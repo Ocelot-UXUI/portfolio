@@ -6,6 +6,9 @@
     <meta name="description" content="郭昱成 UX/UI 作品集" />
     <title>郭昱成 | UX/UI 作品集</title>
     <link rel="stylesheet" href="styles.css" />
+    <style>
+      .edition-grid{grid-template-columns:repeat(3,1fr)}.remi-edition{background:radial-gradient(circle at 84% 18%,#c5a8ff 0,transparent 31%),radial-gradient(circle at 16% 100%,#234fce 0,transparent 38%),linear-gradient(145deg,#252d57,#111220)}.edition h2{font-size:clamp(30px,3vw,51px)}.live-preview{padding:90px 6vw;display:grid;grid-template-columns:.62fr 1.38fr;gap:50px;align-items:center;background:linear-gradient(145deg,#eef1ff,#f9f5ff);color:#171a2a}.live-preview-copy p{color:#7257d6;font-size:12px;letter-spacing:1.2px;margin:0 0 16px}.live-preview-copy h2{font-size:clamp(36px,4.2vw,66px);line-height:1.1;margin:0 0 22px}.live-preview-copy span{color:#585563;font-size:14px;line-height:1.7;display:block}.live-preview-copy a{display:inline-block;margin-top:30px;text-decoration:none;color:#6743cf;font-size:13px;font-weight:700}.live-preview-copy i{font-style:normal;font-size:18px;margin-left:7px}.live-frame{height:510px;display:block;position:relative;overflow:hidden;border:1px solid #c9ccdf;border-radius:14px;background:#fff;box-shadow:0 24px 55px rgba(45,48,89,.18);text-decoration:none}.live-frame iframe{width:1280px;height:800px;border:0;transform:scale(.61);transform-origin:top left;pointer-events:none}.live-frame span{position:absolute;right:18px;bottom:16px;padding:10px 14px;background:rgba(17,18,32,.88);color:#fff;border-radius:20px;font-size:12px;opacity:0;transition:opacity .2s}.live-frame:hover span{opacity:1}@media(max-width:900px){.edition-grid{grid-template-columns:1fr 1fr}.live-preview{grid-template-columns:1fr}.live-frame{height:470px}}@media(max-width:700px){.edition-grid{grid-template-columns:1fr}.live-preview{padding:60px 6vw;grid-template-columns:1fr}.live-frame{height:300px}.live-frame iframe{transform:scale(.39)}}
+    </style>
   </head>
   <body>
     <header><a href="#top">GUO YUCHENG <span>UX/UI DESIGN</span></a><p>PORTFOLIO / 2025-2026</p></header>
@@ -15,18 +18,35 @@
         <h1>郭昱成<br /><em>作品集</em></h1>
         <div class="home-intro"><span>设计原稿版</span><b></b><span>案例长页版</span></div>
       </section>
-      <section class="edition-grid" aria-label="作品集版本选择">
+      <section class="edition-grid" aria-label="作品集项目选择">
+        <a class="edition remi-edition" href="remi.html">
+          <div class="edition-label"><span>01</span><small>LIVE PRODUCT DEMO</small></div>
+          <h2>Remi<br />AI 记忆助手</h2>
+          <p>主动式 AI 协作层的完整交互方案。直接在网页中体验真实产品 Demo。</p>
+          <strong>打开交互项目 <i>→</i></strong>
+        </a>
         <a class="edition figma-edition" href="https://www.figma.com/design/JQG6971AM2IZGSNpgCf5NU/Untitled?node-id=0-1" target="_blank" rel="noreferrer">
-          <div class="edition-label"><span>01</span><small>FIGMA DESIGN</small></div>
+          <div class="edition-label"><span>02</span><small>FIGMA DESIGN</small></div>
           <h2>完整设计<br />原稿版</h2>
           <p>直接查看 Figma 中的完整作品集画板、排版与原始视觉内容。</p>
           <strong>在 Figma 打开 <i>↗</i></strong>
         </a>
         <a class="edition case-edition" href="case.html">
-          <div class="edition-label"><span>02</span><small>WEB CASE STUDY</small></div>
+          <div class="edition-label"><span>03</span><small>WEB CASE STUDY</small></div>
           <h2>主动式 AI<br />记忆助手</h2>
           <p>已导出的高清案例长页，适合直接给面试官连续阅读。</p>
           <strong>查看项目长页 <i>→</i></strong>
+        </a>
+      </section>
+      <section class="live-preview" aria-labelledby="remi-preview-title">
+        <div class="live-preview-copy">
+          <p>01 / LIVE PRODUCT DEMO</p><h2 id="remi-preview-title">Remi<br />AI 记忆助手</h2>
+          <span>这是可直接操作的真实产品页面，不是图片或视频。点击预览即可进入完整体验。</span>
+          <a href="remi.html">全屏体验 Remi <i>→</i></a>
+        </div>
+        <a class="live-frame" href="remi.html" aria-label="打开 Remi AI 记忆助手交互项目">
+          <iframe title="Remi AI 记忆助手交互预览" loading="lazy" src="https://ocelot-uxui.github.io/remi-app/" tabindex="-1"></iframe>
+          <span>点击进入完整交互 Demo <i>↗</i></span>
         </a>
       </section>
       <section class="figma-preview">
