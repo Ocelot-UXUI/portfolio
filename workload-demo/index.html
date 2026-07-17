@@ -7,63 +7,85 @@
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
+  <svg class="icon-sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="5" height="5" rx="1"/><rect x="15" y="4" width="5" height="5" rx="1"/><rect x="4" y="15" width="5" height="5" rx="1"/><rect x="15" y="15" width="5" height="5" rx="1"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 11 9-7 9 7v9H3z"/><path d="M9 20v-6h6v6"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></symbol>
+    <symbol id="i-apps" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M20 4C11 4 5 8 5 14c0 3.3 2.7 6 6 6 6 0 9-6 9-16Z"/><path d="M4 20c3-4 7-7 12-10"/></symbol>
+    <symbol id="i-clipboard" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="16" rx="2"/><path d="M9 5V3h6v2M8 11h8M8 15h8"/></symbol>
+    <symbol id="i-stack" viewBox="0 0 24 24"><path d="m12 3 8 4-8 4-8-4zM4 12l8 4 8-4M4 16l8 4 8-4"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M5 21c0-4 3-7 7-7s7 3 7 7"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0 1 5"/><path d="M20 4v7h-7"/></symbol>
+    <symbol id="i-power" viewBox="0 0 24 24"><path d="M12 3v9"/><path d="M7.1 5.9a8 8 0 1 0 9.8 0"/></symbol>
+    <symbol id="i-unfold" viewBox="0 0 24 24"><path d="M4 7h11M4 12h16M4 17h11"/><path d="m16 5 4 2-4 2M16 15l4 2-4 2"/></symbol>
+    <symbol id="i-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="19" cy="12" r="1" fill="currentColor"/></symbol>
+    <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-chevron-up" viewBox="0 0 24 24"><path d="m6 15 6-6 6 6"/></symbol>
+    <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 10a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 22h4"/></symbol>
+    <symbol id="i-headphones" viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><path d="M4 14h3v5H5a1 1 0 0 1-1-1zM20 14h-3v5h2a1 1 0 0 0 1-1z"/></symbol>
+    <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1"/><path d="M9 3v4M15 3v4M9 17v4M15 17v4M3 9h4M3 15h4M17 9h4M17 15h4"/></symbol>
+    <symbol id="i-memory" viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="10" rx="2"/><path d="M8 7V5M12 7V5M16 7V5M8 17v2M12 17v2M16 17v2M8 11h8"/></symbol>
+  </svg>
   <header class="global-header">
-    <button class="app-launcher" aria-label="应用菜单">⠿</button>
+    <button class="app-launcher" aria-label="应用菜单"><svg><use href="#i-grid"/></svg></button>
     <div class="brand"><span class="brand-gem">◆</span><strong>百度智能云</strong><i></i><strong>度厂版</strong></div>
-    <nav class="breadcrumbs"><span>⌂&nbsp; CNAP</span><em>/</em><span>账号名称占位⌄</span><em>/</em><span>应用名称占位⌄</span><em>/</em><span>环境名称占位⌄</span><em>/</em><span>集群名称占位⌄</span></nav>
-    <div class="header-tools"><label class="header-search"><span>⌕</span><input aria-label="全局搜索"><kbd>⌘K</kbd></label><span class="tool-icon">◔</span><span class="tool-icon">♧</span><span class="user-dot"></span><span>⌄</span><span>•••</span></div>
+    <nav class="breadcrumbs"><span class="crumb-home"><svg><use href="#i-home"/></svg>CNAP</span><em>/</em><span>账号名称占位<svg class="chevron"><use href="#i-chevron-down"/></svg></span><em>/</em><span>应用名称占位<svg class="chevron"><use href="#i-chevron-down"/></svg></span><em>/</em><span>环境名称占位<svg class="chevron"><use href="#i-chevron-down"/></svg></span><em>/</em><span>集群名称占位<svg class="chevron"><use href="#i-chevron-down"/></svg></span></nav>
+    <div class="header-tools"><label class="header-search"><svg><use href="#i-search"/></svg><input aria-label="全局搜索"><kbd>⌘K</kbd></label><button class="header-icon" aria-label="刷新"><svg><use href="#i-refresh"/></svg></button><button class="header-icon" aria-label="消息"><svg><use href="#i-headphones"/></svg></button><span class="user-dot"></span><svg class="header-chevron"><use href="#i-chevron-down"/></svg><button class="header-icon" aria-label="更多"><svg><use href="#i-more"/></svg></button></div>
   </header>
 
   <div class="shell">
     <aside class="primary-nav" aria-label="产品导航">
       <nav>
-        <button><span>✣</span><small>主页</small></button>
-        <button><span>▦</span><small>事物</small></button>
-        <button class="active"><span>▦</span><small>应用</small></button>
-        <button><span>◐</span><small>环境</small></button>
-        <button><span>▤</span><small>变更</small></button>
-        <button><span>◆</span><small>资源</small></button>
-        <button><span>♟</span><small>账户</small></button>
+        <button><svg><use href="#i-home"/></svg><small>主页</small></button>
+        <button><svg><use href="#i-calendar"/></svg><small>事物</small></button>
+        <button class="active"><svg><use href="#i-apps"/></svg><small>应用</small></button>
+        <button><svg><use href="#i-leaf"/></svg><small>环境</small></button>
+        <button><svg><use href="#i-clipboard"/></svg><small>变更</small></button>
+        <button><svg><use href="#i-stack"/></svg><small>资源</small></button>
+        <button><svg><use href="#i-user"/></svg><small>账户</small></button>
       </nav>
-      <div class="primary-bottom"><span>♧</span><span>⚙</span><span>◉</span><span>?</span></div>
+      <div class="primary-bottom"><svg><use href="#i-bell"/></svg><svg><use href="#i-apps"/></svg><svg><use href="#i-refresh"/></svg><span class="help-icon">?</span></div>
     </aside>
 
     <aside class="secondary-nav" aria-label="应用导航">
-      <nav><button class="active">✣</button><button>◴</button><button>▣</button><button>▥</button><button>♧</button><button>◉</button><button>⚙</button></nav>
-      <button class="rail-collapse">◁</button>
+      <nav><button class="active" aria-label="工作负载"><svg><use href="#i-apps"/></svg></button><button aria-label="日志"><svg><use href="#i-clipboard"/></svg></button><button aria-label="服务暴露"><svg><use href="#i-stack"/></svg></button><button aria-label="监控"><svg><use href="#i-refresh"/></svg></button><button aria-label="运行配置"><svg><use href="#i-cpu"/></svg></button><button aria-label="应用设置"><svg><use href="#i-apps"/></svg></button><button aria-label="更多设置"><svg><use href="#i-more"/></svg></button></nav>
+      <button class="rail-collapse" aria-label="收起导航"><svg><use href="#i-chevron-right"/></svg></button>
     </aside>
 
     <main class="workspace">
       <section class="title-row">
-        <div class="title-context"><h1>工作负载</h1><i></i><button>全部工作负载⌄</button></div>
-        <div class="title-actions"><button>◷ 应用重启</button><button>☰ 横向扩缩</button><button>╫ 纵向扩缩</button><button class="icon-only">•••</button></div>
+        <div class="title-context"><h1>工作负载</h1><i></i><button>全部工作负载<svg><use href="#i-chevron-down"/></svg></button></div>
+        <div class="title-actions"><button><svg><use href="#i-power"/></svg>应用重启</button><button><svg><use href="#i-unfold"/></svg>横向扩缩</button><button class="scale-vertical"><svg><use href="#i-unfold"/></svg>纵向扩缩</button><button class="icon-only" aria-label="更多操作"><svg><use href="#i-more"/></svg></button></div>
       </section>
 
       <section class="overview" aria-label="工作负载概览">
-        <article class="overview-card deployment"><div><span>最近部署</span><strong>部署完成&nbsp;›</strong></div><span class="overview-art">▥</span></article>
-        <article class="overview-card config"><div><span>运行配置</span><strong>v24</strong></div><span class="overview-art">☷</span></article>
-        <article class="resources-card"><div><span>CPU总量</span><strong><i class="cpu-icon">▦</i> 338<small>c</small></strong></div><div><span>内存总量</span><strong><i class="memory-icon">▣</i> 887<small>Gi</small></strong></div><div><span>GPU总量</span><strong><i class="gpu-icon">⚑</i> 18<small>卡</small></strong></div></article>
+        <article class="overview-card deployment"><div><span>最近部署</span><strong>部署完成&nbsp;›</strong></div><span class="overview-art"><svg><use href="#i-stack"/></svg></span></article>
+        <article class="overview-card config"><div><span>运行配置</span><strong>v24</strong></div><span class="overview-art"><svg><use href="#i-clipboard"/></svg></span></article>
+        <article class="resources-card"><div><span>CPU总量</span><strong><i class="cpu-icon"><svg><use href="#i-cpu"/></svg></i> 338<small>c</small></strong></div><div><span>内存总量</span><strong><i class="memory-icon"><svg><use href="#i-memory"/></svg></i> 887<small>Gi</small></strong></div><div><span>GPU总量</span><strong><i class="gpu-icon"><svg><use href="#i-apps"/></svg></i> 18<small>卡</small></strong></div></article>
       </section>
 
       <section class="data-panel">
         <div class="tabs-row">
           <nav class="tabs"><button class="active" data-status="all">全部Pod <b id="allCount">86</b></button><button data-status="running">运行时 <b id="runningCount">50</b></button><button data-status="error">异常 <b id="errorCount">04</b></button><button data-status="blocked">已摘流 <b id="blockedCount">02</b></button></nav>
-          <div class="table-tools"><button id="collapseAllBtn" title="收起全部">⌃</button><button id="expandAllBtn" title="展开全部">⌄</button><button id="refreshBtn" title="刷新">↻</button><i></i><button class="view active">☷</button><button class="view">☰</button></div>
+          <div class="table-tools"><button id="collapseAllBtn" title="收起全部"><svg><use href="#i-chevron-up"/></svg></button><button id="expandAllBtn" title="展开全部"><svg><use href="#i-chevron-down"/></svg></button><button id="refreshBtn" title="刷新"><svg><use href="#i-refresh"/></svg></button><i></i><button class="view active" aria-label="卡片视图"><svg><use href="#i-apps"/></svg></button><button class="view" aria-label="列表视图"><svg><use href="#i-clipboard"/></svg></button></div>
         </div>
 
         <div class="filters">
           <select id="statusSelect" aria-label="全部状态"><option value="all">全部状态</option><option value="running">运行中</option><option value="error">异常</option><option value="blocked">已摘流</option></select>
           <select id="clusterSelect" aria-label="屏蔽与接流"><option value="all">屏蔽与接流</option><option value="imeonline">imeonline</option><option value="edge-prod">edge-prod</option></select>
-          <label class="pod-search"><span>⌕</span><input id="searchInput" placeholder="按实例名称或Pod IP搜索" autocomplete="off"></label>
+          <label class="pod-search"><svg><use href="#i-search"/></svg><input id="searchInput" placeholder="按实例名称或Pod IP搜索" autocomplete="off"></label>
         </div>
 
         <div class="workload-group" id="workloadGroup">
           <div class="group-header">
-            <button id="groupToggle" class="group-toggle" aria-label="收起">⌄</button><strong>Payment-api</strong><span class="rollout">Rollout</span><span class="versions">v1.8.3&nbsp; 等3个版本</span>
-            <div class="group-summary"><span>运行中 <b class="green">5</b></span><span>异常 <b class="red">1</b></span><span>已屏蔽 <b class="amber">1</b></span><i></i><span>共 <b id="podCount">10</b> pod</span><button>•••</button></div>
+            <button id="groupToggle" class="group-toggle" aria-label="收起"><svg><use href="#i-chevron-down"/></svg></button><strong>Payment-api</strong><span class="rollout">Rollout</span><span class="versions">v1.8.3&nbsp; 等3个版本</span>
+            <div class="group-summary"><span>运行中 <b class="green">5</b></span><span>异常 <b class="red">1</b></span><span>已屏蔽 <b class="amber">1</b></span><i></i><span>共 <b id="podCount">10</b> pod</span><button aria-label="更多操作"><svg><use href="#i-more"/></svg></button></div>
           </div>
           <div id="tableRegion" class="table-region">
-            <div class="table-scroll"><table class="pod-table"><thead><tr><th><input type="checkbox" aria-label="全选本页"></th><th>Pod</th><th>状态⌃</th><th>Pod IP</th><th>端口</th><th>服务暴露</th><th>重启⌃</th><th>存活⌃</th><th>CPU⌃</th><th>内存</th><th>操作</th></tr></thead><tbody id="podRows"></tbody></table></div>
+            <div class="table-scroll"><table class="pod-table"><thead><tr><th><input type="checkbox" aria-label="全选本页"></th><th>Pod</th><th>状态<span class="sort-icon"><svg><use href="#i-chevron-up"/></svg></span></th><th>Pod IP</th><th>端口</th><th>服务暴露</th><th>重启<span class="sort-icon"><svg><use href="#i-chevron-up"/></svg></span></th><th>存活<span class="sort-icon"><svg><use href="#i-chevron-up"/></svg></span></th><th>CPU<span class="sort-icon"><svg><use href="#i-chevron-up"/></svg></span></th><th>内存</th><th>操作</th></tr></thead><tbody id="podRows"></tbody></table></div>
             <div class="pagination" id="pagination"></div>
           </div>
         </div>
@@ -72,7 +94,7 @@
     </main>
   </div>
 
-  <div class="bulk-bar"><span>已选择 <b>0</b> 个实例</span><div><button>◷ 重启</button><button>↻ 删除/重建</button><button>▣ 屏蔽</button><button>⌘ 接流</button><button>♧ 临时授权</button><i></i><button class="danger">▣ 删除并缩容</button><i></i><button>×</button></div></div>
+  <div class="bulk-bar"><span>已选择 <b>0</b> 个实例</span><div><button><svg><use href="#i-power"/></svg>重启</button><button><svg><use href="#i-refresh"/></svg>删除/重建</button><button><svg><use href="#i-apps"/></svg>屏蔽</button><button><svg><use href="#i-unfold"/></svg>接流</button><button><svg><use href="#i-user"/></svg>临时授权</button><i></i><button class="danger"><svg><use href="#i-apps"/></svg>删除并缩容</button><i></i><button aria-label="关闭">×</button></div></div>
   <div class="toast" id="toast" role="status"></div>
   <script src="./app.js"></script>
 </body>
