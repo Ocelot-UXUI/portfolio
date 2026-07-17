@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>工作负载 | CNAP</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="global-header">
+    <button class="app-launcher" aria-label="应用菜单">⠿</button>
+    <div class="brand"><span class="brand-gem">◆</span><strong>百度智能云</strong><i></i><strong>度厂版</strong></div>
+    <nav class="breadcrumbs"><span>⌂&nbsp; CNAP</span><em>/</em><span>账号名称占位⌄</span><em>/</em><span>应用名称占位⌄</span><em>/</em><span>环境名称占位⌄</span><em>/</em><span>集群名称占位⌄</span></nav>
+    <div class="header-tools"><label class="header-search"><span>⌕</span><input aria-label="全局搜索"><kbd>⌘K</kbd></label><span class="tool-icon">◔</span><span class="tool-icon">♧</span><span class="user-dot"></span><span>⌄</span><span>•••</span></div>
+  </header>
+
+  <div class="shell">
+    <aside class="primary-nav" aria-label="产品导航">
+      <nav>
+        <button><span>✣</span><small>主页</small></button>
+        <button><span>▦</span><small>事物</small></button>
+        <button class="active"><span>▦</span><small>应用</small></button>
+        <button><span>◐</span><small>环境</small></button>
+        <button><span>▤</span><small>变更</small></button>
+        <button><span>◆</span><small>资源</small></button>
+        <button><span>♟</span><small>账户</small></button>
+      </nav>
+      <div class="primary-bottom"><span>♧</span><span>⚙</span><span>◉</span><span>?</span></div>
+    </aside>
+
+    <aside class="secondary-nav" aria-label="应用导航">
+      <nav><button class="active">✣</button><button>◴</button><button>▣</button><button>▥</button><button>♧</button><button>◉</button><button>⚙</button></nav>
+      <button class="rail-collapse">◁</button>
+    </aside>
+
+    <main class="workspace">
+      <section class="title-row">
+        <div class="title-context"><h1>工作负载</h1><i></i><button>全部工作负载⌄</button></div>
+        <div class="title-actions"><button>◷ 应用重启</button><button>☰ 横向扩缩</button><button>╫ 纵向扩缩</button><button class="icon-only">•••</button></div>
+      </section>
+
+      <section class="overview" aria-label="工作负载概览">
+        <article class="overview-card deployment"><div><span>最近部署</span><strong>部署完成&nbsp;›</strong></div><span class="overview-art">▥</span></article>
+        <article class="overview-card config"><div><span>运行配置</span><strong>v24</strong></div><span class="overview-art">☷</span></article>
+        <article class="resources-card"><div><span>CPU总量</span><strong><i class="cpu-icon">▦</i> 338<small>c</small></strong></div><div><span>内存总量</span><strong><i class="memory-icon">▣</i> 887<small>Gi</small></strong></div><div><span>GPU总量</span><strong><i class="gpu-icon">⚑</i> 18<small>卡</small></strong></div></article>
+      </section>
+
+      <section class="data-panel">
+        <div class="tabs-row">
+          <nav class="tabs"><button class="active" data-status="all">全部Pod <b id="allCount">86</b></button><button data-status="running">运行时 <b id="runningCount">50</b></button><button data-status="error">异常 <b id="errorCount">04</b></button><button data-status="blocked">已摘流 <b id="blockedCount">02</b></button></nav>
+          <div class="table-tools"><button id="collapseAllBtn" title="收起全部">⌃</button><button id="expandAllBtn" title="展开全部">⌄</button><button id="refreshBtn" title="刷新">↻</button><i></i><button class="view active">☷</button><button class="view">☰</button></div>
+        </div>
+
+        <div class="filters">
+          <select id="statusSelect" aria-label="全部状态"><option value="all">全部状态</option><option value="running">运行中</option><option value="error">异常</option><option value="blocked">已摘流</option></select>
+          <select id="clusterSelect" aria-label="屏蔽与接流"><option value="all">屏蔽与接流</option><option value="imeonline">imeonline</option><option value="edge-prod">edge-prod</option></select>
+          <label class="pod-search"><span>⌕</span><input id="searchInput" placeholder="按实例名称或Pod IP搜索" autocomplete="off"></label>
+        </div>
+
+        <div class="workload-group" id="workloadGroup">
+          <div class="group-header">
+            <button id="groupToggle" class="group-toggle" aria-label="收起">⌄</button><strong>Payment-api</strong><span class="rollout">Rollout</span><span class="versions">v1.8.3&nbsp; 等3个版本</span>
+            <div class="group-summary"><span>运行中 <b class="green">5</b></span><span>异常 <b class="red">1</b></span><span>已屏蔽 <b class="amber">1</b></span><i></i><span>共 <b id="podCount">10</b> pod</span><button>•••</button></div>
+          </div>
+          <div id="tableRegion" class="table-region">
+            <div class="table-scroll"><table class="pod-table"><thead><tr><th><input type="checkbox" aria-label="全选本页"></th><th>Pod</th><th>状态⌃</th><th>Pod IP</th><th>端口</th><th>服务暴露</th><th>重启⌃</th><th>存活⌃</th><th>CPU⌃</th><th>内存</th><th>操作</th></tr></thead><tbody id="podRows"></tbody></table></div>
+            <div class="pagination" id="pagination"></div>
+          </div>
+        </div>
+        <div class="empty hidden" id="emptyState">暂无符合条件的 Pod</div>
+      </section>
+    </main>
+  </div>
+
+  <div class="bulk-bar"><span>已选择 <b>0</b> 个实例</span><div><button>◷ 重启</button><button>↻ 删除/重建</button><button>▣ 屏蔽</button><button>⌘ 接流</button><button>♧ 临时授权</button><i></i><button class="danger">▣ 删除并缩容</button><i></i><button>×</button></div></div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="./app.js"></script>
+</body>
+</html>
