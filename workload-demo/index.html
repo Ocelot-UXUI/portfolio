@@ -79,16 +79,8 @@
           <label class="pod-search"><svg><use href="#i-search"/></svg><input id="searchInput" placeholder="按实例名称或Pod IP搜索" autocomplete="off"></label>
         </div>
 
-        <div class="workload-group" id="workloadGroup">
-          <div class="group-header">
-            <button id="groupToggle" class="group-toggle" aria-label="收起"><svg><use href="#i-chevron-down"/></svg></button><strong>Payment-api</strong><span class="rollout">Rollout</span><span class="versions">v1.8.3&nbsp; 等3个版本</span>
-            <div class="group-summary"><span>运行中 <b class="green">5</b></span><span>异常 <b class="red">1</b></span><span>已屏蔽 <b class="amber">1</b></span><i></i><span>共 <b id="podCount">10</b> pod</span><button id="groupMoreBtn" aria-label="更多操作"><svg><use href="#i-more"/></svg></button></div>
-          </div>
-          <div id="tableRegion" class="table-region">
-            <div class="table-scroll"><table class="pod-table"><thead><tr><th><input id="selectAllPods" type="checkbox" aria-label="全选本页"></th><th>Pod</th><th>状态<span class="sort-icon"><svg><use href="#i-chevron-up"/></svg></span></th><th>Pod IP</th><th>端口</th><th>服务暴露</th><th>重启<span class="sort-icon"><svg><use href="#i-chevron-up"/></svg></span></th><th>存活<span class="sort-icon"><svg><use href="#i-chevron-up"/></svg></span></th><th>CPU<span class="sort-icon"><svg><use href="#i-chevron-up"/></svg></span></th><th>内存</th><th>操作</th></tr></thead><tbody id="podRows"></tbody></table></div>
-            <div class="pagination" id="pagination"></div>
-          </div>
-        </div>
+        <div class="cluster-groups" id="clusterGroups"></div>
+        <div class="pagination" id="pagination"></div>
         <div class="empty hidden" id="emptyState">暂无符合条件的 Pod</div>
       </section>
     </main>
