@@ -58,7 +58,7 @@
     <main class="workspace">
       <section class="title-row">
         <div class="title-context"><h1>工作负载</h1><i></i><button>全部工作负载<svg><use href="#i-chevron-down"/></svg></button></div>
-        <div class="title-actions"><button><svg><use href="#i-power"/></svg>应用重启</button><button><svg><use href="#i-unfold"/></svg>横向扩缩</button><button class="scale-vertical"><svg><use href="#i-unfold"/></svg>纵向扩缩</button><button class="icon-only" aria-label="更多操作"><svg><use href="#i-more"/></svg></button></div>
+        <div class="title-actions"><button id="restartBtn"><svg><use href="#i-power"/></svg>应用重启</button><button id="horizontalScaleBtn"><svg><use href="#i-unfold"/></svg>横向扩缩</button><button id="verticalScaleBtn" class="scale-vertical"><svg><use href="#i-unfold"/></svg>纵向扩缩</button><button id="actionMoreBtn" class="icon-only" aria-label="更多操作"><svg><use href="#i-more"/></svg></button></div>
       </section>
 
       <section class="overview" aria-label="工作负载概览">
@@ -82,10 +82,10 @@
         <div class="workload-group" id="workloadGroup">
           <div class="group-header">
             <button id="groupToggle" class="group-toggle" aria-label="收起"><svg><use href="#i-chevron-down"/></svg></button><strong>Payment-api</strong><span class="rollout">Rollout</span><span class="versions">v1.8.3&nbsp; 等3个版本</span>
-            <div class="group-summary"><span>运行中 <b class="green">5</b></span><span>异常 <b class="red">1</b></span><span>已屏蔽 <b class="amber">1</b></span><i></i><span>共 <b id="podCount">10</b> pod</span><button aria-label="更多操作"><svg><use href="#i-more"/></svg></button></div>
+            <div class="group-summary"><span>运行中 <b class="green">5</b></span><span>异常 <b class="red">1</b></span><span>已屏蔽 <b class="amber">1</b></span><i></i><span>共 <b id="podCount">10</b> pod</span><button id="groupMoreBtn" aria-label="更多操作"><svg><use href="#i-more"/></svg></button></div>
           </div>
           <div id="tableRegion" class="table-region">
-            <div class="table-scroll"><table class="pod-table"><thead><tr><th><input type="checkbox" aria-label="全选本页"></th><th>Pod</th><th>状态<span class="sort-icon"><svg><use href="#i-chevron-up"/></svg></span></th><th>Pod IP</th><th>端口</th><th>服务暴露</th><th>重启<span class="sort-icon"><svg><use href="#i-chevron-up"/></svg></span></th><th>存活<span class="sort-icon"><svg><use href="#i-chevron-up"/></svg></span></th><th>CPU<span class="sort-icon"><svg><use href="#i-chevron-up"/></svg></span></th><th>内存</th><th>操作</th></tr></thead><tbody id="podRows"></tbody></table></div>
+            <div class="table-scroll"><table class="pod-table"><thead><tr><th><input id="selectAllPods" type="checkbox" aria-label="全选本页"></th><th>Pod</th><th>状态<span class="sort-icon"><svg><use href="#i-chevron-up"/></svg></span></th><th>Pod IP</th><th>端口</th><th>服务暴露</th><th>重启<span class="sort-icon"><svg><use href="#i-chevron-up"/></svg></span></th><th>存活<span class="sort-icon"><svg><use href="#i-chevron-up"/></svg></span></th><th>CPU<span class="sort-icon"><svg><use href="#i-chevron-up"/></svg></span></th><th>内存</th><th>操作</th></tr></thead><tbody id="podRows"></tbody></table></div>
             <div class="pagination" id="pagination"></div>
           </div>
         </div>
@@ -94,7 +94,12 @@
     </main>
   </div>
 
-  <div class="bulk-bar"><span>已选择 <b>0</b> 个实例</span><div><button><svg><use href="#i-power"/></svg>重启</button><button><svg><use href="#i-refresh"/></svg>删除/重建</button><button><svg><use href="#i-apps"/></svg>屏蔽</button><button><svg><use href="#i-unfold"/></svg>接流</button><button><svg><use href="#i-user"/></svg>临时授权</button><i></i><button class="danger"><svg><use href="#i-apps"/></svg>删除并缩容</button><i></i><button aria-label="关闭">×</button></div></div>
+  <div class="bulk-bar hidden" id="bulkBar"><span>已选择 <b id="selectedCount">0</b> 个实例</span><div><button data-bulk-action="restart"><svg><use href="#i-power"/></svg>重启</button><button data-bulk-action="rebuild"><svg><use href="#i-refresh"/></svg>删除/重建</button><button data-bulk-action="block"><svg><use href="#i-apps"/></svg>屏蔽</button><button data-bulk-action="route"><svg><use href="#i-unfold"/></svg>接流</button><button data-bulk-action="grant"><svg><use href="#i-user"/></svg>临时授权</button><i></i><button class="danger" data-bulk-action="delete"><svg><use href="#i-apps"/></svg>删除并缩容</button><i></i><button id="clearSelectionBtn" aria-label="关闭">×</button></div></div>
+  <div class="action-menu hidden" id="actionMenu" role="menu"></div>
+  <div class="modal-backdrop hidden" id="modalBackdrop">
+    <section class="action-modal" id="actionModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"></section>
+  </div>
+  <aside class="history-drawer hidden" id="historyDrawer" aria-label="变更记录"><div class="drawer-header"><div><strong>变更记录</strong><span>最近操作</span></div><button id="closeHistoryBtn" aria-label="关闭">×</button></div><div class="history-list" id="historyList"></div></aside>
   <div class="toast" id="toast" role="status"></div>
   <script src="./app.js"></script>
 </body>
