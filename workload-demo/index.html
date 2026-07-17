@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>工作负载 | CNAP Demo</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="主导航">
+        <div class="brand-mark">C</div>
+        <nav class="side-nav">
+          <button class="nav-item" title="资源总览"><span>▦</span></button>
+          <button class="nav-item active" title="工作负载"><span>↗</span></button>
+          <button class="nav-item" title="资源"><span>□</span></button>
+          <button class="nav-item" title="配置"><span>≡</span></button>
+          <button class="nav-item" title="告警"><span>◉</span></button>
+          <button class="nav-item" title="监控"><span>⌁</span></button>
+          <button class="nav-item" title="设置"><span>⚙</span></button>
+        </nav>
+        <button class="collapse-sidebar" title="展开导航">›</button>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div class="breadcrumb"><span>资源管理</span><i>/</i><strong>工作负载</strong></div>
+          <div class="topbar-actions"><span class="topbar-status"><b></b> imeonline</span><span class="avatar">U</span></div>
+        </header>
+
+        <section class="page-content">
+          <div class="page-heading"><div><h1>工作负载</h1><p>查看和管理当前环境中的工作负载与 Pod 运行状态</p></div><button class="ghost-button" id="refreshBtn">↻ 刷新</button></div>
+          <div class="toolbar">
+            <label class="search-box"><span>⌕</span><input id="searchInput" placeholder="搜索应用名/描述" autocomplete="off" /></label>
+            <div class="toolbar-divider"></div>
+            <button class="filter-button" id="filterButton">筛选 <span>⌄</span></button>
+            <button class="ghost-button" id="expandAllBtn">⌄ 全部收起</button>
+            <div class="view-switch" aria-label="视图切换"><button class="selected" title="列表视图">☷</button><button title="卡片视图">▦</button></div>
+          </div>
+          <div class="filter-panel hidden" id="filterPanel">
+            <div class="filter-row"><span class="filter-label">状态</span><button class="filter-chip active" data-status="all">全部</button><button class="filter-chip" data-status="running">运行中</button><button class="filter-chip" data-status="error">异常</button><button class="filter-chip" data-status="blocked">已屏蔽</button></div>
+            <div class="filter-row"><span class="filter-label">集群</span><button class="filter-chip active" data-cluster="all">全部集群</button><button class="filter-chip" data-cluster="imeonline">imeonline</button><button class="filter-chip" data-cluster="edge-prod">edge-prod</button></div>
+          </div>
+
+          <div class="summary-bar"><span id="resultSummary">共 10 个 Pod</span><span class="summary-meta"><span class="dot running"></span>运行中 <b id="runningCount">7</b><span class="dot error"></span>异常 <b id="errorCount">1</b><span class="dot blocked"></span>已屏蔽 <b id="blockedCount">2</b></span></div>
+          <div id="workloadList" class="workload-list"></div>
+        </section>
+      </main>
+    </div>
+    <div class="toast" id="toast" role="status"></div>
+    <script src="./app.js"></script>
+  </body>
+</html>
