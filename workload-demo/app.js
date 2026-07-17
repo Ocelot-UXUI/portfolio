@@ -21,10 +21,16 @@ function filteredPods(){
   return pods.filter(pod => (state.status === 'all' || pod[1] === state.status) && (!state.query || pod[0].toLowerCase().includes(state.query) || pod[2].includes(state.query)));
 }
 
+const icon = name => `<svg aria-hidden="true"><use href="#i-${name}"/></svg>`;
+
 function rowMarkup(pod){
   const [name,status,ip,port,exposure,restarts,age,cpu,memory] = pod;
   const hot = parseInt(cpu,10) >= 80 ? 'metric-hot' : 'metric-cool';
-  return `<tr><td><input type="checkbox" aria-label="选择 ${name}"></td><td title="${name}">${name}</td><td><span class="status-tag ${status}">${labels[status]}</span></td><td>${ip}</td><td>${port}</td><td><span class="exposure-dot">•</span>${exposure}</td><td class="${restarts >= 4 ? 'metric-hot' : ''}">${restarts}</td><td>${age}</td><td class="${hot}"><span class="cpu-mark">▦</span>${cpu}</td><td><span class="memory-mark">▣</span>${memory}</td><td><span class="row-actions">▤ ▣ ▰ ♧ ◉ •••</span></td></tr>`;
+  const actions = [
+    ['power','重启'], ['refresh','删除/重建'], ['apps','屏蔽'],
+    ['unfold','接流'], ['user','临时授权'], ['more','更多操作']
+  ].map(([iconName,label])=>`<button type="button" aria-label="${label}" title="${label}">${icon(iconName)}</button>`).join('');
+  return `<tr><td><input type="checkbox" aria-label="选择 ${name}"></td><td title="${name}">${name}</td><td><span class="status-tag ${status}">${labels[status]}</span></td><td>${ip}</td><td>${port}</td><td><span class="exposure-dot"></span>${exposure}</td><td class="${restarts >= 4 ? 'metric-hot' : ''}">${restarts}</td><td>${age}</td><td class="${hot}"><span class="cpu-mark">${icon('cpu')}</span>${cpu}</td><td><span class="memory-mark">${icon('memory')}</span>${memory}</td><td><span class="row-actions">${actions}</span></td></tr>`;
 }
 
 function render(){
@@ -42,14 +48,14 @@ function render(){
   document.querySelector('#workloadGroup').classList.toggle('hidden',result.length===0);
   if(result.length<=state.pageSize){ pagination.innerHTML=''; return; }
   const buttons=Array.from({length:pageCount},(_,index)=>`<button class="page-btn ${index+1===state.page?'current':''}" data-page="${index+1}">${index+1}</button>`).join('');
-  pagination.innerHTML=`<button class="page-btn" data-page="prev" ${state.page===1?'disabled':''}>‹</button>${buttons}<button class="page-btn" data-page="next" ${state.page===pageCount?'disabled':''}>›</button><select class="page-size" aria-label="每页条数"><option value="10" ${state.pageSize===10?'selected':''}>10 条/页⌄</option><option value="20" ${state.pageSize===20?'selected':''}>20 条/页⌄</option></select>`;
+  pagination.innerHTML=`<button class="page-btn" data-page="prev" aria-label="上一页" ${state.page===1?'disabled':''}>${icon('chevron-right')}</button>${buttons}<button class="page-btn" data-page="next" aria-label="下一页" ${state.page===pageCount?'disabled':''}>${icon('chevron-right')}</button><select class="page-size" aria-label="每页条数"><option value="10" ${state.pageSize===10?'selected':''}>10 条/页</option><option value="20" ${state.pageSize===20?'selected':''}>20 条/页</option></select>`;
 }
 
 function setCollapsed(collapsed){
   state.collapsed=collapsed;
   document.querySelector('#tableRegion').classList.toggle('hidden',collapsed);
   const toggle=document.querySelector('#groupToggle');
-  toggle.textContent=collapsed?'›':'⌄';
+  toggle.innerHTML=icon(collapsed?'chevron-right':'chevron-down');
   toggle.setAttribute('aria-label',collapsed?'展开':'收起');
 }
 
