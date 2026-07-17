@@ -12,9 +12,10 @@ const pods = [
   ['pod-11','…nference-5f6b9-p9wqc','running','192.168.10.21','grpc:8500','ENS','1','6d','16%','2.6Gi','imeonline']
 ];
 
-const state = { status:'all', cluster:'all', query:'', page:1, pageSize:10, collapsed:false, selected:new Set(), executing:false };
+const state = { status:'all', cluster:'all', query:'', page:1, pageSize:10, collapsedClusters:new Set(), selected:new Set(), executing:false };
 const labels = { running:'运行中', error:'异常', blocked:'已摘流' };
-const rows = document.querySelector('#podRows');
+const clusterLabels = { imeonline:'imeonline', 'edge-prod':'edge-prod' };
+const clusterGroups = document.querySelector('#clusterGroups');
 const pagination = document.querySelector('#pagination');
 const menu = document.querySelector('#actionMenu');
 const modalBackdrop = document.querySelector('#modalBackdrop');
@@ -59,41 +60,48 @@ function rowMarkup(pod){
   return `<tr><td><input class="pod-check" data-pod="${id}" type="checkbox" ${state.selected.has(id)?'checked':''} aria-label="选择 ${name}"></td><td title="${name}">${name}</td><td><span class="status-tag ${status}">${labels[status]}</span></td><td>${ip}</td><td>${port}</td><td><span class="exposure-dot"></span>${exposure}</td><td class="${restarts >= 4 ? 'metric-hot' : ''}">${restarts}</td><td>${age}</td><td class="${hot}"><span class="cpu-mark">${icon('cpu')}</span>${cpu}</td><td><span class="memory-mark">${icon('memory')}</span>${memory}</td><td><span class="row-actions">${rowActions}<button type="button" data-row-more="${id}" aria-label="更多操作" title="更多操作">${icon('more')}</button></span></td></tr>`;
 }
 
+function tableMarkup(cluster,podsInCluster){
+  const selected=podsInCluster.every(([id])=>state.selected.has(id));
+  const partial=podsInCluster.some(([id])=>state.selected.has(id));
+  const summary={running:0,error:0,blocked:0};
+  podsInCluster.forEach(([, ,status])=>summary[status]++);
+  const collapsed=state.collapsedClusters.has(cluster);
+  return `<section class="cluster-group ${collapsed?'collapsed':''}" data-cluster="${cluster}">
+    <header class="cluster-header"><button class="cluster-toggle" data-cluster-toggle="${cluster}" aria-label="${collapsed?'展开':'收起'}">${icon(collapsed?'chevron-right':'chevron-down')}</button><div class="cluster-name"><strong>${clusterLabels[cluster]}</strong><span>集群</span></div><div class="cluster-summary"><span>运行中 <b class="green">${summary.running}</b></span><span>异常 <b class="red">${summary.error}</b></span><span>已摘流 <b class="amber">${summary.blocked}</b></span><i></i><span>共 <b>${podsInCluster.length}</b> pod</span><button class="cluster-more" data-cluster-more="${cluster}" aria-label="集群更多操作">${icon('more')}</button></div></header>
+    <div class="cluster-content"><div class="workload-group"><div class="group-header"><strong>Payment-api</strong><span class="rollout">Rollout</span><span class="versions">v1.8.3&nbsp; 等3个版本</span></div><div class="table-scroll"><table class="pod-table"><thead><tr><th><input class="cluster-select" data-cluster-select="${cluster}" type="checkbox" ${selected?'checked':''} ${partial&&!selected?'data-indeterminate="true"':''} aria-label="全选 ${clusterLabels[cluster]} 集群"></th><th>Pod</th><th>状态<span class="sort-icon">${icon('chevron-up')}</span></th><th>Pod IP</th><th>端口</th><th>服务暴露</th><th>重启<span class="sort-icon">${icon('chevron-up')}</span></th><th>存活<span class="sort-icon">${icon('chevron-up')}</span></th><th>CPU<span class="sort-icon">${icon('chevron-up')}</span></th><th>内存</th><th>操作</th></tr></thead><tbody>${podsInCluster.map(rowMarkup).join('')}</tbody></table></div></div></div>
+  </section>`;
+}
+
 function visiblePods(){ const result=filteredPods(); return result.slice((state.page-1)*state.pageSize,state.page*state.pageSize); }
 function updateSelection(){
   const count=state.selected.size;
   document.querySelector('#selectedCount').textContent=count;
   bulkBar.classList.toggle('hidden',count===0);
-  const visible=visiblePods();
-  const checkbox=document.querySelector('#selectAllPods');
-  checkbox.checked=visible.length>0 && visible.every(([id])=>state.selected.has(id));
-  checkbox.indeterminate=visible.some(([id])=>state.selected.has(id)) && !checkbox.checked;
+  document.querySelectorAll('[data-indeterminate="true"]').forEach(input=>input.indeterminate=true);
 }
 
 function render(){
   const result = filteredPods();
   const pageCount = Math.max(1,Math.ceil(result.length/state.pageSize));
   state.page = Math.min(state.page,pageCount);
-  rows.innerHTML = visiblePods().map(rowMarkup).join('');
-  document.querySelector('#podCount').textContent = result.length;
+  const visible=visiblePods();
+  const byCluster=Object.keys(clusterLabels).map(cluster=>[cluster,visible.filter(pod=>pod[10]===cluster)]).filter(([,items])=>items.length);
+  clusterGroups.innerHTML=byCluster.map(([cluster,items])=>tableMarkup(cluster,items)).join('');
   document.querySelector('#allCount').textContent = String(pods.length).padStart(2,'0');
   document.querySelector('#runningCount').textContent = String(pods.filter(([, ,status])=>status==='running').length).padStart(2,'0');
   document.querySelector('#errorCount').textContent = String(pods.filter(([, ,status])=>status==='error').length).padStart(2,'0');
   document.querySelector('#blockedCount').textContent = String(pods.filter(([, ,status])=>status==='blocked').length).padStart(2,'0');
   document.querySelector('#emptyState').classList.toggle('hidden',result.length!==0);
-  document.querySelector('#workloadGroup').classList.toggle('hidden',result.length===0);
   const buttons=Array.from({length:pageCount},(_,index)=>`<button class="page-btn ${index+1===state.page?'current':''}" data-page="${index+1}">${index+1}</button>`).join('');
   pagination.innerHTML=pageCount>1?`<button class="page-btn" data-page="prev" aria-label="上一页" ${state.page===1?'disabled':''}>${icon('chevron-right')}</button>${buttons}<button class="page-btn" data-page="next" aria-label="下一页" ${state.page===pageCount?'disabled':''}>${icon('chevron-right')}</button><select class="page-size" aria-label="每页条数"><option value="10" ${state.pageSize===10?'selected':''}>10 条/页</option><option value="20" ${state.pageSize===20?'selected':''}>20 条/页</option></select>`:'';
   updateSelection();
 }
 
-function setCollapsed(collapsed){
-  state.collapsed=collapsed;
-  document.querySelector('#tableRegion').classList.toggle('hidden',collapsed);
-  const toggle=document.querySelector('#groupToggle');
-  toggle.innerHTML=icon(collapsed?'chevron-right':'chevron-down');
-  toggle.setAttribute('aria-label',collapsed?'展开':'收起');
+function setClusterCollapsed(cluster,collapsed){
+  collapsed?state.collapsedClusters.add(cluster):state.collapsedClusters.delete(cluster);
+  render();
 }
+function setAllClustersCollapsed(collapsed){ Object.keys(clusterLabels).forEach(cluster=>setClusterCollapsed(cluster,collapsed)); }
 
 function toast(message){ const el=document.querySelector('#toast'); el.textContent=message; el.classList.add('show'); window.setTimeout(()=>el.classList.remove('show'),1800); }
 function actionTarget(ids){ return ids?.length ? `${ids.length} 个实例` : 'Payment-api'; }
@@ -152,23 +160,32 @@ document.querySelectorAll('.tabs button').forEach(button=>button.addEventListene
 document.querySelector('#statusSelect').addEventListener('change',event=>{state.status=event.target.value;state.page=1;document.querySelectorAll('.tabs button').forEach(item=>item.classList.toggle('active',item.dataset.status===state.status));render();});
 document.querySelector('#clusterSelect').addEventListener('change',event=>{state.cluster=event.target.value;state.page=1;render();});
 document.querySelector('#searchInput').addEventListener('input',event=>{state.query=event.target.value.trim().toLowerCase();state.page=1;render();});
-document.querySelector('#groupToggle').addEventListener('click',()=>setCollapsed(!state.collapsed));
-document.querySelector('#collapseAllBtn').addEventListener('click',()=>setCollapsed(true));
-document.querySelector('#expandAllBtn').addEventListener('click',()=>setCollapsed(false));
+document.querySelector('#collapseAllBtn').addEventListener('click',()=>setAllClustersCollapsed(true));
+document.querySelector('#expandAllBtn').addEventListener('click',()=>setAllClustersCollapsed(false));
 document.querySelector('#refreshBtn').addEventListener('click',()=>{toast('Pod 列表已刷新');render();});
 document.querySelector('#restartBtn').addEventListener('click',()=>triggerAction('restart'));
 document.querySelector('#horizontalScaleBtn').addEventListener('click',()=>triggerAction('horizontal'));
 document.querySelector('#verticalScaleBtn').addEventListener('click',()=>triggerAction('vertical'));
 document.querySelector('#actionMoreBtn').addEventListener('click',event=>{event.stopPropagation();openMenu(event.currentTarget,[{key:'history',label:'查看变更记录',icon:'clipboard'},{key:'refresh',label:'刷新 Pod 列表',icon:'refresh'}]);});
-document.querySelector('#groupMoreBtn').addEventListener('click',event=>{event.stopPropagation();openMenu(event.currentTarget,[{key:state.collapsed?'expand':'collapse',label:state.collapsed?'展开工作负载':'收起工作负载',icon:state.collapsed?'chevron-down':'chevron-up'},{key:'history',label:'查看变更记录',icon:'clipboard'}]);});
-rows.addEventListener('change',event=>{ if(!event.target.matches('.pod-check')) return; event.target.checked?state.selected.add(event.target.dataset.pod):state.selected.delete(event.target.dataset.pod); updateSelection(); });
-rows.addEventListener('click',event=>{ const button=event.target.closest('[data-action]'); if(button) triggerAction(button.dataset.action,[button.dataset.pod]); const more=event.target.closest('[data-row-more]'); if(more){event.stopPropagation();openMenu(more,[{key:'history',label:'查看实例变更记录',icon:'clipboard'},{key:'restart-row',label:'重启实例',icon:'power'}]); menu.dataset.pod=more.dataset.rowMore;} });
-document.querySelector('#selectAllPods').addEventListener('change',event=>{visiblePods().forEach(([id])=>event.target.checked?state.selected.add(id):state.selected.delete(id));render();});
+clusterGroups.addEventListener('change',event=>{
+  if(event.target.matches('.pod-check')){ event.target.checked?state.selected.add(event.target.dataset.pod):state.selected.delete(event.target.dataset.pod); updateSelection(); }
+  if(event.target.matches('.cluster-select')){ const cluster=event.target.dataset.clusterSelect; visiblePods().filter(pod=>pod[10]===cluster).forEach(([id])=>event.target.checked?state.selected.add(id):state.selected.delete(id)); render(); }
+});
+clusterGroups.addEventListener('click',event=>{
+  const toggle=event.target.closest('[data-cluster-toggle]');
+  if(toggle){ setClusterCollapsed(toggle.dataset.clusterToggle,!state.collapsedClusters.has(toggle.dataset.clusterToggle)); return; }
+  const clusterMore=event.target.closest('[data-cluster-more]');
+  if(clusterMore){ event.stopPropagation(); const cluster=clusterMore.dataset.clusterMore; const collapsed=state.collapsedClusters.has(cluster); openMenu(clusterMore,[{key:collapsed?'expand-cluster':'collapse-cluster',label:collapsed?'展开集群':'收起集群',icon:collapsed?'chevron-down':'chevron-up'},{key:'history',label:'查看集群变更记录',icon:'clipboard'}]); menu.dataset.cluster=cluster; return; }
+  const button=event.target.closest('[data-action]');
+  if(button){ triggerAction(button.dataset.action,[button.dataset.pod]); return; }
+  const more=event.target.closest('[data-row-more]');
+  if(more){ event.stopPropagation(); openMenu(more,[{key:'history',label:'查看实例变更记录',icon:'clipboard'},{key:'restart-row',label:'重启实例',icon:'power'}]); menu.dataset.pod=more.dataset.rowMore; }
+});
 document.querySelectorAll('[data-bulk-action]').forEach(button=>button.addEventListener('click',()=>triggerAction(button.dataset.bulkAction,[...state.selected])));
 document.querySelector('#clearSelectionBtn').addEventListener('click',()=>{state.selected.clear();render();});
 pagination.addEventListener('click',event=>{const button=event.target.closest('[data-page]');if(!button)return;const count=Math.max(1,Math.ceil(filteredPods().length/state.pageSize));state.page=button.dataset.page==='prev'?state.page-1:button.dataset.page==='next'?state.page+1:Number(button.dataset.page);state.page=Math.max(1,Math.min(count,state.page));render();});
 pagination.addEventListener('change',event=>{if(!event.target.classList.contains('page-size'))return;state.pageSize=Number(event.target.value);state.page=1;render();});
-menu.addEventListener('click',event=>{const item=event.target.closest('[data-menu-action]');if(!item)return;const pod=menu.dataset.pod;const key=item.dataset.menuAction; if(key==='history') openHistory(); else if(key==='refresh'){toast('Pod 列表已刷新');render();} else if(key==='collapse') setCollapsed(true); else if(key==='expand') setCollapsed(false); else if(key==='restart-row') triggerAction('restart',[pod]); closeMenu();});
+menu.addEventListener('click',event=>{const item=event.target.closest('[data-menu-action]');if(!item)return;const pod=menu.dataset.pod;const cluster=menu.dataset.cluster;const key=item.dataset.menuAction; if(key==='history') openHistory(); else if(key==='refresh'){toast('Pod 列表已刷新');render();} else if(key==='collapse-cluster') setClusterCollapsed(cluster,true); else if(key==='expand-cluster') setClusterCollapsed(cluster,false); else if(key==='restart-row') triggerAction('restart',[pod]); closeMenu();});
 modalBackdrop.addEventListener('click',event=>{if(event.target===modalBackdrop)closeModal();});
 document.querySelector('#closeHistoryBtn').addEventListener('click',()=>historyDrawer.classList.add('hidden'));
 document.addEventListener('click',event=>{if(!event.target.closest('#actionMenu'))closeMenu();});
