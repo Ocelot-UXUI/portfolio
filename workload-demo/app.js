@@ -20,6 +20,8 @@ const pagination = document.querySelector('#pagination');
 const menu = document.querySelector('#actionMenu');
 const modalBackdrop = document.querySelector('#modalBackdrop');
 const modal = document.querySelector('#actionModal');
+const detailBackdrop = document.querySelector('#detailBackdrop');
+const instanceModal = document.querySelector('#instanceModal');
 const historyDrawer = document.querySelector('#historyDrawer');
 const historyList = document.querySelector('#historyList');
 const bulkBar = document.querySelector('#bulkBar');
@@ -57,7 +59,7 @@ function rowMarkup(pod){
   const hot = parseInt(cpu,10) >= 80 ? 'metric-hot' : 'metric-cool';
   const rowActions = [['restart','重启'],['rebuild','删除/重建'],['block','屏蔽'],['route','接流'],['grant','临时授权']]
     .map(([key,label])=>`<button type="button" data-action="${key}" data-pod="${id}" aria-label="${label}" title="${label}">${icon(actions[key].icon)}</button>`).join('');
-  return `<tr><td><input class="pod-check" data-pod="${id}" type="checkbox" ${state.selected.has(id)?'checked':''} aria-label="选择 ${name}"></td><td title="${name}">${name}</td><td><span class="status-tag ${status}">${labels[status]}</span></td><td>${ip}</td><td>${port}</td><td><span class="exposure-dot"></span>${exposure}</td><td class="${restarts >= 4 ? 'metric-hot' : ''}">${restarts}</td><td>${age}</td><td class="${hot}"><span class="cpu-mark">${icon('cpu')}</span>${cpu}</td><td><span class="memory-mark">${icon('memory')}</span>${memory}</td><td><span class="row-actions">${rowActions}<button type="button" data-row-more="${id}" aria-label="更多操作" title="更多操作">${icon('more')}</button></span></td></tr>`;
+  return `<tr><td><input class="pod-check" data-pod="${id}" type="checkbox" ${state.selected.has(id)?'checked':''} aria-label="选择 ${name}"></td><td title="${name}"><button class="pod-link" data-instance-detail="${id}">${name}</button></td><td><span class="status-tag ${status}">${labels[status]}</span></td><td>${ip}</td><td>${port}</td><td><span class="exposure-dot"></span>${exposure}</td><td class="${restarts >= 4 ? 'metric-hot' : ''}">${restarts}</td><td>${age}</td><td class="${hot}"><span class="cpu-mark">${icon('cpu')}</span>${cpu}</td><td><span class="memory-mark">${icon('memory')}</span>${memory}</td><td><span class="row-actions">${rowActions}<button type="button" data-row-more="${id}" aria-label="更多操作" title="更多操作">${icon('more')}</button></span></td></tr>`;
 }
 
 function tableMarkup(cluster,podsInCluster){
@@ -144,6 +146,19 @@ function finishAction(actionKey,ids){
 
 function renderHistory(){ historyList.innerHTML=history.map(item=>`<article class="history-item ${item.status}"><div><strong>${item.label}</strong><span>${item.target}</span></div><p>${item.message}</p><time>${item.time}</time></article>`).join(''); }
 function openHistory(){ renderHistory(); historyDrawer.classList.remove('hidden'); }
+
+function instanceMarkup(pod,tab='overview'){
+  const [id,name,status,ip,port,exposure,restarts,age,cpu,memory,cluster]=pod;
+  const tabs=[['overview','概览'],['config','配置'],['monitor','监控'],['events','事件']];
+  const tabBar=tabs.map(([key,label])=>`<button class="${key===tab?'active':''}" data-detail-tab="${key}">${label}</button>`).join('');
+  const overview=`<div class="detail-grid"><section class="detail-section"><h3>基本信息</h3><dl class="detail-kv"><div><dt>实例名称</dt><dd>${name}</dd></div><div><dt>运行状态</dt><dd><span class="status-tag ${status}">${labels[status]}</span></dd></div><div><dt>集群</dt><dd>${cluster}</dd></div><div><dt>Pod IP</dt><dd>${ip}</dd></div><div><dt>运行时长</dt><dd>${age}</dd></div><div><dt>重启次数</dt><dd>${restarts}</dd></div></dl></section><section class="detail-section"><h3>资源使用</h3><div class="resource-row"><div><span>CPU</span><strong>${cpu}</strong></div><div class="resource-bar"><i style="width:${cpu}"></i></div><small>申请 2 c / 上限 4 c</small></div><div class="resource-row"><div><span>内存</span><strong>${memory}</strong></div><div class="resource-bar memory"><i style="width:62%"></i></div><small>申请 8 Gi / 上限 12 Gi</small></div></section><section class="detail-section full"><h3>服务暴露</h3><div class="exposure-card"><span class="exposure-dot"></span><strong>${exposure}</strong><span>${port}</span><span>流量状态正常</span></div></section></div>`;
+  const config=`<div class="detail-grid"><section class="detail-section full"><h3>容器配置</h3><dl class="detail-kv three"><div><dt>镜像</dt><dd>registry.cnap.io/payment-api:v1.8.3</dd></div><div><dt>命令</dt><dd>/app/payment-api</dd></div><div><dt>端口</dt><dd>${port}</dd></div></dl></section><section class="detail-section full"><h3>环境变量</h3><div class="code-list"><div><span>ENV</span><strong>production</strong></div><div><span>LOG_LEVEL</span><strong>info</strong></div><div><span>FEATURE_GATE</span><strong>enabled</strong></div></div></section></div>`;
+  const monitor=`<div class="detail-grid"><section class="detail-section full"><h3>近 1 小时资源趋势</h3><div class="metric-chart"><div class="chart-legend"><span><i class="cpu-line"></i>CPU 使用率</span><span><i class="memory-line"></i>内存使用率</span></div><div class="chart-bars">${[42,55,48,68,62,75,58,64,71,60,66,58].map((value,index)=>`<i class="bar-${index%3}" style="height:${value}%"></i>`).join('')}</div><div class="chart-axis"><span>60 分钟前</span><span>现在</span></div></div></section><section class="detail-section"><h3>网络</h3><dl class="detail-kv"><div><dt>入流量</dt><dd>18.2 MB/s</dd></div><div><dt>出流量</dt><dd>6.4 MB/s</dd></div></dl></section><section class="detail-section"><h3>健康检查</h3><dl class="detail-kv"><div><dt>存活探针</dt><dd class="success-text">通过</dd></div><div><dt>就绪探针</dt><dd class="success-text">通过</dd></div></dl></section></div>`;
+  const events=`<section class="detail-section full"><h3>实例事件</h3><div class="event-list"><article><time>刚刚</time><div><strong>健康检查通过</strong><p>就绪探针返回 200，实例继续接收流量。</p></div></article><article><time>12 分钟前</time><div><strong>配置已同步</strong><p>运行配置 v24 已应用至当前实例。</p></div></article><article><time>3 天前</time><div><strong>实例已创建</strong><p>Rollout v1.8.3 创建并调度到 ${cluster}。</p></div></article></div></section>`;
+  return `<header class="instance-header"><div><div class="instance-title"><h2 id="instanceTitle">${name}</h2><span class="status-tag ${status}">${labels[status]}</span></div><p>${cluster} · ${ip} · ${port}</p></div><div class="instance-header-actions"><button data-detail-action="restart">${icon('power')}重启实例</button><button class="close-detail" aria-label="关闭">×</button></div></header><nav class="detail-tabs">${tabBar}</nav><div class="detail-body" data-instance-id="${id}">${tab==='overview'?overview:tab==='config'?config:tab==='monitor'?monitor:events}</div>`;
+}
+function openInstanceDetail(id,tab='overview'){ const pod=pods.find(item=>item[0]===id); if(!pod)return; instanceModal.innerHTML=instanceMarkup(pod,tab); detailBackdrop.classList.remove('hidden'); }
+function closeInstanceDetail(){ detailBackdrop.classList.add('hidden'); instanceModal.innerHTML=''; }
 function closeMenu(){ menu.classList.add('hidden'); menu.innerHTML=''; }
 function openMenu(trigger,items){
   const rect=trigger.getBoundingClientRect();
@@ -172,6 +187,8 @@ clusterGroups.addEventListener('change',event=>{
   if(event.target.matches('.cluster-select')){ const cluster=event.target.dataset.clusterSelect; visiblePods().filter(pod=>pod[10]===cluster).forEach(([id])=>event.target.checked?state.selected.add(id):state.selected.delete(id)); render(); }
 });
 clusterGroups.addEventListener('click',event=>{
+  const detail=event.target.closest('[data-instance-detail]');
+  if(detail){ openInstanceDetail(detail.dataset.instanceDetail); return; }
   const toggle=event.target.closest('[data-cluster-toggle]');
   if(toggle){ setClusterCollapsed(toggle.dataset.clusterToggle,!state.collapsedClusters.has(toggle.dataset.clusterToggle)); return; }
   const clusterMore=event.target.closest('[data-cluster-more]');
@@ -179,15 +196,17 @@ clusterGroups.addEventListener('click',event=>{
   const button=event.target.closest('[data-action]');
   if(button){ triggerAction(button.dataset.action,[button.dataset.pod]); return; }
   const more=event.target.closest('[data-row-more]');
-  if(more){ event.stopPropagation(); openMenu(more,[{key:'history',label:'查看实例变更记录',icon:'clipboard'},{key:'restart-row',label:'重启实例',icon:'power'}]); menu.dataset.pod=more.dataset.rowMore; }
+  if(more){ event.stopPropagation(); openMenu(more,[{key:'detail',label:'查看实例详情',icon:'clipboard'},{key:'history',label:'查看实例变更记录',icon:'clipboard'},{key:'restart-row',label:'重启实例',icon:'power'}]); menu.dataset.pod=more.dataset.rowMore; }
 });
 document.querySelectorAll('[data-bulk-action]').forEach(button=>button.addEventListener('click',()=>triggerAction(button.dataset.bulkAction,[...state.selected])));
 document.querySelector('#clearSelectionBtn').addEventListener('click',()=>{state.selected.clear();render();});
 pagination.addEventListener('click',event=>{const button=event.target.closest('[data-page]');if(!button)return;const count=Math.max(1,Math.ceil(filteredPods().length/state.pageSize));state.page=button.dataset.page==='prev'?state.page-1:button.dataset.page==='next'?state.page+1:Number(button.dataset.page);state.page=Math.max(1,Math.min(count,state.page));render();});
 pagination.addEventListener('change',event=>{if(!event.target.classList.contains('page-size'))return;state.pageSize=Number(event.target.value);state.page=1;render();});
-menu.addEventListener('click',event=>{const item=event.target.closest('[data-menu-action]');if(!item)return;const pod=menu.dataset.pod;const cluster=menu.dataset.cluster;const key=item.dataset.menuAction; if(key==='history') openHistory(); else if(key==='refresh'){toast('Pod 列表已刷新');render();} else if(key==='collapse-cluster') setClusterCollapsed(cluster,true); else if(key==='expand-cluster') setClusterCollapsed(cluster,false); else if(key==='restart-row') triggerAction('restart',[pod]); closeMenu();});
+menu.addEventListener('click',event=>{const item=event.target.closest('[data-menu-action]');if(!item)return;const pod=menu.dataset.pod;const cluster=menu.dataset.cluster;const key=item.dataset.menuAction; if(key==='history') openHistory(); else if(key==='detail') openInstanceDetail(pod); else if(key==='refresh'){toast('Pod 列表已刷新');render();} else if(key==='collapse-cluster') setClusterCollapsed(cluster,true); else if(key==='expand-cluster') setClusterCollapsed(cluster,false); else if(key==='restart-row') triggerAction('restart',[pod]); closeMenu();});
 modalBackdrop.addEventListener('click',event=>{if(event.target===modalBackdrop)closeModal();});
+detailBackdrop.addEventListener('click',event=>{if(event.target===detailBackdrop)closeInstanceDetail();});
+instanceModal.addEventListener('click',event=>{const close=event.target.closest('.close-detail');if(close){closeInstanceDetail();return;}const tab=event.target.closest('[data-detail-tab]');if(tab){openInstanceDetail(instanceModal.querySelector('.detail-body').dataset.instanceId,tab.dataset.detailTab);return;}const action=event.target.closest('[data-detail-action]');if(action){const id=instanceModal.querySelector('.detail-body').dataset.instanceId;closeInstanceDetail();triggerAction(action.dataset.detailAction,[id]);}});
 document.querySelector('#closeHistoryBtn').addEventListener('click',()=>historyDrawer.classList.add('hidden'));
 document.addEventListener('click',event=>{if(!event.target.closest('#actionMenu'))closeMenu();});
-document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeMenu();closeModal();historyDrawer.classList.add('hidden');}});
+document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeMenu();closeModal();closeInstanceDetail();historyDrawer.classList.add('hidden');}});
 renderHistory(); render();
