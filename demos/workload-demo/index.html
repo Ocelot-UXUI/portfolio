@@ -51,8 +51,15 @@
     </aside>
 
     <aside class="secondary-nav" aria-label="应用导航">
-      <nav><button class="active" aria-label="工作负载"><svg><use href="#i-apps"/></svg></button><button aria-label="日志"><svg><use href="#i-clipboard"/></svg></button><button aria-label="服务暴露"><svg><use href="#i-stack"/></svg></button><button aria-label="监控"><svg><use href="#i-refresh"/></svg></button><button aria-label="运行配置"><svg><use href="#i-cpu"/></svg></button><button aria-label="应用设置"><svg><use href="#i-apps"/></svg></button><button aria-label="更多设置"><svg><use href="#i-more"/></svg></button></nav>
-      <button class="rail-collapse" aria-label="收起导航"><svg><use href="#i-chevron-right"/></svg></button>
+      <nav>
+        <button class="active" data-app-nav="workload" aria-label="工作负载" title="工作负载"><svg><use href="#i-apps"/></svg></button>
+        <button data-app-nav="exposure" aria-label="服务暴露" title="服务暴露"><svg><use href="#i-stack"/></svg></button>
+        <button data-app-nav="logs" aria-label="日志" title="日志"><svg><use href="#i-clipboard"/></svg></button>
+        <button data-app-nav="terminal" aria-label="终端" title="终端"><svg><use href="#i-unfold"/></svg></button>
+        <button data-app-nav="monitor" aria-label="监控" title="监控"><svg><use href="#i-refresh"/></svg></button>
+        <button data-app-nav="runtime" aria-label="运行配置" title="运行配置"><svg><use href="#i-cpu"/></svg></button>
+        <button data-app-nav="settings" aria-label="应用设置" title="应用设置"><svg><use href="#i-apps"/></svg></button>
+      </nav>
     </aside>
 
     <main class="workspace">
