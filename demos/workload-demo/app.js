@@ -12,7 +12,7 @@ const pods = [
   ['pod-11','…nference-5f6b9-p9wqc','running','192.168.10.21','grpc:8500','ENS','1','6d','16%','2.6Gi','imeonline']
 ];
 
-const state = { status:'all', cluster:'all', query:'', page:1, pageSize:10, collapsedClusters:new Set(), selected:new Set(), pausedPods:new Set(), executing:false, appNav:'workload' };
+const state = { status:'all', cluster:'all', query:'', page:1, pageSize:10, collapsedClusters:new Set(), selected:new Set(), pausedPods:new Set(), executing:false, primaryNav:'apps', appNav:'workload' };
 const labels = { running:'运行中', error:'异常', blocked:'已摘流' };
 const clusterLabels = { imeonline:'imeonline', 'edge-prod':'edge-prod' };
 const clusterGroups = document.querySelector('#clusterGroups');
@@ -40,13 +40,17 @@ const appNavLabels = { workload:'工作负载', exposure:'服务暴露', logs:'�
 const workloadSections = document.querySelectorAll('[data-workload-section]');
 const appPagePlaceholder = document.querySelector('#appPagePlaceholder');
 const appPageTitle = document.querySelector('#appPageTitle');
+const secondaryNav = document.querySelector('.secondary-nav');
 
 function renderAppNavigation(){
-  const isWorkload = state.appNav === 'workload';
+  const isApplication = state.primaryNav === 'apps';
+  const isWorkload = isApplication && state.appNav === 'workload';
+  document.querySelectorAll('[data-primary-nav]').forEach(button=>button.classList.toggle('active', button.dataset.primaryNav === state.primaryNav));
   document.querySelectorAll('[data-app-nav]').forEach(button=>button.classList.toggle('active', button.dataset.appNav === state.appNav));
+  secondaryNav.classList.toggle('hidden', !isApplication);
   workloadSections.forEach(section=>section.classList.toggle('hidden', !isWorkload));
   appPagePlaceholder.classList.toggle('hidden', isWorkload);
-  appPageTitle.textContent = isWorkload ? '页面内容占位' : appNavLabels[state.appNav];
+  appPageTitle.textContent = isApplication ? appNavLabels[state.appNav] : '页面内容占位';
 }
 
 let pendingAction = null;
@@ -189,6 +193,10 @@ function openMenu(trigger,items){
 
 function triggerAction(actionKey,ids=[]){ closeMenu(); openConfirm(actionKey,ids); }
 
+document.querySelectorAll('[data-primary-nav]').forEach(button=>button.addEventListener('click',()=>{
+  state.primaryNav=button.dataset.primaryNav;
+  renderAppNavigation();
+}));
 document.querySelectorAll('[data-app-nav]').forEach(button=>button.addEventListener('click',()=>{
   state.appNav=button.dataset.appNav;
   renderAppNavigation();
@@ -252,4 +260,4 @@ instanceModal.addEventListener('click',event=>{
 document.querySelector('#closeHistoryBtn').addEventListener('click',()=>historyDrawer.classList.add('hidden'));
 document.addEventListener('click',event=>{if(!event.target.closest('#actionMenu'))closeMenu();});
 document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeMenu();closeModal();closeInstanceDetail();historyDrawer.classList.add('hidden');}});
-renderHistory(); render();
+renderHistory(); render(); renderAppNavigation();
