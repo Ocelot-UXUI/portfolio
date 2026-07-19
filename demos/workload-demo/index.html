@@ -39,42 +39,43 @@
   <div class="shell">
     <aside class="primary-nav" aria-label="产品导航">
       <nav>
-        <button><svg><use href="#i-home"/></svg><small>主页</small></button>
-        <button><svg><use href="#i-calendar"/></svg><small>事物</small></button>
-        <button class="active"><svg><use href="#i-apps"/></svg><small>应用</small></button>
-        <button><svg><use href="#i-leaf"/></svg><small>环境</small></button>
-        <button><svg><use href="#i-clipboard"/></svg><small>变更</small></button>
-        <button><svg><use href="#i-stack"/></svg><small>资源</small></button>
-        <button><svg><use href="#i-user"/></svg><small>账户</small></button>
+        <button aria-label="主页" title="主页"><svg><use href="#i-home"/></svg></button>
+        <button aria-label="事物" title="事物"><svg><use href="#i-calendar"/></svg></button>
+        <button class="active" aria-label="应用" title="应用"><svg><use href="#i-apps"/></svg></button>
+        <button aria-label="环境" title="环境"><svg><use href="#i-leaf"/></svg></button>
+        <button aria-label="变更" title="变更"><svg><use href="#i-clipboard"/></svg></button>
+        <button aria-label="资源" title="资源"><svg><use href="#i-stack"/></svg></button>
+        <button aria-label="账户" title="账户"><svg><use href="#i-user"/></svg></button>
       </nav>
       <div class="primary-bottom"><svg><use href="#i-bell"/></svg><svg><use href="#i-apps"/></svg><svg><use href="#i-refresh"/></svg><span class="help-icon">?</span></div>
     </aside>
 
     <aside class="secondary-nav" aria-label="应用导航">
+      <p class="secondary-title">应用</p>
       <nav>
-        <button class="active" data-app-nav="workload" aria-label="工作负载" title="工作负载"><svg><use href="#i-apps"/></svg></button>
-        <button data-app-nav="exposure" aria-label="服务暴露" title="服务暴露"><svg><use href="#i-stack"/></svg></button>
-        <button data-app-nav="logs" aria-label="日志" title="日志"><svg><use href="#i-clipboard"/></svg></button>
-        <button data-app-nav="terminal" aria-label="终端" title="终端"><svg><use href="#i-unfold"/></svg></button>
-        <button data-app-nav="monitor" aria-label="监控" title="监控"><svg><use href="#i-refresh"/></svg></button>
-        <button data-app-nav="runtime" aria-label="运行配置" title="运行配置"><svg><use href="#i-cpu"/></svg></button>
-        <button data-app-nav="settings" aria-label="应用设置" title="应用设置"><svg><use href="#i-apps"/></svg></button>
+        <button class="active" data-app-nav="workload"><svg><use href="#i-apps"/></svg><span>工作负载</span></button>
+        <button data-app-nav="exposure"><svg><use href="#i-stack"/></svg><span>服务暴露</span></button>
+        <button data-app-nav="logs"><svg><use href="#i-clipboard"/></svg><span>日志</span></button>
+        <button data-app-nav="terminal"><svg><use href="#i-unfold"/></svg><span>终端</span></button>
+        <button data-app-nav="monitor"><svg><use href="#i-refresh"/></svg><span>监控</span></button>
+        <button data-app-nav="runtime"><svg><use href="#i-cpu"/></svg><span>运行配置</span></button>
+        <button data-app-nav="settings"><svg><use href="#i-apps"/></svg><span>应用设置</span></button>
       </nav>
     </aside>
 
     <main class="workspace">
-      <section class="title-row">
+      <section class="title-row" data-workload-section>
         <div class="title-context"><h1>工作负载</h1><i></i><button>全部工作负载<svg><use href="#i-chevron-down"/></svg></button></div>
         <div class="title-actions"><button id="restartBtn"><svg><use href="#i-power"/></svg>应用重启</button><button id="horizontalScaleBtn"><svg><use href="#i-unfold"/></svg>横向扩缩</button><button id="verticalScaleBtn" class="scale-vertical"><svg><use href="#i-unfold"/></svg>纵向扩缩</button><button id="actionMoreBtn" class="icon-only" aria-label="更多操作"><svg><use href="#i-more"/></svg></button></div>
       </section>
 
-      <section class="overview" aria-label="工作负载概览">
+      <section class="overview" aria-label="工作负载概览" data-workload-section>
         <article class="overview-card deployment"><div><span>最近部署</span><strong>部署完成&nbsp;›</strong></div><span class="overview-art"><svg><use href="#i-stack"/></svg></span></article>
         <article class="overview-card config"><div><span>运行配置</span><strong>v24</strong></div><span class="overview-art"><svg><use href="#i-clipboard"/></svg></span></article>
         <article class="resources-card"><div><span>CPU总量</span><strong><i class="cpu-icon"><svg><use href="#i-cpu"/></svg></i> 338<small>c</small></strong></div><div><span>内存总量</span><strong><i class="memory-icon"><svg><use href="#i-memory"/></svg></i> 887<small>Gi</small></strong></div><div><span>GPU总量</span><strong><i class="gpu-icon"><svg><use href="#i-apps"/></svg></i> 18<small>卡</small></strong></div></article>
       </section>
 
-      <section class="data-panel">
+      <section class="data-panel" data-workload-section>
         <div class="tabs-row">
           <nav class="tabs"><button class="active" data-status="all">全部Pod <b id="allCount">86</b></button><button data-status="running">运行时 <b id="runningCount">50</b></button><button data-status="error">异常 <b id="errorCount">04</b></button><button data-status="blocked">已摘流 <b id="blockedCount">02</b></button></nav>
           <div class="table-tools"><button id="collapseAllBtn" title="收起全部"><svg><use href="#i-chevron-up"/></svg></button><button id="expandAllBtn" title="展开全部"><svg><use href="#i-chevron-down"/></svg></button><button id="refreshBtn" title="刷新"><svg><use href="#i-refresh"/></svg></button><i></i><button class="view active" aria-label="卡片视图"><svg><use href="#i-apps"/></svg></button><button class="view" aria-label="列表视图"><svg><use href="#i-clipboard"/></svg></button></div>
@@ -90,6 +91,7 @@
         <div class="pagination" id="pagination"></div>
         <div class="empty hidden" id="emptyState">暂无符合条件的 Pod</div>
       </section>
+      <section class="app-page-placeholder hidden" id="appPagePlaceholder" aria-live="polite"><p id="appPageTitle">页面内容占位</p></section>
     </main>
   </div>
 

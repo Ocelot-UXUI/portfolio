@@ -12,7 +12,7 @@ const pods = [
   ['pod-11','…nference-5f6b9-p9wqc','running','192.168.10.21','grpc:8500','ENS','1','6d','16%','2.6Gi','imeonline']
 ];
 
-const state = { status:'all', cluster:'all', query:'', page:1, pageSize:10, collapsedClusters:new Set(), selected:new Set(), pausedPods:new Set(), executing:false };
+const state = { status:'all', cluster:'all', query:'', page:1, pageSize:10, collapsedClusters:new Set(), selected:new Set(), pausedPods:new Set(), executing:false, appNav:'workload' };
 const labels = { running:'运行中', error:'异常', blocked:'已摘流' };
 const clusterLabels = { imeonline:'imeonline', 'edge-prod':'edge-prod' };
 const clusterGroups = document.querySelector('#clusterGroups');
@@ -36,6 +36,19 @@ const actions = {
   grant:{label:'临时授权', icon:'user', detail:'将创建 24 小时有效的临时访问授权。'},
   delete:{label:'删除并缩容', icon:'apps', detail:'将删除目标实例并降低副本数，此操作可能影响服务容量。', fails:true}
 };
+const appNavLabels = { workload:'工作负载', exposure:'服务暴露', logs:'日志', terminal:'终端', monitor:'监控', runtime:'运行配置', settings:'应用设置' };
+const workloadSections = document.querySelectorAll('[data-workload-section]');
+const appPagePlaceholder = document.querySelector('#appPagePlaceholder');
+const appPageTitle = document.querySelector('#appPageTitle');
+
+function renderAppNavigation(){
+  const isWorkload = state.appNav === 'workload';
+  document.querySelectorAll('[data-app-nav]').forEach(button=>button.classList.toggle('active', button.dataset.appNav === state.appNav));
+  workloadSections.forEach(section=>section.classList.toggle('hidden', !isWorkload));
+  appPagePlaceholder.classList.toggle('hidden', isWorkload);
+  appPageTitle.textContent = isWorkload ? '页面内容占位' : appNavLabels[state.appNav];
+}
+
 let pendingAction = null;
 let history = [
   {label:'应用重启', target:'Payment-api', status:'success', time:'刚刚', message:'已完成 5 个实例的滚动重启。'},
@@ -176,6 +189,10 @@ function openMenu(trigger,items){
 
 function triggerAction(actionKey,ids=[]){ closeMenu(); openConfirm(actionKey,ids); }
 
+document.querySelectorAll('[data-app-nav]').forEach(button=>button.addEventListener('click',()=>{
+  state.appNav=button.dataset.appNav;
+  renderAppNavigation();
+}));
 document.querySelectorAll('.tabs button').forEach(button=>button.addEventListener('click',()=>{
   document.querySelectorAll('.tabs button').forEach(item=>item.classList.toggle('active',item===button));
   state.status=button.dataset.status; state.page=1; document.querySelector('#statusSelect').value=state.status; render();
