@@ -15,6 +15,10 @@ const pods = [
 const state = { status:'all', cluster:'all', query:'', page:1, pageSize:10, viewMode:'detailed', collapsedClusters:new Set(), selected:new Set(), pausedPods:new Set(), instanceSummaryCollapsed:false, selectedContainer:0, executing:false, primaryNav:'apps', appNav:'workload', appNavExpanded:true, secondaryCollapsed:false, accountTab:'all', accountQuery:'', compactMoreOpen:false };
 const labels = { running:'运行中', error:'异常', blocked:'已摘流' };
 const clusterLabels = { imeonline:'imeonline', 'edge-prod':'edge-prod' };
+const clusterMeta = {
+  imeonline:{environment:'华北生产', channel:'稳定发布', version:'v1.8.3', versions:'等 3 个版本'},
+  'edge-prod':{environment:'边缘生产', channel:'灰度发布', version:'v1.9.0-rc.2', versions:'等 2 个版本'}
+};
 const clusterGroups = document.querySelector('#clusterGroups');
 const pagination = document.querySelector('#pagination');
 const menu = document.querySelector('#actionMenu');
@@ -80,7 +84,8 @@ const actions = {
   block:{label:'屏蔽', icon:'block', detail:'将停止向目标实例分配新流量，已建立连接不受影响。'},
   route:{label:'接流', icon:'route', detail:'将恢复向目标实例分配新流量。'},
   grant:{label:'临时授权', icon:'user', detail:'将创建 24 小时有效的临时访问授权。'},
-  delete:{label:'删除并缩容', icon:'apps', detail:'将删除目标实例并降低副本数，此操作可能影响服务容量。', fails:true}
+  delete:{label:'删除并缩容', icon:'apps', detail:'将删除目标实例并降低副本数，此操作可能影响服务容量。', fails:true},
+  'delete-deployment':{label:'删除部署资源', icon:'apps', detail:'将清除所选集群上的部署资源，此操作不可撤销。'}
 };
 const appNavLabels = { workload:'工作负载', exposure:'服务暴露', logs:'日志', terminal:'终端', monitor:'监控', runtime:'运行配置', settings:'应用设置' };
 const workloadSections = document.querySelectorAll('[data-workload-section]');
@@ -164,8 +169,9 @@ function tableMarkup(cluster,podsInCluster){
   podsInCluster.forEach(([, ,status])=>summary[status]++);
   const collapsed=state.collapsedClusters.has(cluster);
   const clusterName=clusterLabels[cluster];
+  const meta=clusterMeta[cluster];
   return `<section class="cluster-group ${collapsed?'collapsed':''}" data-cluster="${cluster}">
-    <header class="group-header"><button class="cluster-toggle" data-cluster-toggle="${cluster}" aria-label="${collapsed?'展开':'收起'}">${icon(collapsed?'chevron-right':'chevron-down')}</button><div class="group-title"><strong>Payment-api</strong><span class="cluster-context">${clusterName}</span><span class="rollout">Rollout</span><span class="versions">v1.8.3&nbsp; 等3个版本</span></div><div class="group-summary"><span>运行中 <b class="green">${summary.running}</b></span><span>异常 <b class="red">${summary.error}</b></span><span>已屏蔽 <b class="amber">${summary.blocked}</b></span><i></i><span>共 ${podsInCluster.length} pod</span><button class="cluster-more" data-cluster-more="${cluster}" aria-label="${clusterName} 更多操作">${icon('more')}</button></div></header>
+    <header class="group-header"><button class="cluster-toggle" data-cluster-toggle="${cluster}" aria-label="${collapsed?'展开':'收起'}">${icon(collapsed?'chevron-right':'chevron-down')}</button><div class="group-title"><strong>Payment-api</strong><span class="cluster-context"><b>${clusterName}</b>${meta.environment}</span><span class="rollout ${cluster}">${meta.channel}</span><span class="versions">${meta.version}&nbsp; ${meta.versions}</span></div><div class="group-summary"><span>运行中 <b class="green">${summary.running}</b></span><span>异常 <b class="red">${summary.error}</b></span><span>已屏蔽 <b class="amber">${summary.blocked}</b></span><i></i><span>共 ${podsInCluster.length} pod</span><button class="cluster-more" data-cluster-more="${cluster}" aria-label="${clusterName} 更多操作">${icon('more')}</button></div></header>
     <div class="table-scroll"><table class="pod-table"><thead><tr><th><input class="cluster-select" data-cluster-select="${cluster}" type="checkbox" ${selected?'checked':''} ${partial&&!selected?'data-indeterminate="true"':''} aria-label="全选 ${clusterName} 集群"><button class="select-options" data-select-options="${cluster}" aria-label="选择操作" title="选择操作">${icon('chevron-down')}</button></th><th>Pod</th><th>状态<span class="sort-icon">${icon('chevron-up')}</span></th><th>Pod IP</th><th>端口</th><th>服务暴露</th><th>重启<span class="sort-icon">${icon('chevron-up')}</span></th><th>存活<span class="sort-icon">${icon('chevron-up')}</span></th><th>CPU<span class="sort-icon">${icon('chevron-up')}</span></th><th>内存</th><th>操作</th></tr></thead><tbody>${podsInCluster.map(rowMarkup).join('')}</tbody></table></div>
   </section>`;
 }
@@ -206,19 +212,67 @@ function setAllWorkloadsCollapsed(collapsed){
 }
 
 function toast(message){ const el=document.querySelector('#toast'); el.textContent=message; el.classList.add('show'); window.setTimeout(()=>el.classList.remove('show'),1800); }
-function actionTarget(ids){ return ids?.length ? `${ids.length} 个实例` : 'Payment-api'; }
+function actionTarget(ids){ return ids?.length ? `${ids.length} 个 Pod` : 'Payment-api'; }
 function setActionControls(disabled){ document.querySelectorAll('.title-actions button,[data-action],[data-bulk-action]').forEach(button=>button.disabled=disabled); }
 function closeModal(){ if(!state.executing){ modalBackdrop.classList.add('hidden'); modal.innerHTML=''; pendingAction=null; } }
 
+const modalClusters=[
+  {id:'imeonline',name:'imeonline',current:15,desired:4,unavailable:'15%',surge:'15%',available:'>95%'},
+  {id:'edge-prod',name:'edge-prod',current:16,desired:4,unavailable:'16%',surge:'16%',available:'>95%'}
+];
+const verticalModalClusters=[
+  {id:'imeonline',name:'imeonline',unavailable:'15%',surge:'15%',available:'>95%'},
+  {id:'edge-prod',name:'edge-prod',unavailable:'16%',surge:'16%',available:'>95%'},
+  {id:'imeonline-canary',name:'imeonline-canary',unavailable:'16%',surge:'16%',available:'>95%'},
+  {id:'edge-prod-canary',name:'edge-prod-canary',unavailable:'16%',surge:'16%',available:'>95%'}
+];
+function modalHeader(title,description){
+  return `<header class="operation-modal-header"><div><div class="operation-modal-title"><h2 id="modalTitle">${title}</h2><i></i><span>环境：prod-cn-bj</span></div><p>${description}</p></div><button type="button" data-modal-close aria-label="关闭">${icon('close')}</button></header>`;
+}
+function modalFooter(disabled=true,hint='你当前还未选择集群'){
+  return `<footer class="operation-modal-footer"><span>${hint}</span><div><button type="button" class="modal-cancel" data-modal-close>取消</button><button type="button" class="modal-confirm" data-modal-confirm ${disabled?'disabled':''}>确定</button></div></footer>`;
+}
+function clusterIcon(){ return '<img class="modal-cluster-mark" src="./assets/figma-all-modal-effects-4-45382/image_4.png" alt="">'; }
+function selectionColumn(rows){
+  return `<div class="modal-select-column"><label class="modal-select-all"><input type="checkbox" data-modal-select-all aria-label="选择全部集群"><span>集群</span></label>${rows.map(row=>`<label class="modal-cluster-choice"><input type="checkbox" data-modal-cluster="${row.id}" aria-label="选择 ${row.name}">${clusterIcon()}<span>${row.name}</span></label>`).join('')}</div>`;
+}
+function verticalSettingsTable(rows){
+  const resourceCell=(row,type)=>`<div class="vertical-resource-cell"><label><input type="checkbox" checked aria-label="${row.name} ${type} 请求">Req<input value="4" aria-label="${row.name} ${type} 请求值"><select aria-label="${row.name} ${type} 请求单位"><option>${type==='CPU'?'c':'Gi'}</option></select></label><label><input type="checkbox" aria-label="${row.name} ${type} 限制">Lim<input value="4" aria-label="${row.name} ${type} 限制值"><select aria-label="${row.name} ${type} 限制单位"><option>${type==='CPU'?'c':'Gi'}</option></select></label></div>`;
+  const header=['','集群','CPU','内存','最大不可用','最大可超出','可用度锁'].map((label,index)=>index===0?`<div class="vertical-scale-head"><input type="checkbox" data-modal-select-all aria-label="选择全部集群"></div>`:`<div class="vertical-scale-head">${label}</div>`).join('');
+  const values=row=>`<div class="vertical-scale-check"><input type="checkbox" data-modal-cluster="${row.id}" aria-label="选择 ${row.name}"></div><div class="vertical-scale-cluster">${verticalClusterIcon()}<span>${row.name}</span></div>${resourceCell(row,'CPU')}${resourceCell(row,'内存')}<div class="vertical-scale-value">${row.unavailable}</div><div class="vertical-scale-value">${row.surge}</div><div class="vertical-scale-value">${row.available}</div>`;
+  return `<div class="vertical-scale-grid">${header}${rows.map(values).join('')}</div>`;
+}
+function verticalClusterIcon(){ return '<img class="modal-cluster-mark" src="./assets/figma-vertical-scale-61-23532/image_4.png" alt="">'; }
+function settingsTable(rows,kind){
+  const selection=selectionColumn(rows);
+  if(kind==='vertical') return verticalSettingsTable(rows);
+  const columns=kind==='horizontal' ? [['当前副本数','current'],['期望副本数','desired'],['最大不可用','unavailable'],['可用度锁','available']] : [['最大不可用','unavailable'],['最大可超出','surge'],['可用度锁','available']];
+  return `<div class="operation-grid ${kind==='horizontal'?'horizontal-grid':'restart-grid'}">${selection}${columns.map(([label,key])=>`<div class="modal-number-column"><span>${label}</span>${rows.map(row=>key==='desired'?`<label><input type="number" min="0" value="${row[key]}" aria-label="${row.name} ${label}"></label>`:`<b>${row[key]}</b>`).join('')}</div>`).join('')}</div>`;
+}
+function podTable(ids){
+  const rows=(ids.length?pods.filter(([id])=>ids.includes(id)):pods.slice(0,2));
+  return `<div class="pod-preview"><div class="pod-preview-head"><span>Pod 名称</span><span>所属工作负载</span><span>集群</span><span>状态</span></div>${rows.map(([,name,status,,,,,,,,cluster])=>`<div><span>${name}</span><span>Payment-api</span><span>${clusterIcon()}${clusterLabels[cluster]}</span><span class="status-tag ${status}">${labels[status]}</span></div>`).join('')}</div>`;
+}
 function openConfirm(actionKey, ids=[]){
-  const action=actions[actionKey];
+  const action=actions[actionKey] || {label:'删除部署资源',detail:'删除资源将彻底清除所选集群上的部署资源，且不可撤销。'};
   pendingAction={actionKey,ids};
-  const field=action.field?`<label class="modal-field">${action.field}<input id="actionValue" value="${action.value}" aria-label="${action.field}"></label>`:'';
-  modal.innerHTML=`<div class="modal-title-row"><span class="modal-icon">${icon(action.icon)}</span><div><h2 id="modalTitle">确认${action.label}</h2><p>目标：${actionTarget(ids)}</p></div></div><div class="risk-note">${action.detail}</div>${field}<label class="risk-check"><input id="riskAcknowledged" type="checkbox">我已了解该操作可能影响线上服务</label><div class="modal-actions"><button class="secondary" id="cancelActionBtn">取消</button><button class="primary" id="confirmActionBtn" disabled>确认执行</button></div>`;
+  let content='';
+  if(actionKey==='horizontal') content=`${modalHeader('横向扩缩','横向扩缩是在保持当前 Pod 配置和规格的前提下，调整集群内 Pod 的数量。')}<div class="operation-modal-body">${settingsTable(modalClusters,'horizontal')}</div>${modalFooter()}`;
+  else if(actionKey==='vertical') content=`${modalHeader('纵向扩缩','纵向扩缩是在保持当前集群 Pod 数量的前提下，调整 Pod 的资源规格，Pod 规格可按集群调整。')}<div class="operation-modal-body">${settingsTable(verticalModalClusters,'vertical')}</div>${modalFooter()}`;
+  else if(actionKey==='delete-deployment') content=`${modalHeader('删除部署资源','删除资源将会彻底清除所选集群上的部署资源，且不可撤销。')}<div class="operation-modal-body"><p class="operation-info">此过程可能需要几分钟，请稍做等待...</p><section class="operation-section"><h3>应用名称补充</h3><label class="operation-field"><span>应用名称</span><input data-app-name placeholder="请补全应用名称"><small>应用名称：Payment-api</small></label></section><section class="operation-section"><h3>选择集群</h3>${settingsTable(modalClusters,'horizontal')}</section></div>${modalFooter()}`;
+  else {
+    const isBatch=ids.length>0;
+    const isRebuild=actionKey==='rebuild';
+    const title=isBatch ? (isRebuild?'批量删除/重建 Pod':'批量重启 Pod') : '应用重启';
+    const description=isRebuild?'删除/重建功能将删除指定 Pod，并触发集群重新申请、重新启动 Pod 的过程。':'重启应用会按照部署并发度对所选环境下、指定集群的实例进行重启。';
+    const warning=isRebuild?'1. 删除/重建过程中会销毁当前 Pod，并创建新的 Pod，名称、IP、所在节点等会发生变化。\n2. 已驱逐状态的 Pod 会被彻底删除，其他状态会创建新的 Pod。':'1. 重启过程中不会销毁容器，仅重新拉起进程。\n2. 重启过程中会对目标 Pod 进行流量屏蔽操作，请关注恢复状态。';
+    const podSection=isBatch?`<section class="operation-section"><h3>待${isRebuild?'删除/重建':'重启'} Pod ${ids.length}</h3>${podTable(ids)}</section>`:'';
+    const config=isBatch?'':`<section class="operation-section"><h3>集群与参数配置<span>（必填）</span></h3>${settingsTable(modalClusters,'restart')}</section>`;
+    content=`${modalHeader(title,description)}<div class="operation-modal-body"><p class="operation-warning">${warning.replace('\n','<br>')}</p><section class="operation-section timeout-section"><h3>超时时间配置</h3><label class="operation-field"><span>超时时间</span><input type="number" value="60" aria-label="超时时间"><em>秒</em><small>发送 SIGTERM 后的等待时间，超时未检测到进程退出则视为重启失败</small></label></section>${podSection}${config}</div>${modalFooter(isBatch?false:true,isBatch?'':'请选择一个集群后，再发起确定')}`;
+  }
+  modal.className=`action-modal operation-modal ${actionKey==='vertical'?'operation-modal-wide':''}`;
+  modal.innerHTML=content;
   modalBackdrop.classList.remove('hidden');
-  document.querySelector('#riskAcknowledged').addEventListener('change',event=>{document.querySelector('#confirmActionBtn').disabled=!event.target.checked;});
-  document.querySelector('#cancelActionBtn').addEventListener('click',closeModal);
-  document.querySelector('#confirmActionBtn').addEventListener('click',executeAction);
 }
 
 function executeAction(){
@@ -393,7 +447,7 @@ document.querySelectorAll('.table-tools .view').forEach(button=>button.addEventL
 document.querySelector('#restartBtn').addEventListener('click',()=>triggerAction('restart'));
 document.querySelector('#horizontalScaleBtn').addEventListener('click',()=>triggerAction('horizontal'));
 document.querySelector('#verticalScaleBtn').addEventListener('click',()=>triggerAction('vertical'));
-document.querySelector('#actionMoreBtn').addEventListener('click',event=>{event.stopPropagation();openMenu(event.currentTarget,[{key:'history',label:'查看变更记录',icon:'clipboard'},{key:'refresh',label:'刷新 Pod 列表',icon:'refresh'}]);});
+document.querySelector('#actionMoreBtn').addEventListener('click',event=>{event.stopPropagation();openMenu(event.currentTarget,[{key:'history',label:'查看变更记录',icon:'clipboard'},{key:'refresh',label:'刷新 Pod 列表',icon:'refresh'},{key:'delete-deployment',label:'删除部署资源',icon:'apps'}]);});
 clusterGroups.addEventListener('change',event=>{
   if(event.target.matches('.pod-check')){ event.target.checked?state.selected.add(event.target.dataset.pod):state.selected.delete(event.target.dataset.pod); updateSelection(); }
   if(event.target.matches('.cluster-select')){ const cluster=event.target.dataset.clusterSelect; visiblePods().filter(pod=>pod[10]===cluster).forEach(([id])=>event.target.checked?state.selected.add(id):state.selected.delete(id)); render(); }
@@ -416,8 +470,16 @@ document.querySelectorAll('[data-bulk-action]').forEach(button=>button.addEventL
 document.querySelector('#clearSelectionBtn').addEventListener('click',()=>{state.selected.clear();render();});
 pagination.addEventListener('click',event=>{const button=event.target.closest('[data-page]');if(!button)return;const count=Math.max(1,Math.ceil(filteredPods().length/state.pageSize));state.page=button.dataset.page==='prev'?state.page-1:button.dataset.page==='next'?state.page+1:Number(button.dataset.page);state.page=Math.max(1,Math.min(count,state.page));render();});
 pagination.addEventListener('change',event=>{if(!event.target.classList.contains('page-size'))return;state.pageSize=Number(event.target.value);state.page=1;render();});
-menu.addEventListener('click',event=>{const item=event.target.closest('[data-menu-action]');if(!item)return;const pod=menu.dataset.pod;const cluster=menu.dataset.cluster;const key=item.dataset.menuAction; const scoped=visiblePods().filter(entry=>!cluster||entry[10]===cluster); if(key==='select-page'||key==='select-all'||key==='invert-page'||key==='invert-all'||key==='clear-selection'){const targets=(key==='select-all'||key==='invert-all')?filteredPods():scoped;if(key==='select-page'||key==='select-all')targets.forEach(([id])=>state.selected.add(id));if(key==='invert-page'||key==='invert-all')targets.forEach(([id])=>state.selected.has(id)?state.selected.delete(id):state.selected.add(id));if(key==='clear-selection')state.selected.clear();render();closeMenu();return;} if(key==='history') openHistory(); else if(key==='detail') openInstanceDetail(pod); else if(key==='refresh'){toast('Pod 列表已刷新');render();} else if(key==='collapse-cluster') setWorkloadCollapsed(cluster,true); else if(key==='expand-cluster') setWorkloadCollapsed(cluster,false); else if(key==='restart-row') triggerAction('restart',[pod]); else if(key==='more-customize') toast('导航设置将在后续版本开放'); else if(key.startsWith('context-')) toast(`已切换${menu.dataset.context || ''}：${item.textContent.trim()}`); else if(key==='header-preferences') toast('已打开偏好设置'); else if(key==='header-help') toast('已打开帮助文档'); else toast(`已选择${item.textContent.trim()}`); closeMenu();});
+menu.addEventListener('click',event=>{const item=event.target.closest('[data-menu-action]');if(!item)return;const pod=menu.dataset.pod;const cluster=menu.dataset.cluster;const key=item.dataset.menuAction; const scoped=visiblePods().filter(entry=>!cluster||entry[10]===cluster); if(key==='select-page'||key==='select-all'||key==='invert-page'||key==='invert-all'||key==='clear-selection'){const targets=(key==='select-all'||key==='invert-all')?filteredPods():scoped;if(key==='select-page'||key==='select-all')targets.forEach(([id])=>state.selected.add(id));if(key==='invert-page'||key==='invert-all')targets.forEach(([id])=>state.selected.has(id)?state.selected.delete(id):state.selected.add(id));if(key==='clear-selection')state.selected.clear();render();closeMenu();return;} if(key==='history') openHistory(); else if(key==='detail') openInstanceDetail(pod); else if(key==='refresh'){toast('Pod 列表已刷新');render();} else if(key==='collapse-cluster') setWorkloadCollapsed(cluster,true); else if(key==='expand-cluster') setWorkloadCollapsed(cluster,false); else if(key==='restart-row') triggerAction('restart',[pod]); else if(key==='delete-deployment') triggerAction('delete-deployment'); else if(key==='more-customize') toast('导航设置将在后续版本开放'); else if(key.startsWith('context-')) toast(`已切换${menu.dataset.context || ''}：${item.textContent.trim()}`); else if(key==='header-preferences') toast('已打开偏好设置'); else if(key==='header-help') toast('已打开帮助文档'); else toast(`已选择${item.textContent.trim()}`); closeMenu();});
 modalBackdrop.addEventListener('click',event=>{if(event.target===modalBackdrop)closeModal();});
+modal.addEventListener('change',event=>{
+  if(event.target.matches('[data-modal-select-all]')) document.querySelectorAll('[data-modal-cluster]').forEach(input=>{input.checked=event.target.checked;});
+  if(event.target.matches('[data-modal-cluster]')){const all=Array.from(document.querySelectorAll('[data-modal-cluster]'));const selectAll=document.querySelector('[data-modal-select-all]');if(selectAll) selectAll.checked=all.length>0&&all.every(input=>input.checked);}
+  const confirm=modal.querySelector('[data-modal-confirm]');
+  if(confirm){const selected=modal.querySelector('[data-modal-cluster]:checked');const name=modal.querySelector('[data-app-name]');confirm.disabled=Boolean(name ? !name.value.trim()||!selected : !selected&&pendingAction?.actionKey!=='rebuild'&&pendingAction?.ids?.length===0);}
+});
+modal.addEventListener('input',event=>{if(!event.target.matches('[data-app-name]'))return;const confirm=modal.querySelector('[data-modal-confirm]');if(confirm)confirm.disabled=!event.target.value.trim()||!modal.querySelector('[data-modal-cluster]:checked');});
+modal.addEventListener('click',event=>{if(event.target.closest('[data-modal-close]')){closeModal();return;}if(event.target.closest('[data-modal-confirm]'))executeAction();});
 detailBackdrop.addEventListener('click',event=>{if(event.target===detailBackdrop)closeInstanceDetail();});
 instanceModal.addEventListener('click',event=>{
   const close=event.target.closest('.close-detail');
