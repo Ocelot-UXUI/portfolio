@@ -211,7 +211,7 @@ function setAllWorkloadsCollapsed(collapsed){
   render();
 }
 
-function toast(message){ const el=document.querySelector('#toast'); el.textContent=message; el.classList.add('show'); window.setTimeout(()=>el.classList.remove('show'),1800); }
+function toast(message,type='default'){ const el=document.querySelector('#toast'); el.textContent=message; el.dataset.type=type; el.classList.add('show'); window.setTimeout(()=>el.classList.remove('show'),1800); }
 function actionTarget(ids){ return ids?.length ? `${ids.length} 个 Pod` : 'Payment-api'; }
 function setActionControls(disabled){ document.querySelectorAll('.title-actions button,[data-action],[data-bulk-action]').forEach(button=>button.disabled=disabled); }
 function closeModal(){ if(!state.executing){ modalBackdrop.classList.add('hidden'); modal.innerHTML=''; pendingAction=null; } }
@@ -227,17 +227,17 @@ const verticalModalClusters=[
   {id:'edge-prod-canary',name:'edge-prod-canary',unavailable:'16%',surge:'16%',available:'>95%'}
 ];
 function modalHeader(title,description){
-  return `<header class="operation-modal-header"><div><div class="operation-modal-title"><h2 id="modalTitle">${title}</h2><i></i><span>环境：prod-cn-bj</span></div><p>${description}</p></div><button type="button" data-modal-close aria-label="关闭">${icon('close')}</button></header>`;
+  return `<header class="operation-modal-header"><div><div class="operation-modal-title"><h2 id="modalTitle">${title}</h2><button class="modal-description-help" type="button" aria-label="查看操作说明" title="${description}">i</button><i></i><span>环境：prod-cn-bj</span></div><p>${description}</p></div><button type="button" data-modal-close aria-label="关闭">${icon('close')}</button></header>`;
 }
-function modalFooter(disabled=true,hint='你当前还未选择集群'){
-  return `<footer class="operation-modal-footer"><span>${hint}</span><div><button type="button" class="modal-cancel" data-modal-close>取消</button><button type="button" class="modal-confirm" data-modal-confirm ${disabled?'disabled':''}>确定</button></div></footer>`;
+function modalFooter(disabled=false,hint='请选择一个集群后，再发起确定'){
+  return `<footer class="operation-modal-footer"><span data-modal-hint>${hint}</span><div><button type="button" class="modal-cancel" data-modal-close>取消</button><button type="button" class="modal-confirm" data-modal-confirm ${disabled?'disabled':''}>确定</button></div></footer>`;
 }
 function clusterIcon(){ return '<img class="modal-cluster-mark" src="./assets/figma-all-modal-effects-4-45382/image_4.png" alt="">'; }
 function selectionColumn(rows){
   return `<div class="modal-select-column"><label class="modal-select-all"><input type="checkbox" data-modal-select-all aria-label="选择全部集群"><span>集群</span></label>${rows.map(row=>`<label class="modal-cluster-choice"><input type="checkbox" data-modal-cluster="${row.id}" aria-label="选择 ${row.name}">${clusterIcon()}<span>${row.name}</span></label>`).join('')}</div>`;
 }
 function verticalSettingsTable(rows){
-  const resourceCell=(row,type)=>`<div class="vertical-resource-cell"><label><input type="checkbox" checked aria-label="${row.name} ${type} 请求">Req<input value="4" aria-label="${row.name} ${type} 请求值"><select aria-label="${row.name} ${type} 请求单位"><option>${type==='CPU'?'c':'Gi'}</option></select></label><label><input type="checkbox" aria-label="${row.name} ${type} 限制">Lim<input value="4" aria-label="${row.name} ${type} 限制值"><select aria-label="${row.name} ${type} 限制单位"><option>${type==='CPU'?'c':'Gi'}</option></select></label></div>`;
+  const resourceCell=(row,type)=>`<div class="vertical-resource-cell" data-resource-cluster="${row.id}" data-resource-type="${type}"><label><input type="checkbox" checked aria-label="${row.name} ${type} 请求">Req<input data-resource-request="value" value="4" aria-label="${row.name} ${type} 请求值"><select data-resource-request="unit" aria-label="${row.name} ${type} 请求单位"><option>${type==='CPU'?'c':'Gi'}</option></select></label><label><input type="checkbox" data-resource-limit-toggle checked aria-label="${row.name} ${type} 限制">Lim<input data-resource-limit="value" value="4" aria-label="${row.name} ${type} 限制值"><select data-resource-limit="unit" aria-label="${row.name} ${type} 限制单位"><option>${type==='CPU'?'c':'Gi'}</option></select></label></div>`;
   const header=['','集群','CPU','内存','最大不可用','最大可超出','可用度锁'].map((label,index)=>index===0?`<div class="vertical-scale-head"><input type="checkbox" data-modal-select-all aria-label="选择全部集群"></div>`:`<div class="vertical-scale-head">${label}</div>`).join('');
   const values=row=>`<div class="vertical-scale-check"><input type="checkbox" data-modal-cluster="${row.id}" aria-label="选择 ${row.name}"></div><div class="vertical-scale-cluster">${verticalClusterIcon()}<span>${row.name}</span></div>${resourceCell(row,'CPU')}${resourceCell(row,'内存')}<div class="vertical-scale-value">${row.unavailable}</div><div class="vertical-scale-value">${row.surge}</div><div class="vertical-scale-value">${row.available}</div>`;
   return `<div class="vertical-scale-grid">${header}${rows.map(values).join('')}</div>`;
@@ -247,7 +247,7 @@ function settingsTable(rows,kind){
   const selection=selectionColumn(rows);
   if(kind==='vertical') return verticalSettingsTable(rows);
   const columns=kind==='horizontal' ? [['当前副本数','current'],['期望副本数','desired'],['最大不可用','unavailable'],['可用度锁','available']] : [['最大不可用','unavailable'],['最大可超出','surge'],['可用度锁','available']];
-  return `<div class="operation-grid ${kind==='horizontal'?'horizontal-grid':'restart-grid'}">${selection}${columns.map(([label,key])=>`<div class="modal-number-column"><span>${label}</span>${rows.map(row=>key==='desired'?`<label><input type="number" min="0" value="${row[key]}" aria-label="${row.name} ${label}"></label>`:`<b>${row[key]}</b>`).join('')}</div>`).join('')}</div>`;
+  return `<div class="operation-grid ${kind==='horizontal'?'horizontal-grid':'restart-grid'}">${selection}${columns.map(([label,key])=>`<div class="modal-number-column"><span>${label}</span>${rows.map(row=>key==='desired'||(kind==='restart'&&key==='unavailable')?`<label><input type="number" min="0" value="${key==='desired'?row[key]:row[key].replace('%','')}" data-modal-${key}="${row.id}" data-initial-value="${key==='desired'?row[key]:row[key].replace('%','')}" aria-label="${row.name} ${label}">${key==='unavailable'?'<em>%</em>':''}</label>`:`<b>${row[key]}</b>`).join('')}</div>`).join('')}</div>`;
 }
 function podTable(ids){
   const rows=(ids.length?pods.filter(([id])=>ids.includes(id)):pods.slice(0,2));
@@ -268,16 +268,43 @@ function openConfirm(actionKey, ids=[]){
     const warning=isRebuild?'1. 删除/重建过程中会销毁当前 Pod，并创建新的 Pod，名称、IP、所在节点等会发生变化。\n2. 已驱逐状态的 Pod 会被彻底删除，其他状态会创建新的 Pod。':'1. 重启过程中不会销毁容器，仅重新拉起进程。\n2. 重启过程中会对目标 Pod 进行流量屏蔽操作，请关注恢复状态。';
     const podSection=isBatch?`<section class="operation-section"><h3>待${isRebuild?'删除/重建':'重启'} Pod ${ids.length}</h3>${podTable(ids)}</section>`:'';
     const config=isBatch?'':`<section class="operation-section"><h3>集群与参数配置<span>（必填）</span></h3>${settingsTable(modalClusters,'restart')}</section>`;
-    content=`${modalHeader(title,description)}<div class="operation-modal-body"><p class="operation-warning">${warning.replace('\n','<br>')}</p><section class="operation-section timeout-section"><h3>超时时间配置</h3><label class="operation-field"><span>超时时间</span><input type="number" value="60" aria-label="超时时间"><em>秒</em><small>发送 SIGTERM 后的等待时间，超时未检测到进程退出则视为重启失败</small></label></section>${podSection}${config}</div>${modalFooter(isBatch?false:true,isBatch?'':'请选择一个集群后，再发起确定')}`;
+    content=`${modalHeader(title,description)}<div class="operation-modal-body"><p class="operation-warning">${warning.replace('\n','<br>')}</p><section class="operation-section timeout-section"><h3>超时时间配置</h3><label class="operation-field"><span>超时时间</span><input type="number" value="60" aria-label="超时时间"><em>秒</em><small>发送 SIGTERM 后的等待时间，超时未检测到进程退出则视为重启失败</small></label></section>${podSection}${config}</div>${modalFooter(false,isBatch?'':'请选择一个集群后，再发起确定')}`;
   }
   modal.className=`action-modal operation-modal ${actionKey==='vertical'?'operation-modal-wide':''}`;
   modal.innerHTML=content;
   modalBackdrop.classList.remove('hidden');
 }
 
+function selectedModalClusters(){ return Array.from(modal.querySelectorAll('[data-modal-cluster]:checked')); }
+function updateModalFooter(error=''){
+  const hint=modal.querySelector('[data-modal-hint]');
+  const selected=selectedModalClusters();
+  const name=modal.querySelector('[data-app-name]');
+  if(!hint)return;
+  hint.classList.toggle('is-error',Boolean(error));
+  hint.textContent=error || (selected.length ? `已选择 ${selected.length} 个集群` : '请选择一个集群后，再发起确定');
+  const confirm=modal.querySelector('[data-modal-confirm]');
+  if(confirm) confirm.disabled=false;
+  if(name&&name.value.trim()&&selected.length) hint.classList.remove('is-error');
+}
+function syncResourceLimit(cell){
+  const enabled=cell.querySelector('[data-resource-limit-toggle]').checked;
+  const requestValue=cell.querySelector('[data-resource-request="value"]');
+  const requestUnit=cell.querySelector('[data-resource-request="unit"]');
+  const limitValue=cell.querySelector('[data-resource-limit="value"]');
+  const limitUnit=cell.querySelector('[data-resource-limit="unit"]');
+  if(!enabled){limitValue.value=requestValue.value;limitUnit.value=requestUnit.value;}
+  limitValue.disabled=!enabled; limitUnit.disabled=!enabled;
+}
 function executeAction(){
   if(!pendingAction) return;
+  const clusterInputs=modal.querySelectorAll('[data-modal-cluster]');
+  const selected=selectedModalClusters();
+  const appName=modal.querySelector('[data-app-name]');
+  if(clusterInputs.length&&!selected.length){updateModalFooter('请至少选择 1 个集群');return;}
+  if(appName&&!appName.value.trim()){updateModalFooter('请补全应用名称');return;}
   const {actionKey,ids}=pendingAction;
+  pendingAction.clusterCount=selected.length;
   const action=actions[actionKey];
   state.executing=true; setActionControls(true);
   modal.innerHTML=`<div class="execution-state"><span class="spinner">${icon('refresh')}</span><h2>正在${action.label}</h2><p>正在处理${actionTarget(ids)}，请勿关闭当前页面。</p><div class="progress-track"><span></span></div></div>`;
@@ -295,7 +322,8 @@ function finishAction(actionKey,ids){
   document.querySelector('#viewHistoryBtn').addEventListener('click',()=>{modalBackdrop.classList.add('hidden');openHistory();});
   const close=document.querySelector('#closeResultBtn'); if(close) close.addEventListener('click',closeModal);
   const retry=document.querySelector('#retryActionBtn'); if(retry) retry.addEventListener('click',()=>openConfirm(actionKey,ids));
-  if(!failed) toast(`${action.label}已提交`);
+  const clusterMessage=pendingAction?.clusterCount ? `：${pendingAction.clusterCount} 个集群` : '';
+  toast(failed ? `${action.label}失败` : `已发起${action.label}${clusterMessage}`,failed?'error':'success');
 }
 
 function renderHistory(){ historyList.innerHTML=history.map(item=>`<article class="history-item ${item.status}"><div><strong>${item.label}</strong><span>${item.target}</span></div><p>${item.message}</p><time>${item.time}</time></article>`).join(''); }
@@ -473,13 +501,34 @@ pagination.addEventListener('change',event=>{if(!event.target.classList.contains
 menu.addEventListener('click',event=>{const item=event.target.closest('[data-menu-action]');if(!item)return;const pod=menu.dataset.pod;const cluster=menu.dataset.cluster;const key=item.dataset.menuAction; const scoped=visiblePods().filter(entry=>!cluster||entry[10]===cluster); if(key==='select-page'||key==='select-all'||key==='invert-page'||key==='invert-all'||key==='clear-selection'){const targets=(key==='select-all'||key==='invert-all')?filteredPods():scoped;if(key==='select-page'||key==='select-all')targets.forEach(([id])=>state.selected.add(id));if(key==='invert-page'||key==='invert-all')targets.forEach(([id])=>state.selected.has(id)?state.selected.delete(id):state.selected.add(id));if(key==='clear-selection')state.selected.clear();render();closeMenu();return;} if(key==='history') openHistory(); else if(key==='detail') openInstanceDetail(pod); else if(key==='refresh'){toast('Pod 列表已刷新');render();} else if(key==='collapse-cluster') setWorkloadCollapsed(cluster,true); else if(key==='expand-cluster') setWorkloadCollapsed(cluster,false); else if(key==='restart-row') triggerAction('restart',[pod]); else if(key==='delete-deployment') triggerAction('delete-deployment'); else if(key==='more-customize') toast('导航设置将在后续版本开放'); else if(key.startsWith('context-')) toast(`已切换${menu.dataset.context || ''}：${item.textContent.trim()}`); else if(key==='header-preferences') toast('已打开偏好设置'); else if(key==='header-help') toast('已打开帮助文档'); else toast(`已选择${item.textContent.trim()}`); closeMenu();});
 modalBackdrop.addEventListener('click',event=>{if(event.target===modalBackdrop)closeModal();});
 modal.addEventListener('change',event=>{
-  if(event.target.matches('[data-modal-select-all]')) document.querySelectorAll('[data-modal-cluster]').forEach(input=>{input.checked=event.target.checked;});
-  if(event.target.matches('[data-modal-cluster]')){const all=Array.from(document.querySelectorAll('[data-modal-cluster]'));const selectAll=document.querySelector('[data-modal-select-all]');if(selectAll) selectAll.checked=all.length>0&&all.every(input=>input.checked);}
-  const confirm=modal.querySelector('[data-modal-confirm]');
-  if(confirm){const selected=modal.querySelector('[data-modal-cluster]:checked');const name=modal.querySelector('[data-app-name]');confirm.disabled=Boolean(name ? !name.value.trim()||!selected : !selected&&pendingAction?.actionKey!=='rebuild'&&pendingAction?.ids?.length===0);}
+  if(event.target.matches('[data-modal-select-all]')) modal.querySelectorAll('[data-modal-cluster]').forEach(input=>{input.checked=event.target.checked;if(!event.target.checked){const unavailable=modal.querySelector(`[data-modal-unavailable="${input.dataset.modalCluster}"]`);if(unavailable)unavailable.value=unavailable.dataset.initialValue;}});
+  if(event.target.matches('[data-modal-cluster]')){
+    const clusterId=event.target.dataset.modalCluster;
+    const unavailable=modal.querySelector(`[data-modal-unavailable="${clusterId}"]`);
+    if(!event.target.checked&&unavailable) unavailable.value=unavailable.dataset.initialValue;
+    const all=Array.from(modal.querySelectorAll('[data-modal-cluster]'));
+    const selectAll=modal.querySelector('[data-modal-select-all]');
+    if(selectAll){selectAll.checked=all.length>0&&all.every(input=>input.checked);selectAll.indeterminate=all.some(input=>input.checked)&&!selectAll.checked;}
+  }
+  if(event.target.matches('[data-resource-limit-toggle]')) syncResourceLimit(event.target.closest('.vertical-resource-cell'));
+  updateModalFooter();
 });
-modal.addEventListener('input',event=>{if(!event.target.matches('[data-app-name]'))return;const confirm=modal.querySelector('[data-modal-confirm]');if(confirm)confirm.disabled=!event.target.value.trim()||!modal.querySelector('[data-modal-cluster]:checked');});
+modal.addEventListener('input',event=>{
+  if(event.target.matches('[data-modal-unavailable]')){
+    const cluster=modal.querySelector(`[data-modal-cluster="${event.target.dataset.modalUnavailable}"]`);
+    if(cluster) cluster.checked=true;
+    const all=Array.from(modal.querySelectorAll('[data-modal-cluster]'));
+    const selectAll=modal.querySelector('[data-modal-select-all]');
+    if(selectAll){selectAll.checked=all.length>0&&all.every(input=>input.checked);selectAll.indeterminate=all.some(input=>input.checked)&&!selectAll.checked;}
+  }
+  if(event.target.matches('[data-resource-request]')){
+    const cell=event.target.closest('.vertical-resource-cell');
+    if(!cell.querySelector('[data-resource-limit-toggle]').checked) syncResourceLimit(cell);
+  }
+  updateModalFooter();
+});
 modal.addEventListener('click',event=>{if(event.target.closest('[data-modal-close]')){closeModal();return;}if(event.target.closest('[data-modal-confirm]'))executeAction();});
+modal.addEventListener('scroll',()=>{const header=modal.querySelector('.operation-modal-header');if(header)header.classList.toggle('is-scrolled',modal.scrollTop>0);});
 detailBackdrop.addEventListener('click',event=>{if(event.target===detailBackdrop)closeInstanceDetail();});
 instanceModal.addEventListener('click',event=>{
   const close=event.target.closest('.close-detail');

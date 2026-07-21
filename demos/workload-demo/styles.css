@@ -177,3 +177,10 @@
 .vertical-resource-cell input:not([type="checkbox"]):focus,.vertical-resource-cell select:focus{border-color:#181818}
 .vertical-scale-value{display:flex;align-items:center;justify-content:flex-end;padding:0 20px;color:#181818;font-size:14px;line-height:22px;white-space:nowrap}
 @media(max-width:1100px){.action-modal.operation-modal.operation-modal-wide{width:calc(100vw - 48px)}.operation-modal-wide .operation-modal-body{overflow-x:auto}}
+
+/* Figma 66:28615 interaction states. */
+.modal-description-help{display:none;place-items:center;width:16px;height:16px;padding:0;border:1px solid #8f8f8f;border-radius:50%;background:transparent;color:#8f8f8f;font:600 11px/1 Inter,Arial,sans-serif}.operation-modal-header.is-scrolled .modal-description-help{display:grid}
+.operation-modal-footer [data-modal-hint].is-error{color:#e62c4b}
+.vertical-resource-cell input:disabled,.vertical-resource-cell select:disabled{border-color:#e8e8e8;background:#f7f7f7;color:#8f8f8f;cursor:not-allowed}
+.toast[data-type="success"]{border-top:2px solid #00a656}
+.toast[data-type="error"]{border-top:2px solid #e62c4b}
