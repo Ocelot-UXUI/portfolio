@@ -48,12 +48,18 @@ const icon = name => figmaIconAssets[name]
 const primaryNavIcons = {
   home:{default:'image_44.png',active:'image_52.png'},
   affairs:{default:'image_45.png',active:'image_53.png'},
-  apps:{default:'image_46.png',active:'image_46.png'},
+  apps:{default:'image_46.png',active:'image_1.png'},
   environment:{default:'image_47.png',active:'image_54.png'},
   changes:{default:'image_48.png',active:'image_55.png'},
   resources:{default:'image_49.png',active:'image_56.png'},
   account:{default:'image_50.png',active:'image_57.png'},
   more:{default:'image_51.png',active:'image_58.png'}
+};
+const primaryNavIconSrc = (name, selected=false) => {
+  const iconSet = primaryNavIcons[name];
+  if(!iconSet) return '';
+  if(name === 'apps' && selected) return './assets/figma-primary-app-selected-56-39117/image_1.png';
+  return `${figmaIconPath}/${iconSet[selected ? 'active' : 'default']}`;
 };
 const appNavIcons = {
   workload:'image_59.png', exposure:'image_67.png', logs:'image_60.png', terminal:'image_61.png',
@@ -97,11 +103,10 @@ function renderAppNavigation(){
     const selected = button.dataset.primaryNav === state.primaryNav;
     button.classList.toggle('active', selected);
     const image = button.querySelector('img');
-    const iconSet = primaryNavIcons[button.dataset.primaryNav];
-    if(image && iconSet) image.src = `${figmaIconPath}/${selected ? iconSet.active : iconSet.default}`;
+    if(image) image.src = primaryNavIconSrc(button.dataset.primaryNav, selected);
   });
   const moreIcon = document.querySelector('#primaryMoreBtn img');
-  if(moreIcon) moreIcon.src = `${figmaIconPath}/${state.compactMoreOpen ? primaryNavIcons.more.active : primaryNavIcons.more.default}`;
+  if(moreIcon) moreIcon.src = primaryNavIconSrc('more', state.compactMoreOpen);
   document.querySelectorAll('[data-app-nav]').forEach(button=>{
     button.classList.toggle('active', button.dataset.appNav === state.appNav);
     const image = button.querySelector('img');
@@ -255,7 +260,7 @@ function yamlMarkup(pod){
 function openInstanceDetail(id,tab='detail'){ const pod=pods.find(item=>item[0]===id); if(!pod)return; instanceModal.innerHTML=instanceMarkup(pod,tab); detailBackdrop.classList.remove('hidden'); }
 function closeInstanceDetail(){ detailBackdrop.classList.add('hidden'); instanceModal.innerHTML=''; }
 function closeMenu(){ menu.classList.add('hidden'); menu.innerHTML=''; }
-function closeCompactMore(){ state.compactMoreOpen=false; compactMorePopover.classList.add('hidden'); const trigger=document.querySelector('#primaryMoreBtn'); trigger.classList.remove('active'); trigger.querySelector('img').src=`${figmaIconPath}/${primaryNavIcons.more.default}`; }
+function closeCompactMore(){ state.compactMoreOpen=false; compactMorePopover.classList.add('hidden'); const trigger=document.querySelector('#primaryMoreBtn'); trigger.classList.remove('active'); trigger.querySelector('img').src=primaryNavIconSrc('more'); }
 function syncCompactNavigation(){
   const replacement = document.querySelector('.primary-replaceable');
   const replacementIcon = replacement.querySelector('img');
@@ -266,7 +271,7 @@ function syncCompactNavigation(){
   replacement.dataset.primaryNav = iconKey;
   replacement.setAttribute('aria-label', activeItem.label);
   replacement.setAttribute('title', activeItem.label);
-  replacementIcon.src = `${figmaIconPath}/${(primaryNavIcons[iconKey] || primaryNavIcons.changes).default}`;
+  replacementIcon.src = primaryNavIconSrc(primaryNavIcons[iconKey] ? iconKey : 'changes');
   replacementLabel.textContent = activeItem.label;
   document.querySelectorAll('.compact-overflow-item').forEach(item=>item.classList.toggle('compact-hidden', compactMoreMedia.matches));
   if(!compactMoreMedia.matches) closeCompactMore();
@@ -279,7 +284,7 @@ function openCompactMore(trigger){
   state.compactMoreOpen=true;
   compactMorePopover.classList.remove('hidden');
   trigger.classList.add('active');
-  trigger.querySelector('img').src=`${figmaIconPath}/${primaryNavIcons.more.active}`;
+  trigger.querySelector('img').src=primaryNavIconSrc('more',true);
 }
 function closeAccountPopover(){ accountPopover.classList.add('hidden'); }
 function renderAccountPopover(){
