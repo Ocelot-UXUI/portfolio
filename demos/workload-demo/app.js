@@ -12,7 +12,7 @@ const pods = [
   ['pod-11','…nference-5f6b9-p9wqc','running','192.168.10.21','grpc:8500','ENS','1','6d','16%','2.6Gi','imeonline']
 ];
 
-const state = { status:'all', cluster:'all', query:'', page:1, pageSize:10, collapsedClusters:new Set(), selected:new Set(), pausedPods:new Set(), executing:false, primaryNav:'apps', appNav:'workload' };
+const state = { status:'all', cluster:'all', query:'', page:1, pageSize:10, viewMode:'detailed', collapsedClusters:new Set(), selected:new Set(), pausedPods:new Set(), instanceSummaryCollapsed:false, selectedContainer:0, executing:false, primaryNav:'apps', appNav:'workload', appNavExpanded:true, secondaryCollapsed:false, accountTab:'all', accountQuery:'', compactMoreOpen:false };
 const labels = { running:'运行中', error:'异常', blocked:'已摘流' };
 const clusterLabels = { imeonline:'imeonline', 'edge-prod':'edge-prod' };
 const clusterGroups = document.querySelector('#clusterGroups');
@@ -25,14 +25,47 @@ const instanceModal = document.querySelector('#instanceModal');
 const historyDrawer = document.querySelector('#historyDrawer');
 const historyList = document.querySelector('#historyList');
 const bulkBar = document.querySelector('#bulkBar');
-const icon = name => `<svg aria-hidden="true"><use href="#i-${name}"/></svg>`;
+const figmaIconPath = './assets/figma-icon-library-56-38920';
+const figmaIconAssets = {
+  'chevron-right':'image_3.png',
+  'chevron-down':'image_6.png',
+  'chevron-up':'image_5.png',
+  'search':'image_43.png',
+  'refresh':'image_40.png',
+  'power':'image_18.png',
+  'unfold':'image_32.png',
+  'pause':'image_21.png',
+  'block':'image_20.png',
+  'route':'image_19.png',
+  'restart':'image_82.png',
+  'horizontal-scale':'image_32.png',
+  'vertical-scale':'image_33.png',
+  'close':'image_25.png'
+};
+const icon = name => figmaIconAssets[name]
+  ? `<img class="figma-icon" src="${figmaIconPath}/${figmaIconAssets[name]}" alt="">`
+  : `<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24"><use href="#i-${name}"/></svg>`;
+const primaryNavIcons = {
+  home:{default:'image_44.png',active:'image_52.png'},
+  affairs:{default:'image_45.png',active:'image_53.png'},
+  apps:{default:'image_46.png',active:'image_46.png'},
+  environment:{default:'image_47.png',active:'image_54.png'},
+  changes:{default:'image_48.png',active:'image_55.png'},
+  resources:{default:'image_49.png',active:'image_56.png'},
+  account:{default:'image_50.png',active:'image_57.png'},
+  more:{default:'image_51.png',active:'image_58.png'}
+};
+const appNavIcons = {
+  workload:'image_59.png', exposure:'image_67.png', logs:'image_60.png', terminal:'image_61.png',
+  monitor:'image_62.png', runtime:'image_64.png', settings:'image_63.png'
+};
 const actions = {
-  restart:{label:'应用重启', icon:'power', detail:'将依次重启目标实例，短暂中断可能影响正在处理的请求。'},
-  horizontal:{label:'横向扩缩', icon:'unfold', detail:'将调整应用实例数量，变更完成前新实例不会接收流量。', field:'期望实例数', value:'6'},
-  vertical:{label:'纵向扩缩', icon:'unfold', detail:'将更新实例 CPU 和内存规格，变更期间实例会滚动重建。', field:'CPU 配额', value:'4 c'},
+  restart:{label:'应用重启', icon:'restart', detail:'将依次重启目标实例，短暂中断可能影响正在处理的请求。'},
+  horizontal:{label:'横向扩缩', icon:'horizontal-scale', detail:'将调整应用实例数量，变更完成前新实例不会接收流量。', field:'期望实例数', value:'6'},
+  vertical:{label:'纵向扩缩', icon:'vertical-scale', detail:'将更新实例 CPU 和内存规格，变更期间实例会滚动重建。', field:'CPU 配额', value:'4 c'},
   rebuild:{label:'删除/重建', icon:'refresh', detail:'将删除并重建目标实例，实例上的临时数据不会保留。'},
-  block:{label:'屏蔽', icon:'apps', detail:'将停止向目标实例分配新流量，已建立连接不受影响。'},
-  route:{label:'接流', icon:'unfold', detail:'将恢复向目标实例分配新流量。'},
+  block:{label:'屏蔽', icon:'block', detail:'将停止向目标实例分配新流量，已建立连接不受影响。'},
+  route:{label:'接流', icon:'route', detail:'将恢复向目标实例分配新流量。'},
   grant:{label:'临时授权', icon:'user', detail:'将创建 24 小时有效的临时访问授权。'},
   delete:{label:'删除并缩容', icon:'apps', detail:'将删除目标实例并降低副本数，此操作可能影响服务容量。', fails:true}
 };
@@ -41,13 +74,46 @@ const workloadSections = document.querySelectorAll('[data-workload-section]');
 const appPagePlaceholder = document.querySelector('#appPagePlaceholder');
 const appPageTitle = document.querySelector('#appPageTitle');
 const secondaryNav = document.querySelector('.secondary-nav');
+const accountPopover = document.querySelector('#accountPopover');
+const accountList = document.querySelector('#accountList');
+const compactMorePopover = document.querySelector('#compactMorePopover');
+const compactMoreMedia = window.matchMedia('(max-width:1250px)');
+const compactOverflowItems = {
+  resources:{label:'资源', icon:'./assets/figma-compact-more-32-2945/image_9.png'},
+  account:{label:'账户', icon:'./assets/figma-compact-more-32-2945/image_10.png'}
+};
+const accounts = [
+  { name:'一站式测试账户', handle:'appspace-test', initial:'t', tone:'mint', favorite:true, recent:true },
+  { name:'码神专用账号码神专用账号', handle:'cnap-mashen', initial:'m', tone:'blue', favorite:true, recent:true },
+  { name:'一站式测试账户', handle:'appspace-test-2', initial:'t', tone:'yellow', favorite:false, recent:false },
+  { name:'一站式测试账户', handle:'appspace-tool', initial:'t', tone:'purple', favorite:false, recent:true }
+];
 
 function renderAppNavigation(){
   const isApplication = state.primaryNav === 'apps';
   const isWorkload = isApplication && state.appNav === 'workload';
-  document.querySelectorAll('[data-primary-nav]').forEach(button=>button.classList.toggle('active', button.dataset.primaryNav === state.primaryNav));
-  document.querySelectorAll('[data-app-nav]').forEach(button=>button.classList.toggle('active', button.dataset.appNav === state.appNav));
+  syncCompactNavigation();
+  document.querySelectorAll('[data-primary-nav]').forEach(button=>{
+    const selected = button.dataset.primaryNav === state.primaryNav;
+    button.classList.toggle('active', selected);
+    const image = button.querySelector('img');
+    const iconSet = primaryNavIcons[button.dataset.primaryNav];
+    if(image && iconSet) image.src = `${figmaIconPath}/${selected ? iconSet.active : iconSet.default}`;
+  });
+  const moreIcon = document.querySelector('#primaryMoreBtn img');
+  if(moreIcon) moreIcon.src = `${figmaIconPath}/${state.compactMoreOpen ? primaryNavIcons.more.active : primaryNavIcons.more.default}`;
+  document.querySelectorAll('[data-app-nav]').forEach(button=>{
+    button.classList.toggle('active', button.dataset.appNav === state.appNav);
+    const image = button.querySelector('img');
+    if(image) image.src = `${figmaIconPath}/${appNavIcons[button.dataset.appNav]}`;
+  });
   secondaryNav.classList.toggle('hidden', !isApplication);
+  secondaryNav.classList.toggle('collapsed', state.secondaryCollapsed);
+  const collapseButton = document.querySelector('#secondaryCollapseBtn');
+  const collapseIcon = collapseButton.querySelector('img');
+  collapseButton.setAttribute('aria-label', state.secondaryCollapsed ? '展开二级导航' : '收起二级导航');
+  collapseButton.setAttribute('title', state.secondaryCollapsed ? '展开二级导航' : '收起二级导航');
+  collapseIcon.src = state.secondaryCollapsed ? collapseIcon.dataset.collapsedSrc : collapseIcon.dataset.expandedSrc;
   workloadSections.forEach(section=>section.classList.toggle('hidden', !isWorkload));
   appPagePlaceholder.classList.toggle('hidden', isWorkload);
   appPageTitle.textContent = isApplication ? appNavLabels[state.appNav] : '页面内容占位';
@@ -76,7 +142,7 @@ function rowMarkup(pod){
   const hot = parseInt(cpu,10) >= 80 ? 'metric-hot' : 'metric-cool';
   const rowActions = [['restart','重启'],['rebuild','删除/重建'],['block','屏蔽'],['route','接流'],['grant','临时授权']]
     .map(([key,label])=>`<button type="button" data-action="${key}" data-pod="${id}" aria-label="${label}" title="${label}">${icon(actions[key].icon)}</button>`).join('');
-  return `<tr><td><input class="pod-check" data-pod="${id}" type="checkbox" ${state.selected.has(id)?'checked':''} aria-label="选择 ${name}"></td><td title="${name}"><button class="pod-link" data-instance-detail="${id}">${name}</button></td><td><span class="status-tag ${status}">${labels[status]}</span></td><td>${ip}</td><td>${port}</td><td><span class="exposure-dot"></span>${exposure}</td><td class="${restarts >= 4 ? 'metric-hot' : ''}">${restarts}</td><td>${age}</td><td class="${hot}"><span class="cpu-mark">${icon('cpu')}</span>${cpu}</td><td><span class="memory-mark">${icon('memory')}</span>${memory}</td><td><span class="row-actions">${rowActions}<button type="button" data-row-more="${id}" aria-label="更多操作" title="更多操作">${icon('more')}</button></span></td></tr>`;
+  return `<tr><td><input class="pod-check" data-pod="${id}" type="checkbox" ${state.selected.has(id)?'checked':''} aria-label="选择 ${name}"></td><td title="${name}"><button class="pod-link" data-instance-detail="${id}">${name}</button></td><td><span class="status-tag ${status}">${labels[status]}</span></td><td>${ip}</td><td>${port}</td><td><span class="exposure-dot"></span>${exposure}</td><td class="${restarts >= 4 ? 'metric-hot' : ''}">${restarts}</td><td>${age}</td><td class="${hot}"><span class="usage-value" data-tooltip="CPU：${cpu}，Limit：8c，请求：4c"><span class="cpu-mark">${icon('cpu')}</span>${cpu}</span></td><td><span class="usage-value" data-tooltip="内存：${memory}，Limit：12Gi，请求：8Gi"><span class="memory-mark">${icon('memory')}</span>${memory}</span></td><td><span class="row-actions">${rowActions}<button type="button" data-row-more="${id}" aria-label="更多操作" title="更多操作">${icon('more')}</button></span></td></tr>`;
 }
 
 function tableMarkup(cluster,podsInCluster){
@@ -87,7 +153,7 @@ function tableMarkup(cluster,podsInCluster){
   const collapsed=state.collapsedClusters.has(cluster);
   return `<section class="cluster-group ${collapsed?'collapsed':''}" data-cluster="${cluster}">
     <header class="cluster-header"><button class="cluster-toggle" data-cluster-toggle="${cluster}" aria-label="${collapsed?'展开':'收起'}">${icon(collapsed?'chevron-right':'chevron-down')}</button><div class="cluster-name"><strong>${clusterLabels[cluster]}</strong><span>集群</span></div><div class="cluster-summary"><span>运行中 <b class="green">${summary.running}</b></span><span>异常 <b class="red">${summary.error}</b></span><span>已摘流 <b class="amber">${summary.blocked}</b></span><i></i><span>共 <b>${podsInCluster.length}</b> pod</span><button class="cluster-more" data-cluster-more="${cluster}" aria-label="集群更多操作">${icon('more')}</button></div></header>
-    <div class="cluster-content"><div class="workload-group"><div class="group-header"><strong>Payment-api</strong><span class="rollout">Rollout</span><span class="versions">v1.8.3&nbsp; 等3个版本</span></div><div class="table-scroll"><table class="pod-table"><thead><tr><th><input class="cluster-select" data-cluster-select="${cluster}" type="checkbox" ${selected?'checked':''} ${partial&&!selected?'data-indeterminate="true"':''} aria-label="全选 ${clusterLabels[cluster]} 集群"></th><th>Pod</th><th>状态<span class="sort-icon">${icon('chevron-up')}</span></th><th>Pod IP</th><th>端口</th><th>服务暴露</th><th>重启<span class="sort-icon">${icon('chevron-up')}</span></th><th>存活<span class="sort-icon">${icon('chevron-up')}</span></th><th>CPU<span class="sort-icon">${icon('chevron-up')}</span></th><th>内存</th><th>操作</th></tr></thead><tbody>${podsInCluster.map(rowMarkup).join('')}</tbody></table></div></div></div>
+    <div class="cluster-content"><div class="workload-group"><div class="group-header"><strong>Payment-api</strong><span class="rollout">Rollout</span><span class="versions">v1.8.3&nbsp; 等3个版本</span></div><div class="table-scroll"><table class="pod-table"><thead><tr><th><input class="cluster-select" data-cluster-select="${cluster}" type="checkbox" ${selected?'checked':''} ${partial&&!selected?'data-indeterminate="true"':''} aria-label="全选 ${clusterLabels[cluster]} 集群"><button class="select-options" data-select-options="${cluster}" aria-label="选择操作" title="选择操作">${icon('chevron-down')}</button></th><th>Pod</th><th>状态<span class="sort-icon">${icon('chevron-up')}</span></th><th>Pod IP</th><th>端口</th><th>服务暴露</th><th>重启<span class="sort-icon">${icon('chevron-up')}</span></th><th>存活<span class="sort-icon">${icon('chevron-up')}</span></th><th>CPU<span class="sort-icon">${icon('chevron-up')}</span></th><th>内存</th><th>操作</th></tr></thead><tbody>${podsInCluster.map(rowMarkup).join('')}</tbody></table></div></div></div>
   </section>`;
 }
 
@@ -106,6 +172,7 @@ function render(){
   const visible=visiblePods();
   const byCluster=Object.keys(clusterLabels).map(cluster=>[cluster,visible.filter(pod=>pod[10]===cluster)]).filter(([,items])=>items.length);
   clusterGroups.innerHTML=byCluster.map(([cluster,items])=>tableMarkup(cluster,items)).join('');
+  clusterGroups.classList.toggle('compact-mode',state.viewMode==='compact');
   document.querySelector('#allCount').textContent = String(pods.length).padStart(2,'0');
   document.querySelector('#runningCount').textContent = String(pods.filter(([, ,status])=>status==='running').length).padStart(2,'0');
   document.querySelector('#errorCount').textContent = String(pods.filter(([, ,status])=>status==='error').length).padStart(2,'0');
@@ -172,11 +239,14 @@ function instanceMarkup(pod,tab='detail'){
   const paused=state.pausedPods.has(id);
   const tabs=[['detail','详细信息'],['logs','日志'],['terminal','终端'],['events','事件']];
   const tabBar=tabs.map(([key,label])=>`<button class="${key===tab?'active':''}" data-detail-tab="${key}">${label}</button>`).join('');
-  const details=`<div class="pod-detail-page"><section class="pod-summary"><div><span>状态</span><strong class="success-text">${paused?'已暂停':labels[status]}</strong></div><div><span>就绪</span><strong>是</strong></div><div><span>重启</span><strong>${restarts}</strong></div><div class="survival-field" title="开始时间：2026-06-04 04:20:06"><span>存活时间</span><strong>${age}</strong></div><div><span>Pod IP</span><strong>${ip}</strong></div><div><span>资源用量</span><strong>${cpu} / ${memory}</strong></div></section><section class="container-section"><div class="section-heading"><h3>容器</h3><button data-yaml-open="${id}">Pod YAML ${icon('chevron-right')}</button></div><article class="container-card"><header><span class="container-dot"></span><strong>ranking-inference</strong><em>主容器</em><span class="status-tag running">运行中</span></header><div class="container-stats"><span>类型<strong>普通</strong></span><span>状态<strong>运行中</strong></span><span>就绪<strong>是</strong></span><span>重启<strong>0</strong></span><span>存活<strong>8d</strong></span><span>端口<strong>3</strong></span><span>挂载<strong>3</strong></span></div><dl class="container-info"><div><dt>镜像</dt><dd>registry.internal/payments/api-gateway:v2.2.5</dd></div><div><dt>镜像拉取策略</dt><dd>IfNotPresent</dd></div><div class="wide"><dt>启动命令</dt><dd>/app/server --config=/etc/app/config/server.yaml --port=8500</dd></div></dl></article><div class="minor-containers"><button><span class="container-dot sidecar"></span><strong>ranking-inference</strong><small>Sidecar</small></button><button><span class="container-dot init"></span><strong>ranking-inference</strong><small>Init</small></button></div></section><section class="compact-table"><h3>挂载 <b>3</b></h3><div class="table-head"><span>容器名称</span><span>挂载路径</span><span>日志路径</span></div>${['go-demo','go-demo','go-demo'].map((item,index)=>`<div><span>${item}</span><span>/data/app/${index+1}</span><span>/home/work/logs</span></div>`).join('')}</section><section class="compact-table"><h3>环境变量 <b>3</b></h3><div class="table-head"><span>容器名称</span><span>变量名称</span><span>变量值</span></div><div><span>go-demo</span><span>ENV</span><span>production</span></div><div><span>go-demo</span><span>LOG_LEVEL</span><span>info</span></div><div><span>go-demo</span><span>PORT</span><span>8500</span></div></section></div>`;
+  const summary=`<section class="instance-summary ${state.instanceSummaryCollapsed?'is-collapsed':''}"><div class="summary-grid"><div><span>Pod IP</span><strong>${ip}</strong></div><div><span>节点 IP</span><strong>192.168.10.12</strong></div><div><span>版本</span><strong>v1.8.3</strong></div><div><span>重启次数</span><strong>${restarts}</strong></div><div><span>存活时间</span><strong>${age}</strong></div><div><span>服务暴露</span><strong>${port}</strong></div></div></section>`;
+  const details=`<div class="pod-detail-page"><section class="detail-overview"><h3>基本信息</h3><dl><div><dt>Pod 名称</dt><dd>${name}</dd></div><div><dt>运行状态</dt><dd class="success-text">${paused?'已暂停':labels[status]}</dd></div><div><dt>所属集群</dt><dd>${cluster}</dd></div><div><dt>资源用量</dt><dd class="usage-value" data-tooltip="CPU 用量 ${cpu}；内存用量 ${memory}">${cpu} / ${memory}</dd></div></dl></section><section class="container-section"><div class="section-heading"><h3>容器</h3><button data-yaml-open="${id}">Pod YAML ${icon('chevron-right')}</button></div><article class="container-card"><header><span class="container-dot"></span><strong>ranking-inference</strong><em>主容器</em><span class="status-tag running">运行中</span></header><div class="container-stats"><span>类型<strong>普通</strong></span><span>状态<strong>运行中</strong></span><span>就绪<strong>是</strong></span><span>重启<strong>0</strong></span><span>存活<strong>8d</strong></span><span>端口<strong>3</strong></span><span>挂载<strong>3</strong></span></div><dl class="container-info"><div><dt>镜像</dt><dd>registry.internal/payments/api-gateway:v2.2.5</dd></div><div><dt>镜像拉取策略</dt><dd>IfNotPresent</dd></div><div class="wide"><dt>启动命令</dt><dd>/app/server --config=/etc/app/config/server.yaml --port=8500</dd></div></dl></article><div class="minor-containers"><button><span class="container-dot sidecar"></span><strong>ranking-inference</strong><small>Sidecar</small></button><button><span class="container-dot init"></span><strong>ranking-inference</strong><small>Init</small></button></div></section><section class="compact-table"><h3>挂载 <b>3</b></h3><div class="table-head"><span>容器名称</span><span>挂载路径</span><span>日志路径</span></div>${['go-demo','go-demo','go-demo'].map((item,index)=>`<div><span>${item}</span><span>/data/app/${index+1}</span><span>/home/work/logs</span></div>`).join('')}</section><section class="compact-table"><h3>环境变量 <b>3</b></h3><div class="table-head"><span>容器名称</span><span>变量名称</span><span>变量值</span></div><div><span>go-demo</span><span>ENV</span><span>production</span></div><div><span>go-demo</span><span>LOG_LEVEL</span><span>info</span></div><div><span>go-demo</span><span>PORT</span><span>8500</span></div></section></div>`;
   const logs=`<div class="tool-pane"><div class="tool-toolbar"><span>当前运行</span><button data-log-mode="latest">最新日志</button><label>${icon('search')}<input placeholder="搜索日志"></label><button data-log-fullscreen="${id}" title="全屏">${icon('unfold')}</button></div><div class="terminal-screen log-screen">${logLines(name)}</div></div>`;
   const terminal=`<div class="tool-pane"><div class="tool-toolbar"><select><option>ranking-inference</option></select><span>/bin/bash</span><button>${icon('refresh')}重新连接</button></div><div class="terminal-screen"><p><b>root@${name.slice(-8)}:</b>/app# ps aux</p><p>PID USER COMMAND</p><p>1 root /app/server --config=/etc/app/config/server.yaml</p><p>27 root /bin/bash</p><p><b>root@${name.slice(-8)}:</b>/app# <span class="cursor"></span></p></div></div>`;
   const events=`<div class="event-pane"><div class="event-toolbar"><select><option>全部类型</option><option>Normal</option><option>Warning</option></select><button>${icon('refresh')}刷新</button></div><div class="event-table"><div class="table-head"><span>类型</span><span>原因</span><span>信息</span><span>时间</span></div><div><span class="success-text">Normal</span><span>Started</span><span>Started container ranking-inference</span><span>2 分钟前</span></div><div><span class="success-text">Normal</span><span>Pulled</span><span>Container image already present on machine</span><span>2 分钟前</span></div><div><span class="warning-text">Warning</span><span>Unhealthy</span><span>Readiness probe failed, retry succeeded</span><span>1 小时前</span></div></div></div>`;
-  return `<header class="instance-header"><div class="instance-title-wrap"><button class="close-detail" aria-label="关闭">×</button><div><div class="instance-title"><h2 id="instanceTitle" title="${name}">${name}</h2><span class="status-tag ${paused?'blocked':status}">${paused?'已暂停':labels[status]}</span></div><p>${cluster} · ${ip}</p></div></div><div class="instance-header-actions"><button data-pause-pod="${id}">${paused?'恢复':'暂停'}</button><button data-detail-action="restart" title="重启">${icon('power')}</button><button data-detail-action="rebuild" title="删除/重建">${icon('refresh')}</button><button data-open-new="${id}" title="在新标签页打开">${icon('unfold')}</button><button title="更多">${icon('more')}</button></div></header><nav class="detail-tabs">${tabBar}</nav><div class="detail-body" data-instance-id="${id}">${tab==='detail'?details:tab==='logs'?logs:tab==='terminal'?terminal:events}</div>`;
+  const containerItems=[['主容器',''],['主容器',''],['Sidecar','sidecar'],['Init','init']];
+  const containers=`<nav class="container-strip" aria-label="容器选择">${containerItems.map(([type,tone],index)=>`<button class="${state.selectedContainer===index?'active':''}" data-container-select="${index}" ${state.selectedContainer===index?'aria-current="true"':''}><span class="container-dot ${tone}"></span><strong>ranking-inference</strong><small>${type}</small></button>`).join('')}</nav>`;
+  return `<header class="instance-header"><div class="instance-title-wrap"><div class="instance-title"><h2 id="instanceTitle" title="${name}">${name}</h2><span class="status-tag ${paused?'blocked':status}">${paused?'已暂停':labels[status]}</span></div><p>${cluster} · ${ip}</p></div><div class="instance-header-actions"><button data-pause-pod="${id}">${paused?'恢复':'暂停'}</button><button data-detail-action="restart" title="重启">${icon('power')}</button><button data-detail-action="rebuild" title="删除/重建">${icon('refresh')}</button><button data-open-new="${id}" title="在新标签页打开">${icon('unfold')}</button><button class="close-detail" aria-label="关闭" title="关闭">×</button></div></header>${summary}<button class="summary-toggle" data-summary-toggle="${id}" aria-expanded="${!state.instanceSummaryCollapsed}">${state.instanceSummaryCollapsed?'展开':'收起'} ${icon(state.instanceSummaryCollapsed?'chevron-down':'chevron-up')}</button><section class="instance-workbench">${containers}<nav class="detail-tabs">${tabBar}</nav><div class="detail-body" data-instance-id="${id}">${tab==='detail'?details:tab==='logs'?logs:tab==='terminal'?terminal:events}</div></section>`;
 }
 function yamlMarkup(pod){
   const [id,name,,, ,,,, , ,cluster]=pod;
@@ -185,6 +255,48 @@ function yamlMarkup(pod){
 function openInstanceDetail(id,tab='detail'){ const pod=pods.find(item=>item[0]===id); if(!pod)return; instanceModal.innerHTML=instanceMarkup(pod,tab); detailBackdrop.classList.remove('hidden'); }
 function closeInstanceDetail(){ detailBackdrop.classList.add('hidden'); instanceModal.innerHTML=''; }
 function closeMenu(){ menu.classList.add('hidden'); menu.innerHTML=''; }
+function closeCompactMore(){ state.compactMoreOpen=false; compactMorePopover.classList.add('hidden'); const trigger=document.querySelector('#primaryMoreBtn'); trigger.classList.remove('active'); trigger.querySelector('img').src=`${figmaIconPath}/${primaryNavIcons.more.default}`; }
+function syncCompactNavigation(){
+  const replacement = document.querySelector('.primary-replaceable');
+  const replacementIcon = replacement.querySelector('img');
+  const replacementLabel = replacement.querySelector('span');
+  const selectedOverflow = compactMoreMedia.matches && compactOverflowItems[state.primaryNav];
+  const activeItem = selectedOverflow ? compactOverflowItems[state.primaryNav] : {label:'变更'};
+  const iconKey = selectedOverflow ? state.primaryNav : replacement.dataset.defaultNav;
+  replacement.dataset.primaryNav = iconKey;
+  replacement.setAttribute('aria-label', activeItem.label);
+  replacement.setAttribute('title', activeItem.label);
+  replacementIcon.src = `${figmaIconPath}/${(primaryNavIcons[iconKey] || primaryNavIcons.changes).default}`;
+  replacementLabel.textContent = activeItem.label;
+  document.querySelectorAll('.compact-overflow-item').forEach(item=>item.classList.toggle('compact-hidden', compactMoreMedia.matches));
+  if(!compactMoreMedia.matches) closeCompactMore();
+}
+function openCompactMore(trigger){
+  closeMenu(); closeAccountPopover();
+  const rect = trigger.getBoundingClientRect();
+  compactMorePopover.style.top = `${Math.min(rect.top, window.innerHeight - 118)}px`;
+  compactMorePopover.style.left = `${rect.right + 8}px`;
+  state.compactMoreOpen=true;
+  compactMorePopover.classList.remove('hidden');
+  trigger.classList.add('active');
+  trigger.querySelector('img').src=`${figmaIconPath}/${primaryNavIcons.more.active}`;
+}
+function closeAccountPopover(){ accountPopover.classList.add('hidden'); }
+function renderAccountPopover(){
+  const query = state.accountQuery.toLowerCase();
+  const visible = accounts.filter(account => (state.accountTab === 'all' || account[state.accountTab]) && (!query || `${account.name} ${account.handle}`.toLowerCase().includes(query)));
+  accountList.innerHTML = visible.length ? visible.map(account => `<button class="account-row" data-account-select="${account.handle}"><span class="account-avatar ${account.tone}">${account.initial}</span><span class="account-copy"><strong>${account.name}</strong><small>${account.handle}</small></span><span class="account-star" aria-hidden="true">${account.favorite ? '★' : ''}</span></button>`).join('') : '<p class="account-empty">未找到匹配账户</p>';
+  document.querySelectorAll('[data-account-tab]').forEach(button => button.classList.toggle('active', button.dataset.accountTab === state.accountTab));
+}
+function openAccountPopover(trigger){
+  closeMenu();
+  const rect = trigger.getBoundingClientRect();
+  accountPopover.style.top = `${rect.bottom - 1}px`;
+  accountPopover.style.left = `${Math.max(16, Math.min(rect.left - 20, window.innerWidth - 496))}px`;
+  accountPopover.classList.remove('hidden');
+  renderAccountPopover();
+  document.querySelector('#accountSearchInput').focus();
+}
 function openMenu(trigger,items){
   const rect=trigger.getBoundingClientRect();
   menu.innerHTML=items.map(item=>`<button data-menu-action="${item.key}">${item.icon?icon(item.icon):''}${item.label}</button>`).join('');
@@ -201,6 +313,56 @@ document.querySelectorAll('[data-app-nav]').forEach(button=>button.addEventListe
   state.appNav=button.dataset.appNav;
   renderAppNavigation();
 }));
+document.querySelector('#secondaryCollapseBtn').addEventListener('click',()=>{
+  state.secondaryCollapsed=!state.secondaryCollapsed;
+  renderAppNavigation();
+});
+document.querySelectorAll('[data-context]').forEach(button=>button.addEventListener('click',event=>{
+  event.stopPropagation();
+  const key=button.dataset.context;
+  const labels={account:'账户',application:'应用',environment:'环境'};
+  if(key==='home'){ toast('已返回 CNAP 首页'); return; }
+  if(key==='account'){ openAccountPopover(button); return; }
+  const lists={
+    account:[{key:'context-account-main',label:'默认账号',icon:'user'},{key:'context-account-prod',label:'生产账号',icon:'user'},{key:'context-account-manage',label:'管理账号',icon:'user'}],
+    application:[{key:'context-application-payment',label:'Payment-api',icon:'apps'},{key:'context-application-order',label:'Order-service',icon:'apps'},{key:'context-application-gateway',label:'Gateway',icon:'apps'}],
+    environment:[{key:'context-environment-prod',label:'生产环境 · prod-cn-bj',icon:'leaf'},{key:'context-environment-staging',label:'测试环境 · staging-cn-bj',icon:'leaf'}]
+  };
+  openMenu(button, lists[key]); menu.dataset.context=labels[key];
+}));
+document.querySelector('#accountSearchInput').addEventListener('input', event => { state.accountQuery = event.target.value.trim(); renderAccountPopover(); });
+document.querySelectorAll('[data-account-tab]').forEach(button => button.addEventListener('click', () => { state.accountTab = button.dataset.accountTab; renderAccountPopover(); }));
+accountList.addEventListener('click', event => {
+  const account = event.target.closest('[data-account-select]');
+  if(!account) return;
+  const selected = accounts.find(item => item.handle === account.dataset.accountSelect);
+  document.querySelector('[data-context="account"]').innerHTML = `${selected.name}<svg class="chevron"><use href="#i-chevron-down"/></svg>`;
+  closeAccountPopover();
+  toast(`已切换账户：${selected.name}`);
+});
+document.querySelectorAll('[data-account-action]').forEach(button => button.addEventListener('click', () => {
+  closeAccountPopover();
+  toast(button.dataset.accountAction === 'create' ? '已打开新建账户' : button.dataset.accountAction === 'request' ? '已打开账户权限申请' : '已打开账户列表');
+}));
+document.querySelector('#primaryMoreBtn').addEventListener('click',event=>{
+  event.stopPropagation();
+  if(compactMoreMedia.matches){
+    compactMorePopover.classList.contains('hidden') ? openCompactMore(event.currentTarget) : closeCompactMore();
+    return;
+  }
+  openMenu(event.currentTarget,[{key:'more-resources',label:'资源',icon:'stack'},{key:'more-account',label:'账户',icon:'user'},{key:'more-customize',label:'导航设置',icon:'apps'}]);
+});
+document.querySelectorAll('[data-compact-more]').forEach(button=>button.addEventListener('click',()=>{
+  state.primaryNav=button.dataset.compactMore;
+  closeCompactMore();
+  renderAppNavigation();
+  toast(`已切换到${compactOverflowItems[state.primaryNav].label}`);
+}));
+compactMoreMedia.addEventListener('change',()=>renderAppNavigation());
+document.querySelector('#headerMoreBtn').addEventListener('click',event=>{
+  event.stopPropagation();
+  openMenu(event.currentTarget,[{key:'header-preferences',label:'偏好设置',icon:'apps'},{key:'header-help',label:'帮助文档',icon:'clipboard'}]);
+});
 document.querySelectorAll('.tabs button').forEach(button=>button.addEventListener('click',()=>{
   document.querySelectorAll('.tabs button').forEach(item=>item.classList.toggle('active',item===button));
   state.status=button.dataset.status; state.page=1; document.querySelector('#statusSelect').value=state.status; render();
@@ -211,6 +373,7 @@ document.querySelector('#searchInput').addEventListener('input',event=>{state.qu
 document.querySelector('#collapseAllBtn').addEventListener('click',()=>setAllClustersCollapsed(true));
 document.querySelector('#expandAllBtn').addEventListener('click',()=>setAllClustersCollapsed(false));
 document.querySelector('#refreshBtn').addEventListener('click',()=>{toast('Pod 列表已刷新');render();});
+document.querySelectorAll('.table-tools .view').forEach(button=>button.addEventListener('click',()=>{state.viewMode=button.dataset.viewMode;document.querySelectorAll('.table-tools .view').forEach(item=>{const selected=item===button;item.classList.toggle('active',selected);item.setAttribute('aria-pressed',String(selected));});clusterGroups.classList.toggle('compact-mode',state.viewMode==='compact');toast(state.viewMode==='compact'?'已切换为精简模式':'已切换为详细模式');}));
 document.querySelector('#restartBtn').addEventListener('click',()=>triggerAction('restart'));
 document.querySelector('#horizontalScaleBtn').addEventListener('click',()=>triggerAction('horizontal'));
 document.querySelector('#verticalScaleBtn').addEventListener('click',()=>triggerAction('vertical'));
@@ -224,6 +387,8 @@ clusterGroups.addEventListener('click',event=>{
   if(detail){ openInstanceDetail(detail.dataset.instanceDetail); return; }
   const toggle=event.target.closest('[data-cluster-toggle]');
   if(toggle){ setClusterCollapsed(toggle.dataset.clusterToggle,!state.collapsedClusters.has(toggle.dataset.clusterToggle)); return; }
+  const selectOptions=event.target.closest('[data-select-options]');
+  if(selectOptions){event.stopPropagation();const cluster=selectOptions.dataset.selectOptions;openMenu(selectOptions,[{key:'select-page',label:'全选本页',icon:'apps'},{key:'select-all',label:'全选所有',icon:'apps'},{key:'invert-page',label:'反选本页',icon:'apps'},{key:'invert-all',label:'反选所有',icon:'apps'},{key:'clear-selection',label:'取消全部选择',icon:'apps'}]);menu.dataset.cluster=cluster;return;}
   const clusterMore=event.target.closest('[data-cluster-more]');
   if(clusterMore){ event.stopPropagation(); const cluster=clusterMore.dataset.clusterMore; const collapsed=state.collapsedClusters.has(cluster); openMenu(clusterMore,[{key:collapsed?'expand-cluster':'collapse-cluster',label:collapsed?'展开集群':'收起集群',icon:collapsed?'chevron-down':'chevron-up'},{key:'history',label:'查看集群变更记录',icon:'clipboard'}]); menu.dataset.cluster=cluster; return; }
   const button=event.target.closest('[data-action]');
@@ -235,13 +400,17 @@ document.querySelectorAll('[data-bulk-action]').forEach(button=>button.addEventL
 document.querySelector('#clearSelectionBtn').addEventListener('click',()=>{state.selected.clear();render();});
 pagination.addEventListener('click',event=>{const button=event.target.closest('[data-page]');if(!button)return;const count=Math.max(1,Math.ceil(filteredPods().length/state.pageSize));state.page=button.dataset.page==='prev'?state.page-1:button.dataset.page==='next'?state.page+1:Number(button.dataset.page);state.page=Math.max(1,Math.min(count,state.page));render();});
 pagination.addEventListener('change',event=>{if(!event.target.classList.contains('page-size'))return;state.pageSize=Number(event.target.value);state.page=1;render();});
-menu.addEventListener('click',event=>{const item=event.target.closest('[data-menu-action]');if(!item)return;const pod=menu.dataset.pod;const cluster=menu.dataset.cluster;const key=item.dataset.menuAction; if(key==='history') openHistory(); else if(key==='detail') openInstanceDetail(pod); else if(key==='refresh'){toast('Pod 列表已刷新');render();} else if(key==='collapse-cluster') setClusterCollapsed(cluster,true); else if(key==='expand-cluster') setClusterCollapsed(cluster,false); else if(key==='restart-row') triggerAction('restart',[pod]); closeMenu();});
+menu.addEventListener('click',event=>{const item=event.target.closest('[data-menu-action]');if(!item)return;const pod=menu.dataset.pod;const cluster=menu.dataset.cluster;const key=item.dataset.menuAction; const scoped=visiblePods().filter(entry=>!cluster||entry[10]===cluster); if(key==='select-page'||key==='select-all'||key==='invert-page'||key==='invert-all'||key==='clear-selection'){const targets=(key==='select-all'||key==='invert-all')?filteredPods():scoped;if(key==='select-page'||key==='select-all')targets.forEach(([id])=>state.selected.add(id));if(key==='invert-page'||key==='invert-all')targets.forEach(([id])=>state.selected.has(id)?state.selected.delete(id):state.selected.add(id));if(key==='clear-selection')state.selected.clear();render();closeMenu();return;} if(key==='history') openHistory(); else if(key==='detail') openInstanceDetail(pod); else if(key==='refresh'){toast('Pod 列表已刷新');render();} else if(key==='collapse-cluster') setClusterCollapsed(cluster,true); else if(key==='expand-cluster') setClusterCollapsed(cluster,false); else if(key==='restart-row') triggerAction('restart',[pod]); else if(key==='more-customize') toast('导航设置将在后续版本开放'); else if(key.startsWith('context-')) toast(`已切换${menu.dataset.context || ''}：${item.textContent.trim()}`); else if(key==='header-preferences') toast('已打开偏好设置'); else if(key==='header-help') toast('已打开帮助文档'); else toast(`已选择${item.textContent.trim()}`); closeMenu();});
 modalBackdrop.addEventListener('click',event=>{if(event.target===modalBackdrop)closeModal();});
 detailBackdrop.addEventListener('click',event=>{if(event.target===detailBackdrop)closeInstanceDetail();});
 instanceModal.addEventListener('click',event=>{
   const close=event.target.closest('.close-detail');
   if(close){closeInstanceDetail();return;}
   const body=instanceModal.querySelector('.detail-body');
+  const summaryToggle=event.target.closest('[data-summary-toggle]');
+  if(summaryToggle){const activeTab=instanceModal.querySelector('[data-detail-tab].active')?.dataset.detailTab || 'detail';state.instanceSummaryCollapsed=!state.instanceSummaryCollapsed;openInstanceDetail(summaryToggle.dataset.summaryToggle,activeTab);return;}
+  const container=event.target.closest('[data-container-select]');
+  if(container){state.selectedContainer=Number(container.dataset.containerSelect);instanceModal.querySelectorAll('[data-container-select]').forEach(button=>{const selected=button===container;button.classList.toggle('active',selected);button.toggleAttribute('aria-current',selected);});return;}
   const tab=event.target.closest('[data-detail-tab]');
   if(tab&&body){openInstanceDetail(body.dataset.instanceId,tab.dataset.detailTab);return;}
   const pause=event.target.closest('[data-pause-pod]');
@@ -258,6 +427,6 @@ instanceModal.addEventListener('click',event=>{
   if(action&&body){const id=body.dataset.instanceId;closeInstanceDetail();triggerAction(action.dataset.detailAction,[id]);}
 });
 document.querySelector('#closeHistoryBtn').addEventListener('click',()=>historyDrawer.classList.add('hidden'));
-document.addEventListener('click',event=>{if(!event.target.closest('#actionMenu'))closeMenu();});
-document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeMenu();closeModal();closeInstanceDetail();historyDrawer.classList.add('hidden');}});
+document.addEventListener('click',event=>{if(!event.target.closest('#actionMenu'))closeMenu(); if(!event.target.closest('#accountPopover') && !event.target.closest('[data-context="account"]')) closeAccountPopover(); if(!event.target.closest('#compactMorePopover') && !event.target.closest('#primaryMoreBtn')) closeCompactMore();});
+document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeMenu();closeAccountPopover();closeCompactMore();closeModal();closeInstanceDetail();historyDrawer.classList.add('hidden');}});
 renderHistory(); render(); renderAppNavigation();

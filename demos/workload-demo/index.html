@@ -30,43 +30,51 @@
     <symbol id="i-memory" viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="10" rx="2"/><path d="M8 7V5M12 7V5M16 7V5M8 17v2M12 17v2M16 17v2M8 11h8"/></symbol>
   </svg>
   <header class="global-header">
-    <button class="app-launcher" aria-label="应用菜单"><svg><use href="#i-grid"/></svg></button>
-    <div class="brand"><span class="brand-gem">◆</span><strong>百度智能云</strong><i></i><strong>度厂版</strong></div>
-    <nav class="breadcrumbs"><span class="crumb-home"><svg><use href="#i-home"/></svg>CNAP</span><em>/</em><span>账号名称占位<svg class="chevron"><use href="#i-chevron-down"/></svg></span><em>/</em><span>应用名称占位<svg class="chevron"><use href="#i-chevron-down"/></svg></span><em>/</em><span>环境名称占位<svg class="chevron"><use href="#i-chevron-down"/></svg></span><em>/</em><span>集群名称占位<svg class="chevron"><use href="#i-chevron-down"/></svg></span></nav>
-    <div class="header-tools"><label class="header-search"><svg><use href="#i-search"/></svg><input aria-label="全局搜索"><kbd>⌘K</kbd></label><button class="header-icon" aria-label="刷新"><svg><use href="#i-refresh"/></svg></button><button class="header-icon" aria-label="消息"><svg><use href="#i-headphones"/></svg></button><span class="user-dot"></span><svg class="header-chevron"><use href="#i-chevron-down"/></svg><button class="header-icon" aria-label="更多"><svg><use href="#i-more"/></svg></button></div>
+    <button class="app-launcher" aria-label="产品菜单" title="产品菜单"><svg><use href="#i-grid"/></svg></button>
+    <a class="brand" href="#" aria-label="返回 CNAP 首页"><span class="brand-gem">◆</span><strong>CNAP</strong></a>
+    <nav class="breadcrumbs" aria-label="当前位置">
+      <button class="crumb-home" data-context="home"><svg><use href="#i-home"/></svg>CNAP</button><em>/</em>
+      <button data-context="account">默认账号<svg class="chevron"><use href="#i-chevron-down"/></svg></button><em>/</em>
+      <button data-context="application">Payment-api<svg class="chevron"><use href="#i-chevron-down"/></svg></button><em>/</em>
+      <button data-context="environment"><span class="env-tag">生产</span>prod-cn-bj<svg class="chevron"><use href="#i-chevron-down"/></svg></button>
+    </nav>
+    <div class="header-tools"><label class="header-search"><img class="figma-icon" src="./assets/figma-icon-library-56-38920/image_43.png" alt=""><input aria-label="全局搜索" placeholder="搜索"><kbd>⌘K</kbd></label><button class="header-icon" aria-label="通知" title="通知"><img class="figma-icon" src="./assets/figma-icon-library-56-38920/image_41.png" alt=""></button><button class="user-menu" aria-label="账户菜单" title="账户菜单"><span>G</span><svg><use href="#i-chevron-down"/></svg></button><button class="header-icon" id="headerMoreBtn" aria-label="更多"><svg><use href="#i-more"/></svg></button></div>
   </header>
 
   <div class="shell">
     <aside class="primary-nav" aria-label="产品导航">
       <nav>
-        <button data-primary-nav="home" aria-label="主页" title="主页"><svg><use href="#i-home"/></svg></button>
-        <button data-primary-nav="affairs" aria-label="事物" title="事物"><svg><use href="#i-calendar"/></svg></button>
-        <button class="active" data-primary-nav="apps" aria-label="应用" title="应用"><svg><use href="#i-apps"/></svg></button>
-        <button data-primary-nav="environment" aria-label="环境" title="环境"><svg><use href="#i-leaf"/></svg></button>
-        <button data-primary-nav="changes" aria-label="变更" title="变更"><svg><use href="#i-clipboard"/></svg></button>
-        <button data-primary-nav="resources" aria-label="资源" title="资源"><svg><use href="#i-stack"/></svg></button>
-        <button data-primary-nav="account" aria-label="账户" title="账户"><svg><use href="#i-user"/></svg></button>
+        <button data-primary-nav="home" aria-label="主页" title="主页"><img src="./assets/figma-icon-library-56-38920/image_44.png" alt=""><span>主页</span></button>
+        <button data-primary-nav="affairs" aria-label="事务" title="事务"><img src="./assets/figma-icon-library-56-38920/image_45.png" alt=""><span>事务</span></button>
+        <span class="primary-divider" aria-hidden="true"><img src="./assets/figma-navigation-4-1319/image_3.png" alt=""></span>
+        <button class="active" data-primary-nav="apps" aria-label="应用" title="应用"><img src="./assets/figma-icon-library-56-38920/image_46.png" alt=""><span>应用</span></button>
+        <button data-primary-nav="environment" aria-label="环境" title="环境"><img src="./assets/figma-icon-library-56-38920/image_47.png" alt=""><span>环境</span></button>
+        <button class="primary-replaceable" data-primary-nav="changes" data-default-nav="changes" aria-label="变更" title="变更"><img src="./assets/figma-icon-library-56-38920/image_48.png" alt=""><span>变更</span></button>
+        <button class="compact-overflow-item" data-primary-nav="resources" aria-label="资源" title="资源"><img src="./assets/figma-icon-library-56-38920/image_49.png" alt=""><span>资源</span></button>
+        <button class="compact-overflow-item" data-primary-nav="account" aria-label="账户" title="账户"><img src="./assets/figma-icon-library-56-38920/image_50.png" alt=""><span>账户</span></button>
+        <button id="primaryMoreBtn" class="more-nav" aria-label="更多导航" title="更多导航"><img src="./assets/figma-icon-library-56-38920/image_51.png" alt=""><span>更多</span></button>
       </nav>
-      <div class="primary-bottom"><svg><use href="#i-bell"/></svg><svg><use href="#i-apps"/></svg><svg><use href="#i-refresh"/></svg><span class="help-icon">?</span></div>
+      <div class="primary-bottom"><img src="./assets/figma-navigation-4-1319/image_40.png" alt="通知、设置、更新日志和帮助入口"></div>
     </aside>
 
-    <aside class="secondary-nav" aria-label="应用导航">
-      <p class="secondary-title">应用</p>
+    <aside class="secondary-nav" id="secondaryNav" aria-label="应用导航">
+      <header><p class="secondary-title">应用</p></header>
       <nav>
-        <button class="active" data-app-nav="workload"><svg><use href="#i-apps"/></svg><span>工作负载</span></button>
-        <button data-app-nav="exposure"><svg><use href="#i-stack"/></svg><span>服务暴露</span></button>
-        <button data-app-nav="logs"><svg><use href="#i-clipboard"/></svg><span>日志</span></button>
-        <button data-app-nav="terminal"><svg><use href="#i-unfold"/></svg><span>终端</span></button>
-        <button data-app-nav="monitor"><svg><use href="#i-refresh"/></svg><span>监控</span></button>
-        <button data-app-nav="runtime"><svg><use href="#i-cpu"/></svg><span>运行配置</span></button>
-        <button data-app-nav="settings"><svg><use href="#i-apps"/></svg><span>应用设置</span></button>
+        <button class="active" data-app-nav="workload"><img src="./assets/figma-navigation-4-1319/image_45.png" alt=""><span>工作负载</span></button>
+        <button data-app-nav="exposure"><img src="./assets/figma-navigation-4-1319/image_46.png" alt=""><span>服务暴露</span></button>
+        <button data-app-nav="logs"><img src="./assets/figma-navigation-4-1319/image_47.png" alt=""><span>日志</span></button>
+        <button data-app-nav="terminal"><img src="./assets/figma-navigation-4-1319/image_48.png" alt=""><span>终端</span></button>
+        <button data-app-nav="monitor"><img src="./assets/figma-navigation-4-1319/image_49.png" alt=""><span>监控</span></button>
+        <button data-app-nav="runtime"><img src="./assets/figma-navigation-4-1319/image_50.png" alt=""><span>运行配置</span></button>
+        <button data-app-nav="settings"><img src="./assets/figma-navigation-4-1319/image_51.png" alt=""><span>应用设置</span></button>
       </nav>
+      <button id="secondaryCollapseBtn" class="secondary-collapse" aria-label="收起二级导航" title="收起二级导航"><img src="./assets/figma-navigation-4-1319/image_52.png" data-expanded-src="./assets/figma-navigation-4-1319/image_52.png" data-collapsed-src="./assets/figma-navigation-4-1319/image_37.png" alt=""></button>
     </aside>
 
     <main class="workspace">
       <section class="title-row" data-workload-section>
         <div class="title-context"><h1>工作负载</h1><i></i><button>全部工作负载<svg><use href="#i-chevron-down"/></svg></button></div>
-        <div class="title-actions"><button id="restartBtn"><svg><use href="#i-power"/></svg>应用重启</button><button id="horizontalScaleBtn"><svg><use href="#i-unfold"/></svg>横向扩缩</button><button id="verticalScaleBtn" class="scale-vertical"><svg><use href="#i-unfold"/></svg>纵向扩缩</button><button id="actionMoreBtn" class="icon-only" aria-label="更多操作"><svg><use href="#i-more"/></svg></button></div>
+        <div class="title-actions"><button id="restartBtn"><img class="figma-icon" src="./assets/figma-icon-library-56-38920/image_82.png" alt="">应用重启</button><button id="horizontalScaleBtn"><img class="figma-icon" src="./assets/figma-icon-library-56-38920/image_32.png" alt="">横向扩缩</button><button id="verticalScaleBtn" class="scale-vertical"><img class="figma-icon" src="./assets/figma-icon-library-56-38920/image_33.png" alt="">纵向扩缩</button><button id="actionMoreBtn" class="icon-only" aria-label="更多操作"><svg><use href="#i-more"/></svg></button></div>
       </section>
 
       <section class="overview" aria-label="工作负载概览" data-workload-section>
@@ -75,18 +83,16 @@
         <article class="resources-card"><div><span>CPU总量</span><strong><i class="cpu-icon"><svg><use href="#i-cpu"/></svg></i> 338<small>c</small></strong></div><div><span>内存总量</span><strong><i class="memory-icon"><svg><use href="#i-memory"/></svg></i> 887<small>Gi</small></strong></div><div><span>GPU总量</span><strong><i class="gpu-icon"><svg><use href="#i-apps"/></svg></i> 18<small>卡</small></strong></div></article>
       </section>
 
-      <section class="data-panel" data-workload-section>
+      <section class="data-panel workload-list-panel" data-workload-section>
         <div class="tabs-row">
           <nav class="tabs"><button class="active" data-status="all">全部Pod <b id="allCount">86</b></button><button data-status="running">运行时 <b id="runningCount">50</b></button><button data-status="error">异常 <b id="errorCount">04</b></button><button data-status="blocked">已摘流 <b id="blockedCount">02</b></button></nav>
-          <div class="table-tools"><button id="collapseAllBtn" title="收起全部"><svg><use href="#i-chevron-up"/></svg></button><button id="expandAllBtn" title="展开全部"><svg><use href="#i-chevron-down"/></svg></button><button id="refreshBtn" title="刷新"><svg><use href="#i-refresh"/></svg></button><i></i><button class="view active" aria-label="卡片视图"><svg><use href="#i-apps"/></svg></button><button class="view" aria-label="列表视图"><svg><use href="#i-clipboard"/></svg></button></div>
+          <div class="table-tools"><button id="collapseAllBtn" title="收起全部"><img class="figma-icon" src="./assets/figma-icon-library-56-38920/image_7.png" alt=""></button><button id="expandAllBtn" title="展开全部"><img class="figma-icon" src="./assets/figma-icon-library-56-38920/image_8.png" alt=""></button><button id="refreshBtn" title="刷新"><img class="figma-icon" src="./assets/figma-icon-library-56-38920/image_40.png" alt=""></button><i></i><div class="view-switcher" role="group" aria-label="列表展示模式"><button class="view active" data-view-mode="detailed" aria-label="详细模式" aria-pressed="true" title="详细模式"><img src="./assets/figma-icon-library-56-38920/image_29.png" alt=""></button><button class="view" data-view-mode="compact" aria-label="精简模式" aria-pressed="false" title="精简模式"><img src="./assets/figma-icon-library-56-38920/image_28.png" alt=""></button></div></div>
         </div>
-
         <div class="filters">
           <select id="statusSelect" aria-label="全部状态"><option value="all">全部状态</option><option value="running">运行中</option><option value="error">异常</option><option value="blocked">已摘流</option></select>
           <select id="clusterSelect" aria-label="屏蔽与接流"><option value="all">屏蔽与接流</option><option value="imeonline">imeonline</option><option value="edge-prod">edge-prod</option></select>
           <label class="pod-search"><svg><use href="#i-search"/></svg><input id="searchInput" placeholder="按实例名称或Pod IP搜索" autocomplete="off"></label>
         </div>
-
         <div class="cluster-groups" id="clusterGroups"></div>
         <div class="pagination" id="pagination"></div>
         <div class="empty hidden" id="emptyState">暂无符合条件的 Pod</div>
@@ -97,6 +103,26 @@
 
   <div class="bulk-bar hidden" id="bulkBar"><span>已选择 <b id="selectedCount">0</b> 个实例</span><div><button data-bulk-action="restart"><svg><use href="#i-power"/></svg>重启</button><button data-bulk-action="rebuild"><svg><use href="#i-refresh"/></svg>删除/重建</button><button data-bulk-action="block"><svg><use href="#i-apps"/></svg>屏蔽</button><button data-bulk-action="route"><svg><use href="#i-unfold"/></svg>接流</button><button data-bulk-action="grant"><svg><use href="#i-user"/></svg>临时授权</button><i></i><button class="danger" data-bulk-action="delete"><svg><use href="#i-apps"/></svg>删除并缩容</button><i></i><button id="clearSelectionBtn" aria-label="关闭">×</button></div></div>
   <div class="action-menu hidden" id="actionMenu" role="menu"></div>
+  <section class="compact-more-popover hidden" id="compactMorePopover" aria-label="更多功能">
+    <p>更多功能</p>
+    <div>
+      <button data-compact-more="resources"><img src="./assets/figma-compact-more-32-2945/image_9.png" alt=""><span>资源</span></button>
+      <button data-compact-more="account"><img src="./assets/figma-compact-more-32-2945/image_10.png" alt=""><span>账户</span></button>
+    </div>
+  </section>
+  <section class="account-popover hidden" id="accountPopover" aria-label="切换账户">
+    <label class="account-search"><svg aria-hidden="true"><use href="#i-search"/></svg><input id="accountSearchInput" type="search" placeholder="请输入账户名称" autocomplete="off"></label>
+    <div class="account-popover-body">
+      <nav class="account-tabs" aria-label="账户筛选">
+        <button class="active" data-account-tab="all">全部可用账户</button>
+        <button data-account-tab="favorite">我收藏的账户</button>
+        <button data-account-tab="recent">最近访问</button>
+        <button class="account-list-link" data-account-action="list">打开账户列表</button>
+      </nav>
+      <div class="account-list" id="accountList"></div>
+    </div>
+    <footer class="account-popover-footer"><button data-account-action="create">＋ 新建账户</button><button data-account-action="request">申请账户权限</button></footer>
+  </section>
   <div class="modal-backdrop hidden" id="modalBackdrop">
     <section class="action-modal" id="actionModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"></section>
   </div>
