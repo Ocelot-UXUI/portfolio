@@ -51,4 +51,37 @@
 .table-tools .view-switcher{display:flex;align-items:center;width:62px;height:32px;padding:2px;border:1px solid #d9d9d9;border-radius:22px;background:#f5f7fa}.table-tools .view-switcher .view{display:grid;width:28px;height:28px;margin:0;padding:0;border:0!important;border-radius:20px;background:transparent!important;color:#545454}.table-tools .view-switcher .view img{display:block;width:14px;height:14px;object-fit:contain}.table-tools .view-switcher .view:hover:not(.active){background:#eaedf1!important}.table-tools .view-switcher .view.active{width:28px;height:28px;border:0!important;background:#fff!important;box-shadow:0 1px 2px rgba(24,24,24,.08)}.table-tools .view-switcher .view:focus-visible{outline:2px solid #2468f2;outline-offset:1px}
 /* Use the selected Figma icon library at each control's native 16px scale. */
 .figma-icon{display:block;width:16px!important;height:16px!important;flex:none;object-fit:contain}.header-search>.figma-icon{width:14px!important;height:14px!important}.title-actions .figma-icon{width:14px!important;height:14px!important}.table-tools>.figma-icon,.table-tools>button>.figma-icon{width:15px!important;height:15px!important}.row-actions .figma-icon,.action-menu .figma-icon,.instance-header-actions .figma-icon,.detail-body .figma-icon,.bulk-bar .figma-icon{width:16px!important;height:16px!important}.primary-nav button>img,.secondary-nav button>img,.secondary-collapse>img{display:block;width:20px;height:20px;object-fit:contain}.primary-nav button.active>img{filter:none}
+/* Figma 59:19541: multi-cluster workload tables with a 24px frozen action edge. */
+.cluster-groups{gap:16px!important}
+.cluster-groups>.cluster-group{overflow:visible!important;border:0!important;border-radius:0!important;background:transparent!important}
+.cluster-group .group-header{height:48px!important;display:flex;align-items:center;gap:12px;padding:0 12px;border:0!important;border-radius:12px;background:#f5f7fa!important;color:#181818;font-size:14px}
+.cluster-group .group-title{display:flex;align-items:center;min-width:0;gap:12px}
+.cluster-group .group-title strong{font-size:14px;font-weight:500}
+.cluster-group .cluster-context{color:#545454;font-size:12px;line-height:18px}
+.cluster-group .rollout{height:18px;padding:0 8px;border-radius:12px;background:#e8e8e8;color:#545454;font-size:12px;line-height:18px}
+.cluster-group .versions{padding-left:12px;border-left:1px solid #d9d9d9;color:#8f8f8f;font-size:14px}
+.cluster-group .group-summary{display:flex;align-items:center;gap:16px;margin-left:auto;color:#545454;font-size:14px}
+.cluster-group .group-summary span{display:flex;align-items:center;gap:5px;white-space:nowrap}
+.cluster-group .group-summary b{display:grid;place-items:center;width:22px;height:22px;border-radius:8px;font-size:12px;font-weight:500}
+.cluster-group .group-summary .green{background:#e5fff5;color:#00cc6d}
+.cluster-group .group-summary .red{background:#fdecee;color:#e62c4b}
+.cluster-group .group-summary .amber{background:#fff3e0;color:#f58300}
+.cluster-group .group-summary i{width:1px;height:12px;background:#d9d9d9}
+.cluster-group .table-scroll{margin-top:0;overflow:auto;border-radius:0 0 8px 8px}
+.cluster-group.collapsed .table-scroll{display:none}
+.pod-table th,.pod-table td{height:48px!important}
+.pod-table th:last-child,.pod-table td:last-child{box-shadow:none!important}
+.pod-table th:last-child::before,.pod-table td:last-child::before{position:absolute;z-index:1;top:0;bottom:0;left:-24px;width:24px;background:linear-gradient(270deg,rgba(0,0,0,.03),rgba(0,0,0,0));content:'';pointer-events:none}
+.pod-table th:last-child>*,.pod-table td:last-child>*{position:relative;z-index:2}
+/* Figma 4:40581: one workload header, edge-only operation freeze, and square pagination. */
+.cluster-groups{gap:16px}.cluster-groups>.workload-group{overflow:visible;border:0;border-radius:0;background:transparent}.group-header{height:48px;display:flex;align-items:center;gap:12px;padding:0 12px;border:0!important;border-radius:12px;background:#f5f7fa!important;color:#181818;font-size:14px}.group-header .cluster-toggle{width:16px;height:22px;color:#545454}.group-header .cluster-toggle .figma-icon{width:16px!important;height:16px!important}.group-title{display:flex;align-items:center;min-width:0;gap:12px}.group-title strong{font-size:14px;font-weight:500}.group-title .rollout{height:18px;padding:0 8px;border-radius:12px;background:#e8e8e8;color:#545454;font-size:12px;line-height:18px}.group-title .versions{padding-left:12px;border-left:1px solid #d9d9d9;color:#8f8f8f;font-size:14px}.group-summary{display:flex;align-items:center;gap:16px;margin-left:auto;color:#545454;font-size:14px}.group-summary span{display:flex;align-items:center;gap:5px;white-space:nowrap}.group-summary b{display:grid;place-items:center;width:22px;height:22px;border-radius:8px;font-size:12px;font-weight:500}.group-summary .green{background:#e5fff5;color:#00cc6d}.group-summary .red{background:#fdecee;color:#e62c4b}.group-summary .amber{background:#fff3e0;color:#f58300}.group-summary i{width:1px;height:12px;background:#d9d9d9}.group-header .cluster-more{width:16px;height:22px;margin-left:8px}.workload-group.collapsed .table-scroll{display:none}.workload-group .table-scroll{margin-top:0;overflow:auto;border-radius:0 0 8px 8px}.pod-table th:last-child,.pod-table td:last-child{box-shadow:none}.pod-table th:last-child::before,.pod-table td:last-child::before{position:absolute;z-index:-1;top:0;bottom:0;left:-24px;width:24px;background:linear-gradient(90deg,rgba(0,0,0,0),rgba(0,0,0,.03));content:'';pointer-events:none}.pagination{height:40px;gap:8px;padding:16px 0 0}.page-btn{display:grid;place-items:center;min-width:24px;width:24px;height:24px;padding:0;border:1px solid #e8e8e8!important;border-radius:8px!important;background:#fff!important;color:#545454;font-size:12px;line-height:18px}.page-btn.current{border-color:#181818!important;color:#181818;font-weight:500}.page-btn:disabled{border-color:transparent!important;background:transparent!important;opacity:.45}.page-btn .figma-icon{width:16px!important;height:16px!important}.pagination-divider{width:1px;height:24px;margin:0 8px;background:#e8e8e8}.page-size{width:95px;height:24px!important;margin:0!important;padding:0 8px 0 12px!important;border:1px solid #e8e8e8!important;border-radius:8px!important;background:#fff;color:#545454;font-size:12px}
+/* Final frozen edge follows the 24px Figma gradient, not a column divider. */
+.cluster-groups>.cluster-group{overflow:visible!important;border:0!important;border-radius:0!important;background:transparent!important}
+.cluster-group .group-header{height:48px!important}
+.cluster-group .table-scroll{margin-top:0;overflow:auto;border-radius:0 0 8px 8px}
+.cluster-group.collapsed .table-scroll{display:none}
+.pod-table th,.pod-table td{height:48px!important}
+.pod-table th:last-child,.pod-table td:last-child{box-shadow:none!important}
+.pod-table th:last-child::before,.pod-table td:last-child::before{position:absolute;z-index:1;top:0;bottom:0;left:-24px;width:24px;background:linear-gradient(270deg,rgba(0,0,0,.03),rgba(0,0,0,0));content:'';pointer-events:none}
+.pod-table th:last-child>*,.pod-table td:last-child>*{position:relative;z-index:2}
 
