@@ -92,6 +92,46 @@
 .pod-table th:first-child .select-options{position:absolute;top:50%;right:8px;margin:0;transform:translateY(-50%)}
 .pod-table th:nth-child(2),.pod-table td:nth-child(2){left:72px!important}
 
+/* Figma 1208:5316: frozen identity and action layers share the complete row state. */
+.pod-table tbody tr.is-selected>td,
+.pod-table tbody tr:hover>td{background:#f7f7f7!important}
+
+/* Figma 4:41637: frozen columns are opaque top layers; shadows sit outside their edges. */
+.table-frame{position:relative;isolation:isolate}
+.pod-table th,.pod-table td{position:relative;z-index:1}
+.pod-table th:nth-child(1),
+.pod-table td:nth-child(1),
+.pod-table th:nth-child(2),
+.pod-table td:nth-child(2),
+.pod-table th:last-child,
+.pod-table td:last-child{z-index:20;background:#fff!important}
+.pod-table thead th:nth-child(1),
+.pod-table thead th:nth-child(2),
+.pod-table thead th:last-child{z-index:21}
+.pod-table tbody tr.is-selected>td:nth-child(1),
+.pod-table tbody tr.is-selected>td:nth-child(2),
+.pod-table tbody tr.is-selected>td:last-child,
+.pod-table tbody tr:hover>td:nth-child(1),
+.pod-table tbody tr:hover>td:nth-child(2),
+.pod-table tbody tr:hover>td:last-child{background:#f7f7f7!important}
+.pod-table th:nth-child(2),
+.pod-table td:nth-child(2),
+.pod-table th:last-child,
+.pod-table td:last-child{box-shadow:none!important}
+.pod-table th:nth-child(2)::after,
+.pod-table td:nth-child(2)::after,
+.pod-table th:last-child::before,
+.pod-table td:last-child::before{display:none!important}
+.frozen-edge{position:absolute;z-index:22;top:0;bottom:0;width:0;pointer-events:none}
+.frozen-edge-identity{left:274px;box-shadow:6px 0 10px 2px rgba(0,0,0,.06)}
+.pod-table th:last-child,
+.pod-table td:last-child{
+  width:180px!important;
+  min-width:180px!important;
+  max-width:180px!important
+}
+.table-frame::after{position:absolute;z-index:22;top:0;right:180px;bottom:0;width:24px;background:linear-gradient(90deg,rgba(0,0,0,0),rgba(0,0,0,.03));content:"";pointer-events:none}
+
 /* Sort labels share one text and icon centerline. */
 .pod-table th .sort-icon{display:inline-flex;width:16px;height:16px;margin-left:4px;vertical-align:middle;align-items:center;justify-content:center;transform:translateY(-1px)}
 .pod-table th .sort-icon .figma-icon,.pod-table th .sort-icon svg{display:block;width:16px!important;height:16px!important}
@@ -184,3 +224,64 @@
 .vertical-resource-cell input:disabled,.vertical-resource-cell select:disabled{border-color:#e8e8e8;background:#f7f7f7;color:#8f8f8f;cursor:not-allowed}
 .toast[data-type="success"]{border-top:2px solid #00a656}
 .toast[data-type="error"]{border-top:2px solid #e62c4b}
+
+/* Batch action confirmation tables. */
+.batch-config-note{margin:-2px 0 8px;color:#bfbfbf;font-size:12px;line-height:20px}
+.batch-cluster-table{border-top:1px solid #f0f0f0;border-bottom:1px solid #f0f0f0}
+.batch-cluster-table>div{display:grid;grid-template-columns:280px 165px 165px 1fr;align-items:center;min-height:48px;border-bottom:1px solid #f0f0f0}
+.batch-cluster-table>div:last-child{border-bottom:0}
+.batch-cluster-table>div:first-child{color:#8f8f8f;font-size:14px;font-weight:500}
+.batch-cluster-table span,.batch-cluster-table b,.batch-cluster-table label{padding:0 4px;color:#181818;font-size:14px;font-weight:400}
+.batch-cluster-table span:first-child{display:flex;align-items:center;gap:8px}.batch-cluster-table .modal-cluster-mark{margin:0}
+.batch-cluster-table b{justify-self:end;padding-right:20px}.batch-cluster-table label{display:flex;align-items:center;gap:8px}
+.batch-cluster-table input{width:80px;height:32px;padding:0 8px;border:1px solid #d9d9d9;border-radius:8px;color:#181818;font:14px inherit;outline:0}
+.batch-cluster-table input:focus{border-color:#181818}
+
+/* Figma 90:799 resource columns: specification, utilization, and GPU device card. */
+.pod-table{min-width:1604px!important}
+.pod-table th,.pod-table td{height:72px!important;font-size:14px}
+.pod-table thead th{height:48px!important;padding:0 20px;color:#8f8f8f;font-weight:500}
+.pod-table th:first-child,.pod-table td:first-child{padding:0!important}
+.pod-table th:nth-child(2),.pod-table td:nth-child(2){width:202px;min-width:202px}
+.pod-table .cpu-resource-head,.pod-table .cpu-resource-cell{width:140px;min-width:140px;max-width:140px}
+.pod-table .memory-resource-head,.pod-table .memory-resource-cell{width:188px;min-width:188px;max-width:188px}
+.pod-table .gpu-resource-head,.pod-table .gpu-resource-cell{width:114px;min-width:114px;max-width:114px}
+.pod-table .workload-resource-cell{padding:0 20px;overflow:visible}
+.resource-metric{width:100%;height:48px;display:flex;flex-direction:column;justify-content:center;align-items:stretch}
+.resource-spec{height:22px;display:flex;align-items:center;color:#181818;line-height:22px}
+.resource-spec .cpu-mark,.resource-spec .memory-mark{display:inline-flex;width:16px;height:16px;margin-right:4px;align-items:center;justify-content:center}
+.resource-spec .figma-icon{width:16px!important;height:16px!important}
+.resource-usage{height:22px;display:flex;align-items:center;gap:6px;color:#545454;line-height:22px}
+.resource-track{position:relative;display:block;flex:1;height:3px;overflow:hidden;border-radius:2px;background:#e8e8e8}
+.resource-track i{position:absolute;inset:0 auto 0 0;border-radius:2px;background:#306ddd}
+.resource-usage b{width:32px;color:inherit;font-weight:400;text-align:right}
+.resource-usage.warning{color:#f58300}.resource-usage.warning .resource-track i{background:#f58300}
+.resource-usage.danger{color:#e62c4b}.resource-usage.danger .resource-track i{background:#e62c4b}
+.gpu-resource-cell{padding:0 20px!important;overflow:visible!important}
+.gpu-card{position:relative;display:flex;width:74px;height:44px;align-items:center;padding:4px 8px;border:1px solid rgba(118,185,0,.2);border-radius:8px;background:rgba(118,185,0,.1);color:#76b900;overflow:hidden}
+.gpu-card>img{position:absolute;top:0;left:31px;width:42px!important;height:37px!important;object-fit:cover;object-position:left top;opacity:.22}
+.gpu-details{position:relative;z-index:1;display:flex;width:30px;height:36px;flex-direction:column;justify-content:center}
+.gpu-details b{font-size:12px;font-weight:500;line-height:18px}
+.gpu-card>strong{position:relative;z-index:1;margin-left:9px;color:#545454;font-size:14px;font-weight:500;line-height:22px}
+.gpu-card.p800{border-color:rgba(48,109,221,.2);background:rgba(48,109,221,.1);color:#306ddd}
+.cluster-groups.compact-mode .pod-table th:nth-child(11),.cluster-groups.compact-mode .pod-table td:nth-child(11){display:none}
+.cluster-groups.compact-mode .pod-table th,.cluster-groups.compact-mode .pod-table td{height:40px!important}
+.cluster-groups.compact-mode .pod-table thead th{height:40px!important}
+
+/* Figma 90:32973 operation column: five 16px controls across a 144px row. */
+.pod-table th:last-child,.pod-table td:last-child{padding-right:16px!important;padding-left:20px!important}
+.row-actions{display:flex;width:144px;height:16px;align-items:center;gap:16px;color:#181818;font-size:0}
+.row-actions button{position:relative;display:block;flex:0 0 16px;width:16px;height:16px;margin:0;padding:0;border:0;border-radius:2px;background:transparent;color:inherit;cursor:pointer}
+.row-actions button:hover{background:#e8e8e8}
+.row-actions button:focus-visible{outline:2px solid #306ddd;outline-offset:2px}
+.operation-glyph{position:relative;display:block;width:16px;height:16px;object-fit:contain;pointer-events:none}
+.view-list-glyph .view-list-frame{position:absolute;top:1.33px;left:2.67px;width:11.67px;height:13.33px}
+.view-list-items{position:absolute;top:4px;left:4.8px;display:flex;width:6.67px;height:8px;flex-direction:column;justify-content:space-between}
+.view-list-items>span{display:flex;width:6.67px;height:1.33px;align-items:center}
+.view-list-items img:first-child{width:1.33px;height:1.33px}
+.view-list-items img:last-child{width:4px;height:auto;margin-left:1.34px}
+.hammer-glyph{display:flex;align-items:flex-end}
+.hammer-glyph img:first-child{position:absolute;top:2px;left:1px;width:11.67px;height:3.67px}
+.hammer-glyph img:last-child{position:absolute;top:5.67px;left:6px;width:3px;height:8.33px}
+.more-glyph{display:flex;align-items:center;padding-left:3px;gap:2px}
+.more-glyph img{display:block;width:2px;height:2px}
