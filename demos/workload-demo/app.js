@@ -1,15 +1,15 @@
 const pods = [
-  ['pod-1','…nference-5f6b9-1234d','running','192.168.10.18','grpc:8500','ENS','7','3d','99%','9.7Gi','imeonline'],
-  ['pod-2','…nference-5f6b9-p9wd','running','192.168.10.18','grpc:8500','ENS','5','7d','85%','9.1Gi','imeonline'],
-  ['pod-3','…nference-5f6b9-p1234','running','192.168.10.18','grpc:8500 +1','ENS','5','8d','91%','9.6Gi','edge-prod'],
-  ['pod-4','…nference-51234-p9wqa','blocked','192.168.10.18','grpc:8500 +1','ENS','4','8d','91%','9.4Gi','edge-prod'],
-  ['pod-5','…nference-12349-p9wqd','blocked','192.168.10.18','grpc:8500 +1','ENS','2','8d','12%','2.3Gi','imeonline'],
-  ['pod-6','…nference-12349-p9wqd','running','192.168.10.18','grpc:8500 +1','ENS','1','1h','12%','2.1Gi','edge-prod'],
-  ['pod-7','…nference-12349-p9wqd','running','192.168.10.18','grpc:8500 +1','ALB','1','1h','12%','2.1Gi','imeonline'],
-  ['pod-8','…nference-12349-p9wqd','error','192.168.10.18','grpc:8500 +2','-','1','6d','8%','1.2Gi','edge-prod'],
-  ['pod-9','…nference-5f6b9-p9wqa','running','192.168.10.19','grpc:8500','ENS','1','6d','22%','3.2Gi','imeonline'],
-  ['pod-10','…nference-5f6b9-p9wqb','running','192.168.10.20','grpc:8500','ENS','1','6d','18%','2.8Gi','edge-prod'],
-  ['pod-11','…nference-5f6b9-p9wqc','running','192.168.10.21','grpc:8500','ENS','1','6d','16%','2.6Gi','imeonline']
+  ['pod-1','…nference-5f6b9-1234d','running','192.168.10.18','grpc:8500','ENS','7','3d','99%','9.7Gi','imeonline',{model:'A100',memory:'80G',count:8,variant:'a100'}],
+  ['pod-2','…nference-5f6b9-p9wd','running','192.168.10.18','grpc:8500','ENS','5','7d','85%','9.1Gi','imeonline',{model:'A100',memory:'80G',count:8,variant:'a100'}],
+  ['pod-3','…nference-5f6b9-p1234','running','192.168.10.18','grpc:8500 +1','ENS','5','8d','91%','9.6Gi','edge-prod',{model:'A100',memory:'80G',count:8,variant:'a100'}],
+  ['pod-4','…nference-51234-p9wqa','blocked','192.168.10.18','grpc:8500 +1','ENS','4','8d','91%','9.4Gi','edge-prod',{model:'A100',memory:'80G',count:8,variant:'a100'}],
+  ['pod-5','…nference-12349-p9wqd','blocked','192.168.10.18','grpc:8500 +1','ENS','2','8d','12%','2.3Gi','imeonline',{model:'P800',memory:'192G',count:4,variant:'p800'}],
+  ['pod-6','…nference-12349-p9wqd','running','192.168.10.18','grpc:8500 +1','ENS','1','1h','12%','2.1Gi','edge-prod',{model:'P800',memory:'192G',count:4,variant:'p800'}],
+  ['pod-7','…nference-12349-p9wqd','running','192.168.10.18','grpc:8500 +1','ALB','1','1h','12%','2.1Gi','imeonline',{model:'P800',memory:'192G',count:4,variant:'p800'}],
+  ['pod-8','…nference-12349-p9wqd','error','192.168.10.18','grpc:8500 +2','-','1','6d','8%','1.2Gi','edge-prod',{model:'A100',memory:'80G',count:8,variant:'a100'}],
+  ['pod-9','…nference-5f6b9-p9wqa','running','192.168.10.19','grpc:8500','ENS','1','6d','22%','3.2Gi','imeonline',{model:'A100',memory:'80G',count:8,variant:'a100'}],
+  ['pod-10','…nference-5f6b9-p9wqb','running','192.168.10.20','grpc:8500','ENS','1','6d','18%','2.8Gi','edge-prod',{model:'P800',memory:'192G',count:4,variant:'p800'}],
+  ['pod-11','…nference-5f6b9-p9wqc','running','192.168.10.21','grpc:8500','ENS','1','6d','16%','2.6Gi','imeonline',{model:'A100',memory:'80G',count:8,variant:'a100'}]
 ];
 
 const state = { status:'all', cluster:'all', query:'', page:1, pageSize:10, viewMode:'detailed', collapsedClusters:new Set(), selected:new Set(), pausedPods:new Set(), instanceSummaryCollapsed:false, selectedContainer:0, executing:false, primaryNav:'apps', appNav:'workload', appNavExpanded:true, secondaryCollapsed:false, accountTab:'all', accountQuery:'', compactMoreOpen:false };
@@ -154,12 +154,40 @@ function filteredPods(){
   });
 }
 
+function resourceMetricMarkup(type,usage,capacity,request,percent){
+  const normalized=Math.max(0,Math.min(100,percent));
+  const tone=normalized>=80?'danger':normalized>=60?'warning':'normal';
+  const iconName=type==='cpu'?'cpu':'memory';
+  return `<span class="resource-metric usage-value" data-tooltip="${type==='cpu'?'CPU':'内存'}：${usage}，Limit：${capacity}，请求：${request}"><span class="resource-spec"><span class="${type}-mark">${icon(iconName)}</span>${usage}/${capacity}/${request}</span><span class="resource-usage ${tone}"><span class="resource-track"><i style="width:${normalized}%"></i></span><b>${normalized}%</b></span></span>`;
+}
+
+function gpuCardMarkup(gpu){
+  const asset=gpu.variant==='p800'?'image_37.png':'image_36.png';
+  return `<span class="gpu-card ${gpu.variant}" title="${gpu.model} ${gpu.memory} x${gpu.count}"><img src="./assets/figma-workload-page-59-19541/${asset}" alt=""><span class="gpu-details"><b>${gpu.model}</b><b>${gpu.memory}</b></span><strong>x${gpu.count}</strong></span>`;
+}
+
+function operationIconMarkup(type){
+  const asset=name=>`${figmaIconPath}/${name}`;
+  if(type==='detail') return `<span class="operation-glyph view-list-glyph" aria-hidden="true"><img class="view-list-frame" src="${asset('image_126.png')}" alt=""><span class="view-list-items">${Array.from({length:3},()=>`<span><img src="${asset('image_127.png')}" alt=""><img src="${asset('image_128.png')}" alt=""></span>`).join('')}</span></span>`;
+  if(type==='terminal') return `<img class="operation-glyph" src="${asset('image_129.png')}" alt="">`;
+  if(type==='rebuild') return `<span class="operation-glyph hammer-glyph" aria-hidden="true"><img src="${asset('image_130.png')}" alt=""><img src="${asset('image_131.png')}" alt=""></span>`;
+  if(type==='block') return `<img class="operation-glyph" src="${asset('image_132.png')}" alt="">`;
+  return `<span class="operation-glyph more-glyph" aria-hidden="true">${Array.from({length:3},()=>`<img src="${asset('image_93.png')}" alt="">`).join('')}</span>`;
+}
+
 function rowMarkup(pod){
-  const [id,name,status,ip,port,exposure,restarts,age,cpu,memory] = pod;
-  const hot = parseInt(cpu,10) >= 80 ? 'metric-hot' : 'metric-cool';
-  const rowActions = [['restart','重启'],['rebuild','删除/重建'],['block','屏蔽'],['route','接流'],['grant','临时授权']]
-    .map(([key,label])=>`<button type="button" data-action="${key}" data-pod="${id}" aria-label="${label}" title="${label}">${icon(actions[key].icon)}</button>`).join('');
-  return `<tr><td><input class="pod-check" data-pod="${id}" type="checkbox" ${state.selected.has(id)?'checked':''} aria-label="选择 ${name}"></td><td title="${name}"><button class="pod-link" data-instance-detail="${id}">${name}</button></td><td><span class="status-tag ${status}">${labels[status]}</span></td><td>${ip}</td><td>${port}</td><td><span class="exposure-dot"></span>${exposure}</td><td class="${restarts >= 4 ? 'metric-hot' : ''}">${restarts}</td><td>${age}</td><td class="${hot}"><span class="usage-value" data-tooltip="CPU：${cpu}，Limit：8c，请求：4c"><span class="cpu-mark">${icon('cpu')}</span>${cpu}</span></td><td><span class="usage-value" data-tooltip="内存：${memory}，Limit：12Gi，请求：8Gi"><span class="memory-mark">${icon('memory')}</span>${memory}</span></td><td><span class="row-actions">${rowActions}<button type="button" data-row-more="${id}" aria-label="更多操作" title="更多操作">${icon('more')}</button></span></td></tr>`;
+  const [id,name,status,ip,port,exposure,restarts,age,cpu,memory,,gpu] = pod;
+  const cpuPercent=parseInt(cpu,10)||0;
+  const cpuUsage=`${(cpuPercent*8/100).toFixed(1).replace('.0','')}c`;
+  const memoryPercent=Math.min(100,Math.round((parseFloat(memory)||0)/32*100));
+  const rowActions = [
+    `<button type="button" data-instance-detail="${id}" aria-label="查看实例详情" title="查看实例详情">${operationIconMarkup('detail')}</button>`,
+    `<button type="button" data-instance-terminal="${id}" aria-label="打开终端" title="打开终端">${operationIconMarkup('terminal')}</button>`,
+    `<button type="button" data-action="rebuild" data-pod="${id}" aria-label="删除/重建" title="删除/重建">${operationIconMarkup('rebuild')}</button>`,
+    `<button type="button" data-action="block" data-pod="${id}" aria-label="屏蔽" title="屏蔽">${operationIconMarkup('block')}</button>`,
+    `<button type="button" data-row-more="${id}" aria-label="更多操作" title="更多操作">${operationIconMarkup('more')}</button>`
+  ].join('');
+  return `<tr class="${state.selected.has(id) ? 'is-selected' : ''}"><td><input class="pod-check" data-pod="${id}" type="checkbox" ${state.selected.has(id)?'checked':''} aria-label="选择 ${name}"></td><td title="${name}"><button class="pod-link" data-instance-detail="${id}">${name}</button></td><td><span class="status-tag ${status}">${labels[status]}</span></td><td>${ip}</td><td>${port}</td><td><span class="exposure-dot"></span>${exposure}</td><td class="${restarts >= 4 ? 'metric-hot' : ''}">${restarts}</td><td>${age}</td><td class="workload-resource-cell cpu-resource-cell">${resourceMetricMarkup('cpu',cpuUsage,'8c','16c',cpuPercent)}</td><td class="workload-resource-cell memory-resource-cell">${resourceMetricMarkup('memory',memory,'32Gi','9.1Gi',memoryPercent)}</td><td class="gpu-resource-cell">${gpuCardMarkup(gpu)}</td><td><span class="row-actions">${rowActions}</span></td></tr>`;
 }
 
 function tableMarkup(cluster,podsInCluster){
@@ -172,7 +200,7 @@ function tableMarkup(cluster,podsInCluster){
   const meta=clusterMeta[cluster];
   return `<section class="cluster-group ${collapsed?'collapsed':''}" data-cluster="${cluster}">
     <header class="group-header"><button class="cluster-toggle" data-cluster-toggle="${cluster}" aria-label="${collapsed?'展开':'收起'}">${icon(collapsed?'chevron-right':'chevron-down')}</button><div class="group-title"><strong>Payment-api</strong><span class="cluster-context"><b>${clusterName}</b>${meta.environment}</span><span class="rollout ${cluster}">${meta.channel}</span><span class="versions">${meta.version}&nbsp; ${meta.versions}</span></div><div class="group-summary"><span>运行中 <b class="green">${summary.running}</b></span><span>异常 <b class="red">${summary.error}</b></span><span>已屏蔽 <b class="amber">${summary.blocked}</b></span><i></i><span>共 ${podsInCluster.length} pod</span><button class="cluster-more" data-cluster-more="${cluster}" aria-label="${clusterName} 更多操作">${icon('more')}</button></div></header>
-    <div class="table-scroll"><table class="pod-table"><thead><tr><th><input class="cluster-select" data-cluster-select="${cluster}" type="checkbox" ${selected?'checked':''} ${partial&&!selected?'data-indeterminate="true"':''} aria-label="全选 ${clusterName} 集群"><button class="select-options" data-select-options="${cluster}" aria-label="选择操作" title="选择操作">${icon('chevron-down')}</button></th><th>Pod</th><th>状态<span class="sort-icon">${icon('chevron-up')}</span></th><th>Pod IP</th><th>端口</th><th>服务暴露</th><th>重启<span class="sort-icon">${icon('chevron-up')}</span></th><th>存活<span class="sort-icon">${icon('chevron-up')}</span></th><th>CPU<span class="sort-icon">${icon('chevron-up')}</span></th><th>内存</th><th>操作</th></tr></thead><tbody>${podsInCluster.map(rowMarkup).join('')}</tbody></table></div>
+    <div class="table-frame"><div class="table-scroll"><table class="pod-table"><thead><tr><th><input class="cluster-select" data-cluster-select="${cluster}" type="checkbox" ${selected?'checked':''} ${partial&&!selected?'data-indeterminate="true"':''} aria-label="全选 ${clusterName} 集群"><button class="select-options" data-select-options="${cluster}" aria-label="选择操作" title="选择操作">${icon('chevron-down')}</button></th><th>Pod</th><th>状态<span class="sort-icon">${icon('chevron-up')}</span></th><th>Pod IP</th><th>端口</th><th>服务暴露</th><th>重启<span class="sort-icon">${icon('chevron-up')}</span></th><th>存活<span class="sort-icon">${icon('chevron-up')}</span></th><th class="cpu-resource-head">CPU<span class="sort-icon">${icon('chevron-up')}</span></th><th class="memory-resource-head">内存<span class="sort-icon">${icon('chevron-up')}</span></th><th class="gpu-resource-head">GPU</th><th>操作</th></tr></thead><tbody>${podsInCluster.map(rowMarkup).join('')}</tbody></table></div><i class="frozen-edge frozen-edge-identity" aria-hidden="true"></i></div>
   </section>`;
 }
 
@@ -253,6 +281,25 @@ function podTable(ids){
   const rows=(ids.length?pods.filter(([id])=>ids.includes(id)):pods.slice(0,2));
   return `<div class="pod-preview"><div class="pod-preview-head"><span>Pod 名称</span><span>所属工作负载</span><span>集群</span><span>状态</span></div>${rows.map(([,name,status,,,,,,,,cluster])=>`<div><span>${name}</span><span>Payment-api</span><span>${clusterIcon()}${clusterLabels[cluster]}</span><span class="status-tag ${status}">${labels[status]}</span></div>`).join('')}</div>`;
 }
+function batchClusters(ids){
+  const involved=new Set(pods.filter(([id])=>ids.includes(id)).map(pod=>pod[10]));
+  return modalClusters.filter(cluster=>involved.has(cluster.id));
+}
+function batchClusterTable(ids,editable){
+  const rows=batchClusters(ids);
+  return `<div class="batch-cluster-table"><div><span>集群</span><span>最大不可用</span><span>最大可超出</span><span>可用度锁</span></div>${rows.map(row=>`<div><span>${clusterIcon()}${row.name}</span>${editable?`<label><input type="number" min="0" value="${row.unavailable.replace('%','')}" aria-label="${row.name} 最大不可用"><em>%</em></label>`:`<b>${row.unavailable}</b>`}<b>${row.surge}</b><b>${row.available}</b></div>`).join('')}</div>`;
+}
+function batchModal(actionKey,ids,action){
+  const restart=actionKey==='restart';
+  const rebuild=actionKey==='rebuild';
+  const shrink=actionKey==='delete';
+  const title=restart?'批量重启 Pod':rebuild?'批量删除/重建 Pod':shrink?'批量删除并缩容 Pod':`批量${action.label}`;
+  const description=restart?'将按照部署并发度对已选 Pod 的工作容器依次发送 SIGTERM 信号，触发容器重启。':rebuild?'将删除已选 Pod，并触发集群重新申请、重新启动 Pod 的过程。':shrink?`删除并缩容后，所选 ${ids.length} 个 Pod 将被删除，集群容量相应减少，可能导致服务承载能力下降。该操作不可自动恢复。`:`即将对已选择的 ${ids.length} 个 Pod 执行${action.label}，请在确认前复核操作对象。`;
+  const warning=restart?'1. 重启过程中不会销毁容器，仅重新拉起进程。\n2. 重启过程中会对重启 Pod 进行流量屏蔽操作，请关注恢复状态。':rebuild?'1. 删除/重建过程中会销毁当前 Pod，并创建新的 Pod，名称、IP、所在节点等会发生变化。\n2. 已驱逐状态的 Pod 会被彻底删除，其他状态会创建新的 Pod。':'';
+  const timeout=restart?`<section class="operation-section timeout-section"><h3>超时时间配置</h3><label class="operation-field"><span>超时时间</span><input type="number" value="60" aria-label="超时时间"><em>秒</em><small>发送 SIGTERM 后的等待时间，超时未检测到进程退出则视为重启失败</small></label></section>`:'';
+  const config=(restart||rebuild)?`<section class="operation-section"><h3>集群与参数配置</h3>${rebuild?'<p class="batch-config-note">集群与参数配置由系统自动推导，所有参数均不可修改</p>':''}${batchClusterTable(ids,restart)}</section>`:'';
+  return `${modalHeader(title,description)}<div class="operation-modal-body">${warning?`<p class="operation-warning">${warning.replace('\n','<br>')}</p>`:''}${timeout}<section class="operation-section"><h3>待${rebuild?'删除/重建':shrink?'删除并缩容':'重启'} Pod ${ids.length}</h3>${podTable(ids)}</section>${config}</div>${modalFooter(false,'已选择 '+ids.length+' 个 Pod')}`;
+}
 function openConfirm(actionKey, ids=[]){
   const action=actions[actionKey] || {label:'删除部署资源',detail:'删除资源将彻底清除所选集群上的部署资源，且不可撤销。'};
   pendingAction={actionKey,ids};
@@ -260,6 +307,7 @@ function openConfirm(actionKey, ids=[]){
   if(actionKey==='horizontal') content=`${modalHeader('横向扩缩','横向扩缩是在保持当前 Pod 配置和规格的前提下，调整集群内 Pod 的数量。')}<div class="operation-modal-body">${settingsTable(modalClusters,'horizontal')}</div>${modalFooter()}`;
   else if(actionKey==='vertical') content=`${modalHeader('纵向扩缩','纵向扩缩是在保持当前集群 Pod 数量的前提下，调整 Pod 的资源规格，Pod 规格可按集群调整。')}<div class="operation-modal-body">${settingsTable(verticalModalClusters,'vertical')}</div>${modalFooter()}`;
   else if(actionKey==='delete-deployment') content=`${modalHeader('删除部署资源','删除资源将会彻底清除所选集群上的部署资源，且不可撤销。')}<div class="operation-modal-body"><p class="operation-info">此过程可能需要几分钟，请稍做等待...</p><section class="operation-section"><h3>应用名称补充</h3><label class="operation-field"><span>应用名称</span><input data-app-name placeholder="请补全应用名称"><small>应用名称：Payment-api</small></label></section><section class="operation-section"><h3>选择集群</h3>${settingsTable(modalClusters,'horizontal')}</section></div>${modalFooter()}`;
+  else if(ids.length) content=batchModal(actionKey,ids,action);
   else {
     const isBatch=ids.length>0;
     const isRebuild=actionKey==='rebuild';
@@ -477,10 +525,16 @@ document.querySelector('#horizontalScaleBtn').addEventListener('click',()=>trigg
 document.querySelector('#verticalScaleBtn').addEventListener('click',()=>triggerAction('vertical'));
 document.querySelector('#actionMoreBtn').addEventListener('click',event=>{event.stopPropagation();openMenu(event.currentTarget,[{key:'history',label:'查看变更记录',icon:'clipboard'},{key:'refresh',label:'刷新 Pod 列表',icon:'refresh'},{key:'delete-deployment',label:'删除部署资源',icon:'apps'}]);});
 clusterGroups.addEventListener('change',event=>{
-  if(event.target.matches('.pod-check')){ event.target.checked?state.selected.add(event.target.dataset.pod):state.selected.delete(event.target.dataset.pod); updateSelection(); }
+  if(event.target.matches('.pod-check')){
+    event.target.checked?state.selected.add(event.target.dataset.pod):state.selected.delete(event.target.dataset.pod);
+    event.target.closest('tr')?.classList.toggle('is-selected',event.target.checked);
+    updateSelection();
+  }
   if(event.target.matches('.cluster-select')){ const cluster=event.target.dataset.clusterSelect; visiblePods().filter(pod=>pod[10]===cluster).forEach(([id])=>event.target.checked?state.selected.add(id):state.selected.delete(id)); render(); }
 });
 clusterGroups.addEventListener('click',event=>{
+  const terminal=event.target.closest('[data-instance-terminal]');
+  if(terminal){ openInstanceDetail(terminal.dataset.instanceTerminal,'terminal'); return; }
   const detail=event.target.closest('[data-instance-detail]');
   if(detail){ openInstanceDetail(detail.dataset.instanceDetail); return; }
   const toggle=event.target.closest('[data-cluster-toggle]');
