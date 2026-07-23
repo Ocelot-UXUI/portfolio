@@ -134,20 +134,20 @@
 .pod-table thead th:last-child{z-index:32}
 .pod-table th:last-child,
 .pod-table td:last-child{
-  width:180px!important;
-  min-width:180px!important;
-  max-width:180px!important;
+  width:124px!important;
+  min-width:124px!important;
+  max-width:124px!important;
   border-left:0!important;
-  box-shadow:none!important
+  box-shadow:-10px 0 14px -10px rgba(84,84,84,.28)!important
 }
 .pod-table th:last-child::after,
 .pod-table td:last-child::after{
   position:absolute;
   top:0;
   bottom:0;
-  left:-24px;
-  width:24px;
-  background:linear-gradient(270deg,rgba(0,0,0,.03) 0%,rgba(0,0,0,0) 100%);
+  left:-16px;
+  width:16px;
+  background:linear-gradient(270deg,rgba(84,84,84,.10) 0%,rgba(84,84,84,0) 100%);
   content:"";
   pointer-events:none
 }
@@ -259,11 +259,16 @@
 .batch-cluster-table input:focus{border-color:#181818}
 
 /* Figma 90:799 resource columns: specification, utilization, and GPU device card. */
-.pod-table{min-width:1604px!important}
+.pod-table{width:1575px!important;min-width:1575px!important;max-width:1575px!important}
 .pod-table th,.pod-table td{height:72px!important;font-size:14px}
 .pod-table thead th{height:48px!important;padding:0 20px;color:#8f8f8f;font-weight:500}
-.pod-table th:first-child,.pod-table td:first-child{padding:0!important}
-.pod-table th:nth-child(2),.pod-table td:nth-child(2){width:202px;min-width:202px}
+.pod-table th:first-child,.pod-table td:first-child{width:72px!important;min-width:72px!important;max-width:72px!important;padding:0!important}
+.pod-table th:nth-child(2),.pod-table td:nth-child(2){width:202px;min-width:202px;max-width:202px}
+.pod-table th:nth-child(3),.pod-table td:nth-child(3){width:121px;min-width:121px;max-width:121px}
+.pod-table th:nth-child(4),.pod-table td:nth-child(4){width:146px;min-width:146px;max-width:146px}
+.pod-table th:nth-child(5),.pod-table td:nth-child(5){width:139px;min-width:139px;max-width:139px}
+.pod-table th:nth-child(6),.pod-table td:nth-child(6){width:101px;min-width:101px;max-width:101px}
+.pod-table th:nth-child(7),.pod-table td:nth-child(7),.pod-table th:nth-child(8),.pod-table td:nth-child(8){width:86px;min-width:86px;max-width:86px}
 .pod-table .cpu-resource-head,.pod-table .cpu-resource-cell{width:140px;min-width:140px;max-width:140px}
 .pod-table .memory-resource-head,.pod-table .memory-resource-cell{width:188px;min-width:188px;max-width:188px}
 .pod-table .gpu-resource-head,.pod-table .gpu-resource-cell{width:114px;min-width:114px;max-width:114px}
@@ -292,7 +297,7 @@
 
 /* Figma 90:32973 operation column: five 16px controls across a 144px row. */
 .pod-table th:last-child,.pod-table td:last-child{padding-right:16px!important;padding-left:20px!important}
-.row-actions{display:flex;width:144px;height:16px;align-items:center;gap:16px;color:#181818;font-size:0}
+.row-actions{display:flex;width:124px;height:16px;align-items:center;gap:11px;color:#181818;font-size:0}
 .row-actions button{position:relative;display:block;flex:0 0 16px;width:16px;height:16px;margin:0;padding:0;border:0;border-radius:2px;background:transparent;color:inherit;cursor:pointer}
 .row-actions button:hover{background:#e8e8e8}
 .row-actions button:focus-visible{outline:2px solid #306ddd;outline-offset:2px}
