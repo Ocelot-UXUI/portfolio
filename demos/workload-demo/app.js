@@ -158,7 +158,7 @@ function resourceMetricMarkup(type,usage,capacity,request,percent){
   const normalized=Math.max(0,Math.min(100,percent));
   const tone=normalized>=80?'danger':normalized>=60?'warning':'normal';
   const iconName=type==='cpu'?'cpu':'memory';
-  return `<span class="resource-metric usage-value" data-tooltip="${type==='cpu'?'CPU':'内存'}：${usage}，Limit：${capacity}，请求：${request}"><span class="resource-spec"><span class="${type}-mark">${icon(iconName)}</span>${usage}/${capacity}/${request}</span><span class="resource-usage ${tone}"><span class="resource-track"><i style="width:${normalized}%"></i></span><b>${normalized}%</b></span></span>`;
+  return `<span class="resource-metric usage-value" data-tooltip="${type==='cpu'?'CPU':'内存'}：${usage}，Limit：${capacity}，请求：${request}"><span class="resource-spec"><span class="${type}-mark">${icon(iconName)}</span><span class="resource-spec-value">${usage}/${capacity}/${request}</span></span><span class="resource-usage ${tone}"><span class="resource-track"><i style="width:${normalized}%"></i></span><b>${normalized}%</b></span></span>`;
 }
 
 function gpuCardMarkup(gpu){
