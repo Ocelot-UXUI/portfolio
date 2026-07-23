@@ -44,7 +44,7 @@
 @media(max-width:1050px){.instance-modal{max-width:calc(100vw - 40px)}.summary-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.instance-header{padding-right:16px;padding-left:16px}.instance-summary,.instance-workbench{margin-right:16px;margin-left:16px}}
 
 /* Workload list interaction states from the Figma interaction specification. */
-.select-options{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;margin-left:6px;padding:0;border:0;border-radius:4px;background:transparent;color:#6b7280;vertical-align:middle}.select-options:hover{background:#f2f2f2}.select-options svg{width:14px;height:14px}.cluster-groups.compact-mode .pod-table th:nth-child(5),.cluster-groups.compact-mode .pod-table td:nth-child(5),.cluster-groups.compact-mode .pod-table th:nth-child(6),.cluster-groups.compact-mode .pod-table td:nth-child(6),.cluster-groups.compact-mode .pod-table th:nth-child(9),.cluster-groups.compact-mode .pod-table td:nth-child(9),.cluster-groups.compact-mode .pod-table th:nth-child(10),.cluster-groups.compact-mode .pod-table td:nth-child(10){display:none}.cluster-groups.compact-mode .pod-table th,.cluster-groups.compact-mode .pod-table td{height:40px}.table-tools .view.active{border-color:#181818;background:#f2f2f2;color:#181818}
+.select-options{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;margin-left:6px;padding:0;border:0;border-radius:4px;background:transparent;color:#6b7280;vertical-align:middle}.select-options:hover{background:#f2f2f2}.select-options svg{width:14px;height:14px}.table-tools .view.active{border-color:#181818;background:#f2f2f2;color:#181818}
 /* Keep table identity and actions visible while the middle columns scroll. */
 .table-scroll{position:relative;isolation:isolate}.pod-table{min-width:1230px;border-collapse:separate;border-spacing:0}.pod-table th:nth-child(1),.pod-table td:nth-child(1){position:sticky;left:0;z-index:5;width:40px;min-width:40px;background:#fff}.pod-table th:nth-child(2),.pod-table td:nth-child(2){position:sticky;left:40px;z-index:5;min-width:202px;background:#fff}.pod-table th:last-child,.pod-table td:last-child{position:sticky;right:0;z-index:5;min-width:180px;background:#fff;box-shadow:-12px 0 14px -12px rgba(0,0,0,.24)}.pod-table thead th:nth-child(1),.pod-table thead th:nth-child(2),.pod-table thead th:last-child{z-index:7;background:#fff}.pod-table tbody tr:hover td:nth-child(1),.pod-table tbody tr:hover td:nth-child(2),.pod-table tbody tr:hover td:last-child{background:#fafbfc}.pod-table th:nth-child(2)::after,.pod-table td:nth-child(2)::after{content:'';position:absolute;top:0;right:-12px;bottom:0;width:12px;background:linear-gradient(90deg,rgba(0,0,0,.05),transparent);pointer-events:none}
 /* Figma 4:41693 detailed/compact segmented view switcher. */
@@ -336,42 +336,28 @@
   margin-left:0!important
 }
 
-/* Detailed mode uses content-led column widths; compact mode keeps the existing table geometry. */
-.cluster-groups:not(.compact-mode) .pod-table{width:1269px!important;min-width:1269px!important;max-width:1269px!important;table-layout:fixed}
-.cluster-groups.compact-mode .pod-table{width:1627px!important;min-width:1627px!important;max-width:1627px!important;table-layout:fixed}
+/* Both display modes keep the same table structure and geometry. */
+.pod-table{width:1269px!important;min-width:1269px!important;max-width:1269px!important;table-layout:fixed}
 .pod-table th,.pod-table td{height:72px!important;font-size:14px}
-.cluster-groups.compact-mode .pod-table thead th{height:48px!important;padding:0 20px;color:#8f8f8f;font-weight:500}
-.cluster-groups.compact-mode .pod-table th:first-child,.cluster-groups.compact-mode .pod-table td:first-child{width:72px!important;min-width:72px!important;max-width:72px!important;padding:0!important}
-.cluster-groups.compact-mode .pod-table th:nth-child(2),.cluster-groups.compact-mode .pod-table td:nth-child(2){left:72px!important;width:202px!important;min-width:202px!important;max-width:202px!important}
-.cluster-groups.compact-mode .pod-table th:nth-child(3),.cluster-groups.compact-mode .pod-table td:nth-child(3){width:121px!important;min-width:121px!important;max-width:121px!important}
-.cluster-groups.compact-mode .pod-table th:nth-child(4),.cluster-groups.compact-mode .pod-table td:nth-child(4){width:146px!important;min-width:146px!important;max-width:146px!important}
-.cluster-groups.compact-mode .pod-table th:nth-child(5),.cluster-groups.compact-mode .pod-table td:nth-child(5){width:139px!important;min-width:139px!important;max-width:139px!important}
-.cluster-groups.compact-mode .pod-table th:nth-child(6),.cluster-groups.compact-mode .pod-table td:nth-child(6){width:101px!important;min-width:101px!important;max-width:101px!important}
-.cluster-groups.compact-mode .pod-table th:nth-child(7),.cluster-groups.compact-mode .pod-table td:nth-child(7),.cluster-groups.compact-mode .pod-table th:nth-child(8),.cluster-groups.compact-mode .pod-table td:nth-child(8){width:86px!important;min-width:86px!important;max-width:86px!important}
-.cluster-groups.compact-mode .pod-table .cpu-resource-head,.cluster-groups.compact-mode .pod-table .cpu-resource-cell{width:197px!important;min-width:197px!important;max-width:197px!important}
-.cluster-groups.compact-mode .pod-table .memory-resource-head,.cluster-groups.compact-mode .pod-table .memory-resource-cell{width:204px!important;min-width:204px!important;max-width:204px!important}
-.cluster-groups.compact-mode .pod-table .gpu-resource-head,.cluster-groups.compact-mode .pod-table .gpu-resource-cell{width:113px!important;min-width:113px!important;max-width:113px!important}
-.cluster-groups.compact-mode .pod-table .workload-resource-cell{padding:0 20px;overflow:hidden!important}
-.cluster-groups:not(.compact-mode) .pod-table thead th{height:48px!important;padding:0 12px;color:#8f8f8f;font-weight:500}
-.cluster-groups:not(.compact-mode) .pod-table th:first-child,.cluster-groups:not(.compact-mode) .pod-table td:first-child{width:56px!important;min-width:56px!important;max-width:56px!important;padding:0!important}
-.cluster-groups:not(.compact-mode) .pod-table th:nth-child(2),.cluster-groups:not(.compact-mode) .pod-table td:nth-child(2){left:56px!important;width:184px!important;min-width:184px!important;max-width:184px!important}
-.cluster-groups:not(.compact-mode) .pod-table th:nth-child(3),.cluster-groups:not(.compact-mode) .pod-table td:nth-child(3){width:104px!important;min-width:104px!important;max-width:104px!important}
-.cluster-groups:not(.compact-mode) .pod-table th:nth-child(4),.cluster-groups:not(.compact-mode) .pod-table td:nth-child(4){width:132px!important;min-width:132px!important;max-width:132px!important}
-.cluster-groups:not(.compact-mode) .pod-table th:nth-child(5),.cluster-groups:not(.compact-mode) .pod-table td:nth-child(5){width:116px!important;min-width:116px!important;max-width:116px!important}
-.cluster-groups:not(.compact-mode) .pod-table th:nth-child(6),.cluster-groups:not(.compact-mode) .pod-table td:nth-child(6){width:92px!important;min-width:92px!important;max-width:92px!important}
-.cluster-groups:not(.compact-mode) .pod-table th:nth-child(7),.cluster-groups:not(.compact-mode) .pod-table td:nth-child(7),.cluster-groups:not(.compact-mode) .pod-table th:nth-child(8),.cluster-groups:not(.compact-mode) .pod-table td:nth-child(8){width:72px!important;min-width:72px!important;max-width:72px!important}
-.cluster-groups:not(.compact-mode) .pod-table .cpu-resource-head,.cluster-groups:not(.compact-mode) .pod-table .cpu-resource-cell{width:168px!important;min-width:168px!important;max-width:168px!important}
-.cluster-groups:not(.compact-mode) .pod-table .memory-resource-head,.cluster-groups:not(.compact-mode) .pod-table .memory-resource-cell{width:176px!important;min-width:176px!important;max-width:176px!important}
-.cluster-groups:not(.compact-mode) .pod-table .gpu-resource-head,.cluster-groups:not(.compact-mode) .pod-table .gpu-resource-cell{width:100px!important;min-width:100px!important;max-width:100px!important}
-.cluster-groups:not(.compact-mode) .pod-table .workload-resource-cell{padding:0 12px;overflow:hidden!important}
+.pod-table thead th{height:48px!important;padding:0 12px;color:#8f8f8f;font-weight:500}
+.pod-table th:first-child,.pod-table td:first-child{width:56px!important;min-width:56px!important;max-width:56px!important;padding:0!important}
+.pod-table th:nth-child(2),.pod-table td:nth-child(2){left:56px!important;width:184px!important;min-width:184px!important;max-width:184px!important}
+.pod-table th:nth-child(3),.pod-table td:nth-child(3){width:104px!important;min-width:104px!important;max-width:104px!important}
+.pod-table th:nth-child(4),.pod-table td:nth-child(4){width:132px!important;min-width:132px!important;max-width:132px!important}
+.pod-table th:nth-child(5),.pod-table td:nth-child(5){width:116px!important;min-width:116px!important;max-width:116px!important}
+.pod-table th:nth-child(6),.pod-table td:nth-child(6){width:92px!important;min-width:92px!important;max-width:92px!important}
+.pod-table th:nth-child(7),.pod-table td:nth-child(7),.pod-table th:nth-child(8),.pod-table td:nth-child(8){width:72px!important;min-width:72px!important;max-width:72px!important}
+.pod-table .cpu-resource-head,.pod-table .cpu-resource-cell{width:168px!important;min-width:168px!important;max-width:168px!important}
+.pod-table .memory-resource-head,.pod-table .memory-resource-cell{width:176px!important;min-width:176px!important;max-width:176px!important}
+.pod-table .gpu-resource-head,.pod-table .gpu-resource-cell{width:100px!important;min-width:100px!important;max-width:100px!important}
+.pod-table .workload-resource-cell{padding:0 12px;overflow:hidden!important}
 .resource-metric{width:100%;height:48px;display:flex;flex-direction:column;justify-content:center;align-items:stretch;overflow:hidden}
 .resource-spec{min-width:0;height:22px;display:flex;align-items:center;overflow:visible;color:#181818;line-height:22px}
 .resource-spec .cpu-mark,.resource-spec .memory-mark{display:inline-flex;flex:0 0 16px;width:16px;height:16px;margin-right:6px;align-items:center;justify-content:center}
 .resource-spec .figma-icon{width:16px!important;height:16px!important}
 .resource-spec-value{flex:none;min-width:0;overflow:visible;text-overflow:clip;white-space:nowrap}
 .resource-usage{height:22px;display:flex;align-items:center;gap:6px;color:#545454;line-height:22px}
-.resource-track{position:relative;display:block;flex:0 0 120px;width:120px;height:3px;overflow:hidden;border-radius:2px;background:#e8e8e8}
-.cluster-groups:not(.compact-mode) .resource-track{flex-basis:94px;width:94px}
+.resource-track{position:relative;display:block;flex:0 0 94px;width:94px;height:3px;overflow:hidden;border-radius:2px;background:#e8e8e8}
 .resource-track i{position:absolute;inset:0 auto 0 0;border-radius:2px;background:#306ddd}
 .resource-usage b{width:31px;color:inherit;font-weight:400;text-align:right}
 .resource-usage.warning{color:#f58300}.resource-usage.warning .resource-track i{background:#f58300}
@@ -383,9 +369,6 @@
 .gpu-details b{overflow:hidden;font-size:12px;font-weight:500;line-height:18px;text-overflow:ellipsis;white-space:nowrap}
 .gpu-card>strong{position:absolute;z-index:1;right:8px;color:#545454;font-size:14px;font-weight:500;line-height:22px}
 .gpu-card.p800{border-color:rgba(48,109,221,.2);background:rgba(48,109,221,.1);color:#306ddd}
-.cluster-groups.compact-mode .pod-table th:nth-child(11),.cluster-groups.compact-mode .pod-table td:nth-child(11){display:none}
-.cluster-groups.compact-mode .pod-table th,.cluster-groups.compact-mode .pod-table td{height:40px!important}
-.cluster-groups.compact-mode .pod-table thead th{height:40px!important}
 
 /* Figma 90:32973 operation column: five 16px controls across a 144px row. */
 .pod-table th:last-child,.pod-table td:last-child{padding-right:16px!important;padding-left:20px!important}
