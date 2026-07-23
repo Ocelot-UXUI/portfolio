@@ -195,23 +195,35 @@ function compactUsageMarkup(type,percent){
   return `<span class="compact-usage${danger}"><img src="${compactTableAssetPath}/${asset}" alt=""><span>${percent}%</span></span>`;
 }
 
+function rowActionsMarkup(id){
+  return [
+    `<button type="button" data-instance-detail="${id}" aria-label="查看实例详情" title="查看实例详情">${operationIconMarkup('detail')}</button>`,
+    `<button type="button" data-instance-terminal="${id}" aria-label="打开终端" title="打开终端">${operationIconMarkup('terminal')}</button>`,
+    `<button type="button" data-action="rebuild" data-pod="${id}" aria-label="删除/重建" title="删除/重建">${operationIconMarkup('rebuild')}</button>`,
+    `<button type="button" data-action="block" data-pod="${id}" aria-label="屏蔽" title="屏蔽">${operationIconMarkup('block')}</button>`,
+    `<button type="button" data-row-more="${id}" aria-label="更多操作" title="更多操作">${operationIconMarkup('more')}</button>`
+  ].join('');
+}
+
 function compactRowMarkup(pod){
-  const [id,,status,ip,port,exposure,restarts,age,cpu,memory] = pod;
+  const [id,name,status,ip,port,exposure,restarts,age,cpu,memory] = pod;
   const cpuPercent=compactCpuUsage[id]??(parseInt(cpu,10)||0);
   const memoryPercent=compactMemoryUsage[id]??Math.min(100,Math.round((parseFloat(memory)||0)/10.5*100));
   const restartTone=restarts>=7?' danger':restarts>=4?' warning':'';
-  return `<tr><td><span class="compact-status ${status}">${compactStatusLabels[status]}</span></td><td class="compact-ip">${ip}</td><td class="compact-port">${compactPortMarkup(port)}</td><td>${compactExposureMarkup(id,exposure)}</td><td class="compact-restarts${restartTone}">${restarts}</td><td class="compact-age">${age}</td><td>${compactUsageMarkup('cpu',cpuPercent)}</td><td>${compactUsageMarkup('memory',memoryPercent)}</td></tr>`;
+  return `<tr class="${state.selected.has(id) ? 'is-selected' : ''}"><td><input class="pod-check" data-pod="${id}" type="checkbox" ${state.selected.has(id)?'checked':''} aria-label="选择 ${name}"></td><td title="${name}"><button class="pod-link" data-instance-detail="${id}">${name}</button></td><td><span class="compact-status ${status}">${compactStatusLabels[status]}</span></td><td class="compact-ip">${ip}</td><td class="compact-port">${compactPortMarkup(port)}</td><td>${compactExposureMarkup(id,exposure)}</td><td class="compact-restarts${restartTone}">${restarts}</td><td class="compact-age">${age}</td><td>${compactUsageMarkup('cpu',cpuPercent)}</td><td>${compactUsageMarkup('memory',memoryPercent)}</td><td><span class="row-actions">${rowActionsMarkup(id)}</span></td></tr>`;
 }
 
 function compactTableMarkup(cluster,podsInCluster){
+  const selected=podsInCluster.every(([id])=>state.selected.has(id));
+  const partial=podsInCluster.some(([id])=>state.selected.has(id));
   const collapsed=state.collapsedClusters.has(cluster);
   const clusterName=clusterLabels[cluster];
   const meta=clusterMeta[cluster];
   const summary={running:0,error:0,blocked:0};
   podsInCluster.forEach(([, ,status])=>summary[status]++);
   return `<section class="cluster-group ${collapsed?'collapsed':''}" data-cluster="${cluster}">
-    <header class="group-header"><button class="cluster-toggle" data-cluster-toggle="${cluster}" aria-label="${collapsed?'展开':'收起'}">${icon(collapsed?'chevron-right':'chevron-down')}</button><div class="group-title"><strong>Payment-api</strong><span class="cluster-context"><b>${clusterName}</b>${meta.environment}</span><span class="rollout ${cluster}">${meta.channel}</span><span class="versions">${meta.version}&nbsp; ${meta.versions}</span></div><div class="group-summary"><span>运行中 <b class="green">${summary.running}</b></span><span>异常 <b class="red">${summary.error}</b></span><span>已屏蔽 <b class="amber">${summary.blocked}</b></span><i></i><span>共 ${podsInCluster.length} pod</span><button class="cluster-more" data-cluster-more="${cluster}" aria-label="${clusterName} 更多操作">${icon('more')}</button></div></header>
-    <div class="table-frame"><div class="table-scroll"><table class="pod-table compact-pod-table"><thead><tr><th><span class="column-title">状态</span>${compactSortIconMarkup()}</th><th><span class="column-title">Pod IP</span></th><th><span class="column-title">端口</span></th><th><span class="column-title">服务暴露</span></th><th><span class="column-title">重启</span>${compactSortIconMarkup('desc')}</th><th><span class="column-title">存活</span>${compactSortIconMarkup()}</th><th><span class="column-title">CPU</span>${compactSortIconMarkup('asc')}</th><th><span class="column-title">内存</span>${compactSortIconMarkup('asc')}</th></tr></thead><tbody>${podsInCluster.map(compactRowMarkup).join('')}</tbody></table></div></div>
+    <header class="group-header"><button class="cluster-toggle" data-cluster-toggle="${cluster}" aria-label="${collapsed?'展开':'收起'}">${icon(collapsed?'chevron-right':'chevron-down')}</button><div class="group-title"><strong>Payment-api</strong><span class="rollout ${cluster}">${meta.channel}</span><span class="versions">${meta.version}&nbsp; ${meta.versions}</span></div><div class="group-summary"><span>运行中 <b class="green">${summary.running}</b></span><span>异常 <b class="red">${summary.error}</b></span><span>已屏蔽 <b class="amber">${summary.blocked}</b></span><i></i><span>共 ${podsInCluster.length} pod</span><button class="cluster-more" data-cluster-more="${cluster}" aria-label="${clusterName} 更多操作">${icon('more')}</button></div></header>
+    <div class="table-frame"><div class="table-scroll"><table class="pod-table compact-pod-table"><thead><tr><th><input class="cluster-select" data-cluster-select="${cluster}" type="checkbox" ${selected?'checked':''} ${partial&&!selected?'data-indeterminate="true"':''} aria-label="全选 ${clusterName} 集群"><button class="select-options" data-select-options="${cluster}" aria-label="选择操作" title="选择操作">${icon('chevron-down')}</button></th><th><span class="column-title">实例名称/集群</span></th><th><span class="column-title">状态</span>${compactSortIconMarkup()}</th><th><span class="column-title">Pod IP</span></th><th><span class="column-title">端口</span></th><th><span class="column-title">服务暴露</span></th><th><span class="column-title">重启</span>${compactSortIconMarkup('desc')}</th><th><span class="column-title">存活</span>${compactSortIconMarkup()}</th><th><span class="column-title">CPU</span>${compactSortIconMarkup('asc')}</th><th><span class="column-title">内存</span>${compactSortIconMarkup('asc')}</th><th><span class="column-title">操作</span></th></tr></thead><tbody>${podsInCluster.map(compactRowMarkup).join('')}</tbody></table></div><i class="frozen-edge frozen-edge-identity" aria-hidden="true"></i></div>
   </section>`;
 }
 
@@ -229,14 +241,7 @@ function rowMarkup(pod){
   const cpuPercent=parseInt(cpu,10)||0;
   const cpuUsage=`${(cpuPercent*8/100).toFixed(1).replace('.0','')}c`;
   const memoryPercent=Math.min(100,Math.round((parseFloat(memory)||0)/32*100));
-  const rowActions = [
-    `<button type="button" data-instance-detail="${id}" aria-label="查看实例详情" title="查看实例详情">${operationIconMarkup('detail')}</button>`,
-    `<button type="button" data-instance-terminal="${id}" aria-label="打开终端" title="打开终端">${operationIconMarkup('terminal')}</button>`,
-    `<button type="button" data-action="rebuild" data-pod="${id}" aria-label="删除/重建" title="删除/重建">${operationIconMarkup('rebuild')}</button>`,
-    `<button type="button" data-action="block" data-pod="${id}" aria-label="屏蔽" title="屏蔽">${operationIconMarkup('block')}</button>`,
-    `<button type="button" data-row-more="${id}" aria-label="更多操作" title="更多操作">${operationIconMarkup('more')}</button>`
-  ].join('');
-  return `<tr class="${state.selected.has(id) ? 'is-selected' : ''}"><td><input class="pod-check" data-pod="${id}" type="checkbox" ${state.selected.has(id)?'checked':''} aria-label="选择 ${name}"></td><td title="${name}"><button class="pod-link" data-instance-detail="${id}">${name}</button></td><td><span class="status-tag ${status}">${labels[status]}</span></td><td>${ip}</td><td>${port}</td><td><span class="exposure-dot"></span>${exposure}</td><td class="${restarts >= 4 ? 'metric-hot' : ''}">${restarts}</td><td>${age}</td><td class="workload-resource-cell cpu-resource-cell">${resourceMetricMarkup('cpu',cpuUsage,'8c','16c',cpuPercent)}</td><td class="workload-resource-cell memory-resource-cell">${resourceMetricMarkup('memory',memory,'32Gi','9.1Gi',memoryPercent)}</td><td class="gpu-resource-cell">${gpuCardMarkup(gpu)}</td><td><span class="row-actions">${rowActions}</span></td></tr>`;
+  return `<tr class="${state.selected.has(id) ? 'is-selected' : ''}"><td><input class="pod-check" data-pod="${id}" type="checkbox" ${state.selected.has(id)?'checked':''} aria-label="选择 ${name}"></td><td title="${name}"><button class="pod-link" data-instance-detail="${id}">${name}</button></td><td><span class="status-tag ${status}">${labels[status]}</span></td><td>${ip}</td><td>${port}</td><td><span class="exposure-dot"></span>${exposure}</td><td class="${restarts >= 4 ? 'metric-hot' : ''}">${restarts}</td><td>${age}</td><td class="workload-resource-cell cpu-resource-cell">${resourceMetricMarkup('cpu',cpuUsage,'8c','16c',cpuPercent)}</td><td class="workload-resource-cell memory-resource-cell">${resourceMetricMarkup('memory',memory,'32Gi','9.1Gi',memoryPercent)}</td><td class="gpu-resource-cell">${gpuCardMarkup(gpu)}</td><td><span class="row-actions">${rowActionsMarkup(id)}</span></td></tr>`;
 }
 
 function sortIconMarkup(active=false){
@@ -251,7 +256,7 @@ function tableMarkup(cluster,podsInCluster){
   const clusterName=clusterLabels[cluster];
   const meta=clusterMeta[cluster];
   return `<section class="cluster-group ${collapsed?'collapsed':''}" data-cluster="${cluster}">
-    <header class="group-header"><button class="cluster-toggle" data-cluster-toggle="${cluster}" aria-label="${collapsed?'展开':'收起'}">${icon(collapsed?'chevron-right':'chevron-down')}</button><div class="group-title"><strong>Payment-api</strong><span class="cluster-context"><b>${clusterName}</b>${meta.environment}</span><span class="rollout ${cluster}">${meta.channel}</span><span class="versions">${meta.version}&nbsp; ${meta.versions}</span></div><div class="group-summary"><span>运行中 <b class="green">${summary.running}</b></span><span>异常 <b class="red">${summary.error}</b></span><span>已屏蔽 <b class="amber">${summary.blocked}</b></span><i></i><span>共 ${podsInCluster.length} pod</span><button class="cluster-more" data-cluster-more="${cluster}" aria-label="${clusterName} 更多操作">${icon('more')}</button></div></header>
+    <header class="group-header"><button class="cluster-toggle" data-cluster-toggle="${cluster}" aria-label="${collapsed?'展开':'收起'}">${icon(collapsed?'chevron-right':'chevron-down')}</button><div class="group-title"><strong>Payment-api</strong><span class="rollout ${cluster}">${meta.channel}</span><span class="versions">${meta.version}&nbsp; ${meta.versions}</span></div><div class="group-summary"><span>运行中 <b class="green">${summary.running}</b></span><span>异常 <b class="red">${summary.error}</b></span><span>已屏蔽 <b class="amber">${summary.blocked}</b></span><i></i><span>共 ${podsInCluster.length} pod</span><button class="cluster-more" data-cluster-more="${cluster}" aria-label="${clusterName} 更多操作">${icon('more')}</button></div></header>
     <div class="table-frame"><div class="table-scroll"><table class="pod-table"><thead><tr><th><input class="cluster-select" data-cluster-select="${cluster}" type="checkbox" ${selected?'checked':''} ${partial&&!selected?'data-indeterminate="true"':''} aria-label="全选 ${clusterName} 集群"><button class="select-options" data-select-options="${cluster}" aria-label="选择操作" title="选择操作">${icon('chevron-down')}</button></th><th><span class="column-title">实例名称/集群</span></th><th><span class="column-title">状态/容器</span>${sortIconMarkup()}</th><th><span class="column-title">Pod IP/节点IP</span></th><th><span class="column-title">端口</span></th><th><span class="column-title">服务暴露</span></th><th><span class="column-title">重启</span>${sortIconMarkup(true)}</th><th><span class="column-title">存活</span>${sortIconMarkup()}</th><th class="cpu-resource-head"><span class="column-title">CPU</span>${sortIconMarkup()}</th><th class="memory-resource-head"><span class="column-title">内存</span>${sortIconMarkup()}</th><th class="gpu-resource-head"><span class="column-title">GPU</span></th><th><span class="column-title">操作</span></th></tr></thead><tbody>${podsInCluster.map(rowMarkup).join('')}</tbody></table></div><i class="frozen-edge frozen-edge-identity" aria-hidden="true"></i></div>
   </section>`;
 }
