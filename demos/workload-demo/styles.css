@@ -44,7 +44,7 @@
 @media(max-width:1050px){.instance-modal{max-width:calc(100vw - 40px)}.summary-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.instance-header{padding-right:16px;padding-left:16px}.instance-summary,.instance-workbench{margin-right:16px;margin-left:16px}}
 
 /* Workload list interaction states from the Figma interaction specification. */
-.select-options{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;margin-left:6px;padding:0;border:0;border-radius:4px;background:transparent;color:#6b7280;vertical-align:middle}.select-options:hover{background:#f2f2f2}.select-options svg{width:14px;height:14px}.table-tools .view.active{border-color:#181818;background:#f2f2f2;color:#181818}
+.table-tools .view.active{border-color:#181818;background:#f2f2f2;color:#181818}
 /* Keep table identity and actions visible while the middle columns scroll. */
 .table-scroll{position:relative;isolation:isolate}.pod-table{min-width:1230px;border-collapse:separate;border-spacing:0}.pod-table th:nth-child(1),.pod-table td:nth-child(1){position:sticky;left:0;z-index:5;width:40px;min-width:40px;background:#fff}.pod-table th:nth-child(2),.pod-table td:nth-child(2){position:sticky;left:40px;z-index:5;min-width:202px;background:#fff}.pod-table th:last-child,.pod-table td:last-child{position:sticky;right:0;z-index:5;min-width:180px;background:#fff;box-shadow:-12px 0 14px -12px rgba(0,0,0,.24)}.pod-table thead th:nth-child(1),.pod-table thead th:nth-child(2),.pod-table thead th:last-child{z-index:7;background:#fff}.pod-table tbody tr:hover td:nth-child(1),.pod-table tbody tr:hover td:nth-child(2),.pod-table tbody tr:hover td:last-child{background:#fafbfc}.pod-table th:nth-child(2)::after,.pod-table td:nth-child(2)::after{content:'';position:absolute;top:0;right:-12px;bottom:0;width:12px;background:linear-gradient(90deg,rgba(0,0,0,.05),transparent);pointer-events:none}
 /* Figma 4:41693 detailed/compact segmented view switcher. */
@@ -89,7 +89,6 @@
 .pod-table th:first-child,.pod-table td:first-child{width:72px!important;min-width:72px!important;padding:0!important}
 .pod-table th:first-child{position:sticky}
 .pod-table th:first-child .cluster-select,.pod-table td:first-child .pod-check{display:block;margin:0 auto}
-.pod-table th:first-child .select-options{position:absolute;top:50%;right:8px;margin:0;transform:translateY(-50%)}
 .pod-table th:nth-child(2),.pod-table td:nth-child(2){left:72px!important}
 
 /* Figma 1208:5316: frozen identity and action layers share the complete row state. */
@@ -373,9 +372,9 @@
 /* Compact mode keeps the frozen identity and operation edges; Figma 4:39671 replaces only the middle columns. */
 .cluster-groups.compact-mode .table-scroll{overflow:auto}
 .cluster-groups.compact-mode .compact-pod-table{
-  width:1211px!important;
-  min-width:1211px!important;
-  max-width:1211px!important;
+  width:1396px!important;
+  min-width:1396px!important;
+  max-width:1396px!important;
   table-layout:fixed
 }
 .cluster-groups.compact-mode .compact-pod-table th,
@@ -402,7 +401,7 @@
 .cluster-groups.compact-mode .compact-pod-table th:nth-child(1),
 .cluster-groups.compact-mode .compact-pod-table td:nth-child(1){position:sticky!important;left:0!important;z-index:5;width:56px!important;min-width:56px!important;max-width:56px!important;padding:0!important}
 .cluster-groups.compact-mode .compact-pod-table th:nth-child(2),
-.cluster-groups.compact-mode .compact-pod-table td:nth-child(2){position:sticky!important;left:56px!important;z-index:5;width:184px!important;min-width:184px!important;max-width:184px!important;padding:0 12px!important}
+.cluster-groups.compact-mode .compact-pod-table td:nth-child(2){position:sticky!important;left:56px!important;z-index:5;width:369px!important;min-width:369px!important;max-width:369px!important;padding:0 12px!important}
 .cluster-groups.compact-mode .compact-pod-table th:nth-child(3),
 .cluster-groups.compact-mode .compact-pod-table td:nth-child(3){width:88px!important;min-width:88px!important;max-width:88px!important}
 .cluster-groups.compact-mode .compact-pod-table th:nth-child(4),
