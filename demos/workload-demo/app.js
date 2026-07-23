@@ -12,7 +12,7 @@ const pods = [
   ['pod-11','…nference-5f6b9-p9wqc','running','192.168.10.21','grpc:8500','ENS','1','6d','16%','2.6Gi','imeonline',{model:'A100',memory:'80G',count:8,variant:'a100'}]
 ];
 
-const state = { status:'all', cluster:'all', query:'', page:1, pageSize:10, viewMode:'detailed', collapsedClusters:new Set(), selected:new Set(), pausedPods:new Set(), instanceSummaryCollapsed:false, selectedContainer:0, activeInstanceId:null, executing:false, primaryNav:'apps', appNav:'workload', appNavExpanded:true, secondaryCollapsed:false, accountTab:'all', accountQuery:'' };
+const state = { status:'all', cluster:'all', query:'', page:1, pageSize:10, viewMode:'detailed', collapsedClusters:new Set(), selected:new Set(), pausedPods:new Set(), instanceSummaryCollapsed:false, selectedContainer:0, activeInstanceId:null, executing:false, primaryNav:'apps', appNav:'workload', appNavExpanded:true, secondaryCollapsed:false, accountTab:'all', accountQuery:'', compactMoreOpen:false };
 const labels = { running:'运行中', error:'异常', blocked:'已摘流' };
 const clusterLabels = { imeonline:'imeonline', 'edge-prod':'edge-prod' };
 const clusterMeta = {
@@ -57,7 +57,14 @@ const icon = name => {
   return `<img class="figma-icon" src="${source}" alt="">`;
 };
 const primaryNavIcons = {
-  apps:{default:'image_46.png',active:'image_1.png'}
+  home:{default:'image_44.png',active:'image_52.png'},
+  affairs:{default:'image_45.png',active:'image_53.png'},
+  apps:{default:'image_46.png',active:'image_1.png'},
+  environment:{default:'image_47.png',active:'image_54.png'},
+  changes:{default:'image_48.png',active:'image_55.png'},
+  resources:{default:'image_49.png',active:'image_56.png'},
+  account:{default:'image_50.png',active:'image_57.png'},
+  more:{default:'image_51.png',active:'image_58.png'}
 };
 const primaryNavIconSrc = (name, selected=false) => {
   const iconSet = primaryNavIcons[name];
@@ -87,6 +94,12 @@ const appPageTitle = document.querySelector('#appPageTitle');
 const secondaryNav = document.querySelector('.secondary-nav');
 const accountPopover = document.querySelector('#accountPopover');
 const accountList = document.querySelector('#accountList');
+const compactMorePopover = document.querySelector('#compactMorePopover');
+const compactMoreMedia = window.matchMedia('(max-width:1250px)');
+const compactOverflowItems = {
+  resources:{label:'资源', icon:'./assets/figma-compact-more-32-2945/image_9.png'},
+  account:{label:'账户', icon:'./assets/figma-compact-more-32-2945/image_10.png'}
+};
 const accounts = [
   { name:'一站式测试账户', handle:'appspace-test', initial:'t', tone:'mint', favorite:true, recent:true },
   { name:'码神专用账号码神专用账号', handle:'cnap-mashen', initial:'m', tone:'blue', favorite:true, recent:true },
@@ -97,17 +110,21 @@ const accounts = [
 function renderAppNavigation(){
   const isApplication = state.primaryNav === 'apps';
   const isWorkload = isApplication && state.appNav === 'workload';
+  syncCompactNavigation();
   document.querySelectorAll('[data-primary-nav]').forEach(button=>{
     const selected = button.dataset.primaryNav === state.primaryNav;
     button.classList.toggle('active', selected);
     const image = button.querySelector('img');
     if(image) image.src = primaryNavIconSrc(button.dataset.primaryNav, selected);
   });
+  const moreIcon = document.querySelector('#primaryMoreBtn img');
+  if(moreIcon) moreIcon.src = primaryNavIconSrc('more', state.compactMoreOpen);
   document.querySelectorAll('[data-app-nav]').forEach(button=>{
     button.classList.toggle('active', button.dataset.appNav === state.appNav);
     const image = button.querySelector('img');
     if(image) image.src = `${figmaIconPath}/${appNavIcons[button.dataset.appNav]}`;
   });
+  secondaryNav.classList.toggle('hidden', !isApplication);
   secondaryNav.classList.toggle('collapsed', state.secondaryCollapsed);
   const collapseButton = document.querySelector('#secondaryCollapseBtn');
   const collapseIcon = collapseButton.querySelector('img');
@@ -460,6 +477,32 @@ function yamlMarkup(pod){
 function openInstanceDetail(id,tab='detail'){ const pod=pods.find(item=>item[0]===id); if(!pod)return; if(state.activeInstanceId!==id){state.selectedContainer=0;state.activeInstanceId=id;} instanceModal.innerHTML=instanceMarkup(pod,tab); detailBackdrop.classList.remove('hidden'); }
 function closeInstanceDetail(){ detailBackdrop.classList.add('hidden'); instanceModal.innerHTML=''; }
 function closeMenu(){ menu.classList.add('hidden'); menu.innerHTML=''; }
+function closeCompactMore(){ state.compactMoreOpen=false; compactMorePopover.classList.add('hidden'); const trigger=document.querySelector('#primaryMoreBtn'); trigger.classList.remove('active'); trigger.querySelector('img').src=primaryNavIconSrc('more'); }
+function syncCompactNavigation(){
+  const replacement = document.querySelector('.primary-replaceable');
+  const replacementIcon = replacement.querySelector('img');
+  const replacementLabel = replacement.querySelector('span');
+  const selectedOverflow = compactMoreMedia.matches && compactOverflowItems[state.primaryNav];
+  const activeItem = selectedOverflow ? compactOverflowItems[state.primaryNav] : {label:'变更'};
+  const iconKey = selectedOverflow ? state.primaryNav : replacement.dataset.defaultNav;
+  replacement.dataset.primaryNav = iconKey;
+  replacement.setAttribute('aria-label', activeItem.label);
+  replacement.setAttribute('title', activeItem.label);
+  replacementIcon.src = primaryNavIconSrc(primaryNavIcons[iconKey] ? iconKey : 'changes');
+  replacementLabel.textContent = activeItem.label;
+  document.querySelectorAll('.compact-overflow-item').forEach(item=>item.classList.toggle('compact-hidden', compactMoreMedia.matches));
+  if(!compactMoreMedia.matches) closeCompactMore();
+}
+function openCompactMore(trigger){
+  closeMenu(); closeAccountPopover();
+  const rect = trigger.getBoundingClientRect();
+  compactMorePopover.style.top = `${Math.min(rect.top, window.innerHeight - 118)}px`;
+  compactMorePopover.style.left = `${rect.right + 8}px`;
+  state.compactMoreOpen=true;
+  compactMorePopover.classList.remove('hidden');
+  trigger.classList.add('active');
+  trigger.querySelector('img').src=primaryNavIconSrc('more',true);
+}
 function closeAccountPopover(){ accountPopover.classList.add('hidden'); }
 function renderAccountPopover(){
   const query = state.accountQuery.toLowerCase();
@@ -523,6 +566,21 @@ document.querySelectorAll('[data-account-action]').forEach(button => button.addE
   closeAccountPopover();
   toast(button.dataset.accountAction === 'create' ? '已打开新建账户' : button.dataset.accountAction === 'request' ? '已打开账户权限申请' : '已打开账户列表');
 }));
+document.querySelector('#primaryMoreBtn').addEventListener('click',event=>{
+  event.stopPropagation();
+  if(compactMoreMedia.matches){
+    compactMorePopover.classList.contains('hidden') ? openCompactMore(event.currentTarget) : closeCompactMore();
+    return;
+  }
+  openMenu(event.currentTarget,[{key:'more-resources',label:'资源',icon:'stack'},{key:'more-account',label:'账户',icon:'user'},{key:'more-customize',label:'导航设置',icon:'apps'}]);
+});
+document.querySelectorAll('[data-compact-more]').forEach(button=>button.addEventListener('click',()=>{
+  state.primaryNav=button.dataset.compactMore;
+  closeCompactMore();
+  renderAppNavigation();
+  toast(`已切换到${compactOverflowItems[state.primaryNav].label}`);
+}));
+compactMoreMedia.addEventListener('change',()=>renderAppNavigation());
 document.querySelector('#headerMoreBtn').addEventListener('click',event=>{
   event.stopPropagation();
   openMenu(event.currentTarget,[{key:'header-preferences',label:'偏好设置',icon:'apps'},{key:'header-help',label:'帮助文档',icon:'clipboard'}]);
@@ -624,6 +682,6 @@ instanceModal.addEventListener('click',event=>{
   if(action&&body){const id=body.dataset.instanceId;closeInstanceDetail();triggerAction(action.dataset.detailAction,[id]);}
 });
 document.querySelector('#closeHistoryBtn').addEventListener('click',()=>historyDrawer.classList.add('hidden'));
-document.addEventListener('click',event=>{if(!event.target.closest('#actionMenu'))closeMenu(); if(!event.target.closest('#accountPopover') && !event.target.closest('[data-context="account"]')) closeAccountPopover();});
-document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeMenu();closeAccountPopover();closeModal();closeInstanceDetail();historyDrawer.classList.add('hidden');}});
+document.addEventListener('click',event=>{if(!event.target.closest('#actionMenu'))closeMenu(); if(!event.target.closest('#accountPopover') && !event.target.closest('[data-context="account"]')) closeAccountPopover(); if(!event.target.closest('#compactMorePopover') && !event.target.closest('#primaryMoreBtn')) closeCompactMore();});
+document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeMenu();closeAccountPopover();closeCompactMore();closeModal();closeInstanceDetail();historyDrawer.classList.add('hidden');}});
 renderHistory(); render(); renderAppNavigation();
