@@ -166,6 +166,55 @@ function gpuCardMarkup(gpu){
   return `<span class="gpu-card ${gpu.variant}" title="${gpu.model} ${gpu.memory} x${gpu.count}"><img src="./assets/figma-workload-page-59-19541/${asset}" alt=""><span class="gpu-details"><b>${gpu.model}</b><b>${gpu.memory}</b></span><strong>x${gpu.count}</strong></span>`;
 }
 
+const compactTableAssetPath = './assets/figma-compact-table-4-39671';
+const compactCpuUsage = { 'pod-1':99, 'pod-2':85, 'pod-3':91, 'pod-4':91, 'pod-5':12, 'pod-6':12, 'pod-7':12, 'pod-8':0 };
+const compactMemoryUsage = { 'pod-1':92, 'pod-2':92, 'pod-3':94, 'pod-4':90, 'pod-5':24, 'pod-6':24, 'pod-7':24, 'pod-8':0 };
+const compactStatusLabels = { running:'运行中', blocked:'等待中', error:'已失败' };
+
+function compactSortIconMarkup(active=''){
+  const upper=active==='asc'?'image_7.png':'image_1.png';
+  const lower=active==='desc'?'image_6.png':'image_2.png';
+  return `<span class="compact-sort-icon" aria-hidden="true"><img src="${compactTableAssetPath}/${upper}" alt=""><img src="${compactTableAssetPath}/${lower}" alt=""></span>`;
+}
+
+function compactPortMarkup(port){
+  const match=port.match(/^([^:]+):(\d+)(.*)$/);
+  if(!match) return port;
+  return `<span class="compact-port-protocol">${match[1]}:</span><span>${match[2]}</span>${match[3]?`<span class="compact-port-extra">${match[3]}</span>`:''}`;
+}
+
+function compactExposureMarkup(id,exposure){
+  if(exposure==='-') return '-';
+  const asset=id==='pod-1'||id==='pod-2'?'image_3.png':exposure==='ALB'?'image_5.png':'image_4.png';
+  return `<span class="compact-exposure"><img src="${compactTableAssetPath}/${asset}" alt=""><span>${exposure}</span></span>`;
+}
+
+function compactUsageMarkup(type,percent){
+  const danger=percent>=80?' danger':'';
+  const asset=type==='cpu'?'image_8.png':'image_9.png';
+  return `<span class="compact-usage${danger}"><img src="${compactTableAssetPath}/${asset}" alt=""><span>${percent}%</span></span>`;
+}
+
+function compactRowMarkup(pod){
+  const [id,,status,ip,port,exposure,restarts,age,cpu,memory] = pod;
+  const cpuPercent=compactCpuUsage[id]??(parseInt(cpu,10)||0);
+  const memoryPercent=compactMemoryUsage[id]??Math.min(100,Math.round((parseFloat(memory)||0)/10.5*100));
+  const restartTone=restarts>=7?' danger':restarts>=4?' warning':'';
+  return `<tr><td><span class="compact-status ${status}">${compactStatusLabels[status]}</span></td><td class="compact-ip">${ip}</td><td class="compact-port">${compactPortMarkup(port)}</td><td>${compactExposureMarkup(id,exposure)}</td><td class="compact-restarts${restartTone}">${restarts}</td><td class="compact-age">${age}</td><td>${compactUsageMarkup('cpu',cpuPercent)}</td><td>${compactUsageMarkup('memory',memoryPercent)}</td></tr>`;
+}
+
+function compactTableMarkup(cluster,podsInCluster){
+  const collapsed=state.collapsedClusters.has(cluster);
+  const clusterName=clusterLabels[cluster];
+  const meta=clusterMeta[cluster];
+  const summary={running:0,error:0,blocked:0};
+  podsInCluster.forEach(([, ,status])=>summary[status]++);
+  return `<section class="cluster-group ${collapsed?'collapsed':''}" data-cluster="${cluster}">
+    <header class="group-header"><button class="cluster-toggle" data-cluster-toggle="${cluster}" aria-label="${collapsed?'展开':'收起'}">${icon(collapsed?'chevron-right':'chevron-down')}</button><div class="group-title"><strong>Payment-api</strong><span class="cluster-context"><b>${clusterName}</b>${meta.environment}</span><span class="rollout ${cluster}">${meta.channel}</span><span class="versions">${meta.version}&nbsp; ${meta.versions}</span></div><div class="group-summary"><span>运行中 <b class="green">${summary.running}</b></span><span>异常 <b class="red">${summary.error}</b></span><span>已屏蔽 <b class="amber">${summary.blocked}</b></span><i></i><span>共 ${podsInCluster.length} pod</span><button class="cluster-more" data-cluster-more="${cluster}" aria-label="${clusterName} 更多操作">${icon('more')}</button></div></header>
+    <div class="table-frame"><div class="table-scroll"><table class="pod-table compact-pod-table"><thead><tr><th><span class="column-title">状态</span>${compactSortIconMarkup()}</th><th><span class="column-title">Pod IP</span></th><th><span class="column-title">端口</span></th><th><span class="column-title">服务暴露</span></th><th><span class="column-title">重启</span>${compactSortIconMarkup('desc')}</th><th><span class="column-title">存活</span>${compactSortIconMarkup()}</th><th><span class="column-title">CPU</span>${compactSortIconMarkup('asc')}</th><th><span class="column-title">内存</span>${compactSortIconMarkup('asc')}</th></tr></thead><tbody>${podsInCluster.map(compactRowMarkup).join('')}</tbody></table></div></div>
+  </section>`;
+}
+
 function operationIconMarkup(type){
   const asset=name=>`${figmaIconPath}/${name}`;
   if(type==='detail') return `<span class="operation-glyph view-list-glyph" aria-hidden="true"><img class="view-list-frame" src="${asset('image_126.png')}" alt=""><span class="view-list-items">${Array.from({length:3},()=>`<span><img src="${asset('image_127.png')}" alt=""><img src="${asset('image_128.png')}" alt=""></span>`).join('')}</span></span>`;
@@ -221,7 +270,8 @@ function render(){
   state.page = Math.min(state.page,pageCount);
   const visible=visiblePods();
   const byCluster=Object.keys(clusterLabels).map(cluster=>[cluster,visible.filter(pod=>pod[10]===cluster)]).filter(([,items])=>items.length);
-  clusterGroups.innerHTML=byCluster.map(([cluster,items])=>tableMarkup(cluster,items)).join('');
+  const renderTable=state.viewMode==='compact'?compactTableMarkup:tableMarkup;
+  clusterGroups.innerHTML=byCluster.map(([cluster,items])=>renderTable(cluster,items)).join('');
   clusterGroups.classList.toggle('compact-mode',state.viewMode==='compact');
   document.querySelector('#allCount').textContent = String(pods.length).padStart(2,'0');
   document.querySelector('#runningCount').textContent = String(pods.filter(([, ,status])=>status==='running').length).padStart(2,'0');
@@ -540,7 +590,7 @@ document.querySelector('#searchInput').addEventListener('input',event=>{state.qu
 document.querySelector('#collapseAllBtn').addEventListener('click',()=>setAllWorkloadsCollapsed(true));
 document.querySelector('#expandAllBtn').addEventListener('click',()=>setAllWorkloadsCollapsed(false));
 document.querySelector('#refreshBtn').addEventListener('click',()=>{toast('Pod 列表已刷新');render();});
-document.querySelectorAll('.table-tools .view').forEach(button=>button.addEventListener('click',()=>{state.viewMode=button.dataset.viewMode;document.querySelectorAll('.table-tools .view').forEach(item=>{const selected=item===button;item.classList.toggle('active',selected);item.setAttribute('aria-pressed',String(selected));});clusterGroups.classList.toggle('compact-mode',state.viewMode==='compact');toast(state.viewMode==='compact'?'已切换为精简模式':'已切换为详细模式');}));
+document.querySelectorAll('.table-tools .view').forEach(button=>button.addEventListener('click',()=>{state.viewMode=button.dataset.viewMode;document.querySelectorAll('.table-tools .view').forEach(item=>{const selected=item===button;item.classList.toggle('active',selected);item.setAttribute('aria-pressed',String(selected));});render();toast(state.viewMode==='compact'?'已切换为精简模式':'已切换为详细模式');}));
 document.querySelector('#restartBtn').addEventListener('click',()=>triggerAction('restart'));
 document.querySelector('#horizontalScaleBtn').addEventListener('click',()=>triggerAction('horizontal'));
 document.querySelector('#verticalScaleBtn').addEventListener('click',()=>triggerAction('vertical'));
