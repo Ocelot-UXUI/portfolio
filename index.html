@@ -6,78 +6,88 @@
     <meta name="description" content="郭昱成 UX/UI 作品集" />
     <title>郭昱成 | UX/UI 作品集</title>
     <link rel="stylesheet" href="styles/styles.css" />
-    <style>
-      .edition-grid,.live-preview{display:none}.project-directory{padding:92px 6vw 112px;background:#0b0c14}.directory-heading{display:flex;justify-content:space-between;align-items:end;max-width:1400px;margin:0 auto 28px}.directory-heading p{margin:0;color:#bba8ff;font-size:12px;letter-spacing:1.3px}.directory-heading h2{font-size:clamp(34px,4vw,60px);margin:12px 0 0;line-height:1.08}.directory-heading span{font-size:13px;color:#9b98aa;max-width:310px;line-height:1.65}.project-list{max-width:1400px;margin:auto;display:grid;gap:18px}.project-card{display:grid;grid-template-columns:minmax(280px,1.2fr) minmax(340px,1fr);min-height:480px;background:linear-gradient(128deg,#161a35,#0f1020);border:1px solid rgba(255,255,255,.16);overflow:hidden}.project-card-visual{position:relative;overflow:hidden;background:#f7f3ff}.project-card-visual img{width:100%;height:100%;min-height:480px;object-fit:cover;object-position:center;display:block}.project-card-visual:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(9,10,17,.14),transparent 45%,rgba(11,12,20,.18))}.project-card-visual.placeholder{display:flex;flex-direction:column;justify-content:flex-end;padding:38px;background:linear-gradient(145deg,#1b2532,#122c2b 56%,#123f31);color:#e6fff4}.project-card-visual.placeholder:after{background:linear-gradient(145deg,rgba(148,240,190,.08),transparent 48%,rgba(8,9,16,.25))}.project-card-visual.placeholder p,.project-card-visual.placeholder strong{position:relative;z-index:1;margin:0}.project-card-visual.placeholder p{margin-bottom:12px;color:#a5e7c5;font-size:12px;letter-spacing:1.4px}.project-card-visual.placeholder strong{max-width:380px;font-size:clamp(34px,4vw,58px);line-height:1.05}.project-card-visual.placeholder span{position:relative;z-index:1;margin-top:20px;color:#b6c9c1;font-size:13px;line-height:1.6}.project-index{position:absolute;z-index:1;top:24px;left:25px;color:#fff;font-size:12px;letter-spacing:1.2px;padding:9px 12px;background:rgba(12,13,22,.75);backdrop-filter:blur(6px)}.project-info{padding:48px 46px;display:flex;flex-direction:column}.project-info>p{margin:0;color:#bba8ff;font-size:12px;letter-spacing:1.2px}.project-info h3{font-size:clamp(34px,4vw,58px);line-height:1.06;margin:20px 0 16px}.project-info>span{color:#bfbdcb;font-size:15px;line-height:1.75;max-width:480px}.project-links{margin-top:auto;display:grid;gap:10px;padding-top:46px}.project-link{display:flex;align-items:center;gap:15px;padding:15px 16px;border:1px solid rgba(255,255,255,.16);text-decoration:none;color:#fff;transition:background .2s,border-color .2s}.project-link:hover{background:rgba(159,121,255,.18);border-color:#b59bff}.project-link b{font-size:11px;color:#bda8ff;min-width:25px}.project-link strong{font-size:15px}.project-link small{margin-left:auto;color:#bcb8cb;font-size:12px}.directory-next{max-width:1400px;margin:18px auto 0;border:1px dashed rgba(255,255,255,.24);padding:25px 28px;color:#9895a6;font-size:14px;line-height:1.6}.directory-next b{color:#d0c2ff;margin-right:8px}@media(max-width:760px){.project-directory{padding:62px 5vw 78px}.directory-heading{display:block}.directory-heading span{display:block;margin-top:18px}.project-card{grid-template-columns:1fr}.project-card-visual img{min-height:250px}.project-card-visual.placeholder{min-height:250px;padding:26px}.project-info{padding:32px 25px;min-height:410px}.project-info h3{font-size:40px}.project-links{padding-top:34px}}
-    </style>
-    <style>
-      .figma-slide { margin: 0; border: 1px solid #cfc8e4; background: #fff; box-shadow: 0 18px 45px rgba(36, 24, 82, .12); }
-      .figma-slide img { display: block; width: 100%; height: auto; }
-      .figma-slide figcaption { padding: 12px 15px; color: #6d6680; font-size: 11px; letter-spacing: 1.1px; }
-    </style>
   </head>
-  <body>
-    <header><a href="#top">GUO YUCHENG <span>UX/UI DESIGN</span></a><p>PORTFOLIO / 2025-2026</p></header>
+  <body class="homepage">
+    <header class="home-nav">
+      <a class="home-logo" href="#top" aria-label="返回首页">PORTFOLIO</a>
+      <nav aria-label="首页导航">
+        <a href="#work">WORK</a>
+        <a href="#about">ABOUT</a>
+        <a href="#contact">CONTACT</a>
+      </nav>
+      <a class="home-contact" href="#contact">LET'S TALK</a>
+    </header>
+
     <main id="top">
-      <section class="profile-overview" aria-labelledby="profile-name">
-        <div class="profile-resume">
-          <div class="profile-topline">
-            <div>
-              <p class="profile-name" id="profile-name">郭昱成</p>
-              <p class="profile-role">UX UI设计师</p>
-            </div>
-            <address class="profile-contact"><span>邮箱: <a href="mailto:1004080451@qq.com">1004080451@qq.com</a></span><span>手机: <a href="tel:13343215048">13343215048</a></span></address>
-          </div>
-          <div class="profile-details">
-            <div class="profile-main">
-              <div class="profile-facts">
-                <article><h2>教育背景</h2><div><strong>西南交通大学</strong><span>产品设计/本科<br />2023.09-2027.06</span></div></article>
-                <article><h2>获奖经历</h2><ul><li>2025年第十届“两岸新锐设计竞赛·华灿奖”总赛一等奖</li><li>2025年米兰设计周全国赛区三等奖</li><li>2025年NCDA设计大赛四川赛区二等奖*2</li><li>CET-4</li></ul></article>
-              </div>
-              <article class="profile-experience"><h2>实习经历</h2><div><div class="experience-heading"><strong>商汤科技 主动式AI记忆助手</strong><b>UX实习生</b></div><time>2026.01-03</time><p>推动 AI 产品从 0 到 1 的全流程设计，解决主动式 AI 交付物“理解门槛高，用不上”问题，降低用户认知负担</p><ul><li>主动破局初期模糊需求，独立完成完整设计提案。</li><li>梳理项目逻辑，将三种拖拽模式合并为一套组件逻辑，降低开发成本。</li><li>与 PM 和研发多轮对齐，识别开发风险，借助 vibe coding 高保真交互原型，提高跨团队协作效率。</li><li>规划 MVP 落地与后续迭代路线，制定分阶段上线规划，方案获团队认可。</li></ul></div></article>
-            </div>
-            <aside class="profile-projects" aria-label="个人项目"><h2>个人项目</h2><div><article><div><strong>针对职场人的阅读学习APP</strong><b>UX UI设计师</b></div><time>2025.11-12</time><p>引入 AI 能力至阅读场景，帮助用户将碎片化输入转化为可复用的个人知识体系，提升用户的平均阅读效率</p></article><article><div><strong>小红书“本地生活”体验升级</strong><b>UX UI设计师</b></div><time>2025.09-11</time><p>打造小红书“种草-决策-消费”的闭环体验，让用户在小红书内完成灵感发现到下单转化，提升转化和GMV</p></article><article><div><strong>美团众包“多单场景”体验升级</strong><b>UX UI设计师</b></div><time>2025.07-09</time><p>优化多单场景下骑手体验，让骑手在户外骑行场景下高效完成取送流程，缩短平均配送时间</p></article></div></aside>
+      <section class="home-hero" aria-labelledby="home-title">
+        <div class="hero-copy">
+          <p class="home-eyebrow">UX / UI DESIGNER · 2026</p>
+          <h1 id="home-title">设计占位<br /><span>标题占位</span></h1>
+          <p class="hero-description">这里放置个人定位与设计理念的简短介绍。首版暂用占位文字，后续可替换为正式内容。</p>
+          <div class="hero-actions">
+            <a class="home-button primary" href="#work">查看作品 <span aria-hidden="true">↘</span></a>
+            <a class="home-button secondary" href="#about">了解更多</a>
           </div>
         </div>
-        <aside class="profile-strengths" aria-labelledby="strengths-title">
-          <div class="strengths-heading"><h2 id="strengths-title">做AI，懂用户，<br />能自驱</h2><span>个人优势</span></div>
-          <div class="strengths-grid"><article><h3>主动推动，<br />跨团队协作落地</h3><p>在商汤科技的AI记忆助手项目，面对模糊需求从0到1设计提案，主动思考、向上管理、推动共识</p></article><article><h3>AI 场景创新，<br />2 个 0-1 项目经验</h3><p>理解 AI 能力边界，将 AI 能力转化为用户价值</p></article><article><h3>具备商业敏感度，<br />打通转化链路</h3><p>打通小红书从“内容种草”到“交易转化”的完整链路</p></article><article><h3>深入一线，<br />挖掘隐性用户需求</h3><p>成为美团骑手，挖掘到“习以为常”背后的隐性痛点，解决真实问题</p></article></div>
-        </aside>
+        <a class="hero-visual" href="pages/case.html" aria-label="查看精选项目">
+          <img src="assets/remi/figma-source/page-01.webp" alt="精选项目预览" />
+          <span>FEATURED PROJECT · 01</span>
+        </a>
       </section>
-      <section class="project-directory" aria-labelledby="directory-title">
-        <div class="directory-heading"><div><p>SELECTED WORKS / DIRECTORY</p><h2 id="directory-title">项目目录</h2></div><span>每个项目在同一处提供完整案例、可交互原型和可编辑设计原稿。</span></div>
-        <div class="project-list">
-          <article class="project-card">
-            <div class="project-card-visual"><img src="assets/remi/figma-source/page-01.webp" alt="Remi AI 记忆助手项目封面" /><span class="project-index">01 / 2026</span></div>
-            <div class="project-info"><p>SENSETIME · INTERNSHIP PROJECT</p><h3>Remi<br />AI 记忆助手</h3><span>面向企业用户的主动式 AI 协作层：让知识被主动看见，让 AI 主动接上手。</span><nav class="project-links" aria-label="Remi 项目入口"><a class="project-link" href="pages/case.html"><b>01</b><strong>查看案例讲述</strong><small>CASE STUDY →</small></a><a class="project-link" href="pages/remi.html"><b>02</b><strong>体验可交互 Demo</strong><small>LIVE DEMO →</small></a><a class="project-link" href="https://www.figma.com/design/JQG6971AM2IZGSNpgCf5NU/Untitled?node-id=0-1&t=KZDN3UVIF38fw7n3-1" target="_blank" rel="noreferrer"><b>03</b><strong>打开 Figma 设计原稿</strong><small>FIGMA ↗</small></a></nav></div>
+
+      <section class="home-work" id="work" aria-labelledby="work-title">
+        <div class="home-section-heading">
+          <p>SELECTED WORK</p>
+          <h2 id="work-title">精选项目</h2>
+          <span>04 PROJECTS / 2025—2026</span>
+        </div>
+        <div class="home-project-grid">
+          <article class="home-project-card featured">
+            <a href="pages/case.html" aria-label="查看 Remi AI 记忆助手案例">
+              <figure><img src="assets/remi/figma-source/page-01.webp" alt="Remi AI 记忆助手项目封面" /><span>01</span></figure>
+              <div class="home-project-info"><div><p>AI PRODUCT · UX/UI</p><h3>Remi AI 记忆助手</h3></div><span aria-hidden="true">↗</span></div>
+            </a>
           </article>
-          <article class="project-card">
-            <div class="project-card-visual"><img src="assets/xiaohongshu-local/cover.png" alt="小红书本地生活体验升级项目封面" /><span class="project-index">02 / 2025</span></div>
-            <div class="project-info"><p>PERSONAL PROJECT · 2025.09-11</p><h3>小红书<br />本地生活体验升级</h3><span>围绕本地内容消费从搜索、探索到下单决策的断层，重构用户完成消费决策的完整链路。</span><nav class="project-links" aria-label="小红书本地生活项目入口"><a class="project-link" href="pages/xiaohongshu.html"><b>01</b><strong>查看案例讲述</strong><small>CASE STUDY →</small></a></nav></div>
+          <article class="home-project-card">
+            <a href="pages/xiaohongshu.html" aria-label="查看小红书本地生活项目">
+              <figure><img src="assets/xiaohongshu-local/cover.png" alt="小红书本地生活体验升级项目封面" /><span>02</span></figure>
+              <div class="home-project-info"><div><p>SERVICE DESIGN · UX/UI</p><h3>小红书本地生活</h3></div><span aria-hidden="true">↗</span></div>
+            </a>
           </article>
-          <article class="project-card">
-            <div class="project-card-visual"><img src="assets/skip-read/pages/page-01.jpg" alt="针对职场人的阅读学习 APP 项目封面" /><span class="project-index">03 / 2025</span></div>
-            <div class="project-info"><p>PERSONAL PROJECT · 2025.11-12</p><h3>针对职场人的<br />阅读学习 APP</h3><span>面向希望充分利用碎片时间的职场人，将碎片化输入转化为可复用的个人知识体系。</span><nav class="project-links" aria-label="针对职场人的阅读学习 APP 项目入口"><a class="project-link" href="pages/skip-read.html"><b>01</b><strong>查看案例讲述</strong><small>CASE STUDY →</small></a><a class="project-link" href="https://ocelot-uxui.github.io/skip-read/" target="_blank" rel="noreferrer"><b>02</b><strong>体验可交互产品</strong><small>LIVE PRODUCT ↗</small></a></nav></div>
+          <article class="home-project-card">
+            <a href="pages/skip-read.html" aria-label="查看职场阅读学习 APP 项目">
+              <figure><img src="assets/skip-read/pages/page-01.jpg" alt="职场阅读学习 APP 项目封面" /><span>03</span></figure>
+              <div class="home-project-info"><div><p>AI READING · UX/UI</p><h3>职场阅读学习 APP</h3></div><span aria-hidden="true">↗</span></div>
+            </a>
           </article>
-          <article class="project-card">
-            <div class="project-card-visual placeholder"><span class="project-index">04 / 2026</span><p>CNAP · CLOUD WORKLOAD</p><strong>云原生<br />工作负载管理</strong><span>交互 Demo 已上线，案例图与完整项目讲述待补充。</span></div>
-            <div class="project-info"><p>INTERACTION DEMO · 2026</p><h3>CNAP<br />工作负载</h3><span>面向云原生应用运维场景，围绕集群分组、实例详情、批量操作和风险确认设计工作负载管理体验。</span><nav class="project-links" aria-label="CNAP 工作负载项目入口"><a class="project-link" href="demos/workload-demo/index.html"><b>01</b><strong>体验可交互 Demo</strong><small>LIVE DEMO →</small></a></nav></div>
+          <article class="home-project-card">
+            <a href="demos/workload-demo/index.html" aria-label="体验 CNAP 工作负载 Demo">
+              <figure class="project-placeholder"><b>CNAP</b><small>INTERACTION DEMO</small><span>04</span></figure>
+              <div class="home-project-info"><div><p>CLOUD PRODUCT · INTERACTION</p><h3>云原生工作负载管理</h3></div><span aria-hidden="true">↗</span></div>
+            </a>
           </article>
         </div>
-        <div class="directory-next"><b>MORE WORKS COMING</b> 后续每个新作品会继续以同样结构加入：一张项目卡，提供可查看的项目材料，不会和已有项目混在一起。</div>
       </section>
-      <section class="figma-preview" aria-labelledby="figma-preview-title">
+
+      <section class="home-about" id="about" aria-labelledby="about-title">
         <div>
-          <p>DESIGN SOURCE / FIGMA</p>
-          <h2 id="figma-preview-title">设计原稿</h2>
-          <span>在首页直接查看 Remi AI 记忆助手的 Figma 设计原稿，也可以打开 Figma 查看完整文件。</span>
-          <p><a href="https://www.figma.com/design/JQG6971AM2IZGSNpgCf5NU/Untitled?node-id=0-1&t=KZDN3UVIF38fw7n3-1" target="_blank" rel="noreferrer">在 Figma 中打开 ↗</a></p>
+          <p class="home-eyebrow">ABOUT / PROFILE</p>
+          <h2 id="about-title">关于我的<br />标题占位</h2>
         </div>
-        <figure class="figma-slide">
-          <img src="assets/remi/figma-export/frame-01.png" alt="Remi AI 记忆助手 Figma 设计原稿，第 1 页" />
-          <figcaption>01 / Figma 画板</figcaption>
-        </figure>
+        <div class="about-content">
+          <p>这里放置个人经历、设计方法或能力优势的概括。当前为占位内容，用于确认版式、间距和信息层级。</p>
+          <p>后续可以继续补充教育背景、项目经历、获奖信息和正式的个人介绍。</p>
+          <div class="skill-groups">
+            <article><h3>DESIGN</h3><p>UX Design · UI Design · Prototyping · Research</p></article>
+            <article><h3>TOOLS</h3><p>Figma · HTML/CSS · AI Tools · Vibe Coding</p></article>
+          </div>
+        </div>
       </section>
     </main>
-    <footer>GUO YUCHENG · UX/UI DESIGN · 2026</footer>
+
+    <footer class="home-footer" id="contact">
+      <div><p>HAVE A PROJECT IN MIND?</p><h2>一起做点<br />有价值的事</h2></div>
+      <div class="footer-contact"><a href="mailto:1004080451@qq.com">1004080451@qq.com <span aria-hidden="true">↗</span></a><p>GUO YUCHENG · UX/UI DESIGN · 2026</p></div>
+    </footer>
   </body>
 </html>
