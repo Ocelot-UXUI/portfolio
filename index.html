@@ -34,26 +34,33 @@
           </a>
         </section>
 
-        <section class="projects" id="projects">
-          <div class="section-label"><span>Selected Work</span></div>
-          <div class="projects-grid">
-            <a class="project-card reveal" href="pages/case.html">
-              <div class="project-thumb"><img src="assets/remi/figma-source/page-01.webp" alt="Remi AI 记忆助手项目封面" /></div>
-              <div class="project-info"><h3>项目名称一</h3><p>项目简介占位文字，描述项目的核心亮点与设计方向。</p><div class="project-tags"><span class="tag">UI Design</span><span class="tag">Development</span></div></div>
-            </a>
-            <a class="project-card reveal" href="pages/xiaohongshu.html">
-              <div class="project-thumb"><img src="assets/xiaohongshu-local/cover.png" alt="小红书本地生活体验升级项目封面" /></div>
-              <div class="project-info"><h3>项目名称二</h3><p>项目简介占位文字，描述项目的核心亮点与设计方向。</p><div class="project-tags"><span class="tag">Branding</span><span class="tag">Visual Identity</span></div></div>
-            </a>
-            <a class="project-card reveal" href="pages/skip-read.html">
-              <div class="project-thumb"><img src="assets/skip-read/pages/page-01.jpg" alt="职场阅读学习 APP 项目封面" /></div>
-              <div class="project-info"><h3>项目名称三</h3><p>项目简介占位文字，描述项目的核心亮点与设计方向。</p><div class="project-tags"><span class="tag">Motion</span><span class="tag">3D</span></div></div>
-            </a>
-            <a class="project-card reveal" href="demos/workload-demo/index.html">
-              <div class="project-thumb project-thumb-placeholder"><span class="thumb-label">Project 04</span></div>
-              <div class="project-info"><h3>项目名称四</h3><p>项目简介占位文字，描述项目的核心亮点与设计方向。</p><div class="project-tags"><span class="tag">App Design</span><span class="tag">Prototype</span></div></div>
-            </a>
-          </div>
+        <section class="projects showcase-projects" id="projects" aria-labelledby="projects-title">
+          <div class="showcase-heading"><span>PROJECTS</span><h2 id="projects-title">项目</h2></div>
+          <a class="project-showcase project-showcase-remi" href="pages/case.html" data-project-hotspot>
+            <div class="showcase-copy">
+              <h3>商汤科技 主动 AI 记忆助手</h3>
+              <p>解决AI交付物“理解门槛高，用不上”问题</p>
+              <ul><li>B端</li><li>AI功能探索</li><li>0-1项目</li></ul>
+            </div>
+            <div class="showcase-media laptop-device"><div class="laptop-screen"><img src="assets/figma-projects/image_2.png" alt="Remi AI 记忆助手界面" /></div><span class="laptop-base"></span></div>
+          </a>
+          <a class="project-showcase project-showcase-reading" href="pages/skip-read.html" data-project-hotspot>
+            <div class="showcase-copy">
+              <h3>碎片时间下的快速阅读APP</h3>
+              <p>提升用户的平均阅读时间与留存</p>
+              <ul><li>C端</li><li>AI功能探索</li><li>竞品分析</li><li>0-1项目</li></ul>
+            </div>
+            <div class="showcase-media"><img src="assets/figma-projects/image_4.png" alt="快速阅读 APP 手机界面" /></div>
+          </a>
+          <a class="project-showcase project-showcase-xhs" href="pages/xiaohongshu.html" data-project-hotspot>
+            <div class="showcase-copy">
+              <h3>小红书 本地生活体验升级</h3>
+              <p>提升用户从种草到下单核销的转化效率</p>
+              <ul><li>C端</li><li>交互流程优化</li><li>构建消费链路</li><li>页面重构</li></ul>
+            </div>
+            <div class="showcase-media"><img src="assets/figma-projects/image_5.png" alt="小红书本地生活双手机界面" /></div>
+          </a>
+          <div class="project-hover-cursor" aria-hidden="true"><span>查看</span><img src="assets/figma-projects/image_6.png" alt="" /></div>
         </section>
 
         <section class="about" id="about">
@@ -89,6 +96,23 @@
         });
       }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
       document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+
+      const projectCursor = document.querySelector(".project-hover-cursor");
+      const projectHotspots = document.querySelectorAll("[data-project-hotspot]");
+      if (projectCursor && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+        projectHotspots.forEach((hotspot) => {
+          hotspot.addEventListener("pointerenter", (event) => {
+            projectCursor.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0)`;
+            projectCursor.classList.add("visible");
+          });
+          hotspot.addEventListener("pointermove", (event) => {
+            projectCursor.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0)`;
+          });
+          hotspot.addEventListener("pointerleave", () => projectCursor.classList.remove("visible"));
+          hotspot.addEventListener("pointerdown", () => projectCursor.classList.add("pressed"));
+          hotspot.addEventListener("pointerup", () => projectCursor.classList.remove("pressed"));
+        });
+      }
     </script>
   </body>
 </html>
