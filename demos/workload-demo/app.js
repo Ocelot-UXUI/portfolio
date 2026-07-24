@@ -58,6 +58,7 @@ const historyDrawer = document.querySelector('#historyDrawer');
 const historyList = document.querySelector('#historyList');
 const bulkBar = document.querySelector('#bulkBar');
 const figmaIconPath = './assets/figma-icon-library-56-38920';
+const operationIconPath = './assets/figma-operation-column-4-45229';
 const workloadIconPath = './assets/figma-workload-global-tip-4-40581';
 const figmaIconAssets = {
   'chevron-right':'image_3.png',
@@ -247,8 +248,7 @@ function rowActionsMarkup(id){
     `<button type="button" data-instance-terminal="${id}" aria-label="打开终端" title="打开终端">${operationIconMarkup('terminal')}</button>`,
     `<button type="button" data-action="rebuild" data-pod="${id}" aria-label="删除/重建" title="删除/重建">${operationIconMarkup('rebuild')}</button>`,
     `<button type="button" data-action="block" data-pod="${id}" aria-label="屏蔽" title="屏蔽">${operationIconMarkup('block')}</button>`,
-    `<button type="button" data-row-history="${id}" aria-label="查看实例变更记录" title="查看实例变更记录">${operationIconMarkup('history')}</button>`,
-    `<button type="button" data-action="restart" data-pod="${id}" aria-label="重启实例" title="重启实例">${operationIconMarkup('restart')}</button>`
+    `<button type="button" data-row-more="${id}" aria-label="更多操作" title="更多操作">${operationIconMarkup('more')}</button>`
   ].join('');
 }
 
@@ -275,14 +275,12 @@ function compactTableMarkup(cluster,podsInCluster){
 }
 
 function operationIconMarkup(type){
-  const asset=name=>`${figmaIconPath}/${name}`;
-  if(type==='detail') return `<span class="operation-glyph view-list-glyph" aria-hidden="true"><img class="view-list-frame" src="${asset('image_126.png')}" alt=""><span class="view-list-items">${Array.from({length:3},()=>`<span><img src="${asset('image_127.png')}" alt=""><img src="${asset('image_128.png')}" alt=""></span>`).join('')}</span></span>`;
-  if(type==='terminal') return `<img class="operation-glyph" src="${asset('image_129.png')}" alt="">`;
-  if(type==='rebuild') return `<span class="operation-glyph hammer-glyph" aria-hidden="true"><img src="${asset('image_130.png')}" alt=""><img src="${asset('image_131.png')}" alt=""></span>`;
-  if(type==='block') return `<img class="operation-glyph" src="${asset('image_132.png')}" alt="">`;
-  if(type==='history') return icon('clipboard');
-  if(type==='restart') return icon('power');
-  return `<span class="operation-glyph more-glyph" aria-hidden="true">${Array.from({length:3},()=>`<img src="${asset('image_93.png')}" alt="">`).join('')}</span>`;
+  const asset=name=>`${operationIconPath}/${name}`;
+  if(type==='detail') return `<span class="operation-glyph view-list-glyph" aria-hidden="true"><img class="view-list-frame" src="${asset('image_1.png')}" alt=""><span class="view-list-items">${Array.from({length:3},()=>`<span><img src="${asset('image_2.png')}" alt=""><img src="${asset('image_3.png')}" alt=""></span>`).join('')}</span></span>`;
+  if(type==='terminal') return `<img class="operation-glyph" src="${asset('image_4.png')}" alt="">`;
+  if(type==='rebuild') return `<span class="operation-glyph hammer-glyph" aria-hidden="true"><img src="${asset('image_5.png')}" alt=""><img src="${asset('image_6.png')}" alt=""></span>`;
+  if(type==='block') return `<img class="operation-glyph" src="${asset('image_7.png')}" alt="">`;
+  return `<span class="operation-glyph more-glyph" aria-hidden="true">${Array.from({length:3},()=>`<img src="${asset('image_8.png')}" alt="">`).join('')}</span>`;
 }
 
 function rowMarkup(pod){
@@ -740,14 +738,14 @@ clusterGroups.addEventListener('click',event=>{
   if(terminal){ openInstanceDetail(terminal.dataset.instanceTerminal,'terminal'); return; }
   const detail=event.target.closest('[data-instance-detail]');
   if(detail){ openInstanceDetail(detail.dataset.instanceDetail); return; }
-  const historyButton=event.target.closest('[data-row-history]');
-  if(historyButton){ openHistory(); return; }
   const toggle=event.target.closest('[data-cluster-toggle]');
   if(toggle){ setWorkloadCollapsed(toggle.dataset.clusterToggle,!state.collapsedClusters.has(toggle.dataset.clusterToggle)); return; }
   const clusterMore=event.target.closest('[data-cluster-more]');
   if(clusterMore){ event.stopPropagation(); const cluster=clusterMore.dataset.clusterMore; const collapsed=state.collapsedClusters.has(cluster); openMenu(clusterMore,[{key:collapsed?'expand-cluster':'collapse-cluster',label:collapsed?'展开集群':'收起集群',icon:collapsed?'chevron-down':'chevron-up'},{key:'history',label:'查看集群变更记录',icon:'clipboard'}]); menu.dataset.cluster=cluster; return; }
   const button=event.target.closest('[data-action]');
   if(button){ triggerAction(button.dataset.action,[button.dataset.pod]); return; }
+  const more=event.target.closest('[data-row-more]');
+  if(more){ event.stopPropagation(); openMenu(more,[{key:'detail',label:'查看实例详情',icon:'clipboard'},{key:'history',label:'查看实例变更记录',icon:'clipboard'},{key:'restart-row',label:'重启实例',icon:'power'}]); menu.dataset.pod=more.dataset.rowMore; }
 });
 document.querySelectorAll('[data-bulk-action]').forEach(button=>button.addEventListener('click',()=>triggerAction(button.dataset.bulkAction,[...state.selected])));
 document.querySelector('#clearSelectionBtn').addEventListener('click',()=>{state.selected.clear();render();});
