@@ -560,14 +560,19 @@
   position:relative;
   z-index:2;
   width:100%;
-  box-shadow:0 1px 0 rgba(24,24,24,.04)
+  box-shadow:none
+}
+.workload-sticky-spacer{
+  width:100%;
+  height:20px;
+  background:#f5f7fa
 }
 .workload-sticky-stack .sticky-table-frame{
   width:100%;
   height:48px;
   overflow:hidden;
   background:#fff;
-  box-shadow:0 5px 12px rgba(24,24,24,.08)
+  box-shadow:none
 }
 .workload-sticky-stack .sticky-table-scroll{
   width:100%;
@@ -581,10 +586,10 @@
 .workload-sticky-stack .pod-table thead th{top:0!important}
 .workload-sticky-stack .cluster-select{cursor:pointer}
 
-/* Figma 44:9530: preserve the complete 77px page-level workload header while scrolling. */
+/* Figma 300:37259: title, actions and active group read as one 134px sticky surface. */
 .title-row{
   position:sticky;
-  top:0;
+  top:-4px;
   z-index:17;
   isolation:isolate;
   margin-bottom:12px
@@ -592,20 +597,20 @@
 .title-row::before{
   position:absolute;
   z-index:0;
-  top:-24px;
+  top:-20px;
   right:-32px;
   left:-32px;
-  height:77px;
+  height:134px;
   background:#f5f7fa;
   content:"";
   pointer-events:none
 }
 .title-row>*{position:relative;z-index:1}
-.title-context i{height:14px;margin:0 16px}
+.title-context i{height:20px;margin:0 24px}
 .title-filter{
   position:relative;
   display:inline-flex;
-  width:114px;
+  width:108px;
   height:22px;
   align-items:center;
   color:#74777e;
@@ -614,10 +619,10 @@
 }
 .title-filter span{flex:none}
 .title-filter select{
-  width:86px;
+  width:108px;
   height:22px;
   min-width:0;
-  padding:0 18px 0 8px;
+  padding:0 24px 0 0;
   border:0;
   outline:0;
   appearance:none;
@@ -636,10 +641,10 @@
   stroke-width:1.7;
   pointer-events:none
 }
-.title-workload-filter{width:170px;margin-left:20px}
-.title-workload-filter select{width:134px}
+.title-workload-filter{width:108px;margin-left:0}
+.title-workload-filter select{width:108px}
 .title-context h1{line-height:36px}
 .title-actions{width:376px;gap:8px}
 .title-actions>button:not(.icon-only){width:112px;padding:0 16px;justify-content:center}
 .title-actions .icon-only{width:16px;padding:0}
-@media(max-width:1100px){.title-row::before{top:-20px;right:-20px;left:-20px}.title-context>i,.title-filter{display:none}}
+@media(max-width:1100px){.title-row{top:0}.title-row::before{top:-20px;right:-20px;left:-20px}.title-context>i,.title-filter{display:none}}
