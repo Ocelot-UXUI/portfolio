@@ -111,6 +111,7 @@
     </main>
   </div>
 
+  <div class="workload-sticky-stack cluster-groups hidden" id="workloadStickyStack" aria-label="当前工作负载分组"></div>
   <div class="bulk-bar hidden" id="bulkBar"><span>已选择 <b id="selectedCount">0</b> 个实例</span><div><button data-bulk-action="restart"><svg><use href="#i-power"/></svg>重启</button><button data-bulk-action="rebuild"><svg><use href="#i-refresh"/></svg>删除/重建</button><button data-bulk-action="block"><svg><use href="#i-apps"/></svg>屏蔽</button><button data-bulk-action="route"><svg><use href="#i-unfold"/></svg>接流</button><button data-bulk-action="grant"><svg><use href="#i-user"/></svg>临时授权</button><i></i><button class="danger" data-bulk-action="delete"><svg><use href="#i-apps"/></svg>删除并缩容</button><i></i><button id="clearSelectionBtn" aria-label="关闭">×</button></div></div>
   <div class="action-menu hidden" id="actionMenu" role="menu"></div>
   <section class="compact-more-popover hidden" id="compactMorePopover" aria-label="更多功能">
