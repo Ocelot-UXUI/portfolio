@@ -414,6 +414,11 @@ function setPixelStyle(element,property,value){
   if(element.style[property]!==nextValue) element.style[property]=nextValue;
 }
 
+function setPixelVariable(element,property,value){
+  const nextValue=`${value}px`;
+  if(element.style.getPropertyValue(property)!==nextValue) element.style.setProperty(property,nextValue);
+}
+
 function buildWorkloadStickyStack(group,signature){
   const inner=document.createElement('div');
   inner.className='workload-sticky-stack-inner cluster-group';
@@ -473,7 +478,8 @@ function syncWorkloadStickyStack(){
   const groups=Array.from(clusterGroups.querySelectorAll('.cluster-group'));
   const metrics=groups.map(group=>({
     groupRect:group.getBoundingClientRect(),
-    headerRect:group.querySelector('.group-header').getBoundingClientRect()
+    headerRect:group.querySelector('.group-header').getBoundingClientRect(),
+    tableFrameRect:group.querySelector('.table-frame')?.getBoundingClientRect()
   }));
   let activeIndex=-1;
   metrics.forEach(({groupRect,headerRect},index)=>{
@@ -491,6 +497,8 @@ function syncWorkloadStickyStack(){
   if(workloadStickyStack.dataset.signature!==signature) buildWorkloadStickyStack(group,signature);
 
   const groupRect=metrics[activeIndex].groupRect;
+  const tableFrameRect=metrics[activeIndex].tableFrameRect??groupRect;
+  const titleRect=document.querySelector('.title-row').getBoundingClientRect();
   const boundary=metrics[activeIndex+1]?.headerRect.top??groupRect.bottom;
   const contentHeight=collapsed?52:100;
   const stackHeight=collapsed?118:166;
@@ -502,6 +510,12 @@ function syncWorkloadStickyStack(){
   setPixelStyle(workloadStickyStack,'left',workspaceRect.left);
   setPixelStyle(workloadStickyStack,'width',workspaceRect.width);
   setPixelStyle(workloadStickyStack,'height',stackHeight);
+  setPixelVariable(workloadStickyStack,'--sticky-title-left',titleRect.left-workspaceRect.left);
+  setPixelVariable(workloadStickyStack,'--sticky-title-right',workspaceRect.right-titleRect.right);
+  setPixelVariable(workloadStickyStack,'--sticky-header-left',groupRect.left-workspaceRect.left);
+  setPixelVariable(workloadStickyStack,'--sticky-header-right',workspaceRect.right-groupRect.right);
+  setPixelVariable(workloadStickyStack,'--sticky-table-left',tableFrameRect.left-workspaceRect.left);
+  setPixelVariable(workloadStickyStack,'--sticky-table-right',workspaceRect.right-tableFrameRect.right);
   const stickyContent=workloadStickyStack.querySelector('.sticky-workload-content');
   const nextTransform=`translateY(${innerOffset}px)`;
   if(stickyContent.style.transform!==nextTransform) stickyContent.style.transform=nextTransform;
