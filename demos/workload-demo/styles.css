@@ -74,7 +74,7 @@
 .pod-table th:last-child::before,.pod-table td:last-child::before{position:absolute;z-index:1;top:0;bottom:0;left:-24px;width:24px;background:linear-gradient(270deg,rgba(0,0,0,.03),rgba(0,0,0,0));content:'';pointer-events:none}
 .pod-table th:last-child>*,.pod-table td:last-child>*{position:relative;z-index:2}
 /* Figma 4:40581: one workload header, edge-only operation freeze, and square pagination. */
-.cluster-groups{gap:16px}.cluster-groups>.workload-group{overflow:visible;border:0;border-radius:0;background:transparent}.group-header{height:48px;display:flex;align-items:center;gap:12px;padding:0 12px;border:0!important;border-radius:12px;background:#f5f7fa!important;color:#181818;font-size:14px}.group-header .cluster-toggle{width:16px;height:22px;color:#545454}.group-header .cluster-toggle .figma-icon{width:16px!important;height:16px!important}.group-title{display:flex;align-items:center;min-width:0;gap:12px}.group-title strong{font-size:14px;font-weight:500}.group-title .rollout{height:18px;padding:0 8px;border-radius:12px;background:#e8e8e8;color:#545454;font-size:12px;line-height:18px}.group-title .versions{padding-left:12px;border-left:1px solid #d9d9d9;color:#8f8f8f;font-size:14px}.group-summary{display:flex;align-items:center;gap:16px;margin-left:auto;color:#545454;font-size:14px}.group-summary span{display:flex;align-items:center;gap:5px;white-space:nowrap}.group-summary b{display:grid;place-items:center;width:22px;height:22px;border-radius:8px;font-size:12px;font-weight:500}.group-summary .green{background:#e5fff5;color:#00cc6d}.group-summary .red{background:#fdecee;color:#e62c4b}.group-summary .amber{background:#fff3e0;color:#f58300}.group-summary i{width:1px;height:12px;background:#d9d9d9}.group-header .cluster-more{width:16px;height:22px;margin-left:8px}.workload-group.collapsed .table-scroll{display:none}.workload-group .table-scroll{margin-top:0;overflow:auto;border-radius:0 0 8px 8px}.pod-table th:last-child,.pod-table td:last-child{box-shadow:none}.pod-table th:last-child::before,.pod-table td:last-child::before{position:absolute;z-index:-1;top:0;bottom:0;left:-24px;width:24px;background:linear-gradient(90deg,rgba(0,0,0,0),rgba(0,0,0,.03));content:'';pointer-events:none}.pagination{height:40px;gap:8px;padding:16px 0 0}.page-btn{display:grid;place-items:center;min-width:24px;width:24px;height:24px;padding:0;border:1px solid #e8e8e8!important;border-radius:8px!important;background:#fff!important;color:#545454;font-size:12px;line-height:18px}.page-btn.current{border-color:#181818!important;color:#181818;font-weight:500}.page-btn:disabled{border-color:transparent!important;background:transparent!important;opacity:.45}.page-btn .figma-icon{width:16px!important;height:16px!important}.pagination-divider{width:1px;height:24px;margin:0 8px;background:#e8e8e8}.page-size{width:95px;height:24px!important;margin:0!important;padding:0 8px 0 12px!important;border:1px solid #e8e8e8!important;border-radius:8px!important;background:#fff;color:#545454;font-size:12px}
+.cluster-groups{gap:16px}.cluster-groups>.workload-group{overflow:visible;border:0;border-radius:0;background:transparent}.group-header{height:48px;display:flex;align-items:center;gap:12px;padding:0 12px;border:0!important;border-radius:12px;background:#f5f7fa!important;color:#181818;font-size:14px}.group-header .cluster-toggle{width:16px;height:22px;color:#545454}.group-header .cluster-toggle .figma-icon{width:16px!important;height:16px!important}.group-title{display:flex;align-items:center;min-width:0;gap:12px}.group-title strong{font-size:14px;font-weight:500}.group-title .rollout{height:18px;padding:0 8px;border-radius:12px;background:#e8e8e8;color:#545454;font-size:12px;line-height:18px}.group-title .versions{padding-left:12px;border-left:1px solid #d9d9d9;color:#8f8f8f;font-size:14px}.group-summary{display:flex;align-items:center;gap:16px;margin-left:auto;color:#545454;font-size:14px}.group-summary span{display:flex;align-items:center;gap:5px;white-space:nowrap}.group-summary b{display:grid;place-items:center;width:22px;height:22px;border-radius:8px;font-size:12px;font-weight:500}.group-summary .green{background:#e5fff5;color:#00cc6d}.group-summary .red{background:#fdecee;color:#e62c4b}.group-summary .amber{background:#fff3e0;color:#f58300}.group-summary i{width:1px;height:12px;background:#d9d9d9}.group-header .cluster-more{width:16px;height:22px;margin-left:8px}.workload-group.collapsed .table-scroll{display:none}.workload-group .table-scroll{margin-top:0;overflow:auto;border-radius:0 0 8px 8px}.pod-table th:last-child,.pod-table td:last-child{box-shadow:none}.pod-table th:last-child::before,.pod-table td:last-child::before{position:absolute;z-index:-1;top:0;bottom:0;left:-24px;width:24px;background:linear-gradient(90deg,rgba(0,0,0,0),rgba(0,0,0,.03));content:'';pointer-events:none}.pagination{height:40px;gap:8px;padding:16px 0 0}.page-btn{display:grid;place-items:center;min-width:24px;width:24px;height:24px;padding:0;border:1px solid #e8e8e8!important;border-radius:8px!important;background:#fff!important;color:#545454;font-size:12px;line-height:18px}.page-btn.current{border-color:#181818!important;color:#181818;font-weight:500}.page-btn:disabled{border-color:transparent!important;background:transparent!important;opacity:.45}.page-btn .figma-icon{width:16px!important;height:16px!important}.page-ellipsis{display:grid;place-items:center;width:24px;height:24px;color:#8f8f8f;font-size:12px;line-height:18px}.pagination-divider{width:1px;height:24px;margin:0 8px;background:#e8e8e8}.page-size{width:95px;height:24px!important;margin:0!important;padding:0 8px 0 12px!important;border:1px solid #e8e8e8!important;border-radius:8px!important;background:#fff;color:#545454;font-size:12px}
 /* Final frozen edge follows the 24px Figma gradient, not a column divider. */
 .cluster-groups>.cluster-group{overflow:visible!important;border:0!important;border-radius:0!important;background:transparent!important}
 .cluster-group .group-header{height:48px!important}
@@ -486,41 +486,49 @@
 .overview-art{display:none!important}
 
 /* Figma 241:37898 breadcrumb environment and cluster dropdown popovers. */
-.env-popover,.cluster-popover{position:fixed;z-index:40;width:480px;border-radius:8px;background:#fff;box-shadow:0 8px 22px rgba(24,32,43,.12);padding:8px 8px 4px;overflow:hidden}
+.env-popover,.cluster-popover{position:fixed;z-index:40;width:480px;border-radius:8px;background:#fff;box-shadow:0 8px 22px rgba(24,32,43,.12);padding:8px 8px 4px;overflow:hidden;font-family:"PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;font-size:14px;line-height:22px;letter-spacing:0}
+.env-popover{height:290px}
+.cluster-popover{height:378px}
 .env-search,.cluster-search{display:flex;align-items:center;width:464px;height:32px;margin:0 auto 2px;padding:0 12px;border:1px solid #e5e7eb;border-radius:8px;background:#fff;color:#8f8f8f}
-.env-search input,.cluster-search input{width:100%;border:0;outline:0;color:#181818;font:14px/22px inherit}
+.env-search>.figma-icon{width:16px!important;height:16px!important;margin-right:8px;object-fit:contain;flex:none}
+.env-search input,.cluster-search input{width:100%;min-width:0;border:0;outline:0;color:#181818;background:transparent;font:400 14px/22px "PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;letter-spacing:0}
 .env-search input::placeholder,.cluster-search input::placeholder{color:#bfbfbf}
-.cluster-search-row{display:flex;align-items:center;gap:8px;margin:0 auto 2px}
+.cluster-search-row{display:flex;align-items:center;gap:8px;width:464px;margin:0 auto 2px}
 .cluster-search-row .cluster-search{flex:1;width:auto;margin:0}
-.cluster-filter-btn{display:grid;place-items:center;width:32px;height:32px;border:1px solid #d9d9d9;border-radius:24px;background:#fff;color:#545454;cursor:pointer;flex:none}
-.cluster-filter-btn:hover{background:#f2f4f6}
+.cluster-search-icon{position:relative;width:16px;height:16px;margin-right:8px;flex:none}
+.cluster-search-icon img{position:absolute;inset:0;width:16px;height:16px;object-fit:contain}
+.cluster-filter-btn{display:grid;place-items:center;width:32px;height:32px;padding:0;border:1px solid #d9d9d9;border-radius:24px;background:#fff;color:#545454;cursor:pointer;flex:none}
+.cluster-filter-btn>.figma-icon{width:16px!important;height:16px!important;object-fit:contain}
 .env-popover-body,.cluster-popover-body{padding:0}
-.env-tabs,.cluster-list-header{display:flex;align-items:stretch;height:36px;padding:0 4px;margin-bottom:2px}
-.env-tabs button{position:relative;height:36px;padding:0;border:0;background:transparent;color:#545454;font:12px/20px inherit;white-space:nowrap;margin-right:32px}
+.env-tabs{display:flex;align-items:stretch;height:36px;padding:0 4px;margin-bottom:2px}
+.env-tabs button{position:relative;height:36px;padding:0;border:0;background:transparent;color:#545454;font:400 12px/20px "PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;letter-spacing:0;white-space:nowrap;margin-right:32px}
 .env-tabs button:last-child{margin-right:0}
 .env-tabs button.active{color:#181818;font-weight:500}
 .env-tabs button.active::after{position:absolute;left:4px;right:4px;bottom:0;height:2px;border-radius:4px;background:#181818;content:""}
 .env-list,.cluster-list{display:flex;flex-direction:column;gap:2px;padding:0}
-.env-row{display:flex;align-items:center;width:100%;height:38px;padding:0 8px;border:0;border-radius:8px;background:#fff;color:#181818;text-align:left;cursor:pointer}
-.env-row:hover{background:#f7f7f7}
+.env-row{display:flex;align-items:center;width:100%;height:38px;padding:0 8px;border:0;border-radius:8px;background:#fff;color:#181818;text-align:left;cursor:pointer;font:400 14px/22px "PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;letter-spacing:0}
 .env-row.selected{background:rgba(167,243,207,.2)}
-.env-row img{width:16px;height:16px;margin-right:8px;object-fit:contain}
+.env-row>img{width:16px;height:16px;margin-right:8px;object-fit:contain;flex:none}
 .env-name{font-size:14px;line-height:22px;margin-right:4px}
 .env-type-tag{height:20px;padding:0 8px;border-radius:4px;background:#f2f2f2;color:#595959;font-size:12px;line-height:20px}
-.env-empty,.cluster-empty{margin:0;padding:18px;color:#8f8f8f;text-align:center;font-size:14px}
-.cluster-list-header{justify-content:space-between;height:38px;padding:0 8px;color:#8f8f8f;font-size:14px;font-weight:500}
-.cluster-list-header span:first-child{display:flex;align-items:center;gap:2px}
-.cluster-list-header span:first-child img{width:6px;height:4px}
-.cluster-list-header span:last-child{text-align:right}
-.cluster-row{display:flex;align-items:center;justify-content:space-between;width:100%;height:48px;padding:0 8px;border:0;border-radius:8px;background:#fff;color:#181818;text-align:left;cursor:pointer}
-.cluster-row:hover{background:#f7f7f7}
+.env-empty,.cluster-empty{margin:0;padding:18px;color:#8f8f8f;text-align:center;font-size:14px;line-height:22px}
+.cluster-list-header,.cluster-row{display:grid;grid-template-columns:200px 36px 101px;column-gap:55px;align-items:center;width:100%;padding-right:8px;padding-left:8px}
+.cluster-list-header{height:38px;margin-bottom:2px;color:#8f8f8f;font-size:14px;line-height:22px;font-weight:500}
+.cluster-list-header>span:first-child{display:flex;align-items:center;gap:2px}
+.cluster-list-header>span:first-child img{width:6px;height:4px}
+.cluster-list-header>span:last-child{text-align:right}
+.cluster-row{height:48px;border:0;border-radius:8px;background:#fff;color:#181818;text-align:left;cursor:pointer;font:400 14px/22px "PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;letter-spacing:0}
 .cluster-row.selected{background:rgba(167,243,207,.2)}
+.cluster-identity{display:flex;align-items:center;min-width:0}
 .cluster-avatar{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:#caf8e2;margin-right:8px;flex:none}
 .cluster-avatar img{width:20px;height:20px;object-fit:contain}
-.cluster-name{flex:1;font-size:14px;line-height:22px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.cluster-type-tag{height:20px;padding:0 8px;border-radius:12px;background:#f0f1f5;color:#515970;font-size:12px;line-height:20px;margin:0 8px;flex:none}
-.cluster-count{width:101px;text-align:right;font-size:14px;line-height:22px;white-space:nowrap;flex:none}
-.env-popover-footer,.cluster-popover-footer{display:flex;align-items:center;height:40px;padding:0}
-.env-popover-footer button,.cluster-popover-footer button{display:inline-flex;align-items:center;gap:8px;height:32px;padding:0;border:0;border-radius:24px;background:transparent;color:#181818;font:14px inherit;cursor:pointer}
-.env-popover-footer button:hover,.cluster-popover-footer button:hover{background:#f2f4f6}
+.cluster-name{min-width:0;font-size:14px;line-height:22px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cluster-type-tag{display:inline-flex;align-items:center;justify-content:center;width:36px;height:20px;padding:0;border-radius:12px;background:#f0f1f5;color:#515970;font-size:12px;line-height:20px}
+.cluster-count{width:101px;text-align:right;font-size:14px;line-height:22px;white-space:nowrap}
+.env-popover-footer,.cluster-popover-footer{display:flex;align-items:center;justify-content:center;height:40px;padding:0}
+.env-popover-footer button,.cluster-popover-footer button{display:inline-flex;align-items:center;gap:8px;height:32px;padding:0 12px;border:0;border-radius:24px;background:transparent;color:#181818;font:400 14px/22px "PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;letter-spacing:0;cursor:pointer}
+.env-add-icon{width:16px;height:16px;object-fit:contain}
+.cluster-add-icon{position:relative;width:16px;height:16px;flex:none}
+.cluster-add-icon img{position:absolute;inset:0;width:16px;height:16px;object-fit:contain}
+@media (hover:hover){.cluster-filter-btn:hover,.env-row:hover,.cluster-row:hover,.env-popover-footer button:hover,.cluster-popover-footer button:hover{background:#f2f4f6}}
 .env-popover.hidden,.cluster-popover.hidden{display:none!important}

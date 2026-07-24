@@ -1,16 +1,44 @@
-const pods = [
-  ['pod-1','…nference-5f6b9-1234d','running','192.168.10.18','grpc:8500','ENS','7','3d','99%','9.7Gi','imeonline',{model:'A100',memory:'80G',count:8,variant:'a100'}],
-  ['pod-2','…nference-5f6b9-p9wd','running','192.168.10.18','grpc:8500','ENS','5','7d','85%','9.1Gi','imeonline',{model:'A100',memory:'80G',count:8,variant:'a100'}],
-  ['pod-3','…nference-5f6b9-p1234','running','192.168.10.18','grpc:8500 +1','ENS','5','8d','91%','9.6Gi','edge-prod',{model:'A100',memory:'80G',count:8,variant:'a100'}],
-  ['pod-4','…nference-51234-p9wqa','blocked','192.168.10.18','grpc:8500 +1','ENS','4','8d','91%','9.4Gi','edge-prod',{model:'A100',memory:'80G',count:8,variant:'a100'}],
-  ['pod-5','…nference-12349-p9wqd','blocked','192.168.10.18','grpc:8500 +1','ENS','2','8d','12%','2.3Gi','imeonline',{model:'P800',memory:'192G',count:4,variant:'p800'}],
-  ['pod-6','…nference-12349-p9wqd','running','192.168.10.18','grpc:8500 +1','ENS','1','1h','12%','2.1Gi','edge-prod',{model:'P800',memory:'192G',count:4,variant:'p800'}],
-  ['pod-7','…nference-12349-p9wqd','running','192.168.10.18','grpc:8500 +1','ALB','1','1h','12%','2.1Gi','imeonline',{model:'P800',memory:'192G',count:4,variant:'p800'}],
-  ['pod-8','…nference-12349-p9wqd','error','192.168.10.18','grpc:8500 +2','-','1','6d','8%','1.2Gi','edge-prod',{model:'A100',memory:'80G',count:8,variant:'a100'}],
-  ['pod-9','…nference-5f6b9-p9wqa','running','192.168.10.19','grpc:8500','ENS','1','6d','22%','3.2Gi','imeonline',{model:'A100',memory:'80G',count:8,variant:'a100'}],
-  ['pod-10','…nference-5f6b9-p9wqb','running','192.168.10.20','grpc:8500','ENS','1','6d','18%','2.8Gi','edge-prod',{model:'P800',memory:'192G',count:4,variant:'p800'}],
-  ['pod-11','…nference-5f6b9-p9wqc','running','192.168.10.21','grpc:8500','ENS','1','6d','16%','2.6Gi','imeonline',{model:'A100',memory:'80G',count:8,variant:'a100'}]
-];
+const podTemplates = {
+  statuses:['running','running','running','running','running','running','blocked','running','error','running'],
+  cpu:[99,85,91,75,63,42,24,12,8,0],
+  memory:[9.7,9.1,9.6,8.8,7.4,5.6,3.2,2.1,1.2,0.8],
+  ports:['grpc:8500','grpc:8500 +1','http:8080','http:8080 +2','metrics:9090'],
+  exposures:['ENS','ENS','ALB','ENS','-'],
+  ages:['1h','6h','1d','3d','6d','7d','8d'],
+  suffixes:['7k2mq','p9wqa','c4r8n','m2x6b','v8t3p','q5j1d','h9s4f','w3n7k','a6e2r','u1y5c']
+};
+
+function createPods(total=110){
+  return Array.from({length:total},(_,index)=>{
+    const sequence=index+1;
+    const cluster=index%2===0?'imeonline':'edge-prod';
+    const status=podTemplates.statuses[index%podTemplates.statuses.length];
+    const cpu=podTemplates.cpu[index%podTemplates.cpu.length];
+    const memory=podTemplates.memory[(index*3)%podTemplates.memory.length];
+    const gpuIsP800=index%4===3;
+    const gpuCount=gpuIsP800?4:[8,6,2][index%3];
+    const deployment=String(51000+(index%14)*137).slice(-5);
+    const suffix=podTemplates.suffixes[index%podTemplates.suffixes.length];
+    return [
+      `pod-${sequence}`,
+      `ranking-inference-${deployment}-${suffix}`,
+      status,
+      `192.168.${10+Math.floor(index/60)}.${18+(index%60)}`,
+      podTemplates.ports[index%podTemplates.ports.length],
+      podTemplates.exposures[(index*2)%podTemplates.exposures.length],
+      String((index*3)%9),
+      podTemplates.ages[index%podTemplates.ages.length],
+      `${cpu}%`,
+      `${memory.toFixed(1)}Gi`,
+      cluster,
+      gpuIsP800
+        ? {model:'P800',memory:'192G',count:gpuCount,variant:'p800'}
+        : {model:'A100',memory:'80G',count:gpuCount,variant:'a100'}
+    ];
+  });
+}
+
+const pods = createPods();
 
 const state = { status:'all', cluster:'all', query:'', page:1, pageSize:10, viewMode:'detailed', collapsedClusters:new Set(), selected:new Set(), pausedPods:new Set(), instanceSummaryCollapsed:false, selectedContainer:0, activeInstanceId:null, executing:false, primaryNav:'apps', appNav:'workload', appNavExpanded:true, secondaryCollapsed:false, accountTab:'all', accountQuery:'', compactMoreOpen:false, envTab:'all', envQuery:'', selectedEnv:'imeonline', clusterQuery:'', selectedCluster:'imeonline' };
 const labels = { running:'运行中', error:'异常', blocked:'已摘流' };
@@ -279,7 +307,17 @@ function tableMarkup(cluster,podsInCluster){
   </section>`;
 }
 
-function visiblePods(){ const result=filteredPods(); return result.slice((state.page-1)*state.pageSize,state.page*state.pageSize); }
+function paginationItems(current,total){
+  if(total<=7) return Array.from({length:total},(_,index)=>index+1);
+  if(current<=4) return [1,2,3,4,5,'end',total];
+  if(current>=total-3) return [1,'start',total-4,total-3,total-2,total-1,total];
+  return [1,'start',current-1,current,current+1,'end',total];
+}
+
+function visiblePods(){
+  const result=filteredPods();
+  return result.slice((state.page-1)*state.pageSize,state.page*state.pageSize);
+}
 function updateSelection(){
   const count=state.selected.size;
   document.querySelector('#selectedCount').textContent=count;
@@ -301,8 +339,11 @@ function render(){
   document.querySelector('#errorCount').textContent = String(pods.filter(([, ,status])=>status==='error').length).padStart(2,'0');
   document.querySelector('#blockedCount').textContent = String(pods.filter(([, ,status])=>status==='blocked').length).padStart(2,'0');
   document.querySelector('#emptyState').classList.toggle('hidden',result.length!==0);
-  const buttons=Array.from({length:pageCount},(_,index)=>`<button class="page-btn ${index+1===state.page?'current':''}" data-page="${index+1}">${index+1}</button>`).join('');
-  pagination.innerHTML=pageCount>1?`<button class="page-btn page-nav" data-page="prev" aria-label="上一页" ${state.page===1?'disabled':''}>${icon('chevron-left')}</button>${buttons}<button class="page-btn page-nav" data-page="next" aria-label="下一页" ${state.page===pageCount?'disabled':''}>${icon('chevron-right')}</button><i class="pagination-divider" aria-hidden="true"></i><select class="page-size" aria-label="每页条数"><option value="10" ${state.pageSize===10?'selected':''}>10 条/页</option><option value="20" ${state.pageSize===20?'selected':''}>20 条/页</option></select>`:'';
+  const pageItems=paginationItems(state.page,pageCount).map(item=>typeof item==='number'
+    ? `<button class="page-btn ${item===state.page?'current':''}" data-page="${item}" ${item===state.page?'aria-current="page"':''}>${item}</button>`
+    : '<span class="page-ellipsis" aria-hidden="true">···</span>'
+  ).join('');
+  pagination.innerHTML=result.length?`<button class="page-btn page-nav" data-page="prev" aria-label="上一页" ${state.page===1?'disabled':''}>${icon('chevron-left')}</button>${pageItems}<button class="page-btn page-nav" data-page="next" aria-label="下一页" ${state.page===pageCount?'disabled':''}>${icon('chevron-right')}</button><i class="pagination-divider" aria-hidden="true"></i><select class="page-size" aria-label="每页条数"><option value="10" ${state.pageSize===10?'selected':''}>10 条/页</option><option value="20" ${state.pageSize===20?'selected':''}>20 条/页</option><option value="50" ${state.pageSize===50?'selected':''}>50 条/页</option></select>`:'';
   updateSelection();
 }
 
@@ -561,7 +602,7 @@ function closeClusterPopover(){ clusterPopover.classList.add('hidden'); }
 function renderClusterPopover(){
   const query = state.clusterQuery.toLowerCase();
   const visible = clusters.filter(c => !query || c.name.toLowerCase().includes(query));
-  clusterList.innerHTML = visible.length ? visible.map(c => `<button class="cluster-row ${c.id===state.selectedCluster?'selected':''}" data-cluster-select="${c.id}"><span class="cluster-avatar"><img src="${breadcrumbAssetPath}/image_55.png" alt=""></span><span class="cluster-name">${c.name}</span><span class="cluster-type-tag">${c.tag}</span><span class="cluster-count">${c.available} / ${c.expected}</span></button>`).join('') : '<p class="cluster-empty">未找到匹配集群</p>';
+  clusterList.innerHTML = visible.length ? visible.map(c => `<button class="cluster-row ${c.id===state.selectedCluster?'selected':''}" data-cluster-select="${c.id}"><span class="cluster-identity"><span class="cluster-avatar"><img src="${breadcrumbAssetPath}/image_55.png" alt=""></span><span class="cluster-name">${c.name}</span></span><span class="cluster-type-tag">${c.tag}</span><span class="cluster-count">${c.available} / ${c.expected}</span></button>`).join('') : '<p class="cluster-empty">未找到匹配集群</p>';
 }
 function openClusterPopover(trigger){
   closeMenu();

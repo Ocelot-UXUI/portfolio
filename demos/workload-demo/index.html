@@ -77,30 +77,6 @@
         <div class="title-context"><h1>工作负载</h1><i></i><button>全部工作负载<svg><use href="#i-chevron-down"/></svg></button></div>
         <div class="title-actions"><button id="restartBtn"><img class="figma-icon" src="./assets/figma-icon-library-56-38920/image_82.png" alt="">应用重启</button><button id="horizontalScaleBtn"><img class="figma-icon" src="./assets/figma-icon-library-56-38920/image_32.png" alt="">横向扩缩</button><button id="verticalScaleBtn" class="scale-vertical"><img class="figma-icon" src="./assets/figma-icon-library-56-38920/image_33.png" alt="">纵向扩缩</button><button id="actionMoreBtn" class="icon-only" aria-label="更多操作"><svg><use href="#i-more"/></svg></button></div>
       </section>
-  <section class="env-popover hidden" id="envPopover" aria-label="切换环境">
-    <label class="env-search"><img class="figma-icon" src="./assets/figma-icon-library-56-38920/image_43.png" alt=""><input id="envSearchInput" type="search" placeholder="请输入应用名称" autocomplete="off"></label>
-    <div class="env-popover-body">
-      <nav class="env-tabs" aria-label="环境筛选">
-        <button class="active" data-env-tab="all">全部环境</button>
-        <button data-env-tab="recent">最近访问</button>
-        <button data-env-tab="prod">生产环境</button>
-        <button data-env-tab="test">测试环境</button>
-      </nav>
-      <div class="env-list" id="envList"></div>
-    </div>
-    <footer class="env-popover-footer"><button data-env-action="create">＋ 新建环境</button></footer>
-  </section>
-  <section class="cluster-popover hidden" id="clusterPopover" aria-label="切换集群">
-    <div class="cluster-search-row">
-      <label class="cluster-search"><img class="figma-icon" src="./assets/figma-icon-library-56-38920/image_43.png" alt=""><input id="clusterSearchInput" type="search" placeholder="搜索或提问..." autocomplete="off"></label>
-      <button class="cluster-filter-btn" aria-label="筛选"><img class="figma-icon" src="./assets/figma-breadcrumb-dropdown-241-37898/image_52.png" alt=""></button>
-    </div>
-    <div class="cluster-popover-body">
-      <div class="cluster-list-header"><span>全部集群 <img src="./assets/figma-breadcrumb-dropdown-241-37898/image_53.png" alt=""><img src="./assets/figma-breadcrumb-dropdown-241-37898/image_54.png" alt=""></span><span>类型</span><span>可用 / 期望副本</span></div>
-      <div class="cluster-list" id="clusterList"></div>
-    </div>
-    <footer class="cluster-popover-footer"><button data-cluster-action="create"><img class="figma-icon" src="./assets/figma-icon-library-56-38920/image_17.png" alt=""> 绑定新集群</button></footer>
-  </section>
 
       <section class="overview" aria-label="工作负载概览" data-workload-section>
         <article class="overview-card deployment">
@@ -146,7 +122,7 @@
     </div>
   </section>
   <section class="env-popover hidden" id="envPopover" aria-label="切换环境">
-    <label class="env-search"><img class="figma-icon" src="./assets/figma-icon-library-56-38920/image_43.png" alt=""><input id="envSearchInput" type="search" placeholder="请输入应用名称" autocomplete="off"></label>
+    <label class="env-search"><img class="figma-icon" src="./assets/figma-breadcrumb-dropdown-241-37898/image_20.png" alt=""><input id="envSearchInput" type="search" placeholder="请输入应用名称" autocomplete="off"></label>
     <div class="env-popover-body">
       <nav class="env-tabs" aria-label="环境筛选">
         <button class="active" data-env-tab="all">全部环境</button>
@@ -156,18 +132,18 @@
       </nav>
       <div class="env-list" id="envList"></div>
     </div>
-    <footer class="env-popover-footer"><button data-env-action="create">＋ 新建环境</button></footer>
+    <footer class="env-popover-footer"><button data-env-action="create"><img class="env-add-icon" src="./assets/figma-breadcrumb-dropdown-241-37898/image_26.png" alt="">新建环境</button></footer>
   </section>
   <section class="cluster-popover hidden" id="clusterPopover" aria-label="切换集群">
     <div class="cluster-search-row">
-      <label class="cluster-search"><img class="figma-icon" src="./assets/figma-icon-library-56-38920/image_43.png" alt=""><input id="clusterSearchInput" type="search" placeholder="搜索或提问..." autocomplete="off"></label>
+      <label class="cluster-search"><span class="cluster-search-icon" aria-hidden="true"><img src="./assets/figma-breadcrumb-dropdown-241-37898/image_48.png" alt=""><img src="./assets/figma-breadcrumb-dropdown-241-37898/image_49.png" alt=""></span><input id="clusterSearchInput" type="search" placeholder="搜索或提问..." autocomplete="off"></label>
       <button class="cluster-filter-btn" aria-label="筛选"><img class="figma-icon" src="./assets/figma-breadcrumb-dropdown-241-37898/image_52.png" alt=""></button>
     </div>
     <div class="cluster-popover-body">
       <div class="cluster-list-header"><span>全部集群 <img src="./assets/figma-breadcrumb-dropdown-241-37898/image_53.png" alt=""><img src="./assets/figma-breadcrumb-dropdown-241-37898/image_54.png" alt=""></span><span>类型</span><span>可用 / 期望副本</span></div>
       <div class="cluster-list" id="clusterList"></div>
     </div>
-    <footer class="cluster-popover-footer"><button data-cluster-action="create"><img class="figma-icon" src="./assets/figma-icon-library-56-38920/image_17.png" alt=""> 绑定新集群</button></footer>
+    <footer class="cluster-popover-footer"><button data-cluster-action="create"><span class="cluster-add-icon" aria-hidden="true"><img src="./assets/figma-breadcrumb-dropdown-241-37898/image_56.png" alt=""><img src="./assets/figma-breadcrumb-dropdown-241-37898/image_57.png" alt=""></span>绑定新集群</button></footer>
   </section>
   <section class="account-popover hidden" id="accountPopover" aria-label="切换账户">
     <label class="account-search"><svg aria-hidden="true"><use href="#i-search"/></svg><input id="accountSearchInput" type="search" placeholder="请输入账户名称" autocomplete="off"></label>
@@ -181,30 +157,6 @@
       <div class="account-list" id="accountList"></div>
     </div>
     <footer class="account-popover-footer"><button data-account-action="create">＋ 新建账户</button><button data-account-action="request">申请账户权限</button></footer>
-  </section>
-  <section class="env-popover hidden" id="envPopover" aria-label="切换环境">
-    <label class="env-search"><img class="figma-icon" src="./assets/figma-icon-library-56-38920/image_43.png" alt=""><input id="envSearchInput" type="search" placeholder="请输入应用名称" autocomplete="off"></label>
-    <div class="env-popover-body">
-      <nav class="env-tabs" aria-label="环境筛选">
-        <button class="active" data-env-tab="all">全部环境</button>
-        <button data-env-tab="recent">最近访问</button>
-        <button data-env-tab="prod">生产环境</button>
-        <button data-env-tab="test">测试环境</button>
-      </nav>
-      <div class="env-list" id="envList"></div>
-    </div>
-    <footer class="env-popover-footer"><button data-env-action="create">＋ 新建环境</button></footer>
-  </section>
-  <section class="cluster-popover hidden" id="clusterPopover" aria-label="切换集群">
-    <div class="cluster-search-row">
-      <label class="cluster-search"><img class="figma-icon" src="./assets/figma-icon-library-56-38920/image_43.png" alt=""><input id="clusterSearchInput" type="search" placeholder="搜索或提问..." autocomplete="off"></label>
-      <button class="cluster-filter-btn" aria-label="筛选"><img class="figma-icon" src="./assets/figma-breadcrumb-dropdown-241-37898/image_52.png" alt=""></button>
-    </div>
-    <div class="cluster-popover-body">
-      <div class="cluster-list-header"><span>全部集群 <img src="./assets/figma-breadcrumb-dropdown-241-37898/image_53.png" alt=""><img src="./assets/figma-breadcrumb-dropdown-241-37898/image_54.png" alt=""></span><span>类型</span><span>可用 / 期望副本</span></div>
-      <div class="cluster-list" id="clusterList"></div>
-    </div>
-    <footer class="cluster-popover-footer"><button data-cluster-action="create"><img class="figma-icon" src="./assets/figma-icon-library-56-38920/image_17.png" alt=""> 绑定新集群</button></footer>
   </section>
   <div class="modal-backdrop hidden" id="modalBackdrop">
     <section class="action-modal" id="actionModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"></section>
