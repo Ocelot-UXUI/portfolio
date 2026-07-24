@@ -863,50 +863,55 @@
   width:924px;
   height:44px;
   align-items:flex-end;
-  gap:6px;
-  padding:0!important;
-  border:0;
-  background:transparent
+  padding:4px 0 0!important;
+  overflow:hidden;
+  border:1px solid #e8e8e8;
+  border-radius:13px;
+  background:#f0f1f5
 }
 #instanceModal .container-strip button{
   display:flex;
+  flex:none;
   height:40px!important;
   align-items:center;
-  justify-content:flex-start;
-  gap:8px;
+  justify-content:center;
+  gap:6px;
   margin:0!important;
   padding:0 16px!important;
-  border:0!important;
-  border-radius:8px 8px 0 0!important;
+  border:1px solid #e8e8e8!important;
+  border-radius:20px!important;
   background:transparent!important;
   box-shadow:none!important;
-  color:#545454!important;
-  font:400 14px/22px "PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif!important;
+  color:#8f8f8f!important;
+  font:500 14px/22px "PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif!important;
   white-space:nowrap
 }
 #instanceModal .container-strip button:nth-child(1){width:211px}
 #instanceModal .container-strip button:nth-child(2){width:217px}
 #instanceModal .container-strip button:nth-child(3){width:194px}
 #instanceModal .container-strip button:nth-child(4){width:189px}
-#instanceModal .container-strip button.active{background:#fff!important;color:#181818!important}
-#instanceModal .container-dot{display:block;flex:0 0 8px;width:8px;height:8px;border-radius:50%;background:#00a656}
-#instanceModal .container-dot.sidecar{background:#306ddd}
-#instanceModal .container-dot.regular{background:#8f8f8f}
+#instanceModal .container-strip button.active{border-color:transparent!important;border-radius:0!important;background:#fff!important;color:#181818!important}
+#instanceModal .container-dot{display:block;flex:0 0 6px;width:6px;height:6px;border-radius:50%;object-fit:contain}
 #instanceModal .container-dot.init{background:#f58300}
-#instanceModal .container-strip strong{font-size:14px;font-weight:500;line-height:22px}
-#instanceModal .container-strip small{height:20px;padding:0 8px;border-radius:10px;background:#f0f1f5;color:#515970;font-size:12px;font-weight:400;line-height:20px}
-#instanceModal .container-strip button:not(.active) small{background:#dfe2e8;color:#747b8e}
+#instanceModal .container-strip strong{color:inherit;font-size:14px;font-weight:500;line-height:22px}
+#instanceModal .container-strip small{display:flex;flex:none;height:18px;align-items:center;justify-content:center;padding:0;border-radius:12px;background:#d9d9d9;color:#8f8f8f;font-size:10px;font-weight:400;line-height:18px}
+#instanceModal .container-strip button:nth-child(1) small{width:42px}
+#instanceModal .container-strip button:nth-child(2) small{width:47px}
+#instanceModal .container-strip button:nth-child(3) small{width:32px}
+#instanceModal .container-strip button:nth-child(4) small{width:27px}
+#instanceModal .container-strip button.active small{background:#e8e8e8;color:#545454}
+#instanceModal .container-strip-spacer{display:block;flex:0 0 94px;width:94px;height:40px;border:1px solid #e8e8e8;border-radius:20px}
 #instanceModal .detail-tabs{
   display:flex;
   width:924px;
   height:47px;
-  gap:0;
+  gap:32px;
   margin:0;
   padding:0 16px!important;
   border-bottom:1px solid #e8e8e8;
   background:#fff
 }
-#instanceModal .detail-tabs button{position:relative;height:47px;padding:0 16px;border:0;background:transparent;color:#545454;font:400 14px/22px "PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif}
+#instanceModal .detail-tabs button{position:relative;height:47px;padding:0;border:0;background:transparent;color:#545454;font:400 14px/22px "PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif}
 #instanceModal .detail-tabs button.active{color:#181818;font-weight:500}
 #instanceModal .detail-tabs button.active::after{position:absolute;right:0;bottom:0;left:0;height:3px;border-radius:3px 3px 0 0;background:#181818;content:""}
 #instanceModal .detail-body{
