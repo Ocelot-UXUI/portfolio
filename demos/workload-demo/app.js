@@ -48,6 +48,8 @@ const clusterMeta = {
   'edge-prod':{environment:'边缘生产', channel:'灰度发布', version:'v1.9.0-rc.2', versions:'等 2 个版本'}
 };
 const clusterGroups = document.querySelector('#clusterGroups');
+const workspace = document.querySelector('.workspace');
+const workloadStickyStack = document.querySelector('#workloadStickyStack');
 const menu = document.querySelector('#actionMenu');
 const modalBackdrop = document.querySelector('#modalBackdrop');
 const modal = document.querySelector('#actionModal');
@@ -180,6 +182,7 @@ function renderAppNavigation(){
   workloadSections.forEach(section=>section.classList.toggle('hidden', !isWorkload));
   appPagePlaceholder.classList.toggle('hidden', isWorkload);
   appPageTitle.textContent = isApplication ? appNavLabels[state.appNav] : '页面内容占位';
+  scheduleWorkloadStickySync();
 }
 
 let pendingAction = null;
@@ -354,6 +357,96 @@ function updateSelection(){
   document.querySelectorAll('[data-indeterminate="true"]').forEach(input=>input.indeterminate=true);
 }
 
+let stickySyncFrame=0;
+
+function hideWorkloadStickyStack(){
+  workloadStickyStack.classList.add('hidden');
+  workloadStickyStack.replaceChildren();
+  delete workloadStickyStack.dataset.signature;
+  delete workloadStickyStack.dataset.cluster;
+}
+
+function buildWorkloadStickyStack(group,signature){
+  const inner=document.createElement('div');
+  inner.className='workload-sticky-stack-inner cluster-group';
+  inner.dataset.cluster=group.dataset.cluster;
+  const header=group.querySelector('.group-header').cloneNode(true);
+  inner.append(header);
+
+  if(!group.classList.contains('collapsed')){
+    const sourceTable=group.querySelector('.pod-table');
+    const sourceHead=sourceTable?.tHead;
+    if(sourceTable&&sourceHead){
+      const frame=document.createElement('div');
+      frame.className='table-frame sticky-table-frame';
+      const scroll=document.createElement('div');
+      scroll.className='table-scroll sticky-table-scroll';
+      const table=sourceTable.cloneNode(false);
+      table.append(sourceHead.cloneNode(true));
+      scroll.append(table);
+      frame.append(scroll);
+      inner.append(frame);
+    }
+  }
+
+  inner.querySelectorAll('[id]').forEach(element=>element.removeAttribute('id'));
+  const sourceSelect=group.querySelector('.cluster-select');
+  const stickySelect=inner.querySelector('.cluster-select');
+  if(sourceSelect&&stickySelect) stickySelect.indeterminate=sourceSelect.indeterminate;
+  workloadStickyStack.replaceChildren(inner);
+  workloadStickyStack.dataset.signature=signature;
+  workloadStickyStack.dataset.cluster=group.dataset.cluster;
+}
+
+function syncWorkloadStickyStack(){
+  if(document.querySelector('.workload-list-panel')?.classList.contains('hidden')){
+    hideWorkloadStickyStack();
+    return;
+  }
+
+  const workspaceRect=workspace.getBoundingClientRect();
+  const groups=Array.from(clusterGroups.querySelectorAll('.cluster-group'));
+  let activeIndex=-1;
+  groups.forEach((group,index)=>{
+    const headerRect=group.querySelector('.group-header').getBoundingClientRect();
+    if(headerRect.top<=workspaceRect.top&&group.getBoundingClientRect().bottom>workspaceRect.top) activeIndex=index;
+  });
+
+  if(activeIndex<0){
+    hideWorkloadStickyStack();
+    return;
+  }
+
+  const group=groups[activeIndex];
+  const collapsed=group.classList.contains('collapsed');
+  const signature=`${group.dataset.cluster}:${state.viewMode}:${collapsed}:${state.selected.size}`;
+  if(workloadStickyStack.dataset.signature!==signature) buildWorkloadStickyStack(group,signature);
+
+  const groupRect=group.getBoundingClientRect();
+  const nextHeader=groups[activeIndex+1]?.querySelector('.group-header');
+  const boundary=nextHeader?.getBoundingClientRect().top??groupRect.bottom;
+  const stackHeight=collapsed?48:96;
+  const innerOffset=Math.min(0,boundary-workspaceRect.top-stackHeight);
+  const sourceScroll=group.querySelector('.table-scroll');
+  const stickyScroll=workloadStickyStack.querySelector('.sticky-table-scroll');
+
+  workloadStickyStack.style.top=`${workspaceRect.top}px`;
+  workloadStickyStack.style.left=`${groupRect.left}px`;
+  workloadStickyStack.style.width=`${groupRect.width}px`;
+  workloadStickyStack.style.height=`${stackHeight}px`;
+  workloadStickyStack.querySelector('.workload-sticky-stack-inner').style.transform=`translateY(${innerOffset}px)`;
+  if(sourceScroll&&stickyScroll) stickyScroll.scrollLeft=sourceScroll.scrollLeft;
+  workloadStickyStack.classList.remove('hidden');
+}
+
+function scheduleWorkloadStickySync(){
+  if(stickySyncFrame)return;
+  stickySyncFrame=requestAnimationFrame(()=>{
+    stickySyncFrame=0;
+    syncWorkloadStickyStack();
+  });
+}
+
 function render(){
   const result=filteredPods();
   const byCluster=Object.keys(clusterLabels).map(cluster=>{
@@ -363,14 +456,17 @@ function render(){
     return {cluster,allItems,paging};
   }).filter(Boolean);
   const renderTable=state.viewMode==='compact'?compactTableMarkup:tableMarkup;
+  hideWorkloadStickyStack();
   clusterGroups.innerHTML=byCluster.map(({cluster,allItems,paging})=>renderTable(cluster,paging.items,allItems,paging)).join('');
   clusterGroups.classList.toggle('compact-mode',state.viewMode==='compact');
+  workloadStickyStack.classList.toggle('compact-mode',state.viewMode==='compact');
   document.querySelector('#allCount').textContent = String(pods.length).padStart(2,'0');
   document.querySelector('#runningCount').textContent = String(pods.filter(([, ,status])=>status==='running').length).padStart(2,'0');
   document.querySelector('#errorCount').textContent = String(pods.filter(([, ,status])=>status==='error').length).padStart(2,'0');
   document.querySelector('#blockedCount').textContent = String(pods.filter(([, ,status])=>status==='blocked').length).padStart(2,'0');
   document.querySelector('#emptyState').classList.toggle('hidden',result.length!==0);
   updateSelection();
+  scheduleWorkloadStickySync();
 }
 
 function setWorkloadCollapsed(workload,collapsed){
@@ -750,6 +846,30 @@ document.querySelector('#restartBtn').addEventListener('click',()=>triggerAction
 document.querySelector('#horizontalScaleBtn').addEventListener('click',()=>triggerAction('horizontal'));
 document.querySelector('#verticalScaleBtn').addEventListener('click',()=>triggerAction('vertical'));
 document.querySelector('#actionMoreBtn').addEventListener('click',event=>{event.stopPropagation();openMenu(event.currentTarget,[{key:'history',label:'查看变更记录',icon:'clipboard'},{key:'refresh',label:'刷新 Pod 列表',icon:'refresh'},{key:'delete-deployment',label:'删除部署资源',icon:'apps'}]);});
+workspace.addEventListener('scroll',scheduleWorkloadStickySync,{passive:true});
+clusterGroups.addEventListener('scroll',scheduleWorkloadStickySync,{capture:true,passive:true});
+window.addEventListener('resize',scheduleWorkloadStickySync,{passive:true});
+workloadStickyStack.addEventListener('change',event=>{
+  if(!event.target.matches('.cluster-select'))return;
+  const cluster=event.target.dataset.clusterSelect;
+  visiblePods(cluster).forEach(([id])=>event.target.checked?state.selected.add(id):state.selected.delete(id));
+  render();
+});
+workloadStickyStack.addEventListener('click',event=>{
+  const toggle=event.target.closest('[data-cluster-toggle]');
+  if(toggle){
+    setWorkloadCollapsed(toggle.dataset.clusterToggle,!state.collapsedClusters.has(toggle.dataset.clusterToggle));
+    return;
+  }
+  const clusterMore=event.target.closest('[data-cluster-more]');
+  if(clusterMore){
+    event.stopPropagation();
+    const cluster=clusterMore.dataset.clusterMore;
+    const collapsed=state.collapsedClusters.has(cluster);
+    openMenu(clusterMore,[{key:collapsed?'expand-cluster':'collapse-cluster',label:collapsed?'展开集群':'收起集群',icon:collapsed?'chevron-down':'chevron-up'},{key:'history',label:'查看集群变更记录',icon:'clipboard'}]);
+    menu.dataset.cluster=cluster;
+  }
+});
 clusterGroups.addEventListener('change',event=>{
   if(event.target.matches('.page-size')){
     const cluster=event.target.closest('[data-cluster-pagination]')?.dataset.clusterPagination;
