@@ -580,3 +580,68 @@
 .workload-sticky-stack .pod-table{margin:0}
 .workload-sticky-stack .pod-table thead th{top:0!important}
 .workload-sticky-stack .cluster-select{cursor:pointer}
+
+/* Figma 44:9530: preserve the complete 77px page-level workload header while scrolling. */
+.title-row{
+  position:sticky;
+  top:0;
+  z-index:17;
+  isolation:isolate;
+  margin-bottom:12px
+}
+.title-row::before{
+  position:absolute;
+  z-index:0;
+  top:-24px;
+  right:-32px;
+  left:-32px;
+  height:77px;
+  background:#fff;
+  border-bottom:1px solid #f0f1f3;
+  content:"";
+  pointer-events:none
+}
+.title-row>*{position:relative;z-index:1}
+.title-row.is-stuck::before{box-shadow:0 4px 12px rgba(24,24,24,.06)}
+.title-context i{height:14px;margin:0 16px}
+.title-filter{
+  position:relative;
+  display:inline-flex;
+  width:114px;
+  height:22px;
+  align-items:center;
+  color:#74777e;
+  font:400 14px/22px "PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;
+  white-space:nowrap
+}
+.title-filter span{flex:none}
+.title-filter select{
+  width:86px;
+  height:22px;
+  min-width:0;
+  padding:0 18px 0 8px;
+  border:0;
+  outline:0;
+  appearance:none;
+  background:transparent;
+  color:#181818;
+  font:400 14px/22px "PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;
+  cursor:pointer
+}
+.title-filter svg{
+  position:absolute;
+  right:0;
+  width:14px;
+  height:14px;
+  fill:none;
+  stroke:#8f8f8f;
+  stroke-width:1.7;
+  pointer-events:none
+}
+.title-workload-filter{width:170px;margin-left:20px}
+.title-workload-filter select{width:134px}
+.title-context h1{line-height:36px}
+.title-actions{width:376px;gap:8px}
+.title-actions>button:not(.icon-only){width:112px;padding:0 16px;justify-content:center}
+.title-actions .icon-only{width:16px;padding:0}
+@media(max-width:1100px){.title-row::before{top:-20px;right:-20px;left:-20px}.title-context>i,.title-filter{display:none}}

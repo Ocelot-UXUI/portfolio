@@ -49,6 +49,7 @@ const clusterMeta = {
 };
 const clusterGroups = document.querySelector('#clusterGroups');
 const workspace = document.querySelector('.workspace');
+const titleRow = document.querySelector('.title-row');
 const workloadStickyStack = document.querySelector('#workloadStickyStack');
 const menu = document.querySelector('#actionMenu');
 const modalBackdrop = document.querySelector('#modalBackdrop');
@@ -400,16 +401,19 @@ function buildWorkloadStickyStack(group,signature){
 
 function syncWorkloadStickyStack(){
   if(document.querySelector('.workload-list-panel')?.classList.contains('hidden')){
+    titleRow.classList.remove('is-stuck');
     hideWorkloadStickyStack();
     return;
   }
 
   const workspaceRect=workspace.getBoundingClientRect();
+  const stickyTop=workspaceRect.top+77+20;
+  titleRow.classList.toggle('is-stuck',workspace.scrollTop>0);
   const groups=Array.from(clusterGroups.querySelectorAll('.cluster-group'));
   let activeIndex=-1;
   groups.forEach((group,index)=>{
     const headerRect=group.querySelector('.group-header').getBoundingClientRect();
-    if(headerRect.top<=workspaceRect.top&&group.getBoundingClientRect().bottom>workspaceRect.top) activeIndex=index;
+    if(headerRect.top<=stickyTop&&group.getBoundingClientRect().bottom>stickyTop) activeIndex=index;
   });
 
   if(activeIndex<0){
@@ -426,11 +430,11 @@ function syncWorkloadStickyStack(){
   const nextHeader=groups[activeIndex+1]?.querySelector('.group-header');
   const boundary=nextHeader?.getBoundingClientRect().top??groupRect.bottom;
   const stackHeight=collapsed?48:96;
-  const innerOffset=Math.min(0,boundary-workspaceRect.top-stackHeight);
+  const innerOffset=Math.min(0,boundary-stickyTop-stackHeight);
   const sourceScroll=group.querySelector('.table-scroll');
   const stickyScroll=workloadStickyStack.querySelector('.sticky-table-scroll');
 
-  workloadStickyStack.style.top=`${workspaceRect.top}px`;
+  workloadStickyStack.style.top=`${stickyTop}px`;
   workloadStickyStack.style.left=`${groupRect.left}px`;
   workloadStickyStack.style.width=`${groupRect.width}px`;
   workloadStickyStack.style.height=`${stackHeight}px`;
@@ -460,6 +464,8 @@ function render(){
   clusterGroups.innerHTML=byCluster.map(({cluster,allItems,paging})=>renderTable(cluster,paging.items,allItems,paging)).join('');
   clusterGroups.classList.toggle('compact-mode',state.viewMode==='compact');
   workloadStickyStack.classList.toggle('compact-mode',state.viewMode==='compact');
+  document.querySelector('#titleClusterSelect').value=state.cluster;
+  document.querySelector('#titleStatusSelect').value=state.status;
   document.querySelector('#allCount').textContent = String(pods.length).padStart(2,'0');
   document.querySelector('#runningCount').textContent = String(pods.filter(([, ,status])=>status==='running').length).padStart(2,'0');
   document.querySelector('#errorCount').textContent = String(pods.filter(([, ,status])=>status==='error').length).padStart(2,'0');
@@ -837,6 +843,8 @@ document.querySelectorAll('.tabs button').forEach(button=>button.addEventListene
 }));
 document.querySelector('#statusSelect').addEventListener('change',event=>{state.status=event.target.value;resetClusterPages();document.querySelectorAll('.tabs button').forEach(item=>item.classList.toggle('active',item.dataset.status===state.status));render();});
 document.querySelector('#clusterSelect').addEventListener('change',event=>{state.cluster=event.target.value;resetClusterPages();render();});
+document.querySelector('#titleStatusSelect').addEventListener('change',event=>{state.status=event.target.value;resetClusterPages();document.querySelector('#statusSelect').value=state.status;document.querySelectorAll('.tabs button').forEach(item=>item.classList.toggle('active',item.dataset.status===state.status));render();});
+document.querySelector('#titleClusterSelect').addEventListener('change',event=>{state.cluster=event.target.value;resetClusterPages();document.querySelector('#clusterSelect').value=state.cluster;render();});
 document.querySelector('#searchInput').addEventListener('input',event=>{state.query=event.target.value.trim().toLowerCase();resetClusterPages();render();});
 document.querySelector('#collapseAllBtn').addEventListener('click',()=>setAllWorkloadsCollapsed(true));
 document.querySelector('#expandAllBtn').addEventListener('click',()=>setAllWorkloadsCollapsed(false));
