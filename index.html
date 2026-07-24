@@ -90,25 +90,36 @@
       <footer class="footer"><div class="footer-left">© 2026 Portfolio. All rights reserved.</div><div class="footer-links"><a href="pages/case.html">Case Study</a><a href="pages/remi.html">Demo</a><a href="https://github.com/Ocelot-UXUI" target="_blank" rel="noreferrer">GitHub</a><a href="mailto:1004080451@qq.com">Email</a></div></footer>
     </div>
     <script>
+      document.documentElement.classList.add("motion-ready");
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) entry.target.classList.add("visible");
         });
       }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
-      document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+      document.querySelectorAll(".reveal, .project-showcase").forEach((element) => observer.observe(element));
 
       const projectCursor = document.querySelector(".project-hover-cursor");
       const projectHotspots = document.querySelectorAll("[data-project-hotspot]");
       if (projectCursor && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+        const updateProjectPointer = (hotspot, event) => {
+          const bounds = hotspot.getBoundingClientRect();
+          hotspot.style.setProperty("--pointer-x", `${event.clientX - bounds.left}px`);
+          hotspot.style.setProperty("--pointer-y", `${event.clientY - bounds.top}px`);
+          hotspot.style.setProperty("--pointer-shift-x", `${((event.clientX - bounds.left) / bounds.width - 0.5) * 18}px`);
+          hotspot.style.setProperty("--pointer-shift-y", `${((event.clientY - bounds.top) / bounds.height - 0.5) * 12}px`);
+          projectCursor.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0)`;
+        };
         projectHotspots.forEach((hotspot) => {
           hotspot.addEventListener("pointerenter", (event) => {
-            projectCursor.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0)`;
+            updateProjectPointer(hotspot, event);
+            hotspot.classList.add("pointer-active");
             projectCursor.classList.add("visible");
           });
-          hotspot.addEventListener("pointermove", (event) => {
-            projectCursor.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0)`;
+          hotspot.addEventListener("pointermove", (event) => updateProjectPointer(hotspot, event));
+          hotspot.addEventListener("pointerleave", () => {
+            hotspot.classList.remove("pointer-active");
+            projectCursor.classList.remove("visible");
           });
-          hotspot.addEventListener("pointerleave", () => projectCursor.classList.remove("visible"));
           hotspot.addEventListener("pointerdown", () => projectCursor.classList.add("pressed"));
           hotspot.addEventListener("pointerup", () => projectCursor.classList.remove("pressed"));
         });
