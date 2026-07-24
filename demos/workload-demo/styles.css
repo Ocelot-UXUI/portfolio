@@ -552,7 +552,8 @@
   gap:0!important;
   pointer-events:auto
 }
-.workload-sticky-stack-inner{
+.workload-sticky-stack-inner{width:100%}
+.sticky-workload-content{
   width:100%;
   will-change:transform
 }
@@ -564,7 +565,7 @@
 }
 .workload-sticky-spacer{
   width:100%;
-  height:20px;
+  height:4px;
   background:#f5f7fa
 }
 .workload-sticky-stack .sticky-table-frame{
@@ -586,31 +587,20 @@
 .workload-sticky-stack .pod-table thead th{top:0!important}
 .workload-sticky-stack .cluster-select{cursor:pointer}
 
-/* Figma 300:37259: title, actions and active group read as one 134px sticky surface. */
+/* Normal page state keeps its original flow; the combined surface is created only after sticky triggers. */
 .title-row{
-  position:sticky;
-  top:-4px;
-  z-index:17;
-  isolation:isolate;
+  position:relative;
+  top:auto;
+  z-index:auto;
+  isolation:auto;
   margin-bottom:12px
 }
-.title-row::before{
-  position:absolute;
-  z-index:0;
-  top:-20px;
-  right:-32px;
-  left:-32px;
-  height:134px;
-  background:#f5f7fa;
-  content:"";
-  pointer-events:none
-}
-.title-row>*{position:relative;z-index:1}
-.title-context i{height:20px;margin:0 24px}
+.title-row::before{display:none}
+.title-context i{height:14px;margin:0 16px}
 .title-filter{
   position:relative;
   display:inline-flex;
-  width:108px;
+  width:114px;
   height:22px;
   align-items:center;
   color:#74777e;
@@ -619,10 +609,10 @@
 }
 .title-filter span{flex:none}
 .title-filter select{
-  width:108px;
+  width:86px;
   height:22px;
   min-width:0;
-  padding:0 24px 0 0;
+  padding:0 18px 0 8px;
   border:0;
   outline:0;
   appearance:none;
@@ -641,10 +631,35 @@
   stroke-width:1.7;
   pointer-events:none
 }
-.title-workload-filter{width:108px;margin-left:0}
-.title-workload-filter select{width:108px}
+.title-workload-filter{width:170px;margin-left:20px}
+.title-workload-filter select{width:134px}
 .title-context h1{line-height:36px}
 .title-actions{width:376px;gap:8px}
 .title-actions>button:not(.icon-only){width:112px;padding:0 16px;justify-content:center}
 .title-actions .icon-only{width:16px;padding:0}
-@media(max-width:1100px){.title-row{top:0}.title-row::before{top:-20px;right:-20px;left:-20px}.title-context>i,.title-filter{display:none}}
+.workload-sticky-stack{
+  box-sizing:border-box;
+  padding:20px 30px 0;
+  background:#f5f7fa
+}
+.workload-sticky-stack .sticky-title-row{
+  position:relative;
+  top:auto;
+  z-index:2;
+  display:flex;
+  width:100%;
+  height:36px;
+  align-items:center;
+  justify-content:space-between;
+  margin:0 0 10px;
+  background:#f5f7fa
+}
+.workload-sticky-stack .sticky-title-row .title-context i{height:20px;margin:0 24px}
+.workload-sticky-stack .sticky-title-row .title-filter:not(.title-workload-filter){display:none}
+.workload-sticky-stack .sticky-title-row .title-workload-filter{display:inline-flex;width:108px;margin-left:0}
+.workload-sticky-stack .sticky-title-row .title-workload-filter span{display:none}
+.workload-sticky-stack .sticky-title-row .title-workload-filter select{width:108px;padding:0 24px 0 0}
+.workload-sticky-stack .group-header,
+.workload-sticky-stack .workload-sticky-spacer,
+.workload-sticky-stack .sticky-table-frame{width:calc(100% - 30px)}
+@media(max-width:1100px){.title-context>i,.title-filter{display:none}.workload-sticky-stack{padding-right:20px;padding-left:20px}}
