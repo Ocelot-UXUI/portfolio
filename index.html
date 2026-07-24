@@ -7,87 +7,88 @@
     <title>郭昱成 | UX/UI 作品集</title>
     <link rel="stylesheet" href="styles/styles.css" />
   </head>
-  <body class="homepage">
-    <header class="home-nav">
-      <a class="home-logo" href="#top" aria-label="返回首页">PORTFOLIO</a>
-      <nav aria-label="首页导航">
-        <a href="#work">WORK</a>
-        <a href="#about">ABOUT</a>
-        <a href="#contact">CONTACT</a>
+  <body class="prototype-homepage">
+    <div class="page">
+      <nav class="nav" aria-label="首页导航">
+        <a class="nav-logo" href="#home">Portfolio</a>
+        <ul class="nav-links">
+          <li><a href="#projects">Work</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#detail">Detail</a></li>
+        </ul>
+        <a href="mailto:1004080451@qq.com" class="nav-cta">Contact</a>
       </nav>
-      <a class="home-contact" href="#contact">LET'S TALK</a>
-    </header>
 
-    <main id="top">
-      <section class="home-hero" aria-labelledby="home-title">
-        <div class="hero-copy">
-          <p class="home-eyebrow">UX / UI DESIGNER · 2026</p>
-          <h1 id="home-title">设计占位<br /><span>标题占位</span></h1>
-          <p class="hero-description">这里放置个人定位与设计理念的简短介绍。首版暂用占位文字，后续可替换为正式内容。</p>
-          <div class="hero-actions">
-            <a class="home-button primary" href="#work">查看作品 <span aria-hidden="true">↘</span></a>
-            <a class="home-button secondary" href="#about">了解更多</a>
+      <main>
+        <section class="hero" id="home">
+          <div class="hero-text">
+            <h1 class="fade-up">Creative<br /><span class="accent">Developer</span><br />&amp; Designer</h1>
+            <p class="fade-up fade-up-delay-1">专注于数字产品设计与前端开发，用简洁有力的方式呈现每一个项目。</p>
+            <div class="hero-actions fade-up fade-up-delay-2">
+              <a href="#projects" class="btn-primary">查看作品</a>
+              <a href="#about" class="btn-secondary">了解更多</a>
+            </div>
           </div>
-        </div>
-        <a class="hero-visual" href="pages/case.html" aria-label="查看精选项目">
-          <img src="assets/remi/figma-source/page-01.webp" alt="精选项目预览" />
-          <span>FEATURED PROJECT · 01</span>
-        </a>
-      </section>
+          <a class="hero-visual fade-up fade-up-delay-3" href="pages/case.html" aria-label="查看精选项目">
+            <div class="hero-mockup"><img src="assets/remi/figma-source/page-01.webp" alt="精选项目预览" /></div>
+          </a>
+        </section>
 
-      <section class="home-work" id="work" aria-labelledby="work-title">
-        <div class="home-section-heading">
-          <p>SELECTED WORK</p>
-          <h2 id="work-title">精选项目</h2>
-          <span>04 PROJECTS / 2025—2026</span>
-        </div>
-        <div class="home-project-grid">
-          <article class="home-project-card featured">
-            <a href="pages/case.html" aria-label="查看 Remi AI 记忆助手案例">
-              <figure><img src="assets/remi/figma-source/page-01.webp" alt="Remi AI 记忆助手项目封面" /><span>01</span></figure>
-              <div class="home-project-info"><div><p>AI PRODUCT · UX/UI</p><h3>Remi AI 记忆助手</h3></div><span aria-hidden="true">↗</span></div>
+        <section class="projects" id="projects">
+          <div class="section-label"><span>Selected Work</span></div>
+          <div class="projects-grid">
+            <a class="project-card reveal" href="pages/case.html">
+              <div class="project-thumb"><img src="assets/remi/figma-source/page-01.webp" alt="Remi AI 记忆助手项目封面" /></div>
+              <div class="project-info"><h3>项目名称一</h3><p>项目简介占位文字，描述项目的核心亮点与设计方向。</p><div class="project-tags"><span class="tag">UI Design</span><span class="tag">Development</span></div></div>
             </a>
-          </article>
-          <article class="home-project-card">
-            <a href="pages/xiaohongshu.html" aria-label="查看小红书本地生活项目">
-              <figure><img src="assets/xiaohongshu-local/cover.png" alt="小红书本地生活体验升级项目封面" /><span>02</span></figure>
-              <div class="home-project-info"><div><p>SERVICE DESIGN · UX/UI</p><h3>小红书本地生活</h3></div><span aria-hidden="true">↗</span></div>
+            <a class="project-card reveal" href="pages/xiaohongshu.html">
+              <div class="project-thumb"><img src="assets/xiaohongshu-local/cover.png" alt="小红书本地生活体验升级项目封面" /></div>
+              <div class="project-info"><h3>项目名称二</h3><p>项目简介占位文字，描述项目的核心亮点与设计方向。</p><div class="project-tags"><span class="tag">Branding</span><span class="tag">Visual Identity</span></div></div>
             </a>
-          </article>
-          <article class="home-project-card">
-            <a href="pages/skip-read.html" aria-label="查看职场阅读学习 APP 项目">
-              <figure><img src="assets/skip-read/pages/page-01.jpg" alt="职场阅读学习 APP 项目封面" /><span>03</span></figure>
-              <div class="home-project-info"><div><p>AI READING · UX/UI</p><h3>职场阅读学习 APP</h3></div><span aria-hidden="true">↗</span></div>
+            <a class="project-card reveal" href="pages/skip-read.html">
+              <div class="project-thumb"><img src="assets/skip-read/pages/page-01.jpg" alt="职场阅读学习 APP 项目封面" /></div>
+              <div class="project-info"><h3>项目名称三</h3><p>项目简介占位文字，描述项目的核心亮点与设计方向。</p><div class="project-tags"><span class="tag">Motion</span><span class="tag">3D</span></div></div>
             </a>
-          </article>
-          <article class="home-project-card">
-            <a href="demos/workload-demo/index.html" aria-label="体验 CNAP 工作负载 Demo">
-              <figure class="project-placeholder"><b>CNAP</b><small>INTERACTION DEMO</small><span>04</span></figure>
-              <div class="home-project-info"><div><p>CLOUD PRODUCT · INTERACTION</p><h3>云原生工作负载管理</h3></div><span aria-hidden="true">↗</span></div>
+            <a class="project-card reveal" href="demos/workload-demo/index.html">
+              <div class="project-thumb project-thumb-placeholder"><span class="thumb-label">Project 04</span></div>
+              <div class="project-info"><h3>项目名称四</h3><p>项目简介占位文字，描述项目的核心亮点与设计方向。</p><div class="project-tags"><span class="tag">App Design</span><span class="tag">Prototype</span></div></div>
             </a>
-          </article>
-        </div>
-      </section>
-
-      <section class="home-about" id="about" aria-labelledby="about-title">
-        <div>
-          <p class="home-eyebrow">ABOUT / PROFILE</p>
-          <h2 id="about-title">关于我的<br />标题占位</h2>
-        </div>
-        <div class="about-content">
-          <p>这里放置个人经历、设计方法或能力优势的概括。当前为占位内容，用于确认版式、间距和信息层级。</p>
-          <p>后续可以继续补充教育背景、项目经历、获奖信息和正式的个人介绍。</p>
-          <div class="skill-groups">
-            <article><h3>DESIGN</h3><p>UX Design · UI Design · Prototyping · Research</p></article>
-            <article><h3>TOOLS</h3><p>Figma · HTML/CSS · AI Tools · Vibe Coding</p></article>
           </div>
-        </div>
-      </section>
-    </main>
+        </section>
 
-    <footer class="home-footer" id="contact">
-      <div><p>HAVE A PROJECT IN MIND?</p><h2>一起做点<br />有价值的事</h2></div>
-      <div class="footer-contact"><a href="mailto:1004080451@qq.com">1004080451@qq.com <span aria-hidden="true">↗</span></a><p>GUO YUCHENG · UX/UI DESIGN · 2026</p></div>
-    </footer>
+        <section class="about" id="about">
+          <div class="section-label"><span>About</span></div>
+          <div class="about-grid">
+            <div class="about-left reveal"><h2>关于我</h2><p>这里放置你的个人介绍。描述你的设计理念、工作经历、或任何让你与众不同的地方。</p><p>可以包含你的教育背景、获奖经历、或对设计的独到见解。保持真实，让访客了解真正的你。</p></div>
+            <div class="about-right reveal">
+              <div class="skill-group"><h4>Design</h4><div class="skill-list"><span class="skill-item">UI/UX Design</span><span class="skill-item">Visual Design</span><span class="skill-item">Branding</span><span class="skill-item">Motion Design</span><span class="skill-item">Prototyping</span></div></div>
+              <div class="skill-group"><h4>Development</h4><div class="skill-list"><span class="skill-item">HTML / CSS</span><span class="skill-item">JavaScript</span><span class="skill-item">React</span><span class="skill-item">Three.js</span></div></div>
+              <div class="skill-group"><h4>Tools</h4><div class="skill-list"><span class="skill-item">Figma</span><span class="skill-item">After Effects</span><span class="skill-item">Blender</span><span class="skill-item">VS Code</span></div></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="detail" id="detail">
+          <div class="section-label"><span>Project Detail Preview</span></div>
+          <div class="detail-header reveal">
+            <a href="#projects" class="back-link">← 返回作品列表</a>
+            <h2>项目详情页</h2>
+            <p>这是单个项目的展示页面，你可以在这里放置详细的项目描述、设计过程和最终成果。</p>
+            <div class="detail-meta"><div class="meta-item"><label>Client</label><span>客户名称</span></div><div class="meta-item"><label>Role</label><span>UI Designer &amp; Developer</span></div><div class="meta-item"><label>Year</label><span>2026</span></div><div class="meta-item"><label>Category</label><span>Web Design</span></div></div>
+          </div>
+          <div class="detail-gallery"><a class="gallery-item reveal" href="pages/case.html"><img src="assets/remi/figma-export/frame-01.png" alt="项目详情预览" /></a><div class="gallery-item reveal compact"><span class="thumb-label">更多项目图片</span></div></div>
+        </section>
+      </main>
+
+      <footer class="footer"><div class="footer-left">© 2026 Portfolio. All rights reserved.</div><div class="footer-links"><a href="pages/case.html">Case Study</a><a href="pages/remi.html">Demo</a><a href="https://github.com/Ocelot-UXUI" target="_blank" rel="noreferrer">GitHub</a><a href="mailto:1004080451@qq.com">Email</a></div></footer>
+    </div>
+    <script>
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add("visible");
+        });
+      }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
+      document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+    </script>
   </body>
 </html>
