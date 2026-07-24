@@ -648,8 +648,14 @@
 .title-actions>button:not(.icon-only){width:112px;padding:0 16px;justify-content:center}
 .title-actions .icon-only{width:16px;padding:0}
 .workload-sticky-stack{
+  --sticky-title-left:32px;
+  --sticky-title-right:32px;
+  --sticky-header-left:50px;
+  --sticky-header-right:50px;
+  --sticky-table-left:50px;
+  --sticky-table-right:50px;
   box-sizing:border-box;
-  padding:20px 30px 0;
+  padding:20px 0 0;
   background:#f5f7fa
 }
 .workload-sticky-stack .sticky-title-row{
@@ -657,11 +663,11 @@
   top:auto;
   z-index:2;
   display:flex;
-  width:100%;
+  width:calc(100% - var(--sticky-title-left) - var(--sticky-title-right));
   height:36px;
   align-items:center;
   justify-content:space-between;
-  margin:0 0 10px;
+  margin:0 var(--sticky-title-right) 10px var(--sticky-title-left);
   background:#f5f7fa
 }
 .workload-sticky-stack .sticky-title-row .title-context i{height:20px;margin:0 24px}
@@ -669,8 +675,18 @@
 .workload-sticky-stack .sticky-title-row .title-workload-filter{display:inline-flex;width:108px;margin-left:0}
 .workload-sticky-stack .sticky-title-row .title-workload-filter span{display:none}
 .workload-sticky-stack .sticky-title-row .title-workload-filter select{width:108px;padding:0 24px 0 0}
+.workload-sticky-stack .sticky-workload-content{
+  width:100%;
+  margin-left:0
+}
 .workload-sticky-stack .group-header,
-.workload-sticky-stack .workload-sticky-spacer,
-.workload-sticky-stack .sticky-table-frame{width:calc(100% - 30px)}
-@media(max-width:1100px){.title-context>i,.title-filter{display:none}.workload-sticky-stack{padding-right:20px;padding-left:20px}}
+.workload-sticky-stack .workload-sticky-spacer{
+  width:calc(100% - var(--sticky-header-left) - var(--sticky-header-right));
+  margin-left:var(--sticky-header-left)
+}
+.workload-sticky-stack .sticky-table-frame{
+  width:calc(100% - var(--sticky-table-left) - var(--sticky-table-right));
+  margin-left:var(--sticky-table-left)
+}
+@media(max-width:1100px){.title-context>i,.title-filter{display:none}}
 @media(prefers-reduced-motion:reduce){.workload-sticky-stack{transform:none;transition:none}}
