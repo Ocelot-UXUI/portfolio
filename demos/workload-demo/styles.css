@@ -596,13 +596,11 @@
   right:-32px;
   left:-32px;
   height:77px;
-  background:#fff;
-  border-bottom:1px solid #f0f1f3;
+  background:#f5f7fa;
   content:"";
   pointer-events:none
 }
 .title-row>*{position:relative;z-index:1}
-.title-row.is-stuck::before{box-shadow:0 4px 12px rgba(24,24,24,.06)}
 .title-context i{height:14px;margin:0 16px}
 .title-filter{
   position:relative;

@@ -49,7 +49,6 @@ const clusterMeta = {
 };
 const clusterGroups = document.querySelector('#clusterGroups');
 const workspace = document.querySelector('.workspace');
-const titleRow = document.querySelector('.title-row');
 const workloadStickyStack = document.querySelector('#workloadStickyStack');
 const menu = document.querySelector('#actionMenu');
 const modalBackdrop = document.querySelector('#modalBackdrop');
@@ -401,14 +400,12 @@ function buildWorkloadStickyStack(group,signature){
 
 function syncWorkloadStickyStack(){
   if(document.querySelector('.workload-list-panel')?.classList.contains('hidden')){
-    titleRow.classList.remove('is-stuck');
     hideWorkloadStickyStack();
     return;
   }
 
   const workspaceRect=workspace.getBoundingClientRect();
   const stickyTop=workspaceRect.top+77+20;
-  titleRow.classList.toggle('is-stuck',workspace.scrollTop>0);
   const groups=Array.from(clusterGroups.querySelectorAll('.cluster-group'));
   let activeIndex=-1;
   groups.forEach((group,index)=>{
