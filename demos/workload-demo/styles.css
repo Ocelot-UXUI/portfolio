@@ -652,8 +652,10 @@
   --sticky-title-right:32px;
   --sticky-header-left:50px;
   --sticky-header-right:50px;
-  --sticky-table-left:50px;
-  --sticky-table-right:50px;
+  --sticky-surface-left:32px;
+  --sticky-surface-right:32px;
+  --sticky-table-inset-left:18px;
+  --sticky-table-inset-right:18px;
   box-sizing:border-box;
   padding:20px 0 0;
   background:#f5f7fa
@@ -684,9 +686,313 @@
   width:calc(100% - var(--sticky-header-left) - var(--sticky-header-right));
   margin-left:var(--sticky-header-left)
 }
+.workload-sticky-stack .sticky-table-surface{
+  width:calc(100% - var(--sticky-surface-left) - var(--sticky-surface-right));
+  height:48px;
+  margin-left:var(--sticky-surface-left);
+  overflow:hidden;
+  background:#fff
+}
 .workload-sticky-stack .sticky-table-frame{
-  width:calc(100% - var(--sticky-table-left) - var(--sticky-table-right));
-  margin-left:var(--sticky-table-left)
+  width:calc(100% - var(--sticky-table-inset-left) - var(--sticky-table-inset-right));
+  margin-left:var(--sticky-table-inset-left)
 }
 @media(max-width:1100px){.title-context>i,.title-filter{display:none}}
 @media(prefers-reduced-motion:reduce){.workload-sticky-stack{transform:none;transition:none}}
+
+/* Figma 305:25329 workload detail drawer. */
+#detailBackdrop:not(.hidden){align-items:stretch;justify-content:flex-end}
+#instanceModal{
+  box-sizing:border-box;
+  width:980px!important;
+  max-width:calc(100vw - 40px);
+  height:100%;
+  overflow:auto;
+  border:0;
+  border-radius:0;
+  background:#fff!important;
+  box-shadow:0 2px 20px rgba(0,0,0,.2);
+  color:#181818;
+  font:400 14px/22px "PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;
+  letter-spacing:0
+}
+#instanceModal *{box-sizing:border-box;letter-spacing:0}
+#instanceModal .instance-heading{width:100%;height:92px;background:#fff}
+#instanceModal .instance-header{
+  display:flex;
+  width:100%;
+  min-height:52px!important;
+  height:52px;
+  align-items:center;
+  justify-content:space-between;
+  padding:20px 24px 2px!important;
+  border:0
+}
+#instanceModal .instance-title-wrap{min-width:0}
+#instanceModal .instance-title{display:flex;min-width:0;align-items:center;gap:12px}
+#instanceModal .instance-title h2{
+  max-width:520px;
+  margin:0;
+  overflow:hidden;
+  color:#181818;
+  font-size:20px!important;
+  font-weight:500;
+  line-height:30px!important;
+  text-overflow:ellipsis;
+  white-space:nowrap
+}
+#instanceModal .instance-title .status-tag{
+  display:inline-flex;
+  width:auto;
+  min-width:52px;
+  height:20px;
+  align-items:center;
+  justify-content:center;
+  padding:0 8px;
+  border-radius:12px;
+  font-size:12px;
+  font-weight:400;
+  line-height:20px
+}
+#instanceModal .instance-header-actions{display:flex;align-items:center;gap:16px}
+#instanceModal .instance-header-actions>button{
+  display:grid;
+  flex:0 0 16px;
+  width:16px!important;
+  height:16px!important;
+  min-width:16px;
+  place-items:center;
+  padding:0!important;
+  border:0!important;
+  border-radius:2px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:#181818;
+  cursor:pointer
+}
+#instanceModal .instance-header-actions>button:first-child{padding:0!important;border-radius:2px!important}
+#instanceModal .instance-header-actions .figma-icon,
+#instanceModal .instance-header-actions .operation-glyph{display:block;width:16px!important;height:16px!important;object-fit:contain}
+#instanceModal .instance-header-actions>i{display:block;width:1px;height:16px;margin:0 4px;background:#e8e8e8}
+@media(hover:hover){#instanceModal .instance-header-actions>button:hover{background:#f0f1f5!important}}
+#instanceModal .instance-header-actions>button:focus-visible{outline:2px solid #306ddd;outline-offset:3px}
+#instanceModal .instance-context{
+  display:flex;
+  height:40px;
+  align-items:center;
+  gap:16px;
+  padding:0 24px 8px;
+  color:#8f8f8f;
+  font-size:12px;
+  line-height:18px
+}
+#instanceModal .instance-context>span{display:flex;min-width:0;align-items:center;gap:8px}
+#instanceModal .instance-context small{color:#bfbfbf;font:inherit;white-space:nowrap}
+#instanceModal .instance-context b{max-width:210px;overflow:hidden;color:#545454;font-size:12px;font-weight:400;line-height:18px;text-overflow:ellipsis;white-space:nowrap}
+#instanceModal .instance-context>i{display:block;width:1px;height:12px;background:#e8e8e8}
+#instanceModal .instance-summary-shell{
+  position:relative;
+  width:932px;
+  height:108px;
+  margin:0 24px;
+  overflow:visible;
+  transition:height 180ms cubic-bezier(.2,.8,.2,1)
+}
+#instanceModal .instance-summary{
+  width:932px;
+  height:92px;
+  margin:0!important;
+  overflow:hidden;
+  padding:16px 20px!important;
+  border-radius:12px!important;
+  background:#f5f7fa!important;
+  opacity:1;
+  transform:translateY(0);
+  transition:height 180ms cubic-bezier(.2,.8,.2,1),padding 180ms cubic-bezier(.2,.8,.2,1),opacity 120ms ease,transform 180ms cubic-bezier(.2,.8,.2,1)
+}
+#instanceModal .summary-grid{
+  display:grid;
+  grid-template-columns:repeat(4,223px)!important;
+  grid-template-rows:24px 24px;
+  gap:12px 0!important;
+  width:892px
+}
+#instanceModal .summary-grid>div{display:flex;min-width:0;align-items:center;gap:12px}
+#instanceModal .summary-grid span{flex:none;margin:0!important;color:#8f8f8f!important;font-size:12px!important;line-height:18px}
+#instanceModal .summary-grid strong{min-width:0;overflow:hidden;color:#181818!important;font-size:12px!important;font-weight:400!important;line-height:18px;text-overflow:ellipsis;white-space:nowrap}
+#instanceModal .summary-grid .danger-text{color:#e62c4b!important}
+#instanceModal .drawer-mono{font-family:Menlo,Monaco,Consolas,monospace}
+#instanceModal .summary-toggle{
+  position:absolute;
+  z-index:2;
+  top:83px;
+  left:50%;
+  display:flex;
+  width:48px;
+  height:18px;
+  align-items:center;
+  justify-content:center;
+  gap:2px;
+  margin:0!important;
+  padding:0;
+  border:1px solid #e8e8e8!important;
+  border-radius:9px;
+  background:#fff!important;
+  box-shadow:0 1px 4px rgba(0,0,0,.1)!important;
+  color:#8f8f8f!important;
+  font:400 10px/16px "PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif!important;
+  transform:translateX(-50%);
+  transition:top 180ms cubic-bezier(.2,.8,.2,1)
+}
+#instanceModal .summary-toggle img{display:block;width:12px;height:12px;object-fit:contain}
+#instanceModal .instance-summary-shell.is-collapsed{height:28px}
+#instanceModal .instance-summary-shell.is-collapsed .instance-summary{height:0;padding-top:0!important;padding-bottom:0!important;opacity:0;transform:translateY(-4px)}
+#instanceModal .instance-summary-shell.is-collapsed .summary-toggle{top:0}
+#instanceModal .instance-workbench{
+  width:932px;
+  margin:0 24px 24px!important;
+  overflow:hidden;
+  padding:4px;
+  border:0!important;
+  border-radius:12px!important;
+  background:#f0f1f5!important;
+  box-shadow:none!important
+}
+#instanceModal .container-strip{
+  display:flex;
+  width:924px;
+  height:44px;
+  align-items:flex-end;
+  gap:6px;
+  padding:0!important;
+  border:0;
+  background:transparent
+}
+#instanceModal .container-strip button{
+  display:flex;
+  height:40px!important;
+  align-items:center;
+  justify-content:flex-start;
+  gap:8px;
+  margin:0!important;
+  padding:0 16px!important;
+  border:0!important;
+  border-radius:8px 8px 0 0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:#545454!important;
+  font:400 14px/22px "PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif!important;
+  white-space:nowrap
+}
+#instanceModal .container-strip button:nth-child(1){width:211px}
+#instanceModal .container-strip button:nth-child(2){width:217px}
+#instanceModal .container-strip button:nth-child(3){width:194px}
+#instanceModal .container-strip button:nth-child(4){width:189px}
+#instanceModal .container-strip button.active{background:#fff!important;color:#181818!important}
+#instanceModal .container-dot{display:block;flex:0 0 8px;width:8px;height:8px;border-radius:50%;background:#00a656}
+#instanceModal .container-dot.sidecar{background:#306ddd}
+#instanceModal .container-dot.regular{background:#8f8f8f}
+#instanceModal .container-dot.init{background:#f58300}
+#instanceModal .container-strip strong{font-size:14px;font-weight:500;line-height:22px}
+#instanceModal .container-strip small{height:20px;padding:0 8px;border-radius:10px;background:#f0f1f5;color:#515970;font-size:12px;font-weight:400;line-height:20px}
+#instanceModal .container-strip button:not(.active) small{background:#dfe2e8;color:#747b8e}
+#instanceModal .detail-tabs{
+  display:flex;
+  width:924px;
+  height:47px;
+  gap:32px;
+  margin:0;
+  padding:0 16px!important;
+  border-bottom:1px solid #e8e8e8;
+  background:#fff
+}
+#instanceModal .detail-tabs button{position:relative;height:47px;padding:0;border:0;background:transparent;color:#545454;font:400 14px/22px "PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif}
+#instanceModal .detail-tabs button.active{color:#181818;font-weight:500}
+#instanceModal .detail-tabs button.active::after{position:absolute;right:0;bottom:0;left:0;height:3px;border-radius:3px 3px 0 0;background:#181818;content:""}
+#instanceModal .detail-body{
+  width:924px;
+  margin:0;
+  padding:20px 16px!important;
+  border-radius:0;
+  background:#fff;
+  color:#181818
+}
+#instanceModal .container-detail-view{display:block!important;width:892px}
+#instanceModal .drawer-detail-section{width:892px;padding:0}
+#instanceModal .drawer-detail-section+.drawer-detail-section{margin-top:48px}
+#instanceModal .drawer-detail-section>h3,
+#instanceModal .drawer-section-heading h3{position:relative;margin:0 0 16px;padding-left:12px;color:#181818;font-size:14px;font-weight:500;line-height:22px}
+#instanceModal .drawer-detail-section>h3::before,
+#instanceModal .drawer-section-heading h3::before{position:absolute;top:4px;left:0;width:3px;height:14px;border-radius:2px;background:#72e8b1;content:""}
+#instanceModal .drawer-status-grid{display:grid;grid-template-columns:repeat(4,223px);width:892px;margin:0 0 16px}
+#instanceModal .drawer-status-grid>span{display:grid;grid-template-columns:92px 1fr;align-items:center;color:#8f8f8f;font-size:14px;line-height:22px}
+#instanceModal .drawer-status-grid b{margin:0;color:#181818;font-weight:400}
+#instanceModal .drawer-status-grid .danger-text{color:#e62c4b}
+#instanceModal .drawer-status-tag{display:inline-flex;width:52px;height:20px;align-items:center;justify-content:center;border-radius:10px;background:#e6faf1;color:#00a656!important;font-size:12px;line-height:20px}
+#instanceModal .drawer-description-list{width:892px;margin:0}
+#instanceModal .drawer-description-list>div{display:grid;grid-template-columns:92px 800px;min-height:38px;align-items:center}
+#instanceModal .drawer-description-list dt{color:#8f8f8f}
+#instanceModal .drawer-description-list dd{min-width:0;margin:0;overflow:hidden;color:#181818;text-overflow:ellipsis;white-space:nowrap}
+#instanceModal .drawer-description-list em{display:inline-flex;height:20px;align-items:center;margin-left:8px;padding:0 8px;border-radius:10px;background:#f0f1f5;color:#515970;font-size:12px;font-style:normal;line-height:20px}
+#instanceModal .drawer-resource-row{display:flex;width:892px;min-height:80px;align-items:flex-start;padding-top:10px}
+#instanceModal .drawer-field-label{flex:0 0 92px;color:#8f8f8f}
+#instanceModal .drawer-resource-metric{display:flex;flex:0 0 247px;width:247px;gap:8px}
+#instanceModal .drawer-resource-metric>.cpu-mark,
+#instanceModal .drawer-resource-metric>.memory-mark{display:grid;flex:0 0 16px;width:16px;height:16px;margin-top:2px;place-items:center}
+#instanceModal .drawer-resource-metric>div{min-width:0}
+#instanceModal .drawer-resource-metric strong{display:block;color:#181818;font-size:14px;font-weight:400;line-height:22px;white-space:nowrap}
+#instanceModal .drawer-resource-metric>div>span{display:flex;align-items:center;gap:8px;margin-top:4px}
+#instanceModal .drawer-resource-metric i{display:block;width:120px;height:4px;overflow:hidden;border-radius:2px;background:#e8e8e8}
+#instanceModal .drawer-resource-metric i b{display:block;height:100%;background:#e62c4b}
+#instanceModal .drawer-resource-metric em{color:#e62c4b;font-style:normal}
+#instanceModal .drawer-resource-metric small,
+#instanceModal .drawer-gpu-summary>small{display:block;margin-top:4px;color:#bfbfbf;font-size:12px;line-height:18px}
+#instanceModal .drawer-resource-divider{flex:0 0 1px;width:1px;height:48px;margin:0 20px;background:#f0f0f0}
+#instanceModal .drawer-gpu-summary{flex:1;min-width:0}
+#instanceModal .drawer-gpu-summary .gpu-card{margin-top:-6px}
+#instanceModal .drawer-section-heading{display:flex;width:892px;align-items:flex-start;justify-content:space-between}
+#instanceModal .drawer-section-heading button{display:flex;height:22px;align-items:center;gap:6px;padding:0;border:0;background:transparent;color:#181818;font-size:14px;font-weight:400;line-height:22px;cursor:pointer}
+#instanceModal .drawer-section-heading button .figma-icon{width:16px!important;height:16px!important}
+#instanceModal .drawer-data-table{width:892px;border-bottom:1px solid #f0f0f0}
+#instanceModal .drawer-data-table>div{display:grid;width:892px;min-height:48px;align-items:center;border-top:1px solid #f0f0f0;color:#181818;font-size:14px;line-height:22px}
+#instanceModal .drawer-data-table .table-head{height:48px;border-top:0;color:#8f8f8f;font-weight:500}
+#instanceModal .port-detail-table>div,
+#instanceModal .mount-detail-table>div{grid-template-columns:264px 264px 264px 100px}
+#instanceModal .env-detail-table>div{grid-template-columns:346px 346px 200px}
+#instanceModal .drawer-data-table span{min-width:0;overflow:hidden;padding:0 20px;text-overflow:ellipsis;white-space:nowrap}
+#instanceModal .drawer-data-table span:first-child{padding-left:4px}
+#instanceModal .drawer-data-table button{display:grid;width:24px;height:24px;margin-left:20px;padding:0;border:0;background:transparent;place-items:center;cursor:pointer}
+#instanceModal .drawer-data-table button .figma-icon{width:16px!important;height:16px!important}
+#instanceModal .drawer-empty-row{margin:0;padding:18px;color:#8f8f8f;text-align:center}
+#instanceModal .drawer-termination dl{display:grid;grid-template-columns:repeat(2,410px);gap:16px 72px;margin:0}
+#instanceModal .drawer-termination dl>div{display:grid;grid-template-columns:92px 1fr}
+#instanceModal .drawer-termination dt{color:#8f8f8f}
+#instanceModal .drawer-termination dd{margin:0;color:#181818}
+#instanceModal .tool-pane,
+#instanceModal .event-pane{width:892px;height:min(580px,calc(100vh - 250px))}
+#instanceModal .tool-toolbar,
+#instanceModal .event-toolbar{width:892px}
+#instanceModal.fullscreen{width:100vw!important;max-width:none}
+#instanceModal.fullscreen .instance-workbench{width:calc(100vw - 48px)}
+#instanceModal.fullscreen .container-strip,
+#instanceModal.fullscreen .detail-tabs,
+#instanceModal.fullscreen .detail-body{width:calc(100vw - 56px)}
+#instanceModal.fullscreen .tool-pane,
+#instanceModal.fullscreen .tool-toolbar,
+#instanceModal.fullscreen .terminal-screen{width:100%}
+.action-menu{z-index:60}
+@media(max-width:1020px){
+  #instanceModal{width:calc(100vw - 40px)!important}
+  #instanceModal .instance-summary-shell,
+  #instanceModal .instance-summary,
+  #instanceModal .instance-workbench{width:calc(100% - 48px)}
+  #instanceModal .summary-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important;width:100%}
+  #instanceModal .container-strip,
+  #instanceModal .detail-tabs,
+  #instanceModal .detail-body{width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+  #instanceModal .instance-summary-shell,
+  #instanceModal .instance-summary,
+  #instanceModal .summary-toggle{transition:none}
+}

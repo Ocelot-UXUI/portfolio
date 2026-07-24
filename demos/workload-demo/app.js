@@ -61,6 +61,7 @@ const bulkBar = document.querySelector('#bulkBar');
 const figmaIconPath = './assets/figma-icon-library-56-38920';
 const operationIconPath = './assets/figma-operation-column-4-45229';
 const workloadIconPath = './assets/figma-workload-global-tip-4-40581';
+const drawerAssetPath = './assets/figma-workload-drawer-305-25329';
 const figmaIconAssets = {
   'chevron-right':'image_3.png',
   'chevron-left':'image_4.png',
@@ -77,6 +78,12 @@ const figmaIconAssets = {
   'horizontal-scale':'image_32.png',
   'vertical-scale':'image_33.png',
   'close':'image_25.png',
+  'detail':'image_26.png',
+  'hammer':'image_27.png',
+  'terminal-nav':'image_61.png',
+  'share':'image_36.png',
+  'more':'image_51.png',
+  'clipboard':`${drawerAssetPath}/image_59.png`,
   'cpu':`${workloadIconPath}/image_13.png`,
   'memory':`${workloadIconPath}/image_14.png`
 };
@@ -445,6 +452,8 @@ function buildWorkloadStickyStack(group,signature){
     const sourceTable=group.querySelector('.pod-table');
     const sourceHead=sourceTable?.tHead;
     if(sourceTable&&sourceHead){
+      const surface=document.createElement('div');
+      surface.className='sticky-table-surface';
       const frame=document.createElement('div');
       frame.className='table-frame sticky-table-frame';
       const scroll=document.createElement('div');
@@ -453,7 +462,8 @@ function buildWorkloadStickyStack(group,signature){
       table.append(sourceHead.cloneNode(true));
       scroll.append(table);
       frame.append(scroll);
-      content.append(frame);
+      surface.append(frame);
+      content.append(surface);
     }
   }
   inner.append(content);
@@ -468,12 +478,14 @@ function buildWorkloadStickyStack(group,signature){
 }
 
 function syncWorkloadStickyStack(){
-  if(document.querySelector('.workload-list-panel')?.classList.contains('hidden')){
+  const workloadPanel=document.querySelector('.workload-list-panel');
+  if(workloadPanel?.classList.contains('hidden')){
     hideWorkloadStickyStack();
     return;
   }
 
   const workspaceRect=workspace.getBoundingClientRect();
+  const panelRect=workloadPanel.getBoundingClientRect();
   const stickyTop=workspaceRect.top+66;
   const groups=Array.from(clusterGroups.querySelectorAll('.cluster-group'));
   const metrics=groups.map(group=>({
@@ -514,8 +526,10 @@ function syncWorkloadStickyStack(){
   setPixelVariable(workloadStickyStack,'--sticky-title-right',workspaceRect.right-titleRect.right);
   setPixelVariable(workloadStickyStack,'--sticky-header-left',groupRect.left-workspaceRect.left);
   setPixelVariable(workloadStickyStack,'--sticky-header-right',workspaceRect.right-groupRect.right);
-  setPixelVariable(workloadStickyStack,'--sticky-table-left',tableFrameRect.left-workspaceRect.left);
-  setPixelVariable(workloadStickyStack,'--sticky-table-right',workspaceRect.right-tableFrameRect.right);
+  setPixelVariable(workloadStickyStack,'--sticky-surface-left',panelRect.left-workspaceRect.left);
+  setPixelVariable(workloadStickyStack,'--sticky-surface-right',workspaceRect.right-panelRect.right);
+  setPixelVariable(workloadStickyStack,'--sticky-table-inset-left',tableFrameRect.left-panelRect.left);
+  setPixelVariable(workloadStickyStack,'--sticky-table-inset-right',panelRect.right-tableFrameRect.right);
   const stickyContent=workloadStickyStack.querySelector('.sticky-workload-content');
   const nextTransform=`translateY(${innerOffset}px)`;
   if(stickyContent.style.transform!==nextTransform) stickyContent.style.transform=nextTransform;
@@ -707,36 +721,39 @@ function logLines(name){
   return Array.from({length:18},(_,index)=>`<div><i>${String(index+1).padStart(2,'0')}</i><time>2026-06-04 04:${String(20+index).padStart(2,'0')}:06</time><span class="log-level ${index%7===0?'warn':'info'}">${index%7===0?'WARN':'INFO'}</span><code>${name} request completed, status=200 latency=${18+index}ms</code></div>`).join('');
 }
 function instanceMarkup(pod,tab='detail'){
-  const [id,name,status,ip,port,,restarts,age,cpu,memory,cluster,gpu]=pod;
+  const [id,name,status,ip,,exposure,restarts,age,,,cluster,gpu]=pod;
   const paused=state.pausedPods.has(id);
   const containerProfiles=[
-    {name:'ranking-inference',type:'主容器',tone:'',status:'运行中',ready:'是',restarts:'0',age:'8d',image:'registry.internal/payments/api-gateway:v2.2.5',pull:'IfNotPresent',command:'/app/server --config=/etc/app/config/server.yaml --port=8500',cpu:['7.2c','8c','16c',99],memory:['29.44Gi','32Gi','9.1Gi',99],ports:[['静态','main','8092'],['静态','prometheus','8990'],['静态','xxl-job','8209']],mounts:[['config','/etc/app/config','ConfigMap: app-config','只读'],['secrets','/etc/app/secrets','Secret: payment-secrets','只读'],['data','/data','PVC: payment-data','读写']],env:[['POD_NAME','(metadata.name)','Field'],['POD_NAMESPACE','(metadata.namespace)','Field'],['NODE_NAME','-Xms2g -Xmx4g -XX:+UseG1GC','-']],termination:['Completed','0','2026.06.04 04:20:06','2026.06.04 04:20:06']},
+    {name:'ranking-inference',type:'主容器',tone:'',status:'运行中',ready:'是',restarts:'0',age:'8d',image:'registry.internal/payments/api-gateway:v2.2.5',pull:'IfNotPresent',command:'/app/server --config=/etc/app/config/server.yaml --port=8500',cpu:['7.2c','8c','16c',99],memory:['29.44Gi','32Gi','9.1Gi',99],ports:[['静态','main','8092'],['静态','prometheus','8990'],['静态','xxl-job','8209']],mounts:[['config','/etc/app/config','ConfigMap: app-config','只读'],['secrets','/etc/app/config','ConfigMap: app-config','只读'],['data','/etc/app/config','ConfigMap: app-config','读写']],env:[['POD_NAME','(metadata.name)','Field'],['POD_NAMESPACE','(metadata.namespace)','Field'],['NODE_NAME','-Xms2g -Xmx4g -XX:+UseG1GC','-']],termination:['Completed','0','2026.06.04 04:20:06','2026.06.04 04:20:06']},
     {name:'ranking-inference',type:'Sidecar',tone:'sidecar',status:'运行中',ready:'是',restarts:'1',age:'8d',image:'registry.internal/observability/log-agent:v1.12.0',pull:'IfNotPresent',command:'/agent/log-collector --config=/etc/agent/config.yaml',cpu:['0.6c','1c','0.5c',60],memory:['1.82Gi','4Gi','2Gi',46],ports:[['静态','metrics','9090'],['静态','health','9091']],mounts:[['logs','/var/log/app','EmptyDir: app-logs','只读'],['config','/etc/agent','ConfigMap: log-agent','只读']],env:[['POD_NAME','(metadata.name)','Field'],['LOG_LEVEL','info','Config'],['SCRAPE_INTERVAL','30s','Config']],termination:['Completed','0','2026.06.03 18:11:32','2026.06.03 18:11:33']},
-    {name:'ranking-inference',type:'容器',tone:'regular',status:'运行中',ready:'是',restarts:'0',age:'7d',image:'registry.internal/payments/model-server:v4.7.1',pull:'Always',command:'/model/server --model=/models/ranking --grpc-port=8500',cpu:['3.8c','6c','4c',63],memory:['18.6Gi','24Gi','16Gi',78],ports:[['静态','grpc','8500'],['静态','admin','8501']],mounts:[['models','/models','PVC: ranking-models','只读'],['cache','/cache','EmptyDir: model-cache','读写']],env:[['MODEL_NAME','ranking-v47','Config'],['GRPC_PORT','8500','Config'],['CUDA_VISIBLE_DEVICES','0','Config']],termination:['Completed','0','2026.06.02 09:36:18','2026.06.02 09:36:19']},
+    {name:'ranking-inference',type:'普通',tone:'regular',status:'运行中',ready:'是',restarts:'0',age:'7d',image:'registry.internal/payments/model-server:v4.7.1',pull:'Always',command:'/model/server --model=/models/ranking --grpc-port=8500',cpu:['3.8c','6c','4c',63],memory:['18.6Gi','24Gi','16Gi',78],ports:[['静态','grpc','8500'],['静态','admin','8501']],mounts:[['models','/models','PVC: ranking-models','只读'],['cache','/cache','EmptyDir: model-cache','读写']],env:[['MODEL_NAME','ranking-v47','Config'],['GRPC_PORT','8500','Config'],['CUDA_VISIBLE_DEVICES','0','Config']],termination:['Completed','0','2026.06.02 09:36:18','2026.06.02 09:36:19']},
     {name:'ranking-inference',type:'Init',tone:'init',status:'已完成',ready:'是',restarts:'0',age:'8d',image:'registry.internal/base/model-loader:v2.3.0',pull:'IfNotPresent',command:'/bin/model-loader --source=bos://models/ranking-v47',cpu:['0.2c','1c','0.2c',20],memory:['0.74Gi','2Gi','1Gi',37],ports:[],mounts:[['models','/models','PVC: ranking-models','读写'],['credentials','/etc/bos','Secret: bos-access','只读']],env:[['MODEL_VERSION','ranking-v47','Config'],['TARGET_PATH','/models','Config'],['VERIFY_CHECKSUM','true','Config']],termination:['Completed','0','2026.06.04 04:19:42','2026.06.04 04:20:01']}
   ];
   const profile=containerProfiles[state.selectedContainer] || containerProfiles[0];
   const tabs=[['detail','详细信息'],['logs','日志'],['terminal','终端'],['events','事件']];
   const tabBar=tabs.map(([key,label])=>`<button class="${key===tab?'active':''}" data-detail-tab="${key}">${label}</button>`).join('');
-  const summary=`<section class="instance-summary ${state.instanceSummaryCollapsed?'is-collapsed':''}"><div class="summary-grid"><div><span>应用</span><strong>应用名称占位</strong></div><div><span>集群</span><strong>${cluster}</strong></div><div><span>工作负载</span><strong>${cluster}</strong></div></div></section>`;
+  const summaryArrow=state.instanceSummaryCollapsed
+    ? `${figmaIconPath}/image_6.png`
+    : `${drawerAssetPath}/image_61.png`;
+  const summary=`<div class="instance-summary-shell ${state.instanceSummaryCollapsed?'is-collapsed':''}"><section class="instance-summary"><div class="summary-grid"><div><span>Pod IP</span><strong class="drawer-mono">${ip}</strong></div><div><span>节点 IP</span><strong class="drawer-mono">192.168.10.18</strong></div><div><span>版本</span><strong class="drawer-mono">v2.3.1</strong></div><div><span>重启次数</span><strong class="danger-text">${restarts}</strong></div><div><span>存活时间</span><strong>${age}</strong></div><div><span>暴露</span><strong>${exposure}</strong></div></div></section><button class="summary-toggle" data-summary-toggle="${id}" aria-expanded="${!state.instanceSummaryCollapsed}"><img src="${summaryArrow}" alt=""><span>${state.instanceSummaryCollapsed?'展开':'收起'}</span></button></div>`;
   const details=`<div class="pod-detail-page container-detail-view">
     <section class="drawer-detail-section drawer-basic-section">
       <h3>基本信息</h3>
-      <div class="drawer-status-grid"><span>状态 <b class="success-text">${profile.status}</b></span><span>就绪 <b>${profile.ready}</b></span><span>重启 <b class="danger-text">${profile.restarts}</b></span><span>存活 <b>${profile.age}</b></span></div>
-      <dl class="drawer-description-list"><div><dt>镜像</dt><dd>${profile.image}<em>${profile.pull}</em></dd></div><div><dt>启动命令</dt><dd>${profile.command}</dd></div></dl>
-      <div class="drawer-resource-row"><span class="drawer-field-label">资源用量</span><div class="drawer-resource-metric"><span class="cpu-mark">${icon('cpu')}</span><div><strong>${profile.cpu.slice(0,3).join('/')}</strong><span><i><b style="width:${profile.cpu[3]}%"></b></i><em>${profile.cpu[3]}%</em></span><small>CPU</small></div></div><div class="drawer-resource-metric"><span class="memory-mark">${icon('memory')}</span><div><strong>${profile.memory.slice(0,3).join('/')}</strong><span><i><b style="width:${profile.memory[3]}%"></b></i><em>${profile.memory[3]}%</em></span><small>内存</small></div></div><div class="drawer-gpu-summary">${gpuCardMarkup(gpu)}<small>GPU</small></div></div>
+      <div class="drawer-status-grid"><span>状态 <b class="drawer-status-tag">${profile.status}</b></span><span>就绪 <b>${profile.ready}</b></span><span>重启次数 <b class="danger-text">${profile.restarts}</b></span><span>存活时间 <b>${profile.age}</b></span></div>
+      <dl class="drawer-description-list"><div><dt>Pod IP</dt><dd>${profile.image}<em>${profile.pull}</em></dd></div><div><dt>启动命令</dt><dd>${profile.command}</dd></div></dl>
+      <div class="drawer-resource-row"><span class="drawer-field-label">资源用量</span><div class="drawer-resource-metric"><span class="cpu-mark">${icon('cpu')}</span><div><strong>${profile.cpu.slice(0,3).join('/')}</strong><span><i><b style="width:${profile.cpu[3]}%"></b></i><em>${profile.cpu[3]}%</em></span><small>CPU</small></div></div><div class="drawer-resource-divider"></div><div class="drawer-resource-metric"><span class="memory-mark">${icon('memory')}</span><div><strong>${profile.memory.slice(0,3).join('/')}</strong><span><i><b style="width:${profile.memory[3]}%"></b></i><em>${profile.memory[3]}%</em></span><small>内存</small></div></div><div class="drawer-resource-divider"></div><div class="drawer-gpu-summary">${gpuCardMarkup(gpu)}<small>GPU</small></div></div>
     </section>
-    <section class="drawer-detail-section"><div class="drawer-section-heading"><h3>端口 <b>${profile.ports.length}</b></h3><button type="button">${icon('clipboard')} 复制全部IP:PORT</button></div><div class="drawer-data-table port-detail-table"><div class="table-head"><span>端口类型</span><span>端口名称</span><span>端口号</span><span>操作</span></div>${profile.ports.length?profile.ports.map(item=>`<div><span>${item[0]}</span><span>${item[1]}</span><span>${item[2]}</span><button type="button" title="复制端口">${icon('clipboard')}</button></div>`).join(''):'<p class="drawer-empty-row">暂无端口</p>'}</div></section>
-    <section class="drawer-detail-section"><h3>挂载 <b>${profile.mounts.length}</b></h3><div class="drawer-data-table mount-detail-table"><div class="table-head"><span>挂载类型</span><span>挂载路径</span><span>来源</span><span>操作</span></div>${profile.mounts.map(item=>`<div>${item.map(value=>`<span>${value}</span>`).join('')}</div>`).join('')}</div></section>
-    <section class="drawer-detail-section"><h3>环境变量 <b>${profile.env.length}</b></h3><div class="drawer-data-table env-detail-table"><div class="table-head"><span>名称</span><span>值</span><span>来源</span></div>${profile.env.map(item=>`<div>${item.map(value=>`<span>${value}</span>`).join('')}</div>`).join('')}</div></section>
+    <section class="drawer-detail-section"><div class="drawer-section-heading"><h3>端口 ${profile.ports.length}</h3><button type="button" data-copy-all-ports="${id}">${icon('clipboard')}<span>复制全部IP:PORT</span></button></div><div class="drawer-data-table port-detail-table"><div class="table-head"><span>端口类型</span><span>端口名称</span><span>端口号</span><span>操作</span></div>${profile.ports.length?profile.ports.map(item=>`<div><span>${item[0]}</span><span>${item[1]}</span><span>${item[2]}</span><button type="button" data-copy-port="${item[2]}" title="复制端口">${icon('clipboard')}</button></div>`).join(''):'<p class="drawer-empty-row">暂无端口</p>'}</div></section>
+    <section class="drawer-detail-section"><h3>挂载 ${profile.mounts.length}</h3><div class="drawer-data-table mount-detail-table"><div class="table-head"><span>挂载类型</span><span>挂载路径</span><span>来源</span><span>操作</span></div>${profile.mounts.map(item=>`<div>${item.map(value=>`<span>${value}</span>`).join('')}</div>`).join('')}</div></section>
+    <section class="drawer-detail-section"><h3>环境变量 ${profile.env.length}</h3><div class="drawer-data-table env-detail-table"><div class="table-head"><span>名称</span><span>值</span><span>来源</span></div>${profile.env.map(item=>`<div>${item.map(value=>`<span>${value}</span>`).join('')}</div>`).join('')}</div></section>
     <section class="drawer-detail-section drawer-termination"><h3>上一次终止</h3><dl><div><dt>原因</dt><dd>${profile.termination[0]}</dd></div><div><dt>退出码</dt><dd>${profile.termination[1]}</dd></div><div><dt>开始时间</dt><dd>${profile.termination[2]}</dd></div><div><dt>结束时间</dt><dd>${profile.termination[3]}</dd></div></dl></section>
   </div>`;
-  const logs=`<div class="tool-pane"><div class="tool-toolbar"><span>当前运行</span><button data-log-mode="latest">最新日志</button><label>${icon('search')}<input placeholder="搜索日志"></label><button data-log-fullscreen="${id}" title="全屏">${icon('unfold')}</button></div><div class="terminal-screen log-screen">${logLines(name)}</div></div>`;
+  const logs=`<div class="tool-pane"><div class="tool-toolbar"><span>当前运行</span><button data-log-mode="latest">最新日志</button><label>${icon('search')}<input placeholder="搜索日志"></label><button data-log-fullscreen="${id}" title="全屏">${icon('share')}</button></div><div class="terminal-screen log-screen">${logLines(name)}</div></div>`;
   const terminal=`<div class="tool-pane"><div class="tool-toolbar"><select><option>ranking-inference</option></select><span>/bin/bash</span><button>${icon('refresh')}重新连接</button></div><div class="terminal-screen"><p><b>root@${name.slice(-8)}:</b>/app# ps aux</p><p>PID USER COMMAND</p><p>1 root /app/server --config=/etc/app/config/server.yaml</p><p>27 root /bin/bash</p><p><b>root@${name.slice(-8)}:</b>/app# <span class="cursor"></span></p></div></div>`;
   const events=`<div class="event-pane"><div class="event-toolbar"><select><option>全部类型</option><option>Normal</option><option>Warning</option></select><button>${icon('refresh')}刷新</button></div><div class="event-table"><div class="table-head"><span>类型</span><span>原因</span><span>信息</span><span>时间</span></div><div><span class="success-text">Normal</span><span>Started</span><span>Started container ranking-inference</span><span>2 分钟前</span></div><div><span class="success-text">Normal</span><span>Pulled</span><span>Container image already present on machine</span><span>2 分钟前</span></div><div><span class="warning-text">Warning</span><span>Unhealthy</span><span>Readiness probe failed, retry succeeded</span><span>1 小时前</span></div></div></div>`;
-  const containerItems=[['主容器',''],['Sidecar','sidecar'],['容器','regular'],['Init','init']];
-  const containers=`<nav class="container-strip" aria-label="容器选择">${containerItems.map(([type,tone],index)=>`<button class="${state.selectedContainer===index?'active':''}" data-container-select="${index}" ${state.selectedContainer===index?'aria-current="true"':''}><span class="container-dot ${tone}"></span><strong>ranking-inference</strong><small>${type}</small></button>`).join('')}</nav>`;
-  return `<header class="instance-header"><div class="instance-title-wrap"><div class="instance-title"><h2 id="instanceTitle" title="${name}">${name}</h2><span class="status-tag ${paused?'blocked':status}">${paused?'已暂停':labels[status]}</span></div></div><div class="instance-header-actions"><button data-pause-pod="${id}">${paused?'恢复':'暂停'}</button><button data-detail-action="restart" title="重启">${icon('power')}</button><button data-detail-action="rebuild" title="删除/重建">${icon('refresh')}</button><button data-open-new="${id}" title="在新标签页打开">${icon('unfold')}</button><button class="close-detail" aria-label="关闭" title="关闭">×</button></div></header>${summary}<button class="summary-toggle" data-summary-toggle="${id}" aria-expanded="${!state.instanceSummaryCollapsed}">${state.instanceSummaryCollapsed?'展开':'收起'} ${icon(state.instanceSummaryCollapsed?'chevron-down':'chevron-up')}</button><section class="instance-workbench">${containers}<nav class="detail-tabs">${tabBar}</nav><div class="detail-body" data-instance-id="${id}">${tab==='detail'?details:tab==='logs'?logs:tab==='terminal'?terminal:events}</div></section>`;
+  const containers=`<nav class="container-strip" aria-label="容器选择">${containerProfiles.map((item,index)=>`<button class="${state.selectedContainer===index?'active':''}" data-container-select="${index}" ${state.selectedContainer===index?'aria-current="true"':''}><span class="container-dot ${item.tone}"></span><strong>${item.name}</strong><small>${item.type}</small></button>`).join('')}</nav>`;
+  const headerActions=`<div class="instance-header-actions"><button data-drawer-tab="detail" title="详细信息">${icon('detail')}</button><button data-drawer-tab="terminal" title="终端">${icon('terminal-nav')}</button><button data-detail-action="rebuild" title="删除/重建">${icon('hammer')}</button><button data-detail-action="block" title="屏蔽">${icon('block')}</button><button data-drawer-more="${id}" title="更多操作">${icon('more')}</button><i aria-hidden="true"></i><button data-open-new="${id}" title="独立展示">${icon('share')}</button><button class="close-detail" aria-label="关闭" title="关闭">${icon('close')}</button></div>`;
+  return `<div class="instance-heading"><header class="instance-header"><div class="instance-title-wrap"><div class="instance-title"><h2 id="instanceTitle" title="${name}">${name}</h2><span class="status-tag ${paused?'blocked':status}">${paused?'已暂停':labels[status]}</span></div></div>${headerActions}</header><div class="instance-context"><span><small>应用</small><b>Payment-api</b></span><i></i><span><small>集群</small><b>${cluster}</b></span><i></i><span><small>工作负载</small><b>ranking-inference</b></span></div></div>${summary}<section class="instance-workbench">${containers}<nav class="detail-tabs">${tabBar}</nav><div class="detail-body" data-instance-id="${id}">${tab==='detail'?details:tab==='logs'?logs:tab==='terminal'?terminal:events}</div></section>`;
 }
 function yamlMarkup(pod){
   const [id,name,,, ,,,, , ,cluster]=pod;
@@ -1058,8 +1075,43 @@ instanceModal.addEventListener('click',event=>{
   const close=event.target.closest('.close-detail');
   if(close){closeInstanceDetail();return;}
   const body=instanceModal.querySelector('.detail-body');
+  const drawerTab=event.target.closest('[data-drawer-tab]');
+  if(drawerTab&&body){openInstanceDetail(body.dataset.instanceId,drawerTab.dataset.drawerTab);return;}
+  const drawerMore=event.target.closest('[data-drawer-more]');
+  if(drawerMore){event.stopPropagation();openMenu(drawerMore,[{key:'detail',label:'查看实例详情',icon:'detail'},{key:'history',label:'查看实例变更记录',icon:'clipboard'},{key:'restart-row',label:'重启实例',icon:'restart'}]);menu.dataset.pod=drawerMore.dataset.drawerMore;return;}
+  const copyPort=event.target.closest('[data-copy-port]');
+  if(copyPort&&body){
+    const pod=pods.find(item=>item[0]===body.dataset.instanceId);
+    const value=`${pod?.[3] || ''}:${copyPort.dataset.copyPort}`;
+    navigator.clipboard?.writeText(value).catch(()=>{});
+    toast(`已复制 ${value}`);
+    return;
+  }
+  const copyAllPorts=event.target.closest('[data-copy-all-ports]');
+  if(copyAllPorts&&body){
+    const pod=pods.find(item=>item[0]===body.dataset.instanceId);
+    const ip=pod?.[3] || '';
+    const values=Array.from(instanceModal.querySelectorAll('[data-copy-port]'))
+      .map(button=>`${ip}:${button.dataset.copyPort}`)
+      .join('\n');
+    navigator.clipboard?.writeText(values).catch(()=>{});
+    toast(`已复制 ${values.split('\n').filter(Boolean).length} 个端口`);
+    return;
+  }
   const summaryToggle=event.target.closest('[data-summary-toggle]');
-  if(summaryToggle){const activeTab=instanceModal.querySelector('[data-detail-tab].active')?.dataset.detailTab || 'detail';state.instanceSummaryCollapsed=!state.instanceSummaryCollapsed;openInstanceDetail(summaryToggle.dataset.summaryToggle,activeTab);return;}
+  if(summaryToggle){
+    const shell=summaryToggle.closest('.instance-summary-shell');
+    state.instanceSummaryCollapsed=!state.instanceSummaryCollapsed;
+    shell?.classList.toggle('is-collapsed',state.instanceSummaryCollapsed);
+    summaryToggle.setAttribute('aria-expanded',String(!state.instanceSummaryCollapsed));
+    const arrow=summaryToggle.querySelector('img');
+    const label=summaryToggle.querySelector('span');
+    if(arrow) arrow.src=state.instanceSummaryCollapsed
+      ? `${figmaIconPath}/image_6.png`
+      : `${drawerAssetPath}/image_61.png`;
+    if(label) label.textContent=state.instanceSummaryCollapsed?'展开':'收起';
+    return;
+  }
   const container=event.target.closest('[data-container-select]');
   if(container){const activeTab=instanceModal.querySelector('[data-detail-tab].active')?.dataset.detailTab || 'detail';const body=instanceModal.querySelector('.detail-body');state.selectedContainer=Number(container.dataset.containerSelect);if(body)openInstanceDetail(body.dataset.instanceId,activeTab);return;}
   const tab=event.target.closest('[data-detail-tab]');
@@ -1071,7 +1123,12 @@ instanceModal.addEventListener('click',event=>{
   const back=event.target.closest('[data-yaml-back]');
   if(back){openInstanceDetail(back.dataset.yamlBack,'detail');return;}
   const fullscreen=event.target.closest('[data-log-fullscreen]');
-  if(fullscreen){instanceModal.classList.toggle('fullscreen');fullscreen.innerHTML=icon('unfold');return;}
+  if(fullscreen){
+    const isFullscreen=instanceModal.classList.toggle('fullscreen');
+    fullscreen.innerHTML=icon(isFullscreen?'close':'share');
+    fullscreen.title=isFullscreen?'退出全屏':'全屏';
+    return;
+  }
   const openNew=event.target.closest('[data-open-new]');
   if(openNew){window.open(`${window.location.href.split('#')[0]}#pod=${openNew.dataset.openNew}`,'_blank','noopener');return;}
   const action=event.target.closest('[data-detail-action]');
