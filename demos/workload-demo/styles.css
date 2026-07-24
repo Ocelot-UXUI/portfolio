@@ -484,3 +484,43 @@
 .resources-card strong img{width:16px;height:16px;object-fit:contain}
 .resources-card small{font-size:14px;font-weight:500}
 .overview-art{display:none!important}
+
+/* Figma 241:37898 breadcrumb environment and cluster dropdown popovers. */
+.env-popover,.cluster-popover{position:fixed;z-index:40;width:480px;border-radius:8px;background:#fff;box-shadow:0 8px 22px rgba(24,32,43,.12);padding:8px 8px 4px;overflow:hidden}
+.env-search,.cluster-search{display:flex;align-items:center;width:464px;height:32px;margin:0 auto 2px;padding:0 12px;border:1px solid #e5e7eb;border-radius:8px;background:#fff;color:#8f8f8f}
+.env-search input,.cluster-search input{width:100%;border:0;outline:0;color:#181818;font:14px/22px inherit}
+.env-search input::placeholder,.cluster-search input::placeholder{color:#bfbfbf}
+.cluster-search-row{display:flex;align-items:center;gap:8px;margin:0 auto 2px}
+.cluster-search-row .cluster-search{flex:1;width:auto;margin:0}
+.cluster-filter-btn{display:grid;place-items:center;width:32px;height:32px;border:1px solid #d9d9d9;border-radius:24px;background:#fff;color:#545454;cursor:pointer;flex:none}
+.cluster-filter-btn:hover{background:#f2f4f6}
+.env-popover-body,.cluster-popover-body{padding:0}
+.env-tabs,.cluster-list-header{display:flex;align-items:stretch;height:36px;padding:0 4px;margin-bottom:2px}
+.env-tabs button{position:relative;height:36px;padding:0;border:0;background:transparent;color:#545454;font:12px/20px inherit;white-space:nowrap;margin-right:32px}
+.env-tabs button:last-child{margin-right:0}
+.env-tabs button.active{color:#181818;font-weight:500}
+.env-tabs button.active::after{position:absolute;left:4px;right:4px;bottom:0;height:2px;border-radius:4px;background:#181818;content:""}
+.env-list,.cluster-list{display:flex;flex-direction:column;gap:2px;padding:0}
+.env-row{display:flex;align-items:center;width:100%;height:38px;padding:0 8px;border:0;border-radius:8px;background:#fff;color:#181818;text-align:left;cursor:pointer}
+.env-row:hover{background:#f7f7f7}
+.env-row.selected{background:rgba(167,243,207,.2)}
+.env-row img{width:16px;height:16px;margin-right:8px;object-fit:contain}
+.env-name{font-size:14px;line-height:22px;margin-right:4px}
+.env-type-tag{height:20px;padding:0 8px;border-radius:4px;background:#f2f2f2;color:#595959;font-size:12px;line-height:20px}
+.env-empty,.cluster-empty{margin:0;padding:18px;color:#8f8f8f;text-align:center;font-size:14px}
+.cluster-list-header{justify-content:space-between;height:38px;padding:0 8px;color:#8f8f8f;font-size:14px;font-weight:500}
+.cluster-list-header span:first-child{display:flex;align-items:center;gap:2px}
+.cluster-list-header span:first-child img{width:6px;height:4px}
+.cluster-list-header span:last-child{text-align:right}
+.cluster-row{display:flex;align-items:center;justify-content:space-between;width:100%;height:48px;padding:0 8px;border:0;border-radius:8px;background:#fff;color:#181818;text-align:left;cursor:pointer}
+.cluster-row:hover{background:#f7f7f7}
+.cluster-row.selected{background:rgba(167,243,207,.2)}
+.cluster-avatar{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:#caf8e2;margin-right:8px;flex:none}
+.cluster-avatar img{width:20px;height:20px;object-fit:contain}
+.cluster-name{flex:1;font-size:14px;line-height:22px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cluster-type-tag{height:20px;padding:0 8px;border-radius:12px;background:#f0f1f5;color:#515970;font-size:12px;line-height:20px;margin:0 8px;flex:none}
+.cluster-count{width:101px;text-align:right;font-size:14px;line-height:22px;white-space:nowrap;flex:none}
+.env-popover-footer,.cluster-popover-footer{display:flex;align-items:center;height:40px;padding:0}
+.env-popover-footer button,.cluster-popover-footer button{display:inline-flex;align-items:center;gap:8px;height:32px;padding:0;border:0;border-radius:24px;background:transparent;color:#181818;font:14px inherit;cursor:pointer}
+.env-popover-footer button:hover,.cluster-popover-footer button:hover{background:#f2f4f6}
+.env-popover.hidden,.cluster-popover.hidden{display:none!important}

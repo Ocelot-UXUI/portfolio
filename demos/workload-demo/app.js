@@ -12,7 +12,7 @@ const pods = [
   ['pod-11','…nference-5f6b9-p9wqc','running','192.168.10.21','grpc:8500','ENS','1','6d','16%','2.6Gi','imeonline',{model:'A100',memory:'80G',count:8,variant:'a100'}]
 ];
 
-const state = { status:'all', cluster:'all', query:'', page:1, pageSize:10, viewMode:'detailed', collapsedClusters:new Set(), selected:new Set(), pausedPods:new Set(), instanceSummaryCollapsed:false, selectedContainer:0, activeInstanceId:null, executing:false, primaryNav:'apps', appNav:'workload', appNavExpanded:true, secondaryCollapsed:false, accountTab:'all', accountQuery:'', compactMoreOpen:false };
+const state = { status:'all', cluster:'all', query:'', page:1, pageSize:10, viewMode:'detailed', collapsedClusters:new Set(), selected:new Set(), pausedPods:new Set(), instanceSummaryCollapsed:false, selectedContainer:0, activeInstanceId:null, executing:false, primaryNav:'apps', appNav:'workload', appNavExpanded:true, secondaryCollapsed:false, accountTab:'all', accountQuery:'', compactMoreOpen:false, envTab:'all', envQuery:'', selectedEnv:'imeonline', clusterQuery:'', selectedCluster:'imeonline' };
 const labels = { running:'运行中', error:'异常', blocked:'已摘流' };
 const clusterLabels = { imeonline:'imeonline', 'edge-prod':'edge-prod' };
 const clusterMeta = {
@@ -105,6 +105,24 @@ const accounts = [
   { name:'码神专用账号码神专用账号', handle:'cnap-mashen', initial:'m', tone:'blue', favorite:true, recent:true },
   { name:'一站式测试账户', handle:'appspace-test-2', initial:'t', tone:'yellow', favorite:false, recent:false },
   { name:'一站式测试账户', handle:'appspace-tool', initial:'t', tone:'purple', favorite:false, recent:true }
+];
+const envPopover = document.querySelector('#envPopover');
+const envList = document.querySelector('#envList');
+const clusterPopover = document.querySelector('#clusterPopover');
+const clusterList = document.querySelector('#clusterList');
+const breadcrumbAssetPath = './assets/figma-breadcrumb-dropdown-241-37898';
+const environments = [
+  { id:'imeonline', name:'imeonline', tag:'特殊环境', icon:'image_21.png', tab:'prod', recent:true },
+  { id:'icafe-web-2', name:'icafe-web-2', tag:'固化环境', icon:'image_22.png', tab:'prod', recent:false },
+  { id:'kefu-c', name:'kefu-c', tag:'Mesh环境', icon:'image_23.png', tab:'test', recent:true },
+  { id:'icafe-web-20260530', name:'icafe-web-20260530', tag:'特殊环境', icon:'image_24.png', tab:'test', recent:false }
+];
+const clusters = [
+  { id:'beijing-eci', name:'beijing-eci', tag:'ECI', available:20, expected:10 },
+  { id:'chengdu-eci', name:'chengdu-eci', tag:'ECI', available:20, expected:10 },
+  { id:'guangzhou-k8s', name:'guangzhou-k8s', tag:'ECI', available:20, expected:10 },
+  { id:'icafe-web-20260530', name:'icafe-web-20260530', tag:'ECI', available:20, expected:10 },
+  { id:'edge-prod', name:'edge-prod', tag:'ECI', available:20, expected:10 }
 ];
 
 function renderAppNavigation(){
@@ -512,12 +530,49 @@ function renderAccountPopover(){
 }
 function openAccountPopover(trigger){
   closeMenu();
+  closeEnvPopover();
+  closeClusterPopover();
   const rect = trigger.getBoundingClientRect();
   accountPopover.style.top = `${rect.bottom - 1}px`;
   accountPopover.style.left = `${Math.max(16, Math.min(rect.left - 20, window.innerWidth - 496))}px`;
   accountPopover.classList.remove('hidden');
   renderAccountPopover();
   document.querySelector('#accountSearchInput').focus();
+}
+function closeEnvPopover(){ envPopover.classList.add('hidden'); }
+function renderEnvPopover(){
+  const query = state.envQuery.toLowerCase();
+  const visible = environments.filter(env => (state.envTab === 'all' || (state.envTab === 'recent' && env.recent) || env.tab === state.envTab) && (!query || env.name.toLowerCase().includes(query)));
+  envList.innerHTML = visible.length ? visible.map(env => `<button class="env-row ${env.id===state.selectedEnv?'selected':''}" data-env-select="${env.id}"><img src="${breadcrumbAssetPath}/${env.icon}" alt=""><span class="env-name">${env.name}</span><span class="env-type-tag">${env.tag}</span></button>`).join('') : '<p class="env-empty">未找到匹配环境</p>';
+  document.querySelectorAll('[data-env-tab]').forEach(button => button.classList.toggle('active', button.dataset.envTab === state.envTab));
+}
+function openEnvPopover(trigger){
+  closeMenu();
+  closeAccountPopover();
+  closeClusterPopover();
+  const rect = trigger.getBoundingClientRect();
+  envPopover.style.top = `${rect.bottom - 1}px`;
+  envPopover.style.left = `${Math.max(16, Math.min(rect.left - 20, window.innerWidth - 496))}px`;
+  envPopover.classList.remove('hidden');
+  renderEnvPopover();
+  document.querySelector('#envSearchInput').focus();
+}
+function closeClusterPopover(){ clusterPopover.classList.add('hidden'); }
+function renderClusterPopover(){
+  const query = state.clusterQuery.toLowerCase();
+  const visible = clusters.filter(c => !query || c.name.toLowerCase().includes(query));
+  clusterList.innerHTML = visible.length ? visible.map(c => `<button class="cluster-row ${c.id===state.selectedCluster?'selected':''}" data-cluster-select="${c.id}"><span class="cluster-avatar"><img src="${breadcrumbAssetPath}/image_55.png" alt=""></span><span class="cluster-name">${c.name}</span><span class="cluster-type-tag">${c.tag}</span><span class="cluster-count">${c.available} / ${c.expected}</span></button>`).join('') : '<p class="cluster-empty">未找到匹配集群</p>';
+}
+function openClusterPopover(trigger){
+  closeMenu();
+  closeAccountPopover();
+  closeEnvPopover();
+  const rect = trigger.getBoundingClientRect();
+  clusterPopover.style.top = `${rect.bottom - 1}px`;
+  clusterPopover.style.left = `${Math.max(16, Math.min(rect.left - 20, window.innerWidth - 496))}px`;
+  clusterPopover.classList.remove('hidden');
+  renderClusterPopover();
+  document.querySelector('#clusterSearchInput').focus();
 }
 function openMenu(trigger,items){
   const rect=trigger.getBoundingClientRect();
@@ -542,15 +597,14 @@ document.querySelector('#secondaryCollapseBtn').addEventListener('click',()=>{
 document.querySelectorAll('[data-context]').forEach(button=>button.addEventListener('click',event=>{
   event.stopPropagation();
   const key=button.dataset.context;
-  const labels={account:'账户',application:'应用',environment:'环境'};
   if(key==='home'){ toast('已返回 CNAP 首页'); return; }
   if(key==='account'){ openAccountPopover(button); return; }
+  if(key==='environment'){ openEnvPopover(button); return; }
+  if(key==='cluster'){ openClusterPopover(button); return; }
   const lists={
-    account:[{key:'context-account-main',label:'默认账号',icon:'user'},{key:'context-account-prod',label:'生产账号',icon:'user'},{key:'context-account-manage',label:'管理账号',icon:'user'}],
-    application:[{key:'context-application-payment',label:'Payment-api',icon:'apps'},{key:'context-application-order',label:'Order-service',icon:'apps'},{key:'context-application-gateway',label:'Gateway',icon:'apps'}],
-    environment:[{key:'context-environment-prod',label:'生产环境 · prod-cn-bj',icon:'leaf'},{key:'context-environment-staging',label:'测试环境 · staging-cn-bj',icon:'leaf'}]
+    application:[{key:'context-application-payment',label:'Payment-api',icon:'apps'},{key:'context-application-order',label:'Order-service',icon:'apps'},{key:'context-application-gateway',label:'Gateway',icon:'apps'}]
   };
-  openMenu(button, lists[key]); menu.dataset.context=labels[key];
+  openMenu(button, lists[key]); menu.dataset.context='应用';
 }));
 document.querySelector('#accountSearchInput').addEventListener('input', event => { state.accountQuery = event.target.value.trim(); renderAccountPopover(); });
 document.querySelectorAll('[data-account-tab]').forEach(button => button.addEventListener('click', () => { state.accountTab = button.dataset.accountTab; renderAccountPopover(); }));
@@ -565,6 +619,35 @@ accountList.addEventListener('click', event => {
 document.querySelectorAll('[data-account-action]').forEach(button => button.addEventListener('click', () => {
   closeAccountPopover();
   toast(button.dataset.accountAction === 'create' ? '已打开新建账户' : button.dataset.accountAction === 'request' ? '已打开账户权限申请' : '已打开账户列表');
+}));
+document.querySelector('#envSearchInput').addEventListener('input', event => { state.envQuery = event.target.value.trim(); renderEnvPopover(); });
+document.querySelectorAll('[data-env-tab]').forEach(button => button.addEventListener('click', () => { state.envTab = button.dataset.envTab; renderEnvPopover(); }));
+envList.addEventListener('click', event => {
+  const item = event.target.closest('[data-env-select]');
+  if(!item) return;
+  state.selectedEnv = item.dataset.envSelect;
+  const selected = environments.find(e => e.id === state.selectedEnv);
+  document.querySelector('[data-context="environment"]').innerHTML = `<span class="env-tag">${selected.tab==='prod'?'生产':'测试'}</span>${selected.name}<svg class="chevron"><use href="#i-chevron-down"/></svg>`;
+  closeEnvPopover();
+  toast(`已切换环境：${selected.name}`);
+});
+document.querySelectorAll('[data-env-action]').forEach(button => button.addEventListener('click', () => {
+  closeEnvPopover();
+  toast('已打开新建环境');
+}));
+document.querySelector('#clusterSearchInput').addEventListener('input', event => { state.clusterQuery = event.target.value.trim(); renderClusterPopover(); });
+clusterList.addEventListener('click', event => {
+  const item = event.target.closest('[data-cluster-select]');
+  if(!item) return;
+  state.selectedCluster = item.dataset.clusterSelect;
+  const selected = clusters.find(c => c.id === state.selectedCluster);
+  document.querySelector('[data-context="cluster"]').innerHTML = `${selected.name}<svg class="chevron"><use href="#i-chevron-down"/></svg>`;
+  closeClusterPopover();
+  toast(`已切换集群：${selected.name}`);
+});
+document.querySelectorAll('[data-cluster-action]').forEach(button => button.addEventListener('click', () => {
+  closeClusterPopover();
+  toast('已打开绑定新集群');
 }));
 document.querySelector('#primaryMoreBtn').addEventListener('click',event=>{
   event.stopPropagation();
@@ -682,6 +765,6 @@ instanceModal.addEventListener('click',event=>{
   if(action&&body){const id=body.dataset.instanceId;closeInstanceDetail();triggerAction(action.dataset.detailAction,[id]);}
 });
 document.querySelector('#closeHistoryBtn').addEventListener('click',()=>historyDrawer.classList.add('hidden'));
-document.addEventListener('click',event=>{if(!event.target.closest('#actionMenu'))closeMenu(); if(!event.target.closest('#accountPopover') && !event.target.closest('[data-context="account"]')) closeAccountPopover(); if(!event.target.closest('#compactMorePopover') && !event.target.closest('#primaryMoreBtn')) closeCompactMore();});
-document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeMenu();closeAccountPopover();closeCompactMore();closeModal();closeInstanceDetail();historyDrawer.classList.add('hidden');}});
+document.addEventListener('click',event=>{if(!event.target.closest('#actionMenu'))closeMenu(); if(!event.target.closest('#accountPopover') && !event.target.closest('[data-context="account"]')) closeAccountPopover(); if(!event.target.closest('#envPopover') && !event.target.closest('[data-context="environment"]')) closeEnvPopover(); if(!event.target.closest('#clusterPopover') && !event.target.closest('[data-context="cluster"]')) closeClusterPopover(); if(!event.target.closest('#compactMorePopover') && !event.target.closest('#primaryMoreBtn')) closeCompactMore();});
+document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeMenu();closeAccountPopover();closeEnvPopover();closeClusterPopover();closeCompactMore();closeModal();closeInstanceDetail();historyDrawer.classList.add('hidden');}});
 renderHistory(); render(); renderAppNavigation();
