@@ -77,7 +77,8 @@
         <div class="title-context">
           <h1>工作负载</h1>
           <i aria-hidden="true"></i>
-          <label class="title-filter title-workload-filter"><select id="titleStatusSelect" aria-label="顶部工作负载筛选"><option value="all">全部工作负载</option><option value="running">运行中工作负载</option><option value="error">异常工作负载</option><option value="blocked">已摘流工作负载</option></select><svg aria-hidden="true"><use href="#i-chevron-down"/></svg></label>
+          <label class="title-filter"><span>集群</span><select id="titleClusterSelect" aria-label="顶部集群筛选"><option value="all">全部集群</option><option value="imeonline">imeonline</option><option value="edge-prod">edge-prod</option></select><svg aria-hidden="true"><use href="#i-chevron-down"/></svg></label>
+          <label class="title-filter title-workload-filter"><span>工作负载</span><select id="titleStatusSelect" aria-label="顶部工作负载筛选"><option value="all">全部工作负载</option><option value="running">运行中工作负载</option><option value="error">异常工作负载</option><option value="blocked">已摘流工作负载</option></select><svg aria-hidden="true"><use href="#i-chevron-down"/></svg></label>
         </div>
         <div class="title-actions"><button id="restartBtn"><img class="figma-icon" src="./assets/figma-icon-library-56-38920/image_82.png" alt="">应用重启</button><button id="horizontalScaleBtn"><img class="figma-icon" src="./assets/figma-icon-library-56-38920/image_32.png" alt="">横向扩缩</button><button id="verticalScaleBtn" class="scale-vertical"><img class="figma-icon" src="./assets/figma-icon-library-56-38920/image_33.png" alt="">纵向扩缩</button><button id="actionMoreBtn" class="icon-only" aria-label="更多操作"><svg><use href="#i-more"/></svg></button></div>
       </section>
