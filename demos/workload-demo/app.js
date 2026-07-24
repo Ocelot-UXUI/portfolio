@@ -358,12 +358,60 @@ function updateSelection(){
 }
 
 let stickySyncFrame=0;
+let stickyShowFrame=0;
+let stickyHideTimer=0;
 
-function hideWorkloadStickyStack(){
+function clearWorkloadStickyStack(){
+  workloadStickyStack.classList.remove('is-visible');
   workloadStickyStack.classList.add('hidden');
   workloadStickyStack.replaceChildren();
   delete workloadStickyStack.dataset.signature;
   delete workloadStickyStack.dataset.cluster;
+}
+
+function hideWorkloadStickyStack({immediate=false}={}){
+  if(stickyShowFrame){
+    cancelAnimationFrame(stickyShowFrame);
+    stickyShowFrame=0;
+  }
+  if(stickyHideTimer){
+    clearTimeout(stickyHideTimer);
+    stickyHideTimer=0;
+  }
+
+  if(workloadStickyStack.classList.contains('hidden'))return;
+  if(immediate){
+    clearWorkloadStickyStack();
+    return;
+  }
+
+  workloadStickyStack.classList.remove('is-visible');
+  stickyHideTimer=window.setTimeout(()=>{
+    stickyHideTimer=0;
+    if(!workloadStickyStack.classList.contains('is-visible')) clearWorkloadStickyStack();
+  },150);
+}
+
+function showWorkloadStickyStack(){
+  if(stickyHideTimer){
+    clearTimeout(stickyHideTimer);
+    stickyHideTimer=0;
+  }
+  const wasHidden=workloadStickyStack.classList.contains('hidden');
+  workloadStickyStack.classList.remove('hidden');
+  if(wasHidden){
+    stickyShowFrame=requestAnimationFrame(()=>{
+      stickyShowFrame=0;
+      if(!workloadStickyStack.classList.contains('hidden')) workloadStickyStack.classList.add('is-visible');
+    });
+  }else if(!workloadStickyStack.classList.contains('is-visible')){
+    workloadStickyStack.classList.add('is-visible');
+  }
+}
+
+function setPixelStyle(element,property,value){
+  const nextValue=`${value}px`;
+  if(element.style[property]!==nextValue) element.style[property]=nextValue;
 }
 
 function buildWorkloadStickyStack(group,signature){
@@ -423,10 +471,13 @@ function syncWorkloadStickyStack(){
   const workspaceRect=workspace.getBoundingClientRect();
   const stickyTop=workspaceRect.top+66;
   const groups=Array.from(clusterGroups.querySelectorAll('.cluster-group'));
+  const metrics=groups.map(group=>({
+    groupRect:group.getBoundingClientRect(),
+    headerRect:group.querySelector('.group-header').getBoundingClientRect()
+  }));
   let activeIndex=-1;
-  groups.forEach((group,index)=>{
-    const headerRect=group.querySelector('.group-header').getBoundingClientRect();
-    if(headerRect.top<=stickyTop&&group.getBoundingClientRect().bottom>stickyTop) activeIndex=index;
+  metrics.forEach(({groupRect,headerRect},index)=>{
+    if(headerRect.top<=stickyTop&&groupRect.bottom>stickyTop) activeIndex=index;
   });
 
   if(activeIndex<0){
@@ -439,22 +490,23 @@ function syncWorkloadStickyStack(){
   const signature=`${group.dataset.cluster}:${state.viewMode}:${collapsed}:${state.selected.size}`;
   if(workloadStickyStack.dataset.signature!==signature) buildWorkloadStickyStack(group,signature);
 
-  const groupRect=group.getBoundingClientRect();
-  const nextHeader=groups[activeIndex+1]?.querySelector('.group-header');
-  const boundary=nextHeader?.getBoundingClientRect().top??groupRect.bottom;
+  const groupRect=metrics[activeIndex].groupRect;
+  const boundary=metrics[activeIndex+1]?.headerRect.top??groupRect.bottom;
   const contentHeight=collapsed?52:100;
   const stackHeight=collapsed?118:166;
   const innerOffset=Math.min(0,boundary-stickyTop-contentHeight);
   const sourceScroll=group.querySelector('.table-scroll');
   const stickyScroll=workloadStickyStack.querySelector('.sticky-table-scroll');
 
-  workloadStickyStack.style.top=`${workspaceRect.top}px`;
-  workloadStickyStack.style.left=`${workspaceRect.left}px`;
-  workloadStickyStack.style.width=`${workspaceRect.width}px`;
-  workloadStickyStack.style.height=`${stackHeight}px`;
-  workloadStickyStack.querySelector('.sticky-workload-content').style.transform=`translateY(${innerOffset}px)`;
-  if(sourceScroll&&stickyScroll) stickyScroll.scrollLeft=sourceScroll.scrollLeft;
-  workloadStickyStack.classList.remove('hidden');
+  setPixelStyle(workloadStickyStack,'top',workspaceRect.top);
+  setPixelStyle(workloadStickyStack,'left',workspaceRect.left);
+  setPixelStyle(workloadStickyStack,'width',workspaceRect.width);
+  setPixelStyle(workloadStickyStack,'height',stackHeight);
+  const stickyContent=workloadStickyStack.querySelector('.sticky-workload-content');
+  const nextTransform=`translateY(${innerOffset}px)`;
+  if(stickyContent.style.transform!==nextTransform) stickyContent.style.transform=nextTransform;
+  if(sourceScroll&&stickyScroll&&stickyScroll.scrollLeft!==sourceScroll.scrollLeft) stickyScroll.scrollLeft=sourceScroll.scrollLeft;
+  showWorkloadStickyStack();
 }
 
 function scheduleWorkloadStickySync(){
@@ -474,6 +526,7 @@ function render(){
     return {cluster,allItems,paging};
   }).filter(Boolean);
   const renderTable=state.viewMode==='compact'?compactTableMarkup:tableMarkup;
+  delete workloadStickyStack.dataset.signature;
   hideWorkloadStickyStack();
   clusterGroups.innerHTML=byCluster.map(({cluster,allItems,paging})=>renderTable(cluster,paging.items,allItems,paging)).join('');
   clusterGroups.classList.toggle('compact-mode',state.viewMode==='compact');
