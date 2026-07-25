@@ -1,5 +1,14 @@
+const clusterDefinitions = [
+  {id:'imeonline',name:'Payment-api',environment:'华北生产',channel:'稳定发布',version:'v1.8.3',versions:'等 3 个版本',podCount:55,running:33,error:11,blocked:11,tag:'K8S'},
+  {id:'edge-prod',name:'Order-service',environment:'华东生产',channel:'灰度发布',version:'v2.4.1',versions:'等 2 个版本',podCount:18,running:11,error:4,blocked:3,tag:'K8S'},
+  {id:'beijing-eci',name:'Gateway-service',environment:'华北边缘',channel:'稳定发布',version:'v3.1.0',versions:'等 4 个版本',podCount:10,running:6,error:2,blocked:2,tag:'ECI'},
+  {id:'chengdu-eci',name:'Risk-engine',environment:'西南生产',channel:'金丝雀发布',version:'v2.7.6',versions:'等 2 个版本',podCount:7,running:4,error:2,blocked:1,tag:'ECI'},
+  {id:'guangzhou-k8s',name:'Search-indexer',environment:'华南生产',channel:'稳定发布',version:'v4.0.2',versions:'等 3 个版本',podCount:5,running:3,error:1,blocked:1,tag:'K8S'},
+  {id:'shanghai-k8s',name:'Billing-worker',environment:'华东生产',channel:'热修复',version:'v1.5.2',versions:'单一版本',podCount:3,running:2,error:1,blocked:0,tag:'K8S'},
+  {id:'hangzhou-eci',name:'Notification-service',environment:'华北测试',channel:'灰度发布',version:'v2.0.0-beta.3',versions:'单一版本',podCount:2,running:1,error:1,blocked:0,tag:'ECI'}
+];
+
 const podTemplates = {
-  statuses:['running','running','running','running','running','running','blocked','running','error','running'],
   cpu:[99,85,91,75,63,42,24,12,8,0],
   memory:[9.7,9.1,9.6,8.8,7.4,5.6,3.2,2.1,1.2,0.8],
   ports:['grpc:8500','grpc:8500 +1','http:8080','http:8080 +2','metrics:9090'],
@@ -8,11 +17,16 @@ const podTemplates = {
   suffixes:['7k2mq','p9wqa','c4r8n','m2x6b','v8t3p','q5j1d','h9s4f','w3n7k','a6e2r','u1y5c']
 };
 
-function createPods(total=110){
-  return Array.from({length:total},(_,index)=>{
-    const sequence=index+1;
-    const cluster=index%2===0?'imeonline':'edge-prod';
-    const status=podTemplates.statuses[index%podTemplates.statuses.length];
+function createPods(){
+  let sequence=0;
+  return clusterDefinitions.flatMap(cluster=>Array.from({length:cluster.podCount},(_,clusterIndex)=>{
+    sequence+=1;
+    const index=sequence-1;
+    const status=clusterIndex<cluster.running
+      ?'running'
+      :clusterIndex<cluster.running+cluster.error
+        ?'error'
+        :'blocked';
     const cpu=podTemplates.cpu[index%podTemplates.cpu.length];
     const memory=podTemplates.memory[(index*3)%podTemplates.memory.length];
     const gpuIsP800=index%4===3;
@@ -30,23 +44,20 @@ function createPods(total=110){
       podTemplates.ages[index%podTemplates.ages.length],
       `${cpu}%`,
       `${memory.toFixed(1)}Gi`,
-      cluster,
+      cluster.id,
       gpuIsP800
         ? {model:'P800',memory:'192G',count:gpuCount,variant:'p800'}
         : {model:'A100',memory:'80G',count:gpuCount,variant:'a100'}
     ];
-  });
+  }));
 }
 
 const pods = createPods();
-
-const state = { status:'all', cluster:'all', query:'', clusterPages:{imeonline:{page:1,pageSize:10},'edge-prod':{page:1,pageSize:10}}, viewMode:'detailed', collapsedClusters:new Set(), selected:new Set(), pausedPods:new Set(), instanceSummaryCollapsed:false, selectedContainer:0, activeInstanceId:null, executing:false, primaryNav:'apps', appNav:'workload', appNavExpanded:true, secondaryCollapsed:false, accountTab:'all', accountQuery:'', compactMoreOpen:false, envTab:'all', envQuery:'', selectedEnv:'imeonline', clusterQuery:'', selectedCluster:'imeonline' };
 const labels = { running:'运行中', error:'异常', blocked:'已摘流' };
-const clusterLabels = { imeonline:'imeonline', 'edge-prod':'edge-prod' };
-const clusterMeta = {
-  imeonline:{environment:'华北生产', channel:'稳定发布', version:'v1.8.3', versions:'等 3 个版本'},
-  'edge-prod':{environment:'边缘生产', channel:'灰度发布', version:'v1.9.0-rc.2', versions:'等 2 个版本'}
-};
+const clusterLabels = Object.fromEntries(clusterDefinitions.map(cluster=>[cluster.id,cluster.name]));
+const clusterMeta = Object.fromEntries(clusterDefinitions.map(cluster=>[cluster.id,cluster]));
+const clusterPages = Object.fromEntries(clusterDefinitions.map(cluster=>[cluster.id,{page:1,pageSize:10}]));
+const state = { status:'all', cluster:'all', query:'', clusterPages, viewMode:'detailed', collapsedClusters:new Set(), selected:new Set(), pausedPods:new Set(), instanceSummaryCollapsed:false, selectedContainer:0, activeInstanceId:null, executing:false, primaryNav:'apps', appNav:'workload', appNavExpanded:true, secondaryCollapsed:false, accountTab:'all', accountQuery:'', compactMoreOpen:false, envTab:'all', envQuery:'', selectedEnv:'imeonline', clusterQuery:'', selectedCluster:'imeonline' };
 const clusterGroups = document.querySelector('#clusterGroups');
 const workspace = document.querySelector('.workspace');
 const workloadStickyStack = document.querySelector('#workloadStickyStack');
@@ -155,13 +166,21 @@ const environments = [
   { id:'kefu-c', name:'kefu-c', tag:'Mesh环境', icon:'image_23.png', tab:'test', recent:true },
   { id:'icafe-web-20260530', name:'icafe-web-20260530', tag:'特殊环境', icon:'image_24.png', tab:'test', recent:false }
 ];
-const clusters = [
-  { id:'beijing-eci', name:'beijing-eci', tag:'ECI', available:20, expected:10 },
-  { id:'chengdu-eci', name:'chengdu-eci', tag:'ECI', available:20, expected:10 },
-  { id:'guangzhou-k8s', name:'guangzhou-k8s', tag:'ECI', available:20, expected:10 },
-  { id:'icafe-web-20260530', name:'icafe-web-20260530', tag:'ECI', available:20, expected:10 },
-  { id:'edge-prod', name:'edge-prod', tag:'ECI', available:20, expected:10 }
-];
+const clusters = clusterDefinitions.map(cluster=>({
+  id:cluster.id,
+  name:cluster.id,
+  tag:cluster.tag,
+  available:cluster.podCount,
+  expected:cluster.podCount
+}));
+
+function renderClusterFilterOptions(){
+  const options=clusterDefinitions
+    .map(cluster=>`<option value="${cluster.id}">${cluster.name}</option>`)
+    .join('');
+  document.querySelector('#titleClusterSelect').innerHTML=`<option value="all">全部集群</option>${options}`;
+  document.querySelector('#clusterSelect').innerHTML=`<option value="all">屏蔽与接流</option>${options}`;
+}
 
 function renderAppNavigation(){
   const isApplication = state.primaryNav === 'apps';
@@ -279,7 +298,7 @@ function compactTableMarkup(cluster,podsInCluster,allPodsInCluster,paging){
   const summary={running:0,error:0,blocked:0};
   allPodsInCluster.forEach(([, ,status])=>summary[status]++);
   return `<section class="cluster-group ${collapsed?'collapsed':''}" data-cluster="${cluster}">
-    <header class="group-header"><button class="cluster-toggle" data-cluster-toggle="${cluster}" aria-label="${collapsed?'展开':'收起'}">${icon(collapsed?'chevron-right':'chevron-down')}</button><div class="group-title"><strong>Payment-api</strong><span class="rollout ${cluster}">${meta.channel}</span><span class="versions">${meta.version}&nbsp; ${meta.versions}</span></div><div class="group-summary"><span>运行中 <b class="green">${summary.running}</b></span><span>异常 <b class="red">${summary.error}</b></span><span>已屏蔽 <b class="amber">${summary.blocked}</b></span><i></i><span>共 ${allPodsInCluster.length} pod</span><button class="cluster-more" data-cluster-more="${cluster}" aria-label="${clusterName} 更多操作">${icon('more')}</button></div></header>
+    <header class="group-header"><button class="cluster-toggle" data-cluster-toggle="${cluster}" aria-label="${collapsed?'展开':'收起'}">${icon(collapsed?'chevron-right':'chevron-down')}</button><div class="group-title"><strong>${clusterName}</strong><span class="rollout ${cluster}">${meta.channel}</span><span class="versions">${meta.version}&nbsp; ${meta.versions}</span></div><div class="group-summary"><span>运行中 <b class="green">${summary.running}</b></span><span>异常 <b class="red">${summary.error}</b></span><span>已屏蔽 <b class="amber">${summary.blocked}</b></span><i></i><span>共 ${allPodsInCluster.length} pod</span><button class="cluster-more" data-cluster-more="${cluster}" aria-label="${clusterName} 更多操作">${icon('more')}</button></div></header>
     <div class="table-frame"><div class="table-scroll"><table class="pod-table compact-pod-table"><thead><tr><th><input class="cluster-select" data-cluster-select="${cluster}" type="checkbox" ${selected?'checked':''} ${partial&&!selected?'data-indeterminate="true"':''} aria-label="全选 ${clusterName} 当前页"></th><th><span class="column-title">实例名称/集群</span></th><th><span class="column-title">状态</span>${compactSortIconMarkup()}</th><th><span class="column-title">Pod IP</span></th><th><span class="column-title">端口</span></th><th><span class="column-title">服务暴露</span></th><th><span class="column-title">重启</span>${compactSortIconMarkup('desc')}</th><th><span class="column-title">存活</span>${compactSortIconMarkup()}</th><th><span class="column-title">CPU</span>${compactSortIconMarkup('asc')}</th><th><span class="column-title">内存</span>${compactSortIconMarkup('asc')}</th><th><span class="column-title">操作</span></th></tr></thead><tbody>${podsInCluster.map(compactRowMarkup).join('')}</tbody></table></div><i class="frozen-edge frozen-edge-identity" aria-hidden="true"></i></div>
     ${clusterPaginationMarkup(cluster,paging)}
   </section>`;
@@ -314,7 +333,7 @@ function tableMarkup(cluster,podsInCluster,allPodsInCluster,paging){
   const clusterName=clusterLabels[cluster];
   const meta=clusterMeta[cluster];
   return `<section class="cluster-group ${collapsed?'collapsed':''}" data-cluster="${cluster}">
-    <header class="group-header"><button class="cluster-toggle" data-cluster-toggle="${cluster}" aria-label="${collapsed?'展开':'收起'}">${icon(collapsed?'chevron-right':'chevron-down')}</button><div class="group-title"><strong>Payment-api</strong><span class="rollout ${cluster}">${meta.channel}</span><span class="versions">${meta.version}&nbsp; ${meta.versions}</span></div><div class="group-summary"><span>运行中 <b class="green">${summary.running}</b></span><span>异常 <b class="red">${summary.error}</b></span><span>已屏蔽 <b class="amber">${summary.blocked}</b></span><i></i><span>共 ${allPodsInCluster.length} pod</span><button class="cluster-more" data-cluster-more="${cluster}" aria-label="${clusterName} 更多操作">${icon('more')}</button></div></header>
+    <header class="group-header"><button class="cluster-toggle" data-cluster-toggle="${cluster}" aria-label="${collapsed?'展开':'收起'}">${icon(collapsed?'chevron-right':'chevron-down')}</button><div class="group-title"><strong>${clusterName}</strong><span class="rollout ${cluster}">${meta.channel}</span><span class="versions">${meta.version}&nbsp; ${meta.versions}</span></div><div class="group-summary"><span>运行中 <b class="green">${summary.running}</b></span><span>异常 <b class="red">${summary.error}</b></span><span>已屏蔽 <b class="amber">${summary.blocked}</b></span><i></i><span>共 ${allPodsInCluster.length} pod</span><button class="cluster-more" data-cluster-more="${cluster}" aria-label="${clusterName} 更多操作">${icon('more')}</button></div></header>
     <div class="table-frame"><div class="table-scroll"><table class="pod-table"><thead><tr><th><input class="cluster-select" data-cluster-select="${cluster}" type="checkbox" ${selected?'checked':''} ${partial&&!selected?'data-indeterminate="true"':''} aria-label="全选 ${clusterName} 当前页"></th><th><span class="column-title">实例名称/集群</span></th><th><span class="column-title">状态/容器</span>${sortIconMarkup()}</th><th><span class="column-title">Pod IP/节点IP</span></th><th><span class="column-title">端口</span></th><th><span class="column-title">服务暴露</span></th><th><span class="column-title">重启</span>${sortIconMarkup(true)}</th><th><span class="column-title">存活</span>${sortIconMarkup()}</th><th class="cpu-resource-head"><span class="column-title">CPU</span>${sortIconMarkup()}</th><th class="memory-resource-head"><span class="column-title">内存</span>${sortIconMarkup()}</th><th class="gpu-resource-head"><span class="column-title">GPU</span></th><th><span class="column-title">操作</span></th></tr></thead><tbody>${podsInCluster.map(rowMarkup).join('')}</tbody></table></div><i class="frozen-edge frozen-edge-identity" aria-hidden="true"></i></div>
     ${clusterPaginationMarkup(cluster,paging)}
   </section>`;
@@ -1139,4 +1158,4 @@ instanceModal.addEventListener('click',event=>{
 document.querySelector('#closeHistoryBtn').addEventListener('click',()=>historyDrawer.classList.add('hidden'));
 document.addEventListener('click',event=>{if(!event.target.closest('#actionMenu'))closeMenu(); if(!event.target.closest('#accountPopover') && !event.target.closest('[data-context="account"]')) closeAccountPopover(); if(!event.target.closest('#envPopover') && !event.target.closest('[data-context="environment"]')) closeEnvPopover(); if(!event.target.closest('#clusterPopover') && !event.target.closest('[data-context="cluster"]')) closeClusterPopover(); if(!event.target.closest('#compactMorePopover') && !event.target.closest('#primaryMoreBtn')) closeCompactMore();});
 document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeMenu();closeAccountPopover();closeEnvPopover();closeClusterPopover();closeCompactMore();closeModal();closeInstanceDetail();historyDrawer.classList.add('hidden');}});
-renderHistory(); render(); renderAppNavigation();
+renderClusterFilterOptions(); renderHistory(); render(); renderAppNavigation();
