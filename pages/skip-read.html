@@ -35,5 +35,11 @@
       </section>
     </main>
     <footer>GUO YUCHENG · UX/UI DESIGN · 2026</footer>
+    <script>
+      const stickyNav = document.querySelector("header");
+      const updateStickyNav = () => stickyNav?.classList.toggle("is-scrolled", window.scrollY > 16);
+      updateStickyNav();
+      window.addEventListener("scroll", updateStickyNav, { passive: true });
+    </script>
   </body>
 </html>
