@@ -180,6 +180,7 @@
             const reference = cellReference(column, rowIndex);
             if (skipped.has(reference)) continue;
             const cell = document.createElement(rowIndex === 0 ? "th" : "td");
+            if (column === 0) cell.classList.add("research-table-first-column");
             if (rowIndex === 0) cell.scope = "col";
             const span = merges.get(reference);
             if (span) {
