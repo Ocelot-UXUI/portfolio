@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="郭昱成 UX/UI 作品集 - 主动式 AI 记忆助手" />
     <title>主动式 AI 记忆助手 | 郭昱成作品集</title>
-    <link rel="stylesheet" href="../styles/styles.css?v=20260726-1" />
+    <link rel="stylesheet" href="../styles/styles.css?v=20260726-2" />
   </head>
   <body>
     <header class="project-nav"><a class="project-back" href="../index.html" aria-label="返回首页"><span aria-hidden="true">←</span> 返回首页</a><p class="project-nav-title">主动式 AI 记忆助手</p><label class="project-view-switch"><span>当前展示：</span><select aria-label="切换主动式 AI 记忆助手展示" data-view-switch data-current="case.html"><option value="case.html" selected>案例 Deck</option><option value="remi.html">交互 Demo</option><option value="remi-materials.html">交付物</option></select></label></header>
@@ -13,7 +13,10 @@
       <section class="slides" aria-label="主动式 AI 记忆助手项目案例">
         <img src="../assets/remi/figma-source/page-01.webp" alt="主动式 AI 记忆助手项目概览" fetchpriority="high" />
         <img src="../assets/remi/figma-source/page-02.webp" alt="主动式 AI 记忆助手项目原稿第 2 页" loading="lazy" />
-        <img src="../assets/remi/figma-source/page-03.webp" alt="主动式 AI 记忆助手项目原稿第 3 页" loading="lazy" />
+        <div class="case-slide-frame">
+          <img src="../assets/remi/figma-source/page-03.webp" alt="主动式 AI 记忆助手项目原稿第 3 页" loading="lazy" />
+          <a class="case-slide-hotspot" href="remi-materials.html?section=interview" data-case-hotspot aria-label="查看用户调研半结构化访谈问题与访谈记录"></a>
+        </div>
         <img src="../assets/remi/figma-source/page-04.webp" alt="主动式 AI 记忆助手项目原稿第 4 页" loading="lazy" />
         <img src="../assets/remi/figma-source/page-05.webp" alt="主动式 AI 记忆助手项目原稿第 5 页" loading="lazy" />
         <img src="../assets/remi/figma-source/page-06.webp" alt="主动式 AI 记忆助手项目原稿第 6 页" loading="lazy" />
@@ -32,6 +35,7 @@
         <img src="../assets/remi/figma-source/page-19.webp" alt="主动式 AI 记忆助手项目原稿第 19 页" loading="lazy" />
         <img src="../assets/remi/figma-source/page-20.webp" alt="主动式 AI 记忆助手项目原稿第 20 页" loading="lazy" />
       </section>
+      <div class="project-hover-cursor" aria-hidden="true"><span>查看</span><img src="../assets/figma-button/image_1.png" alt="" /></div>
     </main>
     <footer>GUO YUCHENG · UX/UI DESIGN · 2026</footer>
     <script>
@@ -51,6 +55,20 @@
           window.location.href = option.value;
         });
       });
+
+      const caseCursor = document.querySelector(".project-hover-cursor");
+      const caseHotspot = document.querySelector("[data-case-hotspot]");
+      if (caseCursor && caseHotspot && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+        const updateCaseCursor = (event) => {
+          caseCursor.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0)`;
+        };
+        caseHotspot.addEventListener("pointerenter", (event) => {
+          updateCaseCursor(event);
+          caseCursor.classList.add("visible");
+        });
+        caseHotspot.addEventListener("pointermove", updateCaseCursor);
+        caseHotspot.addEventListener("pointerleave", () => caseCursor.classList.remove("visible"));
+      }
     </script>
   </body>
 </html>
