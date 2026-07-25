@@ -25,7 +25,12 @@
         </div>
         <div class="deliverables-content" aria-live="polite">
           <section class="deliverable-panel" id="research-panel" data-deliverable-panel="research" role="tabpanel">
-            <p class="deliverable-empty">用户调研材料整理中。</p>
+            <div class="research-subtabs" role="tablist" aria-label="用户调研材料">
+              <button type="button" role="tab" aria-selected="true" tabindex="0" data-research-tab="interview">调研具体内容</button>
+              <button type="button" role="tab" aria-selected="false" tabindex="-1" data-research-tab="document">调研文档</button>
+            </div>
+            <section class="research-subpanel" data-research-panel="interview" role="tabpanel"></section>
+            <section class="research-subpanel" data-research-panel="document" role="tabpanel" hidden></section>
           </section>
           <section class="deliverable-panel" id="competitor-panel" data-deliverable-panel="competitor" role="tabpanel" hidden></section>
           <section class="deliverable-panel" id="validation-panel" data-deliverable-panel="validation" role="tabpanel" hidden>
@@ -41,6 +46,7 @@
       </section>
     </main>
     <script src="remi-competitor-data.js"></script>
+    <script src="remi-research-data.js"></script>
     <script>
       const stickyNav = document.querySelector("header");
       const updateStickyNav = () => stickyNav?.classList.toggle("is-scrolled", window.scrollY > 16);
@@ -67,6 +73,132 @@
         return `${label}${row + 1}`;
       };
       const columnIndex = (label) => [...label].reduce((total, char) => total * 26 + char.charCodeAt(0) - 64, 0) - 1;
+      const createMergeMap = (mergeRanges) => {
+        const merges = new Map();
+        const skipped = new Set();
+        mergeRanges.forEach((merge) => {
+          const [start, end] = merge.split(":");
+          const [, startColumnLabel, startRowLabel] = start.match(/^([A-Z]+)(\d+)$/);
+          const [, endColumnLabel, endRowLabel] = end.match(/^([A-Z]+)(\d+)$/);
+          const startColumn = columnIndex(startColumnLabel);
+          const endColumn = columnIndex(endColumnLabel);
+          const startRow = Number(startRowLabel) - 1;
+          const endRow = Number(endRowLabel) - 1;
+          merges.set(start, { colSpan: endColumn - startColumn + 1, rowSpan: endRow - startRow + 1 });
+          for (let row = startRow; row <= endRow; row += 1) {
+            for (let column = startColumn; column <= endColumn; column += 1) {
+              const reference = cellReference(column, row);
+              if (reference !== start) skipped.add(reference);
+            }
+          }
+        });
+        return { merges, skipped };
+      };
+      const appendInlineMarkdown = (element, content) => {
+        const segments = content.split(/(\*\*[^*]+\*\*)/g);
+        segments.forEach((segment) => {
+          if (segment.startsWith("**") && segment.endsWith("**")) {
+            const strong = document.createElement("strong");
+            strong.textContent = segment.slice(2, -2);
+            element.append(strong);
+            return;
+          }
+          element.append(document.createTextNode(segment.replace(/\\([+_()])/g, "$1")));
+        });
+      };
+      const renderResearchDocument = (panel, markdown) => {
+        const article = document.createElement("article");
+        article.className = "research-document";
+        const lines = markdown.split(/\r?\n/);
+        let list = null;
+        const appendParagraph = (content, className = "") => {
+          const paragraph = document.createElement("p");
+          if (className) paragraph.className = className;
+          appendInlineMarkdown(paragraph, content);
+          article.append(paragraph);
+        };
+        lines.forEach((line) => {
+          const heading = line.match(/^(#{1,3})\s+(.+)$/);
+          const unordered = line.match(/^\s*-\s+(.+)$/);
+          const ordered = line.match(/^\s*\d+\.\s+(.+)$/);
+          if (heading) {
+            list = null;
+            const level = heading[1].length;
+            const element = document.createElement(level === 1 ? "h2" : level === 2 ? "h3" : "h4");
+            appendInlineMarkdown(element, heading[2]);
+            article.append(element);
+            return;
+          }
+          if (line.trim() === "---") {
+            list = null;
+            article.append(document.createElement("hr"));
+            return;
+          }
+          if (unordered || ordered) {
+            const type = unordered ? "ul" : "ol";
+            if (!list || list.tagName.toLowerCase() !== type) {
+              list = document.createElement(type);
+              article.append(list);
+            }
+            const item = document.createElement("li");
+            appendInlineMarkdown(item, (unordered || ordered)[1]);
+            list.append(item);
+            return;
+          }
+          if (line.startsWith(">")) {
+            list = null;
+            appendParagraph(line.replace(/^>\s?/, ""), "research-callout");
+            return;
+          }
+          if (line.trim()) {
+            list = null;
+            appendParagraph(line.trim());
+          }
+        });
+        panel.append(article);
+      };
+      const renderResearch = () => {
+        const data = window.remiResearch;
+        const interviewPanel = document.querySelector('[data-research-panel="interview"]');
+        const documentPanel = document.querySelector('[data-research-panel="document"]');
+        if (!data || interviewPanel.dataset.rendered) return;
+        interviewPanel.dataset.rendered = "true";
+        const title = document.createElement("h2");
+        title.className = "research-section-title";
+        title.textContent = data.interview.name;
+        interviewPanel.append(title);
+        const scroll = document.createElement("div");
+        scroll.className = "research-table-scroll";
+        const table = document.createElement("table");
+        table.className = "research-table";
+        table.setAttribute("aria-label", data.interview.name);
+        const body = document.createElement("tbody");
+        const { merges, skipped } = createMergeMap(data.interview.merges);
+        data.interview.rows.forEach((row, rowIndex) => {
+          const tr = document.createElement("tr");
+          for (let column = 0; column < data.interview.columnCount; column += 1) {
+            const reference = cellReference(column, rowIndex);
+            if (skipped.has(reference)) continue;
+            const cell = document.createElement(rowIndex === 0 ? "th" : "td");
+            if (rowIndex === 0) cell.scope = "col";
+            const span = merges.get(reference);
+            if (span) {
+              cell.colSpan = span.colSpan;
+              cell.rowSpan = span.rowSpan;
+            }
+            const content = document.createElement("span");
+            content.className = "research-cell-text";
+            content.textContent = row[column] || "";
+            cell.append(content);
+            tr.append(cell);
+          }
+          body.append(tr);
+        });
+        table.append(body);
+        scroll.append(table);
+        interviewPanel.append(scroll);
+        renderResearchDocument(documentPanel, data.document);
+      };
       const renderCompetitorAnalysis = () => {
         const panel = document.querySelector('[data-deliverable-panel="competitor"]');
         const sheets = window.remiCompetitorAnalysis || [];
@@ -144,7 +276,23 @@
           panel.append(section);
         });
       };
+      renderResearch();
       renderCompetitorAnalysis();
+      const researchTabs = [...document.querySelectorAll(".research-subtabs [role=tab]")];
+      const researchPanels = [...document.querySelectorAll("[data-research-panel]")];
+      researchTabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          const target = tab.dataset.researchTab;
+          researchTabs.forEach((item) => {
+            const selected = item === tab;
+            item.setAttribute("aria-selected", String(selected));
+            item.tabIndex = selected ? 0 : -1;
+          });
+          researchPanels.forEach((panel) => {
+            panel.hidden = panel.dataset.researchPanel !== target;
+          });
+        });
+      });
       deliverableTabs.forEach((tab) => {
         tab.addEventListener("click", () => {
           const target = tab.dataset.deliverableTab;
