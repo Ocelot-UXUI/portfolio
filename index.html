@@ -60,7 +60,7 @@
             </div>
             <div class="showcase-media"><img src="assets/figma-projects/image_5.png" alt="小红书本地生活双手机界面" /></div>
           </a>
-          <div class="project-hover-cursor" aria-hidden="true"><span>查看</span><img src="assets/figma-projects/image_6.png" alt="" /></div>
+          <div class="project-hover-cursor" aria-hidden="true"><span>查看</span><img src="assets/figma-button/image_1.png" alt="" /></div>
         </section>
 
         <section class="about" id="about">
@@ -105,8 +105,6 @@
           const bounds = hotspot.getBoundingClientRect();
           hotspot.style.setProperty("--pointer-x", `${event.clientX - bounds.left}px`);
           hotspot.style.setProperty("--pointer-y", `${event.clientY - bounds.top}px`);
-          hotspot.style.setProperty("--pointer-shift-x", `${((event.clientX - bounds.left) / bounds.width - 0.5) * 18}px`);
-          hotspot.style.setProperty("--pointer-shift-y", `${((event.clientY - bounds.top) / bounds.height - 0.5) * 12}px`);
           projectCursor.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0)`;
         };
         projectHotspots.forEach((hotspot) => {
@@ -120,8 +118,6 @@
             hotspot.classList.remove("pointer-active");
             projectCursor.classList.remove("visible");
           });
-          hotspot.addEventListener("pointerdown", () => projectCursor.classList.add("pressed"));
-          hotspot.addEventListener("pointerup", () => projectCursor.classList.remove("pressed"));
         });
       }
     </script>
