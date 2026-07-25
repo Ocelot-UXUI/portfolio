@@ -17,15 +17,30 @@
       <section class="deliverables-shell" aria-labelledby="deliverables-title">
         <h1 id="deliverables-title">交付物</h1>
         <div class="deliverables-tabs" role="tablist" aria-label="交付物分类">
-          <button type="button" role="tab" aria-selected="true" tabindex="0">用户调研</button>
-          <button type="button" role="tab" aria-selected="false" tabindex="-1">竞品分析</button>
-          <button type="button" role="tab" aria-selected="false" tabindex="-1">数据验证</button>
-          <button type="button" role="tab" aria-selected="false" tabindex="-1">待定模块</button>
-          <button type="button" role="tab" aria-selected="false" tabindex="-1">待定模块</button>
+          <button type="button" role="tab" aria-controls="research-panel" aria-selected="true" tabindex="0" data-deliverable-tab="research">用户调研</button>
+          <button type="button" role="tab" aria-controls="competitor-panel" aria-selected="false" tabindex="-1" data-deliverable-tab="competitor">竞品分析</button>
+          <button type="button" role="tab" aria-controls="validation-panel" aria-selected="false" tabindex="-1" data-deliverable-tab="validation">数据验证</button>
+          <button type="button" role="tab" aria-selected="false" tabindex="-1" data-deliverable-tab="placeholder-one">待定模块</button>
+          <button type="button" role="tab" aria-selected="false" tabindex="-1" data-deliverable-tab="placeholder-two">待定模块</button>
         </div>
-        <div class="deliverables-content" aria-live="polite"></div>
+        <div class="deliverables-content" aria-live="polite">
+          <section class="deliverable-panel" id="research-panel" data-deliverable-panel="research" role="tabpanel">
+            <p class="deliverable-empty">用户调研材料整理中。</p>
+          </section>
+          <section class="deliverable-panel" id="competitor-panel" data-deliverable-panel="competitor" role="tabpanel" hidden></section>
+          <section class="deliverable-panel" id="validation-panel" data-deliverable-panel="validation" role="tabpanel" hidden>
+            <p class="deliverable-empty">数据验证材料整理中。</p>
+          </section>
+          <section class="deliverable-panel" data-deliverable-panel="placeholder-one" role="tabpanel" hidden>
+            <p class="deliverable-empty">模块内容待补充。</p>
+          </section>
+          <section class="deliverable-panel" data-deliverable-panel="placeholder-two" role="tabpanel" hidden>
+            <p class="deliverable-empty">模块内容待补充。</p>
+          </section>
+        </div>
       </section>
     </main>
+    <script src="remi-competitor-data.js"></script>
     <script>
       const stickyNav = document.querySelector("header");
       const updateStickyNav = () => stickyNav?.classList.toggle("is-scrolled", window.scrollY > 16);
@@ -40,11 +55,106 @@
       });
 
       const deliverableTabs = [...document.querySelectorAll(".deliverables-tabs [role=tab]")];
+      const deliverablePanels = [...document.querySelectorAll("[data-deliverable-panel]")];
+      const cellReference = (column, row) => {
+        let label = "";
+        let value = column + 1;
+        while (value) {
+          const remainder = (value - 1) % 26;
+          label = String.fromCharCode(65 + remainder) + label;
+          value = Math.floor((value - 1) / 26);
+        }
+        return `${label}${row + 1}`;
+      };
+      const columnIndex = (label) => [...label].reduce((total, char) => total * 26 + char.charCodeAt(0) - 64, 0) - 1;
+      const renderCompetitorAnalysis = () => {
+        const panel = document.querySelector('[data-deliverable-panel="competitor"]');
+        const sheets = window.remiCompetitorAnalysis || [];
+        if (!sheets.length || panel.dataset.rendered) return;
+        panel.dataset.rendered = "true";
+        sheets.forEach((sheet) => {
+          const section = document.createElement("section");
+          section.className = "competitor-sheet";
+          const heading = document.createElement("h2");
+          heading.textContent = sheet.name;
+          section.append(heading);
+          const scroll = document.createElement("div");
+          scroll.className = "competitor-table-scroll";
+          const table = document.createElement("table");
+          table.className = "competitor-table";
+          table.setAttribute("aria-label", sheet.name);
+          const tbody = document.createElement("tbody");
+          const merges = new Map();
+          const skipped = new Set();
+          sheet.merges.forEach((merge) => {
+            const [start, end] = merge.split(":");
+            const [, startColumnLabel, startRowLabel] = start.match(/^([A-Z]+)(\d+)$/);
+            const [, endColumnLabel, endRowLabel] = end.match(/^([A-Z]+)(\d+)$/);
+            const startColumn = columnIndex(startColumnLabel);
+            const endColumn = columnIndex(endColumnLabel);
+            const startRow = Number(startRowLabel) - 1;
+            const endRow = Number(endRowLabel) - 1;
+            merges.set(start, { colSpan: endColumn - startColumn + 1, rowSpan: endRow - startRow + 1 });
+            for (let row = startRow; row <= endRow; row += 1) {
+              for (let column = startColumn; column <= endColumn; column += 1) {
+                const reference = cellReference(column, row);
+                if (reference !== start) skipped.add(reference);
+              }
+            }
+          });
+          for (let row = 0; row < sheet.rowCount; row += 1) {
+            const tr = document.createElement("tr");
+            for (let column = 0; column < sheet.columnCount; column += 1) {
+              const reference = cellReference(column, row);
+              if (skipped.has(reference)) continue;
+              const value = sheet.cells[reference] || "";
+              const images = sheet.images[reference] || [];
+              const cell = document.createElement(row === 0 || column === 0 ? "th" : "td");
+              if (cell.tagName === "TH") cell.scope = row === 0 ? "col" : "row";
+              const span = merges.get(reference);
+              if (span) {
+                cell.colSpan = span.colSpan;
+                cell.rowSpan = span.rowSpan;
+              }
+              if (value) {
+                const text = document.createElement("span");
+                text.className = "competitor-cell-text";
+                text.textContent = value;
+                cell.append(text);
+              }
+              if (images.length) {
+                const gallery = document.createElement("div");
+                gallery.className = "competitor-image-gallery";
+                images.forEach((src, index) => {
+                  const image = document.createElement("img");
+                  image.src = src;
+                  image.alt = `${sheet.name} ${reference} 图片 ${index + 1}`;
+                  image.loading = "lazy";
+                  gallery.append(image);
+                });
+                cell.append(gallery);
+              }
+              tr.append(cell);
+            }
+            if (tr.children.length) tbody.append(tr);
+          }
+          table.append(tbody);
+          scroll.append(table);
+          section.append(scroll);
+          panel.append(section);
+        });
+      };
+      renderCompetitorAnalysis();
       deliverableTabs.forEach((tab) => {
         tab.addEventListener("click", () => {
+          const target = tab.dataset.deliverableTab;
           deliverableTabs.forEach((item) => {
-            item.setAttribute("aria-selected", String(item === tab));
-            item.tabIndex = item === tab ? 0 : -1;
+            const selected = item === tab;
+            item.setAttribute("aria-selected", String(selected));
+            item.tabIndex = selected ? 0 : -1;
+          });
+          deliverablePanels.forEach((panel) => {
+            panel.hidden = panel.dataset.deliverablePanel !== target;
           });
         });
       });
