@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="郭昱成 UX/UI 作品集 - 主动式 AI 记忆助手交付物" />
+    <title>主动式 AI 记忆助手交付物 | 郭昱成作品集</title>
+    <link rel="stylesheet" href="../styles/styles.css" />
+  </head>
+  <body class="deliverables-page">
+    <header class="project-nav">
+      <a class="project-back" href="../index.html" aria-label="返回首页"><span aria-hidden="true">←</span> 返回首页</a>
+      <p class="project-nav-title">主动式 AI 记忆助手</p>
+      <label class="project-view-switch"><span>当前展示：</span><select aria-label="切换主动式 AI 记忆助手展示" data-view-switch data-current="remi-deliverables.html"><option value="case.html">案例 Deck</option><option value="remi.html">交互 Demo</option><option value="remi-deliverables.html" selected>交付物</option></select></label>
+    </header>
+    <main class="deliverables-main">
+      <section class="deliverables-shell" aria-labelledby="deliverables-title">
+        <h1 id="deliverables-title">交付物</h1>
+        <div class="deliverables-tabs" role="tablist" aria-label="交付物分类">
+          <button type="button" role="tab" aria-selected="true" tabindex="0">用户调研</button>
+          <button type="button" role="tab" aria-selected="false" tabindex="-1">竞品分析</button>
+          <button type="button" role="tab" aria-selected="false" tabindex="-1">数据验证</button>
+          <button type="button" role="tab" aria-selected="false" tabindex="-1">待定模块</button>
+          <button type="button" role="tab" aria-selected="false" tabindex="-1">待定模块</button>
+        </div>
+        <div class="deliverables-content" aria-live="polite"></div>
+      </section>
+    </main>
+    <script>
+      const stickyNav = document.querySelector("header");
+      const updateStickyNav = () => stickyNav?.classList.toggle("is-scrolled", window.scrollY > 16);
+      updateStickyNav();
+      window.addEventListener("scroll", updateStickyNav, { passive: true });
+
+      document.querySelectorAll("[data-view-switch]").forEach((viewSwitch) => {
+        viewSwitch.addEventListener("change", () => {
+          const option = viewSwitch.selectedOptions[0];
+          if (option.value) window.location.href = option.value;
+        });
+      });
+
+      const deliverableTabs = [...document.querySelectorAll(".deliverables-tabs [role=tab]")];
+      deliverableTabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          deliverableTabs.forEach((item) => {
+            item.setAttribute("aria-selected", String(item === tab));
+            item.tabIndex = item === tab ? 0 : -1;
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
