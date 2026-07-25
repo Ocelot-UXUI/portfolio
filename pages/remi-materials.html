@@ -3,29 +3,71 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="郭昱成 UX/UI 作品集 - 主动式 AI 记忆助手用户调研" />
+    <meta name="description" content="郭昱成 UX/UI 作品集 - 主动式 AI 记忆助手交付物" />
     <title>主动式 AI 记忆助手交付物 | 郭昱成作品集</title>
-    <link rel="stylesheet" href="../styles/styles.css?v=20260725-2" />
+    <link rel="stylesheet" href="../styles/styles.css?v=20260725-4" />
   </head>
   <body class="deliverables-page">
     <header class="project-nav">
       <a class="project-back" href="../index.html" aria-label="返回首页"><span aria-hidden="true">←</span> 返回首页</a>
       <p class="project-nav-title">主动式 AI 记忆助手</p>
-      <a class="project-back" href="case.html" aria-label="查看案例 Deck">案例 Deck</a>
+      <label class="project-view-switch"><span>当前展示</span><select aria-label="切换主动式 AI 记忆助手展示" data-view-switch data-current="remi-materials.html"><option value="case.html">案例 Deck</option><option value="remi.html">交互 Demo</option><option value="remi-materials.html" selected>交付物</option></select></label>
     </header>
     <main class="deliverables-main">
       <section class="deliverables-shell" aria-labelledby="materials-title">
         <h1 id="materials-title">交付物</h1>
-        <div class="research-subtabs" role="tablist" aria-label="用户调研材料">
-          <button type="button" role="tab" aria-selected="true" tabindex="0" data-research-tab="document">调研文档</button>
-          <button type="button" role="tab" aria-selected="false" tabindex="-1" data-research-tab="interview">调研具体内容</button>
+        <div class="deliverables-tabs" role="tablist" aria-label="交付物分类">
+          <button type="button" role="tab" aria-controls="research-panel" aria-selected="true" tabindex="0" data-deliverable-tab="research">用户调研</button>
+          <button type="button" role="tab" aria-controls="competitor-panel" aria-selected="false" tabindex="-1" data-deliverable-tab="competitor">竞品分析</button>
+          <button type="button" role="tab" aria-controls="validation-panel" aria-selected="false" tabindex="-1" data-deliverable-tab="validation">数据验证</button>
+          <button type="button" role="tab" aria-selected="false" tabindex="-1" data-deliverable-tab="placeholder-one">待定模块</button>
+          <button type="button" role="tab" aria-selected="false" tabindex="-1" data-deliverable-tab="placeholder-two">待定模块</button>
         </div>
-        <section class="research-subpanel" data-research-panel="document" role="tabpanel"></section>
-        <section class="research-subpanel" data-research-panel="interview" role="tabpanel" hidden></section>
+        <div class="deliverables-content" aria-live="polite">
+          <section class="deliverable-panel" id="research-panel" data-deliverable-panel="research" role="tabpanel">
+            <div class="research-subtabs" role="tablist" aria-label="用户调研材料">
+              <button type="button" role="tab" aria-selected="true" tabindex="0" data-research-tab="document">调研文档</button>
+              <button type="button" role="tab" aria-selected="false" tabindex="-1" data-research-tab="interview">调研具体内容</button>
+            </div>
+            <section class="research-subpanel" data-research-panel="document" role="tabpanel"></section>
+            <section class="research-subpanel" data-research-panel="interview" role="tabpanel" hidden></section>
+          </section>
+          <section class="deliverable-panel" id="competitor-panel" data-deliverable-panel="competitor" role="tabpanel" hidden></section>
+          <section class="deliverable-panel" id="validation-panel" data-deliverable-panel="validation" role="tabpanel" hidden>
+            <p class="deliverable-empty">数据验证材料整理中。</p>
+          </section>
+          <section class="deliverable-panel" data-deliverable-panel="placeholder-one" role="tabpanel" hidden>
+            <p class="deliverable-empty">模块内容待补充。</p>
+          </section>
+          <section class="deliverable-panel" data-deliverable-panel="placeholder-two" role="tabpanel" hidden>
+            <p class="deliverable-empty">模块内容待补充。</p>
+          </section>
+        </div>
       </section>
     </main>
+    <script src="remi-competitor-data.js?v=20260725-2"></script>
     <script src="remi-research-data.js?v=20260725-2"></script>
     <script>
+      const stickyNav = document.querySelector("header");
+      const updateStickyNav = () => stickyNav?.classList.toggle("is-scrolled", window.scrollY > 16);
+      updateStickyNav();
+      window.addEventListener("scroll", updateStickyNav, { passive: true });
+
+      document.querySelectorAll("[data-view-switch]").forEach((viewSwitch) => {
+        viewSwitch.addEventListener("change", () => {
+          const option = viewSwitch.selectedOptions[0];
+          if (!option.value) return;
+          if (option.dataset.external === "true") {
+            window.open(option.value, "_blank", "noopener");
+            viewSwitch.value = viewSwitch.dataset.current;
+            return;
+          }
+          window.location.href = option.value;
+        });
+      });
+
+      const deliverableTabs = [...document.querySelectorAll(".deliverables-tabs [role=tab]")];
+      const deliverablePanels = [...document.querySelectorAll("[data-deliverable-panel]")];
       const cellReference = (column, row) => {
         let label = "";
         let value = column + 1;
@@ -37,79 +79,240 @@
         return `${label}${row + 1}`;
       };
       const columnIndex = (label) => [...label].reduce((total, char) => total * 26 + char.charCodeAt(0) - 64, 0) - 1;
-      const mergeMap = (ranges) => {
-        const spans = new Map();
+      const createMergeMap = (mergeRanges) => {
+        const merges = new Map();
         const skipped = new Set();
-        ranges.forEach((range) => {
-          const [start, end] = range.split(":");
-          const [, startLabel, startRow] = start.match(/^([A-Z]+)(\d+)$/);
-          const [, endLabel, endRow] = end.match(/^([A-Z]+)(\d+)$/);
-          const fromColumn = columnIndex(startLabel);
-          const toColumn = columnIndex(endLabel);
-          const fromRow = Number(startRow) - 1;
-          const toRow = Number(endRow) - 1;
-          spans.set(start, { colSpan: toColumn - fromColumn + 1, rowSpan: toRow - fromRow + 1 });
-          for (let row = fromRow; row <= toRow; row += 1) for (let column = fromColumn; column <= toColumn; column += 1) {
-            const reference = cellReference(column, row);
-            if (reference !== start) skipped.add(reference);
+        mergeRanges.forEach((merge) => {
+          const [start, end] = merge.split(":");
+          const [, startColumnLabel, startRowLabel] = start.match(/^([A-Z]+)(\d+)$/);
+          const [, endColumnLabel, endRowLabel] = end.match(/^([A-Z]+)(\d+)$/);
+          const startColumn = columnIndex(startColumnLabel);
+          const endColumn = columnIndex(endColumnLabel);
+          const startRow = Number(startRowLabel) - 1;
+          const endRow = Number(endRowLabel) - 1;
+          merges.set(start, { colSpan: endColumn - startColumn + 1, rowSpan: endRow - startRow + 1 });
+          for (let row = startRow; row <= endRow; row += 1) {
+            for (let column = startColumn; column <= endColumn; column += 1) {
+              const reference = cellReference(column, row);
+              if (reference !== start) skipped.add(reference);
+            }
           }
         });
-        return { spans, skipped };
+        return { merges, skipped };
       };
-      const interviewPanel = document.querySelector('[data-research-panel="interview"]');
-      const documentPanel = document.querySelector('[data-research-panel="document"]');
-      const title = document.createElement("h2");
-      title.className = "research-section-title";
-      title.textContent = window.remiResearch.interview.name;
-      const scroll = document.createElement("div");
-      scroll.className = "research-table-scroll";
-      const table = document.createElement("table");
-      table.className = "research-table";
-      const body = document.createElement("tbody");
-      const { spans, skipped } = mergeMap(window.remiResearch.interview.merges);
-      window.remiResearch.interview.rows.forEach((row, rowIndex) => {
-        const tr = document.createElement("tr");
-        for (let column = 0; column < window.remiResearch.interview.columnCount; column += 1) {
-          const reference = cellReference(column, rowIndex);
-          if (skipped.has(reference)) continue;
-          const cell = document.createElement(rowIndex === 0 ? "th" : "td");
-          if (column === 0) cell.classList.add("research-table-first-column");
-          const span = spans.get(reference);
-          if (span) { cell.colSpan = span.colSpan; cell.rowSpan = span.rowSpan; }
-          const text = document.createElement("span");
-          text.className = "research-cell-text";
-          text.textContent = row[column] || "";
-          cell.append(text);
-          tr.append(cell);
-        }
-        body.append(tr);
-      });
-      table.append(body);
-      scroll.append(table);
-      interviewPanel.append(title, scroll);
-      const documentArticle = document.createElement("article");
-      documentArticle.className = "research-document";
-      window.remiResearch.document.split(/\r?\n/).forEach((line) => {
-        const heading = line.match(/^(#{1,3})\s+(.+)$/);
-        if (heading) {
-          const element = document.createElement(heading[1].length === 1 ? "h2" : heading[1].length === 2 ? "h3" : "h4");
-          element.textContent = heading[2].replace(/\*\*/g, "");
-          documentArticle.append(element);
-        } else if (line.trim() === "---") {
-          documentArticle.append(document.createElement("hr"));
-        } else if (line.trim()) {
+      const appendInlineMarkdown = (element, content) => {
+        const segments = content.split(/(\*\*[^*]+\*\*)/g);
+        segments.forEach((segment) => {
+          if (segment.startsWith("**") && segment.endsWith("**")) {
+            const strong = document.createElement("strong");
+            strong.textContent = segment.slice(2, -2);
+            element.append(strong);
+            return;
+          }
+          element.append(document.createTextNode(segment.replace(/\\([+_()])/g, "$1")));
+        });
+      };
+      const renderResearchDocument = (panel, markdown) => {
+        const article = document.createElement("article");
+        article.className = "research-document";
+        const lines = markdown.split(/\r?\n/);
+        let list = null;
+        const appendParagraph = (content, className = "") => {
           const paragraph = document.createElement("p");
-          paragraph.textContent = line.replace(/^>\s?/, "").replace(/\*\*/g, "");
-          documentArticle.append(paragraph);
-        }
+          if (className) paragraph.className = className;
+          appendInlineMarkdown(paragraph, content);
+          article.append(paragraph);
+        };
+        lines.forEach((line) => {
+          const heading = line.match(/^(#{1,3})\s+(.+)$/);
+          const unordered = line.match(/^\s*-\s+(.+)$/);
+          const ordered = line.match(/^\s*\d+\.\s+(.+)$/);
+          if (heading) {
+            list = null;
+            const level = heading[1].length;
+            const element = document.createElement(level === 1 ? "h2" : level === 2 ? "h3" : "h4");
+            appendInlineMarkdown(element, heading[2]);
+            article.append(element);
+            return;
+          }
+          if (line.trim() === "---") {
+            list = null;
+            article.append(document.createElement("hr"));
+            return;
+          }
+          if (unordered || ordered) {
+            const type = unordered ? "ul" : "ol";
+            if (!list || list.tagName.toLowerCase() !== type) {
+              list = document.createElement(type);
+              article.append(list);
+            }
+            const item = document.createElement("li");
+            appendInlineMarkdown(item, (unordered || ordered)[1]);
+            list.append(item);
+            return;
+          }
+          if (line.startsWith(">")) {
+            list = null;
+            appendParagraph(line.replace(/^>\s?/, ""), "research-callout");
+            return;
+          }
+          if (line.trim()) {
+            list = null;
+            appendParagraph(line.trim());
+          }
+        });
+        panel.append(article);
+      };
+      const renderResearch = () => {
+        const data = window.remiResearch;
+        const interviewPanel = document.querySelector('[data-research-panel="interview"]');
+        const documentPanel = document.querySelector('[data-research-panel="document"]');
+        if (!data || interviewPanel.dataset.rendered) return;
+        interviewPanel.dataset.rendered = "true";
+        const title = document.createElement("h2");
+        title.className = "research-section-title";
+        title.textContent = data.interview.name;
+        interviewPanel.append(title);
+        const scroll = document.createElement("div");
+        scroll.className = "research-table-scroll";
+        const table = document.createElement("table");
+        table.className = "research-table";
+        table.setAttribute("aria-label", data.interview.name);
+        const body = document.createElement("tbody");
+        const { merges, skipped } = createMergeMap(data.interview.merges);
+        data.interview.rows.forEach((row, rowIndex) => {
+          const tr = document.createElement("tr");
+          for (let column = 0; column < data.interview.columnCount; column += 1) {
+            const reference = cellReference(column, rowIndex);
+            if (skipped.has(reference)) continue;
+            const cell = document.createElement(rowIndex === 0 ? "th" : "td");
+            if (column === 0) cell.classList.add("research-table-first-column");
+            if (rowIndex === 0) cell.scope = "col";
+            const span = merges.get(reference);
+            if (span) {
+              cell.colSpan = span.colSpan;
+              cell.rowSpan = span.rowSpan;
+            }
+            const content = document.createElement("span");
+            content.className = "research-cell-text";
+            content.textContent = row[column] || "";
+            cell.append(content);
+            tr.append(cell);
+          }
+          body.append(tr);
+        });
+        table.append(body);
+        scroll.append(table);
+        interviewPanel.append(scroll);
+        renderResearchDocument(documentPanel, data.document);
+      };
+      const renderCompetitorAnalysis = () => {
+        const panel = document.querySelector('[data-deliverable-panel="competitor"]');
+        const sheets = window.remiCompetitorAnalysis || [];
+        if (!sheets.length || panel.dataset.rendered) return;
+        panel.dataset.rendered = "true";
+        sheets.forEach((sheet) => {
+          const section = document.createElement("section");
+          section.className = "competitor-sheet";
+          const heading = document.createElement("h2");
+          heading.textContent = sheet.name;
+          section.append(heading);
+          const scroll = document.createElement("div");
+          scroll.className = "competitor-table-scroll";
+          const table = document.createElement("table");
+          table.className = "competitor-table";
+          table.setAttribute("aria-label", sheet.name);
+          const tbody = document.createElement("tbody");
+          const merges = new Map();
+          const skipped = new Set();
+          sheet.merges.forEach((merge) => {
+            const [start, end] = merge.split(":");
+            const [, startColumnLabel, startRowLabel] = start.match(/^([A-Z]+)(\d+)$/);
+            const [, endColumnLabel, endRowLabel] = end.match(/^([A-Z]+)(\d+)$/);
+            const startColumn = columnIndex(startColumnLabel);
+            const endColumn = columnIndex(endColumnLabel);
+            const startRow = Number(startRowLabel) - 1;
+            const endRow = Number(endRowLabel) - 1;
+            merges.set(start, { colSpan: endColumn - startColumn + 1, rowSpan: endRow - startRow + 1 });
+            for (let row = startRow; row <= endRow; row += 1) {
+              for (let column = startColumn; column <= endColumn; column += 1) {
+                const reference = cellReference(column, row);
+                if (reference !== start) skipped.add(reference);
+              }
+            }
+          });
+          for (let row = 0; row < sheet.rowCount; row += 1) {
+            const tr = document.createElement("tr");
+            for (let column = 0; column < sheet.columnCount; column += 1) {
+              const reference = cellReference(column, row);
+              if (skipped.has(reference)) continue;
+              const value = sheet.cells[reference] || "";
+              const images = sheet.images[reference] || [];
+              const cell = document.createElement(row === 0 || column === 0 ? "th" : "td");
+              if (cell.tagName === "TH") cell.scope = row === 0 ? "col" : "row";
+              const span = merges.get(reference);
+              if (span) {
+                cell.colSpan = span.colSpan;
+                cell.rowSpan = span.rowSpan;
+              }
+              if (value) {
+                const text = document.createElement("span");
+                text.className = "competitor-cell-text";
+                text.textContent = value;
+                cell.append(text);
+              }
+              if (images.length) {
+                const gallery = document.createElement("div");
+                gallery.className = "competitor-image-gallery";
+                images.forEach((src, index) => {
+                  const image = document.createElement("img");
+                  image.src = src;
+                  image.alt = `${sheet.name} ${reference} 图片 ${index + 1}`;
+                  image.loading = "lazy";
+                  gallery.append(image);
+                });
+                cell.append(gallery);
+              }
+              tr.append(cell);
+            }
+            if (tr.children.length) tbody.append(tr);
+          }
+          table.append(tbody);
+          scroll.append(table);
+          section.append(scroll);
+          panel.append(section);
+        });
+      };
+      renderResearch();
+      renderCompetitorAnalysis();
+      const researchTabs = [...document.querySelectorAll(".research-subtabs [role=tab]")];
+      const researchPanels = [...document.querySelectorAll("[data-research-panel]")];
+      researchTabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          const target = tab.dataset.researchTab;
+          researchTabs.forEach((item) => {
+            const selected = item === tab;
+            item.setAttribute("aria-selected", String(selected));
+            item.tabIndex = selected ? 0 : -1;
+          });
+          researchPanels.forEach((panel) => {
+            panel.hidden = panel.dataset.researchPanel !== target;
+          });
+        });
       });
-      documentPanel.append(documentArticle);
-      const tabs = [...document.querySelectorAll("[data-research-tab]")];
-      const panels = [...document.querySelectorAll("[data-research-panel]")];
-      tabs.forEach((tab) => tab.addEventListener("click", () => {
-        tabs.forEach((item) => item.setAttribute("aria-selected", String(item === tab)));
-        panels.forEach((panel) => { panel.hidden = panel.dataset.researchPanel !== tab.dataset.researchTab; });
-      }));
+      deliverableTabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          const target = tab.dataset.deliverableTab;
+          deliverableTabs.forEach((item) => {
+            const selected = item === tab;
+            item.setAttribute("aria-selected", String(selected));
+            item.tabIndex = selected ? 0 : -1;
+          });
+          deliverablePanels.forEach((panel) => {
+            panel.hidden = panel.dataset.deliverablePanel !== target;
+          });
+        });
+      });
     </script>
   </body>
 </html>
