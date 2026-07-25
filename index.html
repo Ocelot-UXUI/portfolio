@@ -90,6 +90,11 @@
       <footer class="footer"><div class="footer-left">© 2026 Portfolio. All rights reserved.</div><div class="footer-links"><a href="pages/case.html">Case Study</a><a href="pages/remi.html">Demo</a><a href="https://github.com/Ocelot-UXUI" target="_blank" rel="noreferrer">GitHub</a><a href="mailto:1004080451@qq.com">Email</a></div></footer>
     </div>
     <script>
+      const stickyNav = document.querySelector(".nav");
+      const updateStickyNav = () => stickyNav?.classList.toggle("is-scrolled", window.scrollY > 16);
+      updateStickyNav();
+      window.addEventListener("scroll", updateStickyNav, { passive: true });
+
       document.documentElement.classList.add("motion-ready");
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
