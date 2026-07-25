@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="郭昱成 UX/UI 作品集 - 主动式 AI 记忆助手用户调研" />
     <title>主动式 AI 记忆助手交付物 | 郭昱成作品集</title>
-    <link rel="stylesheet" href="../styles/styles.css?v=20260725-2" />
+    <link rel="stylesheet" href="../styles/styles.css?v=20260725-3" />
   </head>
   <body class="deliverables-page">
     <header class="project-nav">
       <a class="project-back" href="../index.html" aria-label="返回首页"><span aria-hidden="true">←</span> 返回首页</a>
       <p class="project-nav-title">主动式 AI 记忆助手</p>
-      <a class="project-back" href="case.html" aria-label="查看案例 Deck">案例 Deck</a>
+      <label class="project-view-switch"><span class="project-view-switch-label">当前展示</span><span class="project-view-switch-control"><select aria-label="切换主动式 AI 记忆助手展示" data-view-switch data-current="remi-materials.html"><option value="case.html">案例 Deck</option><option value="remi.html">交互 Demo</option><option value="remi-materials.html" selected>交付物</option></select></span></label>
     </header>
     <main class="deliverables-main">
       <section class="deliverables-shell" aria-labelledby="materials-title">
@@ -104,6 +104,12 @@
         }
       });
       documentPanel.append(documentArticle);
+      document.querySelectorAll("[data-view-switch]").forEach((viewSwitch) => {
+        viewSwitch.addEventListener("change", () => {
+          if (viewSwitch.value) window.location.href = viewSwitch.value;
+        });
+      });
+
       const tabs = [...document.querySelectorAll("[data-research-tab]")];
       const panels = [...document.querySelectorAll("[data-research-panel]")];
       tabs.forEach((tab) => tab.addEventListener("click", () => {
