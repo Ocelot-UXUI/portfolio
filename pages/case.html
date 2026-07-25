@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../styles/styles.css" />
   </head>
   <body>
-    <header class="project-nav"><a class="project-back" href="../index.html" aria-label="返回首页"><span aria-hidden="true">←</span> 返回首页</a><p class="project-nav-title">主动式 AI 记忆助手</p><p class="project-nav-index">CASE STUDY / 01</p></header>
+    <header class="project-nav"><a class="project-back" href="../index.html" aria-label="返回首页"><span aria-hidden="true">←</span> 返回首页</a><p class="project-nav-title">主动式 AI 记忆助手</p><label class="project-view-switch"><span>当前展示：</span><select aria-label="切换主动式 AI 记忆助手展示" data-view-switch data-current="case.html"><option value="case.html" selected>案例 Deck</option><option value="remi.html">交互 Demo</option><option value="https://www.figma.com/design/JQG6971AM2IZGSNpgCf5NU/Untitled?node-id=0-1&t=KZDN3UVIF38fw7n3-1" data-external="true">Figma 交付原稿</option></select></label></header>
     <main id="top">
       <section class="slides" aria-label="主动式 AI 记忆助手项目案例">
         <img src="../assets/remi/figma-source/page-01.webp" alt="主动式 AI 记忆助手项目概览" fetchpriority="high" />
@@ -39,6 +39,18 @@
       const updateStickyNav = () => stickyNav?.classList.toggle("is-scrolled", window.scrollY > 16);
       updateStickyNav();
       window.addEventListener("scroll", updateStickyNav, { passive: true });
+      document.querySelectorAll("[data-view-switch]").forEach((viewSwitch) => {
+        viewSwitch.addEventListener("change", () => {
+          const option = viewSwitch.selectedOptions[0];
+          if (!option.value) return;
+          if (option.dataset.external === "true") {
+            window.open(option.value, "_blank", "noopener");
+            viewSwitch.value = viewSwitch.dataset.current;
+            return;
+          }
+          window.location.href = option.value;
+        });
+      });
     </script>
   </body>
 </html>
