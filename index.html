@@ -266,13 +266,19 @@
         outline-offset: 4px;
       }
 
-      .prototype-homepage .project-showcase {
-        scroll-margin-top: 56px;
-        border-top-color: rgba(255, 255, 255, .025);
+      .prototype-homepage .showcase-projects {
+        border-top-color: transparent;
       }
 
-      .prototype-homepage .showcase-projects {
-        border-top-color: rgba(255, 255, 255, .04);
+      .prototype-homepage .showcase-heading {
+        background: var(--canvas);
+      }
+
+      .prototype-homepage .project-showcase,
+      .prototype-homepage .project-showcase:nth-of-type(even) {
+        scroll-margin-top: 56px;
+        background: var(--canvas);
+        border-top-color: transparent;
       }
 
       .prototype-homepage .hero-project-card:hover {
