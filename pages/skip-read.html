@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="针对职场人的阅读学习 APP｜郭昱成作品集" />
     <title>针对职场人的阅读学习 APP | 郭昱成作品集</title>
-    <link rel="stylesheet" href="../styles/styles.css?v=20260726-6" />
+    <link rel="stylesheet" href="../styles/styles.css?v=20260726-7" />
   </head>
   <body>
     <header class="project-nav"><a class="project-back" href="../index.html" aria-label="返回首页"><span aria-hidden="true">←</span> 返回首页</a><p class="project-nav-title">针对职场人的阅读学习 APP</p><label class="project-view-switch"><span>当前展示</span><select aria-label="切换阅读学习 APP 展示" data-view-switch data-current="skip-read.html"><option value="skip-read.html" selected>案例 Deck</option><option value="https://ocelot-uxui.github.io/skip-read/" data-external="true">交互 Demo</option><option disabled>交付物（待补充）</option></select></label></header>
@@ -37,13 +37,23 @@
     <script>
       const stickyNav = document.querySelector("header.project-nav");
       let previousScrollY = window.scrollY;
+      let navHideTimer;
       const updateStickyNav = () => {
         if (!stickyNav) return;
         const currentScrollY = window.scrollY;
         const compact = currentScrollY > 96;
+        const scrollingUp = currentScrollY < previousScrollY;
         stickyNav.classList.toggle("is-scrolled", currentScrollY > 16);
         stickyNav.classList.toggle("project-nav--compact", compact);
-        stickyNav.classList.toggle("project-nav--hidden", compact && currentScrollY > previousScrollY + 8);
+        window.clearTimeout(navHideTimer);
+        stickyNav.classList.toggle("project-nav--hidden", compact && !scrollingUp);
+        if (compact && scrollingUp) {
+          navHideTimer = window.setTimeout(() => {
+            if (window.scrollY > 96 && !stickyNav.matches(":focus-within")) {
+              stickyNav.classList.add("project-nav--hidden");
+            }
+          }, 180);
+        }
         previousScrollY = currentScrollY;
       };
       updateStickyNav();

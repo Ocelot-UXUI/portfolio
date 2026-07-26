@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="郭昱成 UX/UI 作品集 - 主动式 AI 记忆助手交付物" />
     <title>主动式 AI 记忆助手交付物 | 郭昱成作品集</title>
-    <link rel="stylesheet" href="../styles/styles.css?v=20260726-6" />
+    <link rel="stylesheet" href="../styles/styles.css?v=20260726-7" />
   </head>
   <body class="deliverables-page">
     <header class="project-nav">
@@ -50,13 +50,23 @@
     <script>
       const stickyNav = document.querySelector("header.project-nav");
       let previousScrollY = window.scrollY;
+      let navHideTimer;
       const updateStickyNav = () => {
         if (!stickyNav) return;
         const currentScrollY = window.scrollY;
         const compact = currentScrollY > 96;
+        const scrollingUp = currentScrollY < previousScrollY;
         stickyNav.classList.toggle("is-scrolled", currentScrollY > 16);
         stickyNav.classList.toggle("project-nav--compact", compact);
-        stickyNav.classList.toggle("project-nav--hidden", compact && currentScrollY > previousScrollY + 8);
+        window.clearTimeout(navHideTimer);
+        stickyNav.classList.toggle("project-nav--hidden", compact && !scrollingUp);
+        if (compact && scrollingUp) {
+          navHideTimer = window.setTimeout(() => {
+            if (window.scrollY > 96 && !stickyNav.matches(":focus-within")) {
+              stickyNav.classList.add("project-nav--hidden");
+            }
+          }, 180);
+        }
         previousScrollY = currentScrollY;
       };
       updateStickyNav();
