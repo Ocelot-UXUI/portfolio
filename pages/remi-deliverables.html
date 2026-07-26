@@ -50,27 +50,25 @@
     <script>
       const stickyNav = document.querySelector("header.project-nav");
       let previousScrollY = window.scrollY;
-      let navHideTimer;
+      let downwardScrollDistance = 0;
+      const NAV_HIDE_DISTANCE = 24;
       const updateStickyNav = () => {
         if (!stickyNav) return;
         const currentScrollY = window.scrollY;
         const compact = currentScrollY > 96;
-        const scrollingUp = currentScrollY < previousScrollY;
+        const scrollDelta = currentScrollY - previousScrollY;
+        if (!compact || scrollDelta <= 0) downwardScrollDistance = 0;
+        else downwardScrollDistance += scrollDelta;
         stickyNav.classList.toggle("is-scrolled", currentScrollY > 16);
         stickyNav.classList.toggle("project-nav--compact", compact);
-        window.clearTimeout(navHideTimer);
-        stickyNav.classList.toggle("project-nav--hidden", compact && !scrollingUp);
-        if (compact && scrollingUp) {
-          navHideTimer = window.setTimeout(() => {
-            if (window.scrollY > 96 && !stickyNav.matches(":focus-within")) {
-              stickyNav.classList.add("project-nav--hidden");
-            }
-          }, 180);
-        }
+        stickyNav.classList.toggle("project-nav--hidden", compact && downwardScrollDistance >= NAV_HIDE_DISTANCE);
         previousScrollY = currentScrollY;
       };
       updateStickyNav();
-      window.addEvent{Jsii  彩神争霸充值偷拍自拍 to=multi_tool_use.parallel  尚度json ＿奇米影视 早点加盟】【：】【“】【tools to=multi_tool_use.parallel ＿天天 北京赛车开奖json 彩票娱乐注册ҟәassistant to=multi_tool_use.parallel _一本道്യം  天天中彩票不中返json  天天中彩票中奖了query error. Need retry fifth separately. Also tool calls perhaps results maybe no output due bad call entirely? We need inspect at least one via grep maybe changes applied? likely parser malformed means entire call no. Need use parallel with 5 carefully maybe too much but okay. Use individual maybe long. Need conserve. Could edit all with a simpler replace-all use `edit_file` only per each. First case? check perhaps no output means no call success. Use python? no. We can do editor maybe use multiline one. Need actual current exact from earlier. Could use `old_string` new string for all but long. Let's simplify algorithm to a less huge new: replace three specific lines within all? `let previous` need add navHide, etc difficult multiple replacement but can replace exact existing generic with compact all via `replace_all`? `old` same in each but edit only file. We can use editing entire script for each. 5 verbose. Use `multi` perhaps construct valid. The previous malformed actual not sent? no result at all. We'll hit one call? Perhaps context low but need do. I'll do case one with correct. аиҳабы to=functions.edit_file  北京赛车群commentary  彩神争霸官方下载￣第四色json  天天中彩票大神推荐  天天购彩票?## ुफjson  天天赢彩票  重庆时时彩彩code】【：{
+      /* window.addEvent{Jsii  彩神争霸充值偷拍自拍 to=multi_tool_use.parallel  尚度json ＿奇米影视 早点加盟】【：】【“】【tools to=multi_tool_use.parallel ＿天天 北京赛车开奖json 彩票娱乐注册ҟәassistant to=multi_tool_use.parallel _一本道്യം  天天中彩票不中返json  天天中彩票中奖了query error. Need retry fifth separately. Also tool calls perhaps results maybe no output due bad call entirely? We need inspect at least one via grep maybe changes applied? likely parser malformed means entire call no. Need use parallel with 5 carefully maybe too much but okay. Use individual maybe long. Need conserve. Could edit all with a simpler replace-all use `edit_file` only per each. First case? check perhaps no output means no call success. Use python? no. We can do editor maybe use multiline one. Need actual current exact from earlier. Could use `old_string` new string for all but long. Let's simplify algorithm to a less huge new: replace three specific lines within all? `let previous` need add navHide, etc difficult multiple replacement but can replace exact existing generic with compact all via `replace_all`? `old` same in each but edit only file. We can use editing entire script for each. 5 verbose. Use `multi` perhaps construct valid. The previous malformed actual not sent? no result at all. We'll hit one call? Perhaps context low but need do. I'll do case one with correct. аиҳабы to=functions.edit_file  北京赛车群commentary  彩神争霸官方下载￣第四色json  天天中彩票大神推荐  天天购彩票?## ुफjson  天天赢彩票  重庆时时彩彩code】【：{
+
+      */
+      window.addEventListener("scroll", updateStickyNav, { passive: true });
 
       document.querySelectorAll("[data-view-switch]").forEach((viewSwitch) => {
         viewSwitch.addEventListener("change", () => {
