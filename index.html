@@ -326,6 +326,51 @@
         z-index: 2;
       }
 
+      html.motion-ready .prototype-homepage .section-reveal .section-copy-step,
+      html.motion-ready .prototype-homepage .project-showcase .showcase-copy > * {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      html.motion-ready .prototype-homepage .section-reveal.visible .section-copy-step,
+      html.motion-ready .prototype-homepage .project-showcase.visible .showcase-copy > * {
+        animation: portfolio-copy-enter .58s cubic-bezier(.22, 1, .36, 1) forwards;
+      }
+
+      .prototype-homepage .about .section-label { --copy-delay: 0ms; }
+      .prototype-homepage .about-left h2 { --copy-delay: 80ms; }
+      .prototype-homepage .about-left p:nth-of-type(1) { --copy-delay: 160ms; }
+      .prototype-homepage .about-left p:nth-of-type(2) { --copy-delay: 240ms; }
+      .prototype-homepage .about-right .skill-group:nth-child(1) { --copy-delay: 180ms; }
+      .prototype-homepage .about-right .skill-group:nth-child(2) { --copy-delay: 260ms; }
+      .prototype-homepage .about-right .skill-group:nth-child(3) { --copy-delay: 340ms; }
+      .prototype-homepage .showcase-heading span { --copy-delay: 0ms; }
+      .prototype-homepage .showcase-heading h2 { --copy-delay: 90ms; }
+      .prototype-homepage .project-showcase .showcase-copy h3 { --copy-delay: 80ms; }
+      .prototype-homepage .project-showcase .showcase-copy p { --copy-delay: 170ms; }
+      .prototype-homepage .project-showcase .showcase-copy ul { --copy-delay: 260ms; }
+
+      html.motion-ready .prototype-homepage .section-reveal.visible .section-copy-step,
+      html.motion-ready .prototype-homepage .project-showcase.visible .showcase-copy > * {
+        animation-delay: var(--copy-delay, 0ms);
+      }
+
+      @keyframes portfolio-copy-enter {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html.motion-ready .prototype-homepage .section-reveal .section-copy-step,
+        html.motion-ready .prototype-homepage .project-showcase .showcase-copy > * {
+          opacity: 1;
+          transform: none;
+          animation: none;
+        }
+      }
+
       @media (max-width: 700px) {
         .prototype-homepage .hero.hero-gallery {
           min-height: 720px;
@@ -407,20 +452,20 @@
           </div>
         </section>
 
-        <section class="about" id="about">
-          <div class="section-label"><span>About</span></div>
+        <section class="about section-reveal" id="about">
+          <div class="section-label section-copy-step"><span>About</span></div>
           <div class="about-grid">
-            <div class="about-left reveal"><h2>关于我</h2><p>这里放置你的个人介绍。描述你的设计理念、工作经历、或任何让你与众不同的地方。</p><p>可以包含你的教育背景、获奖经历、或对设计的独到见解。保持真实，让访客了解真正的你。</p></div>
-            <div class="about-right reveal">
-              <div class="skill-group"><h4>Design</h4><div class="skill-list"><span class="skill-item">UI/UX Design</span><span class="skill-item">Visual Design</span><span class="skill-item">Branding</span><span class="skill-item">Motion Design</span><span class="skill-item">Prototyping</span></div></div>
-              <div class="skill-group"><h4>Development</h4><div class="skill-list"><span class="skill-item">HTML / CSS</span><span class="skill-item">JavaScript</span><span class="skill-item">React</span><span class="skill-item">Three.js</span></div></div>
-              <div class="skill-group"><h4>Tools</h4><div class="skill-list"><span class="skill-item">Figma</span><span class="skill-item">After Effects</span><span class="skill-item">Blender</span><span class="skill-item">VS Code</span></div></div>
+            <div class="about-left"><h2 class="section-copy-step">关于我</h2><p class="section-copy-step">这里放置你的个人介绍。描述你的设计理念、工作经历、或任何让你与众不同的地方。</p><p class="section-copy-step">可以包含你的教育背景、获奖经历、或对设计的独到见解。保持真实，让访客了解真正的你。</p></div>
+            <div class="about-right">
+              <div class="skill-group section-copy-step"><h4>Design</h4><div class="skill-list"><span class="skill-item">UI/UX Design</span><span class="skill-item">Visual Design</span><span class="skill-item">Branding</span><span class="skill-item">Motion Design</span><span class="skill-item">Prototyping</span></div></div>
+              <div class="skill-group section-copy-step"><h4>Development</h4><div class="skill-list"><span class="skill-item">HTML / CSS</span><span class="skill-item">JavaScript</span><span class="skill-item">React</span><span class="skill-item">Three.js</span></div></div>
+              <div class="skill-group section-copy-step"><h4>Tools</h4><div class="skill-list"><span class="skill-item">Figma</span><span class="skill-item">After Effects</span><span class="skill-item">Blender</span><span class="skill-item">VS Code</span></div></div>
             </div>
           </div>
         </section>
 
         <section class="projects showcase-projects" id="projects" aria-labelledby="projects-title">
-          <div class="showcase-heading"><span>PROJECTS</span><h2 id="projects-title">项目</h2></div>
+          <div class="showcase-heading section-reveal"><span class="section-copy-step">PROJECTS</span><h2 class="section-copy-step" id="projects-title">项目</h2></div>
           <a class="project-showcase project-showcase-cnap" href="demos/workload-demo/index.html" data-project-hotspot>
             <div class="showcase-copy">
               <h3>CNAP 云原生工作负载管理</h3>
@@ -514,7 +559,7 @@
           if (entry.isIntersecting) entry.target.classList.add("visible");
         });
       }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
-      document.querySelectorAll(".reveal, .project-showcase").forEach((element) => observer.observe(element));
+      document.querySelectorAll(".reveal, .section-reveal, .project-showcase").forEach((element) => observer.observe(element));
 
       const projectCursor = document.querySelector(".project-hover-cursor");
       const projectHotspots = document.querySelectorAll("[data-project-hotspot]");
