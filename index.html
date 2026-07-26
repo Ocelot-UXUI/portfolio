@@ -373,94 +373,6 @@
         box-shadow: none;
       }
 
-      .prototype-homepage .hero-project-artwork {
-        isolation: isolate;
-      }
-
-      .prototype-homepage .hero-project-artwork.is-turning-next {
-        animation: hero-project-turn-next .66s cubic-bezier(.22, .8, .24, 1);
-      }
-
-      .prototype-homepage .hero-project-artwork.is-turning-previous {
-        animation: hero-project-turn-previous .66s cubic-bezier(.22, .8, .24, 1);
-      }
-
-      .prototype-homepage .hero-project-card.is-active {
-        z-index: 7;
-        filter: brightness(1.04) drop-shadow(0 26px 32px rgba(0, 0, 0, .34));
-      }
-
-      .prototype-homepage .hero-project-turner {
-        position: absolute;
-        z-index: 10;
-        right: 0;
-        bottom: 16px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-
-      .prototype-homepage .hero-project-turner button {
-        display: grid;
-        width: 36px;
-        height: 36px;
-        place-items: center;
-        padding: 0;
-        border: 1px solid rgba(255, 255, 255, .2);
-        border-radius: 50%;
-        background: rgba(10, 11, 14, .72);
-        color: #fff;
-        cursor: pointer;
-        font: 400 21px/1 Arial, sans-serif;
-        transition: background .2s ease, border-color .2s ease, transform .2s ease;
-        -webkit-backdrop-filter: blur(10px);
-        backdrop-filter: blur(10px);
-      }
-
-      .prototype-homepage .hero-project-turner button:hover,
-      .prototype-homepage .hero-project-turner button:focus-visible {
-        border-color: rgba(255, 255, 255, .62);
-        background: rgba(42, 45, 54, .94);
-        outline: none;
-        transform: translateY(-2px);
-      }
-
-      .prototype-homepage .hero-project-count {
-        min-width: 42px;
-        color: rgba(255, 255, 255, .66);
-        font-size: 11px;
-        font-variant-numeric: tabular-nums;
-        letter-spacing: .08em;
-        text-align: center;
-      }
-
-      @keyframes hero-project-turn-next {
-        0% { opacity: 1; transform: translate3d(0, 0, 0) rotate(0.001deg); }
-        42% { opacity: .28; transform: translate3d(-42px, 8px, 0) rotate(-1.5deg); }
-        43% { opacity: 0; transform: translate3d(42px, -8px, 0) rotate(1.5deg); }
-        100% { opacity: 1; transform: translate3d(0, 0, 0) rotate(0.001deg); }
-      }
-
-      @keyframes hero-project-turn-previous {
-        0% { opacity: 1; transform: translate3d(0, 0, 0) rotate(0.001deg); }
-        42% { opacity: .28; transform: translate3d(42px, 8px, 0) rotate(1.5deg); }
-        43% { opacity: 0; transform: translate3d(-42px, -8px, 0) rotate(-1.5deg); }
-        100% { opacity: 1; transform: translate3d(0, 0, 0) rotate(0.001deg); }
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        .prototype-homepage .hero-project-artwork.is-turning-next,
-        .prototype-homepage .hero-project-artwork.is-turning-previous {
-          animation: none;
-        }
-      }
-
-      @media (max-width: 700px) {
-        .prototype-homepage .hero-project-turner {
-          right: 4px;
-          bottom: 4px;
-        }
-      }
     </style>
   </head>
   <body class="prototype-homepage">
@@ -488,11 +400,6 @@
               <img class="hero-project-reading-content" src="assets/hero-projects/image_3.png" alt="快速阅读应用界面" />
               <img class="hero-project-reading-frame" src="assets/hero-projects/image_4.png" alt="" />
             </figure>
-            <div class="hero-project-turner" aria-label="切换项目预览">
-              <button type="button" data-hero-turn="previous" aria-label="上一个项目" title="上一个项目">&#8592;</button>
-              <span class="hero-project-count" aria-live="polite"><span data-hero-current>01</span> / 04</span>
-              <button type="button" data-hero-turn="next" aria-label="下一个项目" title="下一个项目">&#8594;</button>
-            </div>
           </div>
         </section>
 
@@ -604,43 +511,6 @@
         });
       }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
       document.querySelectorAll(".reveal, .project-showcase").forEach((element) => observer.observe(element));
-
-      const heroArtwork = document.querySelector(".hero-project-artwork");
-      const heroProjectCards = heroArtwork ? [...heroArtwork.querySelectorAll(".hero-project-card")] : [];
-      const heroCurrent = document.querySelector("[data-hero-current]");
-      let heroProjectIndex = 0;
-      let heroTurnTimer;
-      let heroTouchStartX = 0;
-
-      const updateHeroProject = (direction) => {
-        if (!heroArtwork || !heroProjectCards.length || heroArtwork.classList.contains("is-turning-next") || heroArtwork.classList.contains("is-turning-previous")) return;
-        heroProjectIndex = (heroProjectIndex + direction + heroProjectCards.length) % heroProjectCards.length;
-        heroProjectCards.forEach((card, index) => card.classList.toggle("is-active", index === heroProjectIndex));
-        if (heroCurrent) heroCurrent.textContent = String(heroProjectIndex + 1).padStart(2, "0");
-        heroArtwork.classList.add(direction > 0 ? "is-turning-next" : "is-turning-previous");
-        window.clearTimeout(heroTurnTimer);
-        heroTurnTimer = window.setTimeout(() => {
-          heroArtwork.classList.remove("is-turning-next", "is-turning-previous");
-        }, 680);
-      };
-
-      heroProjectCards[heroProjectIndex]?.classList.add("is-active");
-      document.querySelectorAll("[data-hero-turn]").forEach((button) => {
-        button.addEventListener("click", () => updateHeroProject(button.dataset.heroTurn === "next" ? 1 : -1));
-      });
-
-      heroArtwork?.addEventListener("touchstart", (event) => {
-        heroTouchStartX = event.changedTouches[0].clientX;
-      }, { passive: true });
-      heroArtwork?.addEventListener("touchend", (event) => {
-        const distance = event.changedTouches[0].clientX - heroTouchStartX;
-        if (Math.abs(distance) > 42) updateHeroProject(distance < 0 ? 1 : -1);
-      }, { passive: true });
-      window.addEventListener("keydown", (event) => {
-        if (!heroArtwork || event.target.matches("input, textarea, select")) return;
-        if (event.key === "ArrowRight") updateHeroProject(1);
-        if (event.key === "ArrowLeft") updateHeroProject(-1);
-      });
 
       const projectCursor = document.querySelector(".project-hover-cursor");
       const projectHotspots = document.querySelectorAll("[data-project-hotspot]");
