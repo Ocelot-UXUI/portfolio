@@ -7,6 +7,12 @@
   <link rel="stylesheet" href="./styles.css?v=20260725-3">
 </head>
 <body>
+  <header class="portfolio-project-nav">
+    <a class="portfolio-project-back" href="../../index.html">← 返回首页</a>
+    <span class="portfolio-project-title">CNAP / 工作负载管理</span>
+    <label class="portfolio-view-switch"><span>当前展示</span><select aria-label="切换 CNAP 项目展示" data-view-switch data-current="index.html"><option disabled>案例 Deck（待补充）</option><option value="index.html" selected>交互 Demo</option><option disabled>交付物（待补充）</option></select></label>
+  </header>
+  <div class="portfolio-demo-app">
   <svg class="icon-sprite" aria-hidden="true" focusable="false">
     <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="5" height="5" rx="1"/><rect x="15" y="4" width="5" height="5" rx="1"/><rect x="4" y="15" width="5" height="5" rx="1"/><rect x="15" y="15" width="5" height="5" rx="1"/></symbol>
     <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 11 9-7 9 7v9H3z"/><path d="M9 20v-6h6v6"/></symbol>
@@ -171,6 +177,14 @@
   </div>
   <aside class="history-drawer hidden" id="historyDrawer" aria-label="变更记录"><div class="drawer-header"><div><strong>变更记录</strong><span>最近操作</span></div><button id="closeHistoryBtn" aria-label="关闭">×</button></div><div class="history-list" id="historyList"></div></aside>
   <div class="toast" id="toast" role="status"></div>
+  </div>
+  <script>
+    document.querySelectorAll("[data-view-switch]").forEach((viewSwitch) => {
+      viewSwitch.addEventListener("change", () => {
+        if (viewSwitch.value) window.location.href = viewSwitch.value;
+      });
+    });
+  </script>
   <script src="./app.js?v=20260725-2"></script>
 </body>
 </html>
