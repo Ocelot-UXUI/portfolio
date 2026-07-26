@@ -37,31 +37,20 @@
     <script>
       const stickyNav = document.querySelector("header.project-nav");
       let previousScrollY = window.scrollY;
-      let navHideTimer;
+      let downwardScrollDistance = 0;
+      const NAV_HIDE_DISTANCE = 24;
       const updateStickyNav = () => {
         if (!stickyNav) return;
         const currentScrollY = window.scrollY;
         const compact = currentScrollY > 96;
-        const scrollingUp = currentScrollY < previousScrollY;
+        const scrollDelta = currentScrollY - previousScrollY;
+        if (!compact || scrollDelta <= 0) downwardScrollDistance = 0;
+        else downwardScrollDistance += scrollDelta;
         stickyNav.classList.toggle("is-scrolled", currentScrollY > 16);
         stickyNav.classList.toggle("project-nav--compact", compact);
-        window.clearTimeout(navHideTimer);
-        if (compact && scrollingUp) {
-          stickyNav.classList.remove("project-nav--hidden");
-          navHideTimer = window.setTimeout(() => {
-            if (window.scrollY > 96 && !stickyNav.matches(":focus-within")) {
-              stickyNav.classList.add("project-nav--hidden");
-            }
-          }, 1200);
-        } else {
-          stickyNav.classList.toggle("project-nav--hidden", compact);
-        }
+        stickyNav.classList.toggle("project-nav--hidden", compact && downwardScrollDistance >= NAV_HIDE_DISTANCE);
         previousScrollY = currentScrollY;
       };
-      stickyNav?.addEventListener("pointerenter", () => window.clearTimeout(navHideTimer));
-      stickyNav?.addEventListener("pointerleave", () => {
-        if (window.scrollY > 96) navHideTimer = window.setTimeout(() => stickyNav.classList.add("project-nav--hidden"), 480);
-      });
       updateStickyNav();
       window.addEventListener("scroll", updateStickyNav, { passive: true });
       document.querySelectorAll("[data-view-switch]").forEach((viewSwitch) => {
