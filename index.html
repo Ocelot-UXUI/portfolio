@@ -281,6 +281,19 @@
         border-top: 0;
       }
 
+      .prototype-homepage .project-showcase::before,
+      .prototype-homepage .project-showcase.pointer-active::before {
+        opacity: 0;
+      }
+
+      .prototype-homepage .project-showcase.pointer-active .showcase-media {
+        filter: none;
+      }
+
+      .prototype-homepage .project-showcase.pointer-active .showcase-copy h3 {
+        text-shadow: none;
+      }
+
       .prototype-homepage .hero-project-card:hover {
         z-index: 6;
         box-shadow: 0 28px 46px rgba(0, 0, 0, .3);
