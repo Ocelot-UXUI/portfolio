@@ -5,6 +5,165 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>工作负载 | CNAP</title>
   <link rel="stylesheet" href="./styles.css?v=20260726-5">
+  <style>
+    .portfolio-demo-app .global-header {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      height: 56px;
+      padding: 0 16px;
+      border-bottom: 1px solid #e7e7e7;
+      background: #fff;
+      color: #181818;
+      box-shadow: none;
+    }
+
+    .portfolio-demo-app .app-launcher {
+      display: grid;
+      width: 32px;
+      height: 32px;
+      margin: 0 16px 0 0;
+      padding: 0;
+      place-items: center;
+      border: 1px solid #d9d9d9;
+      border-radius: 9px;
+      background: #fff;
+    }
+
+    .portfolio-demo-app .app-launcher img {
+      display: block;
+      width: 16px;
+      height: 16px;
+    }
+
+    .portfolio-demo-app .brand {
+      display: inline-flex;
+      align-items: center;
+      width: 145px;
+      flex: 0 0 145px;
+      margin: 0 16px 0 0;
+      color: #181818;
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .portfolio-demo-app .brand-gem {
+      margin: 0;
+      color: #5f9eeb;
+      font-size: 16px;
+      line-height: 1;
+    }
+
+    .portfolio-demo-app .brand img {
+      display: block;
+      width: 145px;
+      height: 24px;
+    }
+
+    .portfolio-demo-app .breadcrumbs {
+      display: flex;
+      flex: 1 1 auto;
+      align-items: center;
+      min-width: 0;
+      margin-left: 0;
+      overflow: hidden;
+    }
+
+    .portfolio-demo-app .breadcrumbs button {
+      display: inline-flex;
+      flex: 0 0 auto;
+      align-items: center;
+      gap: 4px;
+      min-width: 0;
+      margin-right: 12px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: #181818;
+      font: 400 14px/22px "PingFang SC", sans-serif;
+      white-space: nowrap;
+    }
+
+    .portfolio-demo-app .crumb-home { gap: 8px !important; }
+    .portfolio-demo-app .crumb-home img { width: 16px; height: 16px; }
+    .portfolio-demo-app .crumb-divider {
+      display: inline-flex;
+      width: 1px;
+      height: 12px;
+      margin-right: 12px;
+      align-items: center;
+    }
+    .portfolio-demo-app .crumb-divider img { display: block; width: 1px; height: 12px; }
+    .portfolio-demo-app .breadcrumbs button[data-context="application"]::before,
+    .portfolio-demo-app .breadcrumbs button[data-context="environment"]::before,
+    .portfolio-demo-app .breadcrumbs button[data-context="cluster"]::before {
+      margin-right: 0;
+      color: #bfbfbf;
+      content: "/";
+    }
+    .portfolio-demo-app .breadcrumbs .chevron { width: 16px; height: 16px; }
+    .portfolio-demo-app .env-tag { margin: 0; color: #181818; font: inherit; }
+
+    .portfolio-demo-app .header-tools {
+      display: flex;
+      flex: 0 0 auto;
+      align-items: center;
+      gap: 12px;
+      margin-left: 24px;
+    }
+
+    .portfolio-demo-app .header-search {
+      display: flex;
+      align-items: center;
+      width: 200px;
+      height: 32px;
+      padding: 0 11px;
+      border: 1px solid #d9d9d9;
+      border-radius: 6px;
+      background: #fff;
+    }
+
+    .portfolio-demo-app .header-search > img {
+      width: 14px;
+      height: 14px;
+      margin-right: 8px;
+    }
+
+    .portfolio-demo-app .header-search input {
+      min-width: 0;
+      flex: 1;
+      border: 0;
+      outline: 0;
+      color: #181818;
+      font: 14px/20px "PingFang SC", sans-serif;
+    }
+
+    .portfolio-demo-app .header-search kbd {
+      padding: 0 4px;
+      border-radius: 4px;
+      background: rgba(217, 217, 217, .5);
+      color: #999;
+      font: 12px/20px "PingFang SC", sans-serif;
+      white-space: nowrap;
+    }
+
+    .portfolio-demo-app .header-icon,
+    .portfolio-demo-app .user-menu {
+      display: grid;
+      width: 20px;
+      height: 24px;
+      margin: 0;
+      padding: 0;
+      place-items: center;
+      border: 0;
+      background: transparent;
+    }
+
+    .portfolio-demo-app .header-icon img { display: block; max-width: 18px; max-height: 19px; }
+    .portfolio-demo-app .header-assistant img { width: 18px; height: 17px; }
+    .portfolio-demo-app .user-menu { width: 46px; }
+    .portfolio-demo-app .user-menu img { display: block; width: 46px; height: 24px; }
+  </style>
 </head>
 <body>
   <header class="portfolio-project-nav">
@@ -36,16 +195,23 @@
     <symbol id="i-memory" viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="10" rx="2"/><path d="M8 7V5M12 7V5M16 7V5M8 17v2M12 17v2M16 17v2M8 11h8"/></symbol>
   </svg>
   <header class="global-header">
-    <button class="app-launcher" aria-label="产品菜单" title="产品菜单"><svg><use href="#i-grid"/></svg></button>
-    <a class="brand" href="#" aria-label="返回 CNAP 首页"><span class="brand-gem">◆</span><strong>CNAP</strong></a>
+    <button class="app-launcher" aria-label="产品菜单" title="产品菜单"><img src="./assets/figma-top-navigation/image_1.png" alt=""></button>
+    <a class="brand" href="#" aria-label="返回 CNAP 首页"><img src="./assets/figma-cnap-brand/image_1.png" alt="百度智能云 | 匠厂版"></a>
     <nav class="breadcrumbs" aria-label="当前位置">
-      <button class="crumb-home" data-context="home"><svg><use href="#i-home"/></svg>CNAP</button><em>/</em>
-      <button data-context="account">默认账号<svg class="chevron"><use href="#i-chevron-down"/></svg></button><em>/</em>
-      <button data-context="application">Payment-api<svg class="chevron"><use href="#i-chevron-down"/></svg></button><em>/</em>
-      <button data-context="environment"><span class="env-tag">生产</span>prod-cn-bj<svg class="chevron"><use href="#i-chevron-down"/></svg></button><em>/</em>
-      <button data-context="cluster">imeonline<svg class="chevron"><use href="#i-chevron-down"/></svg></button>
+      <button class="crumb-home" data-context="home"><img src="./assets/figma-top-navigation/image_3.png" alt="">CNAP</button>
+      <span class="crumb-divider" aria-hidden="true"><img src="./assets/figma-top-navigation/image_4.png" alt=""></span>
+      <button data-context="account">默认账号<img class="chevron" src="./assets/figma-top-navigation/image_5.png" alt=""></button>
+      <button data-context="application">Payment-api<img class="chevron" src="./assets/figma-top-navigation/image_5.png" alt=""></button>
+      <button data-context="environment">prod-cn-bj<img class="chevron" src="./assets/figma-top-navigation/image_5.png" alt=""></button>
+      <button data-context="cluster">imeonline<img class="chevron" src="./assets/figma-top-navigation/image_5.png" alt=""></button>
     </nav>
-    <div class="header-tools"><label class="header-search"><img class="figma-icon" src="./assets/figma-icon-library-56-38920/image_43.png" alt=""><input aria-label="全局搜索" placeholder="搜索"><kbd>⌘K</kbd></label><button class="header-icon" aria-label="通知" title="通知"><img class="figma-icon" src="./assets/figma-icon-library-56-38920/image_41.png" alt=""></button><button class="user-menu" aria-label="账户菜单" title="账户菜单"><span>G</span><svg><use href="#i-chevron-down"/></svg></button><button class="header-icon" id="headerMoreBtn" aria-label="更多"><svg><use href="#i-more"/></svg></button></div>
+    <div class="header-tools">
+      <label class="header-search"><img src="./assets/figma-top-navigation/image_7.png" alt=""><input aria-label="全局搜索" placeholder="搜索"><kbd>⌘K</kbd></label>
+      <button class="header-icon header-assistant" aria-label="智能助手" title="智能助手"><img src="./assets/figma-top-navigation/image_8.png" alt=""></button>
+      <button class="header-icon" aria-label="客服与帮助" title="客服与帮助"><img src="./assets/figma-top-navigation/image_6.png" alt=""></button>
+      <button class="user-menu" aria-label="账户菜单" title="账户菜单"><img src="./assets/figma-top-navigation/image_9.png" alt=""></button>
+      <button class="header-icon" id="headerMoreBtn" aria-label="更多" title="更多"><img src="./assets/figma-top-navigation/image_10.png" alt=""></button>
+    </div>
   </header>
 
   <div class="shell">
