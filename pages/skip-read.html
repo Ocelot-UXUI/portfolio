@@ -46,13 +46,15 @@
         stickyNav.classList.toggle("is-scrolled", currentScrollY > 16);
         stickyNav.classList.toggle("project-nav--compact", compact);
         window.clearTimeout(navHideTimer);
-        stickyNav.classList.remove("project-nav--hidden");
-        if (compact) {
+        if (compact && scrollingUp) {
+          stickyNav.classList.remove("project-nav--hidden");
           navHideTimer = window.setTimeout(() => {
             if (window.scrollY > 96 && !stickyNav.matches(":focus-within")) {
               stickyNav.classList.add("project-nav--hidden");
             }
-          }, scrollingUp ? 1200 : 480);
+          }, 1200);
+        } else {
+          stickyNav.classList.toggle("project-nav--hidden", compact);
         }
         previousScrollY = currentScrollY;
       };
