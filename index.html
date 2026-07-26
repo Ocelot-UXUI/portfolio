@@ -6,6 +6,141 @@
     <meta name="description" content="郭昱成 UX/UI 作品集" />
     <title>郭昱成 | UX/UI 作品集</title>
     <link rel="stylesheet" href="styles/styles.css?v=20260726-10" />
+    <style>
+      .prototype-homepage .hero.hero-gallery {
+        min-height: 760px;
+        gap: 32px;
+        background: var(--canvas);
+      }
+
+      .prototype-homepage .hero-artwork {
+        width: min(100%, 1080px);
+        height: 440px;
+      }
+
+      .prototype-homepage .hero-device {
+        position: absolute;
+        margin: 0;
+        transform-origin: center bottom;
+        transition: transform .25s ease;
+      }
+
+      .prototype-homepage .hero-device:hover {
+        z-index: 5;
+        transform: translateY(-10px);
+      }
+
+      .prototype-homepage .hero-device-macbook {
+        z-index: 1;
+        top: 0;
+        left: 4%;
+        width: 66%;
+      }
+
+      .prototype-homepage .macbook-shell {
+        position: relative;
+        padding: 2.5% 3.2% 5.8%;
+        border: 3px solid #4a5568;
+        border-radius: 12px 12px 4px 4px;
+        background: #1a202c;
+        box-shadow: 0 20px 36px rgba(0, 0, 0, .34);
+      }
+
+      .prototype-homepage .macbook-display {
+        overflow: hidden;
+        aspect-ratio: 1.593;
+        background: #000;
+      }
+
+      .prototype-homepage .macbook-display img,
+      .prototype-homepage .phone-device img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .prototype-homepage .macbook-shell::after {
+        position: absolute;
+        right: -5%;
+        bottom: -7%;
+        left: -5%;
+        height: 8%;
+        border-radius: 0 0 50% 50%;
+        background: #242b38;
+        box-shadow: 0 7px 10px rgba(0, 0, 0, .32);
+        content: "";
+      }
+
+      .prototype-homepage .hero-device-phone-large {
+        z-index: 3;
+        right: 6%;
+        bottom: 0;
+        width: 20%;
+      }
+
+      .prototype-homepage .hero-device-phone-small {
+        z-index: 2;
+        right: 24%;
+        bottom: 2%;
+        width: 16%;
+      }
+
+      .prototype-homepage .phone-device {
+        overflow: hidden;
+        border-radius: 13%;
+        background: #111;
+        box-shadow: 0 20px 34px rgba(0, 0, 0, .38);
+      }
+
+      .prototype-homepage .hero-device-phone-small .phone-device {
+        position: relative;
+        aspect-ratio: .477;
+        border: 4px solid #111;
+      }
+
+      .prototype-homepage .hero-device-phone-small .phone-device img:first-child {
+        position: absolute;
+        top: 1.5%;
+        left: 3.2%;
+        width: 93.6%;
+        height: 97%;
+        object-fit: cover;
+      }
+
+      .prototype-homepage .hero-device-phone-small .phone-device img:last-child {
+        position: relative;
+      }
+
+      @media (max-width: 700px) {
+        .prototype-homepage .hero.hero-gallery {
+          min-height: 700px;
+          gap: 26px;
+        }
+
+        .prototype-homepage .hero-artwork {
+          width: min(100%, 390px);
+          height: 330px;
+        }
+
+        .prototype-homepage .hero-device-macbook {
+          top: 8px;
+          left: 1%;
+          width: 72%;
+        }
+
+        .prototype-homepage .hero-device-phone-large {
+          right: 1%;
+          width: 27%;
+        }
+
+        .prototype-homepage .hero-device-phone-small {
+          right: 27%;
+          bottom: 1%;
+          width: 21%;
+        }
+      }
+    </style>
   </head>
   <body class="prototype-homepage">
     <div class="page">
@@ -25,10 +160,20 @@
             <h1 class="fade-up fade-up-delay-1">这里放一句<br />关于我的概括。</h1>
           </div>
           <div class="hero-artwork fade-up fade-up-delay-2" aria-label="作品预览图组">
-            <figure class="hero-art-card hero-art-card-1"><img src="assets/figma-projects/image_4.png" alt="作品预览占位图 1" /></figure>
-            <figure class="hero-art-card hero-art-card-2"><img src="assets/remi/figma-source/page-01.webp" alt="作品预览占位图 2" /></figure>
-            <figure class="hero-art-card hero-art-card-3"><img src="assets/figma-projects/image_2.png" alt="作品预览占位图 3" /></figure>
-            <figure class="hero-art-card hero-art-card-4"><img src="assets/figma-projects/image_5.png" alt="作品预览占位图 4" /></figure>
+            <figure class="hero-device hero-device-macbook">
+              <div class="macbook-shell">
+                <div class="macbook-display"><img src="assets/hero-devices/image_2.png" alt="Remi 主动 AI 记忆助手桌面端界面" /></div>
+              </div>
+            </figure>
+            <figure class="hero-device hero-device-phone-small">
+              <div class="phone-device">
+                <img src="assets/hero-devices/image_5.png" alt="小红书本地生活界面" />
+                <img src="assets/hero-devices/image_6.png" alt="" />
+              </div>
+            </figure>
+            <figure class="hero-device hero-device-phone-large">
+              <div class="phone-device"><img src="assets/hero-devices/image_4.png" alt="快速阅读应用界面" /></div>
+            </figure>
           </div>
         </section>
 
