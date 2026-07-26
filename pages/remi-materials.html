@@ -314,9 +314,12 @@
         });
       });
 
-      if (new URLSearchParams(window.location.search).get("section") === "interview") {
+      const requestedSection = new URLSearchParams(window.location.search).get("section");
+      if (requestedSection === "interview") {
         document.querySelector('[data-deliverable-tab="research"]')?.click();
         document.querySelector('[data-research-tab="interview"]')?.click();
+      } else if (requestedSection === "competitor") {
+        document.querySelector('[data-deliverable-tab="competitor"]')?.click();
       }
     </script>
   </body>
