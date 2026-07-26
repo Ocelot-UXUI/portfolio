@@ -48,16 +48,20 @@
         stickyNav.classList.toggle("is-scrolled", currentScrollY > 16);
         stickyNav.classList.toggle("project-nav--compact", compact);
         window.clearTimeout(navHideTimer);
-        stickyNav.classList.toggle("project-nav--hidden", compact && !scrollingUp);
-        if (compact && scrollingUp) {
+        stickyNav.classList.remove("project-nav--hidden");
+        if (compact) {
           navHideTimer = window.setTimeout(() => {
             if (window.scrollY > 96 && !stickyNav.matches(":focus-within")) {
               stickyNav.classList.add("project-nav--hidden");
             }
-          }, 180);
+          }, scrollingUp ? 1200 : 480);
         }
         previousScrollY = currentScrollY;
       };
+      stickyNav?.addEventListener("pointerenter", () => window.clearTimeout(navHideTimer));
+      stickyNav?.addEventListener("pointerleave", () => {
+        if (window.scrollY > 96) navHideTimer = window.setTimeout(() => stickyNav.classList.add("project-nav--hidden"), 480);
+      });
       updateStickyNav();
       window.addEventListener("scroll", updateStickyNav, { passive: true });
       document.querySelectorAll("[data-view-switch]").forEach((viewSwitch) => {
