@@ -21,3 +21,6 @@ header>.project-view-switch{position:relative;justify-self:end;display:inline-fl
 
 /* Smart project navigation: remains available without occupying the reading canvas. */
 header.project-nav{transition:transform .22s ease,background .22s ease,box-shadow .22s ease;will-change:transform}header.project-nav.project-nav--compact{height:56px;background:rgba(6,7,12,.94);box-shadow:0 8px 24px rgba(0,0,0,.2)}header.project-nav.project-nav--hidden{transform:translateY(-100%)}header.project-nav:focus-within{transform:translateY(0)}@media(max-width:700px){header.project-nav.project-nav--compact{height:52px}}
+
+/* Homepage uses the same reading-friendly reveal behavior as project pages. */
+.prototype-homepage .nav{transition:transform .22s ease,background .25s ease,box-shadow .25s ease;will-change:transform}.prototype-homepage .nav.nav--hidden{transform:translateY(-100%)}.prototype-homepage .nav:focus-within{transform:translateY(0)}

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="郭昱成 UX/UI 作品集" />
     <title>郭昱成 | UX/UI 作品集</title>
-    <link rel="stylesheet" href="styles/styles.css?v=20260726-5" />
+    <link rel="stylesheet" href="styles/styles.css?v=20260726-9" />
   </head>
   <body class="prototype-homepage">
     <div class="page">
@@ -106,7 +106,41 @@
     </div>
     <script>
       const stickyNav = document.querySelector(".nav");
-      const updateStickyNav = () => stickyNav?.classList.toggle("is-scrolled", window.scrollY > 16);
+      let previousScrollY = window.scrollY;
+      let navHideTimer;
+
+      const updateStickyNav = () => {
+        if (!stickyNav) return;
+        const currentScrollY = window.scrollY;
+        const pastHero = currentScrollY > 96;
+        const scrollingUp = currentScrollY < previousScrollY;
+
+        stickyNav.classList.toggle("is-scrolled", currentScrollY > 16);
+        window.clearTimeout(navHideTimer);
+        if (pastHero && scrollingUp) {
+          stickyNav.classList.remove("nav--hidden");
+          navHideTimer = window.setTimeout(() => {
+            if (window.scrollY > 96 && !stickyNav.matches(":focus-within")) {
+              stickyNav.classList.add("nav--hidden");
+            }
+          }, 1200);
+        } else {
+          stickyNav.classList.toggle("nav--hidden", pastHero);
+        }
+
+        previousScrollY = currentScrollY;
+      };
+
+      stickyNav?.addEventListener("pointerenter", () => window.clearTimeout(navHideTimer));
+      stickyNav?.addEventListener("pointerleave", () => {
+        if (window.scrollY > 96) {
+          navHideTimer = window.setTimeout(
+            () => stickyNav.classList.add("nav--hidden"),
+            480
+          );
+        }
+      });
+
       updateStickyNav();
       window.addEventListener("scroll", updateStickyNav, { passive: true });
 
