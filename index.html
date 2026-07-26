@@ -337,13 +337,22 @@
         animation: portfolio-copy-enter .58s cubic-bezier(.22, 1, .36, 1) forwards;
       }
 
+      html.motion-ready .prototype-homepage .about .section-copy-step {
+        transform: translateY(32px) scale(.985);
+        filter: blur(7px);
+      }
+
+      html.motion-ready .prototype-homepage .about.visible .section-copy-step {
+        animation: portfolio-about-copy-enter .72s cubic-bezier(.16, 1, .3, 1) forwards;
+      }
+
       .prototype-homepage .about .section-label { --copy-delay: 0ms; }
-      .prototype-homepage .about-left h2 { --copy-delay: 80ms; }
-      .prototype-homepage .about-left p:nth-of-type(1) { --copy-delay: 160ms; }
-      .prototype-homepage .about-left p:nth-of-type(2) { --copy-delay: 240ms; }
-      .prototype-homepage .about-right .skill-group:nth-child(1) { --copy-delay: 180ms; }
-      .prototype-homepage .about-right .skill-group:nth-child(2) { --copy-delay: 260ms; }
-      .prototype-homepage .about-right .skill-group:nth-child(3) { --copy-delay: 340ms; }
+      .prototype-homepage .about-left h2 { --copy-delay: 120ms; }
+      .prototype-homepage .about-left p:nth-of-type(1) { --copy-delay: 250ms; }
+      .prototype-homepage .about-left p:nth-of-type(2) { --copy-delay: 380ms; }
+      .prototype-homepage .about-right .skill-group:nth-child(1) { --copy-delay: 300ms; }
+      .prototype-homepage .about-right .skill-group:nth-child(2) { --copy-delay: 440ms; }
+      .prototype-homepage .about-right .skill-group:nth-child(3) { --copy-delay: 580ms; }
       .prototype-homepage .showcase-heading span { --copy-delay: 0ms; }
       .prototype-homepage .showcase-heading h2 { --copy-delay: 90ms; }
       .prototype-homepage .project-showcase .showcase-copy h3 { --copy-delay: 80ms; }
@@ -362,11 +371,20 @@
         }
       }
 
+      @keyframes portfolio-about-copy-enter {
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+          filter: blur(0);
+        }
+      }
+
       @media (prefers-reduced-motion: reduce) {
         html.motion-ready .prototype-homepage .section-reveal .section-copy-step,
         html.motion-ready .prototype-homepage .project-showcase .showcase-copy > * {
           opacity: 1;
           transform: none;
+          filter: none;
           animation: none;
         }
       }
