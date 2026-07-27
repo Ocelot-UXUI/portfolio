@@ -22,6 +22,9 @@ header>.project-view-switch{position:relative;justify-self:end;display:inline-fl
 /* Smart project navigation: remains available without occupying the reading canvas. */
 header.project-nav{transition:transform .22s ease,background .22s ease,box-shadow .22s ease;will-change:transform}header.project-nav.project-nav--compact{height:56px;background:rgba(6,7,12,.94);box-shadow:0 8px 24px rgba(0,0,0,.2)}header.project-nav.project-nav--hidden{transform:translateY(-100%)}header.project-nav:focus-within{transform:translateY(0)}header.project-nav{background:rgba(6,7,12,.34);-webkit-backdrop-filter:blur(30px) saturate(185%);backdrop-filter:blur(30px) saturate(185%);box-shadow:inset 0 1px rgba(255,255,255,.08)}header.project-nav.is-scrolled,header.project-nav.project-nav--compact{background:rgba(6,7,12,.52);box-shadow:0 14px 38px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.09)}@media(max-width:700px){header.project-nav.project-nav--compact{height:52px}}
 
+/* CNAP's dense research content uses a solid project bar for a stronger frame. */
+.cnap-research-page header.project-nav,.cnap-research-page header.project-nav.is-scrolled,.cnap-research-page header.project-nav.project-nav--compact{background:#151b26;border-bottom-color:rgba(255,255,255,.12);box-shadow:0 8px 24px rgba(0,0,0,.26),inset 0 1px rgba(255,255,255,.08)}
+
 /* Homepage uses the same reading-friendly reveal behavior as project pages. */
 .prototype-homepage .nav{transition:transform .22s ease,background .25s ease,box-shadow .25s ease;will-change:transform}.prototype-homepage .nav.nav--hidden{transform:translateY(-100%)}.prototype-homepage .nav:focus-within{transform:translateY(0)}
 
