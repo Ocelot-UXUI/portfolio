@@ -18,9 +18,6 @@
         <h1 id="cnap-materials-title">交付物</h1>
         <div class="deliverables-tabs" role="tablist" aria-label="交付物分类">
           <button type="button" role="tab" aria-controls="research-panel" aria-selected="true" tabindex="0" data-deliverable-tab="research">用户调研</button>
-          <button type="button" role="tab" aria-controls="workflow-panel" aria-selected="false" tabindex="-1" data-deliverable-tab="workflow">产品工作流</button>
-          <button type="button" role="tab" aria-controls="pain-panel" aria-selected="false" tabindex="-1" data-deliverable-tab="pain">痛点结论</button>
-          <button type="button" role="tab" aria-controls="todo-panel" aria-selected="false" tabindex="-1" data-deliverable-tab="todo">设计 Todo</button>
         </div>
         <div class="deliverables-content" aria-live="polite">
           <section class="deliverable-panel" id="research-panel" data-deliverable-panel="research" role="tabpanel">
@@ -67,6 +64,25 @@
                     </tbody>
                   </table>
                 </div>
+                <h3>产品工作流</h3>
+                <div class="research-table-scroll"><table class="research-table" aria-label="CNAP 产品工作流"><tbody>
+                  <tr><th class="research-table-first-column">阶段</th><th>用户目标</th><th>涉及操作</th><th>典型行为</th></tr>
+                  <tr><td class="research-table-first-column">1</td><td>应用接入</td><td>创建应用 → 关联集群 → 配置运行参数</td><td>流程文档不全，GPU 应用配置尤为复杂，需参考长文档。</td></tr>
+                  <tr><td class="research-table-first-column">2</td><td>日常部署</td><td>选择镜像 / 版本 → 配置部署策略 → 提交上线 → 等待结果</td><td>M1 构建约耗时 30 分钟，无进度反馈；失败后错误信息不明确。</td></tr>
+                  <tr><td class="research-table-first-column">3</td><td>集群管理</td><td>进入集群列表 → 筛选目标集群 → 批量操作</td><td>集群无排序或标签，数量多时靠记忆或收藏 URL。</td></tr>
+                  <tr><td class="research-table-first-column">4</td><td>运行时运维</td><td>查看实例 / 日志 → 执行扩缩容等操作</td><td>日志查看能力弱，扩缩容入口不易发现，用户转向外部平台。</td></tr>
+                  <tr><td class="research-table-first-column">5</td><td>问题排查</td><td>查看错误信息 → 查日志 → 联系研发</td><td>错误信息笼统，用户无法自助定位。</td></tr>
+                  <tr><td class="research-table-first-column">6</td><td>部署上线</td><td>检查关联卡片状态 → 提交上线</td><td>平台无强制卡点，流程规范依赖人工自觉。</td></tr>
+                </tbody></table></div>
+                <h3>痛点结论</h3>
+                <h4>P0 · 工作流阻断性问题</h4>
+                <ul><li>信息架构以平台视角组织，用户找不到目标应用。</li><li>部署失败信息不明确，用户无法自助排查。</li><li>配置变更无 Diff 展示，上线操作缺乏透明度。</li><li>集群无标签或分组，多集群管理效率极低。</li><li>配置无模板复用，多组件、多集群场景重复劳动严重。</li><li>日志不支持关键词搜索、全屏查看和暂停滚动，用户转向外部平台。</li><li>AI / 自动化能力认知度低，用户不知道有哪些能力。</li><li>用户需要嵌入工作流的自动化，而非独立对话框。</li></ul>
+                <h4>P1 · 效率与流程规范问题</h4>
+                <ul><li>构建阶段耗时长且无进度反馈。</li><li>GPU 等复杂应用接入文档不完整。</li><li>平台无上线流程强制卡点。</li><li>扩缩容等关键运维入口不易发现。</li><li>不同模块的权限入口逻辑不一致。</li><li>用户期待部署完成或失败后的主动通知。</li></ul>
+                <h4>P2 · 版本与连续性问题</h4>
+                <ul><li>镜像 Tag 与代码版本无清晰映射，线上排查困难。</li><li>运行时配置保存偶发丢失，属于直接阻断的功能性问题。</li></ul>
+                <h3>设计 Todo</h3>
+                <ol><li><strong>P0</strong> 信息架构重构：以“应用”为核心对象重组导航。</li><li><strong>P0</strong> 部署 Diff 展示：明确展示本次配置变更。</li><li><strong>P0</strong> 错误信息优化：提供具体原因和修复建议。</li><li><strong>P0</strong> 日志能力增强：支持搜索、全屏、暂停滚动和日志定格。</li><li><strong>P0</strong> 集群标签：支持按标签批量筛选和操作。</li><li><strong>P1</strong> 部署配置模板化：保存和复用策略模板，支持批量导入变量。</li><li><strong>P1</strong> 部署状态主动通知：完成或失败后自动推送如流消息。</li><li><strong>P1</strong> AI 能力可见性提升：在日志和状态查询节点嵌入 AI 入口。</li><li><strong>P1</strong> 上线流程卡点：校验关联卡片和评审状态。</li><li><strong>P1</strong> 文档补全：重点补充 GPU 和复杂配置场景示例。</li><li><strong>P2</strong> 镜像 Tag 与代码版本映射。</li><li><strong>P2</strong> 自定义导航，满足不同角色的使用习惯。</li></ol>
               </article>
             </section>
             <section class="research-subpanel" data-research-panel="satisfaction" role="tabpanel" hidden>
@@ -91,37 +107,6 @@
                 </tbody></table></div>
               </article>
             </section>
-          </section>
-          <section class="deliverable-panel" id="workflow-panel" data-deliverable-panel="workflow" role="tabpanel" hidden>
-            <article class="research-document">
-              <h2>产品工作流</h2>
-              <div class="research-table-scroll"><table class="research-table" aria-label="CNAP 产品工作流"><tbody>
-                <tr><th class="research-table-first-column">阶段</th><th>用户目标</th><th>涉及操作</th><th>典型行为</th></tr>
-                <tr><td class="research-table-first-column">1</td><td>应用接入</td><td>创建应用 → 关联集群 → 配置运行参数</td><td>流程文档不全，GPU 应用配置尤为复杂，需参考长文档。</td></tr>
-                <tr><td class="research-table-first-column">2</td><td>日常部署</td><td>选择镜像 / 版本 → 配置部署策略 → 提交上线 → 等待结果</td><td>M1 构建约耗时 30 分钟，无进度反馈；失败后错误信息不明确。</td></tr>
-                <tr><td class="research-table-first-column">3</td><td>集群管理</td><td>进入集群列表 → 筛选目标集群 → 批量操作</td><td>集群无排序或标签，数量多时靠记忆或收藏 URL。</td></tr>
-                <tr><td class="research-table-first-column">4</td><td>运行时运维</td><td>查看实例 / 日志 → 执行扩缩容等操作</td><td>日志查看能力弱，扩缩容入口不易发现，用户转向外部平台。</td></tr>
-                <tr><td class="research-table-first-column">5</td><td>问题排查</td><td>查看错误信息 → 查日志 → 联系研发</td><td>错误信息笼统，用户无法自助定位。</td></tr>
-                <tr><td class="research-table-first-column">6</td><td>部署上线</td><td>检查关联卡片状态 → 提交上线</td><td>平台无强制卡点，流程规范依赖人工自觉。</td></tr>
-              </tbody></table></div>
-            </article>
-          </section>
-          <section class="deliverable-panel" id="pain-panel" data-deliverable-panel="pain" role="tabpanel" hidden>
-            <article class="research-document">
-              <h2>痛点结论</h2>
-              <h3>P0 · 工作流阻断性问题</h3>
-              <ul><li>信息架构以平台视角组织，用户找不到目标应用。</li><li>部署失败信息不明确，用户无法自助排查。</li><li>配置变更无 Diff 展示，上线操作缺乏透明度。</li><li>集群无标签或分组，多集群管理效率极低。</li><li>配置无模板复用，多组件、多集群场景重复劳动严重。</li><li>日志不支持关键词搜索、全屏查看和暂停滚动，用户转向外部平台。</li><li>AI / 自动化能力认知度低，用户不知道有哪些能力。</li><li>用户需要嵌入工作流的自动化，而非独立对话框。</li></ul>
-              <h3>P1 · 效率与流程规范问题</h3>
-              <ul><li>构建阶段耗时长且无进度反馈。</li><li>GPU 等复杂应用接入文档不完整。</li><li>平台无上线流程强制卡点。</li><li>扩缩容等关键运维入口不易发现。</li><li>不同模块的权限入口逻辑不一致。</li><li>用户期待部署完成或失败后的主动通知。</li></ul>
-              <h3>P2 · 版本与连续性问题</h3>
-              <ul><li>镜像 Tag 与代码版本无清晰映射，线上排查困难。</li><li>运行时配置保存偶发丢失，属于直接阻断的功能性问题。</li></ul>
-            </article>
-          </section>
-          <section class="deliverable-panel" id="todo-panel" data-deliverable-panel="todo" role="tabpanel" hidden>
-            <article class="research-document">
-              <h2>后续 Todo</h2>
-              <ol><li><strong>P0</strong> 信息架构重构：以“应用”为核心对象重组导航。</li><li><strong>P0</strong> 部署 Diff 展示：明确展示本次配置变更。</li><li><strong>P0</strong> 错误信息优化：提供具体原因和修复建议。</li><li><strong>P0</strong> 日志能力增强：支持搜索、全屏、暂停滚动和日志定格。</li><li><strong>P0</strong> 集群标签：支持按标签批量筛选和操作。</li><li><strong>P1</strong> 部署配置模板化：保存和复用策略模板，支持批量导入变量。</li><li><strong>P1</strong> 部署状态主动通知：完成或失败后自动推送如流消息。</li><li><strong>P1</strong> AI 能力可见性提升：在日志和状态查询节点嵌入 AI 入口。</li><li><strong>P1</strong> 上线流程卡点：校验关联卡片和评审状态。</li><li><strong>P1</strong> 文档补全：重点补充 GPU 和复杂配置场景示例。</li><li><strong>P2</strong> 镜像 Tag 与代码版本映射。</li><li><strong>P2</strong> 自定义导航，满足不同角色的使用习惯。</li></ol>
-            </article>
           </section>
         </div>
       </section>
