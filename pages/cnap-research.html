@@ -24,11 +24,7 @@
         </div>
         <div class="deliverables-content" aria-live="polite">
           <section class="deliverable-panel" id="research-panel" data-deliverable-panel="research" role="tabpanel">
-            <div class="research-subtabs" role="tablist" aria-label="用户调研材料">
-              <button type="button" role="tab" aria-selected="true" tabindex="0" data-research-tab="document">调研文档</button>
-              <button type="button" role="tab" aria-selected="false" tabindex="-1" data-research-tab="evidence">证据口径</button>
-            </div>
-            <section class="research-subpanel" data-research-panel="document" role="tabpanel">
+            <section class="research-subpanel">
               <article class="research-document">
                 <h2>CNAP 用户调研结论</h2>
                 <p>通过对平台管理者、大模型基建开发者、商业 OP 和一线研发的访谈，识别 CNAP 在应用接入、部署、集群管理和运行时运维中的关键阻断点，并将研究结论转化为后续信息架构和操作体验的设计依据。</p>
@@ -50,9 +46,9 @@
                 </ul>
               </article>
             </section>
-            <section class="research-subpanel" data-research-panel="evidence" role="tabpanel" hidden>
+            <section class="research-subpanel">
               <article class="research-document">
-                <h2>证据口径</h2>
+                <h3>调研范围与反馈口径</h3>
                 <p>本次访谈材料共覆盖 6 名用户，角色包括平台管理者、大模型基建开发者、商业 OP、一线研发和健康策略研发；其中包含新用户与高频用户。</p>
                 <p>痛点表格中的“依据 2”将多位受访者的相似反馈合并展示，统一采用“反馈原话 + 命中人数”的口径。以下内容保留代表性原话，帮助区分高频问题与高影响问题。</p>
                 <div class="research-table-scroll">
@@ -135,17 +131,6 @@
           item.tabIndex = selected ? 0 : -1;
         });
         deliverablePanels.forEach((panel) => { panel.hidden = panel.dataset.deliverablePanel !== target; });
-      }));
-      const researchTabs = [...document.querySelectorAll(".research-subtabs [role=tab]")];
-      const researchPanels = [...document.querySelectorAll("[data-research-panel]")];
-      researchTabs.forEach((tab) => tab.addEventListener("click", () => {
-        const target = tab.dataset.researchTab;
-        researchTabs.forEach((item) => {
-          const selected = item === tab;
-          item.setAttribute("aria-selected", String(selected));
-          item.tabIndex = selected ? 0 : -1;
-        });
-        researchPanels.forEach((panel) => { panel.hidden = panel.dataset.researchPanel !== target; });
       }));
     </script>
   </body>
