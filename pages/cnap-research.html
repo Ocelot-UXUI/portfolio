@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="郭昱成 UX/UI 作品集 - CNAP 用户调研交付物" />
     <title>CNAP 用户调研 | 郭昱成作品集</title>
-    <link rel="stylesheet" href="../styles/styles.css?v=20260727-2" />
+    <link rel="stylesheet" href="../styles/styles.css?v=20260727-3" />
   </head>
   <body class="deliverables-page">
     <header class="project-nav">
@@ -24,7 +24,11 @@
         </div>
         <div class="deliverables-content" aria-live="polite">
           <section class="deliverable-panel" id="research-panel" data-deliverable-panel="research" role="tabpanel">
-            <section class="research-subpanel">
+            <div class="research-subtabs" role="tablist" aria-label="CNAP 用户调研材料">
+              <button type="button" role="tab" aria-selected="true" tabindex="0" data-research-tab="summary">调研结论</button>
+              <button type="button" role="tab" aria-selected="false" tabindex="-1" data-research-tab="satisfaction">满意度问卷</button>
+            </div>
+            <section class="research-subpanel" data-research-panel="summary" role="tabpanel">
               <article class="research-document">
                 <h2>CNAP 用户调研结论</h2>
                 <p>通过对平台管理者、大模型基建开发者、商业 OP 和一线研发的访谈，识别 CNAP 在应用接入、部署、集群管理和运行时运维中的关键阻断点，并将研究结论转化为后续信息架构和操作体验的设计依据。</p>
@@ -46,7 +50,7 @@
                 </ul>
               </article>
             </section>
-            <section class="research-subpanel">
+            <section class="research-subpanel" data-research-panel="summary" role="tabpanel">
               <article class="research-document">
                 <h3>调研范围与反馈口径</h3>
                 <p>本次访谈材料共覆盖 6 名用户，角色包括平台管理者、大模型基建开发者、商业 OP、一线研发和健康策略研发；其中包含新用户与高频用户。</p>
@@ -63,6 +67,28 @@
                     </tbody>
                   </table>
                 </div>
+              </article>
+            </section>
+            <section class="research-subpanel" data-research-panel="satisfaction" role="tabpanel" hidden>
+              <article class="research-document">
+                <h2>CNAP 二级指标满意度</h2>
+                <p>问卷持续追踪应用管理、部署、流水线、运维、环境管理和端侧等二级指标。图中突出展示 2025Q2、2025Q3 和 2025Q4 三期数据，灰色曲线为历史季度表现，用于判断指标的正常波动区间。</p>
+                <div class="cnap-satisfaction-chart" aria-label="CNAP 二级指标满意度趋势图">
+                  <div class="cnap-chart-head"><strong>各二级指标正常波动中</strong><span>满意度（%）</span></div>
+                  <canvas data-cnap-satisfaction-chart width="1360" height="620">CNAP 二级指标满意度趋势图</canvas>
+                </div>
+                <h3>问卷口径</h3>
+                <div class="research-table-scroll"><table class="research-table" aria-label="CNAP 满意度问卷数据"><tbody>
+                  <tr><th class="research-table-first-column">指标模块</th><th>二级指标</th><th>2025Q2</th><th>2025Q3</th><th>2025Q4</th><th>25Q4 N 值</th></tr>
+                  <tr><td class="research-table-first-column">应用管理</td><td>整体</td><td>89.8</td><td>88.2</td><td>89.8</td><td>134</td></tr>
+                  <tr><td class="research-table-first-column">应用管理</td><td>应用模板及新建应用</td><td>92.4</td><td>90.8</td><td>91.5</td><td>118</td></tr>
+                  <tr><td class="research-table-first-column">应用管理</td><td>应用配置 / 多环境配置</td><td>89.3 / 90.8</td><td>87.8 / 90.5</td><td>91.5 / 91.3</td><td>122 / 119</td></tr>
+                  <tr><td class="research-table-first-column">部署</td><td>部署及管理 / 部署排障 / 数据追溯</td><td>90.2 / 81.7 / 94.1</td><td>87.9 / 79.5 / 90.3</td><td>92.0 / 81.9 / 93.0</td><td>122 / 120 / 102</td></tr>
+                  <tr><td class="research-table-first-column">流水线</td><td>流水线</td><td>90.1</td><td>87.4</td><td>90.4</td><td>121</td></tr>
+                  <tr><td class="research-table-first-column">运维</td><td>查询及运维 / 服务暴露</td><td>90.3 / 92.0</td><td>88.6 / 86.3</td><td>90.4 / 90.4</td><td>123 / 113</td></tr>
+                  <tr><td class="research-table-first-column">环境管理</td><td>新建 / 删除环境、环境复用、功能全面</td><td>91.5 / 93.2 / 90.6</td><td>89.0 / 93.0 / 90.4</td><td>90.4 / 90.4 / 90.4</td><td>118 / 115 / 125</td></tr>
+                  <tr><td class="research-table-first-column">端</td><td>设计布局 / 视觉呈现 / 性能</td><td>88.8 / 91.3 / 81.9</td><td>84.0 / 88.0 / 85.7</td><td>88.8 / 91.3 / 81.9</td><td>125 / 127 / 127</td></tr>
+                </tbody></table></div>
               </article>
             </section>
           </section>
@@ -132,6 +158,62 @@
         });
         deliverablePanels.forEach((panel) => { panel.hidden = panel.dataset.deliverablePanel !== target; });
       }));
+      const researchTabs = [...document.querySelectorAll(".research-subtabs [role=tab]")];
+      const researchPanels = [...document.querySelectorAll("[data-research-panel]")];
+      researchTabs.forEach((tab) => tab.addEventListener("click", () => {
+        const target = tab.dataset.researchTab;
+        researchTabs.forEach((item) => {
+          const selected = item === tab;
+          item.setAttribute("aria-selected", String(selected));
+          item.tabIndex = selected ? 0 : -1;
+        });
+        researchPanels.forEach((panel) => { panel.hidden = panel.dataset.researchPanel !== target; });
+      }));
+      const satisfactionCanvas = document.querySelector("[data-cnap-satisfaction-chart]");
+      if (satisfactionCanvas) {
+        const context = satisfactionCanvas.getContext("2d");
+        const labels = ["整体", "新建应用", "应用配置", "多环境", "备份", "部署管理", "部署排障", "数据追溯", "流水线", "查询运维", "服务暴露", "环境管理", "新建环境", "功能全面", "设计布局", "视觉呈现", "性能"];
+        const datasets = [
+          { color: "#a7c995", values: [89.8,92.4,89.3,90.8,90.6,90.2,81.7,94.1,90.1,90.3,92.0,91.5,93.2,90.6,88.8,91.3,81.9] },
+          { color: "#6488e8", values: [88.2,90.8,87.8,90.5,90.6,87.9,79.5,90.3,87.4,88.6,86.3,89.0,93.0,90.4,84.0,88.0,85.7] },
+          { color: "#bd7ce2", values: [89.8,91.5,89.3,90.8,89.7,90.2,81.9,93.0,89.1,88.6,92.0,91.5,93.0,90.4,88.8,91.3,81.9] }
+        ];
+        const width = satisfactionCanvas.width;
+        const height = satisfactionCanvas.height;
+        const padding = { top: 76, right: 36, bottom: 130, left: 58 };
+        const chartWidth = width - padding.left - padding.right;
+        const chartHeight = height - padding.top - padding.bottom;
+        const x = (index) => padding.left + (chartWidth / (labels.length - 1)) * index;
+        const y = (value) => padding.top + ((100 - value) / 50) * chartHeight;
+        context.clearRect(0, 0, width, height);
+        context.font = "18px PingFang SC, sans-serif";
+        context.fillStyle = "#4f5563";
+        context.textAlign = "right";
+        [50,60,70,80,90,100].forEach((value) => {
+          const lineY = y(value);
+          context.strokeStyle = "#ececf0";
+          context.lineWidth = 1;
+          context.beginPath(); context.moveTo(padding.left, lineY); context.lineTo(width - padding.right, lineY); context.stroke();
+          context.fillText(String(value), padding.left - 14, lineY + 6);
+        });
+        datasets.forEach((dataset) => {
+          context.strokeStyle = dataset.color;
+          context.lineWidth = 3;
+          context.beginPath();
+          dataset.values.forEach((value, index) => { index ? context.lineTo(x(index), y(value)) : context.moveTo(x(index), y(value)); });
+          context.stroke();
+          dataset.values.forEach((value, index) => {
+            context.fillStyle = "#fff"; context.strokeStyle = dataset.color; context.lineWidth = 3;
+            context.beginPath(); context.arc(x(index), y(value), 5, 0, Math.PI * 2); context.fill(); context.stroke();
+          });
+        });
+        context.save(); context.translate(20, height / 2); context.rotate(-Math.PI / 2); context.fillStyle = "#727785"; context.font = "18px PingFang SC, sans-serif"; context.textAlign = "center"; context.fillText("满意度（%）", 0, 0); context.restore();
+        context.fillStyle = "#59606c"; context.font = "16px PingFang SC, sans-serif"; context.textAlign = "right";
+        labels.forEach((label, index) => { context.save(); context.translate(x(index) + 6, height - padding.bottom + 28); context.rotate(-Math.PI / 4); context.fillText(label, 0, 0); context.restore(); });
+        const legend = [["2025Q2", "#a7c995"], ["2025Q3", "#6488e8"], ["2025Q4", "#bd7ce2"]];
+        context.textAlign = "left"; context.font = "17px PingFang SC, sans-serif";
+        legend.forEach(([label, color], index) => { const left = width - 360 + index * 120; context.strokeStyle = color; context.lineWidth = 3; context.beginPath(); context.moveTo(left, 28); context.lineTo(left + 28, 28); context.stroke(); context.fillStyle = color; context.beginPath(); context.arc(left + 14, 28, 4, 0, Math.PI * 2); context.fill(); context.fillStyle = "#4f5563"; context.fillText(label, left + 36, 34); });
+      }
     </script>
   </body>
 </html>
