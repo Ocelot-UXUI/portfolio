@@ -9,7 +9,7 @@
     <link rel="canonical" href="pages/xiaohongshu.html" />
   </head>
   <body>
-    <header><a href="index.html">GUO YUCHENG <span>UX/UI DESIGN</span></a><p>CASE STUDY / 02</p></header>
+    <header class="project-nav"><a class="project-back" href="index.html"><span>←</span>返回首页</a><p class="project-nav-title">CASE STUDY / 02</p><p class="project-nav-index">XIAOHONGSHU</p></header>
     <main id="top">
       <section class="project-intro">
         <p>PERSONAL PROJECT · 2025.09-11</p>
@@ -42,5 +42,25 @@
       </section>
     </main>
     <footer>GUO YUCHENG · UX/UI DESIGN · 2026</footer>
+    <script>
+      const stickyNav = document.querySelector("header.project-nav");
+      let previousScrollY = window.scrollY;
+      let downwardScrollDistance = 0;
+      const NAV_HIDE_DISTANCE = 24;
+      const updateStickyNav = () => {
+        if (!stickyNav) return;
+        const currentScrollY = window.scrollY;
+        const pastHero = currentScrollY > 96;
+        const scrollDelta = currentScrollY - previousScrollY;
+        if (!pastHero || scrollDelta <= 0) downwardScrollDistance = 0;
+        else downwardScrollDistance += scrollDelta;
+        stickyNav.classList.toggle("is-scrolled", currentScrollY > 16);
+        stickyNav.classList.toggle("project-nav--compact", pastHero);
+        stickyNav.classList.toggle("project-nav--hidden", pastHero && downwardScrollDistance >= NAV_HIDE_DISTANCE);
+        previousScrollY = currentScrollY;
+      };
+      updateStickyNav();
+      window.addEventListener("scroll", updateStickyNav, { passive: true });
+    </script>
   </body>
 </html>
