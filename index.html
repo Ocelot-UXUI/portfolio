@@ -318,6 +318,63 @@
         border-top: 0;
       }
 
+      .prototype-homepage .project-showcase-dodo .showcase-media {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .prototype-homepage .dodo-project-preview {
+        position: relative;
+        width: min(100%, 620px);
+        aspect-ratio: 1.48;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, .2);
+        background: #f7f9fa;
+        box-shadow: 0 24px 50px rgba(0, 0, 0, .28);
+        transform: rotate(2deg);
+      }
+
+      .prototype-homepage .dodo-project-preview::before {
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        right: 0;
+        left: 0;
+        height: 28px;
+        background: #121717;
+        content: "DODO · SKILL";
+        color: #cdeccd;
+        font-size: 9px;
+        line-height: 28px;
+        letter-spacing: 1.1px;
+        text-align: center;
+      }
+
+      .prototype-homepage .dodo-project-preview::after {
+        position: absolute;
+        z-index: 1;
+        top: 28px;
+        bottom: 0;
+        left: 0;
+        width: 24%;
+        border-right: 1px solid #e4e8e7;
+        background: #f1f5f3;
+        content: "";
+      }
+
+      .prototype-homepage .dodo-project-preview span {
+        position: absolute;
+        z-index: 3;
+        top: 48px;
+        left: 30%;
+        display: block;
+        width: 56%;
+        height: 12px;
+        background: #dbeadf;
+        box-shadow: 0 28px #e9eeee, 0 56px #e9eeee, 0 84px #dbeadf, 0 112px #e9eeee;
+      }
+
       .prototype-homepage .hero-project-card:hover {
         z-index: 6;
         box-shadow: 0 24px 38px rgba(0, 0, 0, .28);
@@ -608,6 +665,16 @@
 
         <section class="projects showcase-projects" id="projects" aria-labelledby="projects-title">
           <div class="showcase-heading section-reveal"><span class="section-copy-step">PROJECTS</span><h2 class="section-copy-step" id="projects-title">项目</h2></div>
+          <a class="project-showcase project-showcase-dodo" id="project-dodo" href="pages/dodo.html" data-project-hotspot>
+            <div class="showcase-copy">
+              <h3>Dodo Skill 一期交互探索</h3>
+              <p>围绕个人 Skill 与内置 Skill 的管理体验，保留两套方案进行交互对比</p>
+              <ul><li>B端</li><li>AI 产品</li><li>交互探索</li><li>双版本 Demo</li></ul>
+            </div>
+            <div class="showcase-media">
+              <div class="dodo-project-preview" aria-hidden="true"><span></span></div>
+            </div>
+          </a>
           <a class="project-showcase project-showcase-cnap" id="project-cnap" href="demos/workload-demo/index.html" data-project-hotspot>
             <div class="showcase-copy">
               <h3>CNAP 云原生工作负载管理</h3>
