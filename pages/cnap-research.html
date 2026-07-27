@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="CNAP 云原生工作负载管理用户调研结论｜郭昱成作品集" />
+    <title>CNAP 用户调研结论 | 郭昱成作品集</title>
+    <link rel="stylesheet" href="../styles/styles.css?v=20260727-1" />
+    <link rel="stylesheet" href="../styles/cnap-research.css?v=20260727-1" />
+  </head>
+  <body class="cnap-research-page">
+    <header class="project-nav">
+      <a class="project-back" href="../index.html" aria-label="返回首页"><span aria-hidden="true">←</span> 返回首页</a>
+      <p class="project-nav-title">CNAP 云原生工作负载管理</p>
+      <label class="project-view-switch"><span>当前展示</span><select aria-label="切换 CNAP 项目展示" data-view-switch data-current="cnap-research.html"><option value="cnap-research.html" selected>用户调研</option><option value="../demos/workload-demo/index.html">交互 Demo</option></select></label>
+    </header>
+
+    <main class="cnap-research-main">
+      <div class="cnap-research-shell">
+        <section class="cnap-research-hero">
+          <p class="cnap-research-kicker">CNAP · USER RESEARCH SYNTHESIS</p>
+          <h1>先理解用户如何上线，<br />再重新组织平台。</h1>
+          <p>通过对平台管理者、大模型基建开发者、商业 OP 和一线研发的访谈，识别 CNAP 在应用接入、部署、集群管理和运行时运维中的关键阻断点，并将研究结论转化为后续信息架构和操作体验的设计依据。</p>
+          <div class="cnap-evidence">
+            <div><strong>访谈材料</strong><span>6 名用户，覆盖平台管理者、大模型基建开发者、商业 OP、一线研发和健康策略研发。</span></div>
+            <div><strong>用户结构</strong><span>新用户 3 名，高频用户 3 名，兼顾首次接入和规模化使用经验。</span></div>
+            <div><strong>反馈口径</strong><span>相似反馈合并展示，依据列保留反馈原话，并标注命中人数。</span></div>
+          </div>
+        </section>
+
+        <section class="cnap-section">
+          <div class="cnap-section-head"><span>CORE INSIGHTS</span><h2>平台能力的问题，最终都体现在用户无法判断下一步。</h2></div>
+          <div class="cnap-insights">
+            <article class="cnap-insight"><b>结论 01</b><h3>平台信息架构以“平台视角”组织，与用户“应用视角”心智错位。</h3><p>用户进入平台后需要在多层导航中定位目标应用。资深用户靠收藏 URL 绕过导航，新用户则容易直接迷失。</p></article>
+            <article class="cnap-insight"><b>结论 02</b><h3>部署流程透明度不足，是最高频的工作流痛点。</h3><p>配置变更无 Diff、失败信息不明确、构建过程没有进度反馈，用户在关键节点处于黑盒状态。</p></article>
+            <article class="cnap-insight"><b>结论 03</b><h3>多集群、多组件场景下，重复配置成本随规模快速放大。</h3><p>集群缺少标签和分组，配置无法模板复用，变量需要逐个添加，规模化使用效率持续下降。</p></article>
+            <article class="cnap-insight"><b>结论 04</b><h3>用户需要嵌入工作流的自动化，而不是一个额外的对话框。</h3><p>真实诉求集中在部署通知、异常告警和自然语言查询；涉及生产变更时，用户仍希望保留人工确认。</p></article>
+          </div>
+        </section>
+
+        <section class="cnap-section">
+          <div class="cnap-section-head"><span>USER WORKFLOW</span><h2>从接入到排障，用户一直在不同工具之间往返。</h2></div>
+          <div class="cnap-workflow">
+            <article><b>01</b><strong>应用接入</strong><span>创建应用 → 关联集群 → 配置运行参数</span><p>GPU 应用配置复杂，文档不完整，新用户依赖同事指导。</p></article>
+            <article><b>02</b><strong>日常部署</strong><span>选择镜像 → 配置策略 → 提交上线 → 等待结果</span><p>构建阶段约耗时 30 分钟，无进度反馈；失败后需要自行排查。</p></article>
+            <article><b>03</b><strong>集群管理</strong><span>进入集群列表 → 筛选目标 → 批量操作</span><p>集群缺少排序和标签，上线时需要手动勾选集群组合。</p></article>
+            <article><b>04</b><strong>运行时运维</strong><span>查看实例 / 日志 → 执行扩缩容和其他操作</span><p>日志能力弱，扩缩容入口不易发现，用户转向外部平台。</p></article>
+            <article><b>05</b><strong>问题排查</strong><span>查看错误 → 查日志 → 联系研发</span><p>错误信息笼统，用户无法自助定位，排障链路依赖研发介入。</p></article>
+            <article><b>06</b><strong>部署上线</strong><span>检查关联卡片 → 确认评审状态 → 提交上线</span><p>平台缺少强制校验，流程规范依赖人工自觉。</p></article>
+          </div>
+        </section>
+
+        <section class="cnap-section">
+          <div class="cnap-section-head"><span>PAIN POINTS</span><h2>先解决会阻断任务的透明度问题，再处理效率问题。</h2></div>
+          <div class="cnap-priority-group"><h3 class="cnap-priority-title"><i>P0</i> 工作流阻断性问题</h3><div class="cnap-pain-list">
+            <article class="cnap-pain"><small>信息架构</small><h3>用户找不到目标应用</h3><p>全局导航层级深，功能分散在不同菜单，用户心智与产品结构不匹配。</p><blockquote>“信息量太大了，进来之后不知道该点哪里。”</blockquote><em>4/5 用户有导航迷失或依赖收藏 URL 的行为</em></article>
+            <article class="cnap-pain"><small>部署失败</small><h3>错误信息不足，无法自助排查</h3><p>部署异常时提示笼统，缺少具体原因和修复建议，只能联系研发。</p><blockquote>“出错了也不知道是哪里的问题，只能去找研发。”</blockquote><em>4/5 用户反馈错误信息不足</em></article>
+            <article class="cnap-pain"><small>配置透明度</small><h3>配置变更没有 Diff</h3><p>提交上线时无法直观看到本次变更范围，用户无法确认操作是否正确。</p><blockquote>“我希望能看到这次上线改了什么，和上次有什么不一样。”</blockquote><em>3/5 用户有此诉求</em></article>
+            <article class="cnap-pain"><small>集群与配置</small><h3>规模化场景下重复劳动严重</h3><p>集群无标签分组，部署配置无法模板复用，变量需要逐个添加。</p><blockquote>“每个组件都要重新配一遍，很多都是一样的，能不能有个模板？”</blockquote><em>3/5 用户有重复配置痛点</em></article>
+            <article class="cnap-pain"><small>日志能力</small><h3>用户被迫转向外部日志平台</h3><p>不支持关键词搜索、全屏查看和暂停滚动，CNAP 日志无法支撑日常排查。</p><blockquote>“连关键词搜索都没有，怎么排查问题？”</blockquote><em>3/5 用户转向外部日志平台</em></article>
+            <article class="cnap-pain"><small>AI 能力</small><h3>用户不知道平台已有 AI 工具</h3><p>Skill 等能力缺少可见入口和使用场景，用户无法主动发现。</p><blockquote>“有这个工具？我完全不知道。”</blockquote><em>4/5 用户不知道或未使用 AI 能力</em></article>
+            <article class="cnap-pain"><small>工作流自动化</small><h3>真正诉求是嵌入式自动化</h3><p>用户希望部署完成自动通知、异常自动告警、运维查询自然语言化。</p><blockquote>“能不能部署完了自动发个消息告诉我？”</blockquote><em>4/5 用户有嵌入式自动化诉求</em></article>
+          </div></div>
+          <div class="cnap-priority-group"><h3 class="cnap-priority-title"><i class="p1">P1</i> 体验效率与流程规范</h3><div class="cnap-pain-list">
+            <article class="cnap-pain"><small>构建反馈</small><h3>构建耗时长且没有进度</h3><p>M1 构建约耗时 30 分钟，用户不知道是否正常运行。</p><em>2/5 用户明确反馈</em></article>
+            <article class="cnap-pain"><small>应用接入</small><h3>复杂场景文档不完整</h3><p>GPU 应用缺少完整示例，用户依赖同事或自行摸索。</p><em>3/5 用户有文档不足反馈</em></article>
+            <article class="cnap-pain"><small>流程规范</small><h3>上线缺少平台强制卡点</h3><p>关联卡片是否评审通过、是否满足上线条件，平台不做自动校验。</p><em>2/5 用户有此诉求</em></article>
+            <article class="cnap-pain"><small>运维入口</small><h3>扩缩容等关键入口不易发现</h3><p>纵向扩缩容等高频操作隐藏较深，用户需要反复寻找。</p><em>2/5 用户反馈入口不易发现</em></article>
+            <article class="cnap-pain"><small>权限管理</small><h3>权限入口逻辑不一致</h3><p>不同模块的权限管理入口位置不统一，管理成本高。</p><em>2/5 用户反馈权限管理混乱</em></article>
+            <article class="cnap-pain"><small>版本管理</small><h3>镜像 Tag 与代码版本无法映射</h3><p>线上排障时无法从镜像 Tag 直接定位代码版本。</p><em>1/5 用户反馈，但影响排障效率</em></article>
+          </div></div>
+          <div class="cnap-priority-group"><h3 class="cnap-priority-title"><i class="p2">P2</i> 产品连续性问题</h3><div class="cnap-pain-list"><article class="cnap-pain"><small>运行时稳定性</small><h3>配置保存偶发丢失</h3><p>编辑 Secret 时偶发权限和配置丢失，直接阻断操作并造成强烈不安。</p><blockquote>“有时候编辑完保存，发现配置没了，很慌。”</blockquote><em>单用户反馈，但属于直接阻断的功能性问题</em></article></div></div>
+        </section>
+
+        <section class="cnap-section">
+          <div class="cnap-section-head"><span>BEHAVIOR PATTERNS</span><h2>用户已经形成了自己的“绕行策略”。</h2></div>
+          <div class="cnap-behaviors">
+            <article><h3>遇到配置问题先问人，不查文档</h3><p>用户认为官方文档不全、缺少示例，已经不在自己的解决路径上。</p></article>
+            <article><h3>排查问题时主动切换到外部工具</h3><p>运行异常时直接跳转 BLS 等日志平台，把 CNAP 日志页当成跳板。</p></article>
+            <article><h3>提交部署后靠手动刷新确认结果</h3><p>没有被动接收通知的路径，“等结果”变成需要主动维持的动作。</p></article>
+            <article><h3>生产操作坚持人工确认</h3><p>用户接受 AI 辅助分析和查询，但不希望 AI 直接执行高风险生产变更。</p></article>
+          </div>
+        </section>
+
+        <section class="cnap-section">
+          <div class="cnap-section-head"><span>DESIGN TODO</span><h2>研究结论最终落到这些设计动作。</h2></div>
+          <div class="cnap-todos">
+            <article><b>P0</b><strong>信息架构重构</strong><span>以“应用”为核心对象组织导航，进入应用后聚焦当前应用操作。</span></article>
+            <article><b>P0</b><strong>部署 Diff 展示</strong><span>提交上线时展示配置变更，无变更时给出明确提示。</span></article>
+            <article><b>P0</b><strong>错误信息优化</strong><span>提供具体原因、影响范围和修复建议，降低排障对研发的依赖。</span></article>
+            <article><b>P0</b><strong>日志能力增强</strong><span>支持关键词搜索、全屏查看、暂停滚动和日志定格。</span></article>
+            <article><b>P0</b><strong>集群标签与批量筛选</strong><span>支持多维度标记集群，按标签批量筛选和操作。</span></article>
+            <article><b>P1</b><strong>部署配置模板化</strong><span>保存和复用部署策略模板，配置变量支持批量导入。</span></article>
+            <article><b>P1</b><strong>部署状态主动通知</strong><span>部署完成或失败后自动推送如流消息，减少手动刷新。</span></article>
+            <article><b>P1</b><strong>在工作流中提升 AI 可见性</strong><span>在日志查看、状态查询等关键节点嵌入 AI 入口。</span></article>
+            <article><b>P1</b><strong>上线流程卡点</strong><span>与 iCafe 集成，校验关联卡片状态，不满足条件时阻断上线。</span></article>
+            <article><b>P1</b><strong>补全 GPU 和复杂配置文档</strong><span>提供完整接入示例，降低新用户接入成本。</span></article>
+            <article><b>P2</b><strong>镜像 Tag 与代码版本映射</strong><span>优化 Tag 生成规则，支持从 Tag 直接定位代码版本。</span></article>
+            <article><b>P2</b><strong>自定义导航</strong><span>允许用户配置常用入口，适配不同角色的工作习惯。</span></article>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script>
+      const stickyNav = document.querySelector("header.project-nav");
+      let previousScrollY = window.scrollY;
+      let downwardScrollDistance = 0;
+      const NAV_HIDE_DISTANCE = 24;
+      const updateStickyNav = () => {
+        if (!stickyNav) return;
+        const currentScrollY = window.scrollY;
+        const delta = currentScrollY - previousScrollY;
+        if (currentScrollY <= 96 || delta <= 0) downwardScrollDistance = 0;
+        else downwardScrollDistance += delta;
+        stickyNav.classList.toggle("is-scrolled", currentScrollY > 16);
+        stickyNav.classList.toggle("project-nav--compact", currentScrollY > 96);
+        stickyNav.classList.toggle("project-nav--hidden", currentScrollY > 96 && downwardScrollDistance >= NAV_HIDE_DISTANCE);
+        previousScrollY = currentScrollY;
+      };
+      updateStickyNav();
+      window.addEventListener("scroll", updateStickyNav, { passive: true });
+      document.querySelector("[data-view-switch]")?.addEventListener("change", (event) => {
+        if (event.target.value) window.location.href = event.target.value;
+      });
+    </script>
+  </body>
+</html>
