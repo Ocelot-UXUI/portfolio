@@ -23,28 +23,19 @@
       .dodo-decision article { padding: 24px; background: #0e1213; }
       .dodo-decision strong { display: block; margin-bottom: 9px; color: #fff; font-size: 14px; }
       .dodo-decision span { color: #9ca9a1; font-size: 13px; line-height: 1.7; }
-      .dodo-versions { max-width: 1280px; margin: 0 auto; padding: 52px 6vw 90px; }
-      .dodo-versions-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 24px; }
-      .dodo-versions-head h2 { margin: 0; font-size: 28px; font-weight: 600; }
-      .dodo-versions-head p { max-width: 450px; margin: 0; color: #8f9a93; font-size: 12px; line-height: 1.7; text-align: right; }
-      .dodo-version-tabs { display: flex; gap: 8px; margin-bottom: 18px; }
-      .dodo-version-tab { padding: 10px 14px; border: 1px solid rgba(255,255,255,.2); background: transparent; color: #aeb8b2; font: inherit; font-size: 12px; cursor: pointer; }
-      .dodo-version-tab.is-active { border-color: #9be98c; background: #9be98c; color: #071009; }
-      .dodo-preview { overflow: hidden; border: 1px solid rgba(255,255,255,.14); background: #edf0f7; box-shadow: 0 22px 70px rgba(0,0,0,.3); }
-      .dodo-preview-bar { min-height: 54px; padding: 0 18px; display: flex; align-items: center; justify-content: space-between; gap: 18px; background: #121717; color: #dce9df; }
-      .dodo-preview-bar strong { font-size: 13px; font-weight: 600; }
-      .dodo-preview-bar span { color: #91a297; font-size: 11px; }
-      .dodo-preview-frame { display: block; width: 100%; height: min(720px, 72vh); border: 0; background: #fff; }
+      .dodo-demos { max-width: 1280px; margin: 0 auto; padding: 52px 6vw 110px; }
+      .dodo-demos-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 24px; }
+      .dodo-demos-head h2 { margin: 0; font-size: 28px; font-weight: 600; }
+      .dodo-demos-head p { max-width: 450px; margin: 0; color: #8f9a93; font-size: 12px; line-height: 1.7; text-align: right; }
+      .dodo-demo-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+      .dodo-demo-link { min-height: 250px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid rgba(255,255,255,.14); background: #0d1111; color: #fff; text-decoration: none; transition: transform .22s ease, border-color .22s ease, background .22s ease; }
+      .dodo-demo-link:hover { transform: translateY(-5px); border-color: rgba(155,233,140,.72); background: #111a15; }
+      .dodo-demo-link small { color: #9be98c; font-size: 11px; letter-spacing: 1.2px; }
+      .dodo-demo-link h3 { margin: 34px 0 10px; font-size: 24px; font-weight: 600; }
+      .dodo-demo-link p { max-width: 350px; margin: 0; color: #9ca9a1; font-size: 13px; line-height: 1.75; }
+      .dodo-demo-link strong { margin-top: 28px; color: #fff; font-size: 12px; font-weight: 500; }
       .dodo-note { margin: 18px 0 0; color: #78857c; font-size: 11px; line-height: 1.7; }
-      @media (max-width: 760px) {
-        .dodo-hero { min-height: 48vh; padding: 80px 8vw 54px; }
-        .dodo-story { padding: 56px 6vw 20px; }
-        .dodo-story-grid { grid-template-columns: 1fr; gap: 30px; }
-        .dodo-versions { padding: 38px 6vw 60px; }
-        .dodo-versions-head { display: block; }
-        .dodo-versions-head p { margin-top: 12px; text-align: left; }
-        .dodo-preview-frame { height: 560px; }
-      }
+      @media (max-width: 760px) { .dodo-hero { min-height: 48vh; padding: 80px 8vw 54px; } .dodo-story { padding: 56px 6vw 20px; } .dodo-story-grid { grid-template-columns: 1fr; gap: 30px; } .dodo-demos { padding: 38px 6vw 70px; } .dodo-demos-head { display: block; } .dodo-demos-head p { margin-top: 12px; text-align: left; } .dodo-demo-links { grid-template-columns: 1fr; } }
     </style>
   </head>
   <body class="dodo-page">
@@ -53,72 +44,30 @@
       <div class="project-nav-title">Dodo Skill 一期交互探索</div>
       <p class="project-nav-index">01 / 05</p>
     </header>
-
     <main>
       <section class="dodo-hero">
         <p class="dodo-eyebrow">DODO SKILL · INTERACTION EXPLORATION</p>
         <h1>把 Skill<br />变成可管理的资产。</h1>
-        <p>围绕个人 Skill 与内置 Skill 的管理体验，探索列表、详情、编辑、版本记录和历史恢复之间的关系。本页保留两套局部交互原型，用来呈现设计方向与方案演进，不代表完整生产版本。</p>
+        <p>围绕个人 Skill 与内置 Skill 的管理体验，探索列表、详情、编辑、版本记录和历史恢复之间的关系。本页是项目说明页，两个局部交互原型分别独立打开，不代表完整生产版本。</p>
         <div class="dodo-meta"><span>B 端 AI 工具</span><span>交互设计</span><span>方案对比</span><span>HTML Prototype</span></div>
       </section>
-
       <section class="dodo-story">
         <div class="dodo-story-grid">
-          <div>
-            <span class="dodo-story-label">PROJECT LOGIC</span>
-            <h2>同一目标，两个交互方向。</h2>
-            <p>两版都围绕 Skill 的发现、启用、编辑和版本管理展开。作品集不把它们伪装成两个产品，而是保留为一次从局部浮层到完整历史视图的探索过程。</p>
-          </div>
-          <div class="dodo-decision">
-            <article><strong>方案 1 · 轻量版本记录</strong><span>版本记录以浮层承载，用户不离开 Skill 详情页，适合快速查看与回退。</span></article>
-            <article><strong>方案 2 · 完整历史视图</strong><span>历史记录升级为全屏视图，并将本地记录与发布版本拆成更清晰的管理空间。</span></article>
-            <article><strong>展示边界</strong><span>当前 Demo 使用前端模拟数据，真实 Diff、版本接口、权限和发布流程不在本次展示范围内。</span></article>
-          </div>
+          <div><span class="dodo-story-label">PROJECT LOGIC</span><h2>同一目标，两个交互方向。</h2><p>两版都围绕 Skill 的发现、启用、编辑和版本管理展开。作品集保留它们作为一次从局部浮层到完整历史视图的探索过程。</p></div>
+          <div class="dodo-decision"><article><strong>方案 1 · 轻量版本记录</strong><span>版本记录以浮层承载，用户不离开 Skill 详情页，适合快速查看与回退。</span></article><article><strong>方案 2 · 完整历史视图</strong><span>历史记录升级为全屏视图，并将本地记录与发布版本拆成更清晰的管理空间。</span></article><article><strong>展示边界</strong><span>当前 Demo 使用前端模拟数据，真实 Diff、版本接口、权限和发布流程不在本次展示范围内。</span></article></div>
         </div>
       </section>
-
-      <section class="dodo-versions" aria-labelledby="dodo-versions-title">
-        <div class="dodo-versions-head">
-          <h2 id="dodo-versions-title">交互方案预览</h2>
-          <p>选择一个版本进入局部可交互原型。两个版本共用同一产品背景，差异集中在版本记录和内置 Skill 操作路径。</p>
-        </div>
-        <div class="dodo-version-tabs" role="tablist" aria-label="Dodo 交互方案版本">
-          <button class="dodo-version-tab is-active" type="button" role="tab" aria-selected="true" data-dodo-version="1">方案 1 · 版本浮层</button>
-          <button class="dodo-version-tab" type="button" role="tab" aria-selected="false" data-dodo-version="2">方案 2 · 历史视图</button>
-        </div>
-        <div class="dodo-preview">
-          <div class="dodo-preview-bar"><strong data-dodo-preview-title>方案 1 · 版本记录浮层</strong><span>局部交互原型 / Mock data</span></div>
-          <iframe class="dodo-preview-frame" title="Dodo Skill 方案 1 交互原型" src="../demos/dodo/solution-1/index.html" data-dodo-frame></iframe>
+      <section class="dodo-demos" aria-labelledby="dodo-demos-title">
+        <div class="dodo-demos-head"><h2 id="dodo-demos-title">独立交互 Demo</h2><p>两个版本分别打开，避免项目说明、方案对比和产品操作同时堆叠在一个页面里。</p></div>
+        <div class="dodo-demo-links">
+          <a class="dodo-demo-link" href="dodo-demo-1.html"><div><small>VERSION 01</small><h3>版本记录浮层</h3><p>以轻量浮层承载本地记录和发布版本，重点观察详情页上下文中的版本查看与恢复。</p></div><strong>打开方案 1 Demo →</strong></a>
+          <a class="dodo-demo-link" href="dodo-demo-2.html"><div><small>VERSION 02</small><h3>历史记录视图</h3><p>将版本记录升级为独立历史视图，重点观察本地记录、发布版本和回滚路径的管理关系。</p></div><strong>打开方案 2 Demo →</strong></a>
         </div>
         <p class="dodo-note">说明：原型中的列表、Skill 内容、版本记录和 Diff 均为预置模拟数据；页面用于展示信息架构与交互逻辑，不承诺与线上系统的数据状态同步。</p>
       </section>
     </main>
-
     <footer>DODO SKILL · INTERACTION EXPLORATION · 2026</footer>
-
     <script>
-      const versionTabs = document.querySelectorAll("[data-dodo-version]");
-      const frame = document.querySelector("[data-dodo-frame]");
-      const title = document.querySelector("[data-dodo-preview-title]");
-      const versionMeta = {
-        "1": { title: "方案 1 · 版本记录浮层", src: "../demos/dodo/solution-1/index.html", label: "Dodo Skill 方案 1 交互原型" },
-        "2": { title: "方案 2 · 历史记录视图", src: "../demos/dodo/solution-2/index.html", label: "Dodo Skill 方案 2 交互原型" }
-      };
-      versionTabs.forEach((tab) => {
-        tab.addEventListener("click", () => {
-          const meta = versionMeta[tab.dataset.dodoVersion];
-          if (!meta || !frame) return;
-          versionTabs.forEach((item) => {
-            const active = item === tab;
-            item.classList.toggle("is-active", active);
-            item.setAttribute("aria-selected", String(active));
-          });
-          frame.title = meta.label;
-          title.textContent = meta.title;
-          frame.src = meta.src;
-        });
-      });
-
       const stickyNav = document.querySelector(".project-nav");
       let previousScrollY = window.scrollY;
       let downwardScrollDistance = 0;
