@@ -381,7 +381,8 @@
       }
 
       .prototype-homepage .hero-project-card {
-        animation-duration: .9s;
+        transform-origin: center center;
+        animation-duration: 1.8s;
         animation-fill-mode: both;
         animation-play-state: paused;
         animation-timing-function: cubic-bezier(.16, 1, .3, 1);
@@ -395,29 +396,29 @@
         animation-play-state: running;
       }
 
-      .prototype-homepage .hero-project-cnap { animation-name: hero-cnap-unfold; animation-delay: .06s; }
-      .prototype-homepage .hero-project-remi { animation-name: hero-remi-unfold; animation-delay: .14s; }
-      .prototype-homepage .hero-project-xhs { animation-name: hero-xhs-unfold; animation-delay: .25s; }
-      .prototype-homepage .hero-project-reading { animation-name: hero-reading-unfold; animation-delay: .31s; }
+      .prototype-homepage .hero-project-cnap { animation-name: hero-cnap-unfold; animation-delay: .04s; }
+      .prototype-homepage .hero-project-remi { animation-name: hero-remi-unfold; animation-delay: .08s; }
+      .prototype-homepage .hero-project-xhs { animation-name: hero-xhs-unfold; animation-delay: .18s; }
+      .prototype-homepage .hero-project-reading { animation-name: hero-reading-unfold; animation-delay: .24s; }
 
       @keyframes hero-cnap-unfold {
-        from { opacity: 0; transform: scale(.82) rotate(-1deg); }
-        to { opacity: 1; transform: scale(1) rotate(-2.5deg); }
+        0%, 34% { opacity: .94; transform: scale(.62) rotate(-1deg); }
+        100% { opacity: 1; transform: scale(1) rotate(-2.5deg); }
       }
 
       @keyframes hero-remi-unfold {
-        from { opacity: 0; transform: translateX(60%) scale(.82) rotate(-1deg); }
-        to { opacity: 1; transform: translateX(0) scale(1) rotate(-5.5deg); }
+        0%, 34% { opacity: .9; transform: translateX(60%) scale(.62) rotate(-1deg); }
+        100% { opacity: 1; transform: translateX(0) scale(1) rotate(-5.5deg); }
       }
 
       @keyframes hero-xhs-unfold {
-        from { opacity: 0; transform: translateX(-240%) scale(.72) rotate(0); }
-        to { opacity: 1; transform: translateX(0) scale(1) rotate(2.5deg); }
+        0%, 34% { opacity: .88; transform: translateX(-240%) scale(.4) rotate(0); }
+        100% { opacity: 1; transform: translateX(0) scale(1) rotate(2.5deg); }
       }
 
       @keyframes hero-reading-unfold {
-        from { opacity: 0; transform: translateX(-327%) scale(.72) rotate(0); }
-        to { opacity: 1; transform: translateX(0) scale(1) rotate(5.5deg); }
+        0%, 34% { opacity: .84; transform: translateX(-327%) scale(.4) rotate(0); }
+        100% { opacity: 1; transform: translateX(0) scale(1) rotate(5.5deg); }
       }
 
       @media (max-width: 700px) {
@@ -426,13 +427,13 @@
       }
 
       @keyframes hero-xhs-unfold-mobile {
-        from { opacity: 0; transform: translateX(-152%) scale(.72) rotate(0); }
-        to { opacity: 1; transform: translateX(0) scale(1) rotate(2.5deg); }
+        0%, 34% { opacity: .88; transform: translateX(-152%) scale(.4) rotate(0); }
+        100% { opacity: 1; transform: translateX(0) scale(1) rotate(2.5deg); }
       }
 
       @keyframes hero-reading-unfold-mobile {
-        from { opacity: 0; transform: translateX(-217%) scale(.72) rotate(0); }
-        to { opacity: 1; transform: translateX(0) scale(1) rotate(5.5deg); }
+        0%, 34% { opacity: .84; transform: translateX(-217%) scale(.4) rotate(0); }
+        100% { opacity: 1; transform: translateX(0) scale(1) rotate(5.5deg); }
       }
 
       @media (prefers-reduced-motion: reduce) {
