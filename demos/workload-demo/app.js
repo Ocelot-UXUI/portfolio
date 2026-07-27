@@ -625,7 +625,7 @@ function selectionColumn(rows){
   return `<div class="modal-select-column"><label class="modal-select-all"><input type="checkbox" data-modal-select-all aria-label="选择全部集群"><span>集群</span></label>${rows.map(row=>`<label class="modal-cluster-choice"><input type="checkbox" data-modal-cluster="${row.id}" aria-label="选择 ${row.name}">${clusterIcon()}<span>${row.name}</span></label>`).join('')}</div>`;
 }
 function verticalSettingsTable(rows){
-  const resourceCell=(row,type)=>`<div class="vertical-resource-cell" data-resource-cluster="${row.id}" data-resource-type="${type}"><label><input type="checkbox" checked aria-label="${row.name} ${type} 请求">Req<input data-resource-request="value" value="4" aria-label="${row.name} ${type} 请求值"><select data-resource-request="unit" aria-label="${row.name} ${type} 请求单位"><option>${type==='CPU'?'c':'Gi'}</option></select></label><label><input type="checkbox" data-resource-limit-toggle checked aria-label="${row.name} ${type} 限制">Lim<input data-resource-limit="value" value="4" aria-label="${row.name} ${type} 限制值"><select data-resource-limit="unit" aria-label="${row.name} ${type} 限制单位"><option>${type==='CPU'?'c':'Gi'}</option></select></label></div>`;
+  const resourceCell=(row,type)=>`<div class="vertical-resource-cell" data-resource-cluster="${row.id}" data-resource-type="${type}"><label><input type="checkbox" checked disabled aria-label="${row.name} ${type} 请求（必填）">Req<input data-resource-request="value" value="4" aria-label="${row.name} ${type} 请求值"><select data-resource-request="unit" aria-label="${row.name} ${type} 请求单位"><option>${type==='CPU'?'c':'Gi'}</option></select></label><label><input type="checkbox" data-resource-limit-toggle aria-label="${row.name} ${type} 限制（可选）">Lim<input data-resource-limit="value" value="4" disabled aria-label="${row.name} ${type} 限制值"><select data-resource-limit="unit" disabled aria-label="${row.name} ${type} 限制单位"><option>${type==='CPU'?'c':'Gi'}</option></select></label></div>`;
   const header=['','集群','CPU','内存','最大不可用','最大可超出','可用度锁'].map((label,index)=>index===0?`<div class="vertical-scale-head"><input type="checkbox" data-modal-select-all aria-label="选择全部集群"></div>`:`<div class="vertical-scale-head">${label}</div>`).join('');
   const values=row=>`<div class="vertical-scale-check"><input type="checkbox" data-modal-cluster="${row.id}" aria-label="选择 ${row.name}"></div><div class="vertical-scale-cluster">${verticalClusterIcon()}<span>${row.name}</span></div>${resourceCell(row,'CPU')}${resourceCell(row,'内存')}<div class="vertical-scale-value">${row.unavailable}</div><div class="vertical-scale-value">${row.surge}</div><div class="vertical-scale-value">${row.available}</div>`;
   return `<div class="vertical-scale-grid">${header}${rows.map(values).join('')}</div>`;
@@ -680,6 +680,7 @@ function openConfirm(actionKey, ids=[]){
   }
   modal.className=`action-modal operation-modal ${actionKey==='vertical'?'operation-modal-wide':''}`;
   modal.innerHTML=content;
+  if(actionKey==='vertical') modal.querySelectorAll('.vertical-resource-cell').forEach(syncResourceLimit);
   modalBackdrop.classList.remove('hidden');
 }
 
