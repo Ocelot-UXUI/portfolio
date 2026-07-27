@@ -383,7 +383,16 @@
       .prototype-homepage .hero-project-card {
         animation-duration: .9s;
         animation-fill-mode: both;
+        animation-play-state: paused;
         animation-timing-function: cubic-bezier(.16, 1, .3, 1);
+      }
+
+      html.motion-ready .prototype-homepage .hero-project-artwork:not(.hero-ready) .hero-project-card {
+        opacity: 0;
+      }
+
+      .prototype-homepage .hero-project-artwork.hero-ready .hero-project-card {
+        animation-play-state: running;
       }
 
       .prototype-homepage .hero-project-cnap { animation-name: hero-cnap-unfold; animation-delay: .06s; }
@@ -429,6 +438,7 @@
       @media (prefers-reduced-motion: reduce) {
         .prototype-homepage .hero-project-card {
           animation: none;
+          opacity: 1;
         }
       }
 
@@ -652,6 +662,10 @@
       window.addEventListener("scroll", updateStickyNav, { passive: true });
 
       document.documentElement.classList.add("motion-ready");
+      const heroArtwork = document.querySelector(".hero-project-artwork");
+      if (heroArtwork && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        requestAnimationFrame(() => requestAnimationFrame(() => heroArtwork.classList.add("hero-ready")));
+      }
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) entry.target.classList.add("visible");
