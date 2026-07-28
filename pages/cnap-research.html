@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="郭昱成 UX/UI 作品集 - CNAP 用户调研交付物" />
     <title>CNAP 用户调研 | 郭昱成作品集</title>
-    <link rel="stylesheet" href="../styles/styles.css?v=20260727-3" />
+    <link rel="stylesheet" href="../styles/styles.css?v=20260728-1" />
   </head>
   <body class="deliverables-page cnap-research-page">
     <header class="project-nav">
@@ -88,9 +88,9 @@
             <section class="research-subpanel" data-research-panel="satisfaction" role="tabpanel" hidden>
               <article class="research-document">
                 <h2>CNAP 二级指标满意度</h2>
-                <p>问卷持续追踪应用管理、部署、流水线、运维、环境管理和端侧等二级指标。图中突出展示 2025Q2、2025Q3 和 2025Q4 三期数据，灰色曲线为历史季度表现，用于判断指标的正常波动区间。</p>
+                <p>问卷持续追踪应用管理、部署、流水线、运维、环境管理和端侧等二级指标。图中以绿色、蓝色和紫色依次展示 2025Q2、2025Q3 和 2025Q4；紫色强调当前季度，虚线标记 90 分观察基线。</p>
                 <div class="cnap-satisfaction-chart" aria-label="CNAP 二级指标满意度趋势图">
-                  <div class="cnap-chart-head"><strong>各二级指标正常波动中</strong><span>满意度（%）</span></div>
+                  <div class="cnap-chart-head"><div><small>季度追踪</small><strong>二级指标满意度趋势</strong></div><span>90 分为观察基线</span></div>
                   <canvas data-cnap-satisfaction-chart width="1360" height="620">CNAP 二级指标满意度趋势图</canvas>
                 </div>
                 <h3>问卷口径</h3>
@@ -177,45 +177,55 @@
         const context = satisfactionCanvas.getContext("2d");
         const labels = ["整体", "新建应用", "应用配置", "多环境", "备份", "部署管理", "部署排障", "数据追溯", "流水线", "查询运维", "服务暴露", "环境管理", "新建环境", "功能全面", "设计布局", "视觉呈现", "性能"];
         const datasets = [
-          { color: "#a7c995", values: [89.8,92.4,89.3,90.8,90.6,90.2,81.7,94.1,90.1,90.3,92.0,91.5,93.2,90.6,88.8,91.3,81.9] },
-          { color: "#6488e8", values: [88.2,90.8,87.8,90.5,90.6,87.9,79.5,90.3,87.4,88.6,86.3,89.0,93.0,90.4,84.0,88.0,85.7] },
-          { color: "#bd7ce2", values: [89.8,91.5,89.3,90.8,89.7,90.2,81.9,93.0,89.1,88.6,92.0,91.5,93.0,90.4,88.8,91.3,81.9] }
+          { label: "2025Q2", color: "#9cbf8c", values: [89.8,92.4,89.3,90.8,90.6,90.2,81.7,94.1,90.1,90.3,92.0,91.5,93.2,90.6,88.8,91.3,81.9] },
+          { label: "2025Q3", color: "#7594f2", values: [88.2,90.8,87.8,90.5,90.6,87.9,79.5,90.3,87.4,88.6,86.3,89.0,93.0,90.4,84.0,88.0,85.7] },
+          { label: "2025Q4", color: "#cc91f0", values: [89.8,91.5,89.3,90.8,89.7,90.2,81.9,93.0,89.1,88.6,92.0,91.5,93.0,90.4,88.8,91.3,81.9] }
         ];
         const width = satisfactionCanvas.width;
         const height = satisfactionCanvas.height;
-        const padding = { top: 76, right: 36, bottom: 130, left: 58 };
+        const padding = { top: 86, right: 40, bottom: 128, left: 68 };
+        const minValue = 70;
+        const maxValue = 100;
         const chartWidth = width - padding.left - padding.right;
         const chartHeight = height - padding.top - padding.bottom;
         const x = (index) => padding.left + (chartWidth / (labels.length - 1)) * index;
-        const y = (value) => padding.top + ((100 - value) / 50) * chartHeight;
-        context.clearRect(0, 0, width, height);
-        context.font = "18px PingFang SC, sans-serif";
-        context.fillStyle = "#4f5563";
+        const y = (value) => padding.top + ((maxValue - value) / (maxValue - minValue)) * chartHeight;
+        context.fillStyle = "#10131c";
+        context.fillRect(0, 0, width, height);
+        context.font = "17px PingFang SC, sans-serif";
+        context.fillStyle = "#8e97a8";
         context.textAlign = "right";
-        [50,60,70,80,90,100].forEach((value) => {
+        [70,80,90,100].forEach((value) => {
           const lineY = y(value);
-          context.strokeStyle = "#ececf0";
+          context.strokeStyle = value === 90 ? "rgba(204,145,240,.42)" : "rgba(255,255,255,.12)";
           context.lineWidth = 1;
+          context.setLineDash(value === 90 ? [7, 7] : []);
           context.beginPath(); context.moveTo(padding.left, lineY); context.lineTo(width - padding.right, lineY); context.stroke();
-          context.fillText(String(value), padding.left - 14, lineY + 6);
+          context.fillText(String(value), padding.left - 16, lineY + 6);
         });
-        datasets.forEach((dataset) => {
+        context.setLineDash([]);
+        context.textAlign = "left";
+        context.fillStyle = "#cc91f0";
+        context.font = "600 15px PingFang SC, sans-serif";
+        context.fillText("观察基线", padding.left + 12, y(90) - 10);
+        datasets.forEach((dataset, datasetIndex) => {
           context.strokeStyle = dataset.color;
-          context.lineWidth = 3;
+          context.globalAlpha = datasetIndex === 2 ? 1 : .78;
+          context.lineWidth = datasetIndex === 2 ? 4 : 2.5;
           context.beginPath();
           dataset.values.forEach((value, index) => { index ? context.lineTo(x(index), y(value)) : context.moveTo(x(index), y(value)); });
           context.stroke();
           dataset.values.forEach((value, index) => {
-            context.fillStyle = "#fff"; context.strokeStyle = dataset.color; context.lineWidth = 3;
-            context.beginPath(); context.arc(x(index), y(value), 5, 0, Math.PI * 2); context.fill(); context.stroke();
+            context.fillStyle = "#10131c"; context.strokeStyle = dataset.color; context.lineWidth = datasetIndex === 2 ? 3 : 2;
+            context.beginPath(); context.arc(x(index), y(value), datasetIndex === 2 ? 5.5 : 4, 0, Math.PI * 2); context.fill(); context.stroke();
           });
         });
-        context.save(); context.translate(20, height / 2); context.rotate(-Math.PI / 2); context.fillStyle = "#727785"; context.font = "18px PingFang SC, sans-serif"; context.textAlign = "center"; context.fillText("满意度（%）", 0, 0); context.restore();
-        context.fillStyle = "#59606c"; context.font = "16px PingFang SC, sans-serif"; context.textAlign = "right";
-        labels.forEach((label, index) => { context.save(); context.translate(x(index) + 6, height - padding.bottom + 28); context.rotate(-Math.PI / 4); context.fillText(label, 0, 0); context.restore(); });
-        const legend = [["2025Q2", "#a7c995"], ["2025Q3", "#6488e8"], ["2025Q4", "#bd7ce2"]];
-        context.textAlign = "left"; context.font = "17px PingFang SC, sans-serif";
-        legend.forEach(([label, color], index) => { const left = width - 360 + index * 120; context.strokeStyle = color; context.lineWidth = 3; context.beginPath(); context.moveTo(left, 28); context.lineTo(left + 28, 28); context.stroke(); context.fillStyle = color; context.beginPath(); context.arc(left + 14, 28, 4, 0, Math.PI * 2); context.fill(); context.fillStyle = "#4f5563"; context.fillText(label, left + 36, 34); });
+        context.globalAlpha = 1;
+        context.save(); context.translate(25, height / 2); context.rotate(-Math.PI / 2); context.fillStyle = "#8e97a8"; context.font = "15px PingFang SC, sans-serif"; context.textAlign = "center"; context.fillText("满意度（%）", 0, 0); context.restore();
+        context.fillStyle = "#aeb5c2"; context.font = "15px PingFang SC, sans-serif"; context.textAlign = "right";
+        labels.forEach((label, index) => { context.save(); context.translate(x(index) + 6, height - padding.bottom + 30); context.rotate(-Math.PI / 4); context.fillText(label, 0, 0); context.restore(); });
+        context.textAlign = "left"; context.font = "600 17px PingFang SC, sans-serif";
+        datasets.forEach((dataset, index) => { const left = width - 390 + index * 126; context.strokeStyle = dataset.color; context.lineWidth = index === 2 ? 4 : 2.5; context.beginPath(); context.moveTo(left, 36); context.lineTo(left + 28, 36); context.stroke(); context.fillStyle = dataset.color; context.beginPath(); context.arc(left + 14, 36, index === 2 ? 4.5 : 3.5, 0, Math.PI * 2); context.fill(); context.fillStyle = index === 2 ? "#f2edf8" : "#aeb5c2"; context.fillText(dataset.label, left + 38, 42); });
       }
     </script>
   </body>
