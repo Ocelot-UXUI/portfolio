@@ -29,6 +29,8 @@
       .dodo-demos-head p { max-width: 450px; margin: 0; color: #8f9a93; font-size: 12px; line-height: 1.7; text-align: right; }
       .dodo-demo-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
       .dodo-demo-link { min-height: 250px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid rgba(255,255,255,.14); background: #0d1111; color: #fff; text-decoration: none; transition: transform .22s ease, border-color .22s ease, background .22s ease; }
+      .dodo-demo-link--official { grid-column: 1 / -1; min-height: 290px; border-color: rgba(155,233,140,.42); background: linear-gradient(110deg, #101914 0%, #0d1111 66%); }
+      .dodo-demo-link--official h3 { font-size: 32px; }
       .dodo-demo-link:hover { transform: translateY(-5px); border-color: rgba(155,233,140,.72); background: #111a15; }
       .dodo-demo-link small { color: #9be98c; font-size: 11px; letter-spacing: 1.2px; }
       .dodo-demo-link h3 { margin: 34px 0 10px; font-size: 24px; font-weight: 600; }
@@ -48,7 +50,7 @@
       <section class="dodo-hero">
         <p class="dodo-eyebrow">DODO SKILL · INTERACTION EXPLORATION</p>
         <h1>把 Skill<br />变成可管理的资产。</h1>
-        <p>围绕个人 Skill 与内置 Skill 的管理体验，探索列表、详情、编辑、版本记录和历史恢复之间的关系。本页是项目说明页，两个局部交互原型分别独立打开，不代表完整生产版本。</p>
+        <p>围绕个人 Skill 与内置 Skill 的管理体验，探索列表、详情、编辑、版本记录和历史恢复之间的关系。本页同时呈现正式版产品 Demo 与两个独立的局部交互探索。</p>
         <div class="dodo-meta"><span>B 端 AI 工具</span><span>交互设计</span><span>方案对比</span><span>HTML Prototype</span></div>
       </section>
       <section class="dodo-story">
@@ -58,8 +60,9 @@
         </div>
       </section>
       <section class="dodo-demos" aria-labelledby="dodo-demos-title">
-        <div class="dodo-demos-head"><h2 id="dodo-demos-title">独立交互 Demo</h2><p>两个版本分别打开，避免项目说明、方案对比和产品操作同时堆叠在一个页面里。</p></div>
+        <div class="dodo-demos-head"><h2 id="dodo-demos-title">独立交互 Demo</h2><p>正式版作为主要体验入口，两套探索方案独立保留，用于呈现版本管理交互的演进过程。</p></div>
         <div class="dodo-demo-links">
+          <a class="dodo-demo-link dodo-demo-link--official" href="dodo-demo-official.html"><div><small>OFFICIAL VERSION</small><h3>Dodo 正式版</h3><p>基于最终首页方案构建的完整可交互 Demo，包含导航、对话输入、模型选择和装备推荐。</p></div><strong>打开正式版 Demo →</strong></a>
           <a class="dodo-demo-link" href="dodo-demo-1.html"><div><small>VERSION 01</small><h3>版本记录浮层</h3><p>以轻量浮层承载本地记录和发布版本，重点观察详情页上下文中的版本查看与恢复。</p></div><strong>打开方案 1 Demo →</strong></a>
           <a class="dodo-demo-link" href="dodo-demo-2.html"><div><small>VERSION 02</small><h3>历史记录视图</h3><p>将版本记录升级为独立历史视图，重点观察本地记录、发布版本和回滚路径的管理关系。</p></div><strong>打开方案 2 Demo →</strong></a>
         </div>
