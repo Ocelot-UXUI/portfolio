@@ -39,28 +39,28 @@
           <section class="sidebar-group workspace-group">
             <div class="group-title-row">
               <button class="group-title" type="button" aria-expanded="true" data-group-toggle>
-                <span>专属工区</span><span class="section-chevron">⌄</span>
+                <span>专属工区</span><img class="section-chevron" src="assets/navigation/image_21.png" alt="" />
               </button>
-              <button class="section-add" type="button" aria-label="新建工区" data-add-workspace>＋</button>
+              <button class="section-add" type="button" aria-label="新建工区" data-add-workspace><img src="assets/navigation/image_2.png" alt="" /></button>
             </div>
             <div class="group-content" data-group-content>
               <div class="workspace-row" data-workspace-row>
                 <button class="workspace-item" type="button" data-workspace="工区一">
                   <img src="assets/navigation/image_22.png" alt="" /><span>工区一</span>
                 </button>
-                <button class="row-more" type="button" aria-label="工区一更多操作" data-row-menu="workspace">•••</button>
+                <button class="row-more" type="button" aria-label="工区一更多操作" data-row-menu="workspace"><img src="assets/navigation/image_43.png" alt="" /></button>
               </div>
               <div class="workspace-row" data-workspace-row>
                 <button class="workspace-item is-active" type="button" data-workspace="设计评审">
                   <img src="assets/navigation/image_23.png" alt="" /><span>设计评审</span>
                 </button>
-                <button class="row-more" type="button" aria-label="设计评审更多操作" data-row-menu="workspace">•••</button>
+                <button class="row-more" type="button" aria-label="设计评审更多操作" data-row-menu="workspace"><img src="assets/navigation/image_43.png" alt="" /></button>
               </div>
               <div class="workspace-row workspace-task-row">
                 <button class="workspace-item workspace-task" type="button" data-conversation="dodo 新手功能介绍">
                   <span>dodo，我是不会使用 AI 产品的小白用户，请介绍你拥有什么功能</span>
                 </button>
-                <button class="row-more" type="button" aria-label="任务更多操作" data-row-menu="task">•••</button>
+                <button class="row-more" type="button" aria-label="任务更多操作" data-row-menu="task"><img src="assets/navigation/image_43.png" alt="" /></button>
               </div>
             </div>
           </section>
@@ -68,12 +68,12 @@
           <section class="sidebar-group conversation-group">
             <div class="group-title-row conversation-title-row">
               <button class="group-title" type="button" aria-expanded="true" data-conversation-toggle>
-                <span>我的对话</span><span class="section-chevron">⌄</span>
+                <span>我的对话</span><img class="section-chevron" src="assets/navigation/image_21.png" alt="" />
               </button>
               <div class="conversation-head-actions">
-                <button type="button" aria-label="刷新对话" data-refresh-conversations>↻</button>
-                <button type="button" aria-label="搜索对话" data-search-conversations>⌕</button>
-                <button type="button" aria-label="批量管理" data-multi-select>☷</button>
+                <button type="button" aria-label="刷新对话" data-refresh-conversations><span class="sprite-icon sprite-refresh" aria-hidden="true"></span></button>
+                <button type="button" aria-label="搜索对话" data-search-conversations><span class="sprite-icon sprite-search" aria-hidden="true"></span></button>
+                <button type="button" aria-label="批量管理" data-multi-select><span class="sprite-icon sprite-list" aria-hidden="true"></span></button>
               </div>
             </div>
             <div class="conversation-content" data-conversation-content>
@@ -83,7 +83,7 @@
                   <button type="button" role="tab" aria-selected="false" data-conversation-tab="source">按来源</button>
                   <button type="button" role="tab" aria-selected="false" data-conversation-tab="favorite">收藏</button>
                 </div>
-                <button class="filter-button" type="button" aria-label="筛选对话" aria-expanded="false" data-filter-button>⌄</button>
+                <button class="filter-button" type="button" aria-label="筛选对话" aria-expanded="false" data-filter-button><img src="assets/navigation/image_11.png" alt="" /></button>
               </div>
               <div class="conversation-list" data-conversation-list></div>
             </div>
@@ -94,14 +94,14 @@
           <button class="profile" type="button" data-profile>
             <img class="avatar" src="assets/navigation/image_90.png" alt="" />
             <span class="profile-copy"><strong>郭昱成</strong></span>
-            <span class="profile-more">⌄</span>
+            <span class="profile-more"><img src="assets/navigation/image_97.png" alt="" /></span>
           </button>
-          <button class="collapse-button" type="button" aria-label="收起侧栏" data-sidebar-toggle>≡</button>
+          <button class="collapse-button" type="button" aria-label="收起侧栏" data-sidebar-toggle><img src="assets/navigation/image_20.png" alt="" /></button>
         </div>
       </aside>
 
       <main class="main-stage">
-        <button class="mobile-menu" type="button" aria-label="打开导航" data-sidebar-toggle>☰</button>
+        <button class="mobile-menu" type="button" aria-label="打开导航" data-sidebar-toggle><img src="assets/navigation/image_20.png" alt="" /></button>
         <section class="home-view" data-home-view>
           <div class="hero-brand" aria-label="I'm dodo">
             <img src="assets/image_21.png" alt="I'm dodo." />
@@ -111,16 +111,16 @@
             <textarea id="prompt" rows="2" placeholder="发消息给 dodo，告诉我你想完成什么..." aria-label="输入消息"></textarea>
             <div class="prompt-toolbar">
               <div class="tool-buttons" aria-label="输入工具">
-                <button type="button" class="icon-button" title="添加附件" aria-label="添加附件">⌕</button>
-                <button type="button" class="icon-button" title="添加图片" aria-label="添加图片">▧</button>
-                <button type="button" class="icon-button" title="联网搜索" aria-label="联网搜索">◎</button>
-                <button type="button" class="icon-button is-selected" title="安全模式" aria-label="安全模式">◇</button>
-                <button type="button" class="icon-button" title="调用技能" aria-label="调用技能">⌁</button>
+                <button type="button" class="icon-button" title="添加附件" aria-label="添加附件"><img src="assets/navigation/image_106.png" alt="" /></button>
+                <button type="button" class="icon-button" title="添加图片" aria-label="添加图片"><img src="assets/navigation/image_80.png" alt="" /></button>
+                <button type="button" class="icon-button" title="联网搜索" aria-label="联网搜索"><img src="assets/navigation/image_79.png" alt="" /></button>
+                <button type="button" class="icon-button is-selected" title="安全模式" aria-label="安全模式"><img src="assets/navigation/image_66.png" alt="" /></button>
+                <button type="button" class="icon-button" title="调用技能" aria-label="调用技能"><img src="assets/navigation/image_70.png" alt="" /></button>
               </div>
               <div class="prompt-actions">
                 <div class="model-picker">
                   <button class="model-button" type="button" aria-expanded="false" data-model-button>
-                    <span data-model-label>文心大模型 4.5</span><span class="chevron">⌄</span>
+                    <span data-model-label>文心大模型 4.5</span><img class="chevron" src="assets/navigation/image_97.png" alt="" />
                   </button>
                   <div class="model-menu" role="menu" data-model-menu>
                     <button type="button" role="menuitem" data-model="文心大模型 4.5"><strong>文心大模型 4.5</strong><small>均衡 · 推荐</small></button>
@@ -128,18 +128,18 @@
                     <button type="button" role="menuitem" data-model="快速响应模型"><strong>快速响应模型</strong><small>高效对话</small></button>
                   </div>
                 </div>
-                <button class="voice-button" type="button" aria-label="语音输入" title="语音输入">◖</button>
-                <button class="send-button" type="submit" aria-label="发送消息" disabled>↑</button>
+                <button class="voice-button" type="button" aria-label="语音输入" title="语音输入"><span class="prompt-sprite prompt-sprite-voice" aria-hidden="true"></span></button>
+                <button class="send-button" type="submit" aria-label="发送消息" disabled><span class="prompt-sprite prompt-sprite-send" aria-hidden="true"></span></button>
               </div>
             </div>
           </form>
 
           <section class="gear-section" aria-labelledby="gear-title">
             <div class="gear-heading">
-              <div><span class="spark">✦</span><h2 id="gear-title">dodo 的装备</h2></div>
+              <div><span class="spark"><img src="assets/navigation/image_59.png" alt="" /></span><h2 id="gear-title">dodo 的装备</h2></div>
               <div class="gear-controls">
                 <button type="button" data-refresh><img src="assets/image_29.png" alt="" />换一批</button>
-                <button type="button" data-more>更多装备 <span>›</span></button>
+                <button type="button" data-more>更多装备 <img class="gear-more-icon" src="assets/image_27.png" alt="" /></button>
               </div>
             </div>
             <div class="gear-grid" data-gear-grid></div>
@@ -147,7 +147,7 @@
         </section>
 
         <section class="placeholder-view" hidden data-placeholder-view>
-          <div class="placeholder-icon" data-placeholder-icon>✦</div>
+          <div class="placeholder-icon" data-placeholder-icon><img src="assets/navigation/image_3.png" alt="" /></div>
           <h1 data-placeholder-title>知识</h1>
           <p data-placeholder-copy>这里集中管理 dodo 可以调用的内容。</p>
           <button type="button" data-home>返回首页</button>
@@ -159,9 +159,9 @@
     <div class="workspace-modal" hidden data-workspace-modal>
       <button class="modal-backdrop" type="button" aria-label="关闭新建工区弹窗" data-close-workspace></button>
       <form class="workspace-dialog" data-workspace-form>
-        <header><h2>新建工区</h2><button type="button" aria-label="关闭" data-close-workspace>×</button></header>
+        <header><h2>新建工区</h2><button type="button" aria-label="关闭" data-close-workspace><img src="assets/navigation/image_112.png" alt="" /></button></header>
         <div class="workspace-form-row"><label for="workspace-name"><span>*</span>工区名称</label><input id="workspace-name" maxlength="30" placeholder="请输入工区名称，限制在30字以内" required /></div>
-        <div class="workspace-form-row"><label><span>*</span>工区类型</label><button class="workspace-type" type="button" disabled>个人工区 <small>⌄</small></button></div>
+        <div class="workspace-form-row"><label><span>*</span>工区类型</label><button class="workspace-type" type="button" disabled>个人工区 <img src="assets/navigation/image_97.png" alt="" /></button></div>
         <p class="workspace-form-hint">将创建云端目录，dodo 所有端都可以使用（个人工区最多创建 2 个）</p>
         <footer><button type="button" class="secondary-button" data-close-workspace>取消</button><button type="submit" class="primary-button">创建</button></footer>
       </form>
