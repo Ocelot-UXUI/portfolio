@@ -15,7 +15,23 @@ const sectionCopy = {
   knowledge: ["知识", "集中管理 dodo 可以调用的文档、资料和个人知识。", "◫"],
   skills: ["技能", "查看、启用和管理你的专属 Skill。", "⌁"],
   artifacts: ["产物", "查找 dodo 在任务中生成的文档、图片与代码。", "▤"],
+  automation: ["自动化任务", "管理定时运行、事件触发和持续执行的任务。", "↻"],
   settings: ["设置", "管理模型、通知和工作区偏好。", "⚙"]
+};
+
+let conversations = [
+  { id: 1, title: "设计评审报告优化", source: "专属工区", favorite: true, pinned: true },
+  { id: 2, title: "Dodo 导航区状态梳理", source: "专属工区", favorite: false, pinned: false },
+  { id: 3, title: "CNAP 用户调研结论", source: "网页端", favorite: true, pinned: false },
+  { id: 4, title: "作品集首页动效调整", source: "网页端", favorite: false, pinned: false },
+  { id: 5, title: "访谈记录总结", source: "飞书", favorite: false, pinned: false },
+  { id: 6, title: "竞品分析资料整理", source: "飞书", favorite: false, pinned: false }
+];
+
+const sourceIcons = {
+  "专属工区": "assets/navigation/image_23.png",
+  "网页端": "assets/navigation/image_22.png",
+  "飞书": "assets/navigation/image_3.png"
 };
 
 const prompt = document.querySelector("#prompt");
@@ -29,7 +45,16 @@ const modelMenu = document.querySelector("[data-model-menu]");
 const sidebar = document.querySelector("#sidebar");
 const backdrop = document.querySelector("[data-sidebar-backdrop]");
 const toast = document.querySelector("[data-toast]");
+const conversationList = document.querySelector("[data-conversation-list]");
+const floatingMenu = document.querySelector("[data-floating-menu]");
+const workspaceModal = document.querySelector("[data-workspace-modal]");
+const workspaceForm = document.querySelector("[data-workspace-form]");
 let gearSetIndex = 0;
+let conversationTab = "all";
+let conversationFilter = "all";
+let multiSelectMode = false;
+let selectedConversations = new Set();
+let activeMenuTarget = null;
 let toastTimer;
 
 function showToast(message) {
@@ -37,6 +62,83 @@ function showToast(message) {
   toast.classList.add("is-visible");
   window.clearTimeout(toastTimer);
   toastTimer = window.setTimeout(() => toast.classList.remove("is-visible"), 1900);
+}
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"]/g, (character) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    "\"": "&quot;"
+  })[character]);
+}
+
+function getVisibleConversations() {
+  let items = [...conversations].sort((a, b) => Number(b.pinned) - Number(a.pinned));
+  if (conversationTab === "favorite") items = items.filter((item) => item.favorite);
+  if (conversationFilter === "pinned") items = items.filter((item) => item.pinned);
+  if (conversationFilter === "recent") items = items.slice(0, 3);
+  return items;
+}
+
+function conversationRow(item) {
+  return `
+    <div class="conversation-row" data-conversation-id="${item.id}">
+      <button class="conversation-item" type="button" data-conversation="${escapeHTML(item.title)}">
+        ${multiSelectMode ? `<span class="conversation-check ${selectedConversations.has(item.id) ? "is-checked" : ""}" aria-hidden="true">✓</span>` : ""}
+        ${item.favorite ? '<span class="favorite-mark" aria-label="已收藏">★</span>' : ""}
+        <span>${escapeHTML(item.title)}</span>
+      </button>
+      <button class="row-more" type="button" aria-label="${escapeHTML(item.title)}更多操作" data-row-menu="conversation">•••</button>
+    </div>`;
+}
+
+function renderConversations() {
+  const items = getVisibleConversations();
+  if (!items.length) {
+    conversationList.innerHTML = '<div class="conversation-empty">这里还没有符合条件的对话</div>';
+    return;
+  }
+
+  if (conversationTab === "source") {
+    const groups = Object.entries(items.reduce((result, item) => {
+      (result[item.source] ||= []).push(item);
+      return result;
+    }, {}));
+    conversationList.innerHTML = groups.map(([source, sourceItems]) => `
+      <section class="source-group">
+        <div class="source-label"><img src="${sourceIcons[source]}" alt="" /><span>${escapeHTML(source)}</span></div>
+        ${sourceItems.map(conversationRow).join("")}
+      </section>`).join("");
+  } else {
+    conversationList.innerHTML = items.map(conversationRow).join("");
+  }
+
+  if (multiSelectMode) {
+    conversationList.insertAdjacentHTML("beforeend", `
+      <div class="bulk-actions"><span>已选择 ${selectedConversations.size} 项</span><button type="button" data-delete-selected>删除</button></div>`);
+  }
+}
+
+function closeFloatingMenu() {
+  floatingMenu.hidden = true;
+  floatingMenu.innerHTML = "";
+  activeMenuTarget = null;
+  document.querySelector("[data-filter-button]").setAttribute("aria-expanded", "false");
+}
+
+function openFloatingMenu(anchor, items, target) {
+  activeMenuTarget = target;
+  floatingMenu.innerHTML = items.map((item) => item.divider
+    ? '<div class="menu-divider"></div>'
+    : `<button type="button" class="${item.danger ? "is-danger" : ""}" data-menu-action="${item.action}">${item.label}</button>`
+  ).join("");
+  floatingMenu.hidden = false;
+  const rect = anchor.getBoundingClientRect();
+  const menuWidth = 154;
+  const left = Math.min(rect.left, window.innerWidth - menuWidth - 8);
+  floatingMenu.style.left = `${Math.max(8, left)}px`;
+  floatingMenu.style.top = `${Math.min(rect.bottom + 4, window.innerHeight - floatingMenu.offsetHeight - 8)}px`;
 }
 
 function renderGear() {
@@ -134,30 +236,18 @@ document.querySelectorAll("[data-section]").forEach((button) => button.addEventL
 document.querySelectorAll("[data-sidebar-toggle]").forEach((button) => button.addEventListener("click", toggleSidebar));
 backdrop.addEventListener("click", closeMobileSidebar);
 
-document.querySelector("[data-group-toggle]").addEventListener("click", (event) => {
-  const button = event.currentTarget;
+function toggleGroup(button, content) {
   const expanded = button.getAttribute("aria-expanded") === "true";
   button.setAttribute("aria-expanded", String(!expanded));
-  document.querySelector("[data-group-content]").classList.toggle("is-collapsed", expanded);
+  content.classList.toggle("is-collapsed", expanded);
+}
+
+document.querySelector("[data-group-toggle]").addEventListener("click", (event) => {
+  toggleGroup(event.currentTarget, document.querySelector("[data-group-content]"));
 });
 
-document.querySelectorAll("[data-workspace]").forEach((button) => {
-  button.addEventListener("click", () => {
-    document.querySelectorAll("[data-workspace]").forEach((item) => item.classList.remove("is-active"));
-    button.classList.add("is-active");
-    showToast("已进入" + button.dataset.workspace);
-  });
-});
-
-document.querySelectorAll("[data-conversation]").forEach((button) => {
-  button.addEventListener("click", () => {
-    document.querySelectorAll("[data-conversation]").forEach((item) => item.classList.remove("is-active"));
-    button.classList.add("is-active");
-    prompt.value = "继续处理：" + button.dataset.conversation;
-    sendButton.disabled = false;
-    showHome();
-    prompt.focus();
-  });
+document.querySelector("[data-conversation-toggle]").addEventListener("click", (event) => {
+  toggleGroup(event.currentTarget, document.querySelector("[data-conversation-content]"));
 });
 
 document.querySelector("[data-new-chat]").addEventListener("click", () => {
@@ -167,7 +257,178 @@ document.querySelector("[data-new-chat]").addEventListener("click", () => {
   prompt.focus();
 });
 
-document.querySelector("[data-add-workspace]").addEventListener("click", () => showToast("新建工区入口已打开"));
+document.querySelector("[data-add-workspace]").addEventListener("click", () => {
+  workspaceModal.hidden = false;
+  workspaceForm.querySelector("input").focus();
+});
+
+document.querySelectorAll("[data-close-workspace]").forEach((button) => {
+  button.addEventListener("click", () => {
+    workspaceModal.hidden = true;
+    workspaceForm.reset();
+  });
+});
+
+workspaceForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const input = workspaceForm.querySelector("input");
+  const name = input.value.trim();
+  if (!name) return;
+  const row = document.createElement("div");
+  row.className = "workspace-row";
+  row.dataset.workspaceRow = "";
+  row.innerHTML = `
+    <button class="workspace-item" type="button" data-workspace="${escapeHTML(name)}">
+      <img src="assets/navigation/image_22.png" alt="" /><span>${escapeHTML(name)}</span>
+    </button>
+    <button class="row-more" type="button" aria-label="${escapeHTML(name)}更多操作" data-row-menu="workspace">•••</button>`;
+  document.querySelector("[data-group-content]").append(row);
+  workspaceModal.hidden = true;
+  workspaceForm.reset();
+  showToast(`已创建工区：${name}`);
+});
+
+document.querySelectorAll("[data-conversation-tab]").forEach((button) => {
+  button.addEventListener("click", () => {
+    conversationTab = button.dataset.conversationTab;
+    document.querySelectorAll("[data-conversation-tab]").forEach((tab) => {
+      const active = tab === button;
+      tab.classList.toggle("is-active", active);
+      tab.setAttribute("aria-selected", String(active));
+    });
+    renderConversations();
+  });
+});
+
+document.querySelector("[data-filter-button]").addEventListener("click", (event) => {
+  event.stopPropagation();
+  const button = event.currentTarget;
+  const isOpen = !floatingMenu.hidden && activeMenuTarget?.type === "filter";
+  closeFloatingMenu();
+  if (!isOpen) {
+    button.setAttribute("aria-expanded", "true");
+    openFloatingMenu(button, [
+      { label: "显示全部", action: "filter-all" },
+      { label: "只看置顶", action: "filter-pinned" },
+      { label: "最近对话", action: "filter-recent" }
+    ], { type: "filter" });
+    button.setAttribute("aria-expanded", "true");
+  }
+});
+
+document.querySelector("[data-refresh-conversations]").addEventListener("click", () => {
+  renderConversations();
+  showToast("对话列表已刷新");
+});
+
+document.querySelector("[data-search-conversations]").addEventListener("click", () => {
+  const query = window.prompt("搜索对话");
+  if (query === null) return;
+  const match = conversations.find((item) => item.title.includes(query.trim()));
+  showToast(match ? `找到：${match.title}` : "未找到相关对话");
+});
+
+document.querySelector("[data-multi-select]").addEventListener("click", () => {
+  multiSelectMode = !multiSelectMode;
+  selectedConversations.clear();
+  renderConversations();
+});
+
+sidebar.addEventListener("click", (event) => {
+  const workspaceButton = event.target.closest("[data-workspace]");
+  if (workspaceButton) {
+    document.querySelectorAll("[data-workspace]").forEach((item) => item.classList.remove("is-active"));
+    workspaceButton.classList.add("is-active");
+    showToast("已进入" + workspaceButton.dataset.workspace);
+    return;
+  }
+
+  const conversationButton = event.target.closest("[data-conversation]");
+  if (conversationButton) {
+    const row = conversationButton.closest("[data-conversation-id]");
+    if (multiSelectMode && row) {
+      const id = Number(row.dataset.conversationId);
+      selectedConversations.has(id) ? selectedConversations.delete(id) : selectedConversations.add(id);
+      renderConversations();
+      return;
+    }
+    document.querySelectorAll("[data-conversation]").forEach((item) => item.classList.remove("is-active"));
+    conversationButton.classList.add("is-active");
+    prompt.value = "继续处理：" + conversationButton.dataset.conversation;
+    sendButton.disabled = false;
+    showHome();
+    prompt.focus();
+    return;
+  }
+
+  const menuButton = event.target.closest("[data-row-menu]");
+  if (!menuButton) return;
+  event.stopPropagation();
+  const row = menuButton.closest(".workspace-row, .conversation-row");
+  const isConversation = menuButton.dataset.rowMenu === "conversation";
+  const id = isConversation ? Number(row.dataset.conversationId) : null;
+  openFloatingMenu(menuButton, [
+    { label: isConversation && conversations.find((item) => item.id === id)?.favorite ? "取消收藏" : "收藏", action: "favorite" },
+    { label: "置顶", action: "pin" },
+    { label: "重命名", action: "rename" },
+    { divider: true },
+    { label: "删除", action: "delete", danger: true }
+  ], { type: menuButton.dataset.rowMenu, row, id });
+});
+
+floatingMenu.addEventListener("click", (event) => {
+  const actionButton = event.target.closest("[data-menu-action]");
+  if (!actionButton || !activeMenuTarget) return;
+  const action = actionButton.dataset.menuAction;
+
+  if (activeMenuTarget.type === "filter") {
+    conversationFilter = action.replace("filter-", "");
+    renderConversations();
+    closeFloatingMenu();
+    return;
+  }
+
+  if (activeMenuTarget.type === "conversation") {
+    const item = conversations.find((conversation) => conversation.id === activeMenuTarget.id);
+    if (!item) return;
+    if (action === "favorite") item.favorite = !item.favorite;
+    if (action === "pin") item.pinned = !item.pinned;
+    if (action === "rename") {
+      const nextTitle = window.prompt("重命名对话", item.title)?.trim();
+      if (nextTitle) item.title = nextTitle;
+    }
+    if (action === "delete") conversations = conversations.filter((conversation) => conversation.id !== item.id);
+    renderConversations();
+  } else {
+    const label = activeMenuTarget.row.querySelector(".workspace-item span")?.textContent || "当前项目";
+    if (action === "rename") {
+      const nextLabel = window.prompt("重命名", label)?.trim();
+      if (nextLabel) activeMenuTarget.row.querySelector(".workspace-item span").textContent = nextLabel;
+    } else if (action === "delete") {
+      activeMenuTarget.row.remove();
+    } else {
+      showToast(`${label}已${action === "pin" ? "置顶" : "收藏"}`);
+    }
+  }
+  closeFloatingMenu();
+});
+
+conversationList.addEventListener("click", (event) => {
+  const deleteButton = event.target.closest("[data-delete-selected]");
+  if (!deleteButton) return;
+  conversations = conversations.filter((item) => !selectedConversations.has(item.id));
+  selectedConversations.clear();
+  multiSelectMode = false;
+  renderConversations();
+  showToast("已删除所选对话");
+});
+
+document.addEventListener("click", (event) => {
+  if (!event.target.closest("[data-floating-menu]") && !event.target.closest("[data-row-menu]") && !event.target.closest("[data-filter-button]")) {
+    closeFloatingMenu();
+  }
+});
+
 document.querySelector("[data-profile]").addEventListener("click", () => showToast("个人空间"));
 document.querySelector("[data-more]").addEventListener("click", () => showSection("skills"));
 document.querySelector("[data-refresh]").addEventListener("click", () => {
@@ -192,8 +453,11 @@ window.addEventListener("keydown", (event) => {
   }
   if (event.key === "Escape") {
     modelMenu.classList.remove("is-open");
+    workspaceModal.hidden = true;
+    closeFloatingMenu();
     closeMobileSidebar();
   }
 });
 
 renderGear();
+renderConversations();
