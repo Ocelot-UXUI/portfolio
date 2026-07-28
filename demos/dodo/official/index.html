@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Dodo 主动式 AI 工作台正式版交互 Demo" />
+    <title>Dodo 正式版 Demo</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" id="sidebar" aria-label="Dodo 主导航">
+        <div class="sidebar-top">
+          <button class="brand-button" type="button" aria-label="返回 Dodo 首页" data-home>
+            <span class="brand-mark">d</span>
+            <span class="brand-name">dodo</span>
+          </button>
+          <button class="collapse-button" type="button" aria-label="收起侧栏" data-sidebar-toggle>
+            <span></span><span></span>
+          </button>
+        </div>
+
+        <button class="new-chat" type="button" data-new-chat>
+          <img src="assets/image_1.png" alt="" />
+          <span>新对话</span>
+          <kbd>⌘ K</kbd>
+        </button>
+
+        <nav class="primary-nav" aria-label="功能导航">
+          <button class="nav-item" type="button" data-section="knowledge">
+            <img src="assets/image_2.png" alt="" /><span>知识</span>
+          </button>
+          <button class="nav-item" type="button" data-section="skills">
+            <img src="assets/image_3.png" alt="" /><span>技能</span>
+          </button>
+          <button class="nav-item" type="button" data-section="artifacts">
+            <img src="assets/image_4.png" alt="" /><span>产物</span>
+          </button>
+          <button class="nav-item" type="button" data-section="settings">
+            <img src="assets/image_5.png" alt="" /><span>设置</span>
+          </button>
+        </nav>
+
+        <section class="sidebar-group">
+          <button class="group-title" type="button" aria-expanded="true" data-group-toggle>
+            <span>专属工区</span><img src="assets/image_6.png" alt="" />
+          </button>
+          <div class="group-content" data-group-content>
+            <button class="workspace-item" type="button" data-workspace="体验设计组">
+              <span class="workspace-icon workspace-icon--mint">UX</span>
+              <span>体验设计组</span>
+            </button>
+            <button class="workspace-item" type="button" data-workspace="个人知识库">
+              <span class="workspace-icon workspace-icon--blue">ME</span>
+              <span>个人知识库</span>
+            </button>
+            <button class="workspace-item workspace-item--add" type="button" data-add-workspace>
+              <img src="assets/image_8.png" alt="" /><span>新建工区</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="sidebar-group conversation-group">
+          <div class="group-label">我的对话</div>
+          <div class="conversation-list">
+            <button class="conversation-item is-active" type="button" data-conversation="整理用户访谈记录">整理用户访谈记录</button>
+            <button class="conversation-item" type="button" data-conversation="设计评审问题总结">设计评审问题总结</button>
+            <button class="conversation-item" type="button" data-conversation="本周项目进展同步">本周项目进展同步</button>
+          </div>
+        </section>
+
+        <button class="profile" type="button" data-profile>
+          <span class="avatar">郭</span>
+          <span class="profile-copy"><strong>郭昱成</strong><small>个人空间</small></span>
+          <span class="profile-more">•••</span>
+        </button>
+      </aside>
+
+      <main class="main-stage">
+        <button class="mobile-menu" type="button" aria-label="打开导航" data-sidebar-toggle>☰</button>
+        <section class="home-view" data-home-view>
+          <div class="hero-brand" aria-label="I'm dodo">
+            <img src="assets/image_21.png" alt="I'm dodo." />
+          </div>
+
+          <form class="prompt-box" data-prompt-form>
+            <textarea id="prompt" rows="2" placeholder="发消息给 dodo，告诉我你想完成什么..." aria-label="输入消息"></textarea>
+            <div class="prompt-toolbar">
+              <div class="tool-buttons" aria-label="输入工具">
+                <button type="button" class="icon-button" title="添加附件" aria-label="添加附件">⌕</button>
+                <button type="button" class="icon-button" title="添加图片" aria-label="添加图片">▧</button>
+                <button type="button" class="icon-button" title="联网搜索" aria-label="联网搜索">◎</button>
+                <button type="button" class="icon-button is-selected" title="安全模式" aria-label="安全模式">◇</button>
+                <button type="button" class="icon-button" title="调用技能" aria-label="调用技能">⌁</button>
+              </div>
+              <div class="prompt-actions">
+                <div class="model-picker">
+                  <button class="model-button" type="button" aria-expanded="false" data-model-button>
+                    <span data-model-label>文心大模型 4.5</span><span class="chevron">⌄</span>
+                  </button>
+                  <div class="model-menu" role="menu" data-model-menu>
+                    <button type="button" role="menuitem" data-model="文心大模型 4.5"><strong>文心大模型 4.5</strong><small>均衡 · 推荐</small></button>
+                    <button type="button" role="menuitem" data-model="深度思考模型"><strong>深度思考模型</strong><small>复杂分析</small></button>
+                    <button type="button" role="menuitem" data-model="快速响应模型"><strong>快速响应模型</strong><small>高效对话</small></button>
+                  </div>
+                </div>
+                <button class="voice-button" type="button" aria-label="语音输入" title="语音输入">◖</button>
+                <button class="send-button" type="submit" aria-label="发送消息" disabled>↑</button>
+              </div>
+            </div>
+          </form>
+
+          <section class="gear-section" aria-labelledby="gear-title">
+            <div class="gear-heading">
+              <div><span class="spark">✦</span><h2 id="gear-title">dodo 的装备</h2></div>
+              <div class="gear-controls">
+                <button type="button" data-refresh><img src="assets/image_29.png" alt="" />换一批</button>
+                <button type="button" data-more>更多装备 <span>›</span></button>
+              </div>
+            </div>
+            <div class="gear-grid" data-gear-grid></div>
+          </section>
+        </section>
+
+        <section class="placeholder-view" hidden data-placeholder-view>
+          <div class="placeholder-icon" data-placeholder-icon>✦</div>
+          <h1 data-placeholder-title>知识</h1>
+          <p data-placeholder-copy>这里集中管理 dodo 可以调用的内容。</p>
+          <button type="button" data-home>返回首页</button>
+        </section>
+      </main>
+    </div>
+
+    <div class="sidebar-backdrop" data-sidebar-backdrop></div>
+    <div class="toast" role="status" aria-live="polite" data-toast></div>
+    <script src="app.js"></script>
+  </body>
+</html>
