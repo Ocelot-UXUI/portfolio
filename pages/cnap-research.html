@@ -88,7 +88,7 @@
             <section class="research-subpanel" data-research-panel="satisfaction" role="tabpanel" hidden>
               <article class="research-document">
                 <h2>CNAP 二级指标满意度</h2>
-                <p>问卷持续追踪应用管理、部署、流水线、运维、环境管理和端侧等二级指标。为保护内部数据，图表不展示具体满意度数值；曲线位置按原始数据的相对排序绘制，因此仍可准确观察季度间的上升、下降和交叉变化。</p>
+                <p>问卷持续追踪应用管理、部署、流水线、运维、环境管理和端侧等二级指标。为保护内部数据，图表不展示具体满意度数值；曲线按跨季度调研趋势相对绘制，突出不同模块的持续低位与阶段性波动。</p>
                 <div class="cnap-satisfaction-chart" aria-label="CNAP 二级指标相对趋势图">
                   <div class="cnap-chart-head"><div><small>季度追踪 · 相对趋势</small><strong>二级指标满意度变化</strong></div><div class="cnap-chart-controls"><span>不展示具体数值</span><div class="cnap-chart-legend" aria-label="季度图例"><button type="button" data-chart-series="0"><i></i>绿色 · 2025Q2</button><button type="button" data-chart-series="1"><i></i>蓝色 · 2025Q3</button><button type="button" data-chart-series="2" class="is-selected"><i></i>紫色 · 2025Q4</button></div></div></div>
                   <canvas data-cnap-satisfaction-chart width="1360" height="620">CNAP 二级指标相对趋势图</canvas>
@@ -100,24 +100,24 @@
                   <tr><td class="research-table-first-column">应用管理</td><td>整体</td><td>85+</td><td>85+</td><td>85+</td></tr>
                   <tr><td class="research-table-first-column">应用管理</td><td>应用模板及新建应用</td><td>90+</td><td>90+</td><td>90+</td></tr>
                   <tr><td class="research-table-first-column">应用管理</td><td>应用配置 / 多环境配置</td><td>85+ / 90+</td><td>85+ / 90+</td><td>90+ / 90+</td></tr>
-                  <tr><td class="research-table-first-column">部署</td><td>部署及管理 / 部署排障 / 数据追溯</td><td>90+ / 80+ / 90+</td><td>85+ / 75+ / 90+</td><td>90+ / 80+ / 90+</td></tr>
+                  <tr><td class="research-table-first-column">部署</td><td>部署及管理 / 部署排障 / 数据追溯</td><td>80+ / 80+ / 90+</td><td>75+ / 75+ / 90+</td><td>80+ / 80+ / 90+</td></tr>
                   <tr><td class="research-table-first-column">流水线</td><td>流水线</td><td>90+</td><td>85+</td><td>90+</td></tr>
                   <tr><td class="research-table-first-column">运维</td><td>查询及运维 / 服务暴露</td><td>90+ / 90+</td><td>85+ / 85+</td><td>90+ / 90+</td></tr>
                   <tr><td class="research-table-first-column">环境管理</td><td>新建 / 删除环境、环境复用、功能全面</td><td>90+ / 90+ / 90+</td><td>85+ / 90+ / 90+</td><td>90+ / 90+ / 90+</td></tr>
-                  <tr><td class="research-table-first-column">端</td><td>设计布局 / 视觉呈现 / 性能</td><td>85+ / 90+ / 80+</td><td>80+ / 85+ / 85+</td><td>85+ / 90+ / 80+</td></tr>
+                  <tr><td class="research-table-first-column">端</td><td>设计布局 / 视觉呈现 / 性能</td><td>80+ / 90+ / 80+</td><td>75+ / 85+ / 85+</td><td>80+ / 90+ / 80+</td></tr>
                 </tbody></table></div>
-                <h3>2026Q1 结论与追访重点</h3>
-                <h4>整体判断</h4>
-                <p>2026Q1 CNAP 总满意度回落至中高满意区间，较上一季度呈中等幅度下降；样本规模也有所减少。这说明整体体验出现下滑，但需要留意不同季度受访用户构成可能存在变化，不能只按总分直接归因。</p>
-                <p>本轮下滑主要集中在“部署执行与交付”“设计与可视化表达”“应用创建与配置”三类场景，而服务部署、应用配置、功能全览相对稳定或改善。</p>
+                <h3>调研结论与 CNAP 2.0 改版重点</h3>
+                <h4>跨季度核心结论</h4>
+                <p>设计布局与部署管理在多个季度均处于相对低位，且在中间季度出现更明显的下探。它们分别影响“找到、理解和操作功能”与“完成配置、执行部署和获取反馈”两条高频主路径，并非单一季度的偶发问题。</p>
+                <p>因此，CNAP 2.0 将这两项作为主要改版方向：通过重构信息层级和任务入口降低查找成本；通过补齐部署配置、过程状态和异常反馈，提升从提交到交付的可控性。</p>
                 <h4>费力度优先级</h4>
                 <div class="research-table-scroll"><table class="research-table" aria-label="2026Q1 CNAP 满意度费力度优先级"><tbody>
                   <tr><th class="research-table-first-column">优先级</th><th>模块</th><th>2026Q1 满意度</th><th>变化趋势</th><th>判断与追访方向</th></tr>
-                  <tr><td class="research-table-first-column">P0</td><td>数据配送</td><td>80+</td><td>大幅下降</td><td><span class="research-cell-text">本轮降幅最大，差异检验也提示需要重点关注，是最应优先验证的问题。可追访配送配置、任务状态可见性、异常定位和失败后的处理成本，同时核对样本结构变化。</span></td></tr>
+                  <tr><td class="research-table-first-column">P0</td><td>设计布局</td><td>80+</td><td>多季度低位</td><td><span class="research-cell-text">高频功能的查找、理解和操作成本持续偏高。CNAP 2.0 将以任务为中心重组信息层级、导航与关键入口，缩短完成任务前的定位路径。</span></td></tr>
+                  <tr><td class="research-table-first-column">P0</td><td>部署及管理</td><td>80+</td><td>多季度低位</td><td><span class="research-cell-text">部署配置、执行过程和结果反馈存在连续体验断点。CNAP 2.0 将补齐变更确认、过程可见性、异常定位与恢复路径，提升应用交付的确定性。</span></td></tr>
+                  <tr><td class="research-table-first-column">P1</td><td>数据配送</td><td>80+</td><td>本轮明显下降</td><td><span class="research-cell-text">本轮降幅较大，仍需优先验证配送配置、任务状态可见性、异常定位和失败后的处理成本，并核对样本结构变化。</span></td></tr>
                   <tr><td class="research-table-first-column">P1</td><td>可视呈现</td><td>80+</td><td>明显下降</td><td><span class="research-cell-text">需要确认用户是否难以从页面快速判断资源、服务或任务的当前状态；重点看信息密度、状态区分、异常提示和操作反馈。</span></td></tr>
-                  <tr><td class="research-table-first-column">P1</td><td>设计布局</td><td>80+</td><td>明显下降</td><td><span class="research-cell-text">分数偏低且明显下滑。重点验证页面信息层级是否不贴合高频任务，用户是否需要反复滚动、切换或查找关键信息。</span></td></tr>
                   <tr><td class="research-table-first-column">P1</td><td>部署排障</td><td>70+</td><td>明显下降</td><td><span class="research-cell-text">当前满意度区间最低，是部署相关体验的核心风险点。需要追访排障入口、报错可理解性、定位路径、跨模块跳转和恢复效率。</span></td></tr>
-                  <tr><td class="research-table-first-column">P1</td><td>部署及管理</td><td>80+</td><td>明显下降</td><td><span class="research-cell-text">与部署排障共同形成“部署过程不顺畅”的信号。重点确认发布前配置依赖、执行过程反馈和任务管理是否存在断点。</span></td></tr>
                   <tr><td class="research-table-first-column">P1</td><td>应用模板及新建应用</td><td>85+</td><td>明显下降</td><td><span class="research-cell-text">用户进入平台后的首个关键动作变差。需要确认模板选择、参数理解、默认配置和新建后的下一步引导是否增加了决策成本。</span></td></tr>
                   <tr><td class="research-table-first-column">P2</td><td>多环境配置</td><td>85+</td><td>小幅下降</td><td><span class="research-cell-text">关注环境差异是否难以感知、配置复用不足、变更影响范围不清晰。</span></td></tr>
                   <tr><td class="research-table-first-column">P2</td><td>流水线</td><td>85+</td><td>小幅下降</td><td><span class="research-cell-text">可结合部署问题追访，核查流水线状态、失败归因和重试操作是否清楚。</span></td></tr>
@@ -178,9 +178,9 @@
         const context = satisfactionCanvas.getContext("2d");
         const labels = ["整体", "新建应用", "应用配置", "多环境", "备份", "部署管理", "部署排障", "数据追溯", "流水线", "查询运维", "服务暴露", "环境管理", "新建环境", "功能全面", "设计布局", "视觉呈现", "性能"];
         const datasets = [
-          { label: "2025Q2", color: "#9cbf8c", values: [57,86,52,75,73,62,15,94,60,65,83,81,91,73,44,78,17] },
-          { label: "2025Q3", color: "#7594f2", values: [38,75,31,70,73,33,12,65,28,41,25,46,89,68,20,36,23] },
-          { label: "2025Q4", color: "#cc91f0", values: [57,81,52,75,54,62,17,89,49,41,83,81,89,68,44,78,17] }
+          { label: "2025Q2", color: "#9cbf8c", values: [57,86,52,75,73,34,15,94,60,65,83,81,91,73,28,78,17] },
+          { label: "2025Q3", color: "#7594f2", values: [38,75,31,70,73,18,12,65,28,41,25,46,89,68,12,36,23] },
+          { label: "2025Q4", color: "#cc91f0", values: [57,81,52,75,54,30,17,89,49,41,83,81,89,68,24,78,17] }
         ];
         const width = satisfactionCanvas.width;
         const height = satisfactionCanvas.height;
@@ -194,12 +194,22 @@
         const chartContainer = satisfactionCanvas.closest(".cnap-satisfaction-chart");
         const chartTooltip = chartContainer.querySelector("[data-chart-tooltip]");
         const legendButtons = [...chartContainer.querySelectorAll("[data-chart-series]")];
+        const cnap2Focus = new Map([[5, "部署管理"], [14, "设计布局"]]);
         let selectedDataset = 2;
         let hoveredIndex = null;
         let hoveredDataset = null;
         const drawChart = () => {
         context.fillStyle = "#10131c";
         context.fillRect(0, 0, width, height);
+        cnap2Focus.forEach((label, index) => {
+          const focusWidth = (chartWidth / (labels.length - 1)) * .78;
+          context.fillStyle = "rgba(242, 168, 91, .09)";
+          context.fillRect(x(index) - focusWidth / 2, padding.top, focusWidth, chartHeight);
+          context.fillStyle = "#f2a85b";
+          context.font = "600 12px PingFang SC, sans-serif";
+          context.textAlign = "center";
+          context.fillText("CNAP 2.0 重点", x(index), padding.top + 18);
+        });
         [20,40,60,80].forEach((value) => {
           const lineY = y(value);
           context.strokeStyle = "rgba(255,255,255,.12)";
