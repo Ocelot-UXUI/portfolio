@@ -12,11 +12,11 @@ const gearSets = [
 ];
 
 const sectionCopy = {
-  knowledge: ["知识", "集中管理 dodo 可以调用的文档、资料和个人知识。", "◫"],
-  skills: ["技能", "查看、启用和管理你的专属 Skill。", "⌁"],
-  artifacts: ["产物", "查找 dodo 在任务中生成的文档、图片与代码。", "▤"],
-  automation: ["自动化任务", "管理定时运行、事件触发和持续执行的任务。", "↻"],
-  settings: ["设置", "管理模型、通知和工作区偏好。", "⚙"]
+  knowledge: ["知识", "集中管理 dodo 可以调用的文档、资料和个人知识。", "assets/navigation/image_3.png"],
+  skills: ["技能", "查看、启用和管理你的专属 Skill。", "assets/navigation/image_4.png"],
+  artifacts: ["产物", "查找 dodo 在任务中生成的文档、图片与代码。", "assets/navigation/image_5.png"],
+  automation: ["自动化任务", "管理定时运行、事件触发和持续执行的任务。", "assets/navigation/image_6.png"],
+  settings: ["设置", "管理模型、通知和工作区偏好。", "assets/navigation/image_7.png"]
 };
 
 let conversations = [
@@ -85,11 +85,11 @@ function conversationRow(item) {
   return `
     <div class="conversation-row" data-conversation-id="${item.id}">
       <button class="conversation-item" type="button" data-conversation="${escapeHTML(item.title)}">
-        ${multiSelectMode ? `<span class="conversation-check ${selectedConversations.has(item.id) ? "is-checked" : ""}" aria-hidden="true">✓</span>` : ""}
-        ${item.favorite ? '<span class="favorite-mark" aria-label="已收藏">★</span>' : ""}
+        ${multiSelectMode ? `<span class="conversation-check ${selectedConversations.has(item.id) ? "is-checked" : ""}" aria-hidden="true"><img src="assets/navigation/${selectedConversations.has(item.id) ? "image_38.png" : "image_36.png"}" alt="" /></span>` : ""}
+        ${item.favorite ? '<span class="favorite-mark" aria-label="已收藏"><img src="assets/navigation/image_18.png" alt="" /></span>' : ""}
         <span>${escapeHTML(item.title)}</span>
       </button>
-      <button class="row-more" type="button" aria-label="${escapeHTML(item.title)}更多操作" data-row-menu="conversation">•••</button>
+      <button class="row-more" type="button" aria-label="${escapeHTML(item.title)}更多操作" data-row-menu="conversation"><img src="assets/navigation/image_43.png" alt="" /></button>
     </div>`;
 }
 
@@ -131,7 +131,7 @@ function openFloatingMenu(anchor, items, target) {
   activeMenuTarget = target;
   floatingMenu.innerHTML = items.map((item) => item.divider
     ? '<div class="menu-divider"></div>'
-    : `<button type="button" class="${item.danger ? "is-danger" : ""}" data-menu-action="${item.action}">${item.label}</button>`
+    : `<button type="button" class="${item.danger ? "is-danger" : ""}" data-menu-action="${item.action}">${item.icon ? `<img src="${item.icon}" alt="" />` : ""}<span>${item.label}</span></button>`
   ).join("");
   floatingMenu.hidden = false;
   const rect = anchor.getBoundingClientRect();
@@ -149,7 +149,7 @@ function renderGear() {
         <strong>${item.title}</strong>
       </span>
       <p>${item.copy}</p>
-      <span class="card-arrow">›</span>
+      <span class="card-arrow"><img src="assets/image_27.png" alt="" /></span>
     </button>
   `).join("");
 }
@@ -167,7 +167,7 @@ function showSection(section) {
   placeholderView.hidden = false;
   placeholderView.querySelector("[data-placeholder-title]").textContent = title;
   placeholderView.querySelector("[data-placeholder-copy]").textContent = copy;
-  placeholderView.querySelector("[data-placeholder-icon]").textContent = icon;
+  placeholderView.querySelector("[data-placeholder-icon]").innerHTML = `<img src="${icon}" alt="" />`;
   document.querySelectorAll(".nav-item").forEach((item) => {
     item.classList.toggle("is-active", item.dataset.section === section);
   });
@@ -281,7 +281,7 @@ workspaceForm.addEventListener("submit", (event) => {
     <button class="workspace-item" type="button" data-workspace="${escapeHTML(name)}">
       <img src="assets/navigation/image_22.png" alt="" /><span>${escapeHTML(name)}</span>
     </button>
-    <button class="row-more" type="button" aria-label="${escapeHTML(name)}更多操作" data-row-menu="workspace">•••</button>`;
+    <button class="row-more" type="button" aria-label="${escapeHTML(name)}更多操作" data-row-menu="workspace"><img src="assets/navigation/image_43.png" alt="" /></button>`;
   document.querySelector("[data-group-content]").append(row);
   workspaceModal.hidden = true;
   workspaceForm.reset();
@@ -368,11 +368,11 @@ sidebar.addEventListener("click", (event) => {
   const isConversation = menuButton.dataset.rowMenu === "conversation";
   const id = isConversation ? Number(row.dataset.conversationId) : null;
   openFloatingMenu(menuButton, [
-    { label: isConversation && conversations.find((item) => item.id === id)?.favorite ? "取消收藏" : "收藏", action: "favorite" },
-    { label: "置顶", action: "pin" },
-    { label: "重命名", action: "rename" },
+    { label: isConversation && conversations.find((item) => item.id === id)?.favorite ? "取消收藏" : "收藏", action: "favorite", icon: "assets/navigation/image_63.png" },
+    { label: "置顶", action: "pin", icon: "assets/navigation/image_52.png" },
+    { label: "重命名", action: "rename", icon: "assets/navigation/image_64.png" },
     { divider: true },
-    { label: "删除", action: "delete", danger: true }
+    { label: "删除", action: "delete", danger: true, icon: "assets/navigation/image_40.png" }
   ], { type: menuButton.dataset.rowMenu, row, id });
 });
 
