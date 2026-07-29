@@ -610,8 +610,8 @@
         will-change: clip-path, transform;
       }
 
-      html.motion-ready .prototype-homepage .project-showcase.visible .showcase-copy > * {
-        animation: project-copy-mask-reveal 760ms cubic-bezier(.16, 1, .3, 1) forwards;
+      html.motion-ready .prototype-homepage .project-showcase.copy-visible .showcase-copy > * {
+        animation: project-copy-mask-reveal 860ms cubic-bezier(.16, 1, .3, 1) forwards;
         animation-delay: var(--copy-delay, 0ms);
       }
 
@@ -647,7 +647,12 @@
       @keyframes project-copy-mask-reveal {
         0% {
           opacity: 1;
-          clip-path: inset(0 0 100% 0);
+          clip-path: inset(0 0 97% 0);
+          transform: translateY(38px);
+        }
+        12% {
+          opacity: 1;
+          clip-path: inset(0 0 97% 0);
           transform: translateY(38px);
         }
         100% {
@@ -993,7 +998,16 @@
           if (entry.isIntersecting) entry.target.classList.add("visible");
         });
       }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
-      document.querySelectorAll(".reveal, .section-reveal, .project-showcase").forEach((element) => observer.observe(element));
+      document.querySelectorAll(".reveal, .section-reveal").forEach((element) => observer.observe(element));
+
+      const projectCopyObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.closest(".project-showcase")?.classList.add("copy-visible");
+          projectCopyObserver.unobserve(entry.target);
+        });
+      }, { threshold: 0.25, rootMargin: "0px 0px -8% 0px" });
+      document.querySelectorAll(".project-showcase .showcase-copy").forEach((element) => projectCopyObserver.observe(element));
 
       const projectCursor = document.querySelector(".project-hover-cursor");
       const projectArea = document.querySelector(".showcase-projects");
