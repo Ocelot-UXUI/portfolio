@@ -525,6 +525,13 @@
         animation-delay: var(--copy-delay, 0ms);
       }
 
+      .prototype-homepage .hero-gallery-copy {
+        opacity: var(--hero-copy-exit-opacity, 1);
+        filter: blur(var(--hero-copy-exit-blur, 0));
+        transform: translate3d(0, var(--hero-copy-exit-offset, 0), 0);
+        will-change: opacity, filter, transform;
+      }
+
       html.motion-ready .prototype-homepage .section-reveal .section-copy-step,
       html.motion-ready .prototype-homepage .project-showcase .showcase-copy > * {
         opacity: 0;
@@ -567,6 +574,12 @@
           transform: none;
           filter: none;
           animation: none;
+        }
+
+        .prototype-homepage .hero-gallery-copy {
+          opacity: 1;
+          filter: none;
+          transform: none;
         }
       }
 
@@ -809,12 +822,37 @@
       document.documentElement.classList.add("motion-ready");
       const heroArtwork = document.querySelector(".hero-project-artwork");
       const heroCopy = document.querySelector(".hero-gallery-copy");
+      const heroSection = document.querySelector(".hero-gallery");
       if ((heroArtwork || heroCopy) && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
         requestAnimationFrame(() => requestAnimationFrame(() => {
           heroArtwork?.classList.add("hero-ready");
           heroCopy?.classList.add("hero-copy-ready");
         }));
       }
+
+      const updateHeroCopyExit = () => {
+        if (!heroCopy || !heroSection || reducedMotion.matches) return;
+        const heroBounds = heroSection.getBoundingClientRect();
+        const exitDistance = Math.min(heroBounds.height * .62, window.innerHeight * .78);
+        const progress = Math.max(0, Math.min(1, (-heroBounds.top - 24) / exitDistance));
+        const easedProgress = progress * progress * (3 - 2 * progress);
+
+        heroCopy.style.setProperty("--hero-copy-exit-opacity", String(1 - easedProgress));
+        heroCopy.style.setProperty("--hero-copy-exit-blur", `${(easedProgress * 14).toFixed(2)}px`);
+        heroCopy.style.setProperty("--hero-copy-exit-offset", `${(easedProgress * -18).toFixed(2)}px`);
+      };
+
+      let heroCopyScrollFrame;
+      const scheduleHeroCopyExit = () => {
+        if (heroCopyScrollFrame) return;
+        heroCopyScrollFrame = requestAnimationFrame(() => {
+          heroCopyScrollFrame = undefined;
+          updateHeroCopyExit();
+        });
+      };
+      updateHeroCopyExit();
+      window.addEventListener("scroll", scheduleHeroCopyExit, { passive: true });
+      window.addEventListener("resize", updateHeroCopyExit);
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) entry.target.classList.add("visible");
