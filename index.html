@@ -532,6 +532,67 @@
         will-change: opacity, filter, transform;
       }
 
+      .prototype-homepage .about {
+        padding: 120px clamp(24px, 5vw, 76px) 132px;
+      }
+
+      .prototype-homepage .about .section-label {
+        justify-content: flex-end;
+        margin: 0;
+        padding: 0;
+      }
+
+      .prototype-homepage .about .section-label::after {
+        display: none;
+      }
+
+      .prototype-homepage .about .section-label span {
+        color: var(--ink-muted);
+        font-size: 15px;
+        font-weight: 500;
+        text-transform: none;
+      }
+
+      .prototype-homepage .about-heading h2 {
+        max-width: 760px;
+        margin: -30px 0 0;
+        color: var(--ink);
+        font-size: clamp(52px, 6vw, 92px);
+        font-weight: 600;
+        letter-spacing: 0;
+        line-height: 1.18;
+      }
+
+      .prototype-homepage .about-strengths {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: clamp(22px, 3vw, 48px);
+        margin-top: clamp(92px, 11vw, 168px);
+      }
+
+      .prototype-homepage .about-strength {
+        min-width: 0;
+        padding-top: 20px;
+        border-top: 1px solid rgba(247, 248, 248, .82);
+      }
+
+      .prototype-homepage .about-strength h3 {
+        min-height: 2.8em;
+        margin: 0 0 24px;
+        color: var(--ink);
+        font-size: clamp(19px, 1.85vw, 28px);
+        font-weight: 600;
+        letter-spacing: 0;
+        line-height: 1.42;
+      }
+
+      .prototype-homepage .about-strength p {
+        margin: 0;
+        color: var(--ink-subtle);
+        font-size: clamp(14px, 1.2vw, 17px);
+        line-height: 1.75;
+      }
+
       html.motion-ready .prototype-homepage .section-reveal .section-copy-step,
       html.motion-ready .prototype-homepage .project-showcase .showcase-copy > * {
         opacity: 0;
@@ -584,6 +645,32 @@
       }
 
       @media (max-width: 700px) {
+        .prototype-homepage .about {
+          padding-top: 88px;
+          padding-bottom: 88px;
+        }
+
+        .prototype-homepage .about .section-label {
+          justify-content: flex-start;
+        }
+
+        .prototype-homepage .about-heading h2 {
+          margin-top: 28px;
+          font-size: 52px;
+        }
+
+        .prototype-homepage .about-strengths {
+          grid-template-columns: 1fr;
+          gap: 42px;
+          margin-top: 72px;
+        }
+
+        .prototype-homepage .about-strength h3 {
+          min-height: 0;
+          margin-bottom: 14px;
+          font-size: 22px;
+        }
+
         .prototype-homepage .hero.hero-gallery {
           min-height: 720px;
           gap: 12px;
@@ -666,14 +753,15 @@
         </section>
 
         <section class="about section-reveal" id="about">
-          <div class="section-label section-copy-step"><span>About</span></div>
-          <div class="about-grid">
-            <div class="about-left"><h2 class="section-copy-step">关于我</h2><p class="section-copy-step">这里放置你的个人介绍。描述你的设计理念、工作经历、或任何让你与众不同的地方。</p><p class="section-copy-step">可以包含你的教育背景、获奖经历、或对设计的独到见解。保持真实，让访客了解真正的你。</p></div>
-            <div class="about-right">
-              <div class="skill-group section-copy-step"><h4>Design</h4><div class="skill-list"><span class="skill-item">UI/UX Design</span><span class="skill-item">Visual Design</span><span class="skill-item">Branding</span><span class="skill-item">Motion Design</span><span class="skill-item">Prototyping</span></div></div>
-              <div class="skill-group section-copy-step"><h4>Development</h4><div class="skill-list"><span class="skill-item">HTML / CSS</span><span class="skill-item">JavaScript</span><span class="skill-item">React</span><span class="skill-item">Three.js</span></div></div>
-              <div class="skill-group section-copy-step"><h4>Tools</h4><div class="skill-list"><span class="skill-item">Figma</span><span class="skill-item">After Effects</span><span class="skill-item">Blender</span><span class="skill-item">VS Code</span></div></div>
-            </div>
+          <div class="section-label section-copy-step"><span>个人优势</span></div>
+          <div class="about-heading">
+            <h2 class="section-copy-step">做AI，懂用户，<br />能自驱</h2>
+          </div>
+          <div class="about-strengths">
+            <article class="about-strength section-copy-step"><h3>主动推动，<br />跨团队协作落地</h3><p>在商汤科技的AI记忆助手项目，面对模糊需求从0到1设计提案，主动思考、向上管理、推动共识</p></article>
+            <article class="about-strength section-copy-step"><h3>AI 场景创新，<br />2 个 0-1 项目经验</h3><p>理解 AI 能力边界，将 AI 能力转化为用户价值</p></article>
+            <article class="about-strength section-copy-step"><h3>具备商业敏感度，<br />打通转化链路</h3><p>打通小红书从“内容种草”到“交易转化”的完整链路</p></article>
+            <article class="about-strength section-copy-step"><h3>深入一线，<br />挖掘隐性用户需求</h3><p>成为美团骑手，挖掘到“习以为常”背后的隐性痛点，解决真实问题</p></article>
           </div>
         </section>
 
