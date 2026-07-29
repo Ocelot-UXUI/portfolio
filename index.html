@@ -458,6 +458,11 @@
         animation-play-state: running;
       }
 
+      /* The entrance keyframes own transform until every card has settled. */
+      html.motion-ready .prototype-homepage .hero-project-artwork.hero-ready:not(.hero-interaction-ready) .hero-project-card {
+        pointer-events: none;
+      }
+
       .prototype-homepage .hero-project-cnap { animation-name: hero-cnap-unfold; animation-delay: .04s; }
       .prototype-homepage .hero-project-remi { animation-name: hero-remi-unfold; animation-delay: .08s; }
       .prototype-homepage .hero-project-xhs { animation-name: hero-xhs-unfold; animation-delay: .18s; }
@@ -800,6 +805,27 @@
         box-shadow: none;
       }
 
+      /* Keep entrance motion and hover elevation from competing for transform. */
+      .prototype-homepage .hero-project-card {
+        --hero-card-rotate: 0deg;
+        transform: translate3d(0, 0, 0) rotate(var(--hero-card-rotate));
+        transition: transform 420ms cubic-bezier(.22, 1, .36, 1), box-shadow 320ms ease;
+        will-change: transform;
+        animation-fill-mode: backwards;
+      }
+
+      .prototype-homepage .hero-project-cnap { --hero-card-rotate: -2.5deg; }
+      .prototype-homepage .hero-project-remi { --hero-card-rotate: -5.5deg; }
+      .prototype-homepage .hero-project-xhs { --hero-card-rotate: 2.5deg; }
+      .prototype-homepage .hero-project-reading { --hero-card-rotate: 5.5deg; }
+
+      .prototype-homepage .hero-project-card:hover,
+      .prototype-homepage .hero-project-card:focus-visible {
+        z-index: 6;
+        transform: translate3d(0, -14px, 0) rotate(var(--hero-card-rotate));
+        box-shadow: 0 30px 52px rgba(0, 0, 0, .42);
+      }
+
       .project-hover-cursor {
         width: 112px;
         height: 42px;
@@ -1010,7 +1036,21 @@
         requestAnimationFrame(() => requestAnimationFrame(() => {
           heroArtwork?.classList.add("hero-ready");
           heroCopy?.classList.add("hero-copy-ready");
+
+          if (heroArtwork) {
+            const cards = heroArtwork.querySelectorAll(".hero-project-card");
+            let finishedCards = 0;
+            const enableHeroInteractions = () => heroArtwork.classList.add("hero-interaction-ready");
+            cards.forEach((card) => {
+              card.addEventListener("animationend", () => {
+                finishedCards += 1;
+                if (finishedCards === cards.length) enableHeroInteractions();
+              }, { once: true });
+            });
+          }
         }));
+      } else if (heroArtwork) {
+        heroArtwork.classList.add("hero-interaction-ready");
       }
 
       const updateHeroCopyExit = () => {
