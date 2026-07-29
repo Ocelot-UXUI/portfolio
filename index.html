@@ -356,7 +356,16 @@
       .prototype-homepage .showcase-heading {
         position: relative;
         z-index: 1;
+        min-height: 120px;
+        padding: 32px clamp(24px, 4.4vw, 64px);
         background: transparent;
+      }
+
+      @media (max-width: 700px) {
+        .prototype-homepage .showcase-heading {
+          min-height: 112px;
+          padding: 30px 22px;
+        }
       }
 
       .prototype-homepage .project-showcase,
