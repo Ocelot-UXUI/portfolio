@@ -721,6 +721,38 @@
         box-shadow: none;
       }
 
+      .project-hover-cursor {
+        box-sizing: border-box;
+        width: 98px;
+        height: 38px;
+        margin: -19px 0 0 -49px;
+        padding: 0 12px;
+        gap: 5px;
+        border-radius: 10px;
+        background: rgba(247, 246, 242, .96);
+        box-shadow: 0 8px 22px rgba(0, 0, 0, .22);
+        color: #111217;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 1;
+      }
+
+      .project-hover-cursor .project-hover-cursor-arrow {
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 1;
+      }
+
+      .prototype-homepage .project-showcase::after {
+        content: "查看 \2197";
+        padding: 8px 13px;
+        border-radius: 10px;
+        background: rgba(247, 246, 242, .96);
+        color: #111217;
+        font-size: 13px;
+        font-weight: 600;
+      }
+
     </style>
   </head>
   <body class="prototype-homepage">
@@ -817,7 +849,7 @@
             </div>
             <div class="showcase-media"><img src="assets/figma-projects/image_5.png" alt="小红书本地生活双手机界面" /></div>
           </a>
-          <div class="project-hover-cursor" aria-hidden="true"><span>查看</span><img src="assets/figma-button/image_1.png" alt="" /></div>
+          <div class="project-hover-cursor" aria-hidden="true"><span>查看</span><span class="project-hover-cursor-arrow">&#8599;</span></div>
         </section>
 
       </main>
