@@ -1002,9 +1002,13 @@
 
       const projectCopyObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.closest(".project-showcase")?.classList.add("copy-visible");
-          projectCopyObserver.unobserve(entry.target);
+          const project = entry.target.closest(".project-showcase");
+          if (!project) return;
+          if (entry.intersectionRatio >= 0.25) {
+            project.classList.add("copy-visible");
+          } else if (!entry.isIntersecting) {
+            project.classList.remove("copy-visible");
+          }
         });
       }, { threshold: 0.25, rootMargin: "0px 0px -8% 0px" });
       document.querySelectorAll(".project-showcase .showcase-copy").forEach((element) => projectCopyObserver.observe(element));
