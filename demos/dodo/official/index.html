@@ -22,7 +22,7 @@
             <button class="nav-item" type="button" data-section="knowledge">
               <img src="assets/navigation/image_3.png" alt="" /><span>知识</span>
             </button>
-            <button class="nav-item is-active" type="button" data-section="skills">
+            <button class="nav-item" type="button" data-section="skills">
               <img src="assets/navigation/image_4.png" alt="" /><span>技能</span>
             </button>
             <button class="nav-item" type="button" data-section="artifacts">
@@ -146,6 +146,40 @@
           </section>
         </section>
 
+        <section class="skills-view" hidden data-skills-view>
+          <header class="skills-header">
+            <div>
+              <h1>技能</h1>
+              <p>统一管理赋予 dodo 更强大的能力</p>
+            </div>
+            <div class="skills-toolbar">
+              <label class="skills-search" for="skills-search">
+                <img src="assets/skills/image_10.png" alt="" />
+                <input id="skills-search" type="search" placeholder="搜索技能" autocomplete="off" data-skills-search />
+              </label>
+              <div class="skill-create-wrap">
+                <button class="skills-new-button" type="button" aria-expanded="false" data-skill-create-button>
+                  <img src="assets/skills/image_11.png" alt="" /><span>新技能</span>
+                </button>
+                <div class="skill-create-menu" hidden data-skill-create-menu>
+                  <button type="button" data-create-action="upload"><img src="assets/skills/image_52.png" alt="" /><span><strong>创建技能</strong><small>上传本地技能文件</small></span></button>
+                  <button type="button" data-create-action="share"><img src="assets/skills/image_53.png" alt="" /><span><strong>添加共享链接</strong><small>通过链接安装已有技能</small></span></button>
+                  <button type="button" data-create-action="write"><img src="assets/skills/image_54.png" alt="" /><span><strong>让 dodo 写一个</strong><small>描述需求，由 dodo 创建</small></span></button>
+                  <button type="button" data-create-action="center"><img src="assets/skills/image_55.png" alt="" /><span><strong>去 Skill 中心</strong><small>发现更多公开技能</small></span></button>
+                </div>
+              </div>
+            </div>
+          </header>
+
+          <div class="skills-category-tabs" role="tablist" aria-label="技能分类">
+            <button class="is-active" type="button" role="tab" aria-selected="true" data-skill-category="personal">个人</button>
+            <button type="button" role="tab" aria-selected="false" data-skill-category="team">团队</button>
+            <button type="button" role="tab" aria-selected="false" data-skill-category="builtIn">dodo内置</button>
+          </div>
+          <p class="skills-count" aria-live="polite" data-skills-count></p>
+          <div class="skills-list" data-skills-list></div>
+        </section>
+
         <section class="placeholder-view" hidden data-placeholder-view>
           <div class="placeholder-icon" data-placeholder-icon><img src="assets/navigation/image_3.png" alt="" /></div>
           <h1 data-placeholder-title>知识</h1>
@@ -166,6 +200,38 @@
         <footer><button type="button" class="secondary-button" data-close-workspace>取消</button><button type="submit" class="primary-button">创建</button></footer>
       </form>
     </div>
+    <div class="skill-modal" hidden data-skill-upload-modal>
+      <button class="skill-modal-backdrop" type="button" aria-label="关闭创建技能弹窗" data-close-skill-modal></button>
+      <form class="skill-dialog skill-upload-dialog" data-skill-upload-form>
+        <header><h2>创建技能</h2><button type="button" aria-label="关闭" data-close-skill-modal><img src="assets/skills/image_42.png" alt="" /></button></header>
+        <input class="skill-file-input" id="skill-file" type="file" accept=".zip,.skill" data-skill-file />
+        <label class="skill-upload-zone" for="skill-file" data-skill-drop-zone>
+          <img src="assets/skills/image_43.png" alt="" />
+          <strong>点击或拖拽上传技能文件</strong>
+          <span>支持 .zip 或 .skill 格式</span>
+        </label>
+        <div class="uploaded-file-row" hidden data-uploaded-file>
+          <img src="assets/skills/image_45.png" alt="" />
+          <span><strong data-uploaded-file-name></strong><small>文件上传成功</small></span>
+          <button type="button" aria-label="移除文件" data-remove-skill-file><img src="assets/skills/image_47.png" alt="" /></button>
+        </div>
+        <div class="skill-form-row"><label for="skill-name"><span>*</span>名称</label><input id="skill-name" maxlength="40" placeholder="请输入技能名称" required data-skill-name /></div>
+        <div class="skill-form-row"><label for="skill-display-name">展示名称</label><input id="skill-display-name" maxlength="40" placeholder="请输入技能展示名称" data-skill-display-name /></div>
+        <div class="skill-form-row"><label for="skill-description">技能描述</label><textarea id="skill-description" maxlength="200" placeholder="介绍这个技能可以帮助你完成什么" data-skill-description></textarea><small><span data-description-count>0</span>/200</small></div>
+        <footer><button class="secondary-button" type="button" data-close-skill-modal>取消</button><button class="primary-button" type="submit" disabled data-upload-skill-button>上传</button></footer>
+      </form>
+    </div>
+
+    <div class="skill-modal" hidden data-skill-share-modal>
+      <button class="skill-modal-backdrop" type="button" aria-label="关闭添加共享链接弹窗" data-close-skill-modal></button>
+      <form class="skill-dialog skill-share-dialog" data-skill-share-form>
+        <header><h2>添加共享链接</h2><button type="button" aria-label="关闭" data-close-skill-modal><img src="assets/skills/image_51.png" alt="" /></button></header>
+        <p>输入技能共享链接或分享口令，安装后可在个人技能中使用。</p>
+        <div class="skill-form-row"><label for="skill-share-link"><span>*</span>共享链接</label><input id="skill-share-link" placeholder="粘贴链接或分享口令" autocomplete="off" data-skill-share-link /></div>
+        <footer><button class="secondary-button" type="button" data-close-skill-modal>取消</button><button class="primary-button" type="submit" disabled data-install-skill-button>安装</button></footer>
+      </form>
+    </div>
+
     <div class="floating-menu" hidden data-floating-menu></div>
     <div class="toast" role="status" aria-live="polite" data-toast></div>
     <script src="app.js"></script>
