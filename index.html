@@ -593,15 +593,25 @@
         line-height: 1.75;
       }
 
-      html.motion-ready .prototype-homepage .section-reveal .section-copy-step,
-      html.motion-ready .prototype-homepage .project-showcase .showcase-copy > * {
+      html.motion-ready .prototype-homepage .section-reveal .section-copy-step {
         opacity: 0;
         transform: translateY(var(--copy-distance));
       }
 
-      html.motion-ready .prototype-homepage .section-reveal.visible .section-copy-step,
-      html.motion-ready .prototype-homepage .project-showcase.visible .showcase-copy > * {
+      html.motion-ready .prototype-homepage .section-reveal.visible .section-copy-step {
         animation: portfolio-copy-enter var(--copy-duration) var(--copy-easing) forwards;
+        animation-delay: var(--copy-delay, 0ms);
+      }
+
+      html.motion-ready .prototype-homepage .project-showcase .showcase-copy > * {
+        opacity: 0;
+        clip-path: inset(0 0 100% 0);
+        transform: translateY(38px);
+        will-change: opacity, clip-path, transform;
+      }
+
+      html.motion-ready .prototype-homepage .project-showcase.visible .showcase-copy > * {
+        animation: project-copy-mask-reveal 980ms cubic-bezier(.16, 1, .3, 1) forwards;
         animation-delay: var(--copy-delay, 0ms);
       }
 
@@ -614,9 +624,9 @@
       .prototype-homepage .about-right .skill-group:nth-child(3) { --copy-delay: calc(var(--copy-step) * 6); }
       .prototype-homepage .showcase-heading span { --copy-delay: 0ms; }
       .prototype-homepage .showcase-heading h2 { --copy-delay: var(--copy-step); }
-      .prototype-homepage .project-showcase .showcase-copy h3 { --copy-delay: var(--copy-step); }
-      .prototype-homepage .project-showcase .showcase-copy p { --copy-delay: calc(var(--copy-step) * 2); }
-      .prototype-homepage .project-showcase .showcase-copy ul { --copy-delay: calc(var(--copy-step) * 3); }
+      .prototype-homepage .project-showcase .showcase-copy h3 { --copy-delay: 80ms; }
+      .prototype-homepage .project-showcase .showcase-copy p { --copy-delay: 230ms; }
+      .prototype-homepage .project-showcase .showcase-copy ul { --copy-delay: 360ms; }
       .prototype-homepage .footer-left { --copy-delay: 0ms; }
       .prototype-homepage .footer-links { --copy-delay: var(--copy-step); }
 
@@ -627,11 +637,28 @@
         }
       }
 
+      @keyframes project-copy-mask-reveal {
+        0% {
+          opacity: 0;
+          clip-path: inset(0 0 100% 0);
+          transform: translateY(38px);
+        }
+        18% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 1;
+          clip-path: inset(0 0 0 0);
+          transform: translateY(0);
+        }
+      }
+
       @media (prefers-reduced-motion: reduce) {
         html.motion-ready .prototype-homepage .hero-gallery-copy .hero-copy-step,
         html.motion-ready .prototype-homepage .section-reveal .section-copy-step,
         html.motion-ready .prototype-homepage .project-showcase .showcase-copy > * {
           opacity: 1;
+          clip-path: none;
           transform: none;
           filter: none;
           animation: none;
