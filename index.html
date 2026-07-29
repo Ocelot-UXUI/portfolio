@@ -833,13 +833,13 @@
       const updateHeroCopyExit = () => {
         if (!heroCopy || !heroSection || reducedMotion.matches) return;
         const heroBounds = heroSection.getBoundingClientRect();
-        const exitDistance = Math.min(heroBounds.height * .48, window.innerHeight * .58);
+        const exitDistance = Math.min(heroBounds.height * .58, window.innerHeight * .7);
         const progress = Math.max(0, Math.min(1, (-heroBounds.top + 48) / exitDistance));
-        const easedProgress = 1 - Math.pow(1 - progress, 2.3);
+        const easedProgress = progress * progress * (3 - 2 * progress);
 
         heroCopy.style.setProperty("--hero-copy-exit-opacity", String(1 - easedProgress));
-        heroCopy.style.setProperty("--hero-copy-exit-blur", `${(easedProgress * 26).toFixed(2)}px`);
-        heroCopy.style.setProperty("--hero-copy-exit-offset", `${(easedProgress * 36).toFixed(2)}px`);
+        heroCopy.style.setProperty("--hero-copy-exit-blur", `${(easedProgress * 14).toFixed(2)}px`);
+        heroCopy.style.setProperty("--hero-copy-exit-offset", `${(easedProgress * 58).toFixed(2)}px`);
       };
 
       let heroCopyScrollFrame;
