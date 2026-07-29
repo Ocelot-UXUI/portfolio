@@ -630,6 +630,27 @@
         animation-delay: var(--copy-delay, 0ms);
       }
 
+      html.motion-ready .prototype-homepage .about .about-heading h2 {
+        --project-line-reveal: 0%;
+        --project-mask-line-height: 1.18em;
+        opacity: 1;
+        -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 var(--project-line-reveal), transparent var(--project-line-reveal), transparent 100%);
+        mask-image: linear-gradient(to bottom, #000 0, #000 var(--project-line-reveal), transparent var(--project-line-reveal), transparent 100%);
+        -webkit-mask-position: top left;
+        mask-position: top left;
+        -webkit-mask-repeat: repeat-y;
+        mask-repeat: repeat-y;
+        -webkit-mask-size: 100% var(--project-mask-line-height);
+        mask-size: 100% var(--project-mask-line-height);
+        transform: translateY(20px);
+        will-change: transform;
+      }
+
+      html.motion-ready .prototype-homepage .about.about-heading-visible .about-heading h2 {
+        animation: project-copy-mask-reveal 860ms cubic-bezier(.16, 1, .3, 1) forwards;
+        animation-delay: 40ms;
+      }
+
       .motion-ready .prototype-homepage .project-showcase,
       .motion-ready .prototype-homepage .project-showcase.visible {
         opacity: 1;
@@ -680,7 +701,8 @@
       @media (prefers-reduced-motion: reduce) {
         html.motion-ready .prototype-homepage .hero-gallery-copy .hero-copy-step,
         html.motion-ready .prototype-homepage .section-reveal .section-copy-step,
-        html.motion-ready .prototype-homepage .project-showcase .showcase-copy > * {
+        html.motion-ready .prototype-homepage .project-showcase .showcase-copy > *,
+        html.motion-ready .prototype-homepage .about .about-heading h2 {
           opacity: 1;
           clip-path: none;
           -webkit-mask-image: none;
@@ -1033,6 +1055,22 @@
         });
       }, { threshold: 0.25, rootMargin: "0px 0px -8% 0px" });
       document.querySelectorAll(".project-showcase .showcase-copy").forEach((element) => projectCopyObserver.observe(element));
+
+      const aboutHeading = document.querySelector(".about-heading h2");
+      if (aboutHeading) {
+        const aboutHeadingObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            const about = entry.target.closest(".about");
+            if (!about) return;
+            if (entry.intersectionRatio >= 0.35) {
+              about.classList.add("about-heading-visible");
+            } else if (!entry.isIntersecting) {
+              about.classList.remove("about-heading-visible");
+            }
+          });
+        }, { threshold: 0.35, rootMargin: "0px 0px -8% 0px" });
+        aboutHeadingObserver.observe(aboutHeading);
+      }
 
       const projectCursor = document.querySelector(".project-hover-cursor");
       const projectArea = document.querySelector(".showcase-projects");
