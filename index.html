@@ -10,7 +10,7 @@
     <link rel="preload" as="image" href="assets/hero-projects/image_1-transparent.png" />
     <link rel="preload" as="image" href="assets/hero-projects/image_3-transparent.png" />
     <link rel="preload" as="image" href="assets/hero-projects/image_4.png" />
-    <link rel="stylesheet" href="styles/styles.css?v=20260726-10" />
+    <link rel="stylesheet" href="styles/styles.css?v=20260729-11" />
     <style>
       .prototype-homepage .nav {
         background: rgba(6, 7, 12, .34);
@@ -627,9 +627,10 @@
     <div class="page">
       <nav class="nav" aria-label="首页导航">
         <a class="nav-logo" href="#home">Portfolio</a>
-        <ul class="nav-links">
-          <li><a href="#about">关于我</a></li>
-          <li><a href="#projects">项目</a></li>
+        <ul class="nav-links" data-nav-links>
+          <li><a href="#about" data-nav-link>关于我</a></li>
+          <li><a href="#projects" data-nav-link>项目</a></li>
+          <li class="nav-active-indicator" aria-hidden="true"></li>
         </ul>
         <a href="mailto:1004080451@qq.com" class="nav-cta">Contact</a>
       </nav>
@@ -747,6 +748,51 @@
 
       updateStickyNav();
       window.addEventListener("scroll", updateStickyNav, { passive: true });
+
+      const navLinks = [...document.querySelectorAll("[data-nav-link]")];
+      const navIndicator = document.querySelector(".nav-active-indicator");
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+      const updateNavIndicator = (link, instant = false) => {
+        if (!navIndicator || !link) return;
+        const linksBounds = navIndicator.parentElement.getBoundingClientRect();
+        const linkBounds = link.getBoundingClientRect();
+        navLinks.forEach((item) => item.classList.toggle("is-active", item === link));
+        navIndicator.style.transitionDuration = instant || reducedMotion.matches ? "0ms" : "420ms";
+        navIndicator.style.width = `${linkBounds.width}px`;
+        navIndicator.style.transform = `translateX(${linkBounds.left - linksBounds.left}px)`;
+      };
+
+      const sectionLinks = navLinks
+        .map((link) => ({ link, section: document.querySelector(link.getAttribute("href")) }))
+        .filter(({ section }) => section);
+
+      navLinks.forEach((link) => {
+        link.addEventListener("click", () => updateNavIndicator(link));
+        link.addEventListener("focus", () => updateNavIndicator(link));
+      });
+
+      let navScrollFrame;
+      const updateNavFromScroll = () => {
+        navScrollFrame = undefined;
+        const readingLine = window.innerHeight * 0.33;
+        const currentSection = sectionLinks.reduce((closest, item) => {
+          const distance = Math.abs(item.section.getBoundingClientRect().top - readingLine);
+          return distance < closest.distance ? { ...item, distance } : closest;
+        }, { distance: Infinity });
+        if (currentSection.link) updateNavIndicator(currentSection.link);
+      };
+      window.addEventListener("scroll", () => {
+        if (!navScrollFrame) navScrollFrame = requestAnimationFrame(updateNavFromScroll);
+      }, { passive: true });
+      window.addEventListener("resize", () => {
+        const activeLink = navLinks.find((link) => link.classList.contains("is-active"));
+        updateNavIndicator(activeLink || navLinks[0], true);
+      });
+      requestAnimationFrame(() => {
+        updateNavIndicator(navLinks[0], true);
+        updateNavFromScroll();
+      });
 
       document.documentElement.classList.add("motion-ready");
       const heroArtwork = document.querySelector(".hero-project-artwork");
