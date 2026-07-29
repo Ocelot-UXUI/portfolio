@@ -13,15 +13,61 @@
     <link rel="stylesheet" href="styles/styles.css?v=20260729-12" />
     <style>
       .prototype-homepage .nav {
+        overflow: visible;
         background: rgba(6, 7, 12, .34);
         -webkit-backdrop-filter: blur(30px) saturate(185%);
         backdrop-filter: blur(30px) saturate(185%);
         box-shadow: inset 0 1px rgba(255, 255, 255, .08);
       }
 
+      .prototype-homepage .page {
+        overflow: visible;
+      }
+
       .prototype-homepage .nav.is-scrolled {
         background: rgba(6, 7, 12, .52);
         box-shadow: 0 14px 38px rgba(0, 0, 0, .22), inset 0 1px rgba(255, 255, 255, .09);
+      }
+
+      .prototype-homepage .nav-cta {
+        position: relative;
+      }
+
+      .prototype-homepage .nav-contact-label {
+        margin: 0;
+        color: inherit;
+      }
+
+      .prototype-homepage .nav-contact-qr {
+        position: absolute;
+        z-index: 102;
+        top: calc(100% + 12px);
+        right: 0;
+        width: 208px;
+        padding: 7px;
+        border: 1px solid rgba(255, 255, 255, .16);
+        border-radius: 8px;
+        background: rgba(15, 16, 18, .96);
+        box-shadow: 0 18px 42px rgba(0, 0, 0, .38);
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-8px) scale(.98);
+        transition: opacity .2s ease, transform .24s cubic-bezier(.22, 1, .36, 1), visibility .2s;
+        visibility: hidden;
+      }
+
+      .prototype-homepage .nav-contact-qr img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 3px;
+      }
+
+      .prototype-homepage .nav-cta:hover .nav-contact-qr,
+      .prototype-homepage .nav-cta:focus-visible .nav-contact-qr {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        visibility: visible;
       }
 
       .prototype-homepage .hero.hero-gallery {
@@ -130,6 +176,10 @@
       }
 
       @media (max-width: 700px) {
+        .prototype-homepage .nav-contact-qr {
+          display: none;
+        }
+
         .prototype-homepage .hero.hero-gallery {
           min-height: 700px;
           gap: 26px;
@@ -863,13 +913,16 @@
   <body class="prototype-homepage">
     <div class="page">
       <nav class="nav" aria-label="首页导航">
-        <a class="nav-logo" href="#home">Portfolio</a>
+        <a class="nav-logo" href="#home">Guoyucheng</a>
         <ul class="nav-links" data-nav-links>
           <li><a href="#about" data-nav-link aria-label="关于我"><span class="nav-label" aria-hidden="true"><span class="nav-char" style="--nav-char-delay:0ms">关</span><span class="nav-char" style="--nav-char-delay:35ms">于</span><span class="nav-char" style="--nav-char-delay:70ms">我</span></span></a></li>
           <li><a href="#projects" data-nav-link aria-label="项目"><span class="nav-label" aria-hidden="true"><span class="nav-char" style="--nav-char-delay:0ms">项</span><span class="nav-char" style="--nav-char-delay:35ms">目</span></span></a></li>
           <li class="nav-active-indicator" aria-hidden="true"></li>
         </ul>
-        <a href="mailto:1004080451@qq.com" class="nav-cta">Contact</a>
+        <a href="mailto:1004080451@qq.com" class="nav-cta" aria-label="Contact，悬浮显示微信二维码，点击发送邮件">
+          <span class="nav-contact-label">Contact</span>
+          <span class="nav-contact-qr"><img src="assets/contact-wechat.jpg" alt="微信二维码" /></span>
+        </a>
       </nav>
 
       <main>
