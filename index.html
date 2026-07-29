@@ -603,11 +603,26 @@
         animation-delay: var(--copy-delay, 0ms);
       }
 
+      @property --project-line-reveal {
+        syntax: "<percentage>";
+        inherits: false;
+        initial-value: 0%;
+      }
+
       html.motion-ready .prototype-homepage .project-showcase .showcase-copy > * {
+        --project-line-reveal: 0%;
+        --project-mask-line-height: 1.5em;
         opacity: 1;
-        clip-path: inset(0 0 100% 0);
-        transform: translateY(38px);
-        will-change: clip-path, transform;
+        -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 var(--project-line-reveal), transparent var(--project-line-reveal), transparent 100%);
+        mask-image: linear-gradient(to bottom, #000 0, #000 var(--project-line-reveal), transparent var(--project-line-reveal), transparent 100%);
+        -webkit-mask-position: top left;
+        mask-position: top left;
+        -webkit-mask-repeat: repeat-y;
+        mask-repeat: repeat-y;
+        -webkit-mask-size: 100% var(--project-mask-line-height);
+        mask-size: 100% var(--project-mask-line-height);
+        transform: translateY(20px);
+        will-change: transform;
       }
 
       html.motion-ready .prototype-homepage .project-showcase.copy-visible .showcase-copy > * {
@@ -646,18 +661,18 @@
 
       @keyframes project-copy-mask-reveal {
         0% {
+          --project-line-reveal: 6%;
           opacity: 1;
-          clip-path: inset(0 0 97% 0);
-          transform: translateY(38px);
+          transform: translateY(20px);
         }
         12% {
+          --project-line-reveal: 6%;
           opacity: 1;
-          clip-path: inset(0 0 97% 0);
-          transform: translateY(38px);
+          transform: translateY(20px);
         }
         100% {
+          --project-line-reveal: 100%;
           opacity: 1;
-          clip-path: inset(0 0 0 0);
           transform: translateY(0);
         }
       }
@@ -668,6 +683,8 @@
         html.motion-ready .prototype-homepage .project-showcase .showcase-copy > * {
           opacity: 1;
           clip-path: none;
+          -webkit-mask-image: none;
+          mask-image: none;
           transform: none;
           filter: none;
           animation: none;
@@ -681,6 +698,10 @@
       }
 
       @media (max-width: 700px) {
+        html.motion-ready .prototype-homepage .project-showcase .showcase-copy h3 {
+          --project-mask-line-height: 1.35em;
+        }
+
         .prototype-homepage .about {
           padding-top: 88px;
           padding-bottom: 88px;
