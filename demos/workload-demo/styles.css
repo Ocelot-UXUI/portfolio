@@ -1038,17 +1038,3 @@
   #instanceModal .instance-summary,
   #instanceModal .summary-toggle{transition:none}
 }
-
-/* Figma 38:31369: expandable list of all containers in the current Pod. */
-#instanceModal .container-strip{display:flex!important;width:100%;height:52px!important;padding:4px 8px 0!important;align-items:center!important;overflow:hidden!important}
-#instanceModal .container-strip-list{display:flex;min-width:0;flex:1;align-items:flex-end;overflow-x:auto;overflow-y:hidden;scrollbar-width:none}
-#instanceModal .container-strip-list::-webkit-scrollbar{display:none}
-#instanceModal .container-strip-list>button{min-width:max-content;max-width:220px;opacity:1;overflow:hidden;white-space:nowrap;transition:max-width 180ms cubic-bezier(.2,.8,.2,1),opacity 150ms ease,padding 180ms ease,margin 180ms ease}
-#instanceModal .container-strip-list>button+button{margin-left:8px}
-#instanceModal .container-list-toggle{display:grid!important;width:32px!important;min-width:32px!important;height:32px!important;margin:0 0 4px 8px!important;padding:0!important;place-items:center;border:0!important;border-radius:50%!important;background:transparent!important;box-shadow:none!important}
-#instanceModal .container-list-toggle:hover{background:#e7e8eb!important}
-#instanceModal .container-list-toggle img{display:block;width:24px;height:24px;object-fit:contain;transition:transform 180ms cubic-bezier(.2,.8,.2,1)}
-#instanceModal .container-strip.is-collapsed .container-strip-list>button:not(.active){max-width:0;margin-left:0!important;padding-right:0!important;padding-left:0!important;opacity:0;pointer-events:none}
-#instanceModal .container-strip.is-collapsed .container-list-toggle img{transform:rotate(180deg)}
-#instanceModal .container-list-toggle:focus-visible{outline:2px solid #306ddd;outline-offset:2px}
-@media(prefers-reduced-motion:reduce){#instanceModal .container-strip-list>button,#instanceModal .container-list-toggle img{transition:none}}
