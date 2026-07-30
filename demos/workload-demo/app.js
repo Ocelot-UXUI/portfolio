@@ -69,6 +69,8 @@ const instanceModal = document.querySelector('#instanceModal');
 const historyDrawer = document.querySelector('#historyDrawer');
 const historyList = document.querySelector('#historyList');
 const bulkBar = document.querySelector('#bulkBar');
+const resourceTooltip = document.querySelector('#resourceTooltip');
+const usageTooltipAssetPath = './assets/figma-usage-tooltip-38-31304';
 const figmaIconPath = './assets/figma-icon-library-56-38920';
 const operationIconPath = './assets/figma-operation-column-4-45229';
 const workloadIconPath = './assets/figma-workload-global-tip-4-40581';
@@ -234,12 +236,56 @@ function resourceMetricMarkup(type,usage,capacity,request,percent){
   const normalized=Math.max(0,Math.min(100,percent));
   const tone=normalized>=80?'danger':normalized>=60?'warning':'normal';
   const iconName=type==='cpu'?'cpu':'memory';
-  return `<span class="resource-metric usage-value" data-tooltip="${type==='cpu'?'CPU':'内存'}：${usage}，Limit：${capacity}，请求：${request}"><span class="resource-spec"><span class="${type}-mark">${icon(iconName)}</span><span class="resource-spec-value">${usage}/${capacity}/${request}</span></span><span class="resource-usage ${tone}"><span class="resource-track"><i style="width:${normalized}%"></i></span><b>${normalized}%</b></span></span>`;
+  return `<span class="resource-metric usage-value" data-resource-tooltip data-resource-type="${type}" data-resource-usage="${usage}" data-resource-capacity="${capacity}" data-resource-request="${request}" data-resource-percent="${normalized}" tabindex="0" role="img" aria-label="${type==='cpu'?'CPU':'内存'}使用量 ${usage}，限制 ${capacity}，请求 ${request}"><span class="resource-spec"><span class="${type}-mark">${icon(iconName)}</span><span class="resource-spec-value">${usage}/${capacity}/${request}</span></span><span class="resource-usage ${tone}"><span class="resource-track"><i style="width:${normalized}%"></i></span><b>${normalized}%</b></span></span>`;
 }
+
+function showResourceTooltip(target){
+  const type=target.dataset.resourceType;
+  const labels={cpu:'CPU',memory:'内存',gpu:'GPU'};
+  const label=labels[type] || '资源';
+  const percent=Math.max(0,Math.min(100,Number(target.dataset.resourcePercent)||0));
+  const tone=percent>=80?'danger':percent>=60?'warning':'normal';
+  resourceTooltip.innerHTML=`<div class="resource-tooltip-title">${label}</div><div class="resource-tooltip-progress"><img src="${usageTooltipAssetPath}/image_1.png" alt=""><b>${percent}%</b></div><div class="resource-tooltip-details"><span class="limit"><i></i><em>Limit</em><strong>${target.dataset.resourceCapacity || '-'}</strong></span><span class="usage"><i></i><em>usage</em><strong>${target.dataset.resourceUsage || '-'}</strong></span><span class="request"><i></i><em>request</em><strong>${target.dataset.resourceRequest || '-'}</strong></span></div><img class="resource-tooltip-arrow" src="${usageTooltipAssetPath}/image_2.png" alt="">`;
+  resourceTooltip.className=`resource-tooltip ${tone}`;
+  resourceTooltip.setAttribute('aria-hidden','false');
+  const rect=target.getBoundingClientRect();
+  const width=181;
+  const gap=8;
+  const left=Math.max(8,Math.min(rect.left + rect.width/2 - width/2,window.innerWidth-width-8));
+  resourceTooltip.style.left=`${left}px`;
+  resourceTooltip.style.top='0px';
+  const height=resourceTooltip.offsetHeight;
+  const top=rect.top-height-gap;
+  resourceTooltip.style.top=`${Math.max(8,top)}px`;
+  if(top<8) resourceTooltip.classList.add('is-below');
+}
+function hideResourceTooltip(){
+  resourceTooltip.classList.remove('is-below');
+  resourceTooltip.setAttribute('aria-hidden','true');
+}
+
+document.addEventListener('mouseover',event=>{
+  const target=event.target.closest('[data-resource-tooltip]');
+  if(!target || target.contains(event.relatedTarget)) return;
+  showResourceTooltip(target);
+});
+document.addEventListener('mouseout',event=>{
+  const target=event.target.closest('[data-resource-tooltip]');
+  if(target && !target.contains(event.relatedTarget)) hideResourceTooltip();
+});
+document.addEventListener('focusin',event=>{
+  const target=event.target.closest('[data-resource-tooltip]');
+  if(target) showResourceTooltip(target);
+});
+document.addEventListener('focusout',event=>{
+  if(event.target.closest('[data-resource-tooltip]')) hideResourceTooltip();
+});
+window.addEventListener('scroll',hideResourceTooltip,true);
+window.addEventListener('resize',hideResourceTooltip);
 
 function gpuCardMarkup(gpu){
   const asset=gpu.variant==='p800'?'image_37.png':'image_36.png';
-  return `<span class="gpu-card ${gpu.variant}" title="${gpu.model} ${gpu.memory} x${gpu.count}"><img src="./assets/figma-workload-page-59-19541/${asset}" alt=""><span class="gpu-details"><b>${gpu.model}</b><b>${gpu.memory}</b></span><strong>x${gpu.count}</strong></span>`;
+  return `<span class="gpu-card ${gpu.variant}" title="${gpu.model} ${gpu.memory} x${gpu.count}" data-resource-tooltip data-resource-type="gpu" data-resource-usage="${gpu.count} 卡" data-resource-capacity="${gpu.model} ${gpu.memory}" data-resource-request="-" data-resource-percent="100" tabindex="0" role="img" aria-label="GPU ${gpu.model} ${gpu.memory}，${gpu.count} 卡"><img src="./assets/figma-workload-page-59-19541/${asset}" alt=""><span class="gpu-details"><b>${gpu.model}</b><b>${gpu.memory}</b></span><strong>x${gpu.count}</strong></span>`;
 }
 
 const compactTableAssetPath = './assets/figma-compact-table-4-39671';
@@ -268,7 +314,9 @@ function compactExposureMarkup(id,exposure){
 function compactUsageMarkup(type,percent){
   const danger=percent>=80?' danger':'';
   const asset=type==='cpu'?'image_8.png':'image_9.png';
-  return `<span class="compact-usage${danger}"><img src="${compactTableAssetPath}/${asset}" alt=""><span>${percent}%</span></span>`;
+  const label=type==='cpu'?'CPU':'内存';
+  const capacity=type==='cpu'?'8c':'32Gi';
+  return `<span class="compact-usage${danger}" data-resource-tooltip data-resource-type="${type}" data-resource-usage="${percent}%" data-resource-capacity="${capacity}" data-resource-request="-" data-resource-percent="${percent}" tabindex="0" role="img" aria-label="${label}使用量 ${percent}%"><img src="${compactTableAssetPath}/${asset}" alt=""><span>${percent}%</span></span>`;
 }
 
 function rowActionsMarkup(id){
@@ -762,7 +810,7 @@ function instanceMarkup(pod,tab='detail'){
       <h3>基本信息</h3>
       <div class="drawer-status-grid"><span>状态 <b class="drawer-status-tag">${profile.status}</b></span><span>就绪 <b>${profile.ready}</b></span><span>重启次数 <b class="danger-text">${profile.restarts}</b></span><span>存活时间 <b>${profile.age}</b></span></div>
       <dl class="drawer-description-list"><div><dt>Pod IP</dt><dd>${profile.image}<em>${profile.pull}</em></dd></div><div><dt>启动命令</dt><dd>${profile.command}</dd></div></dl>
-      <div class="drawer-resource-row"><span class="drawer-field-label">资源用量</span><div class="drawer-resource-metric"><span class="cpu-mark">${icon('cpu')}</span><div><strong>${profile.cpu.slice(0,3).join('/')}</strong><span><i><b style="width:${profile.cpu[3]}%"></b></i><em>${profile.cpu[3]}%</em></span><small>CPU</small></div></div><div class="drawer-resource-divider"></div><div class="drawer-resource-metric"><span class="memory-mark">${icon('memory')}</span><div><strong>${profile.memory.slice(0,3).join('/')}</strong><span><i><b style="width:${profile.memory[3]}%"></b></i><em>${profile.memory[3]}%</em></span><small>内存</small></div></div><div class="drawer-resource-divider"></div><div class="drawer-gpu-summary">${gpuCardMarkup(gpu)}<small>GPU</small></div></div>
+      <div class="drawer-resource-row"><span class="drawer-field-label">资源用量</span><div class="drawer-resource-metric" data-resource-tooltip data-resource-type="cpu" data-resource-usage="${profile.cpu[0]}" data-resource-capacity="${profile.cpu[1]}" data-resource-request="${profile.cpu[2]}" data-resource-percent="${profile.cpu[3]}" tabindex="0" role="img" aria-label="CPU使用量 ${profile.cpu[0]}"><span class="cpu-mark">${icon('cpu')}</span><div><strong>${profile.cpu.slice(0,3).join('/')}</strong><span><i><b style="width:${profile.cpu[3]}%"></b></i><em>${profile.cpu[3]}%</em></span><small>CPU</small></div></div><div class="drawer-resource-divider"></div><div class="drawer-resource-metric" data-resource-tooltip data-resource-type="memory" data-resource-usage="${profile.memory[0]}" data-resource-capacity="${profile.memory[1]}" data-resource-request="${profile.memory[2]}" data-resource-percent="${profile.memory[3]}" tabindex="0" role="img" aria-label="内存使用量 ${profile.memory[0]}"><span class="memory-mark">${icon('memory')}</span><div><strong>${profile.memory.slice(0,3).join('/')}</strong><span><i><b style="width:${profile.memory[3]}%"></b></i><em>${profile.memory[3]}%</em></span><small>内存</small></div></div><div class="drawer-resource-divider"></div><div class="drawer-gpu-summary">${gpuCardMarkup(gpu)}<small>GPU</small></div></div>
     </section>
     <section class="drawer-detail-section"><div class="drawer-section-heading"><h3>端口 ${profile.ports.length}</h3><button type="button" data-copy-all-ports="${id}">${icon('clipboard')}<span>复制全部IP:PORT</span></button></div><div class="drawer-data-table port-detail-table"><div class="table-head"><span>端口类型</span><span>端口名称</span><span>端口号</span><span>操作</span></div>${profile.ports.length?profile.ports.map(item=>`<div><span>${item[0]}</span><span>${item[1]}</span><span>${item[2]}</span><button type="button" data-copy-port="${item[2]}" title="复制端口">${icon('clipboard')}</button></div>`).join(''):'<p class="drawer-empty-row">暂无端口</p>'}</div></section>
     <section class="drawer-detail-section"><h3>挂载 ${profile.mounts.length}</h3><div class="drawer-data-table mount-detail-table"><div class="table-head"><span>挂载类型</span><span>挂载路径</span><span>来源</span><span>操作</span></div>${profile.mounts.map(item=>`<div>${item.map(value=>`<span>${value}</span>`).join('')}</div>`).join('')}</div></section>
