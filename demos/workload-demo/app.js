@@ -245,7 +245,17 @@ function showResourceTooltip(target){
   const label=labels[type] || '资源';
   const percent=Math.max(0,Math.min(100,Number(target.dataset.resourcePercent)||0));
   const tone=percent>=80?'danger':percent>=60?'warning':'normal';
-  resourceTooltip.innerHTML=`<div class="resource-tooltip-title">${label}</div><div class="resource-tooltip-progress"><img src="${usageTooltipAssetPath}/image_1.png" alt=""><b>${percent}%</b></div><div class="resource-tooltip-details"><span class="limit"><i></i><em>Limit</em><strong>${target.dataset.resourceCapacity || '-'}</strong></span><span class="usage"><i></i><em>usage</em><strong>${target.dataset.resourceUsage || '-'}</strong></span><span class="request"><i></i><em>request</em><strong>${target.dataset.resourceRequest || '-'}</strong></span></div><img class="resource-tooltip-arrow" src="${usageTooltipAssetPath}/image_2.png" alt="">`;
+  const sourceTrack=target.querySelector('.resource-track, .drawer-resource-metric i, div > span > i');
+  const sourceFill=target.querySelector('.resource-track i, .drawer-resource-metric i b, div > span > i > b');
+  const sourceRect=sourceTrack?.getBoundingClientRect();
+  const fallbackColors={danger:'#e62c4b',warning:'#f58300',normal:'#306ddd',gpu:'#76b900'};
+  const progressColor=sourceFill?getComputedStyle(sourceFill).backgroundColor:(type==='gpu'?fallbackColors.gpu:fallbackColors[tone]);
+  const trackWidth=sourceRect?.width?Math.max(72,Math.min(120,Math.round(sourceRect.width))):120;
+  const trackHeight=sourceRect?.height?Math.max(3,Math.min(4,Math.round(sourceRect.height))):3;
+  resourceTooltip.style.setProperty('--resource-progress-color',progressColor);
+  resourceTooltip.style.setProperty('--resource-progress-width',`${trackWidth}px`);
+  resourceTooltip.style.setProperty('--resource-progress-height',`${trackHeight}px`);
+  resourceTooltip.innerHTML=`<div class="resource-tooltip-title">${label}</div><div class="resource-tooltip-progress"><span class="resource-tooltip-track"><i style="width:${percent}%"></i></span><b>${percent}%</b></div><div class="resource-tooltip-details"><span class="limit"><i></i><em>Limit</em><strong>${target.dataset.resourceCapacity || '-'}</strong></span><span class="usage"><i></i><em>usage</em><strong>${target.dataset.resourceUsage || '-'}</strong></span><span class="request"><i></i><em>request</em><strong>${target.dataset.resourceRequest || '-'}</strong></span></div><img class="resource-tooltip-arrow" src="${usageTooltipAssetPath}/image_2.png" alt="">`;
   resourceTooltip.className=`resource-tooltip ${tone}`;
   resourceTooltip.setAttribute('aria-hidden','false');
   const rect=target.getBoundingClientRect();
