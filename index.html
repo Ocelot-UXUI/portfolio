@@ -1061,6 +1061,174 @@
         color: #fff;
       }
 
+      .prototype-homepage .footer.footer-editorial {
+        min-height: 0;
+        grid-template-rows: auto auto auto auto;
+        gap: 72px;
+        padding-top: 58px;
+      }
+
+      .prototype-homepage .footer-meta {
+        align-items: flex-start;
+      }
+
+      .prototype-homepage .footer-identity {
+        display: grid;
+        gap: 12px;
+      }
+
+      .prototype-homepage .footer-identity strong {
+        color: var(--ink);
+        font-size: 58px;
+        font-weight: 600;
+        line-height: 1;
+      }
+
+      .prototype-homepage .footer-identity span {
+        color: var(--ink-muted);
+        font-size: 18px;
+      }
+
+      .prototype-homepage .footer-contact {
+        display: grid;
+        gap: 10px;
+        text-align: right;
+        text-transform: none;
+      }
+
+      .prototype-homepage .footer-contact a {
+        color: var(--ink-muted);
+        font-size: 16px;
+        text-decoration: none;
+      }
+
+      .prototype-homepage .footer-resume {
+        display: grid;
+        grid-template-columns: minmax(0, 1.15fr) minmax(360px, .85fr);
+        gap: 74px;
+      }
+
+      .prototype-homepage .resume-column {
+        min-width: 0;
+      }
+
+      .prototype-homepage .resume-overview {
+        display: grid;
+        grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+        gap: 38px;
+      }
+
+      .prototype-homepage .resume-block,
+      .prototype-homepage .resume-project {
+        padding-top: 18px;
+        border-top: 1px solid #3a3d43;
+      }
+
+      .prototype-homepage .resume-internship {
+        margin-top: 60px;
+      }
+
+      .prototype-homepage .resume-label {
+        margin: 0 0 20px;
+        color: var(--ink-tertiary);
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      .prototype-homepage .resume-block h3,
+      .prototype-homepage .resume-project h3 {
+        margin: 0;
+        color: var(--ink);
+        font-size: 21px;
+        font-weight: 600;
+        line-height: 1.4;
+      }
+
+      .prototype-homepage .resume-project h3 {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .prototype-homepage .resume-role {
+        flex: none;
+        color: var(--ink-muted);
+        font-size: 13px;
+        font-weight: 500;
+      }
+
+      .prototype-homepage .resume-meta,
+      .prototype-homepage .resume-block p,
+      .prototype-homepage .resume-project p {
+        margin: 9px 0 0;
+        color: var(--ink-subtle);
+        font-size: 14px;
+        line-height: 1.75;
+      }
+
+      .prototype-homepage .resume-highlight {
+        margin-top: 24px !important;
+        color: var(--ink-muted) !important;
+        font-size: 16px !important;
+        font-weight: 500;
+      }
+
+      .prototype-homepage .resume-awards {
+        display: grid;
+        gap: 8px;
+        margin: 0;
+        padding: 0;
+        color: var(--ink-subtle);
+        font-size: 14px;
+        line-height: 1.55;
+        list-style: none;
+      }
+
+      .prototype-homepage .resume-points {
+        display: grid;
+        gap: 9px;
+        margin: 22px 0 0;
+        padding: 0;
+        color: var(--ink-subtle);
+        font-size: 14px;
+        line-height: 1.65;
+        list-style: none;
+      }
+
+      .prototype-homepage .resume-points li {
+        position: relative;
+        padding-left: 16px;
+      }
+
+      .prototype-homepage .resume-points li::before {
+        position: absolute;
+        top: .75em;
+        left: 0;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: #a58fff;
+        content: "";
+      }
+
+      .prototype-homepage .resume-projects {
+        display: grid;
+        gap: 34px;
+      }
+
+      .prototype-homepage .resume-project p:last-child {
+        margin-top: 20px;
+        color: var(--ink-muted);
+      }
+
+      .prototype-homepage .footer-display {
+        padding-top: 58px;
+        border-top: 1px solid #3a3d43;
+        font-size: 66px;
+      }
+
       @media (max-width: 1100px) {
         .prototype-homepage .hero-display { font-size: 66px; }
         .prototype-homepage .footer-display { font-size: 62px; }
@@ -1091,9 +1259,9 @@
         .prototype-homepage .hero-project-artwork { height: 395px; }
 
         .prototype-homepage .footer.footer-editorial {
-          min-height: 540px;
+          min-height: 0;
           padding: 28px 22px 24px;
-          gap: 24px;
+          gap: 56px;
         }
 
         .prototype-homepage .footer-meta,
@@ -1101,6 +1269,34 @@
           align-items: flex-start;
           flex-direction: column;
           gap: 14px;
+        }
+
+        .prototype-homepage .footer-identity strong {
+          font-size: 44px;
+        }
+
+        .prototype-homepage .footer-contact {
+          text-align: left;
+        }
+
+        .prototype-homepage .footer-resume,
+        .prototype-homepage .resume-overview {
+          grid-template-columns: 1fr;
+          gap: 44px;
+        }
+
+        .prototype-homepage .resume-internship {
+          margin-top: 44px;
+        }
+
+        .prototype-homepage .resume-project h3 {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 6px;
+        }
+
+        .prototype-homepage .footer-display {
+          padding-top: 44px;
         }
 
         .prototype-homepage .footer-display {
@@ -1237,7 +1433,61 @@
       </main>
 
       <footer class="footer footer-editorial section-reveal">
-        <div class="footer-meta section-copy-step"><span>GUOYUCHENG · UX/UI DESIGNER</span><span>CHENGDU · 2026</span></div>
+        <div class="footer-meta section-copy-step">
+          <div class="footer-identity"><strong>郭昱成</strong><span>UX/UI DESIGNER</span></div>
+          <div class="footer-contact"><a href="mailto:1004080451@qq.com">邮箱：1004080451@qq.com</a><a href="tel:13343215048">手机：13343215048</a></div>
+        </div>
+        <div class="footer-resume section-copy-step">
+          <div class="resume-column">
+            <div class="resume-overview">
+              <article class="resume-block">
+                <p class="resume-label">Education · 教育背景</p>
+                <h3>西南交通大学</h3>
+                <p>产品设计 / 本科</p>
+                <p class="resume-meta">2023.09—2027.06</p>
+              </article>
+              <article class="resume-block">
+                <p class="resume-label">Awards · 获奖经历</p>
+                <ul class="resume-awards">
+                  <li>2025 第十届“两岸新锐设计竞赛·华灿奖”<br />总赛一等奖</li>
+                  <li>2025 米兰设计周全国赛区三等奖</li>
+                  <li>2025 NCDA 设计大赛四川赛区二等奖 × 2</li>
+                  <li>CET-4</li>
+                </ul>
+              </article>
+            </div>
+            <article class="resume-block resume-internship">
+              <p class="resume-label">Experience · 实习经历</p>
+              <h3>商汤科技 · 主动式 AI 记忆助手</h3>
+              <p class="resume-meta">UX 实习生 · 2026.01—03</p>
+              <p class="resume-highlight">推动 AI 产品从 0 到 1 的全流程设计，解决主动式 AI 交付物“理解门槛高、用不上”问题，降低用户认知负担。</p>
+              <ul class="resume-points">
+                <li>主动破局初期模糊需求，独立完成完整设计提案。</li>
+                <li>梳理项目逻辑，将三种拖拽模式合并为一套组件逻辑，降低开发成本。</li>
+                <li>与 PM 和研发多轮对齐，识别开发风险，借助 vibe coding 高保真交互原型，提高跨团队协作效率。</li>
+                <li>规划 MVP 落地与后续迭代路线，制定分阶段上线规划，方案获团队认可。</li>
+              </ul>
+            </article>
+          </div>
+          <div class="resume-column resume-projects">
+            <article class="resume-project">
+              <p class="resume-label">Selected Project · 个人项目</p>
+              <h3><span>针对职场人的阅读学习 APP</span><span class="resume-role">UX/UI 设计师</span></h3>
+              <p class="resume-meta">2025.11—12</p>
+              <p>引入 AI 能力至阅读场景，帮助用户将碎片化输入转化为可复用的个人知识体系，提升用户的平均阅读效率。</p>
+            </article>
+            <article class="resume-project">
+              <h3><span>小红书“本地生活”体验升级</span><span class="resume-role">UX/UI 设计师</span></h3>
+              <p class="resume-meta">2025.09—11</p>
+              <p>打造小红书“种草—决策—消费”的闭环体验，让用户在小红书内完成灵感发现到下单转化，提升转化和 GMV。</p>
+            </article>
+            <article class="resume-project">
+              <h3><span>美团众包“多单场景”体验升级</span><span class="resume-role">UX/UI 设计师</span></h3>
+              <p class="resume-meta">2025.07—09</p>
+              <p>优化多单场景下骑手体验，让骑手在户外骑行场景下高效完成取送流程，缩短平均配送时间。</p>
+            </article>
+          </div>
+        </div>
         <div class="footer-display section-copy-step" aria-label="Let's create meaningful experiences">
           <span class="footer-display-line"><span>Let's</span><em>create</em></span>
           <span class="footer-display-line"><span>Meaningful</span></span>
