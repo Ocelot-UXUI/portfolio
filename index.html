@@ -1258,97 +1258,54 @@
 
       .prototype-homepage .timeline-track {
         position: relative;
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        grid-template-rows: repeat(2, minmax(0, 1fr));
-        min-height: 660px;
-        margin-top: 42px;
-      }
-
-      .prototype-homepage .timeline-track::before {
-        position: absolute;
-        z-index: 0;
-        top: 50%;
-        right: 8px;
-        left: 0;
-        height: 1px;
-        background: #555961;
-        content: "";
-      }
-
-      .prototype-homepage .timeline-track::after {
-        position: absolute;
-        z-index: 0;
-        top: 8px;
-        bottom: 0;
-        left: 50%;
-        width: 1px;
-        background: #555961;
-        content: "";
-      }
-
-      .prototype-homepage .timeline-axis-label {
-        position: absolute;
-        z-index: 2;
-        color: var(--ink-tertiary);
-        font-size: 10px;
-        font-weight: 600;
-        text-transform: uppercase;
-      }
-
-      .prototype-homepage .timeline-axis-x {
-        right: 0;
-        top: calc(50% - 25px);
-      }
-
-      .prototype-homepage .timeline-axis-x::after {
-        margin-left: 7px;
-        color: #a58fff;
-        content: "\2192";
-      }
-
-      .prototype-homepage .timeline-axis-y {
-        top: 0;
-        left: calc(50% + 16px);
-      }
-
-      .prototype-homepage .timeline-axis-y::before {
-        margin-right: 7px;
-        color: #a58fff;
-        content: "\2191";
+        min-height: 520px;
+        margin-top: 38px;
       }
 
       .prototype-homepage .timeline-item {
-        position: relative;
+        position: absolute;
         z-index: 1;
-        display: grid;
-        width: clamp(178px, 18vw, 232px);
-        aspect-ratio: 1;
-        place-items: center;
-        align-self: center;
-        justify-self: center;
+        display: flex;
+        width: clamp(238px, 25vw, 310px);
+        min-height: 78px;
+        align-items: center;
+        justify-content: center;
         min-width: 0;
-        padding: 28px;
-        border: 1px solid #484b55;
-        border-radius: 50%;
-        background: #15161b;
-        box-shadow: inset 0 0 0 1px rgba(165, 143, 255, .04);
+        padding: 18px 34px;
+        border: 1px solid #5a526d;
+        border-radius: 999px;
+        background: #201c2b;
+        box-shadow: 0 12px 34px rgba(0, 0, 0, .18), inset 0 0 0 1px rgba(165, 143, 255, .05);
         color: var(--ink);
         text-decoration: none;
         transition: border-color .25s ease, background .25s ease, box-shadow .3s ease, transform .35s cubic-bezier(.22, 1, .36, 1);
       }
 
-      .prototype-homepage .timeline-item:nth-of-type(1),
+      .prototype-homepage .timeline-item:nth-of-type(1) {
+        top: 14px;
+        left: 0;
+      }
+
+      .prototype-homepage .timeline-item:nth-of-type(2) {
+        top: 126px;
+        left: 24%;
+      }
+
+      .prototype-homepage .timeline-item:nth-of-type(3) {
+        top: 238px;
+        left: 48%;
+      }
+
       .prototype-homepage .timeline-item:nth-of-type(4) {
-        background: #1b1923;
-        border-color: #5c556f;
+        top: 350px;
+        right: 0;
       }
 
       .prototype-homepage .timeline-name {
         display: block;
-        max-width: 160px;
+        max-width: 240px;
         color: inherit;
-        font-size: 20px;
+        font-size: 17px;
         font-weight: 600;
         line-height: 1.35;
         text-align: center;
@@ -1358,8 +1315,8 @@
       .prototype-homepage .timeline-popover {
         position: absolute;
         z-index: 5;
-        top: 50%;
-        left: calc(100% + 18px);
+        bottom: calc(100% + 14px);
+        left: 50%;
         width: min(290px, calc(100vw - 48px));
         padding: 18px;
         border: 1px solid #343740;
@@ -1368,36 +1325,36 @@
         box-shadow: 0 18px 44px rgba(0, 0, 0, .42);
         opacity: 0;
         pointer-events: none;
-        transform: translate(-10px, -50%);
+        transform: translate(-50%, 8px);
         transition: opacity .18s ease, transform .24s cubic-bezier(.22, 1, .36, 1), visibility .18s;
         visibility: hidden;
       }
 
-      .prototype-homepage .timeline-item:nth-of-type(even) .timeline-popover {
-        right: calc(100% + 18px);
-        left: auto;
-        transform: translate(10px, -50%);
+      .prototype-homepage .timeline-item:nth-of-type(1) .timeline-popover {
+        top: calc(100% + 14px);
+        bottom: auto;
+        transform: translate(-50%, -8px);
       }
 
       .prototype-homepage .timeline-popover::after {
         position: absolute;
-        top: calc(50% - 5px);
-        left: -6px;
+        bottom: -6px;
+        left: calc(50% - 5px);
         width: 10px;
         height: 10px;
-        border-left: 1px solid #343740;
+        border-right: 1px solid #343740;
         border-bottom: 1px solid #343740;
         background: #15161a;
         content: "";
         transform: rotate(45deg);
       }
 
-      .prototype-homepage .timeline-item:nth-of-type(even) .timeline-popover::after {
-        right: -6px;
-        left: auto;
+      .prototype-homepage .timeline-item:nth-of-type(1) .timeline-popover::after {
+        top: -6px;
+        bottom: auto;
         border: 0;
         border-top: 1px solid #343740;
-        border-right: 1px solid #343740;
+        border-left: 1px solid #343740;
       }
 
       .prototype-homepage .timeline-popover strong,
@@ -1437,10 +1394,10 @@
       .prototype-homepage .timeline-item:focus-visible {
         z-index: 4;
         border-color: #a58fff;
-        background: #211d2c;
+        background: #2b2440;
         box-shadow: 0 24px 64px rgba(0, 0, 0, .4), 0 0 0 1px rgba(165, 143, 255, .2);
         outline: none;
-        transform: scale(1.045);
+        transform: translateY(-4px) scale(1.025);
       }
 
       .prototype-homepage .timeline-item:hover .timeline-name,
@@ -1452,7 +1409,7 @@
       .prototype-homepage .timeline-item:hover .timeline-popover,
       .prototype-homepage .timeline-item:focus-visible .timeline-popover {
         opacity: 1;
-        transform: translate(0, -50%);
+        transform: translate(-50%, 0);
         visibility: visible;
       }
 
@@ -1533,23 +1490,33 @@
         }
 
         .prototype-homepage .timeline-track {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          grid-template-rows: repeat(2, minmax(0, 1fr));
-          min-height: 410px;
+          display: flex;
+          min-height: 0;
+          flex-direction: column;
+          gap: 18px;
           margin-top: 24px;
         }
 
-        .prototype-homepage .timeline-track::before {
-          top: 50%;
-          right: 4px;
-          left: 0;
-          width: auto;
-          height: 1px;
+        .prototype-homepage .timeline-item {
+          position: relative;
+          top: auto !important;
+          right: auto !important;
+          left: auto !important;
+          width: 78%;
+          min-height: 66px;
+          padding: 14px 22px;
         }
 
-        .prototype-homepage .timeline-item {
-          width: min(34vw, 138px);
-          padding: 14px;
+        .prototype-homepage .timeline-item:nth-of-type(2) {
+          margin-left: 7%;
+        }
+
+        .prototype-homepage .timeline-item:nth-of-type(3) {
+          margin-left: 14%;
+        }
+
+        .prototype-homepage .timeline-item:nth-of-type(4) {
+          margin-left: 21%;
         }
 
         .prototype-homepage .timeline-popover {
@@ -1557,12 +1524,8 @@
         }
 
         .prototype-homepage .timeline-name {
-          max-width: 104px;
+          max-width: 230px;
           font-size: 14px;
-        }
-
-        .prototype-homepage .timeline-axis-label {
-          font-size: 9px;
         }
 
         .prototype-homepage .footer-display {
@@ -1757,8 +1720,6 @@
         <section class="resume-timeline section-copy-step" aria-labelledby="resume-timeline-title">
           <div class="resume-timeline-head"><h2 id="resume-timeline-title">项目时间轴</h2><span>Hover to preview · Click to open</span></div>
           <div class="timeline-track">
-            <span class="timeline-axis-label timeline-axis-x" aria-hidden="true">Timeline</span>
-            <span class="timeline-axis-label timeline-axis-y" aria-hidden="true">Journey</span>
             <a class="timeline-item" href="#resume-meituan" aria-label="美团众包，2025年7月至9月，查看项目">
               <span class="timeline-name">美团众包</span>
               <span class="timeline-popover"><strong>2025.07—09</strong><span>UX/UI 设计师</span><p>优化多单场景下的骑手取送流程，缩短平均配送时间。</p><em>定位到简历项目 ↑</em></span>
