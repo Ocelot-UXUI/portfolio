@@ -924,6 +924,204 @@
         flex-basis: 29px;
       }
 
+      .prototype-homepage .hero.hero-gallery {
+        position: relative;
+        min-height: 860px;
+        padding-top: 66px;
+        gap: 22px;
+      }
+
+      .prototype-homepage .hero-gallery-copy {
+        width: min(100%, 1180px);
+        max-width: none;
+      }
+
+      .prototype-homepage .hero-eyebrow {
+        margin-bottom: 22px;
+      }
+
+      .prototype-homepage .hero-display {
+        display: grid;
+        justify-items: center;
+        color: var(--ink);
+        font-size: 82px;
+        font-weight: 400;
+        line-height: .88;
+        text-transform: uppercase;
+      }
+
+      .prototype-homepage .hero-display-line {
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+        gap: 18px;
+        white-space: nowrap;
+      }
+
+      .prototype-homepage .hero-display em,
+      .prototype-homepage .footer-display em {
+        color: #d9d5e8;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 1.12em;
+        font-weight: 400;
+        line-height: .72;
+        text-transform: none;
+      }
+
+      .prototype-homepage .hero-gallery h1 {
+        margin-top: 26px;
+        color: var(--ink-muted);
+        font-size: 25px;
+        font-weight: 500;
+        line-height: 1.35;
+      }
+
+      .prototype-homepage .hero-note {
+        position: absolute;
+        z-index: 1;
+        top: 47%;
+        color: var(--ink-tertiary);
+        font-size: 10px;
+        font-weight: 600;
+        line-height: 1.35;
+        text-transform: uppercase;
+        writing-mode: vertical-rl;
+      }
+
+      .prototype-homepage .hero-note-left { left: 22px; }
+      .prototype-homepage .hero-note-right { right: 22px; transform: rotate(180deg); }
+
+      .prototype-homepage .hero-project-artwork {
+        height: 385px;
+      }
+
+      .prototype-homepage .hero-gallery-copy .hero-display { --copy-delay: var(--copy-step); }
+      .prototype-homepage .hero-gallery-copy h1 { --copy-delay: calc(var(--copy-step) * 2); }
+
+      .prototype-homepage .footer.footer-editorial {
+        min-height: 640px;
+        padding: 40px clamp(24px, 4.4vw, 64px) 28px;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        align-items: stretch;
+        justify-content: stretch;
+        gap: 30px;
+        background: #08090b;
+        border-top-color: #26282d;
+      }
+
+      .prototype-homepage .footer-meta,
+      .prototype-homepage .footer-bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        color: var(--ink-subtle);
+        font-size: 12px;
+        font-weight: 500;
+        text-transform: uppercase;
+      }
+
+      .prototype-homepage .footer-display {
+        align-self: center;
+        display: grid;
+        justify-items: center;
+        color: var(--ink);
+        font-size: 78px;
+        font-weight: 400;
+        line-height: .9;
+        text-align: center;
+        text-transform: uppercase;
+      }
+
+      .prototype-homepage .footer-display-line {
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+        gap: 18px;
+        white-space: nowrap;
+      }
+
+      .prototype-homepage .footer-links {
+        display: flex;
+        gap: 26px;
+      }
+
+      .prototype-homepage .footer-links a,
+      .prototype-homepage .footer-email {
+        color: var(--ink-muted);
+        font-size: 12px;
+        font-weight: 500;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+
+      .prototype-homepage .footer-links a:hover,
+      .prototype-homepage .footer-email:hover {
+        color: #fff;
+      }
+
+      @media (max-width: 1100px) {
+        .prototype-homepage .hero-display { font-size: 66px; }
+        .prototype-homepage .footer-display { font-size: 62px; }
+      }
+
+      @media (max-width: 700px) {
+        .prototype-homepage .hero.hero-gallery {
+          min-height: 760px;
+          padding-top: 48px;
+          gap: 14px;
+        }
+
+        .prototype-homepage .hero-display {
+          font-size: 38px;
+          line-height: .94;
+        }
+
+        .prototype-homepage .hero-display-line {
+          gap: 8px;
+        }
+
+        .prototype-homepage .hero-gallery h1 {
+          margin-top: 22px;
+          font-size: 23px;
+        }
+
+        .prototype-homepage .hero-note { display: none; }
+        .prototype-homepage .hero-project-artwork { height: 395px; }
+
+        .prototype-homepage .footer.footer-editorial {
+          min-height: 540px;
+          padding: 28px 22px 24px;
+          gap: 24px;
+        }
+
+        .prototype-homepage .footer-meta,
+        .prototype-homepage .footer-bottom {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 14px;
+        }
+
+        .prototype-homepage .footer-display {
+          justify-items: start;
+          font-size: 42px;
+          line-height: .94;
+          text-align: left;
+        }
+
+        .prototype-homepage .footer-display-line {
+          justify-content: flex-start;
+          gap: 9px;
+          white-space: normal;
+        }
+
+        .prototype-homepage .footer-links {
+          gap: 18px;
+          flex-wrap: wrap;
+        }
+      }
+
     </style>
   </head>
   <body class="prototype-homepage">
@@ -945,8 +1143,15 @@
         <section class="hero hero-gallery" id="home">
           <div class="hero-gallery-copy">
             <p class="hero-eyebrow hero-copy-step fade-up">UX/UI PORTFOLIO</p>
-            <h1 class="hero-copy-step fade-up fade-up-delay-1">有Ai工作流，懂用户，<br />能推动事情发生</h1>
+            <div class="hero-display hero-copy-step" aria-hidden="true">
+              <span class="hero-display-line"><span>AI</span><em>with</em><span>Workflow</span></span>
+              <span class="hero-display-line"><span>User</span><em>&amp;</em><span>Insight</span></span>
+              <span class="hero-display-line"><span>Design</span><em>to</em><span>Move</span></span>
+            </div>
+            <h1 class="hero-copy-step fade-up fade-up-delay-1">有 AI 工作流，懂用户，<br />能推动事情发生</h1>
           </div>
+          <span class="hero-note hero-note-left" aria-hidden="true">Based in Chengdu · China</span>
+          <span class="hero-note hero-note-right" aria-hidden="true">Selected work · 2024—2026</span>
           <div class="hero-artwork hero-project-artwork fade-up fade-up-delay-2" aria-label="项目作品预览图组">
             <a class="hero-project-card hero-project-cnap" href="#project-cnap" aria-label="跳转到 CNAP 云原生工作负载管理项目"><img src="assets/hero-projects/cnap-workload-quick-pin.jpg" alt="CNAP 云原生工作负载管理界面" /></a>
             <a class="hero-project-card hero-project-remi" href="#project-remi" aria-label="跳转到 Remi 主动 AI 记忆助手项目"><img src="assets/hero-projects/image_2.jpg" alt="Remi 主动 AI 记忆助手界面" /></a>
@@ -1031,7 +1236,19 @@
 
       </main>
 
-      <footer class="footer section-reveal"><div class="footer-left section-copy-step">© 2026 Portfolio. All rights reserved.</div><div class="footer-links section-copy-step"><a href="pages/case.html">Case Study</a><a href="pages/remi.html">Demo</a><a href="https://github.com/Ocelot-UXUI" target="_blank" rel="noreferrer">GitHub</a><a href="mailto:1004080451@qq.com">Email</a></div></footer>
+      <footer class="footer footer-editorial section-reveal">
+        <div class="footer-meta section-copy-step"><span>GUOYUCHENG · UX/UI DESIGNER</span><span>CHENGDU · 2026</span></div>
+        <div class="footer-display section-copy-step" aria-label="Let's create meaningful experiences">
+          <span class="footer-display-line"><span>Let's</span><em>create</em></span>
+          <span class="footer-display-line"><span>Meaningful</span></span>
+          <span class="footer-display-line"><span>Experiences</span></span>
+        </div>
+        <div class="footer-bottom section-copy-step">
+          <a class="footer-email" href="mailto:1004080451@qq.com">1004080451@qq.com</a>
+          <div class="footer-links"><a href="pages/case.html">Case Study</a><a href="pages/remi.html">Demo</a><a href="https://github.com/Ocelot-UXUI" target="_blank" rel="noreferrer">GitHub</a></div>
+          <span>© 2026 Portfolio</span>
+        </div>
+      </footer>
     </div>
     <script>
       const stickyNav = document.querySelector(".nav");
