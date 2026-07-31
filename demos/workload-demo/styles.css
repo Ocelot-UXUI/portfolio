@@ -1014,6 +1014,8 @@
 .portfolio-project-nav.project-nav .project-view-tab:hover,
 .portfolio-project-nav.project-nav .project-view-tab:focus-visible,
 .portfolio-project-nav.project-nav .project-view-tab.is-active{color:#fff}
+.portfolio-project-nav.project-nav .project-view-tab.is-active{font-weight:600}
+.portfolio-project-nav.project-nav .project-view-tab-indicator{height:2px;box-shadow:0 0 8px rgba(165,143,255,.5)}
 .portfolio-demo-app{height:calc(100vh - 56px)}
 
 /* Product drawers and dialogs must sit above the portfolio shell. */
