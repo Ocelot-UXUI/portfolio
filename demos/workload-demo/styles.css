@@ -997,8 +997,8 @@
 .portfolio-project-nav.project-nav{
   height:44px;
   padding:0 24px;
-  background:#0f1011;
-  border-bottom:1px solid #292b30;
+  background:#090a0e!important;
+  border-bottom:1px solid #202229;
   box-shadow:none;
   backdrop-filter:none;
   -webkit-backdrop-filter:none;
@@ -1006,18 +1006,18 @@
 }
 .portfolio-project-nav.project-nav::before,
 .portfolio-project-nav.project-nav::after{display:none}
-.portfolio-project-nav.project-nav .project-back{color:#aeb3bc;font-size:12px}
+.portfolio-project-nav.project-nav .project-back{color:#c8cbd2;font-size:12px}
 .portfolio-project-nav.project-nav .project-back:hover{color:#fff}
 .portfolio-project-nav.project-nav .project-back span{color:#d1d5db;font-size:16px}
-.portfolio-project-nav.project-nav .project-nav-title{color:#e7e9ed;font-size:12px;font-weight:600;letter-spacing:.15px}
+.portfolio-project-nav.project-nav .project-nav-title{color:#f0f1f3;font-size:12px;font-weight:600;letter-spacing:.15px}
 .portfolio-project-nav .portfolio-view-switch{
   height:28px;
-  border-color:#34373e;
+  border-color:#2b2e35;
   border-radius:4px;
-  background:#181a1e;
+  background:#121318;
   box-shadow:none;
 }
-.portfolio-project-nav .portfolio-view-switch:hover{border-color:#555a64;background:#202329}
+.portfolio-project-nav .portfolio-view-switch:hover{border-color:#555a64;background:#191b21}
 .portfolio-demo-app{height:calc(100vh - 44px)}
 
 /* Product drawers and dialogs must sit above the portfolio shell. */
