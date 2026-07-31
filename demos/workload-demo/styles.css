@@ -995,8 +995,10 @@
 
 /* Keep the portfolio shell quiet so the CNAP product surface stays primary. */
 .portfolio-project-nav.project-nav{
-  height:44px;
-  padding:0 24px;
+  --project-nav-edge:clamp(190px,16vw,320px);
+  height:56px;
+  padding:0;
+  grid-template-columns:var(--project-nav-edge) minmax(0,1fr) var(--project-nav-edge);
   background:#090a0e!important;
   border-bottom:1px solid #202229;
   box-shadow:none;
@@ -1006,19 +1008,13 @@
 }
 .portfolio-project-nav.project-nav::before,
 .portfolio-project-nav.project-nav::after{display:none}
-.portfolio-project-nav.project-nav .project-back{color:#c8cbd2;font-size:12px}
-.portfolio-project-nav.project-nav .project-back:hover{color:#fff}
-.portfolio-project-nav.project-nav .project-back span{color:#d1d5db;font-size:16px}
-.portfolio-project-nav.project-nav .project-nav-title{color:#f0f1f3;font-size:12px;font-weight:600;letter-spacing:.15px}
-.portfolio-project-nav .portfolio-view-switch{
-  height:28px;
-  border-color:#2b2e35;
-  border-radius:4px;
-  background:#121318;
-  box-shadow:none;
-}
-.portfolio-project-nav .portfolio-view-switch:hover{border-color:#555a64;background:#191b21}
-.portfolio-demo-app{height:calc(100vh - 44px)}
+.portfolio-project-nav.project-nav .project-back,
+.portfolio-project-nav.project-nav .project-nav-title{color:#c8cbd2!important}
+.portfolio-project-nav.project-nav .project-view-tab{color:#9da1ab}
+.portfolio-project-nav.project-nav .project-view-tab:hover,
+.portfolio-project-nav.project-nav .project-view-tab:focus-visible,
+.portfolio-project-nav.project-nav .project-view-tab.is-active{color:#fff}
+.portfolio-demo-app{height:calc(100vh - 56px)}
 
 /* Product drawers and dialogs must sit above the portfolio shell. */
 .portfolio-demo-app .modal-backdrop,
