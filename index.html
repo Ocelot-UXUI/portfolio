@@ -1258,15 +1258,56 @@
 
       .prototype-homepage .timeline-track {
         position: relative;
-        min-height: 520px;
+        min-height: 590px;
         margin-top: 38px;
+      }
+
+      .prototype-homepage .timeline-time-axis {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        color: var(--ink-tertiary);
+        font-size: 10px;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      .prototype-homepage .timeline-time-axis i {
+        position: relative;
+        flex: 1;
+        height: 1px;
+        background: #484b53;
+      }
+
+      .prototype-homepage .timeline-time-axis i::before {
+        position: absolute;
+        top: -3px;
+        left: 0;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #a58fff;
+        box-shadow: 0 0 12px rgba(165, 143, 255, .48);
+        content: "";
+      }
+
+      .prototype-homepage .timeline-time-axis i::after {
+        position: absolute;
+        top: -8px;
+        right: 0;
+        color: #a58fff;
+        content: "\2192";
       }
 
       .prototype-homepage .timeline-item {
         position: absolute;
         z-index: 1;
         display: flex;
-        width: clamp(238px, 25vw, 310px);
+        width: var(--timeline-item-width, 290px);
         min-height: 78px;
         align-items: center;
         justify-content: center;
@@ -1282,22 +1323,26 @@
       }
 
       .prototype-homepage .timeline-item:nth-of-type(1) {
-        top: 14px;
+        --timeline-item-width: clamp(270px, 27vw, 320px);
+        top: 82px;
         left: 0;
       }
 
       .prototype-homepage .timeline-item:nth-of-type(2) {
-        top: 126px;
-        left: 24%;
+        --timeline-item-width: clamp(210px, 21vw, 244px);
+        top: 194px;
+        left: 28%;
       }
 
       .prototype-homepage .timeline-item:nth-of-type(3) {
-        top: 238px;
-        left: 48%;
+        --timeline-item-width: clamp(252px, 25vw, 296px);
+        top: 306px;
+        left: 52%;
       }
 
       .prototype-homepage .timeline-item:nth-of-type(4) {
-        top: 350px;
+        --timeline-item-width: clamp(238px, 23vw, 276px);
+        top: 418px;
         right: 0;
       }
 
@@ -1495,6 +1540,12 @@
           flex-direction: column;
           gap: 18px;
           margin-top: 24px;
+          padding-top: 52px;
+        }
+
+        .prototype-homepage .timeline-time-axis {
+          gap: 10px;
+          font-size: 9px;
         }
 
         .prototype-homepage .timeline-item {
@@ -1720,21 +1771,22 @@
         <section class="resume-timeline section-copy-step" aria-labelledby="resume-timeline-title">
           <div class="resume-timeline-head"><h2 id="resume-timeline-title">项目时间轴</h2><span>Hover to preview · Click to open</span></div>
           <div class="timeline-track">
-            <a class="timeline-item" href="#resume-meituan" aria-label="美团众包，2025年7月至9月，查看项目">
-              <span class="timeline-name">美团众包</span>
-              <span class="timeline-popover"><strong>2025.07—09</strong><span>UX/UI 设计师</span><p>优化多单场景下的骑手取送流程，缩短平均配送时间。</p><em>定位到简历项目 ↑</em></span>
-            </a>
-            <a class="timeline-item" href="pages/xiaohongshu.html" aria-label="小红书本地生活，2025年9月至11月，打开项目">
-              <span class="timeline-name">小红书本地生活</span>
-              <span class="timeline-popover"><strong>2025.09—11</strong><span>UX/UI 设计师</span><p>打通种草、决策与消费链路，提升下单转化和 GMV。</p><em>打开项目 ↗</em></span>
+            <div class="timeline-time-axis" aria-hidden="true"><span>现在 · Now</span><i></i><span>过往 · Past</span></div>
+            <a class="timeline-item" href="pages/case.html" aria-label="主动式AI记忆助手，2026年1月至3月，打开项目">
+              <span class="timeline-name">主动式 AI 记忆助手</span>
+              <span class="timeline-popover"><strong>2026.01—03</strong><span>UX 实习生</span><p>推动主动式 AI 产品从 0 到 1，降低交付物理解与使用门槛。</p><em>打开项目 ↗</em></span>
             </a>
             <a class="timeline-item" href="pages/skip-read.html" aria-label="阅读学习APP，2025年11月至12月，打开项目">
               <span class="timeline-name">阅读学习 APP</span>
               <span class="timeline-popover"><strong>2025.11—12</strong><span>UX/UI 设计师</span><p>将碎片化输入转化为可复用知识体系，提升阅读效率。</p><em>打开项目 ↗</em></span>
             </a>
-            <a class="timeline-item" href="pages/case.html" aria-label="主动式AI记忆助手，2026年1月至3月，打开项目">
-              <span class="timeline-name">主动式 AI 记忆助手</span>
-              <span class="timeline-popover"><strong>2026.01—03</strong><span>UX 实习生</span><p>推动主动式 AI 产品从 0 到 1，降低交付物理解与使用门槛。</p><em>打开项目 ↗</em></span>
+            <a class="timeline-item" href="pages/xiaohongshu.html" aria-label="小红书本地生活，2025年9月至11月，打开项目">
+              <span class="timeline-name">小红书本地生活</span>
+              <span class="timeline-popover"><strong>2025.09—11</strong><span>UX/UI 设计师</span><p>打通种草、决策与消费链路，提升下单转化和 GMV。</p><em>打开项目 ↗</em></span>
+            </a>
+            <a class="timeline-item" href="#resume-meituan" aria-label="美团众包，2025年7月至9月，查看项目">
+              <span class="timeline-name">美团众包</span>
+              <span class="timeline-popover"><strong>2025.07—09</strong><span>UX/UI 设计师</span><p>优化多单场景下的骑手取送流程，缩短平均配送时间。</p><em>定位到简历项目 ↑</em></span>
             </a>
           </div>
         </section>
