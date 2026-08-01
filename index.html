@@ -1609,6 +1609,46 @@
         }
       }
 
+      /* Text, outlines and active states invert against the live hero artwork. */
+      .prototype-homepage .nav,
+      .prototype-homepage .nav.is-scrolled {
+        isolation: auto;
+        border-bottom-color: transparent;
+        background: transparent;
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+        box-shadow: none;
+      }
+
+      .prototype-homepage .nav::before,
+      .prototype-homepage .nav::after {
+        display: none;
+      }
+
+      .prototype-homepage .nav-logo,
+      .prototype-homepage .nav-links a,
+      .prototype-homepage .nav-links a:hover,
+      .prototype-homepage .nav-links a:focus-visible,
+      .prototype-homepage .nav-links a.is-active,
+      .prototype-homepage .nav-cta,
+      .prototype-homepage .nav-cta:hover,
+      .prototype-homepage .nav-cta:focus-visible,
+      .prototype-homepage .nav-active-indicator {
+        border-color: #fff;
+        background-color: transparent;
+        color: #fff;
+        mix-blend-mode: difference;
+      }
+
+      .prototype-homepage .nav-cta {
+        background: transparent;
+      }
+
+      .prototype-homepage .nav-active-indicator {
+        background: #fff;
+        box-shadow: none;
+      }
+
     </style>
   </head>
   <body class="prototype-homepage">
