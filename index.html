@@ -932,6 +932,8 @@
       }
 
       .prototype-homepage .hero-gallery-copy {
+        position: relative;
+        z-index: 8;
         width: min(100%, 1180px);
         max-width: none;
       }
@@ -974,6 +976,7 @@
         font-size: 42px;
         font-weight: 500;
         line-height: 1.2;
+        text-shadow: 0 4px 18px rgba(0, 0, 0, .72);
       }
 
       .prototype-homepage .hero-note {
@@ -992,7 +995,9 @@
       .prototype-homepage .hero-note-right { right: 22px; transform: rotate(180deg); }
 
       .prototype-homepage .hero-project-artwork {
+        z-index: 1;
         height: 385px;
+        margin-top: 44px;
       }
 
       .prototype-homepage .hero-gallery-copy .hero-display { --copy-delay: var(--copy-step); }
