@@ -65,6 +65,9 @@
     tabs.addEventListener("pointerleave", () => positionIndicator(activeTab()));
     tabs.addEventListener("mouseleave", () => positionIndicator(activeTab()));
     window.addEventListener("resize", () => positionIndicator(activeTab(), true));
-    requestAnimationFrame(() => positionIndicator(activeTab(), true));
+    requestAnimationFrame(() => {
+      positionIndicator(activeTab(), true);
+      tabs.classList.add("is-ready");
+    });
   });
 })();
