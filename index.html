@@ -706,6 +706,12 @@
         animation-delay: var(--copy-delay, 0ms);
       }
 
+      html.motion-ready .prototype-homepage .project-showcase.copy-static .showcase-copy > * {
+        --project-line-reveal: 100%;
+        animation: none;
+        transform: none;
+      }
+
       html.motion-ready .prototype-homepage .about .about-heading h2 {
         --project-line-reveal: 0%;
         --project-mask-line-height: 1.18em;
@@ -1940,12 +1946,27 @@
       }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
       document.querySelectorAll(".reveal, .section-reveal").forEach((element) => observer.observe(element));
 
+      let lastProjectScrollY = window.scrollY;
+      let projectScrollDirection = "down";
+      window.addEventListener("scroll", () => {
+        const currentScrollY = window.scrollY;
+        if (Math.abs(currentScrollY - lastProjectScrollY) < 2) return;
+        projectScrollDirection = currentScrollY > lastProjectScrollY ? "down" : "up";
+        lastProjectScrollY = currentScrollY;
+      }, { passive: true });
+
       const projectCopyObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           const project = entry.target.closest(".project-showcase");
           if (!project) return;
           if (entry.intersectionRatio >= 0.25) {
-            project.classList.add("copy-visible");
+            if (projectScrollDirection === "down") {
+              project.classList.remove("copy-static");
+              project.classList.add("copy-visible");
+            } else {
+              project.classList.remove("copy-visible");
+              project.classList.add("copy-static");
+            }
           } else if (!entry.isIntersecting) {
             project.classList.remove("copy-visible");
           }
