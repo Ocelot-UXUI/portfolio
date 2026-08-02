@@ -914,42 +914,6 @@
         box-shadow: 0 30px 52px rgba(0, 0, 0, .42);
       }
 
-      .prototype-homepage .hero-project-artwork.hero-coverflow {
-        perspective: 1600px;
-        transform-style: preserve-3d;
-      }
-
-      .prototype-homepage .hero-project-artwork.hero-coverflow .hero-project-card,
-      .prototype-homepage .hero-project-artwork.hero-coverflow .hero-project-card:hover,
-      .prototype-homepage .hero-project-artwork.hero-coverflow .hero-project-card:focus-visible {
-        right: auto;
-        bottom: 0;
-        left: 50%;
-        z-index: var(--hero-flow-z-index, 1);
-        opacity: var(--hero-flow-opacity, 1);
-        transform: translate3d(calc(-50% + var(--hero-flow-x, 0px)), var(--hero-flow-y, 0px), var(--hero-flow-depth, 0px)) rotateY(var(--hero-flow-rotate-y, 0deg)) rotateZ(var(--hero-flow-rotate-z, 0deg)) scale(var(--hero-flow-scale, 1));
-        transform-origin: center center;
-        transition: left 620ms cubic-bezier(.22, 1, .36, 1), transform 620ms cubic-bezier(.22, 1, .36, 1), opacity 620ms cubic-bezier(.22, 1, .36, 1), box-shadow 320ms ease;
-      }
-
-      .prototype-homepage .hero-project-artwork.hero-coverflow .hero-project-card[data-hero-flow-active="true"] {
-        box-shadow: 0 34px 58px rgba(0, 0, 0, .48);
-      }
-
-      .prototype-homepage .hero-project-artwork.hero-coverflow .hero-project-xhs[data-hero-flow-active="true"],
-      .prototype-homepage .hero-project-artwork.hero-coverflow .hero-project-reading[data-hero-flow-active="true"] {
-        box-shadow: none;
-        filter: drop-shadow(0 24px 30px rgba(0, 0, 0, .38));
-      }
-
-      @media (max-width: 700px) {
-        .prototype-homepage .hero-project-artwork.hero-coverflow .hero-project-card,
-        .prototype-homepage .hero-project-artwork.hero-coverflow .hero-project-card:hover,
-        .prototype-homepage .hero-project-artwork.hero-coverflow .hero-project-card:focus-visible {
-          transition-duration: 520ms;
-        }
-      }
-
       .project-hover-cursor {
         position: fixed;
         inset: 0;
@@ -2038,70 +2002,6 @@
         }));
       } else if (heroArtwork) {
         heroArtwork.classList.add("hero-interaction-ready");
-      }
-
-      if (heroArtwork && !reducedMotion.matches) {
-        const heroFlowCards = [
-          heroArtwork.querySelector(".hero-project-remi"),
-          heroArtwork.querySelector(".hero-project-cnap"),
-          heroArtwork.querySelector(".hero-project-xhs"),
-          heroArtwork.querySelector(".hero-project-reading"),
-        ].filter(Boolean);
-        let heroFlowActiveIndex = 1;
-
-        const updateHeroCoverflow = (nextIndex) => {
-          heroFlowActiveIndex = Math.max(0, Math.min(heroFlowCards.length - 1, nextIndex));
-          const compact = window.matchMedia("(max-width: 700px)").matches;
-          const neighbourSpacing = compact ? 96 : 270;
-          const extraSpacing = compact ? 72 : 160;
-          const depthStep = compact ? 110 : 190;
-
-          heroFlowCards.forEach((card, index) => {
-            const relative = index - heroFlowActiveIndex;
-            const distance = Math.abs(relative);
-            const direction = Math.sign(relative);
-            const isPortrait = card.classList.contains("hero-project-xhs") || card.classList.contains("hero-project-reading");
-            const x = direction * (distance ? neighbourSpacing + (distance - 1) * extraSpacing : 0);
-            const activeScale = isPortrait ? (compact ? 1.03 : 1.1) : (compact ? 1.12 : 1);
-            const inactiveScale = Math.max(.58, 1 - distance * .16) * (isPortrait ? .96 : 1);
-            const scale = distance === 0 ? activeScale : inactiveScale;
-            const opacity = distance === 0 ? 1 : distance === 1 ? .78 : distance === 2 ? .4 : .18;
-
-            card.style.setProperty("--hero-flow-x", `${x}px`);
-            card.style.setProperty("--hero-flow-y", `${distance === 0 ? -10 : distance * 10}px`);
-            card.style.setProperty("--hero-flow-depth", `${distance === 0 ? 110 : -distance * depthStep}px`);
-            card.style.setProperty("--hero-flow-rotate-y", `${relative * -9}deg`);
-            card.style.setProperty("--hero-flow-rotate-z", `${relative * 3.5}deg`);
-            card.style.setProperty("--hero-flow-scale", String(scale));
-            card.style.setProperty("--hero-flow-opacity", String(opacity));
-            card.style.setProperty("--hero-flow-z-index", String(10 - distance));
-            card.dataset.heroFlowActive = String(distance === 0);
-          });
-
-          heroArtwork.classList.add("hero-coverflow");
-        };
-
-        heroFlowCards.forEach((card, index) => {
-          card.addEventListener("pointerenter", () => updateHeroCoverflow(index));
-          card.addEventListener("focus", () => updateHeroCoverflow(index));
-          card.addEventListener("click", (event) => {
-            if (!window.matchMedia("(hover: none)").matches || card.dataset.heroFlowActive === "true") return;
-            event.preventDefault();
-            updateHeroCoverflow(index);
-          });
-        });
-
-        heroArtwork.addEventListener("keydown", (event) => {
-          if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
-          event.preventDefault();
-          const direction = event.key === "ArrowRight" ? 1 : -1;
-          updateHeroCoverflow((heroFlowActiveIndex + direction + heroFlowCards.length) % heroFlowCards.length);
-          heroFlowCards[heroFlowActiveIndex]?.focus({ preventScroll: true });
-        });
-
-        window.addEventListener("resize", () => {
-          if (heroArtwork.classList.contains("hero-coverflow")) updateHeroCoverflow(heroFlowActiveIndex);
-        });
       }
 
       const updateHeroCopyExit = () => {
