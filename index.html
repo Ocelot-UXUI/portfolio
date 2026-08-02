@@ -915,16 +915,72 @@
       }
 
       .project-hover-cursor {
-        width: 112px;
-        height: 42px;
-        margin: -21px 0 0 -56px;
-        padding: 0 15px 0 21px;
-        gap: 8px;
-        font-size: 17px;
-        line-height: 26px;
+        position: fixed;
+        inset: 0;
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+        display: block;
+        overflow: hidden;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+        color: inherit;
+        opacity: 0;
+        transition: opacity 140ms ease;
       }
 
-      .project-hover-cursor img {
+      .project-hover-cursor.visible {
+        opacity: 1;
+      }
+
+      .project-hover-pointer,
+      .project-hover-label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        will-change: transform;
+      }
+
+      .project-hover-pointer {
+        z-index: 2;
+        width: 27px;
+        height: 27px;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, .3));
+        transform-origin: 2px 2px;
+      }
+
+      .project-hover-pointer svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+      }
+
+      .project-hover-label {
+        z-index: 1;
+        width: 112px;
+        height: 42px;
+        padding: 0 15px 0 21px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        border-radius: 36px;
+        background: #1c202b;
+        color: #7cfac9;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, .36), inset 0 1px rgba(255, 255, 255, .07);
+        font-family: "PingFang SC", sans-serif;
+        font-size: 17px;
+        line-height: 26px;
+        font-weight: 500;
+        white-space: nowrap;
+        transform-origin: 0 50%;
+      }
+
+      .project-hover-label img {
         width: 29px;
         height: 29px;
         flex-basis: 29px;
@@ -1753,7 +1809,14 @@
             </div>
             <div class="showcase-media"><img src="assets/figma-projects/image_5.png" alt="小红书本地生活双手机界面" /></div>
           </a>
-          <div class="project-hover-cursor" aria-hidden="true"><span>查看</span><img src="assets/figma-button/image_1.png" alt="" /></div>
+          <div class="project-hover-cursor" aria-hidden="true">
+            <span class="project-hover-pointer">
+              <svg viewBox="0 0 28 28" fill="none" aria-hidden="true">
+                <path d="M2.5 1.5v21.2l5.35-5.1 4.3 8.8 3.45-1.7-4.25-8.55h7.65L2.5 1.5Z" fill="#f7f8f8" stroke="#111318" stroke-width="1.2" stroke-linejoin="round" />
+              </svg>
+            </span>
+            <span class="project-hover-label"><span>查看</span><img src="assets/figma-button/image_1.png" alt="" /></span>
+          </div>
         </section>
 
       </main>
@@ -2031,25 +2094,91 @@
       }
 
       const projectCursor = document.querySelector(".project-hover-cursor");
+      const projectCursorPointer = projectCursor?.querySelector(".project-hover-pointer");
+      const projectCursorLabel = projectCursor?.querySelector(".project-hover-label");
       const projectArea = document.querySelector(".showcase-projects");
       const projectHotspots = document.querySelectorAll("[data-project-hotspot]");
-      if (projectCursor && projectArea && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      if (projectCursor && projectCursorPointer && projectCursorLabel && projectArea && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+        const cursorMotion = {
+          targetX: 0,
+          targetY: 0,
+          pointerX: 0,
+          pointerY: 0,
+          labelX: 0,
+          labelY: 0,
+          labelRotation: 0,
+          initialized: false,
+          visible: false,
+          pressed: false,
+          frame: 0,
+        };
+
+        const renderProjectCursor = () => {
+          const pointerEase = 0.38;
+          const labelEase = 0.18;
+          const labelOffsetX = 24;
+          const labelOffsetY = 15;
+          cursorMotion.pointerX += (cursorMotion.targetX - cursorMotion.pointerX) * pointerEase;
+          cursorMotion.pointerY += (cursorMotion.targetY - cursorMotion.pointerY) * pointerEase;
+          const nextLabelX = cursorMotion.targetX + labelOffsetX;
+          const nextLabelY = cursorMotion.targetY + labelOffsetY;
+          const horizontalLag = nextLabelX - cursorMotion.labelX;
+          cursorMotion.labelX += horizontalLag * labelEase;
+          cursorMotion.labelY += (nextLabelY - cursorMotion.labelY) * labelEase;
+          const rotationTarget = Math.max(-7, Math.min(7, horizontalLag * 0.18));
+          cursorMotion.labelRotation += (rotationTarget - cursorMotion.labelRotation) * 0.16;
+          const scale = cursorMotion.pressed ? 0.92 : 1;
+          projectCursorPointer.style.transform = `translate3d(${cursorMotion.pointerX}px, ${cursorMotion.pointerY}px, 0) scale(${scale})`;
+          projectCursorLabel.style.transform = `translate3d(${cursorMotion.labelX}px, ${cursorMotion.labelY}px, 0) rotate(${cursorMotion.labelRotation}deg) scale(${scale})`;
+          const unsettled = Math.abs(cursorMotion.targetX - cursorMotion.pointerX) > 0.1
+            || Math.abs(cursorMotion.targetY - cursorMotion.pointerY) > 0.1
+            || Math.abs(nextLabelX - cursorMotion.labelX) > 0.1
+            || Math.abs(nextLabelY - cursorMotion.labelY) > 0.1
+            || Math.abs(cursorMotion.labelRotation) > 0.1;
+          if (cursorMotion.visible || unsettled) cursorMotion.frame = requestAnimationFrame(renderProjectCursor);
+          else cursorMotion.frame = 0;
+        };
+
+        const startProjectCursorMotion = () => {
+          if (!cursorMotion.frame) cursorMotion.frame = requestAnimationFrame(renderProjectCursor);
+        };
+
         const updateProjectPointer = (event) => {
           const bounds = projectArea.getBoundingClientRect();
           projectArea.style.setProperty("--project-glow-x", `${event.clientX - bounds.left}px`);
           projectArea.style.setProperty("--project-glow-y", `${event.clientY - bounds.top}px`);
-          projectCursor.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0)`;
+          cursorMotion.targetX = event.clientX;
+          cursorMotion.targetY = event.clientY;
+          if (!cursorMotion.initialized) {
+            cursorMotion.pointerX = event.clientX;
+            cursorMotion.pointerY = event.clientY;
+            cursorMotion.labelX = event.clientX + 24;
+            cursorMotion.labelY = event.clientY + 15;
+            cursorMotion.initialized = true;
+          }
+          startProjectCursorMotion();
         };
         projectHotspots.forEach((hotspot) => {
           hotspot.addEventListener("pointerenter", (event) => {
             updateProjectPointer(event);
+            cursorMotion.visible = true;
             projectArea.classList.add("project-glow-active");
             projectCursor.classList.add("visible");
           });
           hotspot.addEventListener("pointermove", updateProjectPointer);
           hotspot.addEventListener("pointerleave", () => {
+            cursorMotion.visible = false;
+            cursorMotion.pressed = false;
             projectArea.classList.remove("project-glow-active");
             projectCursor.classList.remove("visible");
+          });
+          hotspot.addEventListener("pointerdown", () => {
+            cursorMotion.pressed = true;
+            startProjectCursorMotion();
+          });
+          hotspot.addEventListener("pointerup", () => {
+            cursorMotion.pressed = false;
+            startProjectCursorMotion();
           });
         });
       }
