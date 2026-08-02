@@ -1070,6 +1070,38 @@
         margin-top: 44px;
       }
 
+      .hero-variant .prototype-homepage .hero.hero-gallery {
+        overflow: hidden;
+        background: #08090a;
+      }
+
+      .hero-variant .prototype-homepage .hero-gallery-copy,
+      .hero-variant .prototype-homepage .hero-project-artwork {
+        display: none;
+      }
+
+      .prototype-homepage .hero-variant-portrait {
+        display: none;
+      }
+
+      .hero-variant .prototype-homepage .hero-variant-portrait {
+        position: absolute;
+        z-index: 1;
+        top: 18px;
+        left: 50%;
+        display: block;
+        width: min(78vw, 1040px);
+        height: min(78vw, 670px);
+        max-height: calc(100% - 18px);
+        background: url("assets/hero-background.png") center center / cover no-repeat;
+        filter: saturate(.92) contrast(1.04);
+        transform: translateX(-50%);
+      }
+
+      .hero-variant .prototype-homepage .hero-note {
+        z-index: 2;
+      }
+
       .prototype-homepage .hero-gallery-copy .hero-display { --copy-delay: var(--copy-step); }
       .prototype-homepage .hero-gallery-copy h1 { --copy-delay: calc(var(--copy-step) * 2); }
 
@@ -1562,6 +1594,19 @@
         .prototype-homepage .hero-note { display: none; }
         .prototype-homepage .hero-project-artwork { height: 395px; }
 
+        .hero-variant .prototype-homepage .hero.hero-gallery {
+          min-height: 760px;
+          padding: 0;
+        }
+
+        .hero-variant .prototype-homepage .hero-variant-portrait {
+          top: 52px;
+          width: 100%;
+          height: 610px;
+          max-height: none;
+          background-position: 56% center;
+        }
+
         .prototype-homepage .footer.footer-editorial {
           min-height: 0;
           padding: 28px 22px 24px;
@@ -1738,6 +1783,7 @@
           </div>
           <span class="hero-note hero-note-left" aria-hidden="true">Based in Chengdu · China</span>
           <span class="hero-note hero-note-right" aria-hidden="true">Selected work · 2024—2026</span>
+          <div class="hero-variant-portrait" aria-hidden="true"></div>
           <div class="hero-artwork hero-project-artwork fade-up fade-up-delay-2" aria-label="项目作品预览图组">
             <a class="hero-project-card hero-project-cnap" href="#project-cnap" aria-label="跳转到 CNAP 云原生工作负载管理项目"><img src="assets/hero-projects/cnap-workload-quick-pin.jpg" alt="CNAP 云原生工作负载管理界面" /></a>
             <a class="hero-project-card hero-project-remi" href="#project-remi" aria-label="跳转到 Remi 主动 AI 记忆助手项目"><img src="assets/hero-projects/image_2.jpg" alt="Remi 主动 AI 记忆助手界面" /></a>
