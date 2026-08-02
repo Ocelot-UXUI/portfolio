@@ -1087,15 +1087,13 @@
       .hero-variant .prototype-homepage .hero-variant-portrait {
         position: absolute;
         z-index: 1;
-        top: 18px;
-        left: 50%;
+        inset: 0;
         display: block;
-        width: min(78vw, 1040px);
-        height: min(78vw, 670px);
-        max-height: calc(100% - 18px);
+        width: 100%;
+        height: 100%;
+        max-height: none;
         background: url("assets/hero-background.png") center center / cover no-repeat;
         filter: saturate(.92) contrast(1.04);
-        transform: translateX(-50%);
       }
 
       .hero-variant .prototype-homepage .hero-note {
