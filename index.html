@@ -1756,6 +1756,40 @@
         box-shadow: none;
       }
 
+      .hero-variant .prototype-homepage {
+        overflow-x: clip;
+      }
+
+      .hero-variant .prototype-homepage .nav,
+      .hero-variant .prototype-homepage .nav.is-scrolled {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 100vw;
+        margin: 0;
+        transform: translateX(-50%);
+      }
+
+      .hero-variant .prototype-homepage .hero.hero-gallery {
+        width: 100vw;
+        min-height: 100svh;
+        margin-left: calc(50% - 50vw);
+        padding: 0;
+      }
+
+      .hero-variant .prototype-homepage .hero-variant-portrait {
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        background-position: center center;
+      }
+
+      @media (max-width: 700px) {
+        .hero-variant .prototype-homepage .hero-variant-portrait {
+          background-position: 56% center;
+        }
+      }
+
     </style>
   </head>
   <body class="prototype-homepage">
