@@ -14,6 +14,12 @@
     <link rel="preload" as="image" href="assets/hero-projects/image_1-transparent.png" />
     <link rel="preload" as="image" href="assets/hero-projects/image_3-transparent.png" />
     <link rel="preload" as="image" href="assets/hero-projects/image_4.png" />
+    <script>
+      (() => {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get("hero") === "variant") document.documentElement.classList.add("hero-variant");
+      })();
+    </script>
     <link rel="stylesheet" href="styles/styles.css?v=20260729-12" />
     <style>
       .prototype-homepage .nav {
