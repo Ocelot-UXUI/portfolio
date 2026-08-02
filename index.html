@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="preload" as="image" href="assets/hero-background.png" fetchpriority="high" />
     <link rel="preload" as="image" href="assets/hero-projects/cnap-workload-quick-pin.jpg" fetchpriority="high" />
     <link rel="preload" as="image" href="assets/hero-projects/image_2.jpg" fetchpriority="high" />
     <link rel="preload" as="image" href="assets/hero-projects/image_1-transparent.png" />
@@ -981,6 +982,17 @@
         min-height: 860px;
         padding-top: 66px;
         gap: 22px;
+        isolation: isolate;
+        background:
+          linear-gradient(180deg, rgba(1, 1, 2, .08) 0%, rgba(1, 1, 2, .16) 58%, rgba(1, 1, 2, .72) 100%),
+          linear-gradient(90deg, rgba(1, 1, 2, .38) 0%, rgba(1, 1, 2, .12) 46%, rgba(1, 1, 2, .02) 100%),
+          url("assets/hero-background.png") center center / cover no-repeat;
+      }
+
+      @media (max-width: 700px) {
+        .prototype-homepage .hero.hero-gallery {
+          background-position: center, center, 58% center;
+        }
       }
 
       .prototype-homepage .hero-gallery-copy {
