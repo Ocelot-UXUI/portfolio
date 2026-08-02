@@ -517,6 +517,21 @@
         z-index: 2;
       }
 
+      .prototype-homepage .hero.hero-gallery h1.hero-statement {
+        position: absolute;
+        z-index: 3;
+        top: 31%;
+        right: clamp(48px, 7vw, 144px);
+        margin: 0;
+        color: #fff;
+        font-size: clamp(34px, 3.15vw, 58px);
+        font-weight: 600;
+        letter-spacing: 0;
+        line-height: 1.16;
+        mix-blend-mode: difference;
+        pointer-events: none;
+      }
+
       .prototype-homepage .footer.footer-editorial {
         min-height: 640px;
         padding: 40px clamp(24px, 4.4vw, 64px) 28px;
@@ -993,6 +1008,15 @@
       @media (max-width: 700px) {
         .prototype-homepage .hero-note { display: none; }
 
+        .prototype-homepage .hero.hero-gallery h1.hero-statement {
+          top: auto;
+          right: 22px;
+          bottom: 11%;
+          left: 22px;
+          font-size: 30px;
+          line-height: 1.22;
+        }
+
         .prototype-homepage .footer.footer-editorial {
           min-height: 0;
           padding: 28px 22px 24px;
@@ -1186,6 +1210,7 @@
           <span class="hero-note hero-note-left" aria-hidden="true">Based in Chengdu · China</span>
           <span class="hero-note hero-note-right" aria-hidden="true">Selected work · 2024—2026</span>
           <div class="hero-portrait" role="img" aria-label="郭昱成个人形象插画"></div>
+          <h1 class="hero-statement">有 AI 工作流，<br />懂用户，<br />能推动事情发生</h1>
         </section>
 
         <section class="about section-reveal" id="about">
