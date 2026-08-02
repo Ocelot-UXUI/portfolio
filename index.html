@@ -8,18 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="preload" as="image" href="assets/hero-background.png" fetchpriority="high" />
-    <link rel="preload" as="image" href="assets/hero-projects/cnap-workload-quick-pin.jpg" fetchpriority="high" />
-    <link rel="preload" as="image" href="assets/hero-projects/image_2.jpg" fetchpriority="high" />
-    <link rel="preload" as="image" href="assets/hero-projects/image_1-transparent.png" />
-    <link rel="preload" as="image" href="assets/hero-projects/image_3-transparent.png" />
-    <link rel="preload" as="image" href="assets/hero-projects/image_4.png" />
-    <script>
-      (() => {
-        const params = new URLSearchParams(window.location.search);
-        if (params.get("hero") === "variant") document.documentElement.classList.add("hero-variant");
-      })();
-    </script>
+    <link rel="preload" as="image" href="assets/hero-background.jpg" fetchpriority="high" />
     <link rel="stylesheet" href="styles/styles.css?v=20260729-12" />
     <style>
       .prototype-homepage .nav {
@@ -84,267 +73,10 @@
         visibility: visible;
       }
 
-      .prototype-homepage .hero.hero-gallery {
-        min-height: 760px;
-        gap: 32px;
-        background: var(--canvas);
-      }
-
-      .prototype-homepage .hero-artwork {
-        width: min(100%, 1080px);
-        height: 440px;
-      }
-
-      .prototype-homepage .hero-device {
-        position: absolute;
-        margin: 0;
-        transform-origin: center bottom;
-        transition: transform .25s ease;
-      }
-
-      .prototype-homepage .hero-device:hover {
-        z-index: 5;
-        transform: translateY(-10px);
-      }
-
-      .prototype-homepage .hero-device-macbook {
-        z-index: 1;
-        top: 0;
-        left: 4%;
-        width: 66%;
-      }
-
-      .prototype-homepage .macbook-shell {
-        position: relative;
-        padding: 2.5% 3.2% 5.8%;
-        border: 3px solid #4a5568;
-        border-radius: 12px 12px 4px 4px;
-        background: #1a202c;
-        box-shadow: 0 20px 36px rgba(0, 0, 0, .34);
-      }
-
-      .prototype-homepage .macbook-display {
-        overflow: hidden;
-        aspect-ratio: 1.593;
-        background: #000;
-      }
-
-      .prototype-homepage .macbook-display img,
-      .prototype-homepage .phone-device img {
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      .prototype-homepage .macbook-shell::after {
-        position: absolute;
-        right: -5%;
-        bottom: -7%;
-        left: -5%;
-        height: 8%;
-        border-radius: 0 0 50% 50%;
-        background: #242b38;
-        box-shadow: 0 7px 10px rgba(0, 0, 0, .32);
-        content: "";
-      }
-
-      .prototype-homepage .hero-device-phone-large {
-        z-index: 3;
-        right: 6%;
-        bottom: 0;
-        width: 20%;
-      }
-
-      .prototype-homepage .hero-device-phone-small {
-        z-index: 2;
-        right: 24%;
-        bottom: 2%;
-        width: 16%;
-      }
-
-      .prototype-homepage .phone-device {
-        overflow: hidden;
-        border-radius: 13%;
-        background: #111;
-        box-shadow: 0 20px 34px rgba(0, 0, 0, .38);
-      }
-
-      .prototype-homepage .hero-device-phone-small .phone-device {
-        position: relative;
-        aspect-ratio: .477;
-        border: 4px solid #111;
-      }
-
-      .prototype-homepage .hero-device-phone-small .phone-device img:first-child {
-        position: absolute;
-        top: 1.5%;
-        left: 3.2%;
-        width: 93.6%;
-        height: 97%;
-        object-fit: cover;
-      }
-
-      .prototype-homepage .hero-device-phone-small .phone-device img:last-child {
-        position: relative;
-      }
-
       @media (max-width: 700px) {
         .prototype-homepage .nav-contact-qr {
           display: none;
         }
-
-        .prototype-homepage .hero.hero-gallery {
-          min-height: 700px;
-          gap: 26px;
-        }
-
-        .prototype-homepage .hero-artwork {
-          width: min(100%, 390px);
-          height: 330px;
-        }
-
-        .prototype-homepage .hero-device-macbook {
-          top: 8px;
-          left: 1%;
-          width: 72%;
-        }
-
-        .prototype-homepage .hero-device-phone-large {
-          right: 1%;
-          width: 27%;
-        }
-
-        .prototype-homepage .hero-device-phone-small {
-          right: 27%;
-          bottom: 1%;
-          width: 21%;
-        }
-      }
-
-      .prototype-homepage .hero.hero-gallery {
-        min-height: 790px;
-        gap: 30px;
-      }
-
-      .prototype-homepage .hero-project-artwork {
-        width: min(100%, 1100px);
-        height: 420px;
-        overflow: hidden;
-      }
-
-      .prototype-homepage .hero-project {
-        position: absolute;
-        margin: 0;
-        transform-origin: center bottom;
-        transition: transform .25s ease;
-      }
-
-      .prototype-homepage .hero-project:hover {
-        z-index: 5;
-        transform: translateY(-10px);
-      }
-
-      .prototype-homepage .hero-project img {
-        display: block;
-        width: 100%;
-        height: auto;
-      }
-
-      .prototype-homepage .hero-project-desktop {
-        z-index: 1;
-        bottom: -58px;
-        left: 0;
-        width: 50%;
-        filter: drop-shadow(0 16px 22px rgba(0, 0, 0, .2));
-      }
-
-      .prototype-homepage .hero-project-xhs {
-        z-index: 3;
-        bottom: -105px;
-        left: 50%;
-        width: 17%;
-        filter: drop-shadow(0 18px 22px rgba(0, 0, 0, .28));
-      }
-
-      .prototype-homepage .hero-project-reading {
-        z-index: 2;
-        right: 7%;
-        bottom: -105px;
-        width: 17%;
-        filter: drop-shadow(0 18px 22px rgba(0, 0, 0, .28));
-      }
-
-      .prototype-homepage .hero-project-reading-content {
-        position: absolute;
-        top: 1.56%;
-        left: 3.18%;
-        width: 93.64% !important;
-        height: 96.88% !important;
-        object-fit: cover;
-      }
-
-      .prototype-homepage .hero-project-reading-frame { position: relative; }
-
-      @media (max-width: 700px) {
-        .prototype-homepage .hero.hero-gallery {
-          min-height: 690px;
-          gap: 24px;
-        }
-
-        .prototype-homepage .hero-project-artwork {
-          width: min(100%, 390px);
-          height: 338px;
-        }
-
-        .prototype-homepage .hero-project-desktop {
-          bottom: -22px;
-          left: -3%;
-          width: 72%;
-        }
-
-        .prototype-homepage .hero-project-xhs {
-          bottom: -46px;
-          left: 43%;
-          width: 27%;
-        }
-
-        .prototype-homepage .hero-project-reading {
-          right: -2%;
-          bottom: -46px;
-          width: 27%;
-        }
-      }
-
-      .prototype-homepage .hero.hero-gallery {
-        min-height: 730px;
-        gap: 12px;
-      }
-
-      .prototype-homepage .hero-project-artwork {
-        width: min(100%, 1200px);
-        height: 500px;
-        overflow: visible;
-      }
-
-      .prototype-homepage .hero-project-card {
-        position: absolute;
-        overflow: hidden;
-        display: block;
-        margin: 0;
-        border: 3px solid #090909;
-        border-radius: 16px;
-        background: #090909;
-        box-shadow: 0 18px 32px rgba(0, 0, 0, .32);
-        transform-origin: center bottom;
-        color: inherit;
-        text-decoration: none;
-        transition: transform .25s ease, box-shadow .25s ease;
-      }
-
-      .prototype-homepage .hero-project-card:focus-visible {
-        outline: 2px solid #fff;
-        outline-offset: 4px;
       }
 
       .prototype-homepage .showcase-projects {
@@ -448,166 +180,11 @@
         box-shadow: 0 28px #e9eeee, 0 56px #e9eeee, 0 84px #dbeadf, 0 112px #e9eeee;
       }
 
-      .prototype-homepage .hero-project-card:hover {
-        z-index: 6;
-        box-shadow: 0 24px 38px rgba(0, 0, 0, .28);
-      }
-
-      .prototype-homepage .hero-project-card > img {
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      .prototype-homepage .hero-project-cnap {
-        z-index: 2;
-        bottom: 0;
-        left: 30%;
-        width: 62%;
-        aspect-ratio: 1.6;
-        transform: rotate(-2.5deg);
-      }
-
-      .prototype-homepage .hero-project-remi {
-        z-index: 1;
-        bottom: 0;
-        left: -5%;
-        width: 58%;
-        aspect-ratio: 1.575;
-        transform: rotate(-5.5deg);
-      }
-
-      .prototype-homepage .hero-project-remi > img {
-        transform: scale(1.035);
-      }
-
-      .prototype-homepage .hero-project-xhs {
-        z-index: 4;
-        bottom: 0;
-        left: 70%;
-        width: 16.5%;
-        aspect-ratio: .482;
-        transform: rotate(2.5deg);
-      }
-
-      .prototype-homepage .hero-project-reading {
-        z-index: 3;
-        bottom: 0;
-        left: 84%;
-        width: 16.5%;
-        aspect-ratio: .477;
-        transform: rotate(5.5deg);
-      }
-
-      .prototype-homepage .hero-project-reading-content {
-        position: absolute;
-        z-index: 1;
-        top: 1.56%;
-        left: 3.18%;
-        width: 93.64% !important;
-        height: 96.88% !important;
-        object-fit: cover !important;
-      }
-
-      .prototype-homepage .hero-project-reading-frame {
-        position: relative;
-        z-index: 2;
-      }
-
-      .prototype-homepage .hero-project-card {
-        transform-origin: center center;
-        animation-duration: 1.8s;
-        animation-fill-mode: both;
-        animation-play-state: paused;
-        animation-timing-function: cubic-bezier(.16, 1, .3, 1);
-      }
-
-      html.motion-ready .prototype-homepage .hero-project-artwork:not(.hero-ready) .hero-project-card {
-        opacity: 0;
-      }
-
-      .prototype-homepage .hero-project-artwork.hero-ready .hero-project-card {
-        animation-play-state: running;
-      }
-
-      /* The entrance keyframes own transform until every card has settled. */
-      html.motion-ready .prototype-homepage .hero-project-artwork.hero-ready:not(.hero-interaction-ready) .hero-project-card {
-        pointer-events: none;
-      }
-
-      .prototype-homepage .hero-project-cnap { animation-name: hero-cnap-unfold; animation-delay: .04s; }
-      .prototype-homepage .hero-project-remi { animation-name: hero-remi-unfold; animation-delay: .08s; }
-      .prototype-homepage .hero-project-xhs { animation-name: hero-xhs-unfold; animation-delay: .18s; }
-      .prototype-homepage .hero-project-reading { animation-name: hero-reading-unfold; animation-delay: .24s; }
-
-      @keyframes hero-cnap-unfold {
-        0%, 34% { opacity: .94; transform: scale(.62) rotate(-1deg); }
-        100% { opacity: 1; transform: scale(1) rotate(-2.5deg); }
-      }
-
-      @keyframes hero-remi-unfold {
-        0%, 34% { opacity: .9; transform: translateX(60%) scale(.62) rotate(-1deg); }
-        100% { opacity: 1; transform: translateX(0) scale(1) rotate(-5.5deg); }
-      }
-
-      @keyframes hero-xhs-unfold {
-        0%, 34% { opacity: .88; transform: translateX(-240%) scale(.4) rotate(0); }
-        100% { opacity: 1; transform: translateX(0) scale(1) rotate(2.5deg); }
-      }
-
-      @keyframes hero-reading-unfold {
-        0%, 34% { opacity: .84; transform: translateX(-327%) scale(.4) rotate(0); }
-        100% { opacity: 1; transform: translateX(0) scale(1) rotate(5.5deg); }
-      }
-
-      @media (max-width: 700px) {
-        .prototype-homepage .hero-project-xhs { animation-name: hero-xhs-unfold-mobile; }
-        .prototype-homepage .hero-project-reading { animation-name: hero-reading-unfold-mobile; }
-      }
-
-      @keyframes hero-xhs-unfold-mobile {
-        0%, 34% { opacity: .88; transform: translateX(-152%) scale(.4) rotate(0); }
-        100% { opacity: 1; transform: translateX(0) scale(1) rotate(2.5deg); }
-      }
-
-      @keyframes hero-reading-unfold-mobile {
-        0%, 34% { opacity: .84; transform: translateX(-217%) scale(.4) rotate(0); }
-        100% { opacity: 1; transform: translateX(0) scale(1) rotate(5.5deg); }
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        .prototype-homepage .hero-project-card {
-          animation: none;
-          opacity: 1;
-        }
-      }
-
       .prototype-homepage {
         --copy-duration: 1140ms;
         --copy-step: 110ms;
         --copy-distance: 12px;
         --copy-easing: cubic-bezier(.16, 1, .3, 1);
-      }
-
-      html.motion-ready .prototype-homepage .hero-gallery-copy .hero-copy-step {
-        opacity: 0;
-        transform: translateY(var(--copy-distance));
-      }
-
-      .prototype-homepage .hero-gallery-copy .hero-copy-step:first-child { --copy-delay: 0ms; }
-      .prototype-homepage .hero-gallery-copy h1 { --copy-delay: var(--copy-step); }
-
-      .prototype-homepage .hero-gallery-copy.hero-copy-ready .hero-copy-step {
-        animation: portfolio-copy-enter var(--copy-duration) var(--copy-easing) forwards;
-        animation-delay: var(--copy-delay, 0ms);
-      }
-
-      .prototype-homepage .hero-gallery-copy {
-        opacity: var(--hero-copy-exit-opacity, 1);
-        filter: blur(var(--hero-copy-exit-blur, 0));
-        transform: translate3d(0, var(--hero-copy-exit-offset, 0), 0);
-        will-change: opacity, filter, transform;
       }
 
       .prototype-homepage .about {
@@ -788,7 +365,6 @@
       }
 
       @media (prefers-reduced-motion: reduce) {
-        html.motion-ready .prototype-homepage .hero-gallery-copy .hero-copy-step,
         html.motion-ready .prototype-homepage .section-reveal .section-copy-step,
         html.motion-ready .prototype-homepage .project-showcase .showcase-copy > *,
         html.motion-ready .prototype-homepage .about .about-heading h2 {
@@ -799,12 +375,6 @@
           transform: none;
           filter: none;
           animation: none;
-        }
-
-        .prototype-homepage .hero-gallery-copy {
-          opacity: 1;
-          filter: none;
-          transform: none;
         }
       }
 
@@ -843,82 +413,6 @@
           font-size: 22px;
         }
 
-        .prototype-homepage .hero.hero-gallery {
-          min-height: 720px;
-          gap: 12px;
-        }
-
-        .prototype-homepage .hero-project-artwork {
-          width: min(100%, 390px);
-          height: 430px;
-        }
-
-        .prototype-homepage .hero-project-cnap {
-          bottom: 0;
-          left: 25%;
-          width: 60%;
-        }
-
-        .prototype-homepage .hero-project-remi {
-          bottom: 0;
-          left: -4%;
-          width: 56%;
-        }
-
-        .prototype-homepage .hero-project-xhs {
-          bottom: 0;
-          left: 69%;
-          width: 29%;
-        }
-
-        .prototype-homepage .hero-project-reading {
-          bottom: 0;
-          left: 88%;
-          width: 29%;
-        }
-      }
-
-      .prototype-homepage .hero-project-xhs,
-      .prototype-homepage .hero-project-reading {
-        overflow: visible;
-        border: 0;
-        border-radius: 0;
-        background: transparent;
-        box-shadow: none;
-        filter: drop-shadow(0 16px 22px rgba(0, 0, 0, .28));
-      }
-
-      .prototype-homepage .hero-project-xhs:hover,
-      .prototype-homepage .hero-project-reading:hover {
-        box-shadow: none;
-      }
-
-      .prototype-homepage .hero-project-xhs,
-      .prototype-homepage .hero-project-xhs:hover,
-      .prototype-homepage .hero-project-xhs:focus-visible {
-        border-color: transparent;
-        background: transparent;
-      }
-
-      /* Keep entrance motion and hover elevation from competing for transform. */
-      .prototype-homepage .hero-project-card {
-        --hero-card-rotate: 0deg;
-        transform: translate3d(0, 0, 0) rotate(var(--hero-card-rotate));
-        transition: transform 420ms cubic-bezier(.22, 1, .36, 1), box-shadow 320ms ease;
-        will-change: transform;
-        animation-fill-mode: backwards;
-      }
-
-      .prototype-homepage .hero-project-cnap { --hero-card-rotate: -2.5deg; }
-      .prototype-homepage .hero-project-remi { --hero-card-rotate: -5.5deg; }
-      .prototype-homepage .hero-project-xhs { --hero-card-rotate: 2.5deg; }
-      .prototype-homepage .hero-project-reading { --hero-card-rotate: 5.5deg; }
-
-      .prototype-homepage .hero-project-card:hover,
-      .prototype-homepage .hero-project-card:focus-visible {
-        z-index: 6;
-        transform: translate3d(0, -14px, 0) rotate(var(--hero-card-rotate));
-        box-shadow: 0 30px 52px rgba(0, 0, 0, .42);
       }
 
       .project-hover-cursor {
@@ -985,68 +479,13 @@
 
       .prototype-homepage .hero.hero-gallery {
         position: relative;
-        min-height: 860px;
-        padding-top: 66px;
-        gap: 22px;
+        overflow: hidden;
+        width: 100vw;
+        min-height: 100svh;
+        margin-left: calc(50% - 50vw);
+        padding: 0;
         isolation: isolate;
-        background:
-          linear-gradient(180deg, rgba(1, 1, 2, .08) 0%, rgba(1, 1, 2, .16) 58%, rgba(1, 1, 2, .72) 100%),
-          linear-gradient(90deg, rgba(1, 1, 2, .38) 0%, rgba(1, 1, 2, .12) 46%, rgba(1, 1, 2, .02) 100%),
-          url("assets/hero-background.png") center center / cover no-repeat;
-      }
-
-      @media (max-width: 700px) {
-        .prototype-homepage .hero.hero-gallery {
-          background-position: center, center, 58% center;
-        }
-      }
-
-      .prototype-homepage .hero-gallery-copy {
-        position: relative;
-        z-index: 8;
-        width: min(100%, 1180px);
-        max-width: none;
-      }
-
-      .prototype-homepage .hero-eyebrow {
-        margin-bottom: 22px;
-      }
-
-      .prototype-homepage .hero-display {
-        display: grid;
-        justify-items: center;
-        color: var(--ink);
-        font-size: 82px;
-        font-weight: 400;
-        line-height: .88;
-        text-transform: uppercase;
-      }
-
-      .prototype-homepage .hero-display-line {
-        display: flex;
-        align-items: baseline;
-        justify-content: center;
-        gap: 18px;
-        white-space: nowrap;
-      }
-
-      .prototype-homepage .hero-display em,
-      .prototype-homepage .footer-display em {
-        color: #d9d5e8;
-        font-family: Georgia, "Times New Roman", serif;
-        font-size: 1.12em;
-        font-weight: 400;
-        line-height: .72;
-        text-transform: none;
-      }
-
-      .prototype-homepage .hero-gallery h1 {
-        margin-top: 30px;
-        color: var(--ink-muted);
-        font-size: 42px;
-        font-weight: 500;
-        line-height: 1.2;
-        text-shadow: 0 4px 18px rgba(0, 0, 0, .72);
+        background: #08090a;
       }
 
       .prototype-homepage .hero-note {
@@ -1064,44 +503,19 @@
       .prototype-homepage .hero-note-left { left: 22px; }
       .prototype-homepage .hero-note-right { right: 22px; transform: rotate(180deg); }
 
-      .prototype-homepage .hero-project-artwork {
-        z-index: 1;
-        height: 385px;
-        margin-top: 44px;
-      }
-
-      .hero-variant .prototype-homepage .hero.hero-gallery {
-        overflow: hidden;
-        background: #08090a;
-      }
-
-      .hero-variant .prototype-homepage .hero-gallery-copy,
-      .hero-variant .prototype-homepage .hero-project-artwork {
-        display: none;
-      }
-
-      .prototype-homepage .hero-variant-portrait {
-        display: none;
-      }
-
-      .hero-variant .prototype-homepage .hero-variant-portrait {
+      .prototype-homepage .hero-portrait {
         position: absolute;
         z-index: 1;
         inset: 0;
-        display: block;
         width: 100%;
         height: 100%;
-        max-height: none;
-        background: url("assets/hero-background.png") center center / cover no-repeat;
+        background: url("assets/hero-background.jpg") center center / cover no-repeat;
         filter: saturate(.92) contrast(1.04);
       }
 
-      .hero-variant .prototype-homepage .hero-note {
+      .prototype-homepage .hero-note {
         z-index: 2;
       }
-
-      .prototype-homepage .hero-gallery-copy .hero-display { --copy-delay: var(--copy-step); }
-      .prototype-homepage .hero-gallery-copy h1 { --copy-delay: calc(var(--copy-step) * 2); }
 
       .prototype-homepage .footer.footer-editorial {
         min-height: 640px;
@@ -1145,6 +559,15 @@
         justify-content: center;
         gap: 18px;
         white-space: nowrap;
+      }
+
+      .prototype-homepage .footer-display em {
+        color: #d9d5e8;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 1.12em;
+        font-weight: 400;
+        line-height: .72;
+        text-transform: none;
       }
 
       .prototype-homepage .footer-links {
@@ -1564,46 +987,11 @@
       }
 
       @media (max-width: 1100px) {
-        .prototype-homepage .hero-display { font-size: 66px; }
         .prototype-homepage .footer-display { font-size: 62px; }
       }
 
       @media (max-width: 700px) {
-        .prototype-homepage .hero.hero-gallery {
-          min-height: 760px;
-          padding-top: 48px;
-          gap: 14px;
-        }
-
-        .prototype-homepage .hero-display {
-          font-size: 38px;
-          line-height: .94;
-        }
-
-        .prototype-homepage .hero-display-line {
-          gap: 8px;
-        }
-
-        .prototype-homepage .hero-gallery h1 {
-          margin-top: 22px;
-          font-size: 28px;
-        }
-
         .prototype-homepage .hero-note { display: none; }
-        .prototype-homepage .hero-project-artwork { height: 395px; }
-
-        .hero-variant .prototype-homepage .hero.hero-gallery {
-          min-height: 760px;
-          padding: 0;
-        }
-
-        .hero-variant .prototype-homepage .hero-variant-portrait {
-          top: 52px;
-          width: 100%;
-          height: 610px;
-          max-height: none;
-          background-position: 56% center;
-        }
 
         .prototype-homepage .footer.footer-editorial {
           min-height: 0;
@@ -1756,12 +1144,12 @@
         box-shadow: none;
       }
 
-      .hero-variant .prototype-homepage {
+      .prototype-homepage {
         overflow-x: clip;
       }
 
-      .hero-variant .prototype-homepage .nav,
-      .hero-variant .prototype-homepage .nav.is-scrolled {
+      .prototype-homepage .nav,
+      .prototype-homepage .nav.is-scrolled {
         position: absolute;
         top: 0;
         left: 50%;
@@ -1770,22 +1158,8 @@
         transform: translateX(-50%);
       }
 
-      .hero-variant .prototype-homepage .hero.hero-gallery {
-        width: 100vw;
-        min-height: 100svh;
-        margin-left: calc(50% - 50vw);
-        padding: 0;
-      }
-
-      .hero-variant .prototype-homepage .hero-variant-portrait {
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        background-position: center center;
-      }
-
       @media (max-width: 700px) {
-        .hero-variant .prototype-homepage .hero-variant-portrait {
+        .prototype-homepage .hero-portrait {
           background-position: 56% center;
         }
       }
@@ -1809,22 +1183,9 @@
 
       <main>
         <section class="hero hero-gallery" id="home">
-          <div class="hero-gallery-copy">
-            <p class="hero-eyebrow hero-copy-step fade-up">UX/UI PORTFOLIO</p>
-            <h1 class="hero-copy-step fade-up fade-up-delay-1">有 AI 工作流，懂用户，<br />能推动事情发生</h1>
-          </div>
           <span class="hero-note hero-note-left" aria-hidden="true">Based in Chengdu · China</span>
           <span class="hero-note hero-note-right" aria-hidden="true">Selected work · 2024—2026</span>
-          <div class="hero-variant-portrait" aria-hidden="true"></div>
-          <div class="hero-artwork hero-project-artwork fade-up fade-up-delay-2" aria-label="项目作品预览图组">
-            <a class="hero-project-card hero-project-cnap" href="#project-cnap" aria-label="跳转到 CNAP 云原生工作负载管理项目"><img src="assets/hero-projects/cnap-workload-quick-pin.jpg" alt="CNAP 云原生工作负载管理界面" /></a>
-            <a class="hero-project-card hero-project-remi" href="#project-remi" aria-label="跳转到 Remi 主动 AI 记忆助手项目"><img src="assets/hero-projects/image_2.jpg" alt="Remi 主动 AI 记忆助手界面" /></a>
-            <a class="hero-project-card hero-project-xhs" href="#project-xhs" aria-label="跳转到小红书本地生活项目"><img src="assets/hero-projects/image_1-transparent.png" alt="小红书本地生活界面" /></a>
-            <a class="hero-project-card hero-project-reading" href="#project-reading" aria-label="跳转到快速阅读应用项目">
-              <img class="hero-project-reading-content" src="assets/hero-projects/image_3-transparent.png" alt="快速阅读应用界面" />
-              <img class="hero-project-reading-frame" src="assets/hero-projects/image_4.png" alt="" />
-            </a>
-          </div>
+          <div class="hero-portrait" role="img" aria-label="郭昱成个人形象插画"></div>
         </section>
 
         <section class="about section-reveal" id="about">
@@ -2076,53 +1437,6 @@
       });
 
       document.documentElement.classList.add("motion-ready");
-      const heroArtwork = document.querySelector(".hero-project-artwork");
-      const heroCopy = document.querySelector(".hero-gallery-copy");
-      const heroSection = document.querySelector(".hero-gallery");
-      if ((heroArtwork || heroCopy) && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        requestAnimationFrame(() => requestAnimationFrame(() => {
-          heroArtwork?.classList.add("hero-ready");
-          heroCopy?.classList.add("hero-copy-ready");
-
-          if (heroArtwork) {
-            const cards = heroArtwork.querySelectorAll(".hero-project-card");
-            let finishedCards = 0;
-            const enableHeroInteractions = () => heroArtwork.classList.add("hero-interaction-ready");
-            cards.forEach((card) => {
-              card.addEventListener("animationend", () => {
-                finishedCards += 1;
-                if (finishedCards === cards.length) enableHeroInteractions();
-              }, { once: true });
-            });
-          }
-        }));
-      } else if (heroArtwork) {
-        heroArtwork.classList.add("hero-interaction-ready");
-      }
-
-      const updateHeroCopyExit = () => {
-        if (!heroCopy || !heroSection || reducedMotion.matches) return;
-        const heroBounds = heroSection.getBoundingClientRect();
-        const exitDistance = Math.min(heroBounds.height * .58, window.innerHeight * .7);
-        const progress = Math.max(0, Math.min(1, (-heroBounds.top + 48) / exitDistance));
-        const easedProgress = progress * progress * (3 - 2 * progress);
-
-        heroCopy.style.setProperty("--hero-copy-exit-opacity", String(1 - easedProgress));
-        heroCopy.style.setProperty("--hero-copy-exit-blur", `${(easedProgress * 14).toFixed(2)}px`);
-        heroCopy.style.setProperty("--hero-copy-exit-offset", `${(easedProgress * 58).toFixed(2)}px`);
-      };
-
-      let heroCopyScrollFrame;
-      const scheduleHeroCopyExit = () => {
-        if (heroCopyScrollFrame) return;
-        heroCopyScrollFrame = requestAnimationFrame(() => {
-          heroCopyScrollFrame = undefined;
-          updateHeroCopyExit();
-        });
-      };
-      updateHeroCopyExit();
-      window.addEventListener("scroll", scheduleHeroCopyExit, { passive: true });
-      window.addEventListener("resize", updateHeroCopyExit);
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) entry.target.classList.add("visible");
