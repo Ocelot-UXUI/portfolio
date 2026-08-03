@@ -576,8 +576,21 @@
         pointer-events: none;
       }
 
+      .prototype-homepage .hero-coverflow-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        background: linear-gradient(145deg, rgba(255, 255, 255, .2), rgba(255, 255, 255, .04) 58%, rgba(255, 255, 255, .12));
+        backdrop-filter: blur(5px) saturate(.8);
+        -webkit-backdrop-filter: blur(5px) saturate(.8);
+        pointer-events: none;
+      }
+
       .prototype-homepage .hero-coverflow-card .hero-coverflow-bg {
         z-index: 1;
+        opacity: .78;
+        filter: saturate(.58) contrast(.94) brightness(1.06);
         -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 46%, transparent 100%);
         mask-image: linear-gradient(to bottom, #000 0%, #000 46%, transparent 100%);
         -webkit-mask-repeat: no-repeat;
@@ -587,7 +600,7 @@
       }
 
       .prototype-homepage .hero-coverflow-card .hero-coverflow-foreground {
-        z-index: 2;
+        z-index: 3;
         object-fit: contain;
       }
 
