@@ -552,10 +552,14 @@
         left: 0;
         display: block;
         width: clamp(190px, 15.5vw, 310px);
-        aspect-ratio: 784 / 1080;
+        aspect-ratio: 784 / 1068;
         overflow: hidden;
-        border-radius: 10px;
-        background: transparent;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, .24);
+        background: linear-gradient(145deg, rgba(255, 255, 255, .2), rgba(205, 214, 231, .08) 58%, rgba(255, 255, 255, .12));
+        box-shadow: 0 18px 34px rgba(0, 0, 0, .2), inset 0 1px 0 rgba(255, 255, 255, .18);
+        backdrop-filter: blur(14px) saturate(.75);
+        -webkit-backdrop-filter: blur(14px) saturate(.75);
         transform-origin: center bottom;
         transition: left .5s cubic-bezier(.22, 1, .36, 1), transform .5s cubic-bezier(.22, 1, .36, 1), box-shadow .35s ease;
         will-change: left, transform;
@@ -580,33 +584,14 @@
         content: "";
         position: absolute;
         inset: 0;
-        z-index: 2;
-        background: linear-gradient(145deg, rgba(255, 255, 255, .2), rgba(255, 255, 255, .04) 58%, rgba(255, 255, 255, .12));
-        backdrop-filter: blur(5px) saturate(.8);
-        -webkit-backdrop-filter: blur(5px) saturate(.8);
+        z-index: 1;
+        background: linear-gradient(145deg, rgba(255, 255, 255, .18), rgba(255, 255, 255, .02) 60%, rgba(255, 255, 255, .1));
         pointer-events: none;
       }
 
-      .prototype-homepage .hero-coverflow-card .hero-coverflow-bg {
-        z-index: 1;
-        opacity: .78;
-        filter: saturate(.58) contrast(.94) brightness(1.06);
-        -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 46%, transparent 100%);
-        mask-image: linear-gradient(to bottom, #000 0%, #000 46%, transparent 100%);
-        -webkit-mask-repeat: no-repeat;
-        mask-repeat: no-repeat;
-        -webkit-mask-size: 100% 100%;
-        mask-size: 100% 100%;
-      }
-
-      .prototype-homepage .hero-coverflow-card .hero-coverflow-foreground {
-        z-index: 3;
+      .prototype-homepage .hero-coverflow-card .hero-coverflow-original {
+        z-index: 2;
         object-fit: contain;
-      }
-
-      .prototype-homepage .hero-coverflow-card:nth-child(3) .hero-coverflow-bg {
-        -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 18%, transparent 62%);
-        mask-image: linear-gradient(to bottom, #000 0%, #000 18%, transparent 62%);
       }
 
       .prototype-homepage .hero-coverflow-card:nth-child(1) { z-index: 1; }
@@ -1321,9 +1306,9 @@
           <div class="hero-portrait" role="img" aria-label="郭昱成个人形象插画"></div>
           <h1 class="hero-statement">有 AI 工作流，<br />懂用户，<br />能推动事情发生</h1>
           <div class="hero-coverflow" data-hero-coverflow aria-label="可拖动的项目预览">
-            <a class="hero-coverflow-card" href="pages/skip-read.html" aria-label="查看快速阅读 APP 项目"><img class="hero-coverflow-bg" src="assets/hero-cards/reading-phone.jpg" alt="" aria-hidden="true" /><img class="hero-coverflow-foreground" src="assets/hero-cards/reading-phone-foreground.png" alt="快速阅读 APP 项目预览" /></a>
-            <a class="hero-coverflow-card" href="pages/xiaohongshu.html" aria-label="查看小红书本地生活项目"><img class="hero-coverflow-bg" src="assets/hero-cards/xhs-phones.jpg" alt="" aria-hidden="true" /><img class="hero-coverflow-foreground" src="assets/hero-cards/xhs-phones-foreground.png" alt="小红书本地生活项目预览" /></a>
-            <a class="hero-coverflow-card" href="pages/case.html" aria-label="查看主动 AI 记忆助手项目"><img class="hero-coverflow-bg" src="assets/hero-cards/remi-laptop.jpg" alt="" aria-hidden="true" /><img class="hero-coverflow-foreground" src="assets/hero-cards/remi-laptop-foreground.png" alt="主动 AI 记忆助手项目预览" /></a>
+            <a class="hero-coverflow-card" href="pages/skip-read.html" aria-label="查看快速阅读 APP 项目"><img class="hero-coverflow-original" src="assets/hero-cards/reading-original.png" alt="快速阅读 APP 项目预览" /></a>
+            <a class="hero-coverflow-card" href="pages/xiaohongshu.html" aria-label="查看小红书本地生活项目"><img class="hero-coverflow-original" src="assets/hero-cards/xhs-original.png" alt="小红书本地生活项目预览" /></a>
+            <a class="hero-coverflow-card" href="pages/case.html" aria-label="查看主动 AI 记忆助手项目"><img class="hero-coverflow-original" src="assets/hero-cards/remi-original.png" alt="主动 AI 记忆助手项目预览" /></a>
             <span class="hero-coverflow-hint" aria-hidden="true">拖动切换</span>
           </div>
         </section>
