@@ -584,16 +584,31 @@
         box-shadow: 0 18px 34px rgba(0, 0, 0, .2), inset 0 1px 0 rgba(255, 255, 255, .18);
         backdrop-filter: blur(14px) saturate(.75);
         -webkit-backdrop-filter: blur(14px) saturate(.75);
-        transition: background .28s ease, border-color .28s ease, box-shadow .32s ease;
+        transition: border-color .32s ease, box-shadow .38s cubic-bezier(.22, 1, .36, 1), transform .38s cubic-bezier(.22, 1, .36, 1);
       }
 
       .prototype-homepage .hero-coverflow-card:hover .hero-coverflow-surface,
       .prototype-homepage .hero-coverflow-card:focus-visible .hero-coverflow-surface {
-        background: linear-gradient(145deg, rgba(255, 255, 255, .3), rgba(218, 224, 235, .14) 58%, rgba(255, 255, 255, .2));
         border-color: rgba(255, 255, 255, .34);
         box-shadow: 0 24px 48px rgba(0, 0, 0, .28), 0 8px 22px rgba(255, 255, 255, .08), inset 0 1px 0 rgba(255, 255, 255, .24);
-        backdrop-filter: blur(14px) saturate(.75);
-        -webkit-backdrop-filter: blur(14px) saturate(.75);
+        transform: translateY(-4px);
+      }
+
+      .prototype-homepage .hero-coverflow-surface::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 3;
+        border-radius: inherit;
+        background: rgba(255, 255, 255, .13);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .34s cubic-bezier(.22, 1, .36, 1);
+      }
+
+      .prototype-homepage .hero-coverflow-card:hover .hero-coverflow-surface::after,
+      .prototype-homepage .hero-coverflow-card:focus-visible .hero-coverflow-surface::after {
+        opacity: 1;
       }
 
       .prototype-homepage .hero-coverflow-surface img {
