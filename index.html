@@ -557,6 +557,12 @@
         border-radius: 10px;
         background: #161719;
         box-shadow: 0 16px 30px rgba(0, 0, 0, .24);
+        -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 74%, transparent 100%);
+        mask-image: linear-gradient(to bottom, #000 0%, #000 74%, transparent 100%);
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-size: 100% 100%;
+        mask-size: 100% 100%;
         transform-origin: center bottom;
         transition: left .5s cubic-bezier(.22, 1, .36, 1), transform .5s cubic-bezier(.22, 1, .36, 1), box-shadow .35s ease;
         will-change: left, transform;
