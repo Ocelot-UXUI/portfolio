@@ -578,8 +578,8 @@
 
       .prototype-homepage .hero-coverflow-card .hero-coverflow-bg {
         z-index: 1;
-        -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 68%, transparent 100%);
-        mask-image: linear-gradient(to bottom, #000 0%, #000 68%, transparent 100%);
+        -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 46%, transparent 100%);
+        mask-image: linear-gradient(to bottom, #000 0%, #000 46%, transparent 100%);
         -webkit-mask-repeat: no-repeat;
         mask-repeat: no-repeat;
         -webkit-mask-size: 100% 100%;
@@ -589,6 +589,11 @@
       .prototype-homepage .hero-coverflow-card .hero-coverflow-foreground {
         z-index: 2;
         object-fit: contain;
+      }
+
+      .prototype-homepage .hero-coverflow-card:nth-child(3) .hero-coverflow-bg {
+        -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 18%, transparent 62%);
+        mask-image: linear-gradient(to bottom, #000 0%, #000 18%, transparent 62%);
       }
 
       .prototype-homepage .hero-coverflow-card:nth-child(1) { z-index: 1; }
