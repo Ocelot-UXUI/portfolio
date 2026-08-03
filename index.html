@@ -1799,6 +1799,7 @@
         let pointerStartX = 0;
         let pointerDeltaX = 0;
         let isDragging = false;
+        let isAnimating = false;
         let blockClick = false;
 
         const renderHeroCoverflow = (delta = 0, instant = false) => {
@@ -1811,20 +1812,49 @@
           });
         };
 
+        const animateHeroStep = (direction) => {
+          if (isAnimating) return;
+          isAnimating = true;
+          const oldActive = activeCard;
+          const cardSlots = heroCards.map((_, index) => (index - oldActive + heroCards.length) % heroCards.length);
+          heroCards.forEach((card, index) => {
+            const currentSlot = cardSlots[index];
+            const exitsLeft = direction < 0 && currentSlot === 0;
+            const exitsRight = direction > 0 && currentSlot === heroSlots.length - 1;
+            const nextSlot = exitsLeft ? -1 : exitsRight ? heroSlots.length : currentSlot + direction;
+            const target = nextSlot < 0
+              ? { left: "-100%", offset: "-100%", scale: "1", rotate: "0deg" }
+              : nextSlot >= heroSlots.length
+                ? { left: "100%", offset: "0%", scale: "1", rotate: "0deg" }
+                : heroSlots[nextSlot];
+            card.style.zIndex = String(exitsLeft || exitsRight ? 0 : nextSlot === 1 ? 2 : 1);
+            card.style.transitionDuration = "500ms";
+            card.style.left = target.left;
+            card.style.transform = `translateX(calc(${target.offset} + 0px)) scale(${target.scale}) rotate(${target.rotate})`;
+          });
+          window.setTimeout(() => {
+            activeCard = (oldActive + (direction < 0 ? 1 : -1) + heroCards.length) % heroCards.length;
+            renderHeroCoverflow(0, true);
+            isAnimating = false;
+          }, 520);
+        };
+
         const finishHeroDrag = () => {
           if (!isDragging) return;
           isDragging = false;
           heroCoverflow.classList.remove("is-dragging");
           if (Math.abs(pointerDeltaX) > 60) {
-            activeCard = (activeCard + (pointerDeltaX < 0 ? 1 : -1) + heroCards.length) % heroCards.length;
+            animateHeroStep(pointerDeltaX < 0 ? -1 : 1);
             blockClick = true;
+          } else {
+            renderHeroCoverflow();
           }
           pointerDeltaX = 0;
-          renderHeroCoverflow();
         };
 
         renderHeroCoverflow(0, true);
         heroCoverflow.addEventListener("pointerdown", (event) => {
+          if (isAnimating) return;
           if (event.pointerType === "mouse" && event.button !== 0) return;
           isDragging = true;
           pointerStartX = event.clientX;
