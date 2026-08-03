@@ -564,12 +564,22 @@
         color: inherit;
         text-decoration: none;
         transform-origin: center bottom;
-        transition: left .5s cubic-bezier(.22, 1, .36, 1), transform .5s cubic-bezier(.22, 1, .36, 1), box-shadow .35s ease;
+        transition: left .5s cubic-bezier(.22, 1, .36, 1), transform .5s cubic-bezier(.22, 1, .36, 1), opacity .38s ease, filter .38s ease, box-shadow .35s ease;
         will-change: left, transform;
       }
 
-      .prototype-homepage .hero-coverflow-card:hover,
-      .prototype-homepage .hero-coverflow-card:focus-visible {
+      .prototype-homepage .hero-coverflow-card.is-hero-muted {
+        filter: blur(1.2px) saturate(.84);
+        opacity: .72;
+      }
+
+      .prototype-homepage .hero-coverflow-card.is-hero-active {
+        filter: none;
+        opacity: 1;
+      }
+
+      .prototype-homepage .hero-coverflow-card.is-hero-active:hover,
+      .prototype-homepage .hero-coverflow-card.is-hero-active:focus-visible {
         filter: none;
       }
 
@@ -702,6 +712,47 @@
         font-size: 10px;
         letter-spacing: .04em;
         pointer-events: none;
+      }
+
+      .prototype-homepage .hero-coverflow-controls {
+        position: absolute;
+        z-index: 5;
+        inset: 0;
+        pointer-events: none;
+      }
+
+      .prototype-homepage .hero-coverflow-control {
+        position: absolute;
+        top: 52%;
+        width: 34px;
+        height: 34px;
+        padding: 0;
+        border: 1px solid rgba(255, 255, 255, .28);
+        border-radius: 50%;
+        background: rgba(255, 255, 255, .15);
+        box-shadow: 0 8px 22px rgba(0, 0, 0, .22), inset 0 1px rgba(255, 255, 255, .2);
+        color: rgba(255, 255, 255, .94);
+        cursor: pointer;
+        font: 400 20px/1 Arial, sans-serif;
+        opacity: .84;
+        pointer-events: auto;
+        transform: translateY(-50%);
+        transition: background .22s ease, border-color .22s ease, box-shadow .22s ease, opacity .22s ease, transform .22s cubic-bezier(.22, 1, .36, 1);
+        -webkit-backdrop-filter: blur(14px) saturate(.8);
+        backdrop-filter: blur(14px) saturate(.8);
+      }
+
+      .prototype-homepage .hero-coverflow-control--previous { left: clamp(14px, 3vw, 44px); }
+      .prototype-homepage .hero-coverflow-control--next { right: clamp(14px, 3vw, 44px); }
+
+      .prototype-homepage .hero-coverflow-control:hover,
+      .prototype-homepage .hero-coverflow-control:focus-visible {
+        border-color: rgba(255, 255, 255, .48);
+        background: rgba(255, 255, 255, .25);
+        box-shadow: 0 12px 26px rgba(0, 0, 0, .28), inset 0 1px rgba(255, 255, 255, .28);
+        opacity: 1;
+        outline: none;
+        transform: translateY(-50%) scale(1.06);
       }
 
       /* Keep the project cards behind the statement while they slide. */
@@ -1404,6 +1455,10 @@
             <a class="hero-coverflow-card" href="pages/skip-read.html" aria-label="查看快速阅读 APP 项目"><span class="hero-coverflow-surface"><img class="hero-coverflow-original" src="assets/hero-cards/reading-original.png" alt="快速阅读 APP 项目预览" /><span class="hero-coverflow-caption"><span><strong>职场人的阅读学习 APP</strong><small>提升用户的平均阅读时间与留存</small></span><span class="hero-coverflow-caption-arrow" aria-hidden="true">→</span></span></span></a>
             <a class="hero-coverflow-card" href="pages/xiaohongshu.html" aria-label="查看小红书本地生活项目"><span class="hero-coverflow-surface"><img class="hero-coverflow-original" src="assets/hero-cards/xhs-original.png" alt="小红书本地生活项目预览" /><span class="hero-coverflow-caption"><span><strong>小红书本地生活体验升级</strong><small>提升从种草到下单核销的转化效率</small></span><span class="hero-coverflow-caption-arrow" aria-hidden="true">→</span></span></span></a>
             <a class="hero-coverflow-card" href="pages/case.html" aria-label="查看主动 AI 记忆助手项目"><span class="hero-coverflow-surface"><img class="hero-coverflow-original" src="assets/hero-cards/remi-original.png" alt="主动 AI 记忆助手项目预览" /><span class="hero-coverflow-caption"><span><strong>商汤主动 AI 记忆助手</strong><small>解决 AI 交付物理解门槛高、用不上</small></span><span class="hero-coverflow-caption-arrow" aria-hidden="true">→</span></span></span></a>
+            <div class="hero-coverflow-controls" aria-label="项目切换">
+              <button class="hero-coverflow-control hero-coverflow-control--previous" type="button" data-hero-previous aria-label="查看上一个项目">‹</button>
+              <button class="hero-coverflow-control hero-coverflow-control--next" type="button" data-hero-next aria-label="查看下一个项目">›</button>
+            </div>
             <span class="hero-coverflow-hint" aria-hidden="true">拖动切换</span>
           </div>
         </section>
@@ -1790,6 +1845,8 @@
       const heroCoverflow = document.querySelector("[data-hero-coverflow]");
       if (heroCoverflow) {
         const heroCards = [...heroCoverflow.querySelectorAll(".hero-coverflow-card")];
+        const previousHeroControl = heroCoverflow.querySelector("[data-hero-previous]");
+        const nextHeroControl = heroCoverflow.querySelector("[data-hero-next]");
         const heroSlots = [
           { left: "-8%", offset: "0%", scale: "1", rotate: "0deg" },
           { left: "15%", offset: "0%", scale: "1", rotate: "0deg" },
@@ -1809,6 +1866,8 @@
             card.style.zIndex = String(slot === heroSlots[1] ? 2 : 1);
             card.style.transitionDuration = instant ? "0ms" : "500ms";
             card.style.transform = `translateX(calc(${slot.offset} + ${delta}px)) scale(${slot.scale}) rotate(${slot.rotate})`;
+            card.classList.toggle("is-hero-active", slot === heroSlots[1]);
+            card.classList.toggle("is-hero-muted", slot !== heroSlots[1]);
           });
         };
 
@@ -1831,6 +1890,8 @@
             card.style.transitionDuration = "500ms";
             card.style.left = target.left;
             card.style.transform = `translateX(calc(${target.offset} + 0px)) scale(${target.scale}) rotate(${target.rotate})`;
+            card.classList.toggle("is-hero-active", nextSlot === 1);
+            card.classList.toggle("is-hero-muted", nextSlot !== 1);
           });
           window.setTimeout(() => {
             activeCard = (oldActive + (direction < 0 ? 1 : -1) + heroCards.length) % heroCards.length;
@@ -1871,6 +1932,18 @@
         });
         heroCoverflow.addEventListener("pointerup", finishHeroDrag);
         heroCoverflow.addEventListener("pointercancel", finishHeroDrag);
+        [previousHeroControl, nextHeroControl].forEach((control) => {
+          if (!control) return;
+          control.addEventListener("pointerdown", (event) => event.stopPropagation());
+        });
+        previousHeroControl?.addEventListener("click", (event) => {
+          event.preventDefault();
+          animateHeroStep(1);
+        });
+        nextHeroControl?.addEventListener("click", (event) => {
+          event.preventDefault();
+          animateHeroStep(-1);
+        });
         heroCards.forEach((card) => card.addEventListener("click", (event) => {
           if (!blockClick) return;
           event.preventDefault();
