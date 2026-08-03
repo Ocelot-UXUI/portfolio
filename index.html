@@ -531,89 +531,78 @@
         pointer-events: none;
       }
 
-      .prototype-homepage .hero-project-artwork {
+      .prototype-homepage .hero-coverflow {
         position: absolute;
-        z-index: 3;
-        right: 10px;
+        z-index: 2;
+        right: 0;
         bottom: 0;
-        width: min(29vw, 360px);
-        height: clamp(160px, 25vh, 220px);
+        left: 0;
+        height: min(56vh, 430px);
         overflow: visible;
+        cursor: grab;
+        touch-action: pan-y;
+        user-select: none;
+      }
+
+      .prototype-homepage .hero-coverflow.is-dragging { cursor: grabbing; }
+
+      .prototype-homepage .hero-coverflow-card {
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        display: block;
+        width: clamp(220px, 24vw, 330px);
+        aspect-ratio: 784 / 1080;
+        overflow: hidden;
+        border-radius: 20px;
+        background: #161719;
+        box-shadow: 0 24px 42px rgba(0, 0, 0, .32);
+        transform-origin: center bottom;
+        transition: left .5s cubic-bezier(.22, 1, .36, 1), transform .5s cubic-bezier(.22, 1, .36, 1), box-shadow .35s ease;
+        will-change: left, transform;
+      }
+
+      .prototype-homepage .hero-coverflow-card:hover,
+      .prototype-homepage .hero-coverflow-card:focus-visible {
+        box-shadow: 0 30px 50px rgba(0, 0, 0, .4);
+      }
+
+      .prototype-homepage .hero-coverflow-card img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        pointer-events: none;
+      }
+
+      .prototype-homepage .hero-coverflow-card:nth-child(1) { z-index: 1; }
+      .prototype-homepage .hero-coverflow-card:nth-child(2) { z-index: 2; }
+      .prototype-homepage .hero-coverflow-card:nth-child(3) { z-index: 1; }
+
+      .prototype-homepage .hero-coverflow-hint {
+        position: absolute;
+        right: 24px;
+        bottom: 18px;
+        z-index: 4;
+        color: rgba(255, 255, 255, .55);
+        font-size: 10px;
+        letter-spacing: .04em;
+        pointer-events: none;
+      }
+
+      /* Keep the project cards behind the statement while they slide. */
+      .prototype-homepage .hero.hero-gallery h1.hero-statement { z-index: 3; }
+
+      .prototype-homepage .hero-project-artwork {
+        display: none;
       }
 
       .prototype-homepage .hero-project-card {
         --hero-card-rotate: 0deg;
-        position: absolute;
         display: block;
         margin: 0;
         color: inherit;
         text-decoration: none;
-        filter: drop-shadow(0 16px 22px rgba(0, 0, 0, .28));
-        transform: rotate(var(--hero-card-rotate));
-        transform-origin: center bottom;
-        transition: transform .38s cubic-bezier(.2, .8, .2, 1), filter .38s ease;
-      }
-
-      .prototype-homepage .hero-project-card img {
-        display: block;
-        width: 100%;
-        height: auto;
-      }
-
-      .prototype-homepage .hero-project-card:hover,
-      .prototype-homepage .hero-project-card:focus-visible {
-        z-index: 6;
-        filter: drop-shadow(0 24px 30px rgba(0, 0, 0, .38));
-        transform: translateY(-12px) rotate(var(--hero-card-rotate));
-      }
-
-      .prototype-homepage .hero-project-cnap {
-        --hero-card-rotate: -2.5deg;
-        z-index: 2;
-        bottom: 0;
-        left: 30%;
-        width: 62%;
-      }
-
-      .prototype-homepage .hero-project-remi {
-        --hero-card-rotate: -5.5deg;
-        z-index: 1;
-        bottom: 0;
-        left: -5%;
-        width: 58%;
-      }
-
-      .prototype-homepage .hero-project-remi img { transform: scale(1.035); }
-
-      .prototype-homepage .hero-project-xhs {
-        --hero-card-rotate: 2.5deg;
-        z-index: 4;
-        bottom: 0;
-        left: 70%;
-        width: 16.5%;
-      }
-
-      .prototype-homepage .hero-project-reading {
-        --hero-card-rotate: 5.5deg;
-        z-index: 3;
-        bottom: 0;
-        left: 84%;
-        width: 16.5%;
-      }
-
-      .prototype-homepage .hero-project-reading-content {
-        position: absolute;
-        z-index: 1;
-        top: 1.56%;
-        left: 3.18%;
-        width: 93.64% !important;
-        height: 96.88% !important;
-        object-fit: cover;
-      }
-
-      .prototype-homepage .hero-project-reading-frame {
-        position: relative;
-        z-index: 2;
       }
 
       .prototype-homepage .footer.footer-editorial {
@@ -1092,7 +1081,7 @@
       @media (max-width: 700px) {
         .prototype-homepage .hero-note { display: none; }
 
-        .prototype-homepage .hero-project-artwork { display: none; }
+        .prototype-homepage .hero-coverflow { display: none; }
 
         .prototype-homepage .hero.hero-gallery h1.hero-statement {
           top: auto;
@@ -1297,11 +1286,11 @@
           <span class="hero-note hero-note-right" aria-hidden="true">Selected work · 2024—2026</span>
           <div class="hero-portrait" role="img" aria-label="郭昱成个人形象插画"></div>
           <h1 class="hero-statement">有 AI 工作流，<br />懂用户，<br />能推动事情发生</h1>
-          <div class="hero-project-artwork" aria-label="项目作品预览图组">
-            <a class="hero-project-card hero-project-cnap" href="pages/cnap-research.html" aria-label="查看 CNAP 云原生工作负载管理项目"><img src="assets/hero-projects/legacy-cnap.jpg" alt="CNAP 云原生工作负载管理界面" /></a>
-            <a class="hero-project-card hero-project-remi" href="pages/case.html" aria-label="查看主动 AI 记忆助手项目"><img src="assets/hero-projects/legacy-remi.jpg" alt="主动 AI 记忆助手界面" /></a>
-            <a class="hero-project-card hero-project-xhs" href="pages/xiaohongshu.html" aria-label="查看小红书本地生活项目"><img src="assets/hero-projects/legacy-xhs.png" alt="小红书本地生活界面" /></a>
-            <a class="hero-project-card hero-project-reading" href="pages/skip-read.html" aria-label="查看快速阅读 APP 项目"><img class="hero-project-reading-content" src="assets/hero-projects/legacy-reading-content.png" alt="快速阅读 APP 界面" /><img class="hero-project-reading-frame" src="assets/hero-projects/legacy-reading-frame.png" alt="" /></a>
+          <div class="hero-coverflow" data-hero-coverflow aria-label="可拖动的项目预览">
+            <a class="hero-coverflow-card" href="pages/skip-read.html" aria-label="查看快速阅读 APP 项目"><img src="assets/hero-cards/reading-phone.jpg" alt="快速阅读 APP 项目预览" /></a>
+            <a class="hero-coverflow-card" href="pages/xiaohongshu.html" aria-label="查看小红书本地生活项目"><img src="assets/hero-cards/xhs-phones.jpg" alt="小红书本地生活项目预览" /></a>
+            <a class="hero-coverflow-card" href="pages/case.html" aria-label="查看主动 AI 记忆助手项目"><img src="assets/hero-cards/remi-laptop.jpg" alt="主动 AI 记忆助手项目预览" /></a>
+            <span class="hero-coverflow-hint" aria-hidden="true">拖动切换</span>
           </div>
         </section>
 
@@ -1682,6 +1671,65 @@
             startProjectCursorMotion();
           });
         });
+      }
+
+      const heroCoverflow = document.querySelector("[data-hero-coverflow]");
+      if (heroCoverflow) {
+        const heroCards = [...heroCoverflow.querySelectorAll(".hero-coverflow-card")];
+        const heroSlots = [
+          { left: "2%", offset: "0%", scale: ".84", rotate: "-4deg" },
+          { left: "31%", offset: "0%", scale: ".92", rotate: "0deg" },
+          { left: "58%", offset: "0%", scale: ".84", rotate: "4deg" },
+        ];
+        let activeCard = 0;
+        let pointerStartX = 0;
+        let pointerDeltaX = 0;
+        let isDragging = false;
+        let blockClick = false;
+
+        const renderHeroCoverflow = (delta = 0, instant = false) => {
+          heroCards.forEach((card, index) => {
+            const slot = heroSlots[(index - activeCard + heroCards.length) % heroCards.length];
+            card.style.left = slot.left;
+            card.style.zIndex = String(slot === heroSlots[1] ? 2 : 1);
+            card.style.transitionDuration = instant ? "0ms" : "500ms";
+            card.style.transform = `translateX(calc(${slot.offset} + ${delta}px)) scale(${slot.scale}) rotate(${slot.rotate})`;
+          });
+        };
+
+        const finishHeroDrag = () => {
+          if (!isDragging) return;
+          isDragging = false;
+          heroCoverflow.classList.remove("is-dragging");
+          if (Math.abs(pointerDeltaX) > 60) {
+            activeCard = (activeCard + (pointerDeltaX < 0 ? 1 : -1) + heroCards.length) % heroCards.length;
+            blockClick = true;
+          }
+          pointerDeltaX = 0;
+          renderHeroCoverflow();
+        };
+
+        renderHeroCoverflow(0, true);
+        heroCoverflow.addEventListener("pointerdown", (event) => {
+          if (event.pointerType === "mouse" && event.button !== 0) return;
+          isDragging = true;
+          pointerStartX = event.clientX;
+          pointerDeltaX = 0;
+          heroCoverflow.classList.add("is-dragging");
+          heroCoverflow.setPointerCapture?.(event.pointerId);
+        });
+        heroCoverflow.addEventListener("pointermove", (event) => {
+          if (!isDragging) return;
+          pointerDeltaX = event.clientX - pointerStartX;
+          renderHeroCoverflow(pointerDeltaX, true);
+        });
+        heroCoverflow.addEventListener("pointerup", finishHeroDrag);
+        heroCoverflow.addEventListener("pointercancel", finishHeroDrag);
+        heroCards.forEach((card) => card.addEventListener("click", (event) => {
+          if (!blockClick) return;
+          event.preventDefault();
+          blockClick = false;
+        }));
       }
     </script>
   </body>
