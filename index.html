@@ -548,15 +548,15 @@
 
       .prototype-homepage .hero-coverflow-card {
         position: absolute;
-        bottom: -8px;
+        bottom: clamp(48px, 8vh, 88px);
         left: 0;
         display: block;
-        width: clamp(220px, 24vw, 330px);
+        width: clamp(190px, 15.5vw, 310px);
         aspect-ratio: 784 / 1080;
         overflow: hidden;
-        border-radius: 20px;
+        border-radius: 10px;
         background: #161719;
-        box-shadow: 0 24px 42px rgba(0, 0, 0, .32);
+        box-shadow: 0 16px 30px rgba(0, 0, 0, .24);
         transform-origin: center bottom;
         transition: left .5s cubic-bezier(.22, 1, .36, 1), transform .5s cubic-bezier(.22, 1, .36, 1), box-shadow .35s ease;
         will-change: left, transform;
@@ -564,7 +564,7 @@
 
       .prototype-homepage .hero-coverflow-card:hover,
       .prototype-homepage .hero-coverflow-card:focus-visible {
-        box-shadow: 0 30px 50px rgba(0, 0, 0, .4);
+        box-shadow: 0 20px 38px rgba(0, 0, 0, .3);
       }
 
       .prototype-homepage .hero-coverflow-card img {
@@ -1677,9 +1677,9 @@
       if (heroCoverflow) {
         const heroCards = [...heroCoverflow.querySelectorAll(".hero-coverflow-card")];
         const heroSlots = [
-          { left: "2%", offset: "0%", scale: ".84", rotate: "-4deg" },
-          { left: "31%", offset: "0%", scale: ".92", rotate: "0deg" },
-          { left: "58%", offset: "0%", scale: ".84", rotate: "4deg" },
+          { left: "0%", offset: "0%", scale: "1", rotate: "0deg" },
+          { left: "22.5%", offset: "0%", scale: "1", rotate: "0deg" },
+          { left: "100%", offset: "-100%", scale: "1", rotate: "0deg" },
         ];
         let activeCard = 0;
         let pointerStartX = 0;
