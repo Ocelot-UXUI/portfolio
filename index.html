@@ -531,6 +531,41 @@
         pointer-events: none;
       }
 
+      .prototype-homepage .hero-project-strip {
+        position: absolute;
+        z-index: 3;
+        right: clamp(48px, 4.4vw, 72px);
+        bottom: clamp(42px, 8.5vh, 84px);
+        display: grid;
+        grid-template-columns: repeat(3, minmax(96px, 1fr));
+        gap: 10px;
+        width: min(26vw, 372px);
+      }
+
+      .prototype-homepage .hero-project-thumb {
+        display: block;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, .34);
+        background: #161719;
+        box-shadow: 0 10px 24px rgba(0, 0, 0, .22);
+        transition: transform .32s cubic-bezier(.2, .8, .2, 1), border-color .32s ease, box-shadow .32s ease;
+      }
+
+      .prototype-homepage .hero-project-thumb img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .prototype-homepage .hero-project-thumb:hover {
+        z-index: 1;
+        border-color: rgba(255, 255, 255, .8);
+        box-shadow: 0 16px 32px rgba(0, 0, 0, .32);
+        transform: translateY(-7px);
+      }
+
       .prototype-homepage .footer.footer-editorial {
         min-height: 640px;
         padding: 40px clamp(24px, 4.4vw, 64px) 28px;
@@ -1007,6 +1042,8 @@
       @media (max-width: 700px) {
         .prototype-homepage .hero-note { display: none; }
 
+        .prototype-homepage .hero-project-strip { display: none; }
+
         .prototype-homepage .hero.hero-gallery h1.hero-statement {
           top: auto;
           right: 22px;
@@ -1210,6 +1247,11 @@
           <span class="hero-note hero-note-right" aria-hidden="true">Selected work · 2024—2026</span>
           <div class="hero-portrait" role="img" aria-label="郭昱成个人形象插画"></div>
           <h1 class="hero-statement">有 AI 工作流，<br />懂用户，<br />能推动事情发生</h1>
+          <div class="hero-project-strip" aria-label="精选项目">
+            <a class="hero-project-thumb" href="pages/case.html" aria-label="查看主动 AI 记忆助手项目"><img src="assets/hero-projects/sensetime-memory.jpg" alt="主动 AI 记忆助手项目封面" /></a>
+            <a class="hero-project-thumb" href="pages/xiaohongshu.html" aria-label="查看小红书本地生活项目"><img src="assets/hero-projects/xiaohongshu-local.jpg" alt="小红书本地生活项目封面" /></a>
+            <a class="hero-project-thumb" href="pages/skip-read.html" aria-label="查看快速阅读 APP 项目"><img src="assets/hero-projects/reading-app.jpg" alt="快速阅读 APP 项目封面" /></a>
+          </div>
         </section>
 
         <section class="about section-reveal" id="about">
