@@ -550,16 +550,14 @@
         position: absolute;
         bottom: clamp(48px, 8vh, 88px);
         left: 0;
-        display: block;
-        width: clamp(190px, 15.5vw, 310px);
-        aspect-ratio: 784 / 1068;
-        overflow: hidden;
-        border-radius: 16px;
-        border: 1px solid rgba(255, 255, 255, .24);
-        background: linear-gradient(145deg, rgba(255, 255, 255, .2), rgba(205, 214, 231, .08) 58%, rgba(255, 255, 255, .12));
-        box-shadow: 0 18px 34px rgba(0, 0, 0, .2), inset 0 1px 0 rgba(255, 255, 255, .18);
-        backdrop-filter: blur(14px) saturate(.75);
-        -webkit-backdrop-filter: blur(14px) saturate(.75);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: clamp(220px, 22vw, 360px);
+        height: clamp(318px, 43vh, 430px);
+        overflow: visible;
+        color: inherit;
+        text-decoration: none;
         transform-origin: center bottom;
         transition: left .5s cubic-bezier(.22, 1, .36, 1), transform .5s cubic-bezier(.22, 1, .36, 1), box-shadow .35s ease;
         will-change: left, transform;
@@ -570,7 +568,20 @@
         filter: brightness(1.04);
       }
 
-      .prototype-homepage .hero-coverflow-card img {
+      .prototype-homepage .hero-coverflow-surface {
+        position: relative;
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow: hidden;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, .24);
+        background: linear-gradient(145deg, rgba(255, 255, 255, .2), rgba(205, 214, 231, .08) 58%, rgba(255, 255, 255, .12));
+        box-shadow: 0 18px 34px rgba(0, 0, 0, .2), inset 0 1px 0 rgba(255, 255, 255, .18);
+        backdrop-filter: blur(14px) saturate(.75);
+        -webkit-backdrop-filter: blur(14px) saturate(.75);
+      }
+
+      .prototype-homepage .hero-coverflow-surface img {
         position: absolute;
         inset: 0;
         display: block;
@@ -580,7 +591,7 @@
         pointer-events: none;
       }
 
-      .prototype-homepage .hero-coverflow-card::before {
+      .prototype-homepage .hero-coverflow-surface::before {
         content: "";
         position: absolute;
         inset: 0;
@@ -589,9 +600,46 @@
         pointer-events: none;
       }
 
-      .prototype-homepage .hero-coverflow-card .hero-coverflow-original {
+      .prototype-homepage .hero-coverflow-surface .hero-coverflow-original {
         z-index: 2;
         object-fit: contain;
+      }
+
+      .prototype-homepage .hero-coverflow-caption {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: end;
+        gap: 10px;
+        min-height: 60px;
+        color: rgba(255, 255, 255, .94);
+      }
+
+      .prototype-homepage .hero-coverflow-caption strong,
+      .prototype-homepage .hero-coverflow-caption small {
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .prototype-homepage .hero-coverflow-caption strong {
+        font-size: clamp(14px, 1.18vw, 18px);
+        font-weight: 600;
+        line-height: 1.2;
+      }
+
+      .prototype-homepage .hero-coverflow-caption small {
+        margin-top: 5px;
+        color: rgba(255, 255, 255, .62);
+        font-size: 11px;
+        line-height: 1.2;
+      }
+
+      .prototype-homepage .hero-coverflow-caption-arrow {
+        align-self: center;
+        color: rgba(255, 255, 255, .78);
+        font-size: 24px;
+        line-height: 1;
       }
 
       .prototype-homepage .hero-coverflow-card:nth-child(1) { z-index: 1; }
@@ -1306,9 +1354,9 @@
           <div class="hero-portrait" role="img" aria-label="郭昱成个人形象插画"></div>
           <h1 class="hero-statement">有 AI 工作流，<br />懂用户，<br />能推动事情发生</h1>
           <div class="hero-coverflow" data-hero-coverflow aria-label="可拖动的项目预览">
-            <a class="hero-coverflow-card" href="pages/skip-read.html" aria-label="查看快速阅读 APP 项目"><img class="hero-coverflow-original" src="assets/hero-cards/reading-original.png" alt="快速阅读 APP 项目预览" /></a>
-            <a class="hero-coverflow-card" href="pages/xiaohongshu.html" aria-label="查看小红书本地生活项目"><img class="hero-coverflow-original" src="assets/hero-cards/xhs-original.png" alt="小红书本地生活项目预览" /></a>
-            <a class="hero-coverflow-card" href="pages/case.html" aria-label="查看主动 AI 记忆助手项目"><img class="hero-coverflow-original" src="assets/hero-cards/remi-original.png" alt="主动 AI 记忆助手项目预览" /></a>
+            <a class="hero-coverflow-card" href="pages/skip-read.html" aria-label="查看快速阅读 APP 项目"><span class="hero-coverflow-surface"><img class="hero-coverflow-original" src="assets/hero-cards/reading-original.png" alt="快速阅读 APP 项目预览" /></span><span class="hero-coverflow-caption"><span><strong>职场人的阅读学习 APP</strong><small>提升用户的平均阅读时间与留存</small></span><span class="hero-coverflow-caption-arrow" aria-hidden="true">→</span></span></a>
+            <a class="hero-coverflow-card" href="pages/xiaohongshu.html" aria-label="查看小红书本地生活项目"><span class="hero-coverflow-surface"><img class="hero-coverflow-original" src="assets/hero-cards/xhs-original.png" alt="小红书本地生活项目预览" /></span><span class="hero-coverflow-caption"><span><strong>小红书本地生活体验升级</strong><small>提升从种草到下单核销的转化效率</small></span><span class="hero-coverflow-caption-arrow" aria-hidden="true">→</span></span></a>
+            <a class="hero-coverflow-card" href="pages/case.html" aria-label="查看主动 AI 记忆助手项目"><span class="hero-coverflow-surface"><img class="hero-coverflow-original" src="assets/hero-cards/remi-original.png" alt="主动 AI 记忆助手项目预览" /></span><span class="hero-coverflow-caption"><span><strong>商汤主动 AI 记忆助手</strong><small>解决 AI 交付物理解门槛高、用不上</small></span><span class="hero-coverflow-caption-arrow" aria-hidden="true">→</span></span></a>
             <span class="hero-coverflow-hint" aria-hidden="true">拖动切换</span>
           </div>
         </section>
