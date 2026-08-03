@@ -1843,7 +1843,7 @@
           if (!isDragging) return;
           isDragging = false;
           heroCoverflow.classList.remove("is-dragging");
-          if (Math.abs(pointerDeltaX) > 60) {
+          if (Math.abs(pointerDeltaX) > 36) {
             animateHeroStep(pointerDeltaX < 0 ? -1 : 1);
             blockClick = true;
           } else {
@@ -1856,6 +1856,7 @@
         heroCoverflow.addEventListener("pointerdown", (event) => {
           if (isAnimating) return;
           if (event.pointerType === "mouse" && event.button !== 0) return;
+          event.preventDefault();
           isDragging = true;
           pointerStartX = event.clientX;
           pointerDeltaX = 0;
@@ -1864,7 +1865,8 @@
         });
         heroCoverflow.addEventListener("pointermove", (event) => {
           if (!isDragging) return;
-          pointerDeltaX = event.clientX - pointerStartX;
+          event.preventDefault();
+          pointerDeltaX = (event.clientX - pointerStartX) * 1.15;
           renderHeroCoverflow(pointerDeltaX, true);
         });
         heroCoverflow.addEventListener("pointerup", finishHeroDrag);
