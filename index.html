@@ -1849,7 +1849,7 @@
         const nextHeroControl = heroCoverflow.querySelector("[data-hero-next]");
         const heroSlots = [
           { left: "-8%", offset: "0%", scale: "1", rotate: "0deg" },
-          { left: "15%", offset: "0%", scale: "1.55", rotate: "0deg" },
+          { left: "25%", offset: "0%", scaleX: "1.65", scaleY: "1.25", rotate: "0deg" },
           { left: "100%", offset: "-100%", scale: "1", rotate: "0deg" },
         ];
         let activeCard = 0;
@@ -1865,7 +1865,7 @@
             card.style.left = slot.left;
             card.style.zIndex = String(slot === heroSlots[1] ? 2 : 1);
             card.style.transitionDuration = instant ? "0ms" : "500ms";
-            card.style.transform = `translateX(calc(${slot.offset} + ${delta}px)) scale(${slot.scale}) rotate(${slot.rotate})`;
+            card.style.transform = `translateX(calc(${slot.offset} + ${delta}px)) scale(${slot.scaleX || slot.scale}, ${slot.scaleY || slot.scale}) rotate(${slot.rotate})`;
             card.classList.toggle("is-hero-active", slot === heroSlots[1]);
             card.classList.toggle("is-hero-muted", slot !== heroSlots[1]);
           });
@@ -1889,7 +1889,7 @@
             card.style.zIndex = String(exitsLeft || exitsRight ? 0 : nextSlot === 1 ? 2 : 1);
             card.style.transitionDuration = "500ms";
             card.style.left = target.left;
-            card.style.transform = `translateX(calc(${target.offset} + 0px)) scale(${target.scale}) rotate(${target.rotate})`;
+            card.style.transform = `translateX(calc(${target.offset} + 0px)) scale(${target.scaleX || target.scale}, ${target.scaleY || target.scale}) rotate(${target.rotate})`;
             card.classList.toggle("is-hero-active", nextSlot === 1);
             card.classList.toggle("is-hero-muted", nextSlot !== 1);
           });
