@@ -702,9 +702,18 @@
 
       .prototype-homepage .hero-coverflow-caption-arrow {
         align-self: center;
+        display: inline-block;
         color: rgba(255, 255, 255, .78);
         font-size: 24px;
         line-height: 1;
+        transform-origin: 50% 50%;
+        transition: transform .32s cubic-bezier(.22, 1, .36, 1), color .24s ease;
+      }
+
+      .prototype-homepage .hero-coverflow-card:hover .hero-coverflow-caption-arrow,
+      .prototype-homepage .hero-coverflow-card:focus-visible .hero-coverflow-caption-arrow {
+        color: rgba(255, 255, 255, .96);
+        transform: rotate(-45deg);
       }
 
       .prototype-homepage .hero-coverflow-card:nth-child(1) { z-index: 1; }
