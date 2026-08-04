@@ -732,6 +732,9 @@
       .prototype-homepage .hero-coverflow-card:nth-child(1) { z-index: 1; }
       .prototype-homepage .hero-coverflow-card:nth-child(2) { z-index: 2; }
       .prototype-homepage .hero-coverflow-card:nth-child(3) { z-index: 1; }
+      .prototype-homepage .hero-coverflow-card.is-hero-placeholder .hero-coverflow-surface {
+        background: rgba(255, 255, 255, .045);
+      }
 
       .prototype-homepage .hero-coverflow-hint {
         position: absolute;
@@ -1510,6 +1513,7 @@
             <a class="hero-coverflow-card" href="pages/skip-read.html" aria-label="查看快速阅读 APP 项目"><span class="hero-coverflow-surface"><img class="hero-coverflow-original" src="assets/hero-cards/reading-original.png" alt="快速阅读 APP 项目预览" /><span class="hero-coverflow-caption"><span><strong>职场人的阅读学习 APP</strong><small>提升用户的平均阅读时间与留存</small></span><span class="hero-coverflow-caption-arrow" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9.25" stroke="currentColor"/><path d="M7.7 12.3 12 8m0 0H7m5 0v5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></span></a>
             <a class="hero-coverflow-card" href="pages/xiaohongshu.html" aria-label="查看小红书本地生活项目"><span class="hero-coverflow-surface"><img class="hero-coverflow-original" src="assets/hero-cards/xhs-original.png" alt="小红书本地生活项目预览" /><span class="hero-coverflow-caption"><span><strong>小红书本地生活体验升级</strong><small>提升从种草到下单核销的转化效率</small></span><span class="hero-coverflow-caption-arrow" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9.25" stroke="currentColor"/><path d="M7.7 12.3 12 8m0 0H7m5 0v5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></span></a>
             <a class="hero-coverflow-card" href="pages/case.html" aria-label="查看主动 AI 记忆助手项目"><span class="hero-coverflow-surface"><img class="hero-coverflow-original" src="assets/hero-cards/remi-original.png" alt="主动 AI 记忆助手项目预览" /><span class="hero-coverflow-caption"><span><strong>商汤主动 AI 记忆助手</strong><small>解决 AI 交付物理解门槛高、用不上</small></span><span class="hero-coverflow-caption-arrow" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9.25" stroke="currentColor"/><path d="M7.7 12.3 12 8m0 0H7m5 0v5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></span></a>
+            <div class="hero-coverflow-card is-hero-placeholder" aria-hidden="true"><span class="hero-coverflow-surface"></span></div>
             <div class="hero-coverflow-controls" aria-label="项目切换">
               <button class="hero-coverflow-control hero-coverflow-control--previous" type="button" data-hero-previous aria-label="查看上一个项目">‹</button>
               <button class="hero-coverflow-control hero-coverflow-control--next" type="button" data-hero-next aria-label="查看下一个项目">›</button>
@@ -1907,6 +1911,7 @@
           { left: "-8%", offset: "0%", scale: "1", rotate: "0deg" },
           { left: "25%", offset: "0%", scale: "1.25", rotate: "0deg" },
           { left: "100%", offset: "-100%", scale: "1", rotate: "0deg" },
+          { left: "112%", offset: "-100%", scale: ".9", rotate: "0deg" },
         ];
         let activeCard = 0;
         let pointerStartX = 0;
