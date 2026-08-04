@@ -631,11 +631,14 @@
 
       .prototype-homepage .hero-coverflow-surface img {
         position: absolute;
-        inset: 0;
+        top: 0;
+        right: 0;
+        left: 0;
         display: block;
         width: 100%;
-        height: calc(100% - 74px);
+        height: calc(100% - 88px);
         object-fit: contain;
+        object-position: center top;
         pointer-events: none;
       }
 
@@ -654,6 +657,8 @@
       }
 
       .prototype-homepage .hero-coverflow-card:nth-child(1) .hero-coverflow-original {
+        -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 76%, rgba(0, 0, 0, .7) 88%, transparent 100%);
+        mask-image: linear-gradient(to bottom, #000 0%, #000 76%, rgba(0, 0, 0, .7) 88%, transparent 100%);
         transform: scale(.82);
         transform-origin: center center;
       }
