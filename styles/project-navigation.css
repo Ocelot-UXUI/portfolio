@@ -38,6 +38,8 @@ body .project-nav {
   border: 0 !important;
   border-radius: 0;
   background: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
   box-shadow: none !important;
   overflow: visible;
   isolation: isolate;
