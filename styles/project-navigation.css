@@ -52,10 +52,10 @@ body .project-nav .project-nav-index {
   align-items: center;
   border: 1px solid rgba(255,255,255,.16);
   border-radius: 999px;
-  background: rgba(12,14,20,.58) !important;
+  background: rgba(12,14,20,.28) !important;
   -webkit-backdrop-filter: blur(18px) saturate(135%);
   backdrop-filter: blur(18px) saturate(135%);
-  box-shadow: 0 8px 24px rgba(0,0,0,.16), inset 0 1px rgba(255,255,255,.06);
+  box-shadow: 0 8px 24px rgba(0,0,0,.08), inset 0 1px rgba(255,255,255,.06);
 }
 
 body .project-nav .project-back {
@@ -116,7 +116,7 @@ body .project-nav .nav-random-swap {
 body .project-nav .project-back:hover,
 body .project-nav .project-back:focus-visible {
   border-color: rgba(255,255,255,.3);
-  background: rgba(28,31,42,.72) !important;
+  background: rgba(28,31,42,.42) !important;
   transform: translateY(-1px);
 }
 
