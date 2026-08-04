@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="preload" as="image" href="assets/hero-background.jpg" fetchpriority="high" />
     <link rel="stylesheet" href="styles/styles.css?v=20260729-12" />
-    <link rel="stylesheet" href="styles/project-navigation.css?v=20260804-4" />
+    <link rel="stylesheet" href="styles/project-navigation.css?v=20260804-5" />
     <script src="scripts/project-navigation.js?v=20260804-3" defer></script>
     <style>
       .prototype-homepage .nav {
@@ -1381,10 +1381,10 @@
       .prototype-homepage .nav.is-scrolled {
         isolation: auto;
         border-bottom-color: transparent;
-        background: transparent;
-        -webkit-backdrop-filter: none;
-        backdrop-filter: none;
-        box-shadow: none;
+        background: rgba(12, 14, 18, .36);
+        -webkit-backdrop-filter: blur(22px) saturate(130%);
+        backdrop-filter: blur(22px) saturate(130%);
+        box-shadow: inset 0 1px rgba(255, 255, 255, .14);
       }
 
       .prototype-homepage .nav::before,
@@ -1408,7 +1408,7 @@
       }
 
       .prototype-homepage .nav-cta {
-        background: transparent;
+        background: rgba(255, 255, 255, .045);
       }
 
       .prototype-homepage .nav-active-indicator {
