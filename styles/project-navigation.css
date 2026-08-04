@@ -253,3 +253,145 @@ body .project-nav:not(.project-nav--tabs) .project-nav-title {
   body .project-nav .project-view-tab { font-size: 11px !important; }
   body .project-nav .project-view-tab-indicator { bottom: 1px !important; }
 }
+
+/* Three-part project navigation: independent controls at both edges and a quiet project name in the centre. */
+body .project-nav,
+body .project-nav.is-scrolled,
+body .project-nav.project-nav--compact {
+  position: sticky;
+  transform: none !important;
+  height: 52px;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+body .project-nav.project-nav--hidden {
+  transform: none !important;
+}
+
+body .project-nav.project-nav--tabs {
+  grid-template-columns: minmax(180px, 1fr) minmax(0, 1.5fr) minmax(180px, 1fr);
+  gap: clamp(18px, 3vw, 56px);
+}
+
+body .project-nav.project-nav--tabs .project-nav-title,
+body .project-nav:not(.project-nav--tabs) .project-nav-title {
+  display: flex;
+  justify-self: center;
+  justify-content: center;
+  width: auto;
+  max-width: min(42vw, 560px);
+  height: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent !important;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  box-shadow: none;
+  color: #fff !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  text-align: center;
+}
+
+body .project-nav.project-nav--tabs .project-view-tabs {
+  justify-self: end;
+  width: max-content;
+  max-width: 100%;
+  height: 44px;
+  gap: 0;
+  padding: 3px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .16);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .08);
+  -webkit-backdrop-filter: blur(18px) saturate(135%);
+  backdrop-filter: blur(18px) saturate(135%);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .08), inset 0 1px rgba(255, 255, 255, .06);
+  opacity: 1;
+}
+
+body .project-nav .project-view-tab {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 13px;
+  border-radius: 999px;
+  color: rgba(255, 255, 255, .68) !important;
+  font-size: 12px !important;
+  line-height: 1;
+  text-decoration: none;
+  transition: background-color .18s ease, color .18s ease;
+}
+
+body .project-nav .project-view-tab:hover,
+body .project-nav .project-view-tab:focus-visible,
+body .project-nav .project-view-tab.is-active {
+  background: rgba(255, 255, 255, .14);
+  color: #fff !important;
+}
+
+body .project-nav .project-view-tab-indicator {
+  display: none !important;
+}
+
+body:not(.deliverables-page):not(.dodo-page):not(.dodo-demo-page):not(.demo-page) .project-nav.project-nav--tabs .project-view-tabs {
+  border-color: rgba(16, 18, 24, .1);
+  background: rgba(255, 255, 255, .72);
+  box-shadow: 0 8px 24px rgba(20, 24, 32, .08), inset 0 1px rgba(255, 255, 255, .6);
+}
+
+body:not(.deliverables-page):not(.dodo-page):not(.dodo-demo-page):not(.demo-page) .project-nav .project-view-tab {
+  color: rgba(27, 28, 34, .62) !important;
+}
+
+body:not(.deliverables-page):not(.dodo-page):not(.dodo-demo-page):not(.demo-page) .project-nav .project-view-tab:hover,
+body:not(.deliverables-page):not(.dodo-page):not(.dodo-demo-page):not(.demo-page) .project-nav .project-view-tab:focus-visible,
+body:not(.deliverables-page):not(.dodo-page):not(.dodo-demo-page):not(.demo-page) .project-nav .project-view-tab.is-active {
+  background: rgba(16, 18, 24, .08);
+  color: #1b1c22 !important;
+}
+
+@media (max-width: 700px) {
+  body .project-nav.project-nav--tabs {
+    grid-template-columns: 40px minmax(0, 1fr) minmax(0, 172px);
+    gap: 10px;
+  }
+
+  body .project-nav.project-nav--tabs .project-back {
+    width: 40px;
+    padding: 0 !important;
+    justify-content: center;
+    font-size: 0 !important;
+  }
+
+  body .project-nav.project-nav--tabs .project-back > span:first-child {
+    margin: 0;
+  }
+
+  body .project-nav.project-nav--tabs .project-nav-title {
+    display: none;
+  }
+
+  body .project-nav.project-nav--tabs .project-view-tabs {
+    justify-self: stretch;
+    width: 100%;
+    max-width: none;
+    height: 40px;
+    margin: 0;
+    padding: 2px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  body .project-nav.project-nav--tabs .project-view-tabs::-webkit-scrollbar { display: none; }
+
+  body .project-nav .project-view-tab {
+    flex: 0 0 auto;
+    height: 34px;
+    padding: 0 9px;
+    font-size: 11px !important;
+  }
+}
