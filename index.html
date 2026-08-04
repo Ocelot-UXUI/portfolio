@@ -193,6 +193,7 @@
         position: relative;
         isolation: isolate;
         overflow: hidden;
+        border-top: 0;
         padding: 120px clamp(24px, 5vw, 76px) 132px;
         background: #08090b;
       }
@@ -515,6 +516,18 @@
         padding: 0;
         isolation: isolate;
         background: #08090a;
+      }
+
+      .prototype-homepage .hero.hero-gallery::after {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
+        height: 22%;
+        background: linear-gradient(180deg, rgba(8, 9, 10, 0), #08090a 88%);
+        content: "";
+        pointer-events: none;
       }
 
       .prototype-homepage .hero-note {
@@ -1559,7 +1572,6 @@
               <button class="hero-coverflow-control hero-coverflow-control--previous" type="button" data-hero-previous aria-label="查看上一个项目"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3m0 0 4-4m-4 4 4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
               <button class="hero-coverflow-control hero-coverflow-control--next" type="button" data-hero-next aria-label="查看下一个项目"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0-4-4m4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
             </div>
-            <span class="hero-coverflow-hint" aria-hidden="true">拖动切换</span>
           </div>
         </section>
 
