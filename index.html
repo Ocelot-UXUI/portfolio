@@ -758,43 +758,67 @@
 
       .prototype-homepage .hero-coverflow-controls {
         position: absolute;
+        top: 18px;
+        left: clamp(24px, 3vw, 48px);
         z-index: 5;
-        inset: 0;
-        pointer-events: none;
-      }
-
-      .prototype-homepage .hero-coverflow-control {
-        position: absolute;
-        top: 52%;
-        width: 34px;
-        height: 34px;
-        padding: 0;
+        display: flex;
+        width: 86px;
+        height: 40px;
+        overflow: hidden;
         border: 1px solid rgba(255, 255, 255, .28);
-        border-radius: 50%;
-        background: rgba(255, 255, 255, .15);
-        box-shadow: 0 8px 22px rgba(0, 0, 0, .22), inset 0 1px rgba(255, 255, 255, .2);
-        color: rgba(255, 255, 255, .94);
-        cursor: pointer;
-        font: 400 20px/1 Arial, sans-serif;
-        opacity: .84;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, .12);
+        box-shadow: 0 8px 22px rgba(0, 0, 0, .22), inset 0 1px rgba(255, 255, 255, .18);
         pointer-events: auto;
-        transform: translateY(-50%);
-        transition: background .22s ease, border-color .22s ease, box-shadow .22s ease, opacity .22s ease, transform .22s cubic-bezier(.22, 1, .36, 1);
         -webkit-backdrop-filter: blur(14px) saturate(.8);
         backdrop-filter: blur(14px) saturate(.8);
       }
 
-      .prototype-homepage .hero-coverflow-control--previous { left: clamp(14px, 3vw, 44px); }
-      .prototype-homepage .hero-coverflow-control--next { right: clamp(14px, 3vw, 44px); }
+      .prototype-homepage .hero-coverflow-control {
+        position: relative;
+        flex: 1 1 50%;
+        width: auto;
+        height: 100%;
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+        color: rgba(255, 255, 255, .94);
+        cursor: pointer;
+        font: inherit;
+        opacity: .82;
+        pointer-events: auto;
+        transition: background .22s ease, color .22s ease, opacity .22s ease;
+      }
+
+      .prototype-homepage .hero-coverflow-control--next {
+        border-left: 1px solid rgba(255, 255, 255, .16);
+      }
+
+      .prototype-homepage .hero-coverflow-control svg {
+        width: 15px;
+        height: 15px;
+        display: block;
+        margin: auto;
+        transition: transform .3s cubic-bezier(.22, 1, .36, 1);
+      }
 
       .prototype-homepage .hero-coverflow-control:hover,
       .prototype-homepage .hero-coverflow-control:focus-visible {
-        border-color: rgba(255, 255, 255, .48);
-        background: rgba(255, 255, 255, .25);
-        box-shadow: 0 12px 26px rgba(0, 0, 0, .28), inset 0 1px rgba(255, 255, 255, .28);
+        background: rgba(255, 255, 255, .16);
         opacity: 1;
         outline: none;
-        transform: translateY(-50%) scale(1.06);
+      }
+
+      .prototype-homepage .hero-coverflow-control--previous:hover svg,
+      .prototype-homepage .hero-coverflow-control--previous:focus-visible svg {
+        transform: translateX(-2px);
+      }
+
+      .prototype-homepage .hero-coverflow-control--next:hover svg,
+      .prototype-homepage .hero-coverflow-control--next:focus-visible svg {
+        transform: translateX(2px);
       }
 
       /* Keep the project cards behind the statement while they slide. */
@@ -1524,8 +1548,8 @@
             <a class="hero-coverflow-card" href="pages/case.html" aria-label="查看主动 AI 记忆助手项目"><span class="hero-coverflow-surface"><img class="hero-coverflow-original" src="assets/hero-cards/remi-original.png" alt="主动 AI 记忆助手项目预览" /><span class="hero-coverflow-caption"><span><strong>商汤主动 AI 记忆助手</strong><small>解决 AI 交付物理解门槛高、用不上</small></span><span class="hero-coverflow-caption-arrow" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9.25" stroke="currentColor"/><path d="M7.7 12.3 12 8m0 0H7m5 0v5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></span></a>
             <div class="hero-coverflow-card is-hero-placeholder" aria-hidden="true"><span class="hero-coverflow-surface"></span></div>
             <div class="hero-coverflow-controls" aria-label="项目切换">
-              <button class="hero-coverflow-control hero-coverflow-control--previous" type="button" data-hero-previous aria-label="查看上一个项目">‹</button>
-              <button class="hero-coverflow-control hero-coverflow-control--next" type="button" data-hero-next aria-label="查看下一个项目">›</button>
+              <button class="hero-coverflow-control hero-coverflow-control--previous" type="button" data-hero-previous aria-label="查看上一个项目"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3m0 0 4-4m-4 4 4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+              <button class="hero-coverflow-control hero-coverflow-control--next" type="button" data-hero-next aria-label="查看下一个项目"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10m0 0-4-4m4 4-4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
             </div>
             <span class="hero-coverflow-hint" aria-hidden="true">拖动切换</span>
           </div>
