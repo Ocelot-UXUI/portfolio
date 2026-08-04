@@ -190,7 +190,28 @@
       }
 
       .prototype-homepage .about {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
         padding: 120px clamp(24px, 5vw, 76px) 132px;
+        background: #08090b;
+      }
+
+      .prototype-homepage .about::before {
+        position: absolute;
+        z-index: 0;
+        inset: 0;
+        background:
+          linear-gradient(90deg, rgba(8, 9, 11, .86) 0%, rgba(8, 9, 11, .38) 38%, rgba(8, 9, 11, .5) 70%, rgba(8, 9, 11, .88) 100%),
+          linear-gradient(180deg, rgba(8, 9, 11, .74) 0%, rgba(8, 9, 11, .18) 40%, rgba(8, 9, 11, .94) 100%),
+          url("assets/about-background.png") center / cover no-repeat;
+        content: "";
+        pointer-events: none;
+      }
+
+      .prototype-homepage .about > * {
+        position: relative;
+        z-index: 1;
       }
 
       .prototype-homepage .about-heading {
