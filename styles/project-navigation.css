@@ -270,13 +270,16 @@ body .project-nav.project-nav--hidden {
 }
 
 body .project-nav.project-nav--tabs {
-  grid-template-columns: minmax(180px, 1fr) minmax(0, 1.5fr) minmax(180px, 1fr);
-  gap: clamp(18px, 3vw, 56px);
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px;
 }
 
 body .project-nav.project-nav--tabs .project-nav-title,
 body .project-nav:not(.project-nav--tabs) .project-nav-title {
   display: flex;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   justify-self: center;
   justify-content: center;
   width: auto;
@@ -299,11 +302,11 @@ body .project-nav:not(.project-nav--tabs) .project-nav-title {
 body .project-nav.project-nav--tabs .project-view-tabs {
   justify-self: end;
   width: max-content;
-  max-width: 100%;
+  max-width: none;
   height: 44px;
   gap: 0;
   padding: 3px;
-  overflow: hidden;
+  overflow: visible;
   border: 1px solid rgba(255, 255, 255, .16);
   border-radius: 999px;
   background: rgba(255, 255, 255, .08);
@@ -335,6 +338,14 @@ body .project-nav .project-view-tab.is-active {
 
 body .project-nav .project-view-tab-indicator {
   display: none !important;
+}
+
+body .project-nav .project-back {
+  line-height: 1;
+}
+
+body .project-nav .project-back > span:first-child {
+  line-height: 1;
 }
 
 body:not(.deliverables-page):not(.dodo-page):not(.dodo-demo-page):not(.demo-page) .project-nav.project-nav--tabs .project-view-tabs {
@@ -372,6 +383,8 @@ body:not(.deliverables-page):not(.dodo-page):not(.dodo-demo-page):not(.demo-page
   }
 
   body .project-nav.project-nav--tabs .project-nav-title {
+    position: static;
+    transform: none;
     display: none;
   }
 
