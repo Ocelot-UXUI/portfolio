@@ -1,17 +1,79 @@
 (() => {
-  const makeRollingLabel = (text) => {
+  const shuffle = (items) => [...items].sort(() => Math.random() - 0.5);
+
+  const createSwapLabel = (text, extraClass = "") => {
     const label = document.createElement("span");
-    label.className = "project-view-tab-label";
-    label.setAttribute("aria-hidden", "true");
-    [...text].forEach((character, index) => {
-      const item = document.createElement("span");
-      item.className = "project-view-tab-char";
-      item.style.setProperty("--project-tab-delay", `${index * 30}ms`);
-      item.textContent = character;
-      label.append(item);
+    label.className = `nav-random-swap ${extraClass}`.trim();
+
+    const accessible = document.createElement("span");
+    accessible.className = "nav-random-swap-sr";
+    accessible.textContent = text;
+    label.append(accessible);
+
+    [...text].forEach((character) => {
+      const slot = document.createElement("span");
+      slot.className = "nav-random-swap-slot";
+      slot.setAttribute("aria-hidden", "true");
+      if (/\s/.test(character)) slot.classList.add("is-space");
+
+      const primary = document.createElement("span");
+      primary.className = "nav-random-swap-primary";
+      primary.textContent = character === " " ? "\u00a0" : character;
+
+      const secondary = document.createElement("span");
+      secondary.className = "nav-random-swap-secondary";
+      secondary.textContent = character === " " ? "\u00a0" : character;
+
+      slot.append(primary, secondary);
+      label.append(slot);
     });
     return label;
   };
+
+  const bindRandomSwap = (target, label) => {
+    if (!target || !label || target.dataset.randomSwapBound === "true") return;
+    target.dataset.randomSwapBound = "true";
+    const slots = [...label.querySelectorAll(".nav-random-swap-slot:not(.is-space)")];
+    const randomize = () => {
+      shuffle(slots).forEach((slot, order) => slot.style.setProperty("--nav-swap-order", order));
+    };
+    const enter = () => {
+      randomize();
+      label.classList.add("is-swap-hovered");
+    };
+    const leave = () => {
+      randomize();
+      label.classList.remove("is-swap-hovered");
+    };
+    randomize();
+    target.addEventListener("pointerenter", enter);
+    target.addEventListener("pointerleave", leave);
+    target.addEventListener("focus", enter);
+    target.addEventListener("blur", leave);
+  };
+
+  const enhanceElement = (element) => {
+    if (!element || element.dataset.randomSwapEnhanced === "true") return;
+    const text = element.textContent.trim();
+    if (!text) return;
+    const label = createSwapLabel(text);
+    element.replaceChildren(label);
+    element.dataset.randomSwapEnhanced = "true";
+    bindRandomSwap(element, label);
+  };
+
+  const enhanceDirectText = (element) => {
+    if (!element || element.dataset.randomSwapEnhanced === "true") return;
+    const textNodes = [...element.childNodes].filter((node) => node.nodeType === Node.TEXT_NODE && node.textContent.trim());
+    textNodes.forEach((node) => {
+      const label = createSwapLabel(node.textContent.trim());
+      node.replaceWith(label);
+      bindRandomSwap(element, label);
+    });
+    element.dataset.randomSwapEnhanced = "true";
+  };
+
+  const makeRollingLabel = (text) => createSwapLabel(text, "project-view-tab-label");
 
   document.querySelectorAll(".project-nav").forEach((header) => {
     const switcher = header.querySelector(".project-view-switch, .portfolio-view-switch");
@@ -28,13 +90,15 @@
 
     [...select.options].forEach((option) => {
       const tab = document.createElement(option.disabled ? "span" : "a");
+      const label = makeRollingLabel(option.text);
       tab.className = "project-view-tab";
-      tab.append(makeRollingLabel(option.text));
+      tab.append(label);
       if (option.disabled) {
         tab.setAttribute("aria-disabled", "true");
       } else {
         tab.href = option.value;
         tab.setAttribute("aria-label", option.text);
+        bindRandomSwap(tab, label);
       }
       if (option.selected) {
         tab.classList.add("is-active");
@@ -59,15 +123,17 @@
 
     interactiveTabs.forEach((tab) => {
       tab.addEventListener("pointerenter", () => positionIndicator(tab));
-      tab.addEventListener("mouseenter", () => positionIndicator(tab));
       tab.addEventListener("focus", () => positionIndicator(tab));
     });
     tabs.addEventListener("pointerleave", () => positionIndicator(activeTab()));
-    tabs.addEventListener("mouseleave", () => positionIndicator(activeTab()));
     window.addEventListener("resize", () => positionIndicator(activeTab(), true));
     requestAnimationFrame(() => {
       positionIndicator(activeTab(), true);
       tabs.classList.add("is-ready");
     });
   });
+
+  document.querySelectorAll(".project-nav .project-back").forEach(enhanceDirectText);
+  document.querySelectorAll(".project-nav .project-nav-title, .project-nav .project-nav-index").forEach(enhanceElement);
+  document.querySelectorAll(".prototype-homepage .nav-logo, .prototype-homepage .nav-label, .prototype-homepage .nav-contact-label").forEach(enhanceElement);
 })();
