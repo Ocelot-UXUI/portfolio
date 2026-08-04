@@ -102,7 +102,6 @@
     header.classList.add("project-nav--tabs");
   });
 
-  document.querySelectorAll(".project-nav .project-back").forEach(enhanceDirectText);
   document.querySelectorAll(".project-nav .project-nav-index").forEach(enhanceElement);
   document.querySelectorAll(".prototype-homepage .nav-logo, .prototype-homepage .nav-label, .prototype-homepage .nav-contact-label").forEach(enhanceElement);
 })();
