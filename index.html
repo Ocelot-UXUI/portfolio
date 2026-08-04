@@ -1387,6 +1387,11 @@
         box-shadow: inset 0 1px rgba(255, 255, 255, .14);
       }
 
+      .prototype-homepage .nav.nav--compact {
+        background: rgba(12, 14, 18, .54);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, .22), inset 0 1px rgba(255, 255, 255, .16);
+      }
+
       .prototype-homepage .nav::before,
       .prototype-homepage .nav::after {
         display: none;
@@ -1422,15 +1427,28 @@
 
       .prototype-homepage .nav,
       .prototype-homepage .nav.is-scrolled {
-        position: absolute;
+        position: sticky;
         top: 0;
         left: 50%;
         width: 100vw;
-        margin: 0;
+        margin: 0 0 -56px;
+        transform: translateX(-50%);
+      }
+
+      .prototype-homepage .nav.nav--hidden {
+        transform: translate(-50%, -100%);
+      }
+
+      .prototype-homepage .nav:focus-within {
         transform: translateX(-50%);
       }
 
       @media (max-width: 700px) {
+        .prototype-homepage .nav,
+        .prototype-homepage .nav.is-scrolled {
+          margin-bottom: -52px;
+        }
+
         .prototype-homepage .hero-portrait {
           background-position: 56% center;
         }
@@ -1655,6 +1673,7 @@
         }
 
         stickyNav.classList.toggle("is-scrolled", currentScrollY > 16);
+        stickyNav.classList.toggle("nav--compact", pastHero);
         stickyNav.classList.toggle("nav--hidden", pastHero && downwardScrollDistance >= NAV_HIDE_DISTANCE);
         previousScrollY = currentScrollY;
       };
