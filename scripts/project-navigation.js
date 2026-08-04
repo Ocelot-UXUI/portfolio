@@ -73,8 +73,6 @@
     element.dataset.randomSwapEnhanced = "true";
   };
 
-  const makeRollingLabel = (text) => createSwapLabel(text, "project-view-tab-label");
-
   document.querySelectorAll(".project-nav").forEach((header) => {
     const switcher = header.querySelector(".project-view-switch, .portfolio-view-switch");
     const select = switcher?.querySelector("select");
@@ -84,21 +82,15 @@
     const tabs = document.createElement("nav");
     tabs.className = "project-view-tabs";
     tabs.setAttribute("aria-label", select.getAttribute("aria-label") || "切换项目展示");
-    const indicator = document.createElement("span");
-    indicator.className = "project-view-tab-indicator";
-    indicator.setAttribute("aria-hidden", "true");
-
     [...select.options].forEach((option) => {
       const tab = document.createElement(option.disabled ? "span" : "a");
-      const label = makeRollingLabel(option.text);
       tab.className = "project-view-tab";
-      tab.append(label);
+      tab.textContent = option.text;
       if (option.disabled) {
         tab.setAttribute("aria-disabled", "true");
       } else {
         tab.href = option.value;
         tab.setAttribute("aria-label", option.text);
-        bindRandomSwap(tab, label);
       }
       if (option.selected) {
         tab.classList.add("is-active");
@@ -106,34 +98,11 @@
       }
       tabs.append(tab);
     });
-    tabs.append(indicator);
-    header.insertBefore(tabs, title);
+    header.insertBefore(tabs, switcher);
     header.classList.add("project-nav--tabs");
-
-    const interactiveTabs = [...tabs.querySelectorAll("a.project-view-tab")];
-    const positionIndicator = (tab, instant = false) => {
-      if (!tab) return;
-      const tabsRect = tabs.getBoundingClientRect();
-      const tabRect = tab.getBoundingClientRect();
-      indicator.style.transitionDuration = instant ? "0ms" : "380ms";
-      indicator.style.width = `${tabRect.width}px`;
-      indicator.style.transform = `translateX(${tabRect.left - tabsRect.left}px)`;
-    };
-    const activeTab = () => tabs.querySelector(".project-view-tab.is-active") || interactiveTabs[0];
-
-    interactiveTabs.forEach((tab) => {
-      tab.addEventListener("pointerenter", () => positionIndicator(tab));
-      tab.addEventListener("focus", () => positionIndicator(tab));
-    });
-    tabs.addEventListener("pointerleave", () => positionIndicator(activeTab()));
-    window.addEventListener("resize", () => positionIndicator(activeTab(), true));
-    requestAnimationFrame(() => {
-      positionIndicator(activeTab(), true);
-      tabs.classList.add("is-ready");
-    });
   });
 
   document.querySelectorAll(".project-nav .project-back").forEach(enhanceDirectText);
-  document.querySelectorAll(".project-nav .project-nav-title, .project-nav .project-nav-index").forEach(enhanceElement);
+  document.querySelectorAll(".project-nav .project-nav-index").forEach(enhanceElement);
   document.querySelectorAll(".prototype-homepage .nav-logo, .prototype-homepage .nav-label, .prototype-homepage .nav-contact-label").forEach(enhanceElement);
 })();
