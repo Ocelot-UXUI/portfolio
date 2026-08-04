@@ -21,3 +21,200 @@ body .project-view-tabs:not(.is-ready){opacity:0}body .project-view-tabs.is-read
 .nav-random-swap.is-swap-hovered .nav-random-swap-primary{transform:translateY(-110%)}
 .nav-random-swap.is-swap-hovered .nav-random-swap-secondary{transform:translateY(0)}
 @media(prefers-reduced-motion:reduce){.nav-random-swap-primary,.nav-random-swap-secondary{transition:none}}
+
+/* Floating project navigation: framed endpoints with an open tab rail. */
+body .project-nav {
+  position: sticky;
+  top: 16px;
+  z-index: 100;
+  width: min(calc(100% - 40px), 1380px);
+  height: 52px;
+  margin: 16px auto 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: minmax(190px, 1fr) auto minmax(190px, 1fr);
+  align-items: center;
+  gap: clamp(18px, 3vw, 56px);
+  border: 0 !important;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: visible;
+  isolation: isolate;
+}
+
+body .project-nav .project-back,
+body .project-nav .project-nav-title,
+body .project-nav .project-nav-index {
+  min-width: 0;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 999px;
+  background: rgba(12,14,20,.58) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(135%);
+  backdrop-filter: blur(18px) saturate(135%);
+  box-shadow: 0 8px 24px rgba(0,0,0,.16), inset 0 1px rgba(255,255,255,.06);
+}
+
+body .project-nav .project-back {
+  justify-self: start;
+  gap: 9px;
+  padding: 0 20px 0 14px;
+  color: #fff !important;
+  white-space: nowrap;
+  transition: background-color .22s ease, border-color .22s ease, transform .22s ease;
+}
+
+body .project-nav .project-back > span:first-child {
+  width: 24px;
+  height: 24px;
+  display: inline-grid;
+  place-items: center;
+  margin: 0;
+  border-radius: 50%;
+  background: rgba(255,255,255,.1);
+  color: #fff !important;
+  font-size: 16px;
+  line-height: 1;
+}
+
+body .project-nav .project-back .nav-random-swap,
+body .project-nav .project-back .nav-random-swap-slot,
+body .project-nav .project-back .nav-random-swap-primary,
+body .project-nav .project-back .nav-random-swap-secondary {
+  width: auto;
+  height: 1.35em;
+  display: inline-flex;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+body .project-nav .project-nav-title > .nav-random-swap {
+  display: inline-flex;
+  width: auto;
+  height: 1.35em;
+  color: inherit;
+  opacity: 1;
+  visibility: visible;
+}
+
+body .project-nav .nav-random-swap-slot,
+body .project-nav .nav-random-swap-primary,
+body .project-nav .nav-random-swap-secondary {
+  flex: 0 0 auto;
+}
+
+body .project-nav .project-back:hover,
+body .project-nav .project-back:focus-visible {
+  border-color: rgba(255,255,255,.3);
+  background: rgba(28,31,42,.72) !important;
+  transform: translateY(-1px);
+}
+
+body .project-nav .project-nav-title,
+body .project-nav .project-nav-index {
+  justify-self: end;
+  justify-content: flex-end;
+  padding: 0 18px;
+  overflow: hidden;
+  color: #fff !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: right;
+}
+
+body .project-nav .project-nav-index {
+  font-size: 11px !important;
+  letter-spacing: 1px !important;
+}
+
+body .project-nav .project-view-tabs {
+  min-width: 0;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-self: center;
+  gap: clamp(18px, 2.5vw, 38px);
+  padding: 0 4px;
+  background: transparent;
+  border: 0;
+}
+
+body .project-nav .project-view-tab {
+  position: relative;
+  color: rgba(255,255,255,.62) !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  transition: color .22s ease;
+}
+
+body .project-nav .project-view-tab:hover,
+body .project-nav .project-view-tab:focus-visible,
+body .project-nav .project-view-tab.is-active {
+  color: #fff !important;
+}
+
+body .project-nav .project-view-tab-indicator {
+  bottom: 2px !important;
+  height: 2px !important;
+  border-radius: 2px;
+  background: #fff !important;
+  box-shadow: none !important;
+}
+
+body .project-nav:not(.project-nav--tabs) {
+  grid-template-columns: minmax(190px, 1fr) minmax(0, 1.4fr) minmax(130px, 1fr);
+}
+
+body .project-nav:not(.project-nav--tabs) .project-nav-title {
+  justify-self: center;
+  justify-content: center;
+  text-align: center;
+  background: transparent !important;
+  border-color: transparent;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+@media (max-width: 700px) {
+  body .project-nav {
+    top: 10px;
+    width: calc(100% - 20px);
+    height: 46px;
+    margin-top: 10px;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  body .project-nav .project-back {
+    height: 40px;
+    padding-right: 14px;
+    font-size: 12px !important;
+  }
+
+  body .project-nav .project-back > span:first-child {
+    width: 22px;
+    height: 22px;
+    font-size: 15px;
+  }
+
+  body .project-nav .project-nav-title,
+  body .project-nav .project-nav-index { display: none; }
+
+  body .project-nav .project-view-tabs {
+    justify-self: end;
+    gap: 13px;
+    height: 40px;
+    padding-right: 4px;
+  }
+
+  body .project-nav .project-view-tab { font-size: 11px !important; }
+  body .project-nav .project-view-tab-indicator { bottom: 1px !important; }
+}
