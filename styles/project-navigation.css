@@ -589,3 +589,9 @@ body .project-nav .project-back > .project-back-label {
     height: 24px;
   }
 }
+
+/* Keep floating project controls centered within the 52px top navigation band. */
+body:not(.demo-page):not(.dodo-demo-page) > .project-nav:not(.portfolio-project-nav) {
+  top: 0;
+  margin: 0 auto -52px;
+}
