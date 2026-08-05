@@ -322,11 +322,6 @@ body > .portfolio-project-nav.project-nav.project-nav--compact {
   box-shadow: inset 0 1px rgba(255, 255, 255, .75) !important;
 }
 
-body > .portfolio-project-nav.project-nav .project-back > span:first-child {
-  text-indent: 1px;
-  line-height: 24px;
-}
-
 body.demo-page .demo-shell { height: calc(100vh - 100px) !important; }
 body.dodo-demo-page .dodo-demo-shell { height: calc(100vh - 56px) !important; }
 body > .portfolio-project-nav.project-nav + .portfolio-demo-app { height: calc(100vh - 56px) !important; }
@@ -542,5 +537,27 @@ body:not(.deliverables-page):not(.dodo-page):not(.dodo-demo-page):not(.demo-page
     height: 34px;
     padding: 0 9px;
     font-size: 11px !important;
+  }
+}
+
+/* Center the arrow glyph optically inside its fixed circular control. */
+body .project-nav .project-back > span:first-child {
+  font-size: 0 !important;
+  line-height: 0 !important;
+  text-indent: 0 !important;
+}
+
+body .project-nav .project-back > span:first-child::before {
+  content: "←";
+  display: block;
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+  line-height: 1;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 700px) {
+  body .project-nav .project-back > span:first-child::before {
+    font-size: 18px;
   }
 }
