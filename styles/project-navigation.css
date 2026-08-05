@@ -1,3 +1,10 @@
+@font-face{font-family:"Space Grotesk";font-style:normal;font-weight:400;font-display:swap;src:url("../assets/fonts/space-grotesk-400.ttf") format("truetype")}
+@font-face{font-family:"Space Grotesk";font-style:normal;font-weight:500;font-display:swap;src:url("../assets/fonts/space-grotesk-500.ttf") format("truetype")}
+@font-face{font-family:"Space Grotesk";font-style:normal;font-weight:600;font-display:swap;src:url("../assets/fonts/space-grotesk-600.ttf") format("truetype")}
+html:has(body > .project-nav){scrollbar-gutter:stable}
+html:has(body.cnap-research-page > .project-nav)::-webkit-scrollbar{width:15px}
+@media (min-width:701px){body.cnap-research-page .project-view-tabs{transform:translateX(-4px)}}
+
 /* Match the homepage navigation: solid black shell, white type and a quiet white active line. */
 body .project-nav,body .project-nav.is-scrolled,body .project-nav.project-nav--compact,body .portfolio-project-nav.project-nav,body .portfolio-project-nav.project-nav.is-scrolled,body .portfolio-project-nav.project-nav.project-nav--compact{height:56px;isolation:isolate;border:0!important;border-bottom-color:transparent!important;background:rgba(12,14,18,.42)!important;-webkit-backdrop-filter:blur(22px) saturate(130%)!important;backdrop-filter:blur(22px) saturate(130%)!important;box-shadow:inset 0 1px rgba(255,255,255,.14)!important}
 body .project-nav::before,body .project-nav::after,body .portfolio-project-nav.project-nav::before,body .portfolio-project-nav.project-nav::after{display:none!important}
@@ -259,14 +266,86 @@ body .project-nav,
 body .project-nav.is-scrolled,
 body .project-nav.project-nav--compact {
   position: sticky;
-  transform: none !important;
   height: 52px;
   background: transparent !important;
   box-shadow: none !important;
+  font-family:"Space Grotesk","Noto Sans SC","Source Han Sans SC","PingFang SC",Arial,sans-serif;
+  transition: transform .24s cubic-bezier(.22, 1, .36, 1);
 }
 
-body .project-nav.project-nav--hidden {
-  transform: none !important;
+body:not(.demo-page):not(.dodo-demo-page) .project-nav.project-nav--hidden {
+  transform: translateY(calc(-100% - 16px)) !important;
+}
+
+body .portfolio-project-nav.project-nav,
+body .portfolio-project-nav.project-nav.is-scrolled,
+body .portfolio-project-nav.project-nav.project-nav--compact,
+body .portfolio-project-nav.project-nav.project-nav--hidden {
+  position: sticky !important;
+  top: 16px !important;
+  width: min(calc(100% - 40px), 1380px) !important;
+  height: 52px !important;
+  margin: 16px auto -68px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+
+/* Demo pages use a dedicated in-flow top bar so portfolio controls never cover the product UI. */
+body.demo-page > .project-nav,
+body.dodo-demo-page > .project-nav,
+body > .portfolio-project-nav.project-nav {
+  position: sticky !important;
+  top: 0 !important;
+  width: 100% !important;
+  height: 56px !important;
+  margin: 0 !important;
+  padding: 0 20px !important;
+  background: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+/* Workload Demo uses the same light portfolio chrome as the other demo shells. */
+body > .portfolio-project-nav.project-nav,
+body > .portfolio-project-nav.project-nav.is-scrolled,
+body > .portfolio-project-nav.project-nav.project-nav--compact {
+  color: #1b1c22 !important;
+  background: rgba(255, 255, 255, .78) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(125%) !important;
+  backdrop-filter: blur(18px) saturate(125%) !important;
+  box-shadow: inset 0 1px rgba(255, 255, 255, .75) !important;
+}
+
+body.demo-page .demo-shell { height: calc(100vh - 100px) !important; }
+body.dodo-demo-page .dodo-demo-shell { height: calc(100vh - 56px) !important; }
+body > .portfolio-project-nav.project-nav + .portfolio-demo-app { height: calc(100vh - 56px) !important; }
+
+body.demo-page > .project-nav .project-back,
+body.demo-page > .project-nav .project-view-tabs,
+body.dodo-demo-page > .project-nav .project-back,
+body.dodo-demo-page > .project-nav .project-view-tabs,
+body > .portfolio-project-nav.project-nav .project-back,
+body > .portfolio-project-nav.project-nav .project-view-tabs {
+  box-shadow: 0 2px 8px rgba(15, 23, 42, .055), inset 0 1px rgba(255, 255, 255, .08) !important;
+}
+
+@media (max-width: 700px) {
+  body.demo-page > .project-nav,
+  body.dodo-demo-page > .project-nav,
+  body > .portfolio-project-nav.project-nav {
+    height: 52px !important;
+    padding: 0 10px !important;
+  }
+
+  body.demo-page .demo-shell { height: calc(100vh - 96px) !important; }
+  body.dodo-demo-page .dodo-demo-shell { height: calc(100vh - 52px) !important; }
+  body > .portfolio-project-nav.project-nav + .portfolio-demo-app { height: calc(100vh - 52px) !important; }
 }
 
 body .project-nav::before,
@@ -327,7 +406,7 @@ body .project-nav.project-nav--tabs .project-view-tabs {
   width: max-content;
   max-width: none;
   height: 44px;
-  gap: 0;
+  gap: 6px;
   padding: 3px;
   overflow: visible;
   border: 1px solid rgba(255, 255, 255, .16);
@@ -446,6 +525,7 @@ body:not(.deliverables-page):not(.dodo-page):not(.dodo-demo-page):not(.demo-page
     height: 40px;
     margin: 0;
     padding: 2px;
+    gap: 4px;
     overflow-x: auto;
     scrollbar-width: none;
   }
