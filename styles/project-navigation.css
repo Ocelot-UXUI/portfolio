@@ -575,6 +575,14 @@ body .project-nav .project-back:focus-visible > span:first-child::before {
   background: #a7f3cf;
 }
 
+body .project-nav .project-back > .project-back-label {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  line-height: 1;
+  transform: translateY(-1px);
+}
+
 @media (max-width: 700px) {
   body .project-nav .project-back > span:first-child {
     width: 24px;
