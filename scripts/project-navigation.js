@@ -82,6 +82,7 @@
     const tabs = document.createElement("nav");
     tabs.className = "project-view-tabs";
     tabs.setAttribute("aria-label", select.getAttribute("aria-label") || "切换项目展示");
+    tabs.append(title);
     [...select.options].forEach((option) => {
       const tab = document.createElement(option.disabled ? "span" : "a");
       tab.className = "project-view-tab";
@@ -99,7 +100,7 @@
       tabs.append(tab);
     });
     header.insertBefore(tabs, switcher);
-    header.classList.add("project-nav--tabs");
+    header.classList.add("project-nav--tabs", "project-nav--title-in-tabs");
   });
 
   document.querySelectorAll(".project-nav .project-nav-index").forEach(enhanceElement);
