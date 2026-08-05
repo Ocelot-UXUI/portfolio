@@ -10,8 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="preload" as="image" href="assets/hero-background.jpg" fetchpriority="high" />
     <link rel="stylesheet" href="styles/styles.css?v=20260729-12" />
-    <link rel="stylesheet" href="styles/project-navigation.css?v=20260805-26" />
-    <script src="scripts/project-navigation.js?v=20260805-3" defer></script>
+    <link rel="stylesheet" href="styles/project-navigation.css?v=20260805-44" />
+    <script src="scripts/project-navigation.js?v=20260805-8" defer></script>
     <style>
       .prototype-homepage .nav {
         overflow: visible;
@@ -780,6 +780,49 @@
         transition: transform .42s cubic-bezier(.22, 1, .36, 1);
       }
 
+      .prototype-homepage .hero-coverflow-progress {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 4;
+        height: 2px;
+        overflow: hidden;
+        background: #232323;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .25s ease;
+      }
+
+      .prototype-homepage .hero-coverflow-progress > i {
+        position: relative;
+        display: block;
+        width: 0;
+        height: 100%;
+        background: linear-gradient(90deg,
+          rgba(185, 62, 9, .58) 0%,
+          rgba(255, 107, 0, .68) 52%,
+          rgba(255, 107, 0, .42) 78%,
+          rgba(255, 107, 0, 0) 100%);
+        box-shadow: 0 0 4px rgba(255, 107, 0, .28);
+      }
+
+      .prototype-homepage .hero-coverflow-progress > i::after {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        width: 48px;
+        height: 7px;
+        background: linear-gradient(90deg, rgba(255, 107, 0, 0), rgba(255, 107, 0, .34), rgba(255, 107, 0, 0));
+        border-radius: 50%;
+        filter: blur(3px);
+        opacity: .46;
+        transform: translateY(-50%);
+        content: "";
+      }
+
+      .prototype-homepage .hero-coverflow-card.is-hero-active .hero-coverflow-progress { opacity: 1; }
+
       .prototype-homepage .hero-coverflow-card:hover .hero-coverflow-caption-arrow,
       .prototype-homepage .hero-coverflow-card:focus-visible .hero-coverflow-caption-arrow {
         color: rgba(255, 255, 255, .98);
@@ -788,6 +831,10 @@
       .prototype-homepage .hero-coverflow-card:hover .hero-coverflow-caption-arrow svg,
       .prototype-homepage .hero-coverflow-card:focus-visible .hero-coverflow-caption-arrow svg {
         transform: translate3d(2px, -2px, 0) rotate(45deg);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .prototype-homepage .hero-coverflow-progress { display: none; }
       }
 
       .prototype-homepage .hero-coverflow-card:nth-child(1) { z-index: 1; }
@@ -1549,6 +1596,44 @@
         transform: translateY(0);
       }
 
+      .prototype-homepage .footer.footer-minimal {
+        min-height: 0;
+        display: grid;
+        gap: 34px;
+        padding: 40px clamp(22px, 4.4vw, 64px) 26px;
+        background: #050506;
+        border-top: 0;
+      }
+
+      .prototype-homepage .footer-minimal::before {
+        width: 100%;
+        height: 1px;
+        background: #3a3b3e;
+        content: "";
+      }
+
+      .prototype-homepage .footer-minimal-row {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr 1fr 1fr;
+        gap: 24px;
+        align-items: center;
+        color: #9b9b9e;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 1.4;
+      }
+
+      .prototype-homepage .footer-minimal-row a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .prototype-homepage .footer-minimal-row a:hover,
+      .prototype-homepage .footer-minimal-row a:focus-visible { color: #fff; }
+
+      .prototype-homepage .footer-minimal-row a:nth-child(2),
+      .prototype-homepage .footer-minimal-row span:last-child { text-align: right; }
+
       @media (max-width: 700px) {
         .prototype-homepage .nav,
         .prototype-homepage .nav.is-scrolled {
@@ -1558,6 +1643,11 @@
         .prototype-homepage .hero-portrait {
           background-position: 56% center;
         }
+
+        .prototype-homepage .footer.footer-minimal { gap: 22px; padding: 28px 22px 22px; }
+        .prototype-homepage .footer-minimal-row { grid-template-columns: 1fr 1fr; gap: 14px 20px; font-size: 11px; }
+        .prototype-homepage .footer-minimal-row a:nth-child(2),
+        .prototype-homepage .footer-minimal-row span:last-child { text-align: left; }
       }
 
     </style>
@@ -1582,9 +1672,9 @@
           <div class="hero-portrait" role="img" aria-label="郭昱成个人形象插画"></div>
           <h1 class="hero-statement">有 AI 工作流，<br />懂用户，<br />能推动事情发生</h1>
           <div class="hero-coverflow" data-hero-coverflow aria-label="可拖动的项目预览">
-            <a class="hero-coverflow-card" href="pages/skip-read.html" aria-label="查看快速阅读 APP 项目"><span class="hero-coverflow-surface"><img class="hero-coverflow-original" src="assets/hero-cards/reading-original.png" alt="快速阅读 APP 项目预览" /><span class="hero-coverflow-caption"><span><strong>职场人的阅读学习 APP</strong><small>提升用户的平均阅读时间与留存</small></span><span class="hero-coverflow-caption-arrow" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9.25" stroke="currentColor"/><path d="M7.7 12.3 12 8m0 0H7m5 0v5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></span></a>
-            <a class="hero-coverflow-card" href="pages/xiaohongshu.html" aria-label="查看小红书本地生活项目"><span class="hero-coverflow-surface"><img class="hero-coverflow-original" src="assets/hero-cards/xhs-original.png" alt="小红书本地生活项目预览" /><span class="hero-coverflow-caption"><span><strong>小红书本地生活体验升级</strong><small>提升从种草到下单核销的转化效率</small></span><span class="hero-coverflow-caption-arrow" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9.25" stroke="currentColor"/><path d="M7.7 12.3 12 8m0 0H7m5 0v5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></span></a>
-            <a class="hero-coverflow-card" href="pages/case.html" aria-label="查看主动 AI 记忆助手项目"><span class="hero-coverflow-surface"><img class="hero-coverflow-original" src="assets/hero-cards/remi-original.png" alt="主动 AI 记忆助手项目预览" /><span class="hero-coverflow-caption"><span><strong>商汤主动 AI 记忆助手</strong><small>解决 AI 交付物理解门槛高、用不上</small></span><span class="hero-coverflow-caption-arrow" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9.25" stroke="currentColor"/><path d="M7.7 12.3 12 8m0 0H7m5 0v5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span></span></a>
+            <a class="hero-coverflow-card" href="pages/skip-read.html" aria-label="查看快速阅读 APP 项目"><span class="hero-coverflow-surface"><img class="hero-coverflow-original" src="assets/hero-cards/reading-original.png" alt="快速阅读 APP 项目预览" /><span class="hero-coverflow-caption"><span><strong>职场人的阅读学习 APP</strong><small>提升用户的平均阅读时间与留存</small></span><span class="hero-coverflow-caption-arrow" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9.25" stroke="currentColor"/><path d="M7.7 12.3 12 8m0 0H7m5 0v5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span><span class="hero-coverflow-progress" aria-hidden="true"><i></i></span></span></a>
+            <a class="hero-coverflow-card" href="pages/xiaohongshu.html" aria-label="查看小红书本地生活项目"><span class="hero-coverflow-surface"><img class="hero-coverflow-original" src="assets/hero-cards/xhs-original.png" alt="小红书本地生活项目预览" /><span class="hero-coverflow-caption"><span><strong>小红书本地生活体验升级</strong><small>提升从种草到下单核销的转化效率</small></span><span class="hero-coverflow-caption-arrow" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9.25" stroke="currentColor"/><path d="M7.7 12.3 12 8m0 0H7m5 0v5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span><span class="hero-coverflow-progress" aria-hidden="true"><i></i></span></span></a>
+            <a class="hero-coverflow-card" href="pages/case.html" aria-label="查看主动 AI 记忆助手项目"><span class="hero-coverflow-surface"><img class="hero-coverflow-original" src="assets/hero-cards/remi-original.png" alt="主动 AI 记忆助手项目预览" /><span class="hero-coverflow-caption"><span><strong>商汤主动 AI 记忆助手</strong><small>解决 AI 交付物理解门槛高、用不上</small></span><span class="hero-coverflow-caption-arrow" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9.25" stroke="currentColor"/><path d="M7.7 12.3 12 8m0 0H7m5 0v5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span><span class="hero-coverflow-progress" aria-hidden="true"><i></i></span></span></a>
             <div class="hero-coverflow-card is-hero-placeholder" aria-hidden="true"><span class="hero-coverflow-surface"></span></div>
             <div class="hero-coverflow-controls" aria-label="项目切换">
               <button class="hero-coverflow-control hero-coverflow-control--previous" type="button" data-hero-previous aria-label="查看上一个项目"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3m0 0 4-4m-4 4 4 4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -1668,93 +1758,12 @@
 
       </main>
 
-      <footer class="footer footer-editorial section-reveal">
-        <div class="footer-meta section-copy-step">
-          <div class="footer-identity"><strong>郭昱成</strong><span>UX/UI DESIGNER</span></div>
-          <div class="footer-contact"><a href="mailto:1004080451@qq.com">邮箱：1004080451@qq.com</a><a href="tel:13343215048">手机：13343215048</a></div>
-        </div>
-        <div class="footer-resume section-copy-step">
-          <div class="resume-column">
-            <div class="resume-overview">
-              <article class="resume-block">
-                <p class="resume-label">Education · 教育背景</p>
-                <h3>西南交通大学</h3>
-                <p>产品设计 / 本科</p>
-                <p class="resume-meta">2023.09—2027.06</p>
-              </article>
-              <article class="resume-block">
-                <p class="resume-label">Awards · 获奖经历</p>
-                <ul class="resume-awards">
-                  <li>2025 第十届“两岸新锐设计竞赛·华灿奖”<br />总赛一等奖</li>
-                  <li>2025 米兰设计周全国赛区三等奖</li>
-                  <li>2025 NCDA 设计大赛四川赛区二等奖 × 2</li>
-                  <li>CET-4</li>
-                </ul>
-              </article>
-            </div>
-            <article class="resume-block resume-internship">
-              <p class="resume-label">Experience · 实习经历</p>
-              <h3>商汤科技 · 主动式 AI 记忆助手</h3>
-              <p class="resume-meta">UX 实习生 · 2026.01—03</p>
-              <p class="resume-highlight">推动 AI 产品从 0 到 1 的全流程设计，解决主动式 AI 交付物“理解门槛高、用不上”问题，降低用户认知负担。</p>
-              <ul class="resume-points">
-                <li>主动破局初期模糊需求，独立完成完整设计提案。</li>
-                <li>梳理项目逻辑，将三种拖拽模式合并为一套组件逻辑，降低开发成本。</li>
-                <li>与 PM 和研发多轮对齐，识别开发风险，借助 vibe coding 高保真交互原型，提高跨团队协作效率。</li>
-                <li>规划 MVP 落地与后续迭代路线，制定分阶段上线规划，方案获团队认可。</li>
-              </ul>
-            </article>
-          </div>
-          <div class="resume-column resume-projects">
-            <article class="resume-project">
-              <p class="resume-label">Selected Project · 个人项目</p>
-              <h3><span>针对职场人的阅读学习 APP</span><span class="resume-role">UX/UI 设计师</span></h3>
-              <p class="resume-meta">2025.11—12</p>
-              <p>引入 AI 能力至阅读场景，帮助用户将碎片化输入转化为可复用的个人知识体系，提升用户的平均阅读效率。</p>
-            </article>
-            <article class="resume-project">
-              <h3><span>小红书“本地生活”体验升级</span><span class="resume-role">UX/UI 设计师</span></h3>
-              <p class="resume-meta">2025.09—11</p>
-              <p>打造小红书“种草—决策—消费”的闭环体验，让用户在小红书内完成灵感发现到下单转化，提升转化和 GMV。</p>
-            </article>
-            <article class="resume-project" id="resume-meituan">
-              <h3><span>美团众包“多单场景”体验升级</span><span class="resume-role">UX/UI 设计师</span></h3>
-              <p class="resume-meta">2025.07—09</p>
-              <p>优化多单场景下骑手体验，让骑手在户外骑行场景下高效完成取送流程，缩短平均配送时间。</p>
-            </article>
-          </div>
-        </div>
-        <section class="resume-timeline section-copy-step" aria-labelledby="resume-timeline-title">
-          <div class="resume-timeline-head"><h2 id="resume-timeline-title">项目时间轴</h2><span>悬浮查看 · 点击打开</span></div>
-          <div class="timeline-track">
-            <div class="timeline-time-axis" aria-hidden="true"><span>现在</span><i></i><span>过往</span></div>
-            <a class="timeline-item" href="pages/case.html" aria-label="主动式AI记忆助手，2026年1月至3月，打开项目">
-              <span class="timeline-name">主动式 AI 记忆助手</span>
-              <span class="timeline-popover"><strong>2026.01—03</strong><span>UX 实习生</span><p>推动主动式 AI 产品从 0 到 1，降低交付物理解与使用门槛。</p><em>打开项目 ↗</em></span>
-            </a>
-            <a class="timeline-item" href="pages/skip-read.html" aria-label="阅读学习APP，2025年11月至12月，打开项目">
-              <span class="timeline-name">阅读学习 APP</span>
-              <span class="timeline-popover"><strong>2025.11—12</strong><span>UX/UI 设计师</span><p>将碎片化输入转化为可复用知识体系，提升阅读效率。</p><em>打开项目 ↗</em></span>
-            </a>
-            <a class="timeline-item" href="pages/xiaohongshu.html" aria-label="小红书本地生活，2025年9月至11月，打开项目">
-              <span class="timeline-name">小红书本地生活</span>
-              <span class="timeline-popover"><strong>2025.09—11</strong><span>UX/UI 设计师</span><p>打通种草、决策与消费链路，提升下单转化和 GMV。</p><em>打开项目 ↗</em></span>
-            </a>
-            <a class="timeline-item" href="#resume-meituan" aria-label="美团众包，2025年7月至9月，查看项目">
-              <span class="timeline-name">美团众包</span>
-              <span class="timeline-popover"><strong>2025.07—09</strong><span>UX/UI 设计师</span><p>优化多单场景下的骑手取送流程，缩短平均配送时间。</p><em>定位到简历项目 ↑</em></span>
-            </a>
-          </div>
-        </section>
-        <div class="footer-display section-copy-step" aria-label="Let's create meaningful experiences">
-          <span class="footer-display-line"><span>Let's</span><em>create</em></span>
-          <span class="footer-display-line"><span>Meaningful</span></span>
-          <span class="footer-display-line"><span>Experiences</span></span>
-        </div>
-        <div class="footer-bottom section-copy-step">
-          <a class="footer-email" href="mailto:1004080451@qq.com">1004080451@qq.com</a>
-          <div class="footer-links"><a href="pages/case.html">Case Study</a><a href="pages/remi.html">Demo</a><a href="https://github.com/Ocelot-UXUI" target="_blank" rel="noreferrer">GitHub</a></div>
-          <span>© 2026 Portfolio</span>
+      <footer class="footer footer-minimal">
+        <div class="footer-minimal-row">
+          <span>© 2026 郭昱成。保留所有权利</span>
+          <a href="mailto:1004080451@qq.com">1004080451@qq.com</a>
+          <a href="https://github.com/Ocelot-UXUI" target="_blank" rel="noreferrer">GitHub</a>
+          <span>UX/UI 作品集</span>
         </div>
       </footer>
     </div>
@@ -1975,21 +1984,48 @@
 
       const heroCoverflow = document.querySelector("[data-hero-coverflow]");
       if (heroCoverflow) {
-        const heroCards = [...heroCoverflow.querySelectorAll(".hero-coverflow-card")];
+        const heroCards = [...heroCoverflow.querySelectorAll(".hero-coverflow-card:not(.is-hero-placeholder)")];
+        const heroPlaceholder = heroCoverflow.querySelector(".is-hero-placeholder");
+        const heroProgressFills = heroCards.map((card) => card.querySelector(".hero-coverflow-progress > i"));
         const previousHeroControl = heroCoverflow.querySelector("[data-hero-previous]");
         const nextHeroControl = heroCoverflow.querySelector("[data-hero-next]");
         const heroSlots = [
           { left: "0%", offset: "0%", scale: "1", rotate: "0deg" },
           { left: "28%", offset: "0%", scale: "1.25", rotate: "0deg" },
           { left: "56%", offset: "0%", scale: "1", rotate: "0deg" },
-          { left: "84%", offset: "0%", scale: "1", rotate: "0deg" },
         ];
+        const HERO_AUTOPLAY_DURATION = 5000;
+        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         let activeCard = 0;
         let pointerStartX = 0;
         let pointerDeltaX = 0;
         let isDragging = false;
         let isAnimating = false;
         let blockClick = false;
+        let heroAutoplayTimer = 0;
+        let heroProgressFrame = 0;
+
+        const stopHeroAutoplay = () => {
+          window.clearTimeout(heroAutoplayTimer);
+          window.cancelAnimationFrame(heroProgressFrame);
+          heroProgressFills.forEach((fill) => {
+            if (!fill) return;
+            fill.style.transition = "none";
+            fill.style.width = "0%";
+          });
+        };
+
+        const resetHeroAutoplay = () => {
+          stopHeroAutoplay();
+          if (reducedMotion) return;
+          const activeFill = heroCards.find((card) => card.classList.contains("is-hero-active"))?.querySelector(".hero-coverflow-progress > i");
+          if (!activeFill) return;
+          heroProgressFrame = window.requestAnimationFrame(() => {
+            activeFill.style.transition = `width ${HERO_AUTOPLAY_DURATION}ms linear`;
+            activeFill.style.width = "100%";
+            heroAutoplayTimer = window.setTimeout(() => animateHeroStep(-1), HERO_AUTOPLAY_DURATION);
+          });
+        };
 
         const renderHeroCoverflow = (delta = 0, instant = false) => {
           heroCards.forEach((card, index) => {
@@ -2001,10 +2037,19 @@
             card.classList.toggle("is-hero-active", slot === heroSlots[1]);
             card.classList.toggle("is-hero-muted", slot !== heroSlots[1]);
           });
+          if (heroPlaceholder) {
+            heroPlaceholder.style.left = "84%";
+            heroPlaceholder.style.zIndex = "1";
+            heroPlaceholder.style.transitionDuration = instant ? "0ms" : "500ms";
+            heroPlaceholder.style.transform = `translateX(${delta}px)`;
+            heroPlaceholder.classList.remove("is-hero-active");
+            heroPlaceholder.classList.add("is-hero-muted");
+          }
         };
 
         const animateHeroStep = (direction) => {
           if (isAnimating) return;
+          stopHeroAutoplay();
           isAnimating = true;
           const oldActive = activeCard;
           const cardSlots = heroCards.map((_, index) => (index - oldActive + heroCards.length) % heroCards.length);
@@ -2029,6 +2074,7 @@
             activeCard = (oldActive + (direction < 0 ? 1 : -1) + heroCards.length) % heroCards.length;
             renderHeroCoverflow(0, true);
             isAnimating = false;
+            resetHeroAutoplay();
           }, 520);
         };
 
@@ -2041,14 +2087,17 @@
             blockClick = true;
           } else {
             renderHeroCoverflow();
+            resetHeroAutoplay();
           }
           pointerDeltaX = 0;
         };
 
         renderHeroCoverflow(0, true);
+        resetHeroAutoplay();
         heroCoverflow.addEventListener("pointerdown", (event) => {
           if (isAnimating) return;
           if (event.pointerType === "mouse" && event.button !== 0) return;
+          stopHeroAutoplay();
           event.preventDefault();
           isDragging = true;
           pointerStartX = event.clientX;
@@ -2066,7 +2115,10 @@
         heroCoverflow.addEventListener("pointercancel", finishHeroDrag);
         [previousHeroControl, nextHeroControl].forEach((control) => {
           if (!control) return;
-          control.addEventListener("pointerdown", (event) => event.stopPropagation());
+          control.addEventListener("pointerdown", (event) => {
+            event.stopPropagation();
+            stopHeroAutoplay();
+          });
         });
         previousHeroControl?.addEventListener("click", (event) => {
           event.preventDefault();
@@ -2081,6 +2133,10 @@
           event.preventDefault();
           blockClick = false;
         }));
+        document.addEventListener("visibilitychange", () => {
+          if (document.hidden) stopHeroAutoplay();
+          else resetHeroAutoplay();
+        });
       }
     </script>
   </body>

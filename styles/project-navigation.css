@@ -595,3 +595,299 @@ body:not(.demo-page):not(.dodo-demo-page) > .project-nav:not(.portfolio-project-
   top: 0;
   margin: 0 auto -52px;
 }
+
+/* Return control follows the same pill, glass and color system as the view rail. */
+body .project-nav {
+  --project-control-bg: rgba(255,255,255,.08);
+  --project-control-bg-hover: rgba(255,255,255,.14);
+  --project-control-border: rgba(255,255,255,.16);
+  --project-control-text: #fff;
+  --project-control-icon-bg: rgba(255,255,255,.14);
+  --project-control-shadow: 0 8px 24px rgba(0,0,0,.08), inset 0 1px rgba(255,255,255,.06);
+}
+
+body:not(.deliverables-page):not(.dodo-page):not(.dodo-demo-page):not(.demo-page) .project-nav {
+  --project-control-bg: rgba(255,255,255,.72);
+  --project-control-bg-hover: rgba(16,18,24,.08);
+  --project-control-border: rgba(16,18,24,.1);
+  --project-control-text: #1b1c22;
+  --project-control-icon-bg: rgba(16,18,24,.08);
+  --project-control-shadow: 0 8px 24px rgba(20,24,32,.08), inset 0 1px rgba(255,255,255,.6);
+}
+
+/* Light demo canvases need the same contrast as the case-deck navigation. */
+body.light-project-nav .project-nav {
+  --project-control-bg: rgba(255,255,255,.78);
+  --project-control-bg-hover: rgba(16,18,24,.08);
+  --project-control-border: rgba(16,18,24,.10);
+  --project-control-text: #1b1c22;
+  --project-control-icon-bg: rgba(16,18,24,.08);
+  --project-control-shadow: 0 2px 8px rgba(15,23,42,.055), inset 0 1px rgba(255,255,255,.72);
+}
+
+body.light-project-nav .project-nav .project-nav-title,
+body.light-project-nav .project-nav .project-view-tab,
+body.light-project-nav .project-nav .project-view-tab:hover,
+body.light-project-nav .project-nav .project-view-tab:focus-visible,
+body.light-project-nav .project-nav .project-view-tab.is-active {
+  color: #1b1c22 !important;
+}
+
+body.light-project-nav .project-nav .project-view-tab:not(.is-active) {
+  color: rgba(27,28,34,.58) !important;
+}
+
+body.demo-page > .project-nav,
+body.dodo-demo-page > .project-nav,
+body > .portfolio-project-nav.project-nav {
+  --project-control-shadow: 0 2px 8px rgba(15,23,42,.055), inset 0 1px rgba(255,255,255,.08);
+}
+
+body:not(.deliverables-page):not(.dodo-page):not(.dodo-demo-page):not(.demo-page) > .portfolio-project-nav.project-nav {
+  --project-control-shadow: 0 2px 8px rgba(15,23,42,.055), inset 0 1px rgba(255,255,255,.08);
+}
+
+body .project-nav .project-back,
+body .project-nav .project-back:hover,
+body .project-nav .project-back:focus-visible,
+body > .portfolio-project-nav.project-nav .project-back,
+body > .portfolio-project-nav.project-nav .project-back:hover,
+body > .portfolio-project-nav.project-nav .project-back:focus-visible {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  align-self: center;
+  justify-self: start;
+  flex: 0 0 auto;
+  width: fit-content;
+  min-width: 0;
+  max-width: min(260px, 100%);
+  height: 44px;
+  min-height: 44px;
+  gap: 10px;
+  margin: 0;
+  padding: 3px 16px 3px 3px !important;
+  border: 1px solid var(--project-control-border) !important;
+  border-radius: 999px;
+  background: var(--project-control-bg) !important;
+  color: var(--project-control-text) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(135%) !important;
+  backdrop-filter: blur(18px) saturate(135%) !important;
+  box-shadow: var(--project-control-shadow) !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  line-height: 1 !important;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  transform: none;
+  transition: background-color .3s ease, border-color .3s ease, color .3s ease;
+}
+
+body .project-nav .project-back:hover,
+body .project-nav .project-back:focus-visible,
+body > .portfolio-project-nav.project-nav .project-back:hover,
+body > .portfolio-project-nav.project-nav .project-back:focus-visible {
+  border-color: var(--project-control-border) !important;
+  background: var(--project-control-bg-hover) !important;
+  color: var(--project-control-text) !important;
+  box-shadow: var(--project-control-shadow) !important;
+  outline: none;
+}
+
+body .project-nav .project-back > span:first-child {
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  display: inline-grid;
+  place-items: center;
+  margin: 0;
+  border: 0;
+  border-radius: 999px;
+  background: var(--project-control-icon-bg) !important;
+  color: var(--project-control-text) !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  transform: none !important;
+}
+
+body .project-nav .project-back > span:first-child::before {
+  content: "";
+  display: block;
+  width: 16px;
+  height: 16px;
+  background: var(--project-control-text) !important;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M19 12H5'/%3E%3Cpath d='m12 19-7-7 7-7'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M19 12H5'/%3E%3Cpath d='m12 19-7-7 7-7'/%3E%3C/svg%3E") center / contain no-repeat;
+  transform: translateY(4px);
+}
+
+body .project-nav .project-back:hover > span:first-child,
+body .project-nav .project-back:focus-visible > span:first-child {
+  background: var(--project-control-icon-bg) !important;
+  transform: none !important;
+}
+
+body .project-nav .project-back:hover > span:first-child::before,
+body .project-nav .project-back:focus-visible > span:first-child::before {
+  background: var(--project-control-text) !important;
+  transform: translateY(4px);
+}
+
+body .project-nav .project-back > .project-back-label {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  height: auto;
+  overflow: hidden;
+  color: inherit !important;
+  font-family: inherit;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 1 !important;
+  letter-spacing: 0 !important;
+  text-overflow: ellipsis;
+  transform: none !important;
+}
+
+/* Keep the return action available while reading long case decks. */
+body .project-nav.project-nav--hidden { transform: none !important; }
+
+@media (max-width: 700px) {
+  body .project-nav .project-back,
+  body > .portfolio-project-nav.project-nav .project-back {
+    height: 40px;
+    min-height: 40px;
+    padding: 3px 12px 3px 3px !important;
+    font-size: 12px !important;
+  }
+
+  body .project-nav .project-back > span:first-child {
+    flex-basis: 32px;
+    width: 32px;
+    height: 32px;
+  }
+
+}
+
+@media (max-width: 420px) {
+  body .project-nav .project-back,
+  body > .portfolio-project-nav.project-nav .project-back {
+    width: 40px;
+    padding: 0 !important;
+    justify-content: center;
+    border-radius: 999px;
+  }
+
+  body .project-nav .project-back-label { display: none; }
+}
+
+@media (max-width: 700px) {
+  /* The view switcher is moved into the tab rail, so there are only two grid columns. */
+  body .project-nav.project-nav--tabs {
+    grid-template-columns: 40px minmax(0, 1fr) !important;
+  }
+
+  body .project-nav.project-nav--tabs .project-back {
+    width: 40px;
+    min-width: 40px;
+    padding: 0 !important;
+    justify-content: center;
+    gap: 0;
+    font-size: 0 !important;
+  }
+
+  body .project-nav.project-nav--tabs .project-back-label { display: none; }
+}
+
+/* Native cross-document transition keeps tab switches from flashing on reload. */
+@view-transition { navigation: auto; }
+
+body .project-nav .project-view-tabs {
+  view-transition-name: project-view-tabs;
+}
+
+::view-transition-group(project-view-tabs) {
+  animation-duration: .32s;
+  animation-timing-function: cubic-bezier(.22,1,.36,1);
+}
+
+::view-transition-old(project-view-tabs) {
+  animation: project-tabs-out .16s ease both;
+}
+
+::view-transition-new(project-view-tabs) {
+  animation: project-tabs-in .32s cubic-bezier(.22,1,.36,1) both;
+}
+
+@keyframes project-tabs-out {
+  to { opacity: 0; }
+}
+
+@keyframes project-tabs-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(project-view-tabs),
+  ::view-transition-old(project-view-tabs),
+  ::view-transition-new(project-view-tabs) { animation: none; }
+}
+
+/* CNAP's research page uses the same top-band geometry as its Demo. */
+body.cnap-research-page > .project-nav {
+  position: sticky !important;
+  top: 0 !important;
+  width: 100% !important;
+  height: 56px !important;
+  margin: 0 !important;
+  padding: 0 20px !important;
+}
+
+/* Every project page with view tabs shares the Demo top-band geometry. */
+body > .project-nav.project-nav--tabs {
+  position: sticky !important;
+  top: 0 !important;
+  width: 100% !important;
+  height: 56px !important;
+  margin: 0 !important;
+  padding: 0 20px !important;
+}
+
+/* The project navigation is only the floating controls, never a full-width bar. */
+body > .project-nav,
+body > .project-nav.is-scrolled,
+body > .project-nav.project-nav--compact,
+body > .portfolio-project-nav.project-nav,
+body > .portfolio-project-nav.project-nav.is-scrolled,
+body > .portfolio-project-nav.project-nav.project-nav--compact {
+  background: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+body > .project-nav {
+  /* Overlay the first page section instead of reserving a black header band. */
+  margin: 0 auto -56px !important;
+}
+
+body > .project-nav.project-nav--tabs {
+  margin: 0 auto -56px !important;
+}
+
+body.deliverables-page > .project-nav,
+body.deliverables-page > .project-nav.is-scrolled,
+body.deliverables-page > .project-nav.project-nav--compact,
+body.cnap-research-page > .project-nav,
+body.cnap-research-page > .project-nav.is-scrolled,
+body.cnap-research-page > .project-nav.project-nav--compact {
+  background: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+}

@@ -99,8 +99,10 @@
       }
       tabs.append(tab);
     });
+
     header.insertBefore(tabs, switcher);
     header.classList.add("project-nav--tabs", "project-nav--title-in-tabs");
+    tabs.classList.add("is-ready");
   });
 
   document.querySelectorAll(".project-nav .project-nav-index").forEach(enhanceElement);
