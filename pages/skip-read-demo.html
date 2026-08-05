@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="针对职场人的阅读学习 APP 交互 Demo" />
+    <title>阅读学习 APP 交互 Demo | 郭昱成作品集</title>
+    <link rel="stylesheet" href="../styles/styles.css?v=20260729-12" />
+    <link rel="stylesheet" href="../styles/project-navigation.css?v=20260805-44" />
+    <script src="../scripts/project-navigation.js?v=20260805-8" defer></script>
+    <style>
+      .skip-read-demo-page { height: 100vh; overflow: hidden; background: #f3f4f6; }
+      .skip-read-demo-shell { height: calc(100vh - 56px); padding: 12px; background: #f3f4f6; }
+      .skip-read-demo-shell iframe { display: block; width: 100%; height: 100%; border: 0; background: #fff; box-shadow: 0 8px 24px rgba(15,23,42,.1); }
+      @media (max-width: 700px) { .skip-read-demo-shell { padding: 6px; } }
+    </style>
+  </head>
+  <body class="demo-page skip-read-demo-page light-project-nav">
+    <header class="project-nav">
+      <a class="project-back" href="../index.html" aria-label="返回首页"><span aria-hidden="true">←</span><span class="project-back-label">返回首页</span></a>
+      <p class="project-nav-title">针对职场人的阅读学习 APP</p>
+      <label class="project-view-switch"><span>当前展示</span><select aria-label="切换阅读学习 APP 展示" data-view-switch data-current="skip-read-demo.html"><option value="skip-read.html">案例 Deck</option><option value="skip-read-demo.html" selected>交互 Demo</option><option disabled>交付物（待补充）</option></select></label>
+    </header>
+    <main class="skip-read-demo-shell">
+      <iframe src="https://ocelot-uxui.github.io/skip-read/" title="针对职场人的阅读学习 APP 交互 Demo"></iframe>
+    </main>
+    <script>
+      document.querySelectorAll("[data-view-switch]").forEach((viewSwitch) => {
+        viewSwitch.addEventListener("change", () => {
+          const option = viewSwitch.selectedOptions[0];
+          if (option.value) window.location.href = option.value;
+        });
+      });
+    </script>
+  </body>
+</html>
