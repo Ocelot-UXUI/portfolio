@@ -269,9 +269,31 @@ body .project-nav.project-nav--hidden {
   transform: none !important;
 }
 
+body .project-nav::before,
+body .project-nav::after {
+  content: none !important;
+  display: none !important;
+}
+
+body .project-nav,
+body .project-nav.is-scrolled,
+body .project-nav.project-nav--compact,
+body .project-nav.project-nav--hidden {
+  border-color: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  overflow: visible !important;
+}
+
 body .project-nav.project-nav--tabs {
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 24px;
+}
+
+body .project-nav .project-back,
+body .project-nav .project-view-tabs,
+body .project-nav .project-nav-index {
+  align-self: center !important;
 }
 
 body .project-nav.project-nav--tabs .project-nav-title,
@@ -279,7 +301,8 @@ body .project-nav:not(.project-nav--tabs) .project-nav-title {
   display: flex;
   position: absolute;
   left: 50%;
-  transform: translateX(-50%);
+  top: 50%;
+  transform: translate(-50%, -50%);
   justify-self: center;
   justify-content: center;
   width: auto;
@@ -340,11 +363,34 @@ body .project-nav .project-view-tab-indicator {
   display: none !important;
 }
 
+body .project-nav.project-nav--title-in-tabs .project-nav-title {
+  position: static;
+  left: auto;
+  top: auto;
+  transform: none;
+  align-self: center;
+  flex: 0 0 auto;
+  max-width: none;
+  height: 28px;
+  margin-right: 8px;
+  padding: 0 14px 0 12px;
+  border-right: 1px solid rgba(255, 255, 255, .16);
+  color: #fff !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  line-height: 28px;
+  white-space: nowrap;
+}
+
 body .project-nav .project-back {
   line-height: 1;
+  box-shadow: 0 0 18px rgba(0, 0, 0, .09), inset 0 1px rgba(255, 255, 255, .08);
 }
 
 body .project-nav .project-back > span:first-child {
+  flex: 0 0 24px;
+  padding: 0;
+  place-items: center;
   line-height: 1;
 }
 
@@ -352,6 +398,11 @@ body:not(.deliverables-page):not(.dodo-page):not(.dodo-demo-page):not(.demo-page
   border-color: rgba(16, 18, 24, .1);
   background: rgba(255, 255, 255, .72);
   box-shadow: 0 8px 24px rgba(20, 24, 32, .08), inset 0 1px rgba(255, 255, 255, .6);
+}
+
+body:not(.deliverables-page):not(.dodo-page):not(.dodo-demo-page):not(.demo-page) .project-nav.project-nav--title-in-tabs .project-nav-title {
+  border-right-color: rgba(16, 18, 24, .1);
+  color: #1b1c22 !important;
 }
 
 body:not(.deliverables-page):not(.dodo-page):not(.dodo-demo-page):not(.demo-page) .project-nav .project-view-tab {
