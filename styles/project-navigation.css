@@ -542,22 +542,26 @@ body:not(.deliverables-page):not(.dodo-page):not(.dodo-demo-page):not(.demo-page
 
 /* Center the arrow glyph optically inside its fixed circular control. */
 body .project-nav .project-back > span:first-child {
+  width: 30px;
+  height: 30px;
+  padding: 0;
   font-size: 0 !important;
   line-height: 0 !important;
-  text-indent: 0 !important;
+  background: url("../assets/figma-button/image_orange.png") center / contain no-repeat !important;
+  filter: grayscale(1) opacity(.42);
+  transform: rotate(180deg);
+  transition: filter .2s ease, transform .2s ease;
 }
 
-body .project-nav .project-back > span:first-child::before {
-  content: "←";
-  display: block;
-  font-family: Arial, sans-serif;
-  font-size: 20px;
-  line-height: 1;
-  transform: translateY(-1px);
+body .project-nav .project-back:hover > span:first-child,
+body .project-nav .project-back:focus-visible > span:first-child {
+  filter: none;
+  transform: rotate(180deg) scale(1.04);
 }
 
 @media (max-width: 700px) {
-  body .project-nav .project-back > span:first-child::before {
-    font-size: 18px;
+  body .project-nav .project-back > span:first-child {
+    width: 26px;
+    height: 26px;
   }
 }
