@@ -2118,7 +2118,6 @@
           if (isAnimating) return;
           if (event.pointerType === "mouse" && event.button !== 0) return;
           stopHeroAutoplay();
-          event.preventDefault();
           isDragging = true;
           pointerStartX = event.clientX;
           pointerDeltaX = 0;
@@ -2127,8 +2126,8 @@
         });
         heroCoverflow.addEventListener("pointermove", (event) => {
           if (!isDragging) return;
-          event.preventDefault();
           pointerDeltaX = (event.clientX - pointerStartX) * 1.15;
+          if (Math.abs(pointerDeltaX) > 6) event.preventDefault();
           renderHeroCoverflow(pointerDeltaX, true);
         });
         heroCoverflow.addEventListener("pointerup", finishHeroDrag);
