@@ -419,6 +419,8 @@ body .project-nav.project-nav--tabs .project-view-tabs {
 }
 
 body .project-nav .project-view-tab {
+  position: relative;
+  isolation: isolate;
   display: inline-flex;
   align-items: center;
   height: 36px;
@@ -431,10 +433,31 @@ body .project-nav .project-view-tab {
   transition: background-color .18s ease, color .18s ease;
 }
 
+body .project-nav .project-view-tab-text {
+  display: inline-block !important;
+  position: relative;
+  z-index: 1;
+  white-space: nowrap;
+}
+
+body .project-nav .project-view-tab-highlight {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--project-tab-active-bg, rgba(255, 255, 255, .14));
+  pointer-events: none;
+  view-transition-name: project-tab-active-pill;
+}
+
 body .project-nav .project-view-tab:hover,
-body .project-nav .project-view-tab:focus-visible,
-body .project-nav .project-view-tab.is-active {
+body .project-nav .project-view-tab:focus-visible {
   background: rgba(255, 255, 255, .14);
+  color: #fff !important;
+}
+
+body .project-nav .project-view-tab.is-active {
+  background: transparent;
   color: #fff !important;
 }
 
@@ -474,6 +497,7 @@ body .project-nav .project-back > span:first-child {
 }
 
 body:not(.deliverables-page):not(.dodo-page):not(.dodo-demo-page):not(.demo-page) .project-nav.project-nav--tabs .project-view-tabs {
+  --project-tab-active-bg: rgba(16, 18, 24, .08);
   border-color: rgba(16, 18, 24, .1);
   background: rgba(255, 255, 255, .72);
   box-shadow: 0 8px 24px rgba(20, 24, 32, .08), inset 0 1px rgba(255, 255, 255, .6);
@@ -489,10 +513,18 @@ body:not(.deliverables-page):not(.dodo-page):not(.dodo-demo-page):not(.demo-page
 }
 
 body:not(.deliverables-page):not(.dodo-page):not(.dodo-demo-page):not(.demo-page) .project-nav .project-view-tab:hover,
-body:not(.deliverables-page):not(.dodo-page):not(.dodo-demo-page):not(.demo-page) .project-nav .project-view-tab:focus-visible,
-body:not(.deliverables-page):not(.dodo-page):not(.dodo-demo-page):not(.demo-page) .project-nav .project-view-tab.is-active {
+body:not(.deliverables-page):not(.dodo-page):not(.dodo-demo-page):not(.demo-page) .project-nav .project-view-tab:focus-visible {
   background: rgba(16, 18, 24, .08);
   color: #1b1c22 !important;
+}
+
+body:not(.deliverables-page):not(.dodo-page):not(.dodo-demo-page):not(.demo-page) .project-nav .project-view-tab.is-active {
+  background: transparent;
+  color: #1b1c22 !important;
+}
+
+body.light-project-nav .project-nav.project-nav--tabs .project-view-tabs {
+  --project-tab-active-bg: rgba(16, 18, 24, .08);
 }
 
 @media (max-width: 700px) {
@@ -803,39 +835,30 @@ body .project-nav.project-nav--hidden { transform: none !important; }
   body .project-nav.project-nav--tabs .project-back-label { display: none; }
 }
 
-/* Native cross-document transition keeps tab switches from flashing on reload. */
+/* Shared active pill moves between tab positions across project pages. */
 @view-transition { navigation: auto; }
 
-body .project-nav .project-view-tabs {
-  view-transition-name: project-view-tabs;
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
 }
 
-::view-transition-group(project-view-tabs) {
-  animation-duration: .32s;
+::view-transition-group(project-tab-active-pill) {
+  animation-duration: .46s;
   animation-timing-function: cubic-bezier(.22,1,.36,1);
 }
 
-::view-transition-old(project-view-tabs) {
-  animation: project-tabs-out .16s ease both;
-}
-
-::view-transition-new(project-view-tabs) {
-  animation: project-tabs-in .32s cubic-bezier(.22,1,.36,1) both;
-}
-
-@keyframes project-tabs-out {
-  to { opacity: 0; }
-}
-
-@keyframes project-tabs-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+::view-transition-old(project-tab-active-pill),
+::view-transition-new(project-tab-active-pill) {
+  animation: none;
+  mix-blend-mode: normal;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  ::view-transition-group(project-view-tabs),
-  ::view-transition-old(project-view-tabs),
-  ::view-transition-new(project-view-tabs) { animation: none; }
+  ::view-transition-group(project-tab-active-pill),
+  ::view-transition-old(project-tab-active-pill),
+  ::view-transition-new(project-tab-active-pill) { animation: none; }
 }
 
 /* CNAP's research page uses the same top-band geometry as its Demo. */
@@ -878,6 +901,95 @@ body > .project-nav {
 
 body > .project-nav.project-nav--tabs {
   margin: 0 auto -56px !important;
+}
+
+/* Demo navigation owns a separate top band; keep it in flow above the app UI. */
+body.demo-page > .project-nav,
+body.dodo-demo-page > .project-nav,
+body > .portfolio-project-nav.project-nav {
+  position: sticky !important;
+  top: 0 !important;
+  margin: 0 !important;
+}
+
+body .project-nav .demo-nav-toggle { display: none; }
+
+/* Demo-only presentation mode: remove the portfolio bar from flow and reveal it at the top edge. */
+@media (hover: hover) and (pointer: fine) {
+  body.demo-nav-capable > .project-nav.project-nav--tabs {
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    column-gap: 10px;
+  }
+
+  body .project-nav .demo-nav-actions {
+    min-width: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-self: start;
+    gap: 8px;
+  }
+
+  body .project-nav .demo-nav-toggle {
+    align-self: center;
+    justify-self: end;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    gap: 8px;
+    padding: 0 15px;
+    border: 1px solid var(--project-control-border);
+    border-radius: 999px;
+    background: var(--project-control-bg);
+    color: var(--project-control-text);
+    -webkit-backdrop-filter: blur(18px) saturate(135%);
+    backdrop-filter: blur(18px) saturate(135%);
+    box-shadow: var(--project-control-shadow);
+    font: 500 12px/1 "Space Grotesk", "Noto Sans SC", "Source Han Sans SC", "PingFang SC", Arial, sans-serif;
+    letter-spacing: 0;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color .2s ease, border-color .2s ease;
+  }
+
+  body .project-nav .demo-nav-toggle:hover,
+  body .project-nav .demo-nav-toggle:focus-visible,
+  body .project-nav .demo-nav-toggle[aria-pressed="true"] {
+    border-color: var(--project-control-border);
+    background: color-mix(in srgb, var(--project-control-bg) 82%, var(--project-control-bg-hover));
+    outline: none;
+  }
+
+  body .project-nav .demo-nav-toggle svg {
+    width: 16px;
+    height: 16px;
+    flex: 0 0 16px;
+  }
+
+  body.demo-nav-hidden > .project-nav,
+  body.demo-nav-hidden > .portfolio-project-nav.project-nav {
+    position: fixed !important;
+    inset: 0 0 auto !important;
+    z-index: 1200;
+    transform: translateY(calc(-100% - 8px)) !important;
+    transition: transform .32s cubic-bezier(.22, 1, .36, 1) !important;
+  }
+
+  body.demo-nav-hidden.demo-nav-hovering > .project-nav,
+  body.demo-nav-hidden > .project-nav:focus-within,
+  body.demo-nav-hidden.demo-nav-hovering > .portfolio-project-nav.project-nav,
+  body.demo-nav-hidden > .portfolio-project-nav.project-nav:focus-within {
+    transform: translateY(0) !important;
+  }
+
+  body.demo-nav-hidden.demo-page .demo-shell { height: calc(100vh - 44px) !important; }
+  body.demo-nav-hidden.demo-page .skip-read-demo-shell { height: 100vh !important; }
+  body.demo-nav-hidden.dodo-demo-page .dodo-demo-shell { height: 100vh !important; }
+  body.demo-nav-hidden > .portfolio-project-nav.project-nav + .portfolio-demo-app { height: 100vh !important; }
+}
+
+@media (hover: none), (pointer: coarse) {
+  body .project-nav .demo-nav-toggle { display: none !important; }
 }
 
 body.deliverables-page > .project-nav,

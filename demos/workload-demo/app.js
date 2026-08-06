@@ -64,6 +64,7 @@ const workloadStickyStack = document.querySelector('#workloadStickyStack');
 const menu = document.querySelector('#actionMenu');
 const modalBackdrop = document.querySelector('#modalBackdrop');
 const modal = document.querySelector('#actionModal');
+let modalTrigger = null;
 const detailBackdrop = document.querySelector('#detailBackdrop');
 const instanceModal = document.querySelector('#instanceModal');
 const historyDrawer = document.querySelector('#historyDrawer');
@@ -660,7 +661,7 @@ function setAllWorkloadsCollapsed(collapsed){
 function toast(message,type='default'){ const el=document.querySelector('#toast'); el.textContent=message; el.dataset.type=type; el.classList.add('show'); window.setTimeout(()=>el.classList.remove('show'),1800); }
 function actionTarget(ids){ return ids?.length ? `${ids.length} 个 Pod` : 'Payment-api'; }
 function setActionControls(disabled){ document.querySelectorAll('.title-actions button,[data-action],[data-bulk-action]').forEach(button=>button.disabled=disabled); }
-function closeModal(){ if(!state.executing){ modalBackdrop.classList.add('hidden'); modal.innerHTML=''; pendingAction=null; } }
+function closeModal(){ if(!state.executing){ modalBackdrop.classList.add('hidden'); modal.innerHTML=''; pendingAction=null; modalTrigger?.focus({preventScroll:true}); modalTrigger=null; } }
 
 const modalClusters=[
   {id:'imeonline',name:'imeonline',current:15,desired:4,unavailable:'15%',surge:'15%',available:'>95%'},
@@ -719,6 +720,7 @@ function batchModal(actionKey,ids,action){
   return `${modalHeader(title,description)}<div class="operation-modal-body">${warning?`<p class="operation-warning">${warning.replace('\n','<br>')}</p>`:''}${timeout}<section class="operation-section"><h3>待${rebuild?'删除/重建':shrink?'删除并缩容':'重启'} Pod ${ids.length}</h3>${podTable(ids)}</section>${config}</div>${modalFooter(false,'已选择 '+ids.length+' 个 Pod')}`;
 }
 function openConfirm(actionKey, ids=[]){
+  modalTrigger=document.activeElement instanceof HTMLElement ? document.activeElement : null;
   const action=actions[actionKey] || {label:'删除部署资源',detail:'删除资源将彻底清除所选集群上的部署资源，且不可撤销。'};
   pendingAction={actionKey,ids};
   let content='';
@@ -740,6 +742,8 @@ function openConfirm(actionKey, ids=[]){
   modal.innerHTML=content;
   if(actionKey==='vertical') modal.querySelectorAll('.vertical-resource-cell').forEach(syncResourceLimit);
   modalBackdrop.classList.remove('hidden');
+  const focusTarget=modal.querySelector('[data-modal-close], [data-modal-confirm], input, select, button');
+  focusTarget?.focus({preventScroll:true});
 }
 
 function selectedModalClusters(){ return Array.from(modal.querySelectorAll('[data-modal-cluster]:checked')); }

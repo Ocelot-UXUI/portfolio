@@ -73,6 +73,63 @@
     element.dataset.randomSwapEnhanced = "true";
   };
 
+  const isDemoNavigation = (header) => (
+    document.body.matches(".demo-page, .dodo-demo-page")
+    || header.classList.contains("portfolio-project-nav")
+  );
+
+  const addDemoNavigationToggle = (header) => {
+    if (!isDemoNavigation(header) || header.querySelector(".demo-nav-toggle")) return;
+
+    const button = document.createElement("button");
+    button.className = "demo-nav-toggle";
+    button.type = "button";
+    button.setAttribute("aria-label", "隐藏导航");
+    button.setAttribute("aria-pressed", "false");
+    button.innerHTML = `
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+        <path d="M3 9h18"></path>
+        <path d="m9 16 3-3 3 3"></path>
+      </svg>
+      <span>隐藏导航</span>
+    `;
+    const back = header.querySelector(":scope > .project-back");
+    const actions = document.createElement("div");
+    actions.className = "demo-nav-actions";
+    header.insertBefore(actions, back || header.firstChild);
+    if (back) actions.append(back);
+    actions.append(button);
+    document.body.classList.add("demo-nav-capable");
+
+    const setHidden = (hidden) => {
+      document.body.classList.toggle("demo-nav-hidden", hidden);
+      document.body.classList.remove("demo-nav-hovering");
+      button.setAttribute("aria-pressed", String(hidden));
+      button.setAttribute("aria-label", hidden ? "固定显示导航" : "隐藏导航");
+      button.querySelector("span").textContent = hidden ? "固定导航" : "隐藏导航";
+    };
+
+    button.addEventListener("click", () => {
+      const hidden = !document.body.classList.contains("demo-nav-hidden");
+      setHidden(hidden);
+      if (hidden) button.blur();
+    });
+
+    document.addEventListener("pointermove", (event) => {
+      if (!document.body.classList.contains("demo-nav-hidden")) return;
+      const revealHeight = matchMedia("(max-width: 700px)").matches ? 52 : 56;
+      document.body.classList.toggle("demo-nav-hovering", event.clientY <= revealHeight);
+    }, { passive: true });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && document.body.classList.contains("demo-nav-hidden")) {
+        setHidden(false);
+        button.focus({ preventScroll: true });
+      }
+    });
+  };
+
   document.querySelectorAll(".project-nav").forEach((header) => {
     const switcher = header.querySelector(".project-view-switch, .portfolio-view-switch");
     const select = switcher?.querySelector("select");
@@ -86,7 +143,10 @@
     [...select.options].forEach((option) => {
       const tab = document.createElement(option.disabled ? "span" : "a");
       tab.className = "project-view-tab";
-      tab.textContent = option.text;
+      const tabText = document.createElement("span");
+      tabText.className = "project-view-tab-text";
+      tabText.textContent = option.text;
+      tab.append(tabText);
       if (option.disabled) {
         tab.setAttribute("aria-disabled", "true");
       } else {
@@ -96,6 +156,10 @@
       if (option.selected) {
         tab.classList.add("is-active");
         tab.setAttribute("aria-current", "page");
+        const highlight = document.createElement("span");
+        highlight.className = "project-view-tab-highlight";
+        highlight.setAttribute("aria-hidden", "true");
+        tab.prepend(highlight);
       }
       tabs.append(tab);
     });
@@ -103,6 +167,7 @@
     header.insertBefore(tabs, switcher);
     header.classList.add("project-nav--tabs", "project-nav--title-in-tabs");
     tabs.classList.add("is-ready");
+    addDemoNavigationToggle(header);
   });
 
   document.querySelectorAll(".project-nav .project-nav-index").forEach(enhanceElement);
