@@ -2117,6 +2117,7 @@
         heroCoverflow.addEventListener("pointerdown", (event) => {
           if (isAnimating) return;
           if (event.pointerType === "mouse" && event.button !== 0) return;
+          if (event.target.closest?.(".hero-coverflow-caption")) return;
           stopHeroAutoplay();
           isDragging = true;
           pointerStartX = event.clientX;
@@ -2168,6 +2169,12 @@
           if (blockClick) {
             event.preventDefault();
             blockClick = false;
+            return;
+          }
+          // The image area remains a drag surface; use the caption text or
+          // arrow as the explicit navigation target.
+          if (event.detail > 0 && !event.target.closest?.(".hero-coverflow-caption")) {
+            event.preventDefault();
           }
         }));
         document.addEventListener("visibilitychange", () => {
