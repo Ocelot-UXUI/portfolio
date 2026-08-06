@@ -1017,6 +1017,7 @@
 .portfolio-project-nav.project-nav .project-view-tab.is-active{font-weight:600}
 .portfolio-project-nav.project-nav .project-view-tab-indicator{height:2px;box-shadow:0 0 8px rgba(165,143,255,.5)}
 .portfolio-demo-app{height:calc(100vh - 56px)}
+.portfolio-mobile-fallback{display:none}
 
 /* Product drawers and dialogs must sit above the portfolio shell. */
 .portfolio-demo-app .modal-backdrop,
@@ -1031,8 +1032,38 @@
   #instanceModal .detail-tabs,
   #instanceModal .detail-body{width:100%}
 }
+@media(max-width:700px){
+  body{min-width:0;overflow:hidden}
+  .portfolio-demo-app{display:none}
+  .portfolio-mobile-fallback{height:calc(100vh - 56px);display:grid;place-items:center;padding:32px 24px;background:linear-gradient(145deg,#f7f8fa,#edf1f6);color:#181818;text-align:left}
+  .portfolio-mobile-fallback>div{width:min(100%,420px)}
+  .portfolio-mobile-fallback-kicker{display:block;margin-bottom:14px;color:#2468f2;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+  .portfolio-mobile-fallback h1{margin:0 0 14px;font-size:28px;line-height:1.2;font-weight:600}
+  .portfolio-mobile-fallback p{margin:0;max-width:340px;color:#68707c;font-size:14px;line-height:1.7}
+  .portfolio-mobile-fallback a{display:inline-flex;align-items:center;gap:8px;margin-top:26px;color:#2468f2;font-size:13px;font-weight:600;text-decoration:none}
+  .portfolio-mobile-fallback a span{font-size:18px;line-height:1}
+}
 @media(prefers-reduced-motion:reduce){
   #instanceModal .instance-summary-shell,
   #instanceModal .instance-summary,
   #instanceModal .summary-toggle{transition:none}
+}
+
+/* The workload surface is desktop-oriented; keep the mobile fallback from
+   inheriting the demo's fixed canvas width. */
+@media (max-width:700px){
+  html,
+  body{
+    width:100%!important;
+    min-width:0!important;
+    max-width:100%!important;
+    overflow:hidden!important;
+  }
+
+  body .portfolio-demo-app{display:none!important}
+  body .portfolio-mobile-fallback{
+    display:grid!important;
+    width:100%!important;
+    min-width:0!important;
+  }
 }

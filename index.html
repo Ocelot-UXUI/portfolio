@@ -10,8 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="preload" as="image" href="assets/hero-background.jpg" fetchpriority="high" />
     <link rel="stylesheet" href="styles/styles.css?v=20260729-12" />
-    <link rel="stylesheet" href="styles/project-navigation.css?v=20260805-44" />
-    <script src="scripts/project-navigation.js?v=20260805-8" defer></script>
+    <link rel="stylesheet" href="styles/project-navigation.css?v=20260806-5" />
+    <script src="scripts/project-navigation.js?v=20260806-3" defer></script>
     <style>
       .prototype-homepage .nav {
         overflow: visible;
@@ -1400,7 +1400,26 @@
       @media (max-width: 700px) {
         .prototype-homepage .hero-note { display: none; }
 
-        .prototype-homepage .hero-coverflow { display: none; }
+        .prototype-homepage .nav-label,
+        .prototype-homepage .nav-label span,
+        .prototype-homepage .nav-contact-label { display: inline-flex; }
+
+        .prototype-homepage .hero-coverflow {
+          display: block;
+          height: 54vh;
+        }
+
+        .prototype-homepage .hero-coverflow-card { bottom: 42px; width: 38vw; height: 31vh; }
+        .prototype-homepage .hero-coverflow-card.is-hero-active { width: 48vw; }
+        .prototype-homepage .hero-coverflow-caption { top: 10px; right: 12px; left: 12px; min-height: 42px; padding-bottom: 6px; }
+        .prototype-homepage .hero-coverflow-caption strong { font-size: 12px; }
+        .prototype-homepage .hero-coverflow-caption small { margin-top: 3px; font-size: 9px; }
+        .prototype-homepage .hero-coverflow-caption-arrow { width: 28px; height: 28px; flex-basis: 28px; }
+        .prototype-homepage .hero-coverflow-caption-arrow svg { width: 16px; height: 16px; }
+        .prototype-homepage .hero-coverflow-surface img { top: 62px; height: calc(100% - 72px); }
+        .prototype-homepage .hero-coverflow-controls { bottom: calc(42px + 31vh + 12px); left: 18px; width: 72px; height: 34px; }
+        .prototype-homepage .hero-coverflow-control { width: 36px; height: 34px; }
+        .prototype-homepage .hero-coverflow-control svg { width: 14px; height: 14px; }
 
         .prototype-homepage .hero.hero-gallery h1.hero-statement {
           top: auto;
@@ -2004,6 +2023,7 @@
         let blockClick = false;
         let heroAutoplayTimer = 0;
         let heroProgressFrame = 0;
+        let heroInteractionPaused = false;
 
         const stopHeroAutoplay = () => {
           window.clearTimeout(heroAutoplayTimer);
@@ -2017,7 +2037,7 @@
 
         const resetHeroAutoplay = () => {
           stopHeroAutoplay();
-          if (reducedMotion) return;
+          if (reducedMotion || heroInteractionPaused || document.hidden) return;
           const activeFill = heroCards.find((card) => card.classList.contains("is-hero-active"))?.querySelector(".hero-coverflow-progress > i");
           if (!activeFill) return;
           heroProgressFrame = window.requestAnimationFrame(() => {
@@ -2113,6 +2133,23 @@
         });
         heroCoverflow.addEventListener("pointerup", finishHeroDrag);
         heroCoverflow.addEventListener("pointercancel", finishHeroDrag);
+        heroCoverflow.addEventListener("pointerenter", () => {
+          heroInteractionPaused = true;
+          stopHeroAutoplay();
+        });
+        heroCoverflow.addEventListener("pointerleave", () => {
+          heroInteractionPaused = false;
+          if (!isDragging) resetHeroAutoplay();
+        });
+        heroCoverflow.addEventListener("focusin", () => {
+          heroInteractionPaused = true;
+          stopHeroAutoplay();
+        });
+        heroCoverflow.addEventListener("focusout", (event) => {
+          if (event.relatedTarget && heroCoverflow.contains(event.relatedTarget)) return;
+          heroInteractionPaused = false;
+          resetHeroAutoplay();
+        });
         [previousHeroControl, nextHeroControl].forEach((control) => {
           if (!control) return;
           control.addEventListener("pointerdown", (event) => {
@@ -2129,9 +2166,10 @@
           animateHeroStep(-1);
         });
         heroCards.forEach((card) => card.addEventListener("click", (event) => {
-          if (!blockClick) return;
-          event.preventDefault();
-          blockClick = false;
+          if (blockClick) {
+            event.preventDefault();
+            blockClick = false;
+          }
         }));
         document.addEventListener("visibilitychange", () => {
           if (document.hidden) stopHeroAutoplay();
