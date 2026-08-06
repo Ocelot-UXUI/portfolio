@@ -26,6 +26,9 @@
       }
 
       .prototype-homepage .page {
+        width: 100%;
+        max-width: none;
+        margin: 0;
         overflow: visible;
       }
 
@@ -38,22 +41,76 @@
         position: relative;
       }
 
+      .prototype-homepage .nav-contact {
+        position: relative;
+        justify-self: end;
+      }
+
+      .prototype-homepage .nav-contact::after {
+        position: absolute;
+        z-index: 101;
+        top: 100%;
+        right: 0;
+        width: 220px;
+        height: 12px;
+        content: "";
+      }
+
+      .prototype-homepage .nav-contact-trigger {
+        margin: 0;
+        font: inherit;
+        cursor: pointer;
+      }
+
       .prototype-homepage .nav-contact-label {
         margin: 0;
         color: inherit;
       }
 
+      .prototype-homepage .nav-contact-icon {
+        width: 18px;
+        height: 18px;
+        flex: 0 0 18px;
+        display: block;
+      }
+
+      .prototype-homepage .nav-contact-trigger {
+        gap: 6px;
+        min-width: 120px;
+        height: 36px;
+        padding: 8px 16px;
+        border: 1px solid rgba(255, 255, 255, .05);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, .1);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+        -webkit-backdrop-filter: blur(12px);
+        backdrop-filter: blur(12px);
+        color: #fff;
+        font-size: 13px;
+        font-weight: 500;
+        transition: background-color .3s ease, border-color .3s ease;
+      }
+
+      .prototype-homepage .nav-contact-trigger:hover,
+      .prototype-homepage .nav-contact-trigger:focus-visible {
+        border-color: rgba(255, 255, 255, .1);
+        background: rgba(255, 255, 255, .2);
+        outline: none;
+      }
+
       .prototype-homepage .nav-contact-qr {
         position: absolute;
         z-index: 102;
-        top: calc(100% + 12px);
+        top: calc(100% + 10px);
         right: 0;
-        width: 208px;
-        padding: 7px;
-        border: 1px solid rgba(255, 255, 255, .16);
-        border-radius: 8px;
-        background: rgba(15, 16, 18, .96);
-        box-shadow: 0 18px 42px rgba(0, 0, 0, .38);
+        width: 220px;
+        padding: 10px;
+        border: 1px solid rgba(255, 255, 255, .1);
+        border-radius: 16px;
+        background: rgba(9, 4, 2, .5);
+        -webkit-backdrop-filter: blur(24px) saturate(135%);
+        backdrop-filter: blur(24px) saturate(135%);
+        box-shadow: 0 18px 42px rgba(0, 0, 0, .3), inset 0 1px rgba(255, 255, 255, .04);
         opacity: 0;
         pointer-events: none;
         transform: translateY(-8px) scale(.98);
@@ -61,23 +118,99 @@
         visibility: hidden;
       }
 
+      .prototype-homepage .nav-contact:hover .nav-contact-qr,
+      .prototype-homepage .nav-contact:focus-within .nav-contact-qr {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        visibility: visible;
+        pointer-events: auto;
+      }
+
+      .prototype-homepage .nav-contact-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin: 0 0 9px;
+      }
+
+      .prototype-homepage .nav-contact-copy {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        min-width: 0;
+        height: 34px;
+        padding: 0 8px;
+        border: 1px solid rgba(255, 255, 255, .12);
+        border-radius: 10px;
+        background: transparent;
+        color: rgba(255, 255, 255, .9);
+        font: inherit;
+        font-size: 11px;
+        font-weight: 500;
+        line-height: 1;
+        white-space: nowrap;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color .3s cubic-bezier(.4, .64, .68, 1), border-color .3s ease, color .3s ease;
+      }
+
+      .prototype-homepage .nav-contact-copy:hover,
+      .prototype-homepage .nav-contact-copy:focus-visible {
+        border-color: rgba(255, 255, 255, .9);
+        background: rgba(255, 255, 255, .94);
+        color: #100b08;
+        outline: none;
+      }
+
+      .prototype-homepage .nav-contact-copy svg {
+        width: 12px;
+        height: 12px;
+        flex: 0 0 auto;
+      }
+
+      .prototype-homepage .copy-toast {
+        position: fixed;
+        z-index: 300;
+        top: 68px;
+        left: 50%;
+        padding: 10px 14px;
+        border: 1px solid rgba(255, 255, 255, .1);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, .1);
+        -webkit-backdrop-filter: blur(12px) saturate(135%);
+        backdrop-filter: blur(12px) saturate(135%);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, .22), inset 0 1px rgba(255, 255, 255, .06);
+        color: #f7f8f8;
+        font-size: 12px;
+        font-weight: 500;
+        opacity: 0;
+        pointer-events: none;
+        transform: translate(-50%, -6px);
+        transition: opacity .2s ease, transform .2s ease;
+      }
+
+      .prototype-homepage .copy-toast.is-visible {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+
       .prototype-homepage .nav-contact-qr img {
         display: block;
         width: 100%;
         height: auto;
-        border-radius: 3px;
-      }
-
-      .prototype-homepage .nav-cta:hover .nav-contact-qr,
-      .prototype-homepage .nav-cta:focus-visible .nav-contact-qr {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-        visibility: visible;
+        border: 1px solid rgba(255, 255, 255, .1);
+        border-radius: 10px;
       }
 
       @media (max-width: 700px) {
+        .prototype-homepage .nav-contact::after {
+          width: 196px;
+        }
+
         .prototype-homepage .nav-contact-qr {
-          display: none;
+          right: -10px;
+          width: 196px;
         }
       }
 
@@ -1631,6 +1764,38 @@
         content: "";
       }
 
+      .prototype-homepage .footer-back-to-top {
+        justify-self: end;
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        color: #9b9b9e;
+        font-size: 11px;
+        font-weight: 500;
+        line-height: 1;
+        text-decoration: none;
+        text-transform: uppercase;
+        transition: color .3s cubic-bezier(.4, .64, .68, 1);
+      }
+
+      .prototype-homepage .footer-back-to-top svg {
+        width: 10px;
+        height: 11px;
+        color: #dc5619;
+        transition: transform .3s cubic-bezier(.4, .64, .68, 1);
+      }
+
+      .prototype-homepage .footer-back-to-top:hover,
+      .prototype-homepage .footer-back-to-top:focus-visible {
+        color: #fff;
+        outline: none;
+      }
+
+      .prototype-homepage .footer-back-to-top:hover svg,
+      .prototype-homepage .footer-back-to-top:focus-visible svg {
+        transform: translateY(-2px);
+      }
+
       .prototype-homepage .footer-minimal-row {
         display: grid;
         grid-template-columns: 1.4fr 1fr 1fr 1fr;
@@ -1664,6 +1829,7 @@
         }
 
         .prototype-homepage .footer.footer-minimal { gap: 22px; padding: 28px 22px 22px; }
+        .prototype-homepage .footer-back-to-top { font-size: 10px; }
         .prototype-homepage .footer-minimal-row { grid-template-columns: 1fr 1fr; gap: 14px 20px; font-size: 11px; }
         .prototype-homepage .footer-minimal-row a:nth-child(2),
         .prototype-homepage .footer-minimal-row span:last-child { text-align: left; }
@@ -1680,10 +1846,28 @@
           <li><a href="#projects" data-nav-link aria-label="项目"><span class="nav-label" aria-hidden="true"><span class="nav-char" style="--nav-char-delay:0ms">项</span><span class="nav-char" style="--nav-char-delay:35ms">目</span></span></a></li>
           <li class="nav-active-indicator" aria-hidden="true"></li>
         </ul>
-        <a href="mailto:1004080451@qq.com" class="nav-cta" aria-label="Contact，悬浮显示微信二维码，点击发送邮件">
-          <span class="nav-contact-label">Contact</span>
-          <span class="nav-contact-qr"><img src="assets/contact-wechat.jpg" alt="微信二维码" /></span>
-        </a>
+        <div class="nav-contact">
+          <button class="nav-cta nav-contact-trigger" type="button" aria-label="Let's talk，点击复制微信号，悬浮展开联系方式">
+            <svg class="nav-contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" fill="currentColor" aria-hidden="true">
+              <path d="M 13 4 C 7.486 4 3 7.813 3 12.5 C 3 14.089 3.511375 15.622891 4.484375 16.962891 L 3.9023438 21.515625 L 7.9238281 19.826172 C 9.2157664 20.473405 10.661622 20.845152 12.171875 20.951172 C 12.911761 23.89542 15.984593 26 19.5 26 C 20.952474 26 22.272207 25.588631 23.429688 24.96875 L 26.337891 26.601562 L 25.894531 22.833984 C 26.553846 21.884082 27 20.785589 27 19.582031 C 27 17.01804 25.280055 14.888016 22.853516 13.849609 C 22.940874 13.398313 23 12.947264 23 12.5 C 23 7.813 18.514 4 13 4 z M 9.5625 9.171875 C 10.3405 9.171875 10.96875 9.8001719 10.96875 10.576172 C 10.96875 11.352172 10.3395 11.984375 9.5625 11.984375 C 8.7855 11.984375 8.15625 11.354172 8.15625 10.576172 C 8.15625 9.8001719 8.7855 9.171875 9.5625 9.171875 z M 17.234375 9.171875 C 18.011375 9.171875 18.640625 9.8001719 18.640625 10.576172 C 18.640625 11.354172 18.011375 11.984375 17.234375 11.984375 C 16.455375 11.984375 15.828125 11.354172 15.828125 10.576172 C 15.828125 9.7991719 16.457375 9.171875 17.234375 9.171875 z M 19.5 15.166016 C 22.639675 15.166016 25 17.238427 25 19.582031 C 25 20.470335 24.677694 21.29295 24.091797 22.005859 L 23.822266 22.333984 L 23.871094 22.755859 L 23.892578 22.935547 L 23.449219 22.6875 L 22.941406 23.015625 C 22.007387 23.622187 20.813397 24 19.5 24 C 16.360325 24 14 21.925636 14 19.582031 C 14 17.239644 16.360511 15.166016 19.5 15.166016 z M 16.986328 17.429688 C 16.396328 17.429687 15.921875 17.906141 15.921875 18.494141 C 15.921875 19.082141 16.397328 19.560547 16.986328 19.560547 C 17.573328 19.560547 18.051734 19.082141 18.052734 18.494141 C 18.052734 17.906141 17.574328 17.429688 16.986328 17.429688 z M 22.033203 17.429688 C 21.446203 17.429688 20.96875 17.906141 20.96875 18.494141 C 20.96875 19.082141 21.445203 19.560547 22.033203 19.560547 C 22.622203 19.560547 23.101562 19.082141 23.101562 18.494141 C 23.101563 17.906141 22.622203 17.429688 22.033203 17.429688 z" />
+            </svg>
+            <span class="nav-contact-label">Let's talk</span>
+          </button>
+          <div class="nav-contact-qr" aria-label="联系方式">
+            <div class="nav-contact-actions">
+              <button class="nav-contact-copy" type="button" data-copy-value="qwe1004080451" data-copy-label="微信号">
+                <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="5.25" y="5.25" width="7.5" height="7.5" rx="1.25" stroke="currentColor"/><path d="M10.75 5.25V4.5A1.25 1.25 0 0 0 9.5 3.25h-4A1.25 1.25 0 0 0 4.25 4.5v4A1.25 1.25 0 0 0 5.5 9.75h.25" stroke="currentColor"/></svg>
+                <span>复制微信号</span>
+              </button>
+              <button class="nav-contact-copy" type="button" data-copy-qr aria-label="复制微信二维码图片">
+                <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2.25" y="2.25" width="11.5" height="11.5" rx="1.5" stroke="currentColor"/><circle cx="5.25" cy="5.25" r="1" fill="currentColor"/><path d="m3.5 11 2.6-2.6 1.8 1.8 1.6-1.6 3 3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span>复制二维码</span>
+              </button>
+            </div>
+            <img src="assets/contact-wechat.jpg" alt="微信二维码" />
+          </div>
+        </div>
+        <div class="copy-toast" role="status" aria-live="polite"></div>
       </nav>
 
       <main>
@@ -1778,6 +1962,10 @@
       </main>
 
       <footer class="footer footer-minimal">
+        <a class="footer-back-to-top" href="#home" aria-label="返回页面顶部">
+          <span>Back to top</span>
+          <svg viewBox="0 0 10 11" fill="none" aria-hidden="true"><path d="M5 11V3m0 0L.758 7.243M5 3l4.228 4.228M0 1h10" stroke="currentColor"/></svg>
+        </a>
         <div class="footer-minimal-row">
           <span>© 2026 郭昱成。保留所有权利</span>
           <a href="mailto:1004080451@qq.com">1004080451@qq.com</a>
@@ -1812,6 +2000,65 @@
 
       updateStickyNav();
       window.addEventListener("scroll", updateStickyNav, { passive: true });
+
+      const contactTrigger = document.querySelector(".nav-contact-trigger");
+      const copyToast = document.querySelector(".copy-toast");
+      let copyToastTimer = 0;
+
+      const showContactToast = (message) => {
+        if (!copyToast) return;
+        window.clearTimeout(copyToastTimer);
+        copyToast.textContent = message;
+        copyToast.classList.add("is-visible");
+        copyToastTimer = window.setTimeout(() => copyToast.classList.remove("is-visible"), 1800);
+      };
+
+      const showCopyToast = (label) => showContactToast(`已复制${label}`);
+
+      const copyContactValue = async (value, label) => {
+        try {
+          if (navigator.clipboard?.writeText) {
+            await navigator.clipboard.writeText(value);
+          } else {
+            const temporaryInput = document.createElement("textarea");
+            temporaryInput.value = value;
+            temporaryInput.style.position = "fixed";
+            temporaryInput.style.opacity = "0";
+            document.body.append(temporaryInput);
+            temporaryInput.select();
+            document.execCommand("copy");
+            temporaryInput.remove();
+          }
+          showCopyToast(label);
+        } catch {
+          showContactToast(`${label}复制失败，请手动复制`);
+        }
+      };
+
+      const copyQrImage = async () => {
+        const qrImage = document.querySelector(".nav-contact-qr img");
+        try {
+          if (!qrImage || !window.ClipboardItem || !navigator.clipboard?.write) throw new Error("Image clipboard unavailable");
+          if (!qrImage.complete) await qrImage.decode();
+          const canvas = document.createElement("canvas");
+          canvas.width = qrImage.naturalWidth;
+          canvas.height = qrImage.naturalHeight;
+          canvas.getContext("2d").drawImage(qrImage, 0, 0);
+          const qrBlob = await new Promise((resolve, reject) => {
+            canvas.toBlob((blob) => blob ? resolve(blob) : reject(new Error("PNG conversion failed")), "image/png");
+          });
+          await navigator.clipboard.write([new ClipboardItem({ "image/png": qrBlob })]);
+          showCopyToast("二维码");
+        } catch {
+          showContactToast("二维码复制失败，请使用支持图片剪贴板的浏览器");
+        }
+      };
+
+      contactTrigger?.addEventListener("click", () => copyContactValue("qwe1004080451", "微信号"));
+      document.querySelectorAll("[data-copy-value]").forEach((button) => {
+        button.addEventListener("click", () => copyContactValue(button.dataset.copyValue, button.dataset.copyLabel));
+      });
+      document.querySelector("[data-copy-qr]")?.addEventListener("click", copyQrImage);
 
       const navLinks = [...document.querySelectorAll("[data-nav-link]")];
       const navIndicator = document.querySelector(".nav-active-indicator");
@@ -2013,7 +2260,7 @@
           { left: "28%", offset: "0%", scale: "1.25", rotate: "0deg" },
           { left: "56%", offset: "0%", scale: "1", rotate: "0deg" },
         ];
-        const HERO_AUTOPLAY_DURATION = 5000;
+        const HERO_AUTOPLAY_DURATION = 4000;
         const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         let activeCard = 0;
         let pointerStartX = 0;
@@ -2024,10 +2271,23 @@
         let heroAutoplayTimer = 0;
         let heroProgressFrame = 0;
         let heroInteractionPaused = false;
+        let heroHoveredCard = null;
 
-        const stopHeroAutoplay = () => {
+        const stopHeroAutoplay = (resetProgress = true) => {
           window.clearTimeout(heroAutoplayTimer);
           window.cancelAnimationFrame(heroProgressFrame);
+          if (!resetProgress) {
+            heroProgressFills.forEach((fill) => {
+              if (!fill) return;
+              const trackWidth = fill.parentElement?.getBoundingClientRect().width || 0;
+              const renderedWidth = parseFloat(window.getComputedStyle(fill).width) || 0;
+              if (trackWidth > 0) {
+                fill.style.transition = "none";
+                fill.style.width = `${Math.min(100, Math.max(0, (renderedWidth / trackWidth) * 100))}%`;
+              }
+            });
+            return;
+          }
           heroProgressFills.forEach((fill) => {
             if (!fill) return;
             fill.style.transition = "none";
@@ -2035,15 +2295,17 @@
           });
         };
 
-        const resetHeroAutoplay = () => {
-          stopHeroAutoplay();
+        const resetHeroAutoplay = (preserveProgress = false) => {
+          stopHeroAutoplay(!preserveProgress);
           if (reducedMotion || heroInteractionPaused || document.hidden) return;
           const activeFill = heroCards.find((card) => card.classList.contains("is-hero-active"))?.querySelector(".hero-coverflow-progress > i");
           if (!activeFill) return;
+          const currentProgress = Math.min(100, Math.max(0, parseFloat(activeFill.style.width) || 0));
+          const remainingDuration = Math.max(240, HERO_AUTOPLAY_DURATION * (1 - currentProgress / 100));
           heroProgressFrame = window.requestAnimationFrame(() => {
-            activeFill.style.transition = `width ${HERO_AUTOPLAY_DURATION}ms linear`;
+            activeFill.style.transition = `width ${remainingDuration}ms linear`;
             activeFill.style.width = "100%";
-            heroAutoplayTimer = window.setTimeout(() => animateHeroStep(-1), HERO_AUTOPLAY_DURATION);
+            heroAutoplayTimer = window.setTimeout(() => animateHeroStep(-1), remainingDuration);
           });
         };
 
@@ -2133,13 +2395,21 @@
         });
         heroCoverflow.addEventListener("pointerup", finishHeroDrag);
         heroCoverflow.addEventListener("pointercancel", finishHeroDrag);
-        heroCoverflow.addEventListener("pointerenter", () => {
-          heroInteractionPaused = true;
-          stopHeroAutoplay();
-        });
-        heroCoverflow.addEventListener("pointerleave", () => {
-          heroInteractionPaused = false;
-          if (!isDragging) resetHeroAutoplay();
+        // Only hovering the currently featured card pauses autoplay. The gaps,
+        // placeholder and arrow controls remain transparent to the timer.
+        heroCards.forEach((card) => {
+          card.addEventListener("pointerenter", () => {
+            if (!card.classList.contains("is-hero-active")) return;
+            heroHoveredCard = card;
+            heroInteractionPaused = true;
+            stopHeroAutoplay(false);
+          });
+          card.addEventListener("pointerleave", () => {
+            if (heroHoveredCard !== card) return;
+            heroHoveredCard = null;
+            heroInteractionPaused = false;
+            if (!isDragging) resetHeroAutoplay(true);
+          });
         });
         heroCoverflow.addEventListener("focusin", () => {
           heroInteractionPaused = true;
@@ -2178,8 +2448,8 @@
           }
         }));
         document.addEventListener("visibilitychange", () => {
-          if (document.hidden) stopHeroAutoplay();
-          else resetHeroAutoplay();
+          if (document.hidden) stopHeroAutoplay(false);
+          else resetHeroAutoplay(true);
         });
       }
     </script>
