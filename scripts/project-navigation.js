@@ -116,10 +116,19 @@
       if (hidden) button.blur();
     });
 
+    const compactViewport = matchMedia("(max-width: 700px)");
+    compactViewport.addEventListener("change", (event) => {
+      if (event.matches && document.body.classList.contains("demo-nav-hidden")) {
+        setHidden(false);
+      }
+    });
+
     document.addEventListener("pointermove", (event) => {
       if (!document.body.classList.contains("demo-nav-hidden")) return;
-      const revealHeight = matchMedia("(max-width: 700px)").matches ? 52 : 56;
-      document.body.classList.toggle("demo-nav-hovering", event.clientY <= revealHeight);
+      const revealHeight = compactViewport.matches ? 52 : 56;
+      const companion = document.body.querySelector(":scope > .demo-nav-companion");
+      const isInsideNavigation = header.contains(event.target) || companion?.contains(event.target);
+      document.body.classList.toggle("demo-nav-hovering", event.clientY <= revealHeight || isInsideNavigation);
     }, { passive: true });
 
     document.addEventListener("keydown", (event) => {
