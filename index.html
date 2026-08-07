@@ -1749,16 +1749,23 @@
       }
 
       .prototype-homepage .footer.footer-minimal {
+        --footer-edge: clamp(22px, 4.4vw, 64px);
+        position: relative;
+        left: 0;
+        width: 100%;
+        max-width: none;
         min-height: 0;
         display: grid;
         gap: 34px;
-        padding: 40px clamp(22px, 4.4vw, 64px) 26px;
+        padding: 40px var(--footer-edge) 26px;
         background: #050506;
         border-top: 0;
       }
 
       .prototype-homepage .footer-minimal::before {
-        width: 100%;
+        grid-column: 1 / -1;
+        justify-self: center;
+        width: calc(100vw - var(--footer-edge) - var(--footer-edge));
         height: 1px;
         background: #3a3b3e;
         content: "";
@@ -1797,6 +1804,8 @@
       }
 
       .prototype-homepage .footer-minimal-row {
+        justify-self: center;
+        width: calc(100vw - var(--footer-edge) - var(--footer-edge));
         display: grid;
         grid-template-columns: 1.4fr 1fr 1fr 1fr;
         gap: 24px;
@@ -1960,20 +1969,20 @@
         </section>
 
       </main>
-
-      <footer class="footer footer-minimal">
-        <a class="footer-back-to-top" href="#home" aria-label="返回页面顶部">
-          <span>Back to top</span>
-          <svg viewBox="0 0 10 11" fill="none" aria-hidden="true"><path d="M5 11V3m0 0L.758 7.243M5 3l4.228 4.228M0 1h10" stroke="currentColor"/></svg>
-        </a>
-        <div class="footer-minimal-row">
-          <span>© 2026 郭昱成。保留所有权利</span>
-          <a href="mailto:1004080451@qq.com">1004080451@qq.com</a>
-          <a href="https://github.com/Ocelot-UXUI" target="_blank" rel="noreferrer">GitHub</a>
-          <span>UX/UI 作品集</span>
-        </div>
-      </footer>
     </div>
+
+    <footer class="footer footer-minimal">
+      <a class="footer-back-to-top" href="#home" aria-label="返回页面顶部">
+        <span>Back to top</span>
+        <svg viewBox="0 0 10 11" fill="none" aria-hidden="true"><path d="M5 11V3m0 0L.758 7.243M5 3l4.228 4.228M0 1h10" stroke="currentColor"/></svg>
+      </a>
+      <div class="footer-minimal-row">
+        <span>© 2026 郭昱成。保留所有权利</span>
+        <a href="mailto:1004080451@qq.com">1004080451@qq.com</a>
+        <a href="https://github.com/Ocelot-UXUI" target="_blank" rel="noreferrer">GitHub</a>
+        <span>UX/UI 作品集</span>
+      </div>
+    </footer>
     <script>
       const stickyNav = document.querySelector(".nav");
       let previousScrollY = window.scrollY;
