@@ -107,9 +107,9 @@
         padding: 10px;
         border: 1px solid rgba(255, 255, 255, .1);
         border-radius: 16px;
-        background: rgba(9, 4, 2, .5);
-        -webkit-backdrop-filter: blur(24px) saturate(135%);
-        backdrop-filter: blur(24px) saturate(135%);
+        background: rgba(9, 4, 2, .68);
+        -webkit-backdrop-filter: blur(38px) saturate(105%) brightness(.68);
+        backdrop-filter: blur(38px) saturate(105%) brightness(.68);
         box-shadow: 0 18px 42px rgba(0, 0, 0, .3), inset 0 1px rgba(255, 255, 255, .04);
         opacity: 0;
         pointer-events: none;
@@ -1539,27 +1539,40 @@
 
         .prototype-homepage .hero-coverflow {
           display: block;
-          height: 54vh;
+          height: 55vh;
+          height: 55svh;
         }
 
-        .prototype-homepage .hero-coverflow-card { bottom: 42px; width: 38vw; height: 31vh; }
-        .prototype-homepage .hero-coverflow-card.is-hero-active { width: 48vw; }
-        .prototype-homepage .hero-coverflow-caption { top: 10px; right: 12px; left: 12px; min-height: 42px; padding-bottom: 6px; }
-        .prototype-homepage .hero-coverflow-caption strong { font-size: 12px; }
-        .prototype-homepage .hero-coverflow-caption small { margin-top: 3px; font-size: 9px; }
-        .prototype-homepage .hero-coverflow-caption-arrow { width: 28px; height: 28px; flex-basis: 28px; }
-        .prototype-homepage .hero-coverflow-caption-arrow svg { width: 16px; height: 16px; }
-        .prototype-homepage .hero-coverflow-surface img { top: 62px; height: calc(100% - 72px); }
-        .prototype-homepage .hero-coverflow-controls { bottom: calc(42px + 31vh + 12px); left: 18px; width: 72px; height: 34px; }
+        .prototype-homepage .hero-coverflow-card {
+          bottom: 24px;
+          width: 68vw;
+          height: min(43vh, 340px);
+          height: min(43svh, 340px);
+        }
+
+        .prototype-homepage .hero-coverflow-card.is-hero-active { width: 80vw; }
+        .prototype-homepage .hero-coverflow-caption { top: 12px; right: 14px; left: 14px; min-height: 48px; padding-bottom: 8px; }
+        .prototype-homepage .hero-coverflow-caption strong { font-size: 14px; }
+        .prototype-homepage .hero-coverflow-caption small { margin-top: 4px; font-size: 10px; }
+        .prototype-homepage .hero-coverflow-caption-arrow { width: 32px; height: 32px; flex-basis: 32px; }
+        .prototype-homepage .hero-coverflow-caption-arrow svg { width: 18px; height: 18px; }
+        .prototype-homepage .hero-coverflow-surface img { top: 72px; height: calc(100% - 82px); }
+        .prototype-homepage .hero-coverflow-controls {
+          bottom: calc(24px + min(43vh, 340px) + 12px);
+          bottom: calc(24px + min(43svh, 340px) + 12px);
+          left: 18px;
+          width: 72px;
+          height: 34px;
+        }
         .prototype-homepage .hero-coverflow-control { width: 36px; height: 34px; }
         .prototype-homepage .hero-coverflow-control svg { width: 14px; height: 14px; }
 
         .prototype-homepage .hero.hero-gallery h1.hero-statement {
-          top: auto;
+          top: 112px;
           right: 22px;
-          bottom: 11%;
+          bottom: auto;
           left: 22px;
-          font-size: 30px;
+          font-size: 28px;
           line-height: 1.22;
         }
 
@@ -2264,11 +2277,18 @@
         const heroProgressFills = heroCards.map((card) => card.querySelector(".hero-coverflow-progress > i"));
         const previousHeroControl = heroCoverflow.querySelector("[data-hero-previous]");
         const nextHeroControl = heroCoverflow.querySelector("[data-hero-next]");
-        const heroSlots = [
+        const desktopHeroSlots = [
           { left: "0%", offset: "0%", scale: "1", rotate: "0deg" },
           { left: "28%", offset: "0%", scale: "1.25", rotate: "0deg" },
           { left: "56%", offset: "0%", scale: "1", rotate: "0deg" },
         ];
+        const mobileHeroSlots = [
+          { left: "-50%", offset: "0%", scale: ".9", rotate: "0deg" },
+          { left: "50%", offset: "-50%", scale: "1", rotate: "0deg" },
+          { left: "82%", offset: "0%", scale: ".9", rotate: "0deg" },
+        ];
+        const mobileHeroQuery = window.matchMedia("(max-width: 700px)");
+        const getHeroSlots = () => mobileHeroQuery.matches ? mobileHeroSlots : desktopHeroSlots;
         const HERO_AUTOPLAY_DURATION = 4000;
         const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         let activeCard = 0;
@@ -2319,6 +2339,7 @@
         };
 
         const renderHeroCoverflow = (delta = 0, instant = false) => {
+          const heroSlots = getHeroSlots();
           heroCards.forEach((card, index) => {
             const slot = heroSlots[(index - activeCard + heroCards.length) % heroCards.length];
             card.style.left = slot.left;
@@ -2329,7 +2350,7 @@
             card.classList.toggle("is-hero-muted", slot !== heroSlots[1]);
           });
           if (heroPlaceholder) {
-            heroPlaceholder.style.left = "84%";
+            heroPlaceholder.style.left = mobileHeroQuery.matches ? "96%" : "84%";
             heroPlaceholder.style.zIndex = "1";
             heroPlaceholder.style.transitionDuration = instant ? "0ms" : "500ms";
             heroPlaceholder.style.transform = `translateX(${delta}px)`;
@@ -2342,6 +2363,7 @@
           if (isAnimating) return;
           stopHeroAutoplay();
           isAnimating = true;
+          const heroSlots = getHeroSlots();
           const oldActive = activeCard;
           const cardSlots = heroCards.map((_, index) => (index - oldActive + heroCards.length) % heroCards.length);
           heroCards.forEach((card, index) => {
@@ -2385,6 +2407,7 @@
 
         renderHeroCoverflow(0, true);
         resetHeroAutoplay();
+        mobileHeroQuery.addEventListener("change", () => renderHeroCoverflow(0, true));
         heroCoverflow.addEventListener("pointerdown", (event) => {
           if (isAnimating) return;
           if (event.pointerType === "mouse" && event.button !== 0) return;

@@ -45,6 +45,13 @@
         white-space: nowrap;
       }
 
+      .demo-action-heading {
+        min-width: 0;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
       .demo-action-label::before {
         content: "";
         flex: 0 0 7px;
@@ -54,6 +61,89 @@
         border-radius: 50%;
         background: transparent;
         box-shadow: 0 0 0 3px rgba(27, 28, 34, .035);
+      }
+
+      .demo-action-help-wrap {
+        position: relative;
+        display: inline-flex;
+        flex: 0 0 auto;
+      }
+
+      .demo-action-help {
+        display: grid;
+        width: 20px;
+        height: 20px;
+        padding: 0;
+        place-items: center;
+        border: 0;
+        border-radius: 50%;
+        background: transparent;
+        color: rgba(27, 28, 34, .48);
+        cursor: help;
+        transition: color .2s ease, background-color .2s ease;
+      }
+
+      .demo-action-help:hover,
+      .demo-action-help:focus-visible,
+      .demo-action-help[aria-expanded="true"] {
+        background: rgba(16, 18, 24, .06);
+        color: rgba(27, 28, 34, .82);
+        outline: none;
+      }
+
+      .demo-action-help:focus-visible {
+        box-shadow: 0 0 0 2px rgba(27, 28, 34, .14);
+      }
+
+      .demo-action-help svg {
+        width: 14px;
+        height: 14px;
+      }
+
+      .demo-action-tooltip {
+        position: absolute;
+        z-index: 8;
+        top: calc(100% + 9px);
+        left: -8px;
+        width: min(270px, calc(100vw - 104px));
+        padding: 10px 12px;
+        border: 1px solid rgba(16, 18, 24, .1);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, .94);
+        -webkit-backdrop-filter: blur(18px) saturate(110%);
+        backdrop-filter: blur(18px) saturate(110%);
+        box-shadow: 0 10px 28px rgba(15, 23, 42, .14), inset 0 1px rgba(255, 255, 255, .8);
+        color: rgba(27, 28, 34, .78);
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 1.55;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-4px);
+        transition: opacity .18s ease, transform .2s cubic-bezier(.22, 1, .36, 1), visibility .18s;
+        visibility: hidden;
+        white-space: normal;
+      }
+
+      .demo-action-tooltip::before {
+        position: absolute;
+        top: -5px;
+        left: 13px;
+        width: 8px;
+        height: 8px;
+        border-top: 1px solid rgba(16, 18, 24, .1);
+        border-left: 1px solid rgba(16, 18, 24, .1);
+        background: rgba(255, 255, 255, .94);
+        content: "";
+        transform: rotate(45deg);
+      }
+
+      .demo-action-help-wrap:hover .demo-action-tooltip,
+      .demo-action-help-wrap:focus-within .demo-action-tooltip,
+      .demo-action-help-wrap.is-open .demo-action-tooltip {
+        opacity: 1;
+        transform: translateY(0);
+        visibility: visible;
       }
 
       .demo-action-controls {
@@ -167,8 +257,16 @@
   </head>
   <body class="demo-page light-project-nav">
     <header class="project-nav"><a class="project-back" href="../index.html" aria-label="返回首页"><span aria-hidden="true">←</span><span class="project-back-label">返回首页</span></a><p class="project-nav-title">主动式 AI 记忆助手</p><label class="project-view-switch"><span>当前展示</span><select aria-label="切换主动式 AI 记忆助手展示" data-view-switch data-current="remi.html"><option value="case.html">案例 Deck</option><option value="remi.html" selected>交互 Demo</option><option value="remi-materials.html">交付物</option></select></label></header>
-    <div class="demo-action-bar demo-nav-companion" aria-label="动作模拟器">
-      <span class="demo-action-label">动作模拟器</span>
+    <div class="demo-action-bar demo-nav-companion" aria-label="快速体验工具">
+      <div class="demo-action-heading">
+        <span class="demo-action-label">快速体验</span>
+        <span class="demo-action-help-wrap">
+          <button class="demo-action-help" type="button" aria-label="了解快速体验" aria-expanded="false" aria-describedby="demo-action-tooltip">
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.25" stroke="currentColor"/><path d="M8 7.25v4M8 4.75h.01" stroke="currentColor" stroke-linecap="round"/></svg>
+          </button>
+          <span class="demo-action-tooltip" id="demo-action-tooltip" role="tooltip">触发预设场景，体验 Remi 如何从文件和外部对话中识别信息并形成记忆。</span>
+        </span>
+      </div>
       <div class="demo-action-controls">
         <button type="button" data-demo-action="import">模拟导入文件</button>
         <button type="button" data-demo-action="chat">模拟外部对话</button>
@@ -192,6 +290,25 @@
       });
 
       const demoFrame = document.querySelector("#remi-demo-frame");
+      const demoActionHelp = document.querySelector(".demo-action-help");
+      const demoActionHelpWrap = document.querySelector(".demo-action-help-wrap");
+
+      const closeDemoActionHelp = () => {
+        demoActionHelpWrap?.classList.remove("is-open");
+        demoActionHelp?.setAttribute("aria-expanded", "false");
+      };
+
+      demoActionHelp?.addEventListener("click", (event) => {
+        event.stopPropagation();
+        const isOpen = demoActionHelpWrap?.classList.toggle("is-open") ?? false;
+        demoActionHelp.setAttribute("aria-expanded", String(isOpen));
+      });
+
+      document.addEventListener("click", closeDemoActionHelp);
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") closeDemoActionHelp();
+      });
+
       document.querySelectorAll("[data-demo-action]").forEach((button) => {
         button.addEventListener("click", () => {
           demoFrame?.contentWindow?.postMessage(
