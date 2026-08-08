@@ -125,10 +125,15 @@
 
     document.addEventListener("pointermove", (event) => {
       if (!document.body.classList.contains("demo-nav-hidden")) return;
-      const revealHeight = compactViewport.matches ? 52 : 56;
+      const revealHeight = compactViewport.matches ? 52 : 64;
       const companion = document.body.querySelector(":scope > .demo-nav-companion");
       const isInsideNavigation = header.contains(event.target) || companion?.contains(event.target);
-      document.body.classList.toggle("demo-nav-hovering", event.clientY <= revealHeight || isInsideNavigation);
+      const isHovering = document.body.classList.contains("demo-nav-hovering");
+      const leaveBuffer = 16;
+      const shouldReveal = isInsideNavigation
+        || event.clientY <= revealHeight
+        || (isHovering && event.clientY <= revealHeight + leaveBuffer);
+      document.body.classList.toggle("demo-nav-hovering", shouldReveal);
     }, { passive: true });
 
     document.addEventListener("keydown", (event) => {

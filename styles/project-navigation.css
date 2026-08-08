@@ -1140,6 +1140,20 @@ body .project-nav .project-view-tab.is-active:hover {
   box-shadow: none;
 }
 
+/* Revealed demo navigation remains a translucent glass layer over the app canvas. */
+body.demo-nav-hidden > .project-nav,
+body.demo-nav-hidden > .portfolio-project-nav.project-nav,
+body.demo-nav-hidden.demo-nav-hovering > .project-nav,
+body.demo-nav-hidden.demo-nav-hovering > .portfolio-project-nav.project-nav {
+  background: rgba(248, 249, 251, .68) !important;
+  border-bottom: 1px solid rgba(27, 28, 34, .1) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(145%) !important;
+  backdrop-filter: blur(24px) saturate(145%) !important;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, .08), inset 0 1px rgba(255, 255, 255, .72) !important;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
 body .project-nav .project-view-tab.is-active:focus-visible {
   background: transparent !important;
   box-shadow: none;
@@ -1192,7 +1206,7 @@ body .project-nav {
   --project-control-font-size: 14px;
   --project-control-font-weight: 500;
   --project-control-icon-size: 18px;
-  --project-back-icon-offset-y: 4px;
+  --project-back-icon-offset-y: 6px;
   --project-control-gap: 10px;
   --project-control-border-hover: rgba(255, 255, 255, .28);
   --project-control-icon-bg-hover: rgba(255, 255, 255, .18);
