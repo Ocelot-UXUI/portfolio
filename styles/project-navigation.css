@@ -1190,6 +1190,24 @@ body .project-nav .demo-nav-toggle[aria-pressed="true"] {
     margin: 0 auto -64px !important;
   }
 
+  /* Align the return control with the 52px view-switch rail on desktop. */
+  body .project-nav .project-back,
+  body > .portfolio-project-nav.project-nav .project-back {
+    height: 52px;
+    min-height: 52px;
+    padding: 4px 18px 4px 4px !important;
+  }
+
+  body .project-nav .project-back > span:first-child {
+    flex-basis: 44px;
+    width: 44px;
+    height: 44px;
+  }
+
+  body .project-nav .project-back > .project-back-label {
+    font-size: 14px !important;
+  }
+
   body .project-nav .project-view-tab,
   body .project-nav .project-view-tab:not(.is-active),
   body .project-nav.project-nav--title-in-tabs .project-nav-title {
