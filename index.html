@@ -1868,7 +1868,7 @@
         background:
           linear-gradient(180deg, rgba(8, 9, 10, .54) 0%, rgba(8, 9, 10, .72) 40%, #08090a 78%),
           linear-gradient(90deg, rgba(8, 9, 10, .32), transparent 42%, rgba(8, 9, 10, .18)),
-          url("assets/hero-background.jpg") center 34% / cover no-repeat,
+          url("assets/hero-background-lines.png") center 48% / 86% auto no-repeat,
           #08090a;
       }
 
@@ -1910,12 +1910,13 @@
         height: min(52vh, 500px);
         min-height: 390px;
         margin-top: clamp(28px, 5vh, 54px);
+        perspective: 1600px;
       }
 
       .prototype-homepage .hero-project-stack-card {
         position: absolute;
         display: block;
-        overflow: hidden;
+        overflow: visible;
         margin: 0;
         border: 3px solid #090909;
         border-radius: 16px;
@@ -1924,23 +1925,66 @@
         color: inherit;
         text-decoration: none;
         transform-origin: center center;
-        transition: transform 420ms cubic-bezier(.22, 1, .36, 1), box-shadow 320ms ease;
+        transform-style: preserve-3d;
+        transition: transform 520ms cubic-bezier(.22, 1, .36, 1), box-shadow 360ms ease;
         will-change: transform;
       }
 
       .prototype-homepage .hero-project-stack-card:hover,
       .prototype-homepage .hero-project-stack-card:focus-visible {
         z-index: 6;
-        box-shadow: 0 30px 52px rgba(0, 0, 0, .42);
+        box-shadow: 0 36px 64px rgba(0, 0, 0, .48);
         outline: 2px solid transparent;
-        transform: translate3d(0, -14px, 0) rotate(var(--hero-card-rotate));
+        transform: translate3d(0, -18px, 84px) scale(1.075) rotate(var(--hero-card-rotate));
       }
 
       .prototype-homepage .hero-project-stack-card > img {
         display: block;
         width: 100%;
         height: 100%;
+        border-radius: inherit;
         object-fit: cover;
+      }
+
+      .prototype-homepage .hero-project-tooltip {
+        position: absolute;
+        z-index: 8;
+        left: 50%;
+        bottom: calc(100% + 12px);
+        display: grid;
+        width: min(260px, 42vw);
+        gap: 6px;
+        padding: 13px 15px;
+        border: 1px solid rgb(255 255 255 / .18);
+        border-radius: 8px;
+        background: rgb(19 21 25 / .76);
+        box-shadow: 0 14px 30px rgb(0 0 0 / .25), inset 0 1px 0 rgb(255 255 255 / .08);
+        color: #f7f7f5;
+        opacity: 0;
+        pointer-events: none;
+        transform: translate(-50%, 8px) scale(.98);
+        transition: opacity .2s ease, transform .28s cubic-bezier(.22, 1, .36, 1);
+        backdrop-filter: blur(18px) saturate(125%);
+        -webkit-backdrop-filter: blur(18px) saturate(125%);
+      }
+
+      .prototype-homepage .hero-project-tooltip b {
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 1.35;
+      }
+
+      .prototype-homepage .hero-project-tooltip small {
+        color: rgb(239 241 244 / .68);
+        font-size: 11px;
+        font-weight: 400;
+        line-height: 1.5;
+      }
+
+      .prototype-homepage .hero-project-stack-card:hover .hero-project-tooltip,
+      .prototype-homepage .hero-project-stack-card:focus-visible .hero-project-tooltip {
+        opacity: 1;
+        transform: translate(-50%, 0) scale(1);
       }
 
       .prototype-homepage .hero-stack-cnap {
@@ -1951,6 +1995,14 @@
         width: 62%;
         aspect-ratio: 1.6;
         transform: rotate(var(--hero-card-rotate));
+      }
+
+      /* Shift the desktop toward the larger left card when active, preserving
+         its full canvas while keeping the two phone projects exposed. */
+      .prototype-homepage .hero-stack-cnap:hover,
+      .prototype-homepage .hero-stack-cnap:focus-visible {
+        z-index: 6;
+        transform: translate3d(-152px, -14px, 84px) scale(1.035) rotate(var(--hero-card-rotate));
       }
 
       .prototype-homepage .hero-stack-remi {
@@ -2034,6 +2086,7 @@
         .prototype-homepage .hero-stack-remi { bottom: 0; left: -4%; width: 56%; }
         .prototype-homepage .hero-stack-xhs { bottom: 0; left: 69%; width: 29%; }
         .prototype-homepage .hero-stack-reading { bottom: 0; left: 88%; width: 29%; }
+        .prototype-homepage .hero-project-tooltip { display: none; }
       }
 
     </style>
@@ -2078,10 +2131,10 @@
             <p>Selected work · 2024 - 2026</p>
           </div>
           <div class="hero-project-stack" aria-label="精选项目预览">
-            <a class="hero-project-stack-card hero-stack-cnap" href="pages/cnap-research.html" aria-label="查看 CNAP 云原生工作负载管理项目"><img src="assets/hero-projects/legacy-cnap.jpg" alt="CNAP 云原生工作负载管理界面" /></a>
-            <a class="hero-project-stack-card hero-stack-remi" href="pages/case.html" aria-label="查看主动式 AI 记忆助手项目"><img src="assets/hero-projects/legacy-remi.jpg" alt="Remi 主动式 AI 记忆助手界面" /></a>
-            <a class="hero-project-stack-card hero-stack-xhs" href="pages/xiaohongshu.html" aria-label="查看小红书本地生活项目"><img src="assets/hero-projects/legacy-xhs.png" alt="小红书本地生活项目界面" /></a>
-            <a class="hero-project-stack-card hero-stack-reading" href="pages/skip-read.html" aria-label="查看职场人阅读学习 APP 项目"><img class="hero-stack-reading-content" src="assets/hero-projects/legacy-reading-content.png" alt="职场人阅读学习 APP 界面" /><img class="hero-stack-reading-frame" src="assets/hero-projects/legacy-reading-frame.png" alt="" /></a>
+            <a class="hero-project-stack-card hero-stack-cnap" href="pages/cnap-research.html" aria-label="查看 CNAP 云原生工作负载管理项目"><img src="assets/hero-projects/cnap-desktop.png" alt="CNAP 云原生工作负载管理界面" /><span class="hero-project-tooltip"><b>CNAP 云原生工作负载管理</b><small>通过用户调研重构云原生部署与运维体验，降低平台使用门槛与排障成本</small></span></a>
+            <a class="hero-project-stack-card hero-stack-remi" href="pages/case.html" aria-label="查看主动式 AI 记忆助手项目"><img src="assets/hero-devices/image_2.png" alt="Remi 主动式 AI 记忆助手界面" /><span class="hero-project-tooltip"><b>商汤科技 主动 AI 记忆助手</b><small>解决 AI 交付物“理解门槛高，用不上”问题</small></span></a>
+            <a class="hero-project-stack-card hero-stack-xhs" href="pages/xiaohongshu.html" aria-label="查看小红书本地生活项目"><img src="assets/hero-projects/image_1.png" alt="小红书本地生活项目界面" /><span class="hero-project-tooltip"><b>小红书 本地生活体验升级</b><small>提升用户从种草到下单核销的转化效率</small></span></a>
+            <a class="hero-project-stack-card hero-stack-reading" href="pages/skip-read.html" aria-label="查看职场人阅读学习 APP 项目"><img class="hero-stack-reading-content" src="assets/hero-projects/image_3.png" alt="职场人阅读学习 APP 界面" /><img class="hero-stack-reading-frame" src="assets/hero-projects/legacy-reading-frame.png" alt="" /><span class="hero-project-tooltip"><b>碎片时间下的快速阅读 APP</b><small>提升用户的平均阅读时间与留存</small></span></a>
           </div>
         </section>
 
