@@ -76,7 +76,7 @@ body .project-nav .project-back {
   color: #fff !important;
   white-space: nowrap;
   overflow: visible !important;
-  transition: background-color .22s ease, border-color .22s ease, transform .22s ease;
+  transition: background-color .22s ease, border-color .22s ease, color .22s ease, box-shadow .22s ease;
 }
 
 body .project-nav .project-back > span:first-child {
@@ -1183,36 +1183,155 @@ body .project-nav .demo-nav-toggle[aria-pressed="true"] {
   }
 }
 
-/* Give the desktop view switch enough visual weight without changing the compact mobile bar. */
+/* Shared project-navigation specification. Change these tokens, not individual controls. */
+body .project-nav {
+  --project-nav-height: 64px;
+  --project-control-height: 52px;
+  --project-control-inner-size: 44px;
+  --project-control-radius: 999px;
+  --project-control-font-size: 14px;
+  --project-control-font-weight: 500;
+  --project-control-icon-size: 18px;
+  --project-control-gap: 10px;
+  --project-control-border-hover: rgba(255, 255, 255, .28);
+  --project-control-icon-bg-hover: rgba(255, 255, 255, .18);
+  --project-tab-hover-bg: rgba(255, 255, 255, .1);
+  font-family: "Space Grotesk", "Noto Sans SC", "Source Han Sans SC", "PingFang SC", Arial, sans-serif;
+}
+
+body:not(.deliverables-page):not(.dodo-page):not(.dodo-demo-page):not(.demo-page) .project-nav,
+body.light-project-nav .project-nav,
+body.demo-page > .project-nav,
+body.dodo-demo-page > .project-nav,
+body > .portfolio-project-nav.project-nav {
+  --project-control-bg-hover: rgba(255, 255, 255, .94);
+  --project-control-border-hover: rgba(16, 18, 24, .16);
+  --project-control-icon-bg-hover: rgba(16, 18, 24, .12);
+  --project-tab-hover-bg: rgba(16, 18, 24, .06);
+}
+
 @media (min-width: 701px) {
-  body > .project-nav.project-nav--tabs {
-    height: 64px !important;
-    margin: 0 auto -64px !important;
+  body > .project-nav.project-nav--tabs,
+  body.demo-page > .project-nav,
+  body.dodo-demo-page > .project-nav,
+  body > .portfolio-project-nav.project-nav {
+    height: var(--project-nav-height) !important;
+    min-height: var(--project-nav-height) !important;
   }
 
-  /* Align the return control with the 52px view-switch rail on desktop. */
+  body:not(.demo-page):not(.dodo-demo-page) > .project-nav:not(.portfolio-project-nav) {
+    margin-bottom: calc(var(--project-nav-height) * -1) !important;
+  }
+
   body .project-nav .project-back,
+  body .project-nav .demo-nav-toggle,
+  body .project-nav.project-nav--tabs .project-view-tabs,
   body > .portfolio-project-nav.project-nav .project-back {
-    height: 52px;
-    min-height: 52px;
+    height: var(--project-control-height) !important;
+    min-height: var(--project-control-height) !important;
+    border-radius: var(--project-control-radius) !important;
+  }
+
+  body .project-nav .project-back,
+  body .project-nav .project-back:hover,
+  body .project-nav .project-back:focus-visible,
+  body > .portfolio-project-nav.project-nav .project-back,
+  body > .portfolio-project-nav.project-nav .project-back:hover,
+  body > .portfolio-project-nav.project-nav .project-back:focus-visible {
+    gap: var(--project-control-gap) !important;
     padding: 4px 18px 4px 4px !important;
   }
 
   body .project-nav .project-back > span:first-child {
-    flex-basis: 44px;
-    width: 44px;
-    height: 44px;
+    flex: 0 0 var(--project-control-inner-size) !important;
+    width: var(--project-control-inner-size) !important;
+    height: var(--project-control-inner-size) !important;
   }
 
-  body .project-nav .project-back > .project-back-label {
-    font-size: 14px !important;
+  body .project-nav .project-view-tab {
+    height: var(--project-control-inner-size) !important;
+    min-height: var(--project-control-inner-size) !important;
   }
+}
 
-  body .project-nav .project-view-tab,
-  body .project-nav .project-view-tab:not(.is-active),
-  body .project-nav.project-nav--title-in-tabs .project-nav-title {
-    font-size: 14px !important;
-  }
+body .project-nav .project-back,
+body .project-nav .project-back:hover,
+body .project-nav .project-back:focus-visible,
+body .project-nav .project-back > .project-back-label,
+body .project-nav .demo-nav-toggle,
+body .project-nav .project-view-tab,
+body .project-nav.project-nav--title-in-tabs .project-nav-title {
+  font-family: inherit !important;
+  font-size: var(--project-control-font-size) !important;
+  line-height: 1 !important;
+  letter-spacing: 0 !important;
+}
+
+body .project-nav .project-back,
+body .project-nav .project-back:hover,
+body .project-nav .project-back:focus-visible,
+body .project-nav .project-back > .project-back-label,
+body .project-nav .demo-nav-toggle,
+body .project-nav .project-view-tab {
+  font-weight: var(--project-control-font-weight) !important;
+}
+
+body .project-nav.project-nav--title-in-tabs .project-nav-title,
+body .project-nav .project-view-tab.is-active {
+  font-weight: 600 !important;
+}
+
+body .project-nav .project-back > span:first-child,
+body .project-nav .project-back:hover > span:first-child,
+body .project-nav .project-back:focus-visible > span:first-child {
+  display: inline-grid;
+  place-items: center;
+  transform: none !important;
+}
+
+body .project-nav .project-back > span:first-child::before,
+body .project-nav .project-back:hover > span:first-child::before,
+body .project-nav .project-back:focus-visible > span:first-child::before {
+  width: var(--project-control-icon-size) !important;
+  height: var(--project-control-icon-size) !important;
+  background: var(--project-control-text) !important;
+  transform: none !important;
+}
+
+body .project-nav .demo-nav-toggle {
+  gap: 8px !important;
+  padding: 0 16px !important;
+}
+
+body .project-nav .demo-nav-toggle svg {
+  display: block;
+  flex: 0 0 var(--project-control-icon-size) !important;
+  width: var(--project-control-icon-size) !important;
+  height: var(--project-control-icon-size) !important;
+  stroke-width: 1.8;
+}
+
+body .project-nav .project-back:hover,
+body .project-nav .project-back:focus-visible,
+body .project-nav .demo-nav-toggle:hover,
+body .project-nav .demo-nav-toggle:focus-visible,
+body .project-nav .demo-nav-toggle[aria-pressed="true"] {
+  border-color: var(--project-control-border-hover) !important;
+  background: var(--project-control-bg-hover) !important;
+  color: var(--project-control-text) !important;
+  transform: none !important;
+}
+
+body .project-nav .project-back:hover > span:first-child,
+body .project-nav .project-back:focus-visible > span:first-child {
+  background: var(--project-control-icon-bg-hover) !important;
+}
+
+body .project-nav .project-view-tab:hover,
+body .project-nav .project-view-tab:focus-visible {
+  background: var(--project-tab-hover-bg) !important;
+  color: var(--project-tab-text-strong) !important;
+  transform: none !important;
 }
 
 /* Codex-inspired section rail for long project pages and case-study decks. */
