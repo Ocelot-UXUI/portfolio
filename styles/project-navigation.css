@@ -1192,6 +1192,7 @@ body .project-nav {
   --project-control-font-size: 14px;
   --project-control-font-weight: 500;
   --project-control-icon-size: 18px;
+  --project-back-icon-offset-y: 4px;
   --project-control-gap: 10px;
   --project-control-border-hover: rgba(255, 255, 255, .28);
   --project-control-icon-bg-hover: rgba(255, 255, 255, .18);
@@ -1295,7 +1296,7 @@ body .project-nav .project-back:focus-visible > span:first-child::before {
   width: var(--project-control-icon-size) !important;
   height: var(--project-control-icon-size) !important;
   background: var(--project-control-text) !important;
-  transform: none !important;
+  transform: translate3d(0, var(--project-back-icon-offset-y), 0) !important;
 }
 
 body .project-nav .demo-nav-toggle {
