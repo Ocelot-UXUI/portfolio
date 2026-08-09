@@ -1145,13 +1145,128 @@ body.demo-nav-hidden > .project-nav,
 body.demo-nav-hidden > .portfolio-project-nav.project-nav,
 body.demo-nav-hidden.demo-nav-hovering > .project-nav,
 body.demo-nav-hidden.demo-nav-hovering > .portfolio-project-nav.project-nav {
-  background: rgba(248, 249, 251, .68) !important;
-  border-bottom: 1px solid rgba(27, 28, 34, .1) !important;
-  -webkit-backdrop-filter: blur(24px) saturate(145%) !important;
-  backdrop-filter: blur(24px) saturate(145%) !important;
-  box-shadow: 0 10px 28px rgba(15, 23, 42, .08), inset 0 1px rgba(255, 255, 255, .72) !important;
+  background: rgba(255, 255, 255, .72) !important;
+  border-bottom: 0 !important;
+  -webkit-backdrop-filter: blur(22px) saturate(145%) !important;
+  backdrop-filter: blur(22px) saturate(145%) !important;
+  box-shadow: none !important;
   will-change: transform;
   backface-visibility: hidden;
+}
+
+/* Demo pages do not use scroll-sticky navigation. The fixed layer is only
+   enabled while the user has chosen hidden navigation and is revealing it. */
+body.demo-page:not(.demo-nav-hidden) > .project-nav,
+body.dodo-demo-page:not(.demo-nav-hidden) > .project-nav,
+body:not(.demo-nav-hidden) > .portfolio-project-nav.project-nav {
+  position: relative !important;
+  top: auto !important;
+}
+
+/* Keep the companion action row aligned with the 64px navigation band. */
+body .demo-nav-companion {
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+  background: rgba(255, 255, 255, .72) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(145%) !important;
+  backdrop-filter: blur(22px) saturate(145%) !important;
+  transition: transform .22s cubic-bezier(.22, 1, .36, 1) !important;
+}
+
+/* The action row and project navigation share one glass surface. */
+body.demo-page > .project-nav,
+body.dodo-demo-page > .project-nav,
+body > .portfolio-project-nav.project-nav {
+  background: rgba(255, 255, 255, .72) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(145%) !important;
+  backdrop-filter: blur(22px) saturate(145%) !important;
+  box-shadow: none !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body.demo-nav-hidden > .demo-nav-companion {
+    inset: 64px 0 auto !important;
+  }
+
+  body.demo-nav-hidden.demo-page > .project-nav,
+  body.demo-nav-hidden.dodo-demo-page > .project-nav,
+  body.demo-nav-hidden > .portfolio-project-nav.project-nav {
+    transform: translateY(calc(-100% - 8px)) !important;
+  }
+
+  body.demo-nav-hidden > .project-nav,
+  body.demo-nav-hidden > .portfolio-project-nav.project-nav {
+    transition: transform .22s cubic-bezier(.22, 1, .36, 1) !important;
+  }
+}
+
+/* Demo shells follow the shared 64px navigation height instead of the old 56px band. */
+body.demo-page:not(.demo-nav-hidden) .demo-shell {
+  height: calc(100vh - 108px) !important;
+}
+
+body.dodo-demo-page:not(.demo-nav-hidden) .dodo-demo-shell,
+body:not(.demo-nav-hidden) > .portfolio-project-nav.project-nav + .portfolio-demo-app {
+  height: calc(100vh - 64px) !important;
+}
+
+body:not(.demo-nav-hidden) > .portfolio-demo-app {
+  height: calc(100vh - 64px) !important;
+}
+
+body.demo-nav-hidden > .portfolio-demo-app {
+  height: 100vh !important;
+}
+
+@media (max-width: 700px) {
+  body.demo-page:not(.demo-nav-hidden) .demo-shell { height: calc(100vh - 96px) !important; }
+  body.dodo-demo-page:not(.demo-nav-hidden) .dodo-demo-shell,
+  body:not(.demo-nav-hidden) > .portfolio-project-nav.project-nav + .portfolio-demo-app {
+    height: calc(100vh - 52px) !important;
+  }
+}
+
+/* Remi's navigation and quick-action row use one shared glass surface. */
+body.demo-page:has(> .demo-nav-companion) {
+  background: #f8f9fb;
+}
+
+body.demo-page:has(> .demo-nav-companion)::before {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 108px;
+  background: rgba(255, 255, 255, .72);
+  -webkit-backdrop-filter: blur(22px) saturate(145%);
+  backdrop-filter: blur(22px) saturate(145%);
+  content: "";
+  pointer-events: none;
+}
+
+body.demo-page:has(> .demo-nav-companion) > .project-nav,
+body.demo-page:has(> .demo-nav-companion) > .demo-nav-companion,
+body.demo-nav-hidden.demo-page:has(> .demo-nav-companion) > .project-nav,
+body.demo-nav-hidden.demo-page:has(> .demo-nav-companion) > .demo-nav-companion {
+  background: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body.demo-nav-hidden.demo-page:has(> .demo-nav-companion)::before {
+    position: fixed;
+    z-index: 1198;
+    transform: translateY(calc(-100% - 8px));
+    transition: transform .22s cubic-bezier(.22, 1, .36, 1);
+  }
+
+  body.demo-nav-hidden.demo-page.demo-nav-hovering:has(> .demo-nav-companion)::before,
+  body.demo-nav-hidden.demo-page:has(> .demo-nav-companion:focus-within)::before {
+    transform: translateY(0);
+  }
 }
 
 body .project-nav .project-view-tab.is-active:focus-visible {
