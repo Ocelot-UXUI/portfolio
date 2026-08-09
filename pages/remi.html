@@ -192,6 +192,11 @@
           transform: translateY(calc(-100% - 52px)) !important;
         }
 
+        body.demo-nav-hidden.demo-nav-hovering > .project-nav,
+        body.demo-nav-hidden > .project-nav:focus-within {
+          transform: translateY(0) !important;
+        }
+
         body.demo-nav-hidden > .demo-nav-companion {
           position: fixed;
           inset: 56px 0 auto;
