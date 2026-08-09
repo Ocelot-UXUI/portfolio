@@ -113,7 +113,7 @@
       inset: "0 0 auto",
       zIndex: "1197",
       width: "100%",
-      height: "16px",
+      height: "64px",
       background: "transparent"
     });
     document.body.append(revealZone);
@@ -133,11 +133,13 @@
       if (hidden) button.blur();
     });
 
-    revealZone.addEventListener("pointerenter", () => {
+    const revealFromTopEdge = () => {
       if (document.body.classList.contains("demo-nav-hidden")) {
         document.body.classList.add("demo-nav-hovering");
       }
-    });
+    };
+    revealZone.addEventListener("pointerenter", revealFromTopEdge);
+    revealZone.addEventListener("pointermove", revealFromTopEdge, { passive: true });
 
     const compactViewport = matchMedia("(max-width: 700px)");
     compactViewport.addEventListener("change", (event) => {
