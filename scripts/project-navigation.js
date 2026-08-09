@@ -102,9 +102,26 @@
     actions.append(button);
     document.body.classList.add("demo-nav-capable");
 
+    // Iframe demos swallow pointer events, so keep a thin parent-page hit area
+    // above them to reveal the hidden portfolio navigation.
+    const revealZone = document.createElement("div");
+    revealZone.className = "demo-nav-reveal-zone";
+    revealZone.hidden = true;
+    revealZone.setAttribute("aria-hidden", "true");
+    Object.assign(revealZone.style, {
+      position: "fixed",
+      inset: "0 0 auto",
+      zIndex: "1197",
+      width: "100%",
+      height: "16px",
+      background: "transparent"
+    });
+    document.body.append(revealZone);
+
     const setHidden = (hidden) => {
       document.body.classList.toggle("demo-nav-hidden", hidden);
       document.body.classList.remove("demo-nav-hovering");
+      revealZone.hidden = !hidden;
       button.setAttribute("aria-pressed", String(hidden));
       button.setAttribute("aria-label", hidden ? "固定显示导航" : "隐藏导航");
       button.querySelector("span").textContent = hidden ? "固定导航" : "隐藏导航";
@@ -114,6 +131,12 @@
       const hidden = !document.body.classList.contains("demo-nav-hidden");
       setHidden(hidden);
       if (hidden) button.blur();
+    });
+
+    revealZone.addEventListener("pointerenter", () => {
+      if (document.body.classList.contains("demo-nav-hidden")) {
+        document.body.classList.add("demo-nav-hovering");
+      }
     });
 
     const compactViewport = matchMedia("(max-width: 700px)");

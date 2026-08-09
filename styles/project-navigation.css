@@ -1198,6 +1198,13 @@ body > .portfolio-project-nav.project-nav {
   body.demo-nav-hidden > .portfolio-project-nav.project-nav {
     transition: transform .22s cubic-bezier(.22, 1, .36, 1) !important;
   }
+
+  body.demo-nav-hidden.demo-nav-hovering > .project-nav,
+  body.demo-nav-hidden > .project-nav:focus-within,
+  body.demo-nav-hidden.demo-nav-hovering > .portfolio-project-nav.project-nav,
+  body.demo-nav-hidden > .portfolio-project-nav.project-nav:focus-within {
+    transform: translateY(0) !important;
+  }
 }
 
 /* Demo shells follow the shared 64px navigation height instead of the old 56px band. */
