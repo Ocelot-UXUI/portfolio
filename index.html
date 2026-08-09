@@ -1916,6 +1916,12 @@
         perspective: 1600px;
       }
 
+      /* A hovered project and its detail card must clear the headline layer. */
+      .prototype-homepage .hero-project-stack:has(.hero-project-stack-card:hover),
+      .prototype-homepage .hero-project-stack:has(.hero-project-stack-card:focus-visible) {
+        z-index: 4;
+      }
+
       .prototype-homepage .hero-project-stack-card {
         position: absolute;
         display: block;
