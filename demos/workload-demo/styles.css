@@ -603,6 +603,249 @@
 .workload-sticky-stack .pod-table thead th{top:0!important}
 .workload-sticky-stack .cluster-select{cursor:pointer}
 
+/* Runtime configuration page */
+.runtime-page{min-width:960px;min-height:calc(100vh - 112px);padding:0 0 40px;color:#181818}
+.runtime-page-header{display:flex;align-items:center;justify-content:space-between;padding:0 0 16px;border-bottom:1px solid #e8e8e8}
+.runtime-page-header h1{margin:0;font-size:24px;line-height:32px;font-weight:600}.runtime-page-header p{margin:4px 0 0;color:#8f8f8f;font-size:12px;line-height:18px}
+.runtime-page-actions{display:flex;align-items:center;gap:8px}.runtime-page-actions button{height:32px;padding:0 20px;border-radius:20px;font:500 14px/22px "PingFang SC",sans-serif;cursor:pointer}.runtime-secondary-btn{border:1px solid #ccc;background:#fff;color:#181818}.runtime-primary-btn{border:1px solid #1c202b;background:#1c202b;color:#a7f3cf}.runtime-context-row{display:flex;align-items:center;gap:8px;height:48px;color:#8f8f8f;font-size:12px}.runtime-context-row b{color:#545454;font-weight:400}.runtime-context-row em{padding:2px 6px;border-radius:4px;background:#e6faf1;color:#16834b;font-style:normal}.runtime-context-row i{width:1px;height:12px;background:#d9d9d9;margin:0 8px}.runtime-save-state{margin-left:auto;color:#16a765}
+.runtime-layout{display:grid;grid-template-columns:240px minmax(520px,1fr) 112px;gap:24px;align-items:start}.runtime-tree{position:sticky;top:0;min-height:600px;padding:0 8px 16px 0;border-right:1px solid #f0f0f0}.runtime-search{display:flex;height:32px;align-items:center;gap:8px;padding:4px 12px;border:1px solid #d9d9d9;border-radius:8px;background:#fff;color:#bfbfbf}.runtime-search svg{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:1.6}.runtime-search input{width:100%;min-width:0;border:0;outline:0;color:#181818;font:14px/22px "PingFang SC",sans-serif}.runtime-search input::placeholder{color:#bfbfbf}.runtime-tree-list{margin-top:12px}.runtime-tree-group{margin-bottom:8px}.runtime-tree-heading,.runtime-tree-item{display:flex;width:100%;height:32px;align-items:center;border:0;border-radius:4px;background:transparent;color:#181818;font:14px/22px "PingFang SC",sans-serif;text-align:left;cursor:pointer}.runtime-tree-heading{padding:0 8px;gap:4px}.runtime-tree-chevron{width:16px;color:#545454}.runtime-tree-action{margin-left:auto;font-size:18px;color:#181818}.runtime-tree-item{padding:0 8px 0 32px}.runtime-tree-item.is-active{background:#e6faf1}.runtime-tree-item.is-search-hidden{display:none}.runtime-tree-group.is-filtered .runtime-tree-heading{color:#545454}
+.runtime-editor{min-width:0}.runtime-editor-title{display:flex;align-items:center;justify-content:space-between;padding:0 0 12px}.runtime-editor-title h2{display:inline;margin:0 8px 0 0;font-size:18px;line-height:26px;font-weight:600}.runtime-editor-title span{color:#545454;font-size:14px}.runtime-status-pill{padding:3px 8px;border-radius:4px;background:#e6faf1;color:#16834b!important;font-size:12px!important}.runtime-section{margin-bottom:16px;border:1px solid #e8e8e8;border-radius:8px;background:#fff}.runtime-section-heading{display:flex;align-items:flex-start;justify-content:space-between;padding:16px 20px;border-bottom:1px solid #f0f0f0}.runtime-section-heading h3{margin:0;font-size:16px;line-height:24px;font-weight:500}.runtime-section-heading p{margin:4px 0 0;color:#8f8f8f;font-size:12px;line-height:18px}.runtime-icon-btn{width:28px;height:28px;padding:0;border:0;border-radius:50%;background:transparent;color:#545454;font-size:18px;cursor:pointer}.runtime-icon-btn:hover{background:#f2f2f2}.runtime-section.is-collapsed>*:not(.runtime-section-heading){display:none}.runtime-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 24px;padding:20px}.runtime-form-grid label{display:flex;min-width:0;flex-direction:column;gap:6px;color:#181818;font-size:14px}.runtime-form-grid label>span{line-height:22px}.runtime-form-grid input,.runtime-form-grid select,.runtime-input-unit input{height:32px;min-width:0;padding:4px 10px;border:1px solid #d9d9d9;border-radius:8px;background:#fff;color:#181818;font:14px/22px "PingFang SC",sans-serif;outline:0}.runtime-form-grid input:focus,.runtime-form-grid select:focus,.runtime-input-unit input:focus{border-color:#181818}.runtime-form-grid small,.runtime-subsection p{color:#8f8f8f;font-size:12px;line-height:18px}.runtime-field-wide{grid-column:1/-1}.runtime-input-unit{display:flex;align-items:center;gap:8px}.runtime-input-unit input{width:100%}.runtime-input-unit em{color:#545454;font-style:normal;font-size:14px}.runtime-switch-field{position:relative}.runtime-switch-field .runtime-switch{position:absolute;right:0;top:0}.runtime-switch{width:32px;height:20px;padding:2px;border:0;border-radius:12px;background:#d9d9d9;cursor:pointer}.runtime-switch i{display:block;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .15s ease}.runtime-switch.is-on{background:#a7f3cf}.runtime-switch.is-on i{transform:translateX(12px)}.runtime-subsection{padding:20px;border-top:1px solid #f0f0f0}.runtime-subsection h4{margin:0;font-size:14px;line-height:22px;font-weight:500}.runtime-subsection p{margin:4px 0 12px}.runtime-subsection-title{display:flex;align-items:center;justify-content:space-between}.runtime-add-btn,.runtime-outline-btn{height:32px;padding:0 16px;border:1px solid #ccc;border-radius:20px;background:#fff;color:#181818;font:14px/22px "PingFang SC",sans-serif;cursor:pointer}.runtime-add-btn:hover,.runtime-outline-btn:hover,.runtime-secondary-btn:hover{background:#f2f2f2}.runtime-resource-table{border:1px solid #f0f0f0;border-radius:6px;overflow:hidden}.runtime-resource-head,.runtime-resource-row{display:grid;grid-template-columns:1fr 150px 150px 80px;gap:12px;align-items:center;padding:10px 12px}.runtime-resource-head{background:#f7f7f7;color:#8f8f8f;font-size:12px}.runtime-resource-row{border-top:1px solid #f0f0f0;font-size:14px}.runtime-resource-row b{font-weight:400}.runtime-resource-row .runtime-switch{justify-self:center}.runtime-toc{position:sticky;top:0;display:flex;flex-direction:column;gap:16px;padding:8px 0 0 8px;border-left:1px solid #f0f0f0}.runtime-toc strong{font-size:12px;font-weight:500}.runtime-toc a{color:#8f8f8f;font-size:12px;text-decoration:none}.runtime-toc a:hover,.runtime-toc a.is-current{color:#181818}.runtime-toc a.is-current{font-weight:500}
+@media(max-width:1100px){.runtime-layout{grid-template-columns:200px minmax(480px,1fr)}.runtime-toc{display:none}.runtime-tree{padding-right:12px}.runtime-page{min-width:0}.runtime-form-grid{gap:16px}.runtime-resource-head,.runtime-resource-row{grid-template-columns:1fr 110px 110px 60px}}
+
+/* CNAP checkbox states from the shared component spec. */
+.pod-table .pod-check,
+.pod-table .cluster-select {
+  appearance: none;
+  -webkit-appearance: none;
+  position: relative;
+  display: block;
+  width: 16px;
+  height: 16px;
+  margin: 0 auto;
+  padding: 0;
+  border: 1px solid #d9d9d9;
+  border-radius: 2px;
+  background: #f7f8f8;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: border-color .15s ease, background-color .15s ease;
+}
+
+.pod-table .pod-check:hover,
+.pod-table .cluster-select:hover {
+  border-color: #bfbfbf;
+}
+
+.pod-table .pod-check:checked,
+.pod-table .cluster-select:checked {
+  border-color: #1c202b;
+  background: #1c202b;
+}
+
+.pod-table .pod-check:checked::after,
+.pod-table .cluster-select:checked::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.1 6.2 4.7 8.7 9.9 3.4' fill='none' stroke='%23a7f3cf' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 12px 12px no-repeat;
+}
+
+.pod-table .pod-check:indeterminate,
+.pod-table .cluster-select:indeterminate {
+  border-color: #1c202b;
+  background: #1c202b;
+}
+
+.pod-table .pod-check:indeterminate::after,
+.pod-table .cluster-select:indeterminate::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 6px;
+  width: 6px;
+  height: 1.5px;
+  border-radius: 1px;
+  background: #a7f3cf;
+}
+
+.pod-table .pod-check:focus-visible,
+.pod-table .cluster-select:focus-visible {
+  outline: 2px solid rgba(36, 104, 242, .28);
+  outline-offset: 2px;
+}
+
+.pod-table .pod-check:disabled,
+.pod-table .cluster-select:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+/* Small Select pattern from the CNAP component library. */
+.filters .filter-select {
+  position: relative;
+  width: 180px;
+  height: 32px;
+  flex: 0 0 180px;
+}
+
+.filters .filter-select-trigger {
+  display: flex;
+  width: 100%;
+  height: 32px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 3px 8px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  background: #fff;
+  color: #bfbfbf;
+  font: 400 14px/22px "PingFang SC", sans-serif;
+  text-align: left;
+  cursor: pointer;
+}
+
+.filters .filter-select-trigger:hover,
+.filters .filter-select.is-open .filter-select-trigger {
+  border-color: #bfbfbf;
+}
+
+.filters .filter-select-trigger:focus-visible {
+  outline: 2px solid rgba(24, 24, 24, .18);
+  outline-offset: 1px;
+}
+
+.filters .filter-select-trigger span {
+  min-width: 0;
+  overflow: hidden;
+  color: #181818;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.filters .filter-select-trigger span.is-placeholder {
+  color: #bfbfbf;
+}
+
+.filters .filter-select-trigger svg {
+  width: 12px;
+  height: 12px;
+  flex: 0 0 12px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  color: #8f8f8f;
+}
+
+.filters .filter-select.is-open .filter-select-trigger svg {
+  transform: rotate(180deg);
+}
+
+.filters .filter-select-menu {
+  position: absolute;
+  z-index: 40;
+  top: 36px;
+  left: 0;
+  display: none;
+  width: 180px;
+  padding: 4px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
+}
+
+.filters .filter-select.is-open .filter-select-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.filters .filter-select-option {
+  width: 100%;
+  height: 32px;
+  padding: 5px 8px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: #181818;
+  font: 400 14px/22px "PingFang SC", sans-serif;
+  text-align: left;
+  cursor: pointer;
+}
+
+.filters .filter-select-option:hover,
+.filters .filter-select-option:focus-visible {
+  background: #f2f2f2;
+  outline: 0;
+}
+
+.filters .filter-select-option.is-selected {
+  background: #e6faf1;
+}
+
+.filters .filter-select-native {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* CNAP large search input pattern. */
+.filters .pod-search {
+  width: 260px;
+  height: 32px;
+  gap: 8px;
+  padding: 4px 12px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  background: #fff;
+  color: #bfbfbf;
+  font: 400 14px/22px "PingFang SC", sans-serif;
+  transition: border-color .15s ease, background-color .15s ease;
+}
+
+.filters .pod-search:hover {
+  border-color: #bfbfbf;
+}
+
+.filters .pod-search:focus-within {
+  border-color: #181818;
+}
+
+.filters .pod-search > svg {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  color: #bfbfbf;
+  stroke-width: 1.6;
+}
+
+.filters .pod-search input {
+  min-width: 0;
+  height: 22px;
+  padding: 0;
+  color: #181818;
+  font: inherit;
+  line-height: 22px;
+}
+
+.filters .pod-search input::placeholder {
+  color: #bfbfbf;
+  opacity: 1;
+}
+
+.filters .pod-search:has(input:disabled) {
+  border-color: #d9d9d9;
+  background: #f7f7f7;
+  color: #ccc;
+}
+
 /* Normal page state keeps its original flow; the combined surface is created only after sticky triggers. */
 .title-row{
   position:relative;
@@ -705,6 +948,365 @@
 }
 @media(max-width:1100px){.title-context>i,.title-filter{display:none}}
 @media(prefers-reduced-motion:reduce){.workload-sticky-stack{transform:none;transition:none}}
+
+/* Runtime page fidelity pass: the editor follows the Figma stacked-setting pattern. */
+#runtimePage.runtime-page {
+  min-width: 0;
+  min-height: calc(100vh - 74px);
+  margin: -17px -22px -40px;
+  padding: 0 32px 56px;
+  background: #f7f8f8;
+  color: #181818;
+  overflow-x: hidden;
+}
+#runtimePage .runtime-page-header {
+  min-height: 56px;
+  padding: 10px 0;
+  border-bottom: 0;
+}
+#runtimePage .runtime-page-header h1 { margin: 0; font-size: 24px; line-height: 36px; font-weight: 500; letter-spacing: 0; }
+#runtimePage .runtime-page-actions { gap: 12px; color: #181818; font-size: 14px; line-height: 22px; }
+#runtimePage .runtime-version-label { color: #545454; }
+#runtimePage .runtime-version-link { display: inline-flex; align-items: center; gap: 4px; color: #0080ff; text-decoration: none; }
+#runtimePage .runtime-version-link svg,
+#runtimePage .runtime-help-btn svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
+#runtimePage .runtime-help-btn { display: grid; width: 16px; height: 22px; padding: 0; place-items: center; border: 0; background: transparent; color: #bfbfbf; }
+#runtimePage .runtime-version-help { position: relative; display: inline-flex; align-items: center; }
+#runtimePage .runtime-version-help:focus-within .runtime-version-tooltip,
+#runtimePage .runtime-version-help:hover .runtime-version-tooltip { visibility: visible; opacity: 1; transform: translate(-50%,0); }
+#runtimePage .runtime-version-tooltip { position: absolute; z-index: 90; top: calc(100% + 8px); left: 50%; width: 300px; visibility: hidden; opacity: 0; transform: translate(-50%,-4px); transition: opacity .16s ease, transform .16s ease, visibility .16s; pointer-events: none; }
+#runtimePage .runtime-version-tooltip > i { position: absolute; z-index: 1; top: -6px; left: 50%; width: 12px; height: 12px; margin-left: -6px; transform: rotate(45deg); background: #fff; box-shadow: -2px -2px 4px rgba(0,0,0,.03); }
+#runtimePage .runtime-version-tooltip-body { position: relative; z-index: 2; display: flex; flex-direction: column; gap: 16px; padding: 8px 12px; border-radius: 8px; background: #fff; box-shadow: 0 2px 12px rgba(0,0,0,.1); color: #181818; font: 400 12px/20px "PingFang SC", sans-serif; }
+#runtimePage .runtime-version-tooltip-body > span { display: flex; flex-direction: column; }
+#runtimePage .runtime-version-tooltip-body em { color: #545454; font-style: normal; }
+#runtimePage .runtime-version-tooltip-body b { font-weight: 400; overflow-wrap: anywhere; word-break: break-word; }
+#runtimePage .runtime-top-divider { width: 1px; height: 16px; margin: 0 4px; background: #e8e8e8; }
+#runtimePage .runtime-top-check { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
+#runtimePage .runtime-top-check input { appearance: none; width: 16px; height: 16px; margin: 0; border-radius: 2px; background: #fff; }
+#runtimePage .runtime-top-check input::before { display: block; width: 12px; height: 12px; margin: 2px; border: 1px solid #d9d9d9; border-radius: 2px; box-sizing: border-box; content: ""; }
+#runtimePage .runtime-top-check input:checked::before { border-color: #1c202b; background: #1c202b url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.2 6.2 4.8 8.5 9.8 3.5' fill='none' stroke='%23a7f3cf' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 12px no-repeat; }
+#runtimePage .runtime-page-actions .runtime-primary-btn { min-width: 96px; height: 32px; padding: 5px 20px; border-radius: 24px; }
+#runtimePage .runtime-context-row {
+  height: 56px;
+  margin: 0 -32px 24px;
+  padding: 0 24px;
+  justify-content: space-between;
+  background: #effbf5;
+  border: 0;
+  color: #181818;
+  font-size: 14px;
+  line-height: 22px;
+}
+#runtimePage .runtime-context-main { display: flex; min-width: 0; align-items: center; gap: 8px; }
+#runtimePage .runtime-context-main { position: relative; }
+#runtimePage .runtime-level-switch { display: inline-flex; height: 32px; align-items: center; justify-content: center; gap: 12px; padding: 5px 0; border: 0; border-radius: 24px; background: transparent; color: #181818; font: 400 14px/22px "PingFang SC", sans-serif; cursor: pointer; }
+#runtimePage .runtime-level-switch > svg { width: 16px; height: 16px; fill: none; stroke: #545454; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
+#runtimePage .runtime-level-switch .runtime-level-chevron { margin-left: 0; }
+#runtimePage .runtime-level-switch[aria-expanded="true"] .runtime-level-chevron { transform: rotate(180deg); }
+#runtimePage .runtime-level-dropdown { position: absolute; z-index: 80; top: 40px; left: 0; display: flex; width: 400px; height: 308px; flex-direction: column; gap: 4px; padding: 8px 4px; border: 1px solid #d9d9d9; border-radius: 8px; box-sizing: border-box; background: #fff; box-shadow: 0 2px 12px rgba(0,0,0,.1); color: #181818; }
+#runtimePage .runtime-level-dropdown-heading { height: 46px; padding: 2px 8px; box-sizing: border-box; }
+#runtimePage .runtime-level-dropdown-heading strong { display: block; font-size: 12px; line-height: 20px; font-weight: 500; }
+#runtimePage .runtime-level-dropdown-heading p { margin: 2px 0 0; color: #545454; font-size: 12px; line-height: 20px; white-space: nowrap; }
+#runtimePage .runtime-level-row { position: relative; display: flex; width: 100%; height: 32px; align-items: center; gap: 4px; padding: 0 12px; border: 0; border-radius: 6px; background: transparent; color: #181818; font: 12px/20px "PingFang SC", sans-serif; text-align: left; cursor: pointer; }
+#runtimePage .runtime-level-row:hover, #runtimePage .runtime-level-row.is-hovered { background: #f2f2f2; }
+#runtimePage .runtime-level-row.is-selected { background: #e6faf1; }
+#runtimePage .runtime-level-row > svg, #runtimePage .runtime-level-indent-icon svg { width: 16px; height: 16px; flex: 0 0 16px; fill: none; stroke: #545454; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
+#runtimePage .runtime-level-application { padding-left: 8px; }
+#runtimePage .runtime-level-environment { padding-left: 28px; }
+#runtimePage .runtime-level-indent-icon { display: grid; width: 16px; height: 16px; place-items: center; }
+#runtimePage .runtime-level-child { padding-left: 60px; }
+#runtimePage .runtime-level-empty { height: 32px; box-sizing: border-box; padding-left: 60px; color: #999; font: 12px/32px "PingFang SC", sans-serif; }
+#runtimePage .runtime-level-tag { display: inline-flex; height: 20px; align-items: center; flex: 0 0 auto; margin-left: 4px; padding: 0 8px; border-radius: 12px; background: #e5fff5; color: #00cc6d; font: 400 12px/20px "PingFang SC", sans-serif; white-space: nowrap; }
+#runtimePage .runtime-level-row-action { display: inline-flex; width: 24px; height: 24px; flex: 0 0 24px; align-items: center; justify-content: center; margin-left: auto; padding: 6px; border: 0; border-radius: 6px; background: transparent; color: #545454; cursor: pointer; }
+#runtimePage .runtime-level-row-action svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+#runtimePage .runtime-level-row-action:hover { background: #f7f7f7; }
+#runtimePage .runtime-level-row-action:active,
+#runtimePage .runtime-level-row-action:focus-visible { background: #f2f2f2; outline: none; }
+#runtimePage .runtime-level-row-action:disabled { opacity: .4; cursor: not-allowed; }
+#runtimePage .runtime-cluster-add-menu { position: absolute; z-index: 100; width: max-content; min-width: 180px; max-width: min(320px, calc(100vw - 24px)); height: auto; padding: 4px; border: 1px solid #d9d9d9; border-radius: 8px; box-sizing: border-box; background: #fff; box-shadow: 0 4px 16px rgba(0,0,0,.12); }
+#runtimePage .runtime-cluster-add-heading { height: 24px; padding: 2px 8px; box-sizing: border-box; color: #8f8f8f; font: 400 12px/20px "PingFang SC", sans-serif; white-space: nowrap; }
+#runtimePage .runtime-cluster-add-menu [data-runtime-cluster-option] { display: flex; width: 100%; height: 32px; align-items: center; padding: 5px 8px; border: 0; border-radius: 4px; background: transparent; color: #181818; font: 400 14px/22px "PingFang SC", sans-serif; text-align: left; cursor: pointer; }
+#runtimePage .runtime-cluster-add-menu [data-runtime-cluster-option]:hover { background: #f2f2f2; }
+#runtimePage .runtime-cluster-add-menu [data-runtime-cluster-option]:active,
+#runtimePage .runtime-cluster-add-menu [data-runtime-cluster-option]:focus-visible { background: #f2f2f2; outline: none; }
+#runtimePage .runtime-cluster-add-empty { min-height: 48px; display: flex; align-items: center; padding: 8px 12px; box-sizing: border-box; color: #999; font: 400 14px/22px "PingFang SC", sans-serif; white-space: nowrap; }
+#runtimePage .runtime-level-dropdown.has-added-cluster { height: auto; min-height: 308px; }
+#runtimePage .runtime-level-divider { width: 100%; height: 1px; flex: 0 0 1px; margin: 0; background: #f0f0f0; }
+#runtimePage .runtime-heterogeneous { width: 100%; height: 58px; padding: 4px 12px; box-sizing: border-box; }
+#runtimePage .runtime-heterogeneous-title { display: flex; height: 20px; align-items: center; justify-content: space-between; }
+#runtimePage .runtime-heterogeneous-title strong { font-size: 12px; line-height: 20px; font-weight: 500; }
+#runtimePage .runtime-heterogeneous p { display: block; width: 100%; margin: 2px 0 0; overflow: hidden; color: #8f8f8f; font-size: 12px; line-height: 20px; text-overflow: ellipsis; white-space: nowrap; }
+#runtimePage .runtime-mini-switch { position: relative; display: block; flex: 0 0 24px; width: 24px; min-width: 24px; max-width: 24px; height: 14px; min-height: 14px; max-height: 14px; margin: 0; padding: 0; overflow: hidden; appearance: none; -webkit-appearance: none; border: 0; border-radius: 11px; background: #bfbfbf; box-sizing: border-box; cursor: pointer; }
+#runtimePage .runtime-mini-switch.is-on { background: #41D08D; }
+#runtimePage .runtime-mini-switch i { position: absolute; top: 2px; right: 2px; left: auto; display: block; width: 10px; height: 10px; margin: 0; border-radius: 50%; background: #fff; transform: none; }
+#runtimePage .runtime-mini-switch:not(.is-on) i { right: auto; left: 2px; }
+#runtimePage .runtime-context-divider { width: 1px; height: 16px; margin: 0 16px; background: #e8e8e8; }
+#runtimePage .runtime-context-tabs { display: inline-flex; align-items: center; gap: 8px; }
+#runtimePage .runtime-context-chip { display: inline-flex; height: 28px; align-items: center; gap: 4px; padding: 2px 12px; border: 1px solid #ccc; border-radius: 20px; background: #fff; color: #545454; font: 400 14px/22px "PingFang SC", sans-serif; white-space: nowrap; cursor: pointer; }
+#runtimePage .runtime-context-chip:hover { border-color: #545454; background: #f7f7f7; }
+#runtimePage .runtime-context-chip:focus-visible { outline: 2px solid #41d08d; outline-offset: 2px; }
+#runtimePage .runtime-context-chip.is-current { border-color: #545454; background: #fff; color: #181818; font-weight: 500; box-shadow:0 0 0 1px rgba(84,84,84,.08); }
+#runtimePage .runtime-context-chip svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
+#runtimePage .runtime-context-arrow { width: 16px; height: 16px; fill: none; stroke: #545454; stroke-width: 1.2; }
+#runtimePage .runtime-context-help { display: inline-flex; align-items: center; gap: 8px; margin-left: 16px; color: #8f8f8f; white-space: nowrap; }
+#runtimePage .runtime-context-help svg { width: 16px; height: 16px; fill: none; stroke: #f5a623; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
+#runtimePage .runtime-editor { transition: opacity .14s ease, transform .14s ease; }
+#runtimePage.is-context-refreshing .runtime-editor { opacity: .35; transform: translateY(2px); pointer-events: none; }
+#runtimePage .runtime-layout {
+  grid-template-columns: 240px minmax(640px, 815px) 87px;
+  justify-content: space-between;
+  gap: 32px;
+  align-items: start;
+  min-height: calc(100vh - 168px);
+  padding: 24px;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0,0,0,.02);
+}
+#runtimePage .runtime-tree {
+  min-height: 800px;
+  padding: 0 0 24px;
+  border-right: 0;
+}
+#runtimePage .runtime-search { width: 240px; height: 32px; border-radius: 8px; background: #fff; }
+#runtimePage .runtime-tree-list { position: relative; display: flex; flex-direction: column; gap: 8px; margin-top: 16px; padding-left: 0; }
+#runtimePage .runtime-tree-group { position: relative; display: flex; width: 240px; flex-direction: column; gap: 4px; align-items: flex-end; margin-bottom: 0; }
+#runtimePage .runtime-tree-group::before,
+#runtimePage .runtime-tree-group::after { display: none; }
+#runtimePage .runtime-tree-heading,
+#runtimePage .runtime-tree-item { height: 32px; border-radius: 4px; font-size: 14px; line-height: 22px; }
+#runtimePage .runtime-tree-heading { position: relative; width: 240px; gap: 8px; padding: 0; }
+#runtimePage .runtime-tree-heading > svg { width: 16px; height: 16px; fill: none; stroke: #545454; stroke-width: 1.5; flex: 0 0 16px; }
+#runtimePage .runtime-tree-chevron { display: none; }
+#runtimePage .runtime-tree-action { width: 16px; height: 16px; margin-left: auto; fill: none; stroke: #181818; stroke-width: 1.5; }
+#runtimePage .runtime-tree-item { position: relative; width: 220px; padding: 0 8px 0 40px; color: #181818; }
+#runtimePage .runtime-tree-item.runtime-tree-app { width: 240px; padding-left: 24px; color: #181818; }
+#runtimePage .runtime-tree-item.runtime-tree-app::before { position: absolute; left: 7px; width: 8px; height: 8px; border-bottom: 1px solid #d9d9d9; border-left: 1px solid #d9d9d9; border-radius: 0 0 0 4px; content: ""; }
+#runtimePage .runtime-tree-item.is-active { width: 220px; padding-left: 32px; background: #e6faf1; color: #181818; }
+#runtimePage .runtime-tree-item.is-active::before { display: none; }
+#runtimePage .runtime-tree-item:not(.runtime-tree-app)::before { position: absolute; left: 0; width: 8px; height: 1px; background: #d9d9d9; content: ""; }
+#runtimePage .runtime-tree-dot { position: absolute; left: 14px; width: 7px; height: 7px; border: 1px solid #bfbfbf; border-radius: 50%; background: #fff; }
+#runtimePage .runtime-tree-heading > img { width: 16px; height: 16px; flex: 0 0 16px; object-fit: contain; }
+#runtimePage .runtime-icon-action { display: inline-flex; width: 24px; height: 24px; flex: 0 0 24px; align-items: center; justify-content: center; padding: 6px; border: 0; border-radius: 6px; background: transparent; color: #181818; cursor: pointer; }
+#runtimePage .runtime-icon-action svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+#runtimePage .runtime-icon-action:hover { background: #f7f7f7; }
+#runtimePage .runtime-icon-action:active,
+#runtimePage .runtime-icon-action:focus-visible { background: #f2f2f2; outline: none; }
+#runtimePage .runtime-icon-action:disabled { opacity: .4; cursor: not-allowed; }
+#runtimePage .runtime-tree-children { position: relative; display: flex; width: 240px; flex-direction: column; gap: 4px; align-items: flex-end; }
+#runtimePage .runtime-workload-items { position: relative; display: flex; width: 240px; flex-direction: column; gap: 4px; align-items: flex-end; }
+#runtimePage .runtime-workload-items.is-collapsed > .runtime-tree-item.is-active { display: none; }
+#runtimePage .runtime-workload-items:has(> .runtime-workload-collapse.is-collapsed) > .runtime-tree-line { width: 104px; }
+#runtimePage .runtime-workload-items:has(.runtime-container-collapse.is-collapsed) > .runtime-tree-line { width: 68px; }
+#runtimePage .runtime-container-items { position: relative; display: flex; width: 220px; flex-direction: column; gap: 4px; align-items: flex-end; }
+#runtimePage .runtime-container-items.is-collapsed { display: none; }
+#runtimePage .runtime-container-collapse > img { transition: transform .16s ease; }
+#runtimePage .runtime-container-collapse.is-collapsed > img { transform: rotate(180deg); }
+#runtimePage .runtime-workload-collapse > img { transition: transform .16s ease; }
+#runtimePage .runtime-workload-collapse.is-collapsed > img { transform: rotate(180deg); }
+#runtimePage .runtime-tree-line { position: absolute; left: 7px; width: auto; height: 8px; transform: rotate(90deg); transform-origin: left center; pointer-events: none; }
+#runtimePage .runtime-workload-tree .runtime-tree-line { top: 5px; width: 160px; }
+#runtimePage .runtime-resource-tree .runtime-tree-line { top: 5px; width: 53px; }
+#runtimePage .runtime-tree-parent,
+#runtimePage .runtime-tree-leaf,
+#runtimePage .runtime-tree-resource-item { display: flex; height: 32px; align-items: center; border: 0; background: transparent; color: #181818; font: 14px/22px "PingFang SC", sans-serif; text-align: left; }
+#runtimePage .runtime-tree-parent { width: 240px; gap: 4px; padding: 0 0 0 24px; }
+#runtimePage .runtime-tree-parent > img { width: 16px; height: 16px; object-fit: contain; }
+#runtimePage .runtime-container-parent { width: 233px; justify-content: space-between; padding-left: 24px; }
+#runtimePage .runtime-container-header { display: flex; width: 233px; height: 32px; align-items: center; justify-content: space-between; padding-left: 17px; box-sizing: border-box; }
+#runtimePage .runtime-container-header .runtime-container-parent { width: auto; flex: 1; justify-content: flex-start; gap: 4px; padding-left: 0; }
+#runtimePage .runtime-tree-leaf { width: 220px; padding-left: 40px; }
+#runtimePage .runtime-tree-resource-item { width: 240px; padding-left: 24px; }
+#runtimePage .runtime-tree-leaf,
+#runtimePage .runtime-tree-resource-item { position: relative; justify-content: flex-start; gap: 4px; cursor: default; }
+#runtimePage .runtime-tree-delete { display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; margin-left: auto; padding: 5px; border: 0; border-radius: 6px; background: transparent; color: #181818; opacity: 0; pointer-events: none; cursor: pointer; }
+#runtimePage .runtime-tree-delete.is-hidden { visibility: hidden; pointer-events: none; }
+#runtimePage .runtime-tree-leaf:hover .runtime-tree-delete:not(.is-hidden),
+#runtimePage .runtime-tree-resource-item:hover .runtime-tree-delete:not(.is-hidden) { opacity: 1; pointer-events: auto; }
+#runtimePage .runtime-tree-delete svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+#runtimePage .runtime-tree-delete:hover { background: #f2f2f2; }
+#runtimePage .runtime-tree-leaf:hover,
+#runtimePage .runtime-tree-resource-item:hover { background: #f7f7f7; }
+.runtime-delete-modal { width: 600px; min-height: 0; padding: 0; border-radius: 20px; overflow: hidden; box-shadow: 0 0 6px rgba(0,0,0,.15); }
+.runtime-delete-modal-header { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px 8px; }
+.runtime-delete-modal-title { display: flex; align-items: center; gap: 8px; }
+.runtime-delete-modal-title h2 { margin: 0; color: #181818; font: 500 20px/30px "PingFang SC", sans-serif; }
+.runtime-delete-warning { position: relative; display: grid; width: 24px; height: 24px; place-items: center; color: #fff; }
+.runtime-delete-warning::before { position: absolute; width: 21px; height: 21px; border-radius: 50%; background: #ff9b2f; content: ""; }
+.runtime-delete-warning svg { position: relative; z-index: 1; width: 16px; height: 16px; fill: none; stroke: #fff; stroke-width: 1.6; }
+.runtime-delete-modal-header > button { display: grid; width: 20px; height: 20px; place-items: center; padding: 0; border: 0; background: transparent; color: #8f8f8f; cursor: pointer; }
+.runtime-delete-modal-header > button svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; }
+.runtime-delete-modal-body { padding: 8px 24px 16px; color: #545454; font: 14px/22px "PingFang SC", sans-serif; }
+.runtime-delete-modal-footer { display: flex; height: 64px; align-items: flex-end; justify-content: flex-end; gap: 12px; padding: 12px 24px 20px; box-sizing: border-box; }
+.runtime-delete-modal-footer button { height: 32px; padding: 5px 20px; border-radius: 24px; font: 500 14px/22px "PingFang SC", sans-serif; cursor: pointer; }
+.runtime-delete-cancel { border: 1px solid #ccc; background: #fff; color: #181818; }
+.runtime-delete-confirm { border: 0; background: #1c202b; color: #a7f3cf; }
+.runtime-delete-modal-footer button:hover { filter: brightness(.96); }
+#runtimePage .runtime-tree-action { margin-left: auto; }
+#runtimePage .runtime-editor { min-width: 0; }
+#runtimePage .runtime-editor-breadcrumb { display: flex; height: 22px; align-items: center; gap: 12px; margin-bottom: 16px; color: #bfbfbf; font: 14px/22px "PingFang SC", sans-serif; }
+#runtimePage .runtime-editor-breadcrumb strong { color: #545454; font-weight: 400; }
+#runtimePage .runtime-editor-title { height: 44px; padding: 0 0 16px; }
+#runtimePage .runtime-editor-title h2 { font-size: 18px; line-height: 26px; }
+#runtimePage .runtime-editor-title span { color: #545454; }
+#runtimePage .runtime-status-pill { background: #e6faf1; color: #16834b !important; }
+#runtimePage .runtime-section { margin: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+#runtimePage .runtime-section + .runtime-section { margin-top: 32px; padding-top: 32px; border-top: 1px solid #f0f0f0; }
+#runtimePage .runtime-section-heading { min-height: 54px; align-items: center; padding: 0 0 16px; border-bottom: 1px solid #f0f0f0; }
+#runtimePage .runtime-section-heading h3 { font-size: 16px; line-height: 24px; font-weight: 600; }
+#runtimePage .runtime-section-kicker { display: block; margin-bottom: 2px; color: #8f8f8f; font-size: 12px; line-height: 18px; }
+#runtimePage .runtime-icon-btn { display: grid; width: 24px; height: 24px; place-items: center; font-size: 16px; }
+#runtimePage .runtime-icon-btn svg { width: 16px; height: 16px; fill: none; stroke: #545454; stroke-width: 1.5; }
+#runtimePage .runtime-icon-btn.is-collapsed svg { transform: rotate(-90deg); }
+#runtimePage .runtime-setting-list { padding: 0; }
+#runtimePage .runtime-setting-row {
+  display: grid; grid-template-columns: 32px minmax(0, 1fr) auto; gap: 12px; min-height: 76px;
+  align-items: center; padding: 14px 0; border-bottom: 1px solid #f0f0f0;
+}
+#runtimePage .runtime-setting-row:last-child { border-bottom: 0; }
+#runtimePage .runtime-setting-icon { display: grid; width: 22px; height: 22px; place-items: center; border: 1px solid #ccc; border-radius: 50%; background: #fff; color: #8f8f8f; }
+#runtimePage .runtime-setting-icon svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round; }
+#runtimePage .runtime-setting-row strong { display: block; font-size: 14px; line-height: 22px; font-weight: 500; }
+#runtimePage .runtime-setting-row p { margin: 2px 0 0; color: #8f8f8f; font-size: 12px; line-height: 18px; }
+#runtimePage .runtime-setting-row > input,
+#runtimePage .runtime-setting-wide-input,
+#runtimePage .runtime-setting-row .runtime-input-unit input { width: 160px; height: 32px; padding: 4px 10px; border: 1px solid #d9d9d9; border-radius: 8px; background: #fff; color: #181818; font: 14px/22px "PingFang SC", sans-serif; outline: 0; }
+#runtimePage .runtime-setting-row > input:focus,
+#runtimePage .runtime-setting-row .runtime-input-unit input:focus { border-color: #181818; }
+#runtimePage .runtime-setting-row .runtime-input-unit { width: 180px; }
+#runtimePage .runtime-setting-row .runtime-input-unit input { width: 148px; }
+#runtimePage .runtime-setting-row .runtime-switch { margin-right: 4px; }
+#runtimePage .runtime-setting-row-stack { grid-template-columns: 32px minmax(0, 1fr); align-items: start; }
+#runtimePage .runtime-setting-row-stack > .runtime-setting-subrows { grid-column: 2; }
+#runtimePage .runtime-setting-subrows { display: flex; min-width: 0; flex-direction: column; gap: 12px; padding-top: 8px; }
+#runtimePage .runtime-setting-subrows label { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; align-items: center; color: #181818; font-size: 14px; line-height: 22px; }
+#runtimePage .runtime-setting-subrows label small { grid-column: 1 / -1; color: #8f8f8f; font-size: 12px; line-height: 18px; }
+#runtimePage .runtime-setting-subrows label > input,
+#runtimePage .runtime-setting-subrows label > .runtime-input-unit,
+#runtimePage .runtime-setting-subrows label > .runtime-select-value { grid-column: 2; grid-row: 1 / span 2; }
+#runtimePage .runtime-setting-subrows label > .runtime-switch-field { grid-column: 1 / -1; grid-row: auto; }
+#runtimePage .runtime-setting-subrows .runtime-input-unit { display: flex; width: 120px; align-items: center; gap: 8px; }
+#runtimePage .runtime-setting-subrows .runtime-input-unit input { width: 88px; }
+#runtimePage .runtime-setting-subrows .runtime-switch-field { min-height: 20px; }
+#runtimePage .runtime-setting-row-block > div:has(.runtime-add-btn) { display: flex; flex-wrap: wrap; gap: 8px; }
+#runtimePage .runtime-rule-block { padding: 8px 0 12px 32px; border-top: 1px solid #f0f0f0; }
+#runtimePage .runtime-rule-block strong { display: block; font-size: 14px; line-height: 22px; font-weight: 400; }
+#runtimePage .runtime-rule-block p { max-width: 620px; margin: 4px 0 12px; color: #8f8f8f; font-size: 12px; line-height: 18px; }
+#runtimePage .runtime-inline-actions { display: flex; align-items: center; gap: 16px; }
+#runtimePage .runtime-inline-actions button { padding: 0; border: 0; background: transparent; color: #545454; font: 12px/20px "PingFang SC", sans-serif; cursor: pointer; }
+#runtimePage .runtime-inline-actions button:hover { color: #181818; }
+#runtimePage .runtime-select-value { display: inline-flex; width: 160px; height: 32px; align-items: center; justify-content: space-between; padding: 4px 10px; border: 1px solid #d9d9d9; border-radius: 8px; background: #fff; color: #181818; font: 14px/22px "PingFang SC", sans-serif; }
+#runtimePage .runtime-select-value svg { width: 14px; height: 14px; fill: none; stroke: #8f8f8f; stroke-width: 1.5; }
+#runtimePage .runtime-setting-row-block { min-height: 68px; }
+#runtimePage .runtime-rule-group { margin: 0 -20px; padding: 16px 20px; border-top: 1px solid #f0f0f0; }
+#runtimePage .runtime-rule-group p { margin: 4px 0 12px; }
+#runtimePage .runtime-subsection-title h4 { font-size: 14px; line-height: 22px; font-weight: 500; }
+#runtimePage .runtime-add-btn,
+#runtimePage .runtime-outline-btn { display: inline-flex; height: 32px; align-items: center; gap: 4px; padding: 5px 20px; border-radius: 24px; font-size: 14px; line-height: 22px; }
+#runtimePage .runtime-add-btn svg,
+#runtimePage .runtime-outline-btn svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.5; }
+#runtimePage .runtime-outline-btn { color: #545454; }
+#runtimePage .runtime-toc { top: 16px; display: flex; width: 87px; height: 174px; flex-direction: row; gap: 12px; padding: 0; border-left: 0; }
+#runtimePage .runtime-toc-track { position: relative; width: 3px; height: 174px; flex: 0 0 3px; background: #f2f2f2; }
+#runtimePage .runtime-toc-current { position: absolute; top: 25px; left: 0; width: 3px; height: 20px; background: #41d08d; }
+#runtimePage .runtime-toc-items { display: flex; width: 72px; flex-direction: column; gap: 8px; }
+#runtimePage .runtime-toc a { display: flex; height: 18px; align-items: center; padding: 0; color: #545454; font-size: 12px; line-height: 18px; text-decoration: none; white-space: nowrap; }
+#runtimePage .runtime-toc a:not(:first-child) { padding-left: 12px; }
+#runtimePage .runtime-toc a:first-child { color: #181818; }
+#runtimePage .runtime-toc a.is-current { color: #20ad6a; font-weight: 400; }
+#runtimePage .runtime-toc a.is-current::before { display: none; }
+#runtimePage .runtime-container-subsections { padding-top: 0; }
+#runtimePage .runtime-container-subsection { margin-top: 32px; padding-top: 32px; border-top: 1px solid #f0f0f0; }
+#runtimePage .runtime-container-subsection:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+#runtimePage .runtime-container-subsection > h4 { margin: 0 0 16px; font-size: 16px; line-height: 24px; font-weight: 600; }
+#runtimePage .runtime-container-subsection .runtime-setting-row { min-height: 76px; }
+#runtimePage .runtime-container-subsection .runtime-setting-row-block { align-items: start; }
+#runtimePage .runtime-container-content { min-width: 0; }
+#runtimePage .runtime-image-list { padding-left: 32px; }
+#runtimePage .runtime-image-heading { display: flex; height: 22px; align-items: center; gap: 8px; }
+#runtimePage .runtime-image-heading .runtime-setting-icon { width: 22px; height: 22px; }
+#runtimePage .runtime-image-heading strong { font-size: 14px; line-height: 22px; font-weight: 500; }
+#runtimePage .runtime-image-shell { margin-top: 8px; padding: 4px; border-radius: 16px; background: #f7f7f7; }
+#runtimePage .runtime-image-tabs { display: flex; height: 34px; align-items: flex-end; overflow: hidden; }
+#runtimePage .runtime-image-tabs button { height: 30px; padding: 4px 16px; border: 0; border-radius: 12px 12px 0 0; background: transparent; color: #8f8f8f; font: 14px/22px "PingFang SC", sans-serif; cursor: pointer; }
+#runtimePage .runtime-image-tabs button.is-active { background: #fff; color: #545454; font-weight: 500; box-shadow: 0 1px 1px rgba(0,0,0,.1); }
+#runtimePage .runtime-image-panel { padding: 20px 16px; border-radius: 0 12px 12px 12px; background: #fff; }
+#runtimePage .runtime-image-group + .runtime-image-group { margin-top: 32px; }
+#runtimePage .runtime-image-group > p { margin: 0 0 8px; color: #8f8f8f; font-size: 12px; line-height: 20px; }
+#runtimePage .runtime-image-card-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+#runtimePage .runtime-image-card { display: flex; height: 60px; min-width: 0; align-items: center; gap: 12px; padding: 12px; overflow: hidden; border: 1px solid #d9d9d9; border-radius: 8px; background: #fff; color: #181818; font: 14px/22px "PingFang SC", sans-serif; text-align: left; cursor: pointer; }
+#runtimePage .runtime-image-card:hover { border-color: #bfbfbf; }
+#runtimePage .runtime-image-card.is-active { border-color: #181818; }
+#runtimePage .runtime-image-card > span:last-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#runtimePage .runtime-image-icon { display: flex; width: 36px; height: 36px; flex: 0 0 36px; align-items: center; justify-content: center; overflow: hidden; border-radius: 18px; background: #f5f7fa; }
+#runtimePage .runtime-image-icon img { width: 28px; height: 28px; object-fit: contain; }
+#runtimePage .runtime-image-icon-light { background: #f0f1f5; }
+#runtimePage .runtime-image-centos img { width: 38px; height: 38px; object-fit: cover; }
+#runtimePage .runtime-image-version-card { position: relative; display: flex; min-height: 74px; align-items: center; justify-content: space-between; gap: 16px; margin-top: 8px; padding: 20px 16px; overflow: visible; border: 1px solid #bfbfbf; border-radius: 8px; background: linear-gradient(90deg, #fffdfc 20%, #fff 100%); color: #545454; font-size: 14px; line-height: 22px; }
+#runtimePage .runtime-image-version-card::before { position: absolute; top: -9px; left: 101px; width: 20px; height: 12px; background: url("./assets/runtime-images/tab-notch.svg") center/100% 100% no-repeat; content: ""; }
+#runtimePage .runtime-image-version-card::after { position: absolute; z-index: 0; top: 0; left: 0; width: 103px; height: 71px; border-radius: 8px 0 0 8px; background: url("./assets/runtime-images/ubuntu.png") left center/112px 112px no-repeat; opacity: .1; pointer-events: none; content: ""; }
+#runtimePage .runtime-image-version-python { background: linear-gradient(90deg, #fafdff 20%, #fff 100%); }
+#runtimePage .runtime-image-version-python::before { background: #fafdff; }
+#runtimePage .runtime-image-version-python::after { background-image: url("./assets/runtime-images/python.png"); opacity: .15; }
+#runtimePage .runtime-image-version-card > * { position: relative; z-index: 1; }
+#runtimePage .runtime-version-pills { display: flex; align-items: center; padding: 2px; border-radius: 24px; background: #f2f2f2; }
+#runtimePage .runtime-version-pills button { height: 30px; padding: 4px 12px; border: 0; border-radius: 20px; background: transparent; color: #545454; font: 14px/22px "PingFang SC", sans-serif; white-space: nowrap; cursor: pointer; }
+#runtimePage .runtime-version-pills button.is-active { background: #fff; color: #181818; box-shadow: 0 4px 5px rgba(0,0,0,.02); font-weight: 500; }
+#runtimePage .runtime-inline-description { display: flex; min-width: 0; align-items: center; flex-wrap: wrap; gap: 6px; margin-top: 6px; color: #545454; font-size: 12px; line-height: 20px; }
+#runtimePage .runtime-inline-description b { font-weight: 400; }
+#runtimePage .runtime-inline-description small { color: #8f8f8f; font-size: 12px; line-height: 20px; }
+#runtimePage .runtime-tab-strip { display: flex; height: 34px; align-items: stretch; margin-top: 16px; border-bottom: 1px solid #e8e8e8; }
+#runtimePage .runtime-tab-strip button { position: relative; height: 34px; padding: 0 16px; border: 0; background: transparent; color: #8f8f8f; font: 14px/22px "PingFang SC", sans-serif; cursor: pointer; }
+#runtimePage .runtime-tab-strip button.is-active { color: #181818; font-weight: 500; }
+#runtimePage .runtime-tab-strip button.is-active::after { position: absolute; right: 16px; bottom: -1px; left: 16px; height: 2px; background: #41d08d; content: ""; }
+#runtimePage .runtime-os-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 16px; }
+#runtimePage .runtime-os-card { display: flex; height: 60px; align-items: center; gap: 12px; padding: 12px; border: 1px solid #e8e8e8; border-radius: 6px; background: #fff; color: #181818; font: 14px/22px "PingFang SC", sans-serif; text-align: left; cursor: pointer; }
+#runtimePage .runtime-os-card:hover { border-color: #bfbfbf; background: #fafafa; }
+#runtimePage .runtime-os-card.is-active { border-color: #41d08d; background: #f5fffa; box-shadow: 0 0 0 1px #41d08d inset; }
+#runtimePage .runtime-os-logo { display: grid; width: 36px; height: 36px; flex: 0 0 36px; place-items: center; border-radius: 6px; color: #fff; font-size: 18px; font-weight: 600; }
+#runtimePage .runtime-os-ubuntu { background: #e95420; }
+#runtimePage .runtime-os-alpine { background: #0d6fb8; }
+#runtimePage .runtime-os-centos { background: #932279; }
+#runtimePage .runtime-version-card { margin-top: 16px; padding: 16px; border: 1px solid #e8e8e8; border-radius: 6px; background: #fff; }
+#runtimePage .runtime-version-card > b { display: block; font-size: 14px; line-height: 22px; font-weight: 500; }
+#runtimePage .runtime-choice-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+#runtimePage .runtime-choice-list button { height: 30px; padding: 4px 12px; border: 1px solid #d9d9d9; border-radius: 4px; background: #fff; color: #545454; font: 14px/20px "PingFang SC", sans-serif; cursor: pointer; }
+#runtimePage .runtime-choice-list button:hover { border-color: #41d08d; }
+#runtimePage .runtime-choice-list button.is-active { border-color: #41d08d; background: #e6faf1; color: #16834b; }
+#runtimePage .runtime-full-input { width: 100%; height: 32px; margin-top: 12px; padding: 4px 10px; border: 1px solid #d9d9d9; border-radius: 8px; color: #181818; font: 14px/22px "PingFang SC", sans-serif; outline: 0; }
+#runtimePage .runtime-full-input:focus { border-color: #181818; }
+#runtimePage .runtime-code-table { margin-top: 12px; overflow: hidden; border: 1px solid #f0f0f0; border-radius: 6px; }
+#runtimePage .runtime-code-table-head { display: grid; grid-template-columns: 1fr 1fr 80px; gap: 12px; padding: 12px; background: #f7f7f7; color: #8f8f8f; font-size: 12px; line-height: 20px; }
+#runtimePage .runtime-code-table-empty { padding: 24px 12px; color: #999; font-size: 14px; line-height: 22px; text-align: center; }
+#runtimePage .runtime-row-hint { grid-column: 3; margin-top: -42px; color: #8f8f8f; font-size: 12px; line-height: 18px; }
+#runtimePage .runtime-inline-control { display: flex; align-items: center; gap: 10px; white-space: nowrap; }
+#runtimePage .runtime-inline-control > input { width: 100px; height: 32px; padding: 4px 10px; border: 1px solid #d9d9d9; border-radius: 8px; font: 14px/22px "PingFang SC", sans-serif; outline: 0; }
+#runtimePage .runtime-inline-control > em { color: #545454; font-style: normal; }
+#runtimePage .runtime-port-list { display: flex; flex-direction: column; gap: 12px; margin-top: 12px; }
+#runtimePage .runtime-port-list label { display: flex; min-height: 20px; align-items: center; justify-content: space-between; gap: 16px; color: #181818; font-size: 14px; line-height: 22px; }
+#runtimePage .runtime-port-list .runtime-switch { flex: 0 0 32px; }
+@media (max-width: 720px) {
+  #runtimePage .runtime-os-grid { grid-template-columns: 1fr; }
+  #runtimePage .runtime-image-list { padding-left: 0; }
+  #runtimePage .runtime-image-card-grid { grid-template-columns: 1fr; }
+  #runtimePage .runtime-image-version-card { align-items: flex-start; flex-direction: column; }
+  #runtimePage .runtime-version-pills { max-width: 100%; flex-wrap: wrap; }
+  #runtimePage .runtime-setting-row { grid-template-columns: 28px minmax(0, 1fr); gap: 8px; }
+  #runtimePage .runtime-setting-row > .runtime-select-value,
+  #runtimePage .runtime-setting-row > .runtime-add-btn,
+  #runtimePage .runtime-setting-row > .runtime-switch,
+  #runtimePage .runtime-setting-row > .runtime-input-unit,
+  #runtimePage .runtime-setting-row > .runtime-inline-control { grid-column: 2; justify-self: start; margin-top: 4px; }
+  #runtimePage .runtime-row-hint { grid-column: 2; margin: 0; }
+  #runtimePage .runtime-code-table-head { grid-template-columns: 1fr 1fr 56px; }
+  #runtimePage .runtime-inline-control { flex-wrap: wrap; white-space: normal; }
+}
+@media (max-width: 1100px) {
+  #runtimePage.runtime-page { padding-right: 24px; padding-left: 24px; }
+  #runtimePage .runtime-context-row { margin-right: -24px; margin-left: -24px; padding-right: 24px; padding-left: 24px; }
+  #runtimePage .runtime-layout { grid-template-columns: 220px minmax(0, 1fr); gap: 24px; }
+  #runtimePage .runtime-toc { display: none; }
+}
 
 /* Figma 305:25329 workload detail drawer. */
 #detailBackdrop:not(.hidden){align-items:stretch;justify-content:flex-end}
@@ -1049,6 +1651,50 @@
   #instanceModal .summary-toggle{transition:none}
 }
 
+.runtime-tree-group.is-collapsed .runtime-tree-item{display:none}
+.runtime-tree-group.is-collapsed .runtime-tree-chevron{transform:rotate(-90deg)}
+
+/* Global feedback follows the CNAP message component (Figma 469:22947). */
+.toast-region{
+  position:fixed;
+  z-index:1200;
+  top:88px;
+  left:50%;
+  width:min(560px,calc(100vw - 32px));
+  display:flex;
+  justify-content:center;
+  transform:translateX(-50%);
+  pointer-events:none;
+}
+.toast-region .toast{
+  display:flex;
+  width:max-content;
+  max-width:100%;
+  min-height:42px;
+  align-items:center;
+  gap:8px;
+  padding:10px 16px;
+  border:0;
+  border-radius:12px;
+  background:#fff;
+  box-shadow:0 2px 12px rgba(0,0,0,.1);
+  color:#181818;
+  font:500 14px/22px "PingFang SC",-apple-system,BlinkMacSystemFont,"Microsoft YaHei",sans-serif;
+  opacity:0;
+  transform:translateY(-8px);
+  transition:opacity .2s ease,transform .2s ease;
+}
+.toast-region .toast.show{opacity:1;transform:translateY(0)}
+.toast-region .toast svg{width:16px;height:16px;flex:0 0 16px;fill:none;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
+.toast-region .toast span{min-width:0;overflow-wrap:anywhere;word-break:break-word}
+.toast-region .toast-success svg{stroke:#00b96b}
+.toast-region .toast-error svg{stroke:#f5222d}
+.toast-region .toast-warning svg{stroke:#fa8c16}
+@media(max-width:700px){
+  .toast-region{top:72px;width:calc(100vw - 24px)}
+  .toast-region .toast{width:100%;justify-content:flex-start}
+}
+
 /* The workload surface is desktop-oriented; keep the mobile fallback from
    inheriting the demo's fixed canvas width. */
 @media (max-width:700px){
@@ -1066,4 +1712,55 @@
     width:100%!important;
     min-width:0!important;
   }
+}
+
+/* Runtime configuration save confirmation (Figma 467:9985). */
+.action-modal.runtime-save-modal{
+  display:flex;
+  width:800px;
+  min-height:0;
+  max-height:calc(100vh - 48px);
+  flex-direction:column;
+  padding:0;
+  overflow:hidden;
+  border-radius:12px;
+  background:#fff;
+  box-shadow:0 2px 6px rgba(0,0,0,.1);
+  font-family:"PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;
+}
+.runtime-save-modal-header{display:flex;min-height:58px;align-items:center;justify-content:space-between;padding:20px 24px 8px}
+.runtime-save-modal-header h2{margin:0;color:#181818;font-size:20px;font-weight:500;line-height:30px}
+.runtime-save-modal-header button{display:grid;width:20px;height:20px;padding:0;border:0;background:transparent;color:#8f8f8f;place-items:center;cursor:pointer}
+.runtime-save-modal-header button svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.5}
+.runtime-save-modal-header button:hover{color:#181818}
+.runtime-save-modal-body{min-height:0;flex:1;overflow:auto;padding:0 24px 4px}
+.runtime-save-modal-body>p{margin:0 0 16px;color:#545454;font-size:14px;font-weight:400;line-height:22px}
+.runtime-save-change-stack{display:flex;flex-direction:column;gap:12px}
+.runtime-save-change-card{position:relative;width:100%;padding:16px 0;border:1px solid #e8e8e8;border-radius:8px;background:#fff}
+.runtime-save-change-card.has-impact{border:3px solid #f9d7d9;box-shadow:inset 0 0 20px #fdecee}
+.runtime-save-change-card header{display:flex;min-height:22px;align-items:center;justify-content:space-between;padding:0 16px;gap:16px}
+.runtime-save-change-card header>strong{color:#181818;font-size:14px;font-weight:500;line-height:22px}
+.runtime-save-impact{display:inline-flex;align-items:center;gap:4px;color:#8f8f8f;font-size:12px;line-height:20px;white-space:nowrap}
+.runtime-save-impact svg{width:14px;height:14px;fill:none;stroke:#f58300;stroke-width:1.5}
+.runtime-save-change-list{display:flex;flex-direction:column;gap:20px;margin-top:20px}
+.runtime-save-change-row{display:grid;grid-template-columns:64px minmax(0,1fr);min-height:52px}
+.runtime-save-change-rail{position:relative;display:flex;justify-content:center}
+.runtime-save-change-row:not(:last-child) .runtime-save-change-rail::after{position:absolute;top:20px;bottom:-20px;left:50%;width:1px;background:#e8e8e8;content:""}
+.runtime-save-change-rail b{position:relative;z-index:1;display:inline-flex;height:20px;align-items:center;padding:0 8px;border-radius:12px;font-size:12px;font-weight:400;line-height:20px}
+.runtime-save-change-rail b.modified{background:#fff3e0;color:#f58300}
+.runtime-save-change-rail b.updated{background:#e5f2ff;color:#0080ff}
+.runtime-save-change-row>div{min-width:0;padding-right:16px}
+.runtime-save-change-row>div>strong,.runtime-save-change-row>div>p{display:block;margin:0;font-size:14px;line-height:22px}
+.runtime-save-change-row>div>strong{color:#181818;font-weight:400}
+.runtime-save-change-row>div>p{margin-top:8px;color:#545454;font-weight:400;white-space:pre-wrap}
+.runtime-save-modal-footer{display:flex;min-height:64px;align-items:center;justify-content:flex-end;gap:12px;padding:12px 24px 20px;background:#fff}
+.runtime-save-modal-footer button{height:32px;padding:0 20px;border-radius:24px;font:500 14px/22px "PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;cursor:pointer}
+.runtime-save-discard{border:1px solid #ccc;background:#fff;color:#181818}
+.runtime-save-confirm{border:1px solid #1c202b;background:#1c202b;color:#a7f3cf}
+.runtime-save-discard:hover{border-color:#8f8f8f;background:#f8f8f8}
+.runtime-save-confirm:hover{background:#303746}
+.runtime-save-modal-footer button:focus-visible,.runtime-save-modal-header button:focus-visible{outline:2px solid #00a656;outline-offset:2px}
+@media(max-width:840px){
+  .action-modal.runtime-save-modal{width:calc(100vw - 32px)}
+  .runtime-save-impact{display:none}
 }
