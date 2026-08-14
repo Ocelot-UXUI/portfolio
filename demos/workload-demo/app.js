@@ -1041,6 +1041,87 @@ const runtimeContextValueLabels={
   'cluster-a':'cluster-a',
   'cluster-b':'cluster-b'
 };
+let activeRuntimeTarget='pod-config';
+function updateRuntimeEditorHeader(target=activeRuntimeTarget,targetLabel='web1'){
+  const editor=document.querySelector('#runtimeEditor');
+  if(!editor)return;
+  activeRuntimeTarget=target;
+  const displayTargetLabel=targetLabel==='web1'?'web':targetLabel;
+  const breadcrumb=editor.querySelector('.runtime-editor-breadcrumb');
+  const title=editor.querySelector('.runtime-editor-title');
+  const sectionTitle=document.querySelector('#runtimeEditorSectionTitle');
+  const containerSection=document.querySelector('#runtime-container');
+  const isContainer=target==='container-config';
+  if(breadcrumb){
+    breadcrumb.innerHTML=isContainer
+      ? '<span>工作负载</span><span>/</span><span>容器</span><span>/</span><strong></strong>'
+      : '<span>payment-service</span><span>/</span><strong>Pod配置</strong>';
+    if(isContainer)breadcrumb.querySelector('strong').textContent=displayTargetLabel;
+  }
+  if(title)title.classList.toggle('is-container-context',isContainer);
+  if(sectionTitle)sectionTitle.textContent=isContainer?displayTargetLabel:'容器配置';
+  containerSection?.classList.toggle('is-container-context',isContainer);
+}
+updateRuntimeEditorHeader();
+const runtimeHelpModeToggle=document.querySelector('#runtimeHelpMode');
+const runtimeHelpDescriptions={
+  '单节点副本数':'控制单个节点上最多部署此工作负载的 Pod 数量。启用后可限制 Pod 分散部署，避免单节点过载。',
+  '节点架构选择':'选择支持此工作负载的处理器架构。可选择 amd64（x86_64）和 arm64（aarch64），Pod 将优先调度到支持的架构节点上。',
+  '节点标签选择':'选择具有特定标签的节点来部署此工作负载。Pod 将只调度到同时满足所有标签条件的节点上。',
+  '网络':'',
+  '主机网络':'宿主机网络模式使 Pod 直接使用宿主机的网络命名空间，可直接访问宿主机端口。仅在需要高性能网络或特殊监听场景使用。',
+  '外网访问':'控制 Pod 中的容器是否可以访问集群外的网络资源。启用后，容器可以向外部服务发起网络请求；禁用后，容器仅能与集群内部通信。通常与网络策略（NetworkPolicy）配合使用，实现细粒度的网络访问控制。',
+  '修改主机名解析 (/etc/hosts)':'为 Pod 添加额外的主机名解析条目，相当于在容器上配置 /etc/hosts 文件。在 hostAliases 中指定主机名和 IP 映射关系，Pod 内的进程可直接通过主机名访问指定的 IP 地址，无需依赖 DNS 服务。',
+  '凭证管理':'为 Pod 添加额外的主机名解析条目，相当于在容器上配置 /etc/hosts 文件。在 hostAliases 中指定主机名和 IP 映射关系，Pod 内的进程可直接通过主机名访问指定的 IP 地址，无需依赖 DNS 服务。',
+  '用户身份':'配置容器运行时使用的用户和组身份信息。',
+  '文件系统':'附加到 Pod 上的键值对元数据，用于筛选、分组与服务发现。',
+  'pod标签':'附加到 Pod 上的键值对元数据，用于筛选、分组与服务发现。',
+  'Pod注解':'附加到 Pod 上的键值对元数据，用于存储非标识信息。',
+  '工作负载注解':'附加到工作负载上的键值对元数据，用于存储非标识信息。会加在workload上而不是每个pod上。',
+  '镜像来源':'选择镜像的来源方式：代码库构建（从源代码编译）、基础镜像库（基于预置镜像）、或固定镜像（使用指定的已有镜像）。',
+  '基础镜像':'选择镜像构建的基础。百度基础镜像包含优化的发行版和技术栈镜像；社区标准镜像为官方发布的镜像。',
+  '预装组件':'在镜像构建时预先安装指定的系统包（如 curl、git 等），减少容器启动后的初始化时间。',
+  '自定义 Dockerfile 命令':'自定义的 Dockerfile 指令，如 RUN apt-get install -y package、COPY files 等。每行一条指令，在基础镜像基础上执行。',
+  '代码库':'构建镜像所用的源代码仓库（Git URL），支持多个代码库并行构建。每个代码库可关联不同的 BCloud 构建配置以适应不同的编译环境。',
+  'CPU':'配置容器所需的 CPU 资源量。',
+  '内存':'配置容器所需的内存资源量。',
+  '临时存储':'配置容器运行期间使用的临时存储空间。',
+  'GPU（可选）':'为容器分配 GPU 资源，适用于需要 GPU 加速的工作负载。',
+  '启动命令':'容器启动时执行的主程序（Dockerfile 的 ENTRYPOINT），如 /app/bootstrap 或 java -jar app.jar。不设置则使用镜像的默认启动命令。',
+  '默认参数':'传递给启动命令的默认参数（Dockerfile 的 CMD），如 --config=/etc/app.conf。Pod 启动时可通过 args 覆盖。',
+  '环境变量':'注入到容器中的环境变量（env）。支持直接入值、引用 Pod 字段、容器字段、Secret 或 ConfigMap。',
+  '流量检测':'删除pod时，向1号进程发送退出信号前，检查该pod的BNS/VIP等是否已经摘除，可配置检查完毕后等待多久发出信号，默认180s。接收到删除命令30min后kill -9强制杀掉1号进程。',
+  '优雅关闭等待时间':'占位占位占位占位占位占位占位占位占位占位占位占位',
+  '配置文件挂载':'将代码库中的配置文件挂载到容器中指定路径。支持多个配置文件同时挂载。容器中挂载路径为绝对路径，代码库和路径为源配置文件位置。',
+  '存储卷挂载':'为容器配置存储卷挂载。存储卷定义了 Pod 中容器可使用的存储资源，支持多种卷类型：空目录、宿主机目录、配置映射、Secret、本地盘临时卷、日志卷、持久卷和 RapidFS 持久卷',
+  '命名端口':'配置容器暴露的端口，支持静态端口、动态端口分配、以及预定义的端口段。每个端口可指定协议类型（TCP/UDP）。',
+  '匿名端口段':'在不同端口段上申请一部分端口供容器自行使用，通过 LRS_RESOURCE_PORT_RANGES 环境变量传递给容器。如果在端口段上配置了命名端口，命名端口与匿名端口段共享端口段，且偏移量不得大于匿名端口个数。',
+  '探针':'配置容器的健康检查探针。启动探针用于检查容器是否已完成启动；存活探针用于检查容器是否仍在运行；就绪探针用于检查容器是否准备好接收流量。'
+};
+function addRuntimeHelpDescriptions(){
+  const healthLabel=document.querySelector('#runtime-container-health strong');
+  if(healthLabel?.textContent.trim()==='匿名端口段')healthLabel.textContent='探针';
+  document.querySelectorAll('#runtimePage .runtime-setting-row strong').forEach(label=>{
+    const key=label.textContent.trim();
+    const text=runtimeHelpDescriptions[key];
+    if(!text||label.parentElement?.querySelector(':scope > p'))return;
+    const description=document.createElement('p');
+    description.textContent=text;
+    label.parentElement.append(description);
+  });
+  document.querySelectorAll('#runtimePage .runtime-subsection-title h4').forEach(label=>{
+    if(label.parentElement.querySelector(':scope > p'))return;
+    const description=document.createElement('p');
+    description.textContent='基于节点标签的高级调度规则。相比节点标签选择支持更丰富的匹配操作符 (In, NotIn, Exists, Gt, Lt 等)，并区分硬性要求与软性偏好。';
+    label.parentElement.append(description);
+  });
+}
+addRuntimeHelpDescriptions();
+function setRuntimeHelpMode(enabled){
+  document.querySelector('#runtimePage')?.classList.toggle('is-help-mode',enabled);
+}
+setRuntimeHelpMode(Boolean(runtimeHelpModeToggle?.checked));
+runtimeHelpModeToggle?.addEventListener('change',()=>setRuntimeHelpMode(runtimeHelpModeToggle.checked));
 let activeRuntimeContext='cluster';
 let runtimeContextRefreshTimer=0;
 function applyRuntimeContext(context,value=runtimeContextSelection[context],{announce=true}={}){
@@ -1050,6 +1131,7 @@ function applyRuntimeContext(context,value=runtimeContextSelection[context],{ann
   if(!profile||!page||!editor)return;
   activeRuntimeContext=context;
   runtimeContextSelection[context]=value;
+  refreshRuntimeFieldTooltips();
   window.clearTimeout(runtimeContextRefreshTimer);
   document.querySelectorAll('.runtime-context-chip[data-runtime-context]').forEach(chip=>{
     const selected=chip.dataset.runtimeContext===context;
@@ -1066,11 +1148,7 @@ function applyRuntimeContext(context,value=runtimeContextSelection[context],{ann
   page.classList.add('is-context-refreshing');
   const help=document.querySelector('.runtime-context-help');
   if(help)help.lastChild.textContent=`正在修改${profile.label}配置`;
-  const breadcrumb=editor.querySelector('.runtime-editor-breadcrumb span:first-child');
-  if(breadcrumb){
-    const selectedLabel=runtimeContextValueLabels[value];
-    breadcrumb.textContent=context==='application'?selectedLabel:`${selectedLabel} / payment-service`;
-  }
+  updateRuntimeEditorHeader(activeRuntimeTarget);
   runtimeContextRefreshTimer=window.setTimeout(()=>{
     document.querySelectorAll('#runtimePage input[type="number"]').forEach((input,index)=>{
       if(index<profile.values.length)input.value=profile.values[index];
@@ -1134,8 +1212,8 @@ document.querySelector('.runtime-context-tabs')?.addEventListener('keydown',even
 });
 document.querySelectorAll('[data-runtime-target]').forEach(item=>item.addEventListener('click',()=>{
   document.querySelectorAll('[data-runtime-target]').forEach(node=>node.classList.toggle('is-active',node===item));
-  const target=document.querySelector(`[data-runtime-config="${item.dataset.runtimeTarget}"]`);
-  if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+  updateRuntimeEditorHeader(item.dataset.runtimeTarget,item.querySelector(':scope > span')?.textContent.trim()||'web1');
+  document.querySelector('#runtimeEditor')?.scrollTo({top:0,behavior:'smooth'});
 }));
 document.querySelectorAll('[data-runtime-delete-type]').forEach(button=>button.addEventListener('click',event=>{
   event.stopPropagation();
@@ -1573,16 +1651,48 @@ instanceModal.addEventListener('click',event=>{
   const action=event.target.closest('[data-detail-action]');
   if(action&&body){const id=body.dataset.instanceId;closeInstanceDetail();triggerAction(action.dataset.detailAction,[id]);}
 });
+function upgradeRuntimeCredentialsSection(){
+  const section=document.querySelector('#runtimePage [data-runtime-config="credentials-config"]');
+  if(!section||section.dataset.credentialsRefined==='true')return;
+  section.dataset.credentialsRefined='true';
+  section.innerHTML=`<div class="runtime-credential-list"><div class="runtime-setting-row runtime-setting-row-block runtime-credential-row"><span class="runtime-setting-icon"><svg><use href="#i-runtime-open-one"/></svg></span><div class="runtime-credential-content"><div class="runtime-credential-heading"><strong>凭证管理</strong><div class="runtime-credential-actions"><button type="button"><svg><use href="#i-runtime-copy"/></svg><span>复制全部</span></button><button type="button"><svg><use href="#i-runtime-visible"/></svg><span>显示全部</span></button></div></div><p class="runtime-credential-description">为 Pod 添加额外的主机名解析条目，相当于在容器上配置 /etc/hosts 文件。在 hostAliases 中指定主机名和 IP 映射关系，Pod 内的进程可直接通过主机名访问指定的 IP 地址，无需依赖 DNS 服务。</p><div class="runtime-credential-add-list"><button class="runtime-add-btn" type="button"><svg><use href="#i-runtime-add"/></svg>添加凭证</button><button class="runtime-add-btn" type="button"><svg><use href="#i-runtime-add"/></svg>批量添加</button></div></div></div></div>`;
+}
+upgradeRuntimeCredentialsSection();
 function upgradeRuntimeImageSection(){
   const section=document.querySelector('#runtime-container-image');
   if(!section||section.dataset.imageRefined==='true')return;
   section.dataset.imageRefined='true';
-  section.innerHTML=`<h4>镜像构建</h4><div class="runtime-image-list"><div class="runtime-image-heading"><span class="runtime-setting-icon"><svg><use href="#i-runtime-open-one"/></svg></span><strong>基础镜像</strong></div><div class="runtime-image-shell"><div class="runtime-image-tabs"><button class="is-active" type="button">百度基础镜像</button><button type="button">社区标准镜像</button></div><div class="runtime-image-panel"><div class="runtime-image-group"><p>基础OS发行版</p><div class="runtime-image-card-grid"><button class="runtime-image-card is-active" type="button"><span class="runtime-image-icon"><img src="./assets/runtime-images/ubuntu.png" alt=""></span><span>Ubuntu</span></button><button class="runtime-image-card" type="button"><span class="runtime-image-icon runtime-image-icon-light"><img src="./assets/runtime-images/alpine.png" alt=""></span><span>Alpine</span></button><button class="runtime-image-card" type="button"><span class="runtime-image-icon runtime-image-icon-light runtime-image-centos"><img src="./assets/runtime-images/centos.png" alt=""></span><span>CentOS</span></button></div><div class="runtime-image-version-card runtime-image-version-ubuntu"><span>选择 Ubuntu 版本</span><div class="runtime-version-pills"><button class="is-active" type="button">26.04 Resolute</button><button type="button">24.04 Noble</button><button type="button">24.04 Noble</button></div></div></div><div class="runtime-image-group"><p>技术栈</p><div class="runtime-image-card-grid"><button class="runtime-image-card" type="button"><span class="runtime-image-icon"><img src="./assets/runtime-images/ubuntu.png" alt=""></span><span>基础基础OS镜像</span></button><button class="runtime-image-card" type="button"><span class="runtime-image-icon runtime-image-icon-light"><img src="./assets/runtime-images/alpine.png" alt=""></span><span>百度 GCC</span></button><button class="runtime-image-card" type="button"><span class="runtime-image-icon runtime-image-icon-light runtime-image-centos"><img src="./assets/runtime-images/centos.png" alt=""></span><span>OpenJDK</span></button><button class="runtime-image-card is-active" type="button"><span class="runtime-image-icon"><img src="./assets/runtime-images/python.png" alt=""></span><span>Python</span></button><button class="runtime-image-card" type="button"><span class="runtime-image-icon runtime-image-icon-light"><img src="./assets/runtime-images/node.png" alt=""></span><span>Node</span></button><button class="runtime-image-card" type="button"><span class="runtime-image-icon runtime-image-icon-light runtime-image-centos"><img src="./assets/runtime-images/centos.png" alt=""></span><span>Go</span></button></div><div class="runtime-image-version-card runtime-image-version-python"><span>选择 Python 版本</span><div class="runtime-version-pills"><button class="is-active" type="button">3.14</button><button type="button">3.13</button><button type="button">3.12</button><button type="button">3.11</button><button type="button">2.7</button></div></div></div></div></div></div></div>`;
+  section.innerHTML=`<h4>镜像构建</h4><div class="runtime-image-list"><div class="runtime-image-heading"><span class="runtime-setting-icon"><svg><use href="#i-runtime-open-one"/></svg></span><div class="runtime-image-heading-copy"><strong>基础镜像</strong><p>选择镜像构建的基础。百度基础镜像包含优化的发行版和技术栈镜像；社区标准镜像为官方发布的镜像。</p></div></div><div class="runtime-image-shell"><div class="runtime-image-tabs"><button class="is-active" type="button">百度基础镜像</button><button type="button">社区标准镜像</button></div><div class="runtime-image-panel"><div class="runtime-image-group"><p>基础OS发行版</p><div class="runtime-image-card-grid"><button class="runtime-image-card is-active" type="button"><span class="runtime-image-icon"><img src="./assets/runtime-images/ubuntu.png" alt=""></span><span>Ubuntu</span></button><button class="runtime-image-card" type="button"><span class="runtime-image-icon runtime-image-icon-light"><img src="./assets/runtime-images/alpine.png" alt=""></span><span>Alpine</span></button><button class="runtime-image-card" type="button"><span class="runtime-image-icon runtime-image-icon-light runtime-image-centos"><img src="./assets/runtime-images/centos.png" alt=""></span><span>CentOS</span></button></div><div class="runtime-image-version-card runtime-image-version-ubuntu"><span>选择 Ubuntu 版本</span><div class="runtime-version-pills"><button class="is-active" type="button">26.04 Resolute</button><button type="button">24.04 Noble</button><button type="button">24.04 Noble</button></div></div></div><div class="runtime-image-group"><p>技术栈</p><div class="runtime-image-card-grid"><button class="runtime-image-card" type="button"><span class="runtime-image-icon"><img src="./assets/runtime-images/ubuntu.png" alt=""></span><span>基础基础OS镜像</span></button><button class="runtime-image-card" type="button"><span class="runtime-image-icon runtime-image-icon-light"><img src="./assets/runtime-images/alpine.png" alt=""></span><span>百度 GCC</span></button><button class="runtime-image-card" type="button"><span class="runtime-image-icon runtime-image-icon-light runtime-image-centos"><img src="./assets/runtime-images/centos.png" alt=""></span><span>OpenJDK</span></button><button class="runtime-image-card is-active" type="button"><span class="runtime-image-icon"><img src="./assets/runtime-images/python.png" alt=""></span><span>Python</span></button><button class="runtime-image-card" type="button"><span class="runtime-image-icon runtime-image-icon-light"><img src="./assets/runtime-images/node.png" alt=""></span><span>Node</span></button><button class="runtime-image-card" type="button"><span class="runtime-image-icon runtime-image-icon-light runtime-image-centos"><img src="./assets/runtime-images/centos.png" alt=""></span><span>Go</span></button></div><div class="runtime-image-version-card runtime-image-version-python"><span>选择 Python 版本</span><div class="runtime-version-pills"><button class="is-active" type="button">3.14</button><button type="button">3.13</button><button type="button">3.12</button><button type="button">3.11</button><button type="button">2.7</button></div></div></div></div></div></div></div>`;
+  const runtimeImageVariants=[
+    {selector:'.runtime-image-version-ubuntu',cards:[['ubuntu-card.png','#fffdfc'],['base-os-card.png','#f5fdff'],['alpine-card.png','#fefcff']]},
+    {selector:'.runtime-image-version-python',cards:[['base-os-card.png','#f8fcff'],['gcc-layer2.svg','#fffdfc'],['node-card.png','#fafdff'],['openjdk-card.png','#fafdff'],['go-card.png','#fafdff'],['python-card.png','#f5fdff']]}
+  ];
+  const syncRuntimeImagePreview=(group,card)=>{
+    const variant=runtimeImageVariants.find(item=>group.querySelector(item.selector));
+    const index=[...group.querySelectorAll('.runtime-image-card')].indexOf(card);
+    const data=variant?.cards[index];
+    const preview=variant&&group.querySelector(variant.selector);
+    if(!data||!preview)return;
+    preview.style.setProperty('--runtime-card-image',`url("./assets/runtime-images/${data[0]}")`);
+    preview.style.setProperty('--runtime-card-gradient',data[1]);
+  };
+  runtimeImageVariants.forEach(variant=>{
+    const preview=section.querySelector(variant.selector);
+    const group=preview?.closest('.runtime-image-group');
+    group?.querySelectorAll('.runtime-image-card').forEach((card,index)=>{
+      const data=variant.cards[index];
+      const image=card.querySelector('.runtime-image-icon img');
+      if(data){card.dataset.runtimeCardImage=data[0];card.dataset.runtimeCardGradient=data[1];}
+      if(image&&data)image.src=`./assets/runtime-images/${data[0]}`;
+    });
+    const active=group?.querySelector('.runtime-image-card.is-active');
+    if(active)syncRuntimeImagePreview(group,active);
+  });
   section.addEventListener('click',event=>{
     const tab=event.target.closest('.runtime-image-tabs button');
     if(tab){section.querySelectorAll('.runtime-image-tabs button').forEach(item=>item.classList.toggle('is-active',item===tab));return;}
     const card=event.target.closest('.runtime-image-card');
-    if(card){const group=card.closest('.runtime-image-group');group?.querySelectorAll('.runtime-image-card').forEach(item=>item.classList.toggle('is-active',item===card));return;}
+    if(card){const group=card.closest('.runtime-image-group');group?.querySelectorAll('.runtime-image-card').forEach(item=>item.classList.toggle('is-active',item===card));if(group)syncRuntimeImagePreview(group,card);return;}
     const pill=event.target.closest('.runtime-version-pills button');
     if(pill){pill.parentElement.querySelectorAll('button').forEach(item=>item.classList.toggle('is-active',item===pill));}
   });
@@ -1599,6 +1709,20 @@ function setRuntimeFieldEnabled(scope,enabled){
     if(control===toggle)return;
     control.disabled=!enabled;
   });
+}
+function getRuntimeTooltipText(state){
+  if(activeRuntimeContext==='application')return '';
+  const current=runtimeContextValueLabels[runtimeContextSelection[activeRuntimeContext]];
+  if(activeRuntimeContext==='environment'){
+    const application=runtimeContextValueLabels[runtimeContextSelection.application];
+    if(state==='active')return `已在${current}的环境级配置中覆盖为本地值。点击取消覆盖`;
+    if(state==='restore')return `再次点击将放弃本地覆盖，恢复继承自 ${application} 的应用级配置`;
+    return `${current}的环境级配置，继承自 ${application} 的应用级配置。点击可在当前层级覆盖为本地值`;
+  }
+  const environment=runtimeContextValueLabels[runtimeContextSelection.environment];
+  if(state==='active')return `已在${current}的集群级配置中覆盖为本地值。点击取消覆盖`;
+  if(state==='restore')return `再次点击将放弃本地覆盖，恢复继承自 ${environment} 的环境级配置`;
+  return `${current}的集群级配置，继承自 ${environment} 的环境级配置。点击可在当前层级覆盖为本地值`;
 }
 function setupRuntimeFieldActivation(){
   const scopes=[...document.querySelectorAll('#runtimePage .runtime-setting-row'),document.querySelector('#runtime-container-image .runtime-image-list')].filter(Boolean);
@@ -1624,12 +1748,14 @@ function setupRuntimeFieldActivation(){
     toggle.addEventListener('click',event=>{
       event.preventDefault();
       event.stopPropagation();
+      scope._runtimeRestoreHotZone?.cancel();
       const state=toggle.dataset.runtimeFieldState;
       if(state==='default'){
         setRuntimeFieldEnabled(scope,true);
         scope.classList.remove('is-restore-pending');
         toggle.dataset.runtimeFieldState='active';
         toggle.setAttribute('aria-label','取消覆盖');
+        ensureRuntimeFieldTooltip(scope,getRuntimeTooltipText('active'));
       } else if(state==='active'){
         scope.classList.add('is-restore-pending');
         toggle.dataset.runtimeFieldState='restore';
@@ -1645,31 +1771,84 @@ function setupRuntimeFieldActivation(){
         scope.classList.remove('is-restore-pending');
         toggle.dataset.runtimeFieldState='default';
         toggle.setAttribute('aria-label','启用此配置项');
+        ensureRuntimeFieldTooltip(scope,getRuntimeTooltipText('default'));
       }
     });
+    const cancelRestoreTimer=()=>{
+      clearTimeout(scope._runtimeRestoreTimer);
+      scope._runtimeRestoreTimer=null;
+    };
+    const scheduleRestoreTimer=()=>{
+      cancelRestoreTimer();
+      scope._runtimeRestoreTimer=setTimeout(()=>{
+        if(toggle.dataset.runtimeFieldState==='restore')restoreRuntimeFieldToBlue(scope);
+      },500);
+    };
+    scope._runtimeRestoreHotZone={cancel:cancelRestoreTimer,schedule:scheduleRestoreTimer};
+    toggle.addEventListener('pointerenter',cancelRestoreTimer);
+    toggle.addEventListener('pointerleave',scheduleRestoreTimer);
     setRuntimeFieldEnabled(scope,false);
+    ensureRuntimeFieldTooltip(scope,getRuntimeTooltipText('default'));
+  });
+  document.querySelectorAll('#runtimePage .runtime-rule-group .runtime-add-btn').forEach(button=>{
+    button.disabled=true;
   });
 }
 function clearRuntimeFieldOverride(scope){
+  scope._runtimeRestoreHotZone?.cancel();
   scope.querySelector('.runtime-override-tag')?.remove();
   scope.querySelector('.runtime-override-tooltip')?.remove();
+  scope.querySelector('[data-runtime-field-toggle]')?.removeAttribute('aria-describedby');
   const title=scope.querySelector('.runtime-field-title');
-  const strong=title?.querySelector('strong');
-  if(title&&strong)title.replaceWith(strong);
+  const label=title?.querySelector('strong, h4');
+  if(title&&label)title.replaceWith(label);
+}
+function restoreRuntimeFieldToBlue(scope){
+  if(!scope||!scope.classList.contains('is-restore-pending'))return;
+  scope._runtimeRestoreHotZone?.cancel();
+  scope.classList.remove('is-restore-pending');
+  const toggle=scope.querySelector('[data-runtime-field-toggle]');
+  if(toggle)toggle.dataset.runtimeFieldState='active';
+  toggle?.setAttribute('aria-label','取消覆盖');
+  const tag=scope.querySelector('.runtime-override-tag');
+  if(tag){
+    tag.className='runtime-override-tag';
+    tag.textContent='已覆盖';
+  }
+  ensureRuntimeFieldTooltip(scope,getRuntimeTooltipText('active'));
 }
 let runtimeOverrideTooltipId=0;
+function ensureRuntimeFieldTooltip(scope,text){
+  const toggle=scope?.querySelector('[data-runtime-field-toggle]');
+  if(!scope||!toggle)return;
+  if(!text){
+    scope.querySelector('.runtime-override-tooltip')?.remove();
+    toggle.removeAttribute('aria-describedby');
+    return;
+  }
+  let tooltip=scope.querySelector('.runtime-override-tooltip');
+  if(!tooltip){
+    tooltip=document.createElement('span');
+    tooltip.className='runtime-override-tooltip';
+    tooltip.setAttribute('role','tooltip');
+    toggle.after(tooltip);
+  }
+  tooltip.textContent=text;
+  if(!tooltip.id)tooltip.id=`runtime-override-tooltip-${++runtimeOverrideTooltipId}`;
+  toggle.setAttribute('aria-describedby',tooltip.id);
+}
 function markRuntimeFieldRestorePending(scope){
   if(!scope)return;
-  const strong=scope.matches('.runtime-image-list')
+  const label=scope.matches('.runtime-image-list')
     ? scope.querySelector('.runtime-image-heading strong')
     : scope.querySelector(':scope > div:not(.runtime-setting-icon) strong');
-  if(!strong)return;
-  let title=strong.parentElement;
+  if(!label)return;
+  let title=label.parentElement;
   if(!title?.classList.contains('runtime-field-title')){
     title=document.createElement('span');
     title.className='runtime-field-title';
-    strong.replaceWith(title);
-    title.append(strong);
+    label.replaceWith(title);
+    title.append(label);
   }
   let tag=title.querySelector('.runtime-override-tag');
   if(!tag){
@@ -1680,27 +1859,32 @@ function markRuntimeFieldRestorePending(scope){
   tag.textContent='再次点击 取消覆盖';
 
   const toggle=scope.querySelector('[data-runtime-field-toggle]');
-  let tooltip=scope.querySelector('.runtime-override-tooltip');
-  if(!tooltip){
-    tooltip=document.createElement('span');
-    tooltip.className='runtime-override-tooltip';
-    tooltip.setAttribute('role','tooltip');
-    tooltip.textContent='再次点击将放弃本地覆盖，恢复继承自 dev 的环境级配置';
-    toggle?.after(tooltip);
+  ensureRuntimeFieldTooltip(scope,getRuntimeTooltipText('restore'));
+  const tooltip=scope.querySelector('.runtime-override-tooltip');
+  const hotZone=scope._runtimeRestoreHotZone;
+  if(hotZone&&!tooltip.dataset.hotZoneBound){
+    tooltip.addEventListener('pointerenter',hotZone.cancel);
+    tooltip.addEventListener('pointerleave',hotZone.schedule);
+    tooltip.dataset.hotZoneBound='true';
   }
-  if(!tooltip.id)tooltip.id=`runtime-override-tooltip-${++runtimeOverrideTooltipId}`;
-  toggle?.setAttribute('aria-describedby',tooltip.id);
+}
+function refreshRuntimeFieldTooltips(){
+  document.querySelectorAll('#runtimePage [data-runtime-field-toggle]').forEach(toggle=>{
+    const scope=toggle.closest('.runtime-setting-row, .runtime-image-list');
+    if(!scope)return;
+    ensureRuntimeFieldTooltip(scope,getRuntimeTooltipText(toggle.dataset.runtimeFieldState||'default'));
+  });
 }
 function markRuntimeFieldCovered(scope){
   if(!scope||!scope.classList.contains('is-field-enabled'))return;
-  const strong=scope.matches('.runtime-image-list')
+  const label=scope.matches('.runtime-image-list')
     ? scope.querySelector('.runtime-image-heading strong')
     : scope.querySelector(':scope > div:not(.runtime-setting-icon) strong');
-  if(!strong||strong.parentElement.querySelector('.runtime-override-tag'))return;
+  if(!label||label.parentElement.querySelector('.runtime-override-tag'))return;
   const title=document.createElement('span');
   title.className='runtime-field-title';
-  strong.replaceWith(title);
-  title.append(strong);
+  label.replaceWith(title);
+  title.append(label);
   const tag=document.createElement('span');
   tag.className='runtime-override-tag';
   tag.textContent='已覆盖';
