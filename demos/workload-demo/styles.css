@@ -609,7 +609,7 @@
 .runtime-page-header h1{margin:0;font-size:24px;line-height:32px;font-weight:600}.runtime-page-header p{margin:4px 0 0;color:#8f8f8f;font-size:12px;line-height:18px}
 .runtime-page-actions{display:flex;align-items:center;gap:8px}.runtime-page-actions button{height:32px;padding:0 20px;border-radius:20px;font:500 14px/22px "PingFang SC",sans-serif;cursor:pointer}.runtime-secondary-btn{border:1px solid #ccc;background:#fff;color:#181818}.runtime-primary-btn{border:1px solid #1c202b;background:#1c202b;color:#a7f3cf}.runtime-context-row{display:flex;align-items:center;gap:8px;height:48px;color:#8f8f8f;font-size:12px}.runtime-context-row b{color:#545454;font-weight:400}.runtime-context-row em{padding:2px 6px;border-radius:4px;background:#e6faf1;color:#16834b;font-style:normal}.runtime-context-row i{width:1px;height:12px;background:#d9d9d9;margin:0 8px}.runtime-save-state{margin-left:auto;color:#16a765}
 .runtime-layout{display:grid;grid-template-columns:240px minmax(520px,1fr) 112px;gap:24px;align-items:start}.runtime-tree{position:sticky;top:0;min-height:600px;padding:0 8px 16px 0;border-right:1px solid #f0f0f0}.runtime-search{display:flex;height:32px;align-items:center;gap:8px;padding:4px 12px;border:1px solid #d9d9d9;border-radius:8px;background:#fff;color:#bfbfbf}.runtime-search svg{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:1.6}.runtime-search input{width:100%;min-width:0;border:0;outline:0;color:#181818;font:14px/22px "PingFang SC",sans-serif}.runtime-search input::placeholder{color:#bfbfbf}.runtime-tree-list{margin-top:12px}.runtime-tree-group{margin-bottom:8px}.runtime-tree-heading,.runtime-tree-item{display:flex;width:100%;height:32px;align-items:center;border:0;border-radius:4px;background:transparent;color:#181818;font:14px/22px "PingFang SC",sans-serif;text-align:left;cursor:pointer}.runtime-tree-heading{padding:0 8px;gap:4px}.runtime-tree-chevron{width:16px;color:#545454}.runtime-tree-action{margin-left:auto;font-size:18px;color:#181818}.runtime-tree-item{padding:0 8px 0 32px}.runtime-tree-item.is-active{background:#e6faf1}.runtime-tree-item.is-search-hidden{display:none}.runtime-tree-group.is-filtered .runtime-tree-heading{color:#545454}
-.runtime-editor{min-width:0}.runtime-editor-title{display:flex;align-items:center;justify-content:space-between;padding:0 0 12px}.runtime-editor-title h2{display:inline;margin:0 8px 0 0;font-size:18px;line-height:26px;font-weight:600}.runtime-editor-title span{color:#545454;font-size:14px}.runtime-status-pill{padding:3px 8px;border-radius:4px;background:#e6faf1;color:#16834b!important;font-size:12px!important}.runtime-section{margin-bottom:16px;border:1px solid #e8e8e8;border-radius:8px;background:#fff}.runtime-section-heading{display:flex;align-items:flex-start;justify-content:space-between;padding:16px 20px;border-bottom:1px solid #f0f0f0}.runtime-section-heading h3{margin:0;font-size:16px;line-height:24px;font-weight:500}.runtime-section-heading p{margin:4px 0 0;color:#8f8f8f;font-size:12px;line-height:18px}.runtime-icon-btn{width:28px;height:28px;padding:0;border:0;border-radius:50%;background:transparent;color:#545454;font-size:18px;cursor:pointer}.runtime-icon-btn:hover{background:#f2f2f2}.runtime-section.is-collapsed>*:not(.runtime-section-heading){display:none}.runtime-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 24px;padding:20px}.runtime-form-grid label{display:flex;min-width:0;flex-direction:column;gap:6px;color:#181818;font-size:14px}.runtime-form-grid label>span{line-height:22px}.runtime-form-grid input,.runtime-form-grid select,.runtime-input-unit input{height:32px;min-width:0;padding:4px 10px;border:1px solid #d9d9d9;border-radius:8px;background:#fff;color:#181818;font:14px/22px "PingFang SC",sans-serif;outline:0}.runtime-form-grid input:focus,.runtime-form-grid select:focus,.runtime-input-unit input:focus{border-color:#181818}.runtime-form-grid small,.runtime-subsection p{color:#8f8f8f;font-size:12px;line-height:18px}.runtime-field-wide{grid-column:1/-1}.runtime-input-unit{display:flex;align-items:center;gap:8px}.runtime-input-unit input{width:100%}.runtime-input-unit em{color:#545454;font-style:normal;font-size:14px}.runtime-switch-field{position:relative}.runtime-switch-field .runtime-switch{position:absolute;right:0;top:0}.runtime-switch{width:32px;height:20px;padding:2px;border:0;border-radius:12px;background:#d9d9d9;cursor:pointer}.runtime-switch i{display:block;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .15s ease}.runtime-switch.is-on{background:#a7f3cf}.runtime-switch.is-on i{transform:translateX(12px)}.runtime-subsection{padding:20px;border-top:1px solid #f0f0f0}.runtime-subsection h4{margin:0;font-size:14px;line-height:22px;font-weight:500}.runtime-subsection p{margin:4px 0 12px}.runtime-subsection-title{display:flex;align-items:center;justify-content:space-between}.runtime-add-btn,.runtime-outline-btn{height:32px;padding:0 16px;border:1px solid #ccc;border-radius:20px;background:#fff;color:#181818;font:14px/22px "PingFang SC",sans-serif;cursor:pointer}.runtime-add-btn:hover,.runtime-outline-btn:hover,.runtime-secondary-btn:hover{background:#f2f2f2}.runtime-resource-table{border:1px solid #f0f0f0;border-radius:6px;overflow:hidden}.runtime-resource-head,.runtime-resource-row{display:grid;grid-template-columns:1fr 150px 150px 80px;gap:12px;align-items:center;padding:10px 12px}.runtime-resource-head{background:#f7f7f7;color:#8f8f8f;font-size:12px}.runtime-resource-row{border-top:1px solid #f0f0f0;font-size:14px}.runtime-resource-row b{font-weight:400}.runtime-resource-row .runtime-switch{justify-self:center}.runtime-toc{position:sticky;top:0;display:flex;flex-direction:column;gap:16px;padding:8px 0 0 8px;border-left:1px solid #f0f0f0}.runtime-toc strong{font-size:12px;font-weight:500}.runtime-toc a{color:#8f8f8f;font-size:12px;text-decoration:none}.runtime-toc a:hover,.runtime-toc a.is-current{color:#181818}.runtime-toc a.is-current{font-weight:500}
+.runtime-editor{min-width:0}.runtime-editor-title{display:flex;align-items:center;justify-content:flex-start;padding:0 0 12px}.runtime-editor-title h2{display:inline;margin:0 8px 0 0;font-size:18px;line-height:26px;font-weight:600}.runtime-editor-title span{color:#545454;font-size:14px}.runtime-status-pill{padding:3px 8px;border-radius:4px;background:#e6faf1;color:#16834b!important;font-size:12px!important}.runtime-section{margin-bottom:16px;border:1px solid #e8e8e8;border-radius:8px;background:#fff}.runtime-section-heading{display:flex;align-items:flex-start;justify-content:space-between;padding:16px 20px;border-bottom:1px solid #f0f0f0}.runtime-section-heading h3{margin:0;font-size:16px;line-height:24px;font-weight:500}.runtime-section-heading p{margin:4px 0 0;color:#8f8f8f;font-size:12px;line-height:18px}.runtime-icon-btn{width:28px;height:28px;padding:0;border:0;border-radius:50%;background:transparent;color:#545454;font-size:18px;cursor:pointer}.runtime-icon-btn:hover{background:#f2f2f2}.runtime-section.is-collapsed>*:not(.runtime-section-heading){display:none}.runtime-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 24px;padding:20px}.runtime-form-grid label{display:flex;min-width:0;flex-direction:column;gap:6px;color:#181818;font-size:14px}.runtime-form-grid label>span{line-height:22px}.runtime-form-grid input,.runtime-form-grid select,.runtime-input-unit input{height:32px;min-width:0;padding:4px 10px;border:1px solid #d9d9d9;border-radius:8px;background:#fff;color:#181818;font:14px/22px "PingFang SC",sans-serif;outline:0}.runtime-form-grid input:focus,.runtime-form-grid select:focus,.runtime-input-unit input:focus{border-color:#181818}.runtime-form-grid small,.runtime-subsection p{color:#8f8f8f;font-size:12px;line-height:18px}.runtime-field-wide{grid-column:1/-1}.runtime-input-unit{display:flex;align-items:center;gap:8px}.runtime-input-unit input{width:100%}.runtime-input-unit em{color:#545454;font-style:normal;font-size:14px}.runtime-switch-field{position:relative}.runtime-switch-field .runtime-switch{position:absolute;right:0;top:0}.runtime-switch{width:32px;height:20px;padding:2px;border:0;border-radius:12px;background:#d9d9d9;cursor:pointer}.runtime-switch i{display:block;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .15s ease}.runtime-switch.is-on{background:#a7f3cf}.runtime-switch.is-on i{transform:translateX(12px)}.runtime-subsection{padding:20px;border-top:1px solid #f0f0f0}.runtime-subsection h4{margin:0;font-size:14px;line-height:22px;font-weight:500}.runtime-subsection p{margin:4px 0 12px}.runtime-subsection-title{display:flex;align-items:center;justify-content:space-between}.runtime-add-btn,.runtime-outline-btn{height:32px;padding:0 16px;border:1px solid #ccc;border-radius:20px;background:#fff;color:#181818;font:14px/22px "PingFang SC",sans-serif;cursor:pointer}.runtime-add-btn:hover,.runtime-outline-btn:hover,.runtime-secondary-btn:hover{background:#f2f2f2}.runtime-resource-table{border:1px solid #f0f0f0;border-radius:6px;overflow:hidden}.runtime-resource-head,.runtime-resource-row{display:grid;grid-template-columns:1fr 150px 150px 80px;gap:12px;align-items:center;padding:10px 12px}.runtime-resource-head{background:#f7f7f7;color:#8f8f8f;font-size:12px}.runtime-resource-row{border-top:1px solid #f0f0f0;font-size:14px}.runtime-resource-row b{font-weight:400}.runtime-resource-row .runtime-switch{justify-self:center}.runtime-toc{position:sticky;top:0;display:flex;flex-direction:column;gap:16px;padding:8px 0 0 8px;border-left:1px solid #f0f0f0}.runtime-toc strong{font-size:12px;font-weight:500}.runtime-toc a{color:#8f8f8f;font-size:12px;text-decoration:none}.runtime-toc a:hover,.runtime-toc a.is-current{color:#181818}.runtime-toc a.is-current{font-weight:500}
 @media(max-width:1100px){.runtime-layout{grid-template-columns:200px minmax(480px,1fr)}.runtime-toc{display:none}.runtime-tree{padding-right:12px}.runtime-page{min-width:0}.runtime-form-grid{gap:16px}.runtime-resource-head,.runtime-resource-row{grid-template-columns:1fr 110px 110px 60px}}
 @media (max-width: 1320px) {
   #runtimePage .runtime-layout { grid-template-columns: 220px minmax(0, 1fr); gap: 24px; }
@@ -998,6 +998,8 @@
   color: #181818;
   overflow-x: hidden;
 }
+#runtimePage.runtime-page { overflow: visible; }
+.portfolio-demo-app { overflow: visible; }
 #runtimePage .runtime-page-header {
   min-height: 56px;
   padding: 10px 0;
@@ -1020,10 +1022,22 @@
 #runtimePage .runtime-version-tooltip-body em { color: #545454; font-style: normal; }
 #runtimePage .runtime-version-tooltip-body b { font-weight: 400; overflow-wrap: anywhere; word-break: break-word; }
 #runtimePage .runtime-top-divider { width: 1px; height: 16px; margin: 0 4px; background: #e8e8e8; }
-#runtimePage .runtime-top-check { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
-#runtimePage .runtime-top-check input { appearance: none; width: 16px; height: 16px; margin: 0; border-radius: 2px; background: #fff; }
-#runtimePage .runtime-top-check input::before { display: block; width: 12px; height: 12px; margin: 2px; border: 1px solid #d9d9d9; border-radius: 2px; box-sizing: border-box; content: ""; }
-#runtimePage .runtime-top-check input:checked::before { border-color: #1c202b; background: #1c202b url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.2 6.2 4.8 8.5 9.8 3.5' fill='none' stroke='%23a7f3cf' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 12px no-repeat; }
+#runtimePage .cnap-checkbox { display: inline-flex; min-height: 30px; align-items: center; gap: 8px; padding: 4px 0; color: #181818; font: 400 14px/22px "PingFang SC", sans-serif; white-space: nowrap; cursor: pointer; user-select: none; }
+#runtimePage .cnap-checkbox > input { position: absolute; width: 16px; height: 16px; margin: 0; opacity: 0; pointer-events: none; }
+#runtimePage .cnap-checkbox-box { position: relative; display: block; width: 16px; height: 16px; flex: 0 0 16px; border-radius: 2px; box-sizing: border-box; background: transparent; }
+#runtimePage .cnap-checkbox-box::before { position: absolute; top: 2px; left: 2px; width: 12px; height: 12px; box-sizing: border-box; border: 1px solid #d9d9d9; border-radius: 2px; background: #fff; content: ""; }
+#runtimePage .cnap-checkbox > input:focus-visible + .cnap-checkbox-box { outline: 2px solid rgba(65,208,141,.35); outline-offset: 2px; }
+#runtimePage .cnap-checkbox:not(.is-disabled):hover .cnap-checkbox-box::before { border-color: #bfbfbf; }
+#runtimePage .cnap-checkbox > input:checked + .cnap-checkbox-box::before,
+#runtimePage .cnap-checkbox > input:indeterminate + .cnap-checkbox-box::before { border-color: #1c202b; background: #1c202b; }
+#runtimePage .cnap-checkbox:not(.is-disabled):hover > input:checked + .cnap-checkbox-box::before,
+#runtimePage .cnap-checkbox:not(.is-disabled):hover > input:indeterminate + .cnap-checkbox-box::before { border-color: #363940; background: #363940; }
+#runtimePage .cnap-checkbox > input:checked + .cnap-checkbox-box::after { position: absolute; top: 4px; left: 5px; width: 4px; height: 7px; transform: rotate(45deg); border: solid #a7f3cf; border-width: 0 1.5px 1.5px 0; content: ""; }
+#runtimePage .cnap-checkbox > input:indeterminate + .cnap-checkbox-box::after { position: absolute; top: 7px; left: 5px; width: 6px; height: 1.5px; border-radius: 2px; background: #a7f3cf; content: ""; }
+#runtimePage .cnap-checkbox > input:disabled + .cnap-checkbox-box::before { border-color: #d9d9d9; background: #f7f7f7; }
+#runtimePage .cnap-checkbox > input:disabled:checked + .cnap-checkbox-box::before,
+#runtimePage .cnap-checkbox > input:disabled:indeterminate + .cnap-checkbox-box::before { border-color: #1c202b; background: #1c202b; }
+#runtimePage .cnap-checkbox.is-disabled { opacity: .6; cursor: not-allowed; }
 #runtimePage .runtime-page-actions .runtime-primary-btn { min-width: 96px; height: 32px; padding: 5px 20px; border-radius: 24px; }
 #runtimePage .runtime-context-row {
   height: 56px;
@@ -1113,6 +1127,9 @@
 #runtimePage .runtime-setting-row > .runtime-input-unit,
 #runtimePage .runtime-setting-row > .runtime-inline-control { max-width: 100%; }
 #runtimePage .runtime-tree {
+  position: sticky;
+  top: 24px;
+  z-index: 5;
   min-height: 800px;
   padding: 0 0 24px;
   border-right: 0;
@@ -1172,7 +1189,7 @@
 #runtimePage .runtime-tree-delete.is-hidden { visibility: hidden; pointer-events: none; }
 #runtimePage .runtime-tree-leaf:hover .runtime-tree-delete:not(.is-hidden),
 #runtimePage .runtime-tree-resource-item:hover .runtime-tree-delete:not(.is-hidden) { opacity: 1; pointer-events: auto; }
-#runtimePage .runtime-tree-delete svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+#runtimePage .runtime-tree-delete svg { width: 16px; height: 16px; fill: #181818; stroke: none; }
 #runtimePage .runtime-tree-delete:hover { background: #f2f2f2; }
 #runtimePage .runtime-tree-leaf:hover,
 #runtimePage .runtime-tree-resource-item:hover { background: #f7f7f7; }
@@ -1193,17 +1210,28 @@
 .runtime-delete-modal-footer button:hover { filter: brightness(.96); }
 #runtimePage .runtime-tree-action { margin-left: auto; }
 #runtimePage .runtime-editor { min-width: 0; }
-#runtimePage .runtime-editor-breadcrumb { display: flex; height: 22px; align-items: center; gap: 12px; margin-bottom: 16px; color: #bfbfbf; font: 14px/22px "PingFang SC", sans-serif; }
-#runtimePage .runtime-editor-breadcrumb strong { color: #545454; font-weight: 400; }
-#runtimePage .runtime-editor-title { height: 44px; padding: 0 0 16px; }
-#runtimePage .runtime-editor-title h2 { font-size: 18px; line-height: 26px; }
-#runtimePage .runtime-editor-title span { color: #545454; }
+#runtimePage .runtime-editor-breadcrumb { display: flex; height: 22px; align-items: center; gap: 4px; margin-bottom: 32px; color: #bfbfbf; font: 400 14px/22px "PingFang SC", sans-serif; }
+#runtimePage .runtime-editor-breadcrumb > span:nth-of-type(2),
+#runtimePage .runtime-editor-breadcrumb > span:nth-of-type(4) { margin-left: 8px; }
+#runtimePage .runtime-editor-breadcrumb strong { color: #181818; font-weight: 400; }
+#runtimePage .runtime-editor-title { display: flex; height: 30px; align-items: center; justify-content: flex-start; gap: 12px; margin-bottom: 36px; padding: 0; }
+#runtimePage .runtime-editor-title h2 { margin: 0; color: #181818; font: 500 20px/30px "PingFang SC", sans-serif; }
+#runtimePage .runtime-editor-title i { width: 1px; height: 16px; background: #d9d9d9; }
+#runtimePage .runtime-editor-title span { display: inline-flex; height: 20px; align-items: center; padding: 0 8px; border-radius: 12px; background: #f0f1f5; color: #515970; font: 400 12px/20px "PingFang SC", sans-serif; }
 #runtimePage .runtime-status-pill { background: #e6faf1; color: #16834b !important; }
 #runtimePage .runtime-section { margin: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none; }
 #runtimePage .runtime-section + .runtime-section { margin-top: 32px; padding-top: 32px; border-top: 1px solid #f0f0f0; }
 #runtimePage .runtime-section-heading { min-height: 54px; align-items: center; padding: 0 0 16px; border-bottom: 1px solid #f0f0f0; }
+#runtimePage .runtime-section-heading { min-height: 40px; }
+#runtimePage .runtime-section-kicker { display: none; }
 #runtimePage .runtime-section-heading h3 { font-size: 16px; line-height: 24px; font-weight: 600; }
-#runtimePage .runtime-section-kicker { display: block; margin-bottom: 2px; color: #8f8f8f; font-size: 12px; line-height: 18px; }
+#runtimePage #runtime-container.is-container-context .runtime-section-heading { min-height: 22px; padding-bottom: 0; border-bottom: 0; }
+#runtimePage #runtime-container.is-container-context .runtime-section-kicker { display: none; }
+#runtimePage #runtime-container.is-container-context .runtime-section-heading > div { display: flex; align-items: center; gap: 8px; }
+#runtimePage #runtime-container.is-container-context .runtime-section-heading > div::before { width: 3px; height: 16px; flex: 0 0 3px; background: #72e8b1; content: ""; }
+#runtimePage #runtime-container.is-container-context .runtime-section-heading h3 { font: 500 16px/24px "PingFang SC", sans-serif; }
+#runtimePage .runtime-section-heading p { margin: 4px 0 0; color: #8f8f8f; font-size: 12px; line-height: 20px; }
+#runtimePage .runtime-section-kicker { display: block; margin-bottom: 2px; color: #8f8f8f; font-size: 12px; line-height: 20px; }
 #runtimePage .runtime-icon-btn { display: grid; width: 24px; height: 24px; place-items: center; font-size: 16px; }
 #runtimePage .runtime-icon-btn svg { width: 16px; height: 16px; fill: none; stroke: #545454; stroke-width: 1.5; }
 #runtimePage .runtime-icon-btn.is-collapsed svg { transform: rotate(-90deg); }
@@ -1224,13 +1252,15 @@
 #runtimePage .runtime-setting-row.is-field-disabled input,
 #runtimePage .runtime-setting-row.is-field-disabled select,
 #runtimePage .runtime-setting-row.is-field-disabled .runtime-select-value,
-#runtimePage .runtime-setting-row.is-field-disabled .runtime-add-btn,
-#runtimePage .runtime-setting-row.is-field-disabled .runtime-inline-actions button { border-color: #e8e8e8; background: #f7f7f7; color: #bfbfbf; cursor: not-allowed; }
+#runtimePage .runtime-setting-row.is-field-disabled .runtime-inline-actions button { border-color: #d9d9d9; background: #f7f7f7; color: #bfbfbf; cursor: not-allowed; }
+#runtimePage .runtime-setting-row.is-field-disabled .runtime-add-btn { border-color: #ccc; background: #fff; color: #181818; opacity: .4; cursor: not-allowed; }
 #runtimePage .runtime-setting-row.is-field-disabled .runtime-switch { background: #e8e8e8; cursor: not-allowed; }
 #runtimePage .runtime-setting-row.is-field-disabled .runtime-switch i { background: #fff; }
 #runtimePage .runtime-image-list.is-field-disabled .runtime-image-card,
 #runtimePage .runtime-image-list.is-field-disabled .runtime-version-pills { opacity: .56; }
 #runtimePage .runtime-image-list.is-field-disabled .runtime-image-shell button { cursor: not-allowed; }
+#runtimePage .runtime-setting-row.is-field-disabled:has(> input:hover, > button:hover, .runtime-setting-subrows:hover, .runtime-inline-control:hover, .runtime-command-actions:hover) .runtime-override-tooltip,
+#runtimePage .runtime-image-list.is-field-disabled:has(.runtime-image-shell button:hover) .runtime-override-tooltip { display: block; }
 #runtimePage .cnap-input {
   display: block;
   box-sizing: border-box;
@@ -1263,36 +1293,58 @@
 #runtimePage .runtime-setting-row strong { display: block; font-size: 14px; line-height: 22px; font-weight: 500; }
 #runtimePage .runtime-field-title { display: inline-flex; align-items: center; gap: 4px; vertical-align: top; }
 #runtimePage .runtime-field-title strong { display: inline; }
+#runtimePage .runtime-field-title h4 { display: inline; margin: 0; }
 #runtimePage .runtime-override-tag { display: inline-flex; height: 20px; align-items: center; padding: 0 8px; border-radius: 12px; background: #e5f2ff; color: #0080ff; font: 400 12px/20px "PingFang SC", sans-serif; white-space: nowrap; }
 #runtimePage .runtime-override-tag-pending { background: #fff3e0; color: #f58300; }
 #runtimePage .runtime-setting-row.is-field-enabled,
-#runtimePage .runtime-image-list.is-field-enabled { position: relative; }
+#runtimePage .runtime-image-list.is-field-enabled,
+#runtimePage .runtime-setting-row.is-field-disabled,
+#runtimePage .runtime-image-list.is-field-disabled { position: relative; }
 #runtimePage .runtime-override-tooltip {
   position: absolute; z-index: 20; left: 0; bottom: calc(100% - 2px); display: none;
   width: max-content; max-width: 246px; padding: 5px 12px; border-radius: 8px;
   background: #fff; box-shadow: 0 2px 12px rgba(0,0,0,.1); color: #181818;
-  font: 400 14px/22px "PingFang SC", sans-serif; white-space: normal;
+  font: 400 14px/22px "PingFang SC", sans-serif; white-space: normal; pointer-events: none;
 }
 #runtimePage .runtime-override-tooltip::after {
   position: absolute; left: 7px; bottom: -5px; width: 10px; height: 10px;
   transform: rotate(45deg); background: #fff; content: "";
 }
 #runtimePage .is-restore-pending .runtime-setting-icon:hover + .runtime-override-tooltip,
-#runtimePage .is-restore-pending .runtime-setting-icon:focus-visible + .runtime-override-tooltip { display: block; }
-#runtimePage .runtime-setting-row p { margin: 2px 0 0; color: #8f8f8f; font-size: 12px; line-height: 18px; }
+#runtimePage .is-restore-pending .runtime-setting-icon:focus-visible + .runtime-override-tooltip,
+#runtimePage .is-field-enabled:not(.is-restore-pending) .runtime-setting-icon:hover + .runtime-override-tooltip,
+#runtimePage .is-field-enabled:not(.is-restore-pending) .runtime-setting-icon:focus-visible + .runtime-override-tooltip,
+#runtimePage .is-field-disabled .runtime-setting-icon:hover + .runtime-override-tooltip,
+#runtimePage .is-field-disabled .runtime-setting-icon:focus-visible + .runtime-override-tooltip { display: block; }
+#runtimePage .runtime-setting-row p { margin: 4px 0 0; color: #545454; font-size: 12px; line-height: 20px; }
 #runtimePage .runtime-setting-row > input,
 #runtimePage .runtime-setting-wide-input,
 #runtimePage .runtime-setting-row .runtime-input-unit input { width: 160px; height: 32px; padding: 4px 10px; border: 1px solid #d9d9d9; border-radius: 8px; background: #fff; color: #181818; font: 14px/22px "PingFang SC", sans-serif; outline: 0; }
+#runtimePage .runtime-setting-row > input[type="number"] { width: 100px; }
 #runtimePage .runtime-setting-row > input:focus,
 #runtimePage .runtime-setting-row .runtime-input-unit input:focus { border-color: #181818; }
 #runtimePage .runtime-setting-row .runtime-input-unit { width: 180px; }
 #runtimePage .runtime-setting-row .runtime-input-unit input { width: 148px; }
 #runtimePage .runtime-setting-row .runtime-switch { margin-right: 4px; }
+#runtimePage .runtime-setting-row:has(> .runtime-switch-field) {
+  align-items: start;
+  row-gap: 8px;
+}
+#runtimePage .runtime-setting-row:has(> .runtime-switch-field) > div:not(.runtime-switch-field),
+#runtimePage .runtime-setting-row:has(> .runtime-switch-field) > .runtime-switch-field {
+  grid-column: 2 / 4;
+}
+#runtimePage .runtime-setting-row:has(> .runtime-switch-field) > .runtime-switch-field {
+  width: 100%; min-width: 0; margin: 0;
+}
+#runtimePage .runtime-switch-field > span {
+  color: #181818; font: 400 14px/22px "PingFang SC", sans-serif;
+}
 #runtimePage .runtime-setting-row-stack { grid-template-columns: 32px minmax(0, 1fr); align-items: start; }
 #runtimePage .runtime-setting-row-stack > .runtime-setting-subrows { grid-column: 2; }
 #runtimePage .runtime-setting-subrows { display: flex; min-width: 0; flex-direction: column; gap: 12px; padding-top: 8px; }
 #runtimePage .runtime-setting-subrows label { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 16px; align-items: center; color: #181818; font-size: 14px; line-height: 22px; }
-#runtimePage .runtime-setting-subrows label small { grid-column: 1 / -1; color: #8f8f8f; font-size: 12px; line-height: 18px; }
+#runtimePage .runtime-setting-subrows label small { grid-column: 1 / -1; color: #8f8f8f; font-size: 12px; line-height: 20px; }
 #runtimePage .runtime-setting-subrows label > input,
 #runtimePage .runtime-setting-subrows label > .runtime-input-unit,
 #runtimePage .runtime-setting-subrows label > .runtime-select-value { grid-column: 2; grid-row: 1 / span 2; }
@@ -1303,22 +1355,44 @@
 #runtimePage .runtime-setting-row-block > div:has(.runtime-add-btn) { display: flex; flex-wrap: wrap; gap: 8px; }
 #runtimePage .runtime-rule-block { padding: 8px 0 12px 32px; border-top: 1px solid #f0f0f0; }
 #runtimePage .runtime-rule-block strong { display: block; font-size: 14px; line-height: 22px; font-weight: 400; }
-#runtimePage .runtime-rule-block p { max-width: 620px; margin: 4px 0 12px; color: #8f8f8f; font-size: 12px; line-height: 18px; }
+#runtimePage .runtime-rule-block p { max-width: 620px; margin: 4px 0 12px; color: #8f8f8f; font-size: 12px; line-height: 20px; }
 #runtimePage .runtime-inline-actions { display: flex; align-items: center; gap: 16px; }
 #runtimePage .runtime-inline-actions button { padding: 0; border: 0; background: transparent; color: #545454; font: 12px/20px "PingFang SC", sans-serif; cursor: pointer; }
 #runtimePage .runtime-inline-actions button:hover { color: #181818; }
+#runtimePage [data-runtime-config="credentials-config"] { margin-top: 32px; padding: 0 16px; border: 1px solid #e8e8e8; border-radius: 12px; }
+#runtimePage .runtime-credential-list { padding: 20px 0; }
+#runtimePage .runtime-credential-row { min-height: 0; align-items: start; padding: 0; border-bottom: 0; }
+#runtimePage .runtime-credential-content { min-width: 0; }
+#runtimePage .runtime-credential-heading { display: flex; min-height: 22px; align-items: center; justify-content: space-between; gap: 16px; }
+#runtimePage .runtime-credential-heading strong { font-weight: 500; }
+#runtimePage .runtime-credential-actions { display: flex; align-items: center; gap: 16px; }
+#runtimePage .runtime-credential-actions button { display: inline-flex; height: 20px; align-items: center; gap: 6px; padding: 0; border: 0; background: transparent; color: #181818; font: 400 12px/20px "PingFang SC", sans-serif; white-space: nowrap; cursor: pointer; }
+#runtimePage .runtime-credential-actions button:hover { color: #545454; }
+#runtimePage .runtime-credential-actions svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.2; }
+#runtimePage .runtime-credential-description { display: none; margin: 4px 0 0; color: #545454; font: 400 12px/20px "PingFang SC", sans-serif; }
+#runtimePage.is-help-mode .runtime-credential-description { display: block; }
+#runtimePage .runtime-credential-add-list { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; margin-top: 12px; padding-left: 32px; }
+#runtimePage .runtime-credential-add-list .runtime-add-btn { min-width: 116px; }
+#runtimePage [data-runtime-config="credentials-config"] .runtime-setting-icon { margin-top: 0; }
+#runtimePage [data-runtime-config="credentials-config"] .runtime-credential-row.is-field-disabled .runtime-credential-actions button { color: #181818; }
+#runtimePage [data-runtime-config="credentials-config"] .runtime-credential-row.is-field-disabled .runtime-add-btn { opacity: .4; }
 #runtimePage .runtime-select-value { display: inline-flex; width: 160px; height: 32px; align-items: center; justify-content: space-between; padding: 4px 10px; border: 1px solid #d9d9d9; border-radius: 8px; background: #fff; color: #181818; font: 14px/22px "PingFang SC", sans-serif; }
 #runtimePage .runtime-select-value svg { width: 14px; height: 14px; fill: none; stroke: #8f8f8f; stroke-width: 1.5; }
 #runtimePage .runtime-setting-row-block { min-height: 68px; }
 #runtimePage .runtime-rule-group { margin: 0 -20px; padding: 16px 20px; border-top: 1px solid #f0f0f0; }
 #runtimePage .runtime-rule-group p { margin: 4px 0 12px; }
+#runtimePage .runtime-subsection-title p { display: none; margin: 4px 0 0; color: #8f8f8f; font-size: 12px; font-weight: 400; line-height: 20px; }
+#runtimePage.is-help-mode .runtime-subsection-title { display: block; }
+#runtimePage.is-help-mode .runtime-subsection-title p { display: block; }
 #runtimePage .runtime-subsection-title h4 { font-size: 14px; line-height: 22px; font-weight: 500; }
 #runtimePage .runtime-add-btn,
-#runtimePage .runtime-outline-btn { display: inline-flex; height: 32px; align-items: center; gap: 4px; padding: 5px 20px; border-radius: 24px; font-size: 14px; line-height: 22px; }
+#runtimePage .runtime-outline-btn { display: inline-flex; height: 32px; align-items: center; gap: 4px; padding: 5px 20px; border-radius: 24px; font-size: 14px; font-weight: 500; line-height: 22px; }
 #runtimePage .runtime-add-btn svg,
 #runtimePage .runtime-outline-btn svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.5; }
+#runtimePage .runtime-add-btn:disabled { opacity: .4; cursor: not-allowed; }
+#runtimePage .runtime-add-btn:disabled:hover { background: #fff; }
 #runtimePage .runtime-outline-btn { color: #545454; }
-#runtimePage .runtime-toc { top: 16px; display: flex; width: 87px; height: 174px; flex-direction: row; gap: 12px; padding: 0; border-left: 0; }
+#runtimePage .runtime-toc { position: sticky; top: 24px; z-index: 5; display: flex; width: 87px; height: 174px; flex-direction: row; gap: 12px; padding: 0; border-left: 0; }
 #runtimePage .runtime-toc-track { position: relative; width: 3px; height: 174px; flex: 0 0 3px; background: #f2f2f2; }
 #runtimePage .runtime-toc-current { position: absolute; top: 25px; left: 0; width: 3px; height: 20px; background: #41d08d; }
 #runtimePage .runtime-toc-items { display: flex; width: 72px; flex-direction: column; gap: 8px; }
@@ -1333,11 +1407,28 @@
 #runtimePage .runtime-container-subsection > h4 { margin: 0 0 16px; font-size: 16px; line-height: 24px; font-weight: 600; }
 #runtimePage .runtime-container-subsection .runtime-setting-row { min-height: 76px; }
 #runtimePage .runtime-container-subsection .runtime-setting-row-block { align-items: start; }
+#runtimePage .runtime-container-subsection .runtime-command-row {
+  min-height: 94px; align-items: start; row-gap: 8px; padding-top: 16px; padding-bottom: 16px;
+}
+#runtimePage .runtime-command-row > .runtime-command-actions {
+  display: flex; grid-column: 2 / 4; min-width: 0; align-items: center; gap: 16px;
+}
+#runtimePage .runtime-command-row .runtime-row-hint {
+  display: inline-flex; grid-column: auto; align-items: center; gap: 4px; margin: 0;
+  color: #8f8f8f; font: 400 12px/20px "PingFang SC", sans-serif; white-space: nowrap;
+}
+#runtimePage .runtime-command-row .runtime-row-hint svg {
+  width: 14px; height: 14px; flex: 0 0 14px; fill: none; stroke: #ff9b2f; stroke-width: 1.5;
+}
 #runtimePage .runtime-container-content { min-width: 0; }
 #runtimePage .runtime-image-list { padding-left: 32px; }
 #runtimePage .runtime-image-heading { display: flex; height: 22px; align-items: center; gap: 8px; }
 #runtimePage .runtime-image-heading .runtime-setting-icon { width: 22px; height: 22px; }
-#runtimePage .runtime-image-heading strong { font-size: 14px; line-height: 22px; font-weight: 500; }
+#runtimePage .runtime-image-heading-copy { min-width: 0; }
+#runtimePage .runtime-image-heading strong { display: block; font-size: 14px; line-height: 22px; font-weight: 500; }
+#runtimePage .runtime-image-heading-copy p { display: none; margin: 4px 0 0; color: #8f8f8f; font-size: 12px; line-height: 20px; }
+#runtimePage.is-help-mode .runtime-image-heading { height: auto; align-items: flex-start; }
+#runtimePage.is-help-mode .runtime-image-heading-copy p { display: block; }
 #runtimePage .runtime-image-shell { margin-top: 8px; padding: 4px; border-radius: 16px; background: #f7f7f7; }
 #runtimePage .runtime-image-tabs { display: flex; height: 34px; align-items: flex-end; overflow: hidden; }
 #runtimePage .runtime-image-tabs button { height: 30px; padding: 4px 16px; border: 0; border-radius: 12px 12px 0 0; background: transparent; color: #8f8f8f; font: 14px/22px "PingFang SC", sans-serif; cursor: pointer; }
@@ -1354,13 +1445,17 @@
 #runtimePage .runtime-image-icon img { width: 28px; height: 28px; object-fit: contain; }
 #runtimePage .runtime-image-icon-light { background: #f0f1f5; }
 #runtimePage .runtime-image-centos img { width: 38px; height: 38px; object-fit: cover; }
-#runtimePage .runtime-image-version-card { position: relative; display: flex; min-height: 74px; align-items: center; justify-content: space-between; gap: 16px; margin-top: 8px; padding: 20px 16px; overflow: visible; border: 1px solid #bfbfbf; border-radius: 8px; background: linear-gradient(90deg, #fffdfc 20%, #fff 100%); color: #545454; font-size: 14px; line-height: 22px; }
+#runtimePage .runtime-image-version-card { position: relative; display: flex; min-height: 74px; align-items: center; justify-content: space-between; gap: 16px; margin-top: 8px; padding: 20px 16px; overflow: hidden; border: 1px solid #bfbfbf; border-radius: 8px; background: linear-gradient(90deg, #fffdfc 20%, #fff 100%); box-shadow: inset 0 0 0 1px #bfbfbf; color: #545454; font-size: 14px; line-height: 22px; }
 #runtimePage .runtime-image-version-card::before { position: absolute; top: -9px; left: 101px; width: 20px; height: 12px; background: url("./assets/runtime-images/tab-notch.svg") center/100% 100% no-repeat; content: ""; }
 #runtimePage .runtime-image-version-card::after { position: absolute; z-index: 0; top: 0; left: 0; width: 103px; height: 71px; border-radius: 8px 0 0 8px; background: url("./assets/runtime-images/ubuntu.png") left center/112px 112px no-repeat; opacity: .1; pointer-events: none; content: ""; }
 #runtimePage .runtime-image-version-python { background: linear-gradient(90deg, #fafdff 20%, #fff 100%); }
 #runtimePage .runtime-image-version-python::before { background: #fafdff; }
 #runtimePage .runtime-image-version-python::after { background-image: url("./assets/runtime-images/python.png"); opacity: .15; }
 #runtimePage .runtime-image-version-card > * { position: relative; z-index: 1; }
+#runtimePage .runtime-image-version-card { background: linear-gradient(90deg, var(--runtime-card-gradient, #fffdfc) 21.58%, #fff 100%); }
+#runtimePage .runtime-image-version-card::after { background-image: var(--runtime-card-image, url("./assets/runtime-images/ubuntu-card.png")); background-size: auto 112px; background-position: left center; }
+#runtimePage .runtime-image-version-python::after { background-image: var(--runtime-card-image, url("./assets/runtime-images/python-card.png")); }
+#runtimePage .runtime-image-version-card::before { display: none; }
 #runtimePage .runtime-version-pills { display: flex; align-items: center; padding: 2px; border-radius: 24px; background: #f2f2f2; }
 #runtimePage .runtime-version-pills button { height: 30px; padding: 4px 12px; border: 0; border-radius: 20px; background: transparent; color: #545454; font: 14px/22px "PingFang SC", sans-serif; white-space: nowrap; cursor: pointer; }
 #runtimePage .runtime-version-pills button.is-active { background: #fff; color: #181818; box-shadow: 0 4px 5px rgba(0,0,0,.02); font-weight: 500; }
@@ -1390,8 +1485,20 @@
 #runtimePage .runtime-code-table { margin-top: 12px; overflow: hidden; border: 1px solid #f0f0f0; border-radius: 6px; }
 #runtimePage .runtime-code-table-head { display: grid; grid-template-columns: 1fr 1fr 80px; gap: 12px; padding: 12px; background: #f7f7f7; color: #8f8f8f; font-size: 12px; line-height: 20px; }
 #runtimePage .runtime-code-table-empty { padding: 24px 12px; color: #999; font-size: 14px; line-height: 22px; text-align: center; }
-#runtimePage .runtime-row-hint { grid-column: 3; margin-top: -42px; color: #8f8f8f; font-size: 12px; line-height: 18px; }
+#runtimePage .runtime-row-hint { grid-column: 3; margin-top: -42px; color: #8f8f8f; font-size: 12px; line-height: 20px; }
+#runtimePage:not(.is-help-mode) .runtime-setting-row p,
+#runtimePage:not(.is-help-mode) .runtime-setting-subrows label small,
+#runtimePage:not(.is-help-mode) .runtime-rule-block p,
+#runtimePage:not(.is-help-mode) .runtime-row-hint,
+#runtimePage:not(.is-help-mode) .runtime-inline-description small { display: none; }
 #runtimePage .runtime-inline-control { display: flex; align-items: center; gap: 10px; white-space: nowrap; }
+#runtimePage .runtime-switch-field {
+  display: flex; min-width: 260px; align-items: center; gap: 12px;
+}
+#runtimePage .runtime-switch-field > span { min-width: 0; overflow-wrap: anywhere; }
+#runtimePage .runtime-switch-field .runtime-switch {
+  position: static; flex: 0 0 32px; margin-left: auto;
+}
 #runtimePage .runtime-inline-control > input { width: 100px; height: 32px; padding: 4px 10px; border: 1px solid #d9d9d9; border-radius: 8px; font: 14px/22px "PingFang SC", sans-serif; outline: 0; }
 #runtimePage .runtime-inline-control > em { color: #545454; font-style: normal; }
 #runtimePage .runtime-port-list { display: flex; flex-direction: column; gap: 12px; margin-top: 12px; }
