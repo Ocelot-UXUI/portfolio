@@ -8,7 +8,7 @@
 
 ## 可复用组件
 
-`components/cnap-select.js` 是 CNAP Select 组件的原生 JavaScript 实现，样式位于 `styles.css`。新增页面需要 Select 时，复用下面的结构，并在页面中先引用组件脚本，再引用页面业务脚本：
+`components/cnap-select.js` 和 `components/cnap-input.js` 是 CNAP Select/Input 组件的原生 JavaScript 实现，样式位于 `styles.css`。新增页面需要这些组件时，复用现有类名和状态规则，并在页面中先引用组件脚本，再引用页面业务脚本：
 
 ```html
 <div class="filter-select" data-filter-select="mySelect">
