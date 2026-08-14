@@ -57,7 +57,7 @@ const labels = { running:'运行中', error:'异常', blocked:'已摘流' };
 const clusterLabels = Object.fromEntries(clusterDefinitions.map(cluster=>[cluster.id,cluster.name]));
 const clusterMeta = Object.fromEntries(clusterDefinitions.map(cluster=>[cluster.id,cluster]));
 const clusterPages = Object.fromEntries(clusterDefinitions.map(cluster=>[cluster.id,{page:1,pageSize:10}]));
-const state = { status:'all', cluster:'all', query:'', clusterPages, viewMode:'detailed', collapsedClusters:new Set(), selected:new Set(), pausedPods:new Set(), instanceSummaryCollapsed:false, selectedContainer:0, activeInstanceId:null, executing:false, primaryNav:'apps', appNav:'workload', appNavExpanded:true, secondaryCollapsed:false, accountTab:'all', accountQuery:'', compactMoreOpen:false, envTab:'all', envQuery:'', selectedEnv:'imeonline', clusterQuery:'', selectedCluster:'imeonline' };
+const state = { status:'all', cluster:'all', traffic:'all', query:'', clusterPages, viewMode:'detailed', collapsedClusters:new Set(), selected:new Set(), pausedPods:new Set(), instanceSummaryCollapsed:false, selectedContainer:0, activeInstanceId:null, executing:false, primaryNav:'apps', appNav:'workload', appNavExpanded:true, secondaryCollapsed:false, accountTab:'all', accountQuery:'', compactMoreOpen:false, envTab:'all', envQuery:'', selectedEnv:'imeonline', clusterQuery:'', selectedCluster:'imeonline' };
 const clusterGroups = document.querySelector('#clusterGroups');
 const workspace = document.querySelector('.workspace');
 const workloadStickyStack = document.querySelector('#workloadStickyStack');
@@ -143,6 +143,7 @@ const appNavLabels = { workload:'工作负载', exposure:'服务暴露', logs:'�
 const workloadSections = document.querySelectorAll('[data-workload-section]');
 const appPagePlaceholder = document.querySelector('#appPagePlaceholder');
 const appPageTitle = document.querySelector('#appPageTitle');
+const runtimePage = document.querySelector('#runtimePage');
 const secondaryNav = document.querySelector('.secondary-nav');
 const accountPopover = document.querySelector('#accountPopover');
 const accountList = document.querySelector('#accountList');
@@ -177,17 +178,27 @@ const clusters = clusterDefinitions.map(cluster=>({
   expected:cluster.podCount
 }));
 
+function syncFilterSelect(selectId){
+  window.CNAPSelect?.sync(selectId);
+}
+
+function closeFilterSelects(except=null){
+  window.CNAPSelect?.closeAll(except);
+}
+
 function renderClusterFilterOptions(){
   const options=clusterDefinitions
     .map(cluster=>`<option value="${cluster.id}">${cluster.name}</option>`)
     .join('');
   document.querySelector('#titleClusterSelect').innerHTML=`<option value="all">全部集群</option>${options}`;
-  document.querySelector('#clusterSelect').innerHTML=`<option value="all">屏蔽与接流</option>${options}`;
+  document.querySelector('#trafficSelect').innerHTML='<option value="all">全部屏蔽类型</option><option value="running">接流中</option><option value="blocked">已屏蔽</option>';
+  syncFilterSelect('trafficSelect');
 }
 
 function renderAppNavigation(){
   const isApplication = state.primaryNav === 'apps';
   const isWorkload = isApplication && state.appNav === 'workload';
+  const isRuntime = isApplication && state.appNav === 'runtime';
   syncCompactNavigation();
   document.querySelectorAll('[data-primary-nav]').forEach(button=>{
     const selected = button.dataset.primaryNav === state.primaryNav;
@@ -210,7 +221,8 @@ function renderAppNavigation(){
   collapseButton.setAttribute('title', state.secondaryCollapsed ? '展开二级导航' : '收起二级导航');
   collapseIcon.src = state.secondaryCollapsed ? collapseIcon.dataset.collapsedSrc : collapseIcon.dataset.expandedSrc;
   workloadSections.forEach(section=>section.classList.toggle('hidden', !isWorkload));
-  appPagePlaceholder.classList.toggle('hidden', isWorkload);
+  runtimePage.classList.toggle('hidden', !isRuntime);
+  appPagePlaceholder.classList.toggle('hidden', isWorkload || isRuntime);
   appPageTitle.textContent = isApplication ? appNavLabels[state.appNav] : '页面内容占位';
   scheduleWorkloadStickySync();
 }
@@ -228,6 +240,7 @@ function filteredPods(){
     const ip=pod[3];
     const cluster=pod[10];
     return (state.status === 'all' || status === state.status) &&
+      (state.traffic === 'all' || status === state.traffic) &&
       (state.cluster === 'all' || cluster === state.cluster) &&
       (!state.query || name.toLowerCase().includes(state.query) || ip.includes(state.query));
   });
@@ -658,10 +671,76 @@ function setAllWorkloadsCollapsed(collapsed){
   render();
 }
 
-function toast(message,type='default'){ const el=document.querySelector('#toast'); el.textContent=message; el.dataset.type=type; el.classList.add('show'); window.setTimeout(()=>el.classList.remove('show'),1800); }
+let toastTimer;
+function toast(message,type='default'){
+  const region=document.querySelector('#toastRegion');
+  if(!region)return;
+  const normalized=type==='error'?'error':type==='warning'||type==='warn'?'warning':'success';
+  const iconName=normalized==='error'?'toast-error':normalized==='warning'?'runtime-attention':'toast-success';
+  region.innerHTML=`<div class="toast toast-${normalized}" role="status"><svg aria-hidden="true"><use href="#i-${iconName}"/></svg><span>${message}</span></div>`;
+  const el=region.firstElementChild;
+  window.clearTimeout(toastTimer);
+  requestAnimationFrame(()=>el.classList.add('show'));
+  toastTimer=window.setTimeout(()=>{el.classList.remove('show');window.setTimeout(()=>{if(region.firstElementChild===el)region.innerHTML='';},220);},2400);
+}
 function actionTarget(ids){ return ids?.length ? `${ids.length} 个 Pod` : 'Payment-api'; }
 function setActionControls(disabled){ document.querySelectorAll('.title-actions button,[data-action],[data-bulk-action]').forEach(button=>button.disabled=disabled); }
 function closeModal(){ if(!state.executing){ modalBackdrop.classList.add('hidden'); modal.innerHTML=''; pendingAction=null; modalTrigger?.focus({preventScroll:true}); modalTrigger=null; } }
+
+function runtimeSaveChangeCard({title,changes,impact=false}){
+  return `<section class="runtime-save-change-card ${impact?'has-impact':''}">
+    <header><strong>${title}</strong>${impact?'<span class="runtime-save-impact"><svg aria-hidden="true"><use href="#i-runtime-attention"/></svg>顶层修改将同步影响下级配置</span>':''}</header>
+    <div class="runtime-save-change-list">${changes.map(change=>`<div class="runtime-save-change-row"><span class="runtime-save-change-rail"><b class="${change.type}">${change.type==='updated'?'更新':'修改'}</b></span><div><strong>${change.label}</strong><p>${change.value}</p></div></div>`).join('')}</div>
+  </section>`;
+}
+
+function openRuntimeSaveConfirm(){
+  modalTrigger=document.activeElement instanceof HTMLElement ? document.activeElement : null;
+  const cards=[
+    runtimeSaveChangeCard({
+      title:'应用级 / payment-service / Pod 配置',
+      impact:true,
+      changes:[
+        {label:'实例数量',value:'3  →  2',type:'modified'},
+        {label:'部署并发度',value:'最大不可用实例 10%  →  20%    |    最大可超出实例 21%  →  20%',type:'modified'},
+        {label:'Pod 标签',value:'标签1，标签2，标签3',type:'updated'},
+        {label:'外网访问状态',value:'开启  →  关闭',type:'modified'},
+        {label:'凭证管理',value:'设置为继承自「应用」',type:'modified'}
+      ]
+    }),
+    runtimeSaveChangeCard({
+      title:'环境级 / prod / payment-service / 容器 / web1',
+      changes:[
+        {label:'部署路径',value:'/home/work/app',type:'modified'},
+        {label:'Pod 标签',value:'标签1，标签2，标签3',type:'updated'}
+      ]
+    }),
+    runtimeSaveChangeCard({
+      title:'集群级 / nb-bddwd / payment-service / 容器 / web2',
+      changes:[
+        {label:'部署路径',value:'/home/work/app',type:'modified'},
+        {label:'Pod 标签',value:'标签1，标签2，标签3',type:'updated'}
+      ]
+    })
+  ];
+  modal.className='action-modal runtime-save-modal';
+  modal.innerHTML=`<header class="runtime-save-modal-header"><h2 id="modalTitle">保存配置</h2><button type="button" data-modal-close aria-label="关闭">${icon('close')}</button></header><div class="runtime-save-modal-body"><p>以下是本次修改的所有变更项，确定保存配置吗？</p><div class="runtime-save-change-stack">${cards.join('')}</div></div><footer class="runtime-save-modal-footer"><button type="button" class="runtime-save-discard" data-runtime-save-discard>放弃修改并切换</button><button type="button" class="runtime-save-confirm" data-runtime-save-confirm>保存配置项并切换</button></footer>`;
+  modalBackdrop.classList.remove('hidden');
+  modal.querySelector('[data-modal-close]')?.focus({preventScroll:true});
+}
+
+function completeRuntimeSave(shouldSave){
+  if(shouldSave){
+    const stateLabel=document.querySelector('#runtimeSaveState');
+    if(stateLabel) stateLabel.textContent='已保存 · 刚刚';
+  } else {
+    document.querySelectorAll('#runtimePage input[type="number"]').forEach(input=>{if(input.defaultValue)input.value=input.defaultValue;});
+    const stateLabel=document.querySelector('#runtimeSaveState');
+    if(stateLabel) stateLabel.textContent='正在编辑配置';
+  }
+  closeModal();
+  toast(shouldSave?'运行配置已保存':'已放弃本次修改并切换');
+}
 
 const modalClusters=[
   {id:'imeonline',name:'imeonline',current:15,desired:4,unavailable:'15%',surge:'15%',available:'>95%'},
@@ -945,6 +1024,272 @@ document.querySelector('#secondaryCollapseBtn').addEventListener('click',()=>{
   state.secondaryCollapsed=!state.secondaryCollapsed;
   renderAppNavigation();
 });
+const runtimeContextProfiles={
+  application:{label:'应用',values:[6,20,30,2],switches:[true,true,true],breadcrumb:'payment-service'},
+  environment:{label:'环境',values:[4,10,20,2],switches:[true,false,true],breadcrumb:'dev / payment-service'},
+  cluster:{label:'集群',values:[3,3,3,1],switches:[true,true,false],breadcrumb:'web1 / payment-service'}
+};
+const runtimeContextSelection={
+  application:'application-base',
+  environment:'development',
+  cluster:'cluster-a'
+};
+const runtimeContextValueLabels={
+  'application-base':'application-base',
+  development:'development',
+  staging:'staging',
+  'cluster-a':'cluster-a',
+  'cluster-b':'cluster-b'
+};
+let activeRuntimeContext='cluster';
+let runtimeContextRefreshTimer=0;
+function applyRuntimeContext(context,value=runtimeContextSelection[context],{announce=true}={}){
+  const profile=runtimeContextProfiles[context];
+  const page=document.querySelector('#runtimePage');
+  const editor=document.querySelector('#runtimeEditor');
+  if(!profile||!page||!editor)return;
+  activeRuntimeContext=context;
+  runtimeContextSelection[context]=value;
+  window.clearTimeout(runtimeContextRefreshTimer);
+  document.querySelectorAll('.runtime-context-chip[data-runtime-context]').forEach(chip=>{
+    const selected=chip.dataset.runtimeContext===context;
+    chip.classList.toggle('is-current',selected);
+    chip.setAttribute('aria-selected',String(selected));
+    const label=chip.querySelector('span');
+    if(label) label.textContent=`${runtimeContextProfiles[chip.dataset.runtimeContext].label}：${runtimeContextValueLabels[runtimeContextSelection[chip.dataset.runtimeContext]]}`;
+  });
+  document.querySelectorAll('#runtimeLevelDropdown [data-runtime-level]').forEach(row=>{
+    const selected=row.dataset.runtimeContext===context&&row.dataset.runtimeLevel===value;
+    row.classList.toggle('is-selected',selected);
+  });
+  page.dataset.currentContext=context;
+  page.classList.add('is-context-refreshing');
+  const help=document.querySelector('.runtime-context-help');
+  if(help)help.lastChild.textContent=`正在修改${profile.label}配置`;
+  const breadcrumb=editor.querySelector('.runtime-editor-breadcrumb span:first-child');
+  if(breadcrumb){
+    const selectedLabel=runtimeContextValueLabels[value];
+    breadcrumb.textContent=context==='application'?selectedLabel:`${selectedLabel} / payment-service`;
+  }
+  runtimeContextRefreshTimer=window.setTimeout(()=>{
+    document.querySelectorAll('#runtimePage input[type="number"]').forEach((input,index)=>{
+      if(index<profile.values.length)input.value=profile.values[index];
+    });
+    document.querySelectorAll('#runtimePage .runtime-setting-row .runtime-switch').forEach((button,index)=>{
+      const enabled=profile.switches[index]??button.classList.contains('is-on');
+      button.classList.toggle('is-on',enabled);
+      button.setAttribute('aria-pressed',String(enabled));
+    });
+    editor.scrollTo({top:0,behavior:'auto'});
+    page.classList.remove('is-context-refreshing');
+    if(announce)toast(`已切换到${profile.label}：${runtimeContextValueLabels[value]} 配置`);
+  },180);
+}
+let runtimeDeleteTarget=null;
+function updateRuntimeDeleteVisibility(){
+  ['container','resource'].forEach(type=>{
+    const selector=type==='container'?'.runtime-container-items .runtime-tree-leaf':'.runtime-resource-tree .runtime-tree-resource-item';
+    const rows=[...document.querySelectorAll(selector)];
+    rows.forEach(row=>row.querySelector('.runtime-tree-delete')?.classList.toggle('is-hidden',rows.length<=1));
+  });
+}
+function openRuntimeDeleteConfirm(button){
+  const row=button.closest('.runtime-tree-leaf, .runtime-tree-resource-item');
+  if(!row)return;
+  const type=button.dataset.runtimeDeleteType;
+  const label=type==='container'?'容器':'资源';
+  const name=row.querySelector(':scope > span')?.textContent.trim()||'';
+  runtimeDeleteTarget=row;
+  modalTrigger=button;
+  modal.className='action-modal runtime-delete-modal';
+  modal.innerHTML=`<header class="runtime-delete-modal-header"><div class="runtime-delete-modal-title"><span class="runtime-delete-warning"><svg><use href="#i-runtime-attention"/></svg></span><h2 id="modalTitle">删除${label}</h2></div><button type="button" data-modal-close aria-label="关闭">${icon('close')}</button></header><div class="runtime-delete-modal-body">删除${label}后，其内容将被清空且无法找回，确定删除吗？</div><footer class="runtime-delete-modal-footer"><button type="button" class="runtime-delete-cancel" data-modal-close>取消</button><button type="button" class="runtime-delete-confirm" data-runtime-delete-confirm>确定</button></footer>`;
+  modalBackdrop.classList.remove('hidden');
+  modal.querySelector('[data-modal-close]')?.focus({preventScroll:true});
+  modal.dataset.runtimeDeleteName=name;
+}
+function confirmRuntimeDelete(){
+  if(!runtimeDeleteTarget)return;
+  const type=runtimeDeleteTarget.querySelector('.runtime-tree-delete')?.dataset.runtimeDeleteType;
+  const label=type==='container'?'容器':'资源';
+  const name=runtimeDeleteTarget.querySelector(':scope > span')?.textContent.trim()||'';
+  runtimeDeleteTarget.remove();
+  runtimeDeleteTarget=null;
+  updateRuntimeDeleteVisibility();
+  closeModal();
+  toast(`已删除${label}：${name}`);
+}
+updateRuntimeDeleteVisibility();
+document.querySelectorAll('.runtime-context-chip[data-runtime-context]').forEach(button=>button.addEventListener('click',()=>{
+  applyRuntimeContext(button.dataset.runtimeContext);
+}));
+document.querySelector('.runtime-context-tabs')?.addEventListener('keydown',event=>{
+  if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
+  const tabs=[...document.querySelectorAll('.runtime-context-chip[data-runtime-context]')];
+  const currentIndex=tabs.indexOf(document.activeElement);
+  if(currentIndex<0)return;
+  event.preventDefault();
+  const nextIndex=event.key==='Home'?0:event.key==='End'?tabs.length-1:(currentIndex+(event.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;
+  tabs[nextIndex].focus();
+  applyRuntimeContext(tabs[nextIndex].dataset.runtimeContext);
+});
+document.querySelectorAll('[data-runtime-target]').forEach(item=>item.addEventListener('click',()=>{
+  document.querySelectorAll('[data-runtime-target]').forEach(node=>node.classList.toggle('is-active',node===item));
+  const target=document.querySelector(`[data-runtime-config="${item.dataset.runtimeTarget}"]`);
+  if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+}));
+document.querySelectorAll('[data-runtime-delete-type]').forEach(button=>button.addEventListener('click',event=>{
+  event.stopPropagation();
+  openRuntimeDeleteConfirm(button);
+}));
+const runtimeLevelSwitch=document.querySelector('#runtimeLevelSwitch');
+const runtimeLevelDropdown=document.querySelector('#runtimeLevelDropdown');
+const runtimeClusterAddMenu=document.querySelector('#runtimeClusterAddMenu');
+let runtimeClusterAddTarget=null;
+function refreshRuntimeClusterAddMenu(){
+  if(!runtimeClusterAddMenu)return;
+  const options=runtimeClusterAddMenu.querySelectorAll('[data-runtime-cluster-option]');
+  const empty=runtimeClusterAddMenu.querySelector('.runtime-cluster-add-empty');
+  if(options.length===0&&!empty){
+    const emptyMessage=document.createElement('div');
+    emptyMessage.className='runtime-cluster-add-empty';
+    emptyMessage.textContent='暂无集群可添加';
+    runtimeClusterAddMenu.append(emptyMessage);
+  } else if(options.length>0&&empty){
+    empty.remove();
+  }
+}
+function closeRuntimeLevelDropdown(){
+  if(!runtimeLevelDropdown||!runtimeLevelSwitch)return;
+  runtimeLevelDropdown.classList.add('hidden');
+  runtimeLevelSwitch.setAttribute('aria-expanded','false');
+}
+runtimeLevelSwitch?.addEventListener('click',event=>{
+  event.stopPropagation();
+  const isOpen=!runtimeLevelDropdown.classList.contains('hidden');
+  if(isOpen) closeRuntimeLevelDropdown();
+  else { runtimeLevelDropdown.classList.remove('hidden'); runtimeLevelSwitch.setAttribute('aria-expanded','true'); }
+});
+runtimeLevelDropdown?.addEventListener('click',event=>{
+  event.stopPropagation();
+  const addButton=event.target.closest('.runtime-level-row-action');
+  if(addButton){
+    runtimeClusterAddTarget=addButton.closest('[data-runtime-context="environment"]');
+    const main=runtimeLevelSwitch.closest('.runtime-context-main');
+    const buttonRect=addButton.getBoundingClientRect();
+    const mainRect=main.getBoundingClientRect();
+    runtimeClusterAddMenu.classList.remove('hidden');
+    const menuRect=runtimeClusterAddMenu.getBoundingClientRect();
+    const preferredLeft=buttonRect.right-mainRect.left+4;
+    const maxLeft=Math.max(4,main.clientWidth-menuRect.width-4);
+    runtimeClusterAddMenu.style.left=`${Math.min(preferredLeft,maxLeft)}px`;
+    runtimeClusterAddMenu.style.top=`${Math.max(4,buttonRect.top-mainRect.top)}px`;
+    return;
+  }
+  const row=event.target.closest('[data-runtime-level]');
+  if(!row)return;
+  applyRuntimeContext(row.dataset.runtimeContext,row.dataset.runtimeLevel);
+  closeRuntimeLevelDropdown();
+});
+runtimeClusterAddMenu?.addEventListener('click',event=>{
+  event.stopPropagation();
+  const option=event.target.closest('[data-runtime-cluster-option]');
+  if(!option)return;
+  const clusterId=option.dataset.runtimeClusterOption;
+  const clusterLabel=clusterId.replace(/^cluster-/, 'cluster-');
+  if(!runtimeClusterAddTarget)return;
+  const environmentRows=[];
+  let sibling=runtimeClusterAddTarget.nextElementSibling;
+  while(sibling&&!sibling.matches('[data-runtime-context="environment"], .runtime-level-divider')){
+    if(sibling.matches('[data-runtime-context="cluster"]'))environmentRows.push(sibling);
+    sibling=sibling.nextElementSibling;
+  }
+  const existingRow=environmentRows.find(row=>row.dataset.runtimeLevel===clusterId);
+  if(existingRow){
+    option.remove();
+    refreshRuntimeClusterAddMenu();
+    applyRuntimeContext('cluster',clusterId);
+    runtimeClusterAddMenu.classList.add('hidden');
+    closeRuntimeLevelDropdown();
+    return;
+  }
+  const insertBefore=sibling||runtimeLevelDropdown?.querySelector('.runtime-level-divider');
+  if(!insertBefore)return;
+  const row=document.createElement('button');
+  row.type='button';
+  row.className='runtime-level-row runtime-level-child is-selected';
+  row.setAttribute('role','menuitem');
+  row.dataset.runtimeLevel=clusterId;
+  row.dataset.runtimeContext='cluster';
+  row.innerHTML=`<span>${clusterLabel}</span><span class="runtime-level-tag">集群</span>`;
+  insertBefore.before(row);
+  const emptyState=runtimeClusterAddTarget.nextElementSibling;
+  if(emptyState?.classList.contains('runtime-level-empty'))emptyState.remove();
+  runtimeLevelDropdown.classList.add('has-added-cluster');
+  runtimeContextValueLabels[clusterId]=clusterLabel;
+  runtimeContextSelection.cluster=clusterId;
+  option.remove();
+  refreshRuntimeClusterAddMenu();
+  applyRuntimeContext('cluster',clusterId);
+  toast(`已添加集群配置：${clusterLabel}`);
+  runtimeClusterAddMenu.classList.add('hidden');
+  closeRuntimeLevelDropdown();
+});
+runtimeLevelDropdown?.querySelector('.runtime-mini-switch')?.addEventListener('click',event=>{
+  event.stopPropagation();
+  const button=event.currentTarget;
+  const active=button.classList.toggle('is-on');
+  button.setAttribute('aria-pressed',String(active));
+  toast(active?'已启用集群配置异构':'已关闭集群配置异构');
+});
+document.addEventListener('click',event=>{
+  if(runtimeClusterAddMenu&&!runtimeClusterAddMenu.contains(event.target)&&!runtimeLevelDropdown.contains(event.target)) runtimeClusterAddMenu.classList.add('hidden');
+  if(runtimeLevelDropdown&&!runtimeLevelDropdown.contains(event.target)&&event.target!==runtimeLevelSwitch) closeRuntimeLevelDropdown();
+});
+document.querySelectorAll('[data-runtime-toc]').forEach(item=>item.addEventListener('click',event=>{
+  event.preventDefault();
+  const target=document.querySelector(`[data-runtime-config="${item.dataset.runtimeToc}"]`);
+  if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+  document.querySelectorAll('[data-runtime-toc]').forEach(node=>node.classList.toggle('is-current',node===item));
+}));
+document.querySelectorAll('[data-runtime-collapse]').forEach(button=>button.addEventListener('click',event=>{
+  event.stopPropagation();
+  const items=button.dataset.runtimeCollapse==='container'
+    ? button.closest('.runtime-container-header').nextElementSibling
+    : button.closest('.runtime-workload-items');
+  const collapsed=items.classList.toggle('is-collapsed');
+  button.classList.toggle('is-collapsed',collapsed);
+  button.setAttribute('aria-expanded',String(!collapsed));
+}));
+document.querySelectorAll('[data-runtime-add]:not([data-runtime-add="level"])').forEach(button=>button.addEventListener('click',event=>{
+  event.stopPropagation();
+  toast(`已打开新增${button.dataset.runtimeAdd==='workload'?'工作负载':button.dataset.runtimeAdd==='container'?'容器':'资源'}配置`);
+}));
+document.querySelectorAll('.runtime-section-heading .runtime-icon-btn').forEach(button=>button.addEventListener('click',()=>{
+  const section=button.closest('.runtime-section');
+  section.classList.toggle('is-collapsed');
+  button.classList.toggle('is-collapsed',section.classList.contains('is-collapsed'));
+}));
+document.querySelectorAll('.runtime-switch').forEach(button=>button.addEventListener('click',()=>{
+  const active=button.classList.toggle('is-on');
+  button.setAttribute('aria-pressed',String(active));
+}));
+document.querySelector('#runtimeSearchInput').addEventListener('input',event=>{
+  const query=event.target.value.trim().toLowerCase();
+  document.querySelectorAll('.runtime-tree-group').forEach(group=>{
+    group.classList.toggle('is-filtered',Boolean(query));
+    group.querySelectorAll('.runtime-tree-item').forEach(item=>item.classList.toggle('is-search-hidden',Boolean(query&&!item.textContent.toLowerCase().includes(query))));
+  });
+});
+document.querySelector('#runtimeSaveBtn').addEventListener('click',()=>{
+  openRuntimeSaveConfirm();
+});
+const runtimeResetBtn=document.querySelector('#runtimeResetBtn');
+if(runtimeResetBtn) runtimeResetBtn.addEventListener('click',()=>{
+  document.querySelectorAll('#runtimePage input[type="number"]').forEach(input=>{if(input.defaultValue)input.value=input.defaultValue;});
+  const stateLabel=document.querySelector('#runtimeSaveState');
+  if(stateLabel) stateLabel.textContent='正在编辑配置';
+  toast('已恢复当前配置');
+});
 document.querySelectorAll('[data-context]').forEach(button=>button.addEventListener('click',event=>{
   event.stopPropagation();
   const key=button.dataset.context;
@@ -1021,13 +1366,14 @@ document.querySelector('#headerMoreBtn').addEventListener('click',event=>{
 });
 document.querySelectorAll('.tabs button').forEach(button=>button.addEventListener('click',()=>{
   document.querySelectorAll('.tabs button').forEach(item=>item.classList.toggle('active',item===button));
-  state.status=button.dataset.status; resetClusterPages(); document.querySelector('#statusSelect').value=state.status; render();
+  state.status=button.dataset.status; resetClusterPages(); document.querySelector('#statusSelect').value=state.status; syncFilterSelect('statusSelect'); render();
 }));
-document.querySelector('#statusSelect').addEventListener('change',event=>{state.status=event.target.value;resetClusterPages();document.querySelectorAll('.tabs button').forEach(item=>item.classList.toggle('active',item.dataset.status===state.status));render();});
-document.querySelector('#clusterSelect').addEventListener('change',event=>{state.cluster=event.target.value;resetClusterPages();render();});
-document.querySelector('#titleStatusSelect').addEventListener('change',event=>{state.status=event.target.value;resetClusterPages();document.querySelector('#statusSelect').value=state.status;document.querySelectorAll('.tabs button').forEach(item=>item.classList.toggle('active',item.dataset.status===state.status));render();});
-document.querySelector('#titleClusterSelect').addEventListener('change',event=>{state.cluster=event.target.value;resetClusterPages();document.querySelector('#clusterSelect').value=state.cluster;render();});
+document.querySelector('#statusSelect').addEventListener('change',event=>{state.status=event.target.value;syncFilterSelect('statusSelect');resetClusterPages();document.querySelectorAll('.tabs button').forEach(item=>item.classList.toggle('active',item.dataset.status===state.status));render();});
+document.querySelector('#trafficSelect').addEventListener('change',event=>{state.traffic=event.target.value;syncFilterSelect('trafficSelect');resetClusterPages();render();});
+document.querySelector('#titleStatusSelect').addEventListener('change',event=>{state.status=event.target.value;resetClusterPages();document.querySelector('#statusSelect').value=state.status;syncFilterSelect('statusSelect');document.querySelectorAll('.tabs button').forEach(item=>item.classList.toggle('active',item.dataset.status===state.status));render();});
+document.querySelector('#titleClusterSelect').addEventListener('change',event=>{state.cluster=event.target.value;resetClusterPages();render();});
 document.querySelector('#searchInput').addEventListener('input',event=>{state.query=event.target.value.trim().toLowerCase();resetClusterPages();render();});
+window.CNAPSelect?.initAll();
 document.querySelector('#collapseAllBtn').addEventListener('click',()=>setAllWorkloadsCollapsed(true));
 document.querySelector('#expandAllBtn').addEventListener('click',()=>setAllWorkloadsCollapsed(false));
 document.querySelector('#refreshBtn').addEventListener('click',()=>{toast('Pod 列表已刷新');render();});
@@ -1044,6 +1390,7 @@ workloadStickyStack.addEventListener('change',event=>{
     state.status=event.target.value;
     resetClusterPages();
     document.querySelector('#statusSelect').value=state.status;
+    syncFilterSelect('statusSelect');
     document.querySelectorAll('.tabs button').forEach(item=>item.classList.toggle('active',item.dataset.status===state.status));
     render();
     return;
@@ -1152,7 +1499,13 @@ modal.addEventListener('input',event=>{
   }
   updateModalFooter();
 });
-modal.addEventListener('click',event=>{if(event.target.closest('[data-modal-close]')){closeModal();return;}if(event.target.closest('[data-modal-confirm]'))executeAction();});
+modal.addEventListener('click',event=>{
+  if(event.target.closest('[data-modal-close]')){closeModal();return;}
+  if(event.target.closest('[data-runtime-delete-confirm]')){confirmRuntimeDelete();return;}
+  if(event.target.closest('[data-runtime-save-discard]')){completeRuntimeSave(false);return;}
+  if(event.target.closest('[data-runtime-save-confirm]')){completeRuntimeSave(true);return;}
+  if(event.target.closest('[data-modal-confirm]'))executeAction();
+});
 modal.addEventListener('scroll',()=>{const header=modal.querySelector('.operation-modal-header');if(header)header.classList.toggle('is-scrolled',modal.scrollTop>0);});
 detailBackdrop.addEventListener('click',event=>{if(event.target===detailBackdrop)closeInstanceDetail();});
 instanceModal.addEventListener('click',event=>{
@@ -1218,7 +1571,22 @@ instanceModal.addEventListener('click',event=>{
   const action=event.target.closest('[data-detail-action]');
   if(action&&body){const id=body.dataset.instanceId;closeInstanceDetail();triggerAction(action.dataset.detailAction,[id]);}
 });
+function upgradeRuntimeImageSection(){
+  const section=document.querySelector('#runtime-container-image');
+  if(!section||section.dataset.imageRefined==='true')return;
+  section.dataset.imageRefined='true';
+  section.innerHTML=`<h4>镜像构建</h4><div class="runtime-image-list"><div class="runtime-image-heading"><span class="runtime-setting-icon"><svg><use href="#i-runtime-open-one"/></svg></span><strong>基础镜像</strong></div><div class="runtime-image-shell"><div class="runtime-image-tabs"><button class="is-active" type="button">百度基础镜像</button><button type="button">社区标准镜像</button></div><div class="runtime-image-panel"><div class="runtime-image-group"><p>基础OS发行版</p><div class="runtime-image-card-grid"><button class="runtime-image-card is-active" type="button"><span class="runtime-image-icon"><img src="./assets/runtime-images/ubuntu.png" alt=""></span><span>Ubuntu</span></button><button class="runtime-image-card" type="button"><span class="runtime-image-icon runtime-image-icon-light"><img src="./assets/runtime-images/alpine.png" alt=""></span><span>Alpine</span></button><button class="runtime-image-card" type="button"><span class="runtime-image-icon runtime-image-icon-light runtime-image-centos"><img src="./assets/runtime-images/centos.png" alt=""></span><span>CentOS</span></button></div><div class="runtime-image-version-card runtime-image-version-ubuntu"><span>选择 Ubuntu 版本</span><div class="runtime-version-pills"><button class="is-active" type="button">26.04 Resolute</button><button type="button">24.04 Noble</button><button type="button">24.04 Noble</button></div></div></div><div class="runtime-image-group"><p>技术栈</p><div class="runtime-image-card-grid"><button class="runtime-image-card" type="button"><span class="runtime-image-icon"><img src="./assets/runtime-images/ubuntu.png" alt=""></span><span>基础基础OS镜像</span></button><button class="runtime-image-card" type="button"><span class="runtime-image-icon runtime-image-icon-light"><img src="./assets/runtime-images/alpine.png" alt=""></span><span>百度 GCC</span></button><button class="runtime-image-card" type="button"><span class="runtime-image-icon runtime-image-icon-light runtime-image-centos"><img src="./assets/runtime-images/centos.png" alt=""></span><span>OpenJDK</span></button><button class="runtime-image-card is-active" type="button"><span class="runtime-image-icon"><img src="./assets/runtime-images/python.png" alt=""></span><span>Python</span></button><button class="runtime-image-card" type="button"><span class="runtime-image-icon runtime-image-icon-light"><img src="./assets/runtime-images/node.png" alt=""></span><span>Node</span></button><button class="runtime-image-card" type="button"><span class="runtime-image-icon runtime-image-icon-light runtime-image-centos"><img src="./assets/runtime-images/centos.png" alt=""></span><span>Go</span></button></div><div class="runtime-image-version-card runtime-image-version-python"><span>选择 Python 版本</span><div class="runtime-version-pills"><button class="is-active" type="button">3.14</button><button type="button">3.13</button><button type="button">3.12</button><button type="button">3.11</button><button type="button">2.7</button></div></div></div></div></div></div></div>`;
+  section.addEventListener('click',event=>{
+    const tab=event.target.closest('.runtime-image-tabs button');
+    if(tab){section.querySelectorAll('.runtime-image-tabs button').forEach(item=>item.classList.toggle('is-active',item===tab));return;}
+    const card=event.target.closest('.runtime-image-card');
+    if(card){const group=card.closest('.runtime-image-group');group?.querySelectorAll('.runtime-image-card').forEach(item=>item.classList.toggle('is-active',item===card));return;}
+    const pill=event.target.closest('.runtime-version-pills button');
+    if(pill){pill.parentElement.querySelectorAll('button').forEach(item=>item.classList.toggle('is-active',item===pill));}
+  });
+}
+upgradeRuntimeImageSection();
 document.querySelector('#closeHistoryBtn').addEventListener('click',()=>historyDrawer.classList.add('hidden'));
-document.addEventListener('click',event=>{if(!event.target.closest('#actionMenu'))closeMenu(); if(!event.target.closest('#accountPopover') && !event.target.closest('[data-context="account"]')) closeAccountPopover(); if(!event.target.closest('#envPopover') && !event.target.closest('[data-context="environment"]')) closeEnvPopover(); if(!event.target.closest('#clusterPopover') && !event.target.closest('[data-context="cluster"]')) closeClusterPopover(); if(!event.target.closest('#compactMorePopover') && !event.target.closest('#primaryMoreBtn')) closeCompactMore();});
-document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeMenu();closeAccountPopover();closeEnvPopover();closeClusterPopover();closeCompactMore();closeModal();closeInstanceDetail();historyDrawer.classList.add('hidden');}});
+document.addEventListener('click',event=>{if(!event.target.closest('.filter-select'))closeFilterSelects(); if(!event.target.closest('#actionMenu'))closeMenu(); if(!event.target.closest('#accountPopover') && !event.target.closest('[data-context="account"]')) closeAccountPopover(); if(!event.target.closest('#envPopover') && !event.target.closest('[data-context="environment"]')) closeEnvPopover(); if(!event.target.closest('#clusterPopover') && !event.target.closest('[data-context="cluster"]')) closeClusterPopover(); if(!event.target.closest('#compactMorePopover') && !event.target.closest('#primaryMoreBtn')) closeCompactMore();});
+document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeMenu();closeAccountPopover();closeEnvPopover();closeClusterPopover();closeCompactMore();runtimeClusterAddMenu?.classList.add('hidden');closeRuntimeLevelDropdown();closeModal();closeInstanceDetail();historyDrawer.classList.add('hidden');}});
 renderClusterFilterOptions(); renderHistory(); render(); renderAppNavigation();
