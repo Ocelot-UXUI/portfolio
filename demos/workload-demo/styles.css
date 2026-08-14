@@ -611,6 +611,45 @@
 .runtime-layout{display:grid;grid-template-columns:240px minmax(520px,1fr) 112px;gap:24px;align-items:start}.runtime-tree{position:sticky;top:0;min-height:600px;padding:0 8px 16px 0;border-right:1px solid #f0f0f0}.runtime-search{display:flex;height:32px;align-items:center;gap:8px;padding:4px 12px;border:1px solid #d9d9d9;border-radius:8px;background:#fff;color:#bfbfbf}.runtime-search svg{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:1.6}.runtime-search input{width:100%;min-width:0;border:0;outline:0;color:#181818;font:14px/22px "PingFang SC",sans-serif}.runtime-search input::placeholder{color:#bfbfbf}.runtime-tree-list{margin-top:12px}.runtime-tree-group{margin-bottom:8px}.runtime-tree-heading,.runtime-tree-item{display:flex;width:100%;height:32px;align-items:center;border:0;border-radius:4px;background:transparent;color:#181818;font:14px/22px "PingFang SC",sans-serif;text-align:left;cursor:pointer}.runtime-tree-heading{padding:0 8px;gap:4px}.runtime-tree-chevron{width:16px;color:#545454}.runtime-tree-action{margin-left:auto;font-size:18px;color:#181818}.runtime-tree-item{padding:0 8px 0 32px}.runtime-tree-item.is-active{background:#e6faf1}.runtime-tree-item.is-search-hidden{display:none}.runtime-tree-group.is-filtered .runtime-tree-heading{color:#545454}
 .runtime-editor{min-width:0}.runtime-editor-title{display:flex;align-items:center;justify-content:space-between;padding:0 0 12px}.runtime-editor-title h2{display:inline;margin:0 8px 0 0;font-size:18px;line-height:26px;font-weight:600}.runtime-editor-title span{color:#545454;font-size:14px}.runtime-status-pill{padding:3px 8px;border-radius:4px;background:#e6faf1;color:#16834b!important;font-size:12px!important}.runtime-section{margin-bottom:16px;border:1px solid #e8e8e8;border-radius:8px;background:#fff}.runtime-section-heading{display:flex;align-items:flex-start;justify-content:space-between;padding:16px 20px;border-bottom:1px solid #f0f0f0}.runtime-section-heading h3{margin:0;font-size:16px;line-height:24px;font-weight:500}.runtime-section-heading p{margin:4px 0 0;color:#8f8f8f;font-size:12px;line-height:18px}.runtime-icon-btn{width:28px;height:28px;padding:0;border:0;border-radius:50%;background:transparent;color:#545454;font-size:18px;cursor:pointer}.runtime-icon-btn:hover{background:#f2f2f2}.runtime-section.is-collapsed>*:not(.runtime-section-heading){display:none}.runtime-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 24px;padding:20px}.runtime-form-grid label{display:flex;min-width:0;flex-direction:column;gap:6px;color:#181818;font-size:14px}.runtime-form-grid label>span{line-height:22px}.runtime-form-grid input,.runtime-form-grid select,.runtime-input-unit input{height:32px;min-width:0;padding:4px 10px;border:1px solid #d9d9d9;border-radius:8px;background:#fff;color:#181818;font:14px/22px "PingFang SC",sans-serif;outline:0}.runtime-form-grid input:focus,.runtime-form-grid select:focus,.runtime-input-unit input:focus{border-color:#181818}.runtime-form-grid small,.runtime-subsection p{color:#8f8f8f;font-size:12px;line-height:18px}.runtime-field-wide{grid-column:1/-1}.runtime-input-unit{display:flex;align-items:center;gap:8px}.runtime-input-unit input{width:100%}.runtime-input-unit em{color:#545454;font-style:normal;font-size:14px}.runtime-switch-field{position:relative}.runtime-switch-field .runtime-switch{position:absolute;right:0;top:0}.runtime-switch{width:32px;height:20px;padding:2px;border:0;border-radius:12px;background:#d9d9d9;cursor:pointer}.runtime-switch i{display:block;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .15s ease}.runtime-switch.is-on{background:#a7f3cf}.runtime-switch.is-on i{transform:translateX(12px)}.runtime-subsection{padding:20px;border-top:1px solid #f0f0f0}.runtime-subsection h4{margin:0;font-size:14px;line-height:22px;font-weight:500}.runtime-subsection p{margin:4px 0 12px}.runtime-subsection-title{display:flex;align-items:center;justify-content:space-between}.runtime-add-btn,.runtime-outline-btn{height:32px;padding:0 16px;border:1px solid #ccc;border-radius:20px;background:#fff;color:#181818;font:14px/22px "PingFang SC",sans-serif;cursor:pointer}.runtime-add-btn:hover,.runtime-outline-btn:hover,.runtime-secondary-btn:hover{background:#f2f2f2}.runtime-resource-table{border:1px solid #f0f0f0;border-radius:6px;overflow:hidden}.runtime-resource-head,.runtime-resource-row{display:grid;grid-template-columns:1fr 150px 150px 80px;gap:12px;align-items:center;padding:10px 12px}.runtime-resource-head{background:#f7f7f7;color:#8f8f8f;font-size:12px}.runtime-resource-row{border-top:1px solid #f0f0f0;font-size:14px}.runtime-resource-row b{font-weight:400}.runtime-resource-row .runtime-switch{justify-self:center}.runtime-toc{position:sticky;top:0;display:flex;flex-direction:column;gap:16px;padding:8px 0 0 8px;border-left:1px solid #f0f0f0}.runtime-toc strong{font-size:12px;font-weight:500}.runtime-toc a{color:#8f8f8f;font-size:12px;text-decoration:none}.runtime-toc a:hover,.runtime-toc a.is-current{color:#181818}.runtime-toc a.is-current{font-weight:500}
 @media(max-width:1100px){.runtime-layout{grid-template-columns:200px minmax(480px,1fr)}.runtime-toc{display:none}.runtime-tree{padding-right:12px}.runtime-page{min-width:0}.runtime-form-grid{gap:16px}.runtime-resource-head,.runtime-resource-row{grid-template-columns:1fr 110px 110px 60px}}
+@media (max-width: 1320px) {
+  #runtimePage .runtime-layout { grid-template-columns: 220px minmax(0, 1fr); gap: 24px; }
+  #runtimePage .runtime-toc { display: none; }
+  #runtimePage .runtime-tree,
+  #runtimePage .runtime-tree-list,
+  #runtimePage .runtime-tree-group,
+  #runtimePage .runtime-tree-heading,
+  #runtimePage .runtime-container-header,
+  #runtimePage .runtime-container-items,
+  #runtimePage .runtime-tree-children,
+  #runtimePage .runtime-workload-items { width: 100%; }
+  #runtimePage .runtime-search { width: 100%; }
+  #runtimePage .cnap-input { max-width: 100%; min-width: 0; }
+  #runtimePage .runtime-setting-subrows .runtime-input-unit .cnap-input { min-width: 0; }
+  #runtimePage .runtime-rule-group { box-sizing: border-box; margin-right: 0; margin-left: 0; }
+}
+
+#runtimePage .runtime-image-card-grid { min-width: 0; }
+#runtimePage .runtime-image-card > span:last-child { width: 0; flex: 1 1 0; }
+#runtimePage [data-runtime-target].is-search-hidden { display: none; }
+#runtimePage .runtime-rule-group { box-sizing: border-box; }
+@media (max-width: 1320px) {
+  #runtimePage .runtime-rule-group { margin-right: 0; margin-left: 0; }
+}
+@container (max-width: 1100px) {
+  #runtimePage .runtime-layout { grid-template-columns: 220px minmax(0, 1fr); gap: 24px; }
+  #runtimePage .runtime-toc { display: none; }
+  #runtimePage .runtime-tree,
+  #runtimePage .runtime-tree-list,
+  #runtimePage .runtime-tree-group,
+  #runtimePage .runtime-tree-heading,
+  #runtimePage .runtime-container-header,
+  #runtimePage .runtime-container-items,
+  #runtimePage .runtime-tree-children,
+  #runtimePage .runtime-workload-items { width: 100%; }
+  #runtimePage .runtime-search { width: 100%; }
+  #runtimePage .cnap-input { max-width: 100%; min-width: 0; }
+  #runtimePage .runtime-setting-subrows .runtime-input-unit .cnap-input { min-width: 0; }
+}
 
 /* CNAP checkbox states from the shared component spec. */
 .pod-table .pod-check,
@@ -1053,7 +1092,7 @@
 #runtimePage .runtime-editor { transition: opacity .14s ease, transform .14s ease; }
 #runtimePage.is-context-refreshing .runtime-editor { opacity: .35; transform: translateY(2px); pointer-events: none; }
 #runtimePage .runtime-layout {
-  grid-template-columns: 240px minmax(640px, 815px) 87px;
+  grid-template-columns: 240px minmax(0, 815px) 87px;
   justify-content: space-between;
   gap: 32px;
   align-items: start;
@@ -1063,6 +1102,16 @@
   background: #fff;
   box-shadow: 0 4px 10px rgba(0,0,0,.02);
 }
+#runtimePage { container-type: inline-size; }
+#runtimePage .runtime-layout,
+#runtimePage .runtime-editor,
+#runtimePage .runtime-section,
+#runtimePage .runtime-setting-list,
+#runtimePage .runtime-setting-row,
+#runtimePage .runtime-container-content { min-width: 0; }
+#runtimePage .runtime-setting-row > :nth-child(2) { min-width: 0; }
+#runtimePage .runtime-setting-row > .runtime-input-unit,
+#runtimePage .runtime-setting-row > .runtime-inline-control { max-width: 100%; }
 #runtimePage .runtime-tree {
   min-height: 800px;
   padding: 0 0 24px;
@@ -1165,8 +1214,71 @@
 }
 #runtimePage .runtime-setting-row:last-child { border-bottom: 0; }
 #runtimePage .runtime-setting-icon { display: grid; width: 22px; height: 22px; place-items: center; border: 1px solid #ccc; border-radius: 50%; background: #fff; color: #8f8f8f; }
+#runtimePage button.runtime-setting-icon { padding: 0; cursor: pointer; }
+#runtimePage button.runtime-setting-icon:hover { border-color: #bfbfbf; background: #f7f7f7; }
+#runtimePage button.runtime-setting-icon.is-active { border-color: #9cf; background: #e5f2ff; color: #0080ff; }
+#runtimePage button.runtime-setting-icon.is-active svg { filter: brightness(0) saturate(100%) invert(41%) sepia(96%) saturate(2518%) hue-rotate(196deg) brightness(101%) contrast(105%); }
+#runtimePage .is-restore-pending .runtime-setting-icon { border-color: #f58300; background: #fff3e0; color: #f58300; }
+#runtimePage .is-restore-pending button.runtime-setting-icon.is-active { border-color: #f58300; background: #fff3e0; color: #f58300; }
+#runtimePage .is-restore-pending button.runtime-setting-icon.is-active svg { filter: none; stroke: #f58300; }
+#runtimePage .runtime-setting-row.is-field-disabled input,
+#runtimePage .runtime-setting-row.is-field-disabled select,
+#runtimePage .runtime-setting-row.is-field-disabled .runtime-select-value,
+#runtimePage .runtime-setting-row.is-field-disabled .runtime-add-btn,
+#runtimePage .runtime-setting-row.is-field-disabled .runtime-inline-actions button { border-color: #e8e8e8; background: #f7f7f7; color: #bfbfbf; cursor: not-allowed; }
+#runtimePage .runtime-setting-row.is-field-disabled .runtime-switch { background: #e8e8e8; cursor: not-allowed; }
+#runtimePage .runtime-setting-row.is-field-disabled .runtime-switch i { background: #fff; }
+#runtimePage .runtime-image-list.is-field-disabled .runtime-image-card,
+#runtimePage .runtime-image-list.is-field-disabled .runtime-version-pills { opacity: .56; }
+#runtimePage .runtime-image-list.is-field-disabled .runtime-image-shell button { cursor: not-allowed; }
+#runtimePage .cnap-input {
+  display: block;
+  box-sizing: border-box;
+  width: 200px;
+  min-width: 200px;
+  height: 32px;
+  padding: 4px 8px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  outline: 0;
+  background: #fff;
+  color: #181818;
+  font: 400 14px/22px "PingFang SC", sans-serif;
+  transition: border-color .15s ease, background-color .15s ease;
+}
+#runtimePage .cnap-input::placeholder { color: #bfbfbf; }
+#runtimePage .cnap-input:hover:not(:disabled):not(:focus) { border-color: #bfbfbf; }
+#runtimePage .cnap-input:focus { border-color: #181818; box-shadow: 0 0 0 1px #181818; }
+#runtimePage .cnap-input:disabled { border-color: #d9d9d9; background: #f7f7f7; color: #bfbfbf; cursor: not-allowed; }
+#runtimePage .cnap-input--small { height: 24px; padding: 2px 8px; font-size: 12px; line-height: 20px; }
+#runtimePage .cnap-input--multiline { width: 462px; min-height: 100px; height: 100px; padding: 8px 12px; resize: vertical; }
+#runtimePage .cnap-input[type="number"] { appearance: textfield; }
+#runtimePage .cnap-input[type="number"]::-webkit-inner-spin-button,
+#runtimePage .cnap-input[type="number"]::-webkit-outer-spin-button { appearance: none; margin: 0; }
+#runtimePage .runtime-full-input.cnap-input { width: 100%; min-width: 0; }
+#runtimePage .runtime-input-unit .cnap-input { width: 100%; min-width: 0; }
+#runtimePage .runtime-setting-subrows .runtime-input-unit .cnap-input { width: 88px; min-width: 88px; }
+#runtimePage .runtime-inline-control > .cnap-input { width: 100px; min-width: 0; }
 #runtimePage .runtime-setting-icon svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round; }
 #runtimePage .runtime-setting-row strong { display: block; font-size: 14px; line-height: 22px; font-weight: 500; }
+#runtimePage .runtime-field-title { display: inline-flex; align-items: center; gap: 4px; vertical-align: top; }
+#runtimePage .runtime-field-title strong { display: inline; }
+#runtimePage .runtime-override-tag { display: inline-flex; height: 20px; align-items: center; padding: 0 8px; border-radius: 12px; background: #e5f2ff; color: #0080ff; font: 400 12px/20px "PingFang SC", sans-serif; white-space: nowrap; }
+#runtimePage .runtime-override-tag-pending { background: #fff3e0; color: #f58300; }
+#runtimePage .runtime-setting-row.is-field-enabled,
+#runtimePage .runtime-image-list.is-field-enabled { position: relative; }
+#runtimePage .runtime-override-tooltip {
+  position: absolute; z-index: 20; left: 0; bottom: calc(100% - 2px); display: none;
+  width: max-content; max-width: 246px; padding: 5px 12px; border-radius: 8px;
+  background: #fff; box-shadow: 0 2px 12px rgba(0,0,0,.1); color: #181818;
+  font: 400 14px/22px "PingFang SC", sans-serif; white-space: normal;
+}
+#runtimePage .runtime-override-tooltip::after {
+  position: absolute; left: 7px; bottom: -5px; width: 10px; height: 10px;
+  transform: rotate(45deg); background: #fff; content: "";
+}
+#runtimePage .is-restore-pending .runtime-setting-icon:hover + .runtime-override-tooltip,
+#runtimePage .is-restore-pending .runtime-setting-icon:focus-visible + .runtime-override-tooltip { display: block; }
 #runtimePage .runtime-setting-row p { margin: 2px 0 0; color: #8f8f8f; font-size: 12px; line-height: 18px; }
 #runtimePage .runtime-setting-row > input,
 #runtimePage .runtime-setting-wide-input,
@@ -1760,7 +1872,31 @@
 .runtime-save-discard:hover{border-color:#8f8f8f;background:#f8f8f8}
 .runtime-save-confirm:hover{background:#303746}
 .runtime-save-modal-footer button:focus-visible,.runtime-save-modal-header button:focus-visible{outline:2px solid #00a656;outline-offset:2px}
+
+/* Final narrow-workspace overrides. */
+@media (max-width: 1320px) {
+  #runtimePage .runtime-rule-group { box-sizing: border-box; margin-right: 0; margin-left: 0; }
+}
+#runtimePage .runtime-image-card-grid { min-width: 0; }
+#runtimePage .runtime-image-card > span:last-child { width: 0; flex: 1 1 0; }
 @media(max-width:840px){
   .action-modal.runtime-save-modal{width:calc(100vw - 32px)}
   .runtime-save-impact{display:none}
+}
+
+/* Keep the runtime editor inside the available workspace beside the app nav. */
+@media (max-width: 1320px) {
+  #runtimePage .runtime-layout { grid-template-columns: 220px minmax(0, 1fr); gap: 24px; }
+  #runtimePage .runtime-toc { display: none; }
+  #runtimePage .runtime-tree,
+  #runtimePage .runtime-tree-list,
+  #runtimePage .runtime-tree-group,
+  #runtimePage .runtime-tree-heading,
+  #runtimePage .runtime-container-header,
+  #runtimePage .runtime-container-items,
+  #runtimePage .runtime-tree-children,
+  #runtimePage .runtime-workload-items { width: 100%; }
+  #runtimePage .runtime-search { width: 100%; }
+  #runtimePage .cnap-input { max-width: 100%; min-width: 0; }
+  #runtimePage .runtime-setting-subrows .runtime-input-unit .cnap-input { min-width: 0; }
 }

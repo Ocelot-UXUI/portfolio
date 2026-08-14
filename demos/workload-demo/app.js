@@ -1277,7 +1277,9 @@ document.querySelector('#runtimeSearchInput').addEventListener('input',event=>{
   const query=event.target.value.trim().toLowerCase();
   document.querySelectorAll('.runtime-tree-group').forEach(group=>{
     group.classList.toggle('is-filtered',Boolean(query));
-    group.querySelectorAll('.runtime-tree-item').forEach(item=>item.classList.toggle('is-search-hidden',Boolean(query&&!item.textContent.toLowerCase().includes(query))));
+    group.querySelectorAll('[data-runtime-target]').forEach(item=>{
+      item.classList.toggle('is-search-hidden',Boolean(query&&!item.textContent.toLowerCase().includes(query)));
+    });
   });
 });
 document.querySelector('#runtimeSaveBtn').addEventListener('click',()=>{
@@ -1586,6 +1588,139 @@ function upgradeRuntimeImageSection(){
   });
 }
 upgradeRuntimeImageSection();
+window.CNAPInput?.initAll();
+function setRuntimeFieldEnabled(scope,enabled){
+  scope.classList.toggle('is-field-enabled',enabled);
+  scope.classList.toggle('is-field-disabled',!enabled);
+  const toggle=scope.querySelector(':scope > .runtime-setting-icon, :scope > .runtime-image-heading > .runtime-setting-icon');
+  toggle?.classList.toggle('is-active',enabled);
+  toggle?.setAttribute('aria-pressed',String(enabled));
+  scope.querySelectorAll('input,select,textarea,button').forEach(control=>{
+    if(control===toggle)return;
+    control.disabled=!enabled;
+  });
+}
+function setupRuntimeFieldActivation(){
+  const scopes=[...document.querySelectorAll('#runtimePage .runtime-setting-row'),document.querySelector('#runtime-container-image .runtime-image-list')].filter(Boolean);
+  scopes.forEach(scope=>{
+    const icon=scope.matches('.runtime-image-list')?scope.querySelector(':scope > .runtime-image-heading > .runtime-setting-icon'):scope.querySelector(':scope > .runtime-setting-icon');
+    if(!icon||!icon.querySelector('svg'))return;
+    let toggle=icon;
+    if(icon.tagName!=='BUTTON'){
+      toggle=document.createElement('button');
+      toggle.type='button';
+      toggle.className=icon.className;
+      toggle.innerHTML=icon.innerHTML;
+      icon.replaceWith(toggle);
+    }
+    toggle.dataset.runtimeFieldToggle='';
+    toggle.dataset.runtimeFieldState='default';
+    toggle.setAttribute('aria-label','启用此配置项');
+    scope._runtimeInitialValues=[...scope.querySelectorAll('input,select,textarea')].map(control=>({
+      control,
+      value:control.value,
+      checked:control.checked
+    }));
+    toggle.addEventListener('click',event=>{
+      event.preventDefault();
+      event.stopPropagation();
+      const state=toggle.dataset.runtimeFieldState;
+      if(state==='default'){
+        setRuntimeFieldEnabled(scope,true);
+        scope.classList.remove('is-restore-pending');
+        toggle.dataset.runtimeFieldState='active';
+        toggle.setAttribute('aria-label','取消覆盖');
+      } else if(state==='active'){
+        scope.classList.add('is-restore-pending');
+        toggle.dataset.runtimeFieldState='restore';
+        toggle.setAttribute('aria-label','确认恢复继承配置');
+        markRuntimeFieldRestorePending(scope);
+      } else {
+        scope._runtimeInitialValues?.forEach(({control,value,checked})=>{
+          control.value=value;
+          if('checked' in control)control.checked=checked;
+        });
+        setRuntimeFieldEnabled(scope,false);
+        clearRuntimeFieldOverride(scope);
+        scope.classList.remove('is-restore-pending');
+        toggle.dataset.runtimeFieldState='default';
+        toggle.setAttribute('aria-label','启用此配置项');
+      }
+    });
+    setRuntimeFieldEnabled(scope,false);
+  });
+}
+function clearRuntimeFieldOverride(scope){
+  scope.querySelector('.runtime-override-tag')?.remove();
+  scope.querySelector('.runtime-override-tooltip')?.remove();
+  const title=scope.querySelector('.runtime-field-title');
+  const strong=title?.querySelector('strong');
+  if(title&&strong)title.replaceWith(strong);
+}
+let runtimeOverrideTooltipId=0;
+function markRuntimeFieldRestorePending(scope){
+  if(!scope)return;
+  const strong=scope.matches('.runtime-image-list')
+    ? scope.querySelector('.runtime-image-heading strong')
+    : scope.querySelector(':scope > div:not(.runtime-setting-icon) strong');
+  if(!strong)return;
+  let title=strong.parentElement;
+  if(!title?.classList.contains('runtime-field-title')){
+    title=document.createElement('span');
+    title.className='runtime-field-title';
+    strong.replaceWith(title);
+    title.append(strong);
+  }
+  let tag=title.querySelector('.runtime-override-tag');
+  if(!tag){
+    tag=document.createElement('span');
+    title.append(tag);
+  }
+  tag.className='runtime-override-tag runtime-override-tag-pending';
+  tag.textContent='再次点击 取消覆盖';
+
+  const toggle=scope.querySelector('[data-runtime-field-toggle]');
+  let tooltip=scope.querySelector('.runtime-override-tooltip');
+  if(!tooltip){
+    tooltip=document.createElement('span');
+    tooltip.className='runtime-override-tooltip';
+    tooltip.setAttribute('role','tooltip');
+    tooltip.textContent='再次点击将放弃本地覆盖，恢复继承自 dev 的环境级配置';
+    toggle?.after(tooltip);
+  }
+  if(!tooltip.id)tooltip.id=`runtime-override-tooltip-${++runtimeOverrideTooltipId}`;
+  toggle?.setAttribute('aria-describedby',tooltip.id);
+}
+function markRuntimeFieldCovered(scope){
+  if(!scope||!scope.classList.contains('is-field-enabled'))return;
+  const strong=scope.matches('.runtime-image-list')
+    ? scope.querySelector('.runtime-image-heading strong')
+    : scope.querySelector(':scope > div:not(.runtime-setting-icon) strong');
+  if(!strong||strong.parentElement.querySelector('.runtime-override-tag'))return;
+  const title=document.createElement('span');
+  title.className='runtime-field-title';
+  strong.replaceWith(title);
+  title.append(strong);
+  const tag=document.createElement('span');
+  tag.className='runtime-override-tag';
+  tag.textContent='已覆盖';
+  title.append(tag);
+}
+document.addEventListener('input',event=>{
+  const scope=event.target.closest('#runtimePage .runtime-setting-row, #runtimePage .runtime-image-list');
+  if(scope)markRuntimeFieldCovered(scope);
+});
+document.addEventListener('change',event=>{
+  const scope=event.target.closest('#runtimePage .runtime-setting-row, #runtimePage .runtime-image-list');
+  if(scope)markRuntimeFieldCovered(scope);
+});
+document.addEventListener('click',event=>{
+  if(event.target.closest('[data-runtime-field-toggle]'))return;
+  const control=event.target.closest('#runtimePage .runtime-switch, #runtimePage .runtime-choice-list button, #runtimePage .runtime-image-card');
+  const scope=control?.closest('.runtime-setting-row, .runtime-image-list');
+  if(scope)markRuntimeFieldCovered(scope);
+});
+setupRuntimeFieldActivation();
 document.querySelector('#closeHistoryBtn').addEventListener('click',()=>historyDrawer.classList.add('hidden'));
 document.addEventListener('click',event=>{if(!event.target.closest('.filter-select'))closeFilterSelects(); if(!event.target.closest('#actionMenu'))closeMenu(); if(!event.target.closest('#accountPopover') && !event.target.closest('[data-context="account"]')) closeAccountPopover(); if(!event.target.closest('#envPopover') && !event.target.closest('[data-context="environment"]')) closeEnvPopover(); if(!event.target.closest('#clusterPopover') && !event.target.closest('[data-context="cluster"]')) closeClusterPopover(); if(!event.target.closest('#compactMorePopover') && !event.target.closest('#primaryMoreBtn')) closeCompactMore();});
 document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeMenu();closeAccountPopover();closeEnvPopover();closeClusterPopover();closeCompactMore();runtimeClusterAddMenu?.classList.add('hidden');closeRuntimeLevelDropdown();closeModal();closeInstanceDetail();historyDrawer.classList.add('hidden');}});
