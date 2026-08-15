@@ -1514,6 +1514,212 @@
 #runtimePage .runtime-port-list { display: flex; flex-direction: column; gap: 12px; margin-top: 12px; }
 #runtimePage .runtime-port-list label { display: flex; min-height: 20px; align-items: center; justify-content: space-between; gap: 16px; color: #181818; font-size: 14px; line-height: 22px; }
 #runtimePage .runtime-port-list .runtime-switch { flex: 0 0 32px; }
+
+/* Figma 467:13516 - stacked setting cards and control geometry. */
+#runtimePage .runtime-section {
+  margin: 0 0 32px;
+}
+
+#runtimePage .runtime-section + .runtime-section {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+#runtimePage .runtime-section-heading {
+  min-height: 22px;
+  align-items: center;
+  padding: 0 0 12px;
+  border-bottom: 0;
+}
+
+#runtimePage .runtime-section-heading > div {
+  display: flex;
+  align-items: center;
+}
+
+#runtimePage .runtime-section-heading h3,
+#runtimePage .runtime-section-heading .runtime-icon-btn {
+  display: none;
+}
+
+#runtimePage .runtime-section-kicker {
+  display: block;
+  margin: 0;
+  color: #181818;
+  font: 500 14px/22px "PingFang SC", sans-serif;
+}
+
+#runtimePage .runtime-setting-list {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 16px;
+  overflow: hidden;
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+  background: #fff;
+}
+
+#runtimePage .runtime-setting-row {
+  min-height: 54px;
+  padding: 16px 0;
+  border-bottom-color: #e8e8e8;
+}
+
+#runtimePage .runtime-setting-row:last-child {
+  border-bottom: 0;
+}
+
+#runtimePage .runtime-setting-icon {
+  width: 22px;
+  height: 22px;
+  border-color: #ccc;
+}
+
+#runtimePage .runtime-setting-row strong {
+  font-weight: 500;
+}
+
+#runtimePage .runtime-setting-row p {
+  color: #8f8f8f;
+}
+
+#runtimePage .runtime-setting-row > input,
+#runtimePage .runtime-setting-row .runtime-input-unit input,
+#runtimePage .runtime-select-value {
+  box-sizing: border-box;
+  height: 32px;
+  border-color: #d9d9d9;
+  border-radius: 8px;
+  background: #fff;
+}
+
+#runtimePage .runtime-setting-row > input[type="number"] {
+  width: 100px;
+}
+
+#runtimePage .runtime-setting-row .runtime-input-unit {
+  width: 128px;
+  gap: 8px;
+}
+
+#runtimePage .runtime-setting-row .runtime-input-unit input,
+#runtimePage .runtime-setting-subrows .runtime-input-unit input {
+  width: 100px;
+}
+
+#runtimePage .runtime-switch {
+  width: 32px;
+  height: 20px;
+  border-radius: 11px;
+  background: #bfbfbf;
+}
+
+#runtimePage .runtime-switch.is-on {
+  background: #41d08d;
+}
+
+#runtimePage .runtime-setting-row:has(> .runtime-switch-field) {
+  row-gap: 8px;
+}
+
+#runtimePage .runtime-setting-row:has(> .runtime-switch-field) > .runtime-switch-field {
+  min-height: 20px;
+  padding-left: 32px;
+}
+
+#runtimePage .runtime-setting-row-stack {
+  row-gap: 8px;
+  padding-bottom: 16px;
+}
+
+#runtimePage .runtime-setting-subrows {
+  gap: 12px;
+  padding-top: 0;
+}
+
+#runtimePage .runtime-setting-subrows .runtime-input-unit {
+  width: 128px;
+}
+
+#runtimePage .runtime-setting-row-block {
+  min-height: 54px;
+}
+
+#runtimePage .runtime-rule-group {
+  margin: 0 -16px;
+  padding: 16px;
+  border-top-color: #e8e8e8;
+}
+
+#runtimePage .runtime-rule-group > .runtime-subsection-title {
+  display: flex;
+  min-height: 22px;
+  align-items: center;
+  gap: 8px;
+  justify-content: flex-start;
+}
+
+#runtimePage .runtime-rule-group > .runtime-subsection-title::before {
+  display: block;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  background: #fff;
+  content: "";
+}
+
+#runtimePage .runtime-rule-block {
+  margin-left: 32px;
+  padding: 16px 0;
+  border-top-color: #e8e8e8;
+}
+
+#runtimePage .runtime-rule-block:first-of-type {
+  margin-top: 8px;
+}
+
+#runtimePage .runtime-rule-block strong {
+  font-weight: 500;
+}
+
+#runtimePage .runtime-add-btn {
+  min-height: 32px;
+  border-color: #ccc;
+  border-radius: 24px;
+}
+
+#runtimePage [data-runtime-config="credentials-config"] {
+  margin-top: 0;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 0;
+}
+
+#runtimePage [data-runtime-config="credentials-config"]::before {
+  display: block;
+  margin: 0 0 12px;
+  color: #181818;
+  content: "密钥凭证";
+  font: 500 14px/22px "PingFang SC", sans-serif;
+}
+
+#runtimePage [data-runtime-config="credentials-config"] .runtime-credential-list {
+  box-sizing: border-box;
+  margin: 0 -16px;
+  padding: 0 16px 16px;
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+}
+
+#runtimePage .runtime-container-subsection .runtime-setting-list,
+#runtimePage .runtime-image-shell,
+#runtimePage .runtime-code-table {
+  border-color: #e8e8e8;
+}
 @media (max-width: 720px) {
   #runtimePage .runtime-os-grid { grid-template-columns: 1fr; }
   #runtimePage .runtime-image-list { padding-left: 0; }
@@ -2016,4 +2222,92 @@
   #runtimePage .runtime-search { width: 100%; }
   #runtimePage .cnap-input { max-width: 100%; min-width: 0; }
   #runtimePage .runtime-setting-subrows .runtime-input-unit .cnap-input { min-width: 0; }
+}
+
+/* Final runtime mode geometry overrides. */
+#runtimePage .runtime-setting-row {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+#runtimePage .runtime-setting-row:has(> .runtime-switch-field) {
+  row-gap: 16px;
+}
+
+#runtimePage .runtime-setting-row-stack {
+  row-gap: 16px;
+  padding-bottom: 20px;
+}
+
+#runtimePage .runtime-setting-subrows {
+  gap: 16px;
+}
+
+#runtimePage.is-help-mode .runtime-setting-subrows {
+  gap: 12px;
+  padding-top: 8px;
+}
+
+#runtimePage.is-help-mode .runtime-rule-group {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+#runtimePage.is-help-mode .runtime-rule-group > .runtime-subsection-title {
+  flex-wrap: wrap;
+  align-items: flex-start;
+  row-gap: 4px;
+}
+
+#runtimePage.is-help-mode .runtime-rule-group > .runtime-subsection-title p {
+  flex: 0 0 calc(100% - 30px);
+  margin: 0 0 0 30px;
+}
+
+#runtimePage.is-help-mode .runtime-rule-block {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+#runtimePage .runtime-rule-group > .runtime-subsection-title::before {
+  display: none;
+  content: none;
+}
+
+#runtimePage .runtime-rule-group > .runtime-subsection-title > .runtime-setting-icon {
+  display: grid;
+  flex: 0 0 22px;
+  place-items: center;
+}
+
+/* Figma 527:7379 - compact runtime mode. */
+#runtimePage:not(.is-help-mode) .runtime-setting-row {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+#runtimePage:not(.is-help-mode) .runtime-setting-row:has(> .runtime-switch-field) {
+  row-gap: 8px;
+}
+
+#runtimePage:not(.is-help-mode) .runtime-setting-row-stack {
+  row-gap: 8px;
+  padding-bottom: 16px;
+}
+
+#runtimePage:not(.is-help-mode) .runtime-setting-subrows {
+  gap: 12px;
+  padding-top: 0;
+}
+
+#runtimePage:not(.is-help-mode) .runtime-rule-block p {
+  display: block;
+  margin: 4px 0 12px;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+#runtimePage:not(.is-help-mode) .runtime-rule-block {
+  margin-left: 32px;
+  padding: 8px 0 12px;
 }

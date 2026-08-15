@@ -1110,10 +1110,17 @@ function addRuntimeHelpDescriptions(){
     label.parentElement.append(description);
   });
   document.querySelectorAll('#runtimePage .runtime-subsection-title h4').forEach(label=>{
-    if(label.parentElement.querySelector(':scope > p'))return;
+    const title=label.parentElement;
+    if(!title.querySelector(':scope > .runtime-setting-icon')){
+      const icon=document.createElement('span');
+      icon.className='runtime-setting-icon';
+      icon.innerHTML='<svg><use href="#i-runtime-open-one"/></svg>';
+      title.prepend(icon);
+    }
+    if(title.querySelector(':scope > p'))return;
     const description=document.createElement('p');
     description.textContent='基于节点标签的高级调度规则。相比节点标签选择支持更丰富的匹配操作符 (In, NotIn, Exists, Gt, Lt 等)，并区分硬性要求与软性偏好。';
-    label.parentElement.append(description);
+    title.append(description);
   });
 }
 addRuntimeHelpDescriptions();
