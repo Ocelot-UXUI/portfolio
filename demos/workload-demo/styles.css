@@ -1310,8 +1310,10 @@
 #runtimePage .runtime-override-tag-pending { background: #fff3e0; color: #f58300; }
 #runtimePage .runtime-setting-row.is-field-enabled,
 #runtimePage .runtime-image-list.is-field-enabled,
+#runtimePage .runtime-rule-group.is-field-enabled,
 #runtimePage .runtime-setting-row.is-field-disabled,
-#runtimePage .runtime-image-list.is-field-disabled { position: relative; }
+#runtimePage .runtime-image-list.is-field-disabled,
+#runtimePage .runtime-rule-group.is-field-disabled { position: relative; }
 #runtimePage .runtime-override-tooltip {
   position: absolute; z-index: 20; left: 0; bottom: calc(100% - 2px); display: none;
   width: max-content; max-width: 246px; padding: 5px 12px; border-radius: 8px;
@@ -1431,7 +1433,41 @@
   width: 14px; height: 14px; flex: 0 0 14px; fill: none; stroke: #ff9b2f; stroke-width: 1.5;
 }
 #runtimePage .runtime-container-content { min-width: 0; }
-#runtimePage .runtime-image-list { padding-left: 32px; }
+#runtimePage .runtime-image-list { padding-left: 17px; }
+#runtimePage .runtime-image-source {
+  box-sizing: border-box;
+  height: 94px;
+  padding: 16px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+#runtimePage .runtime-image-source-title {
+  display: flex;
+  height: 22px;
+  align-items: center;
+  gap: 8px;
+}
+#runtimePage .runtime-image-source-title .runtime-setting-icon,
+#runtimePage .runtime-image-heading .runtime-setting-icon {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+}
+#runtimePage .runtime-image-source-title strong { font-size: 14px; line-height: 22px; font-weight: 500; }
+#runtimePage .runtime-image-source-controls {
+  display: flex;
+  height: 32px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+  padding-left: 32px;
+}
+#runtimePage .runtime-image-source-copy { display: flex; min-width: 0; align-items: center; gap: 8px; }
+#runtimePage .runtime-image-source-copy b,
+#runtimePage .runtime-image-source-copy .runtime-level-tag { flex: 0 0 auto; white-space: nowrap; }
+#runtimePage .runtime-image-source-copy b { font-size: 14px; line-height: 22px; font-weight: 400; }
+#runtimePage .runtime-image-source-copy small { min-width: 0; overflow: hidden; color: #8f8f8f; font-size: 12px; line-height: 18px; text-overflow: ellipsis; white-space: nowrap; }
+#runtimePage .runtime-image-source-controls > .runtime-select-value { flex: 0 0 160px; }
+#runtimePage .runtime-image-heading { margin-top: 16px; }
 #runtimePage .runtime-image-heading { display: flex; height: 22px; align-items: center; gap: 8px; }
 #runtimePage .runtime-image-heading .runtime-setting-icon { width: 22px; height: 22px; }
 #runtimePage .runtime-image-heading-copy { min-width: 0; }
@@ -2225,27 +2261,46 @@
 }
 
 /* Final runtime mode geometry overrides. */
+#runtimePage {
+  /* CNAP spacing scale from Figma 531:7404. */
+  --runtime-space-2xs: 4px;
+  --runtime-space-xs: 8px;
+  --runtime-space-s: 12px;
+  --runtime-space-m: 16px;
+  --runtime-space-l: 20px;
+  --runtime-space-4xl: 32px;
+}
+
 #runtimePage .runtime-setting-row {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  grid-template-columns: 22px minmax(0, 1fr) auto;
+  column-gap: var(--runtime-space-xs);
+  padding-top: var(--runtime-space-l);
+  padding-bottom: var(--runtime-space-l);
 }
 
 #runtimePage .runtime-setting-row:has(> .runtime-switch-field) {
-  row-gap: 16px;
+  row-gap: var(--runtime-space-m);
 }
 
 #runtimePage .runtime-setting-row-stack {
-  row-gap: 16px;
-  padding-bottom: 20px;
+  row-gap: var(--runtime-space-m);
+  padding-bottom: var(--runtime-space-l);
+}
+
+#runtimePage .runtime-setting-row-stack > .runtime-setting-subrows {
+  grid-column: 1 / -1;
+  box-sizing: border-box;
+  width: 100%;
+  padding-left: var(--runtime-space-4xl);
 }
 
 #runtimePage .runtime-setting-subrows {
-  gap: 16px;
+  gap: var(--runtime-space-m);
 }
 
 #runtimePage.is-help-mode .runtime-setting-subrows {
-  gap: 12px;
-  padding-top: 8px;
+  gap: var(--runtime-space-s);
+  padding-top: var(--runtime-space-xs);
 }
 
 #runtimePage.is-help-mode .runtime-rule-group {
@@ -2282,21 +2337,21 @@
 
 /* Figma 527:7379 - compact runtime mode. */
 #runtimePage:not(.is-help-mode) .runtime-setting-row {
-  padding-top: 16px;
-  padding-bottom: 16px;
+  padding-top: var(--runtime-space-m);
+  padding-bottom: var(--runtime-space-m);
 }
 
 #runtimePage:not(.is-help-mode) .runtime-setting-row:has(> .runtime-switch-field) {
-  row-gap: 8px;
+  row-gap: var(--runtime-space-xs);
 }
 
 #runtimePage:not(.is-help-mode) .runtime-setting-row-stack {
-  row-gap: 8px;
-  padding-bottom: 16px;
+  row-gap: var(--runtime-space-xs);
+  padding-bottom: var(--runtime-space-m);
 }
 
 #runtimePage:not(.is-help-mode) .runtime-setting-subrows {
-  gap: 12px;
+  gap: var(--runtime-space-s);
   padding-top: 0;
 }
 
@@ -2310,6 +2365,44 @@
 #runtimePage:not(.is-help-mode) .runtime-rule-block {
   margin-left: 32px;
   padding: 8px 0 12px;
+}
+
+/* Security groups use one parent toggle; their child fields sit on the next text level. */
+#runtimePage [data-runtime-config="security-config"] .runtime-setting-row-stack {
+  grid-template-columns: 22px minmax(0, 1fr);
+  column-gap: var(--runtime-space-xs);
+}
+
+#runtimePage [data-runtime-config="security-config"] .runtime-setting-row-stack > .runtime-setting-subrows {
+  grid-column: 1 / -1;
+  box-sizing: border-box;
+  width: 100%;
+  margin-left: 0;
+  padding-left: var(--runtime-space-4xl);
+}
+
+#runtimePage [data-runtime-config="security-config"] .runtime-setting-subrows > label:not(:last-child) {
+  padding-bottom: var(--runtime-space-m);
+  border-bottom: 1px solid #f0f0f0;
+}
+
+#runtimePage [data-runtime-config="security-config"] .runtime-setting-subrows > label:last-child {
+  padding-bottom: 0;
+}
+
+#runtimePage.is-help-mode [data-runtime-config="security-config"] .runtime-setting-row-stack {
+  row-gap: var(--runtime-space-xs);
+  padding-top: var(--runtime-space-m);
+  padding-bottom: var(--runtime-space-m);
+}
+
+#runtimePage.is-help-mode [data-runtime-config="security-config"] .runtime-setting-subrows {
+  gap: var(--runtime-space-s);
+  padding-top: var(--runtime-space-xs);
+}
+
+#runtimePage.is-help-mode [data-runtime-config="security-config"] .runtime-setting-row-stack > div > p {
+  display: none;
 }
 
 /* Keep card borders without clipping field-state tooltips. */
@@ -2336,9 +2429,54 @@
 #runtimePage .runtime-setting-row.is-field-enabled:hover,
 #runtimePage .runtime-setting-row.is-field-disabled:hover,
 #runtimePage .runtime-image-list.is-field-enabled:hover,
-#runtimePage .runtime-image-list.is-field-disabled:hover {
+#runtimePage .runtime-image-list.is-field-disabled:hover,
+#runtimePage .runtime-rule-group.is-field-enabled:hover,
+#runtimePage .runtime-rule-group.is-field-disabled:hover {
   z-index: 30;
 }
+
+/* Service exposure page from Figma 534:6287. */
+.service-exposure-page { min-height: calc(100vh - 112px); color: #181818; }
+.service-exposure-heading { display:flex; align-items:center; justify-content:space-between; min-height:64px; }
+.service-exposure-tabs { display:flex; align-items:center; gap:32px; height:100%; }
+.service-exposure-tabs h1 { margin:0; font-size:24px; line-height:32px; font-weight:600; }
+.service-exposure-tabs > i { width:1px; height:24px; background:#d9d9d9; }
+.service-exposure-tabs button { position:relative; height:32px; padding:0; border:0; background:transparent; color:#8f8f8f; font:500 14px/22px "PingFang SC",sans-serif; }
+.service-exposure-tabs button.is-active { color:#181818; }
+.service-exposure-tabs button.is-active::after { position:absolute; right:0; bottom:-8px; left:0; height:2px; border-radius:4px; background:#181818; content:""; }
+.service-primary-action { display:inline-flex; height:32px; align-items:center; gap:4px; padding:0 20px; border:1px solid #1c202b; border-radius:24px; background:#1c202b; color:#a7f3cf; font:500 14px/22px "PingFang SC",sans-serif; }
+.service-primary-action svg { width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:1.8; }
+.service-exposure-panel { min-height:calc(100vh - 192px); padding:24px 24px 32px; border-radius:12px; background:#fff; }
+.service-exposure-toolbar { display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; }
+.service-exposure-toolbar h2 { margin:0; font-size:20px; line-height:28px; font-weight:500; }
+.service-exposure-toolbar > div { display:flex; gap:16px; }
+.service-filter { display:flex; width:120px; height:32px; align-items:center; justify-content:space-between; padding:0 12px; border:1px solid #d9d9d9; border-radius:8px; background:#fff; color:#bfbfbf; font:14px/22px "PingFang SC",sans-serif; }
+.service-filter svg { width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:1.8; }
+.service-exposure-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:32px; }
+.service-card { position:relative; display:flex; min-width:0; height:82px; align-items:center; padding:16px 32px; border:1px solid #d9d9d9; border-radius:8px; background:#fff; }
+.service-card-icon { display:grid; width:44px; height:44px; flex:0 0 44px; margin-right:20px; place-items:center; border-radius:8px; }
+.service-card-icon svg { width:24px; height:24px; fill:none; stroke:currentColor; stroke-width:1.5; }
+.service-card-icon.is-alb { background:#e7f0ff; color:#7aa9e6; }
+.service-card-icon.is-node,.service-card-icon.is-cyan { background:#e2f9fb; color:#4cc4d3; }
+.service-card-icon.is-cluster { background:#e0faed; color:#43cf91; }
+.service-card-copy { min-width:0; flex:1; }
+.service-card-copy > div { display:flex; min-width:0; align-items:center; gap:12px; }
+.service-card-copy strong { overflow:hidden; font-size:18px; line-height:26px; font-weight:500; text-overflow:ellipsis; white-space:nowrap; }
+.service-card-copy p { overflow:hidden; margin:8px 0 0; color:#8f8f8f; font-size:14px; line-height:22px; text-overflow:ellipsis; white-space:nowrap; }
+.service-card-copy p i { display:inline-block; width:1px; height:12px; margin:0 10px; vertical-align:-1px; background:#d9d9d9; }
+.service-type-pill { padding:3px 10px; border-radius:16px; font-size:14px; line-height:22px; white-space:nowrap; }
+.service-type-pill.is-blue { background:#edf4ff; color:#5e92db; }
+.service-type-pill.is-cyan { background:#e5fafc; color:#36b7c6; }
+.service-type-pill.is-green { background:#e3faee; color:#2dc27f; }
+.service-card-actions { position:relative; display:flex; flex:0 0 auto; align-items:center; gap:16px; margin-left:16px; }
+.service-card-actions button { display:grid; width:20px; height:20px; padding:0; place-items:center; border:0; background:transparent; color:#545454; }
+.service-card-actions button svg { width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.7; }
+.service-card-actions button:hover { color:#181818; }
+.service-tooltip { position:absolute; z-index:5; right:0; bottom:calc(100% + 12px); display:none; padding:10px 12px; border-radius:8px; background:#fff; box-shadow:0 8px 22px rgba(24,32,43,.12); font-size:14px; line-height:22px; white-space:nowrap; }
+.service-tooltip i { position:absolute; right:82px; bottom:-6px; width:12px; height:12px; background:#fff; transform:rotate(45deg); }
+.service-card.is-hovered .service-tooltip { display:block; }
+.service-card.is-hovered { z-index:2; }
+@media (max-width: 1280px) { .service-exposure-grid { gap:16px; } .service-card { padding:16px 20px; } .service-card-icon { margin-right:14px; } }
 
 #runtimePage .runtime-override-tooltip {
   z-index: 40;
@@ -2353,8 +2491,4 @@
 #runtimePage .runtime-setting-list > .runtime-rule-group {
   margin-right: -16px;
   margin-left: -16px;
-}
-
-#runtimePage .runtime-image-list {
-  padding-left: 17px;
 }
