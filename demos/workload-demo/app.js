@@ -145,6 +145,9 @@ const appPagePlaceholder = document.querySelector('#appPagePlaceholder');
 const appPageTitle = document.querySelector('#appPageTitle');
 const runtimePage = document.querySelector('#runtimePage');
 const serviceExposurePage = document.querySelector('#serviceExposurePage');
+const serviceDrawer = document.querySelector('#serviceDrawer');
+const serviceDrawerBackdrop = document.querySelector('#serviceDrawerBackdrop');
+const serviceCreateModal = document.querySelector('#serviceCreateModal');
 const secondaryNav = document.querySelector('.secondary-nav');
 const accountPopover = document.querySelector('#accountPopover');
 const accountList = document.querySelector('#accountList');
@@ -1957,5 +1960,91 @@ document.addEventListener('click',event=>{
 setupRuntimeFieldActivation();
 document.querySelector('#closeHistoryBtn').addEventListener('click',()=>historyDrawer.classList.add('hidden'));
 document.addEventListener('click',event=>{if(!event.target.closest('.filter-select'))closeFilterSelects(); if(!event.target.closest('#actionMenu'))closeMenu(); if(!event.target.closest('#accountPopover') && !event.target.closest('[data-context="account"]')) closeAccountPopover(); if(!event.target.closest('#envPopover') && !event.target.closest('[data-context="environment"]')) closeEnvPopover(); if(!event.target.closest('#clusterPopover') && !event.target.closest('[data-context="cluster"]')) closeClusterPopover(); if(!event.target.closest('#compactMorePopover') && !event.target.closest('#primaryMoreBtn')) closeCompactMore();});
-document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeMenu();closeAccountPopover();closeEnvPopover();closeClusterPopover();closeCompactMore();runtimeClusterAddMenu?.classList.add('hidden');closeRuntimeLevelDropdown();closeModal();closeInstanceDetail();historyDrawer.classList.add('hidden');}});
+document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeMenu();closeAccountPopover();closeEnvPopover();closeClusterPopover();closeCompactMore();runtimeClusterAddMenu?.classList.add('hidden');closeRuntimeLevelDropdown();closeModal();closeInstanceDetail();historyDrawer.classList.add('hidden');closeServiceDrawer();closeServiceCreateModal();}});
+function setupServiceExposureCardActions(){
+  document.querySelectorAll('#serviceExposurePage .service-card').forEach(card=>{
+    if(card.querySelector('.service-card-actions'))return;
+    const actions=document.createElement('div');
+    actions.className='service-card-actions';
+    actions.innerHTML=`<button type="button" class="service-add-upstream" aria-label="新增上游接入"><img src="./assets/service-exposure/add.svg" alt=""></button><button type="button" aria-label="设置"><img src="./assets/service-exposure/settings.svg" alt=""></button><button type="button" aria-label="删除"><img src="./assets/service-exposure/delete.svg" alt=""></button><span class="service-tooltip">新增上游接入<i></i></span>`;
+    card.append(actions);
+  });
+}
+setupServiceExposureCardActions();
+function closeServiceDrawer(){
+  serviceDrawer?.classList.add('hidden');
+  serviceDrawerBackdrop?.classList.add('hidden');
+  serviceDrawer?.setAttribute('aria-hidden','true');
+}
+function openServiceDrawer(card){
+  const name=card.querySelector('strong')?.textContent.trim()||'服务详情';
+  const type=card.querySelector('.service-type-pill')?.textContent.trim()||'NodePort';
+  const meta=card.querySelector('p')?.textContent.replace(/\s+/g,' ').trim()||'';
+  const workloadMatch=meta.match(/工作负载\s+(.+)$/);
+  const workloadText=workloadMatch?.[1]||'order-worker 北京.bjyz-1 南京.bjyz-1';
+  const clusters=workloadText.match(/(?:北京|南京)?\.?[a-z]+-\d+/gi)||['bjyz-1','njxg-1'];
+  const serviceType=type==='ALB'?'LoadBalancer':type;
+  const targetWorkload=meta.includes('order-api')?'order-api（Deployment）':'order-worker（Deployment）';
+  serviceDrawer.querySelector('#serviceDrawerTitle').textContent=name;
+  serviceDrawer.querySelector('#drawerServiceType').textContent=serviceType;
+  serviceDrawer.querySelector('#drawerTargetWorkload').textContent=targetWorkload;
+  serviceDrawer.querySelector('#drawerPodName').textContent=`group.${name}.K8S.all`;
+  serviceDrawer.querySelector('#drawerWorkloadOne').textContent=targetWorkload.replace(/（.*）/,'');
+  serviceDrawer.querySelector('#drawerWorkloadTwo').textContent=targetWorkload.replace(/（.*）/,'');
+  serviceDrawer.querySelector('#drawerClusterOne').textContent=(clusters[0]||'bjyz-1').replace(/^(北京|南京)\./,'');
+  serviceDrawer.querySelector('#drawerClusterTwo').textContent=(clusters[1]||clusters[0]||'njxg-1').replace(/^(北京|南京)\./,'');
+  serviceDrawer.querySelector('#drawerServicePort').textContent=type==='ClusterIP'?'80':'8080';
+  serviceDrawer.querySelector('#drawerServicePortTwo').textContent=type==='ClusterIP'?'80':'8080';
+  serviceDrawer.classList.remove('hidden');
+  serviceDrawerBackdrop.classList.remove('hidden');
+  serviceDrawer.setAttribute('aria-hidden','false');
+}
+document.querySelectorAll('#serviceExposurePage .service-card').forEach(card=>card.addEventListener('click',event=>{
+  if(event.target.closest('button'))return;
+  openServiceDrawer(card);
+}));
+serviceDrawerBackdrop?.addEventListener('click',closeServiceDrawer);
+serviceDrawer?.querySelector('.service-drawer-close')?.addEventListener('click',closeServiceDrawer);
+serviceDrawer?.querySelector('.service-drawer-delete')?.addEventListener('click',closeServiceDrawer);
+function closeServiceCreateModal(){
+  serviceCreateModal?.classList.add('hidden');
+  serviceCreateModal?.setAttribute('aria-hidden','true');
+}
+function setServiceCreateStep(step){
+  const modal=serviceCreateModal;
+  if(!modal)return;
+  const firstStepElements=modal.querySelectorAll('.service-create-section-title,.service-create-group');
+  const basicStep=modal.querySelector('#serviceCreateBasicStep');
+  firstStepElements.forEach(item=>item.classList.toggle('hidden',step!==1));
+  basicStep?.classList.toggle('hidden',step!==2);
+  modal.querySelectorAll('.service-create-steps > div').forEach((item,index)=>item.classList.toggle('is-active',index===step-1));
+  modal.querySelector('.service-create-prev')?.classList.toggle('hidden',step===1);
+  modal.querySelector('.service-create-next').textContent=step===2?'下一步':'下一步';
+  modal.dataset.step=String(step);
+}
+function openServiceCreateModal(){
+  setServiceCreateStep(1);
+  serviceCreateModal?.classList.remove('hidden');
+  serviceCreateModal?.setAttribute('aria-hidden','false');
+}
+document.querySelector('.service-primary-action')?.addEventListener('click',openServiceCreateModal);
+serviceCreateModal?.querySelector('.service-create-close')?.addEventListener('click',closeServiceCreateModal);
+serviceCreateModal?.querySelector('.service-create-cancel')?.addEventListener('click',closeServiceCreateModal);
+serviceCreateModal?.querySelector('.service-create-prev')?.addEventListener('click',()=>setServiceCreateStep(1));
+serviceCreateModal?.querySelector('.service-create-next')?.addEventListener('click',()=>{
+  const step=Number(serviceCreateModal.dataset.step||1);
+  if(step===1&&!serviceCreateModal.querySelector('.service-create-option.is-selected')){
+    const toast=serviceCreateModal.querySelector('#serviceCreateToast');
+    toast.classList.remove('hidden');
+    window.setTimeout(()=>toast.classList.add('hidden'),1800);
+    return;
+  }
+  setServiceCreateStep(Math.min(step+1,2));
+});
+serviceCreateModal?.addEventListener('click',event=>{if(event.target===serviceCreateModal)closeServiceCreateModal();});
+serviceCreateModal?.querySelectorAll('.service-create-option').forEach(option=>option.addEventListener('click',()=>{
+  const wasSelected=option.classList.contains('is-selected');
+  serviceCreateModal.querySelectorAll('.service-create-option').forEach(item=>item.classList.remove('is-selected'));
+  if(!wasSelected)option.classList.add('is-selected');
+}));
 renderClusterFilterOptions(); renderHistory(); render(); renderAppNavigation();
