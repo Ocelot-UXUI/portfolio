@@ -1025,14 +1025,14 @@
 #runtimePage .cnap-checkbox { display: inline-flex; min-height: 30px; align-items: center; gap: 8px; padding: 4px 0; color: #181818; font: 400 14px/22px "PingFang SC", sans-serif; white-space: nowrap; cursor: pointer; user-select: none; }
 #runtimePage .cnap-checkbox > input { position: absolute; width: 16px; height: 16px; margin: 0; opacity: 0; pointer-events: none; }
 #runtimePage .cnap-checkbox-box { position: relative; display: block; width: 16px; height: 16px; flex: 0 0 16px; border-radius: 2px; box-sizing: border-box; background: transparent; }
-#runtimePage .cnap-checkbox-box::before { position: absolute; top: 2px; left: 2px; width: 12px; height: 12px; box-sizing: border-box; border: 1px solid #d9d9d9; border-radius: 2px; background: #fff; content: ""; }
+#runtimePage .cnap-checkbox-box::before { position: absolute; inset: 0; width: 16px; height: 16px; box-sizing: border-box; border: 1px solid #d9d9d9; border-radius: 2px; background: #fff; content: ""; }
 #runtimePage .cnap-checkbox > input:focus-visible + .cnap-checkbox-box { outline: 2px solid rgba(65,208,141,.35); outline-offset: 2px; }
 #runtimePage .cnap-checkbox:not(.is-disabled):hover .cnap-checkbox-box::before { border-color: #bfbfbf; }
 #runtimePage .cnap-checkbox > input:checked + .cnap-checkbox-box::before,
 #runtimePage .cnap-checkbox > input:indeterminate + .cnap-checkbox-box::before { border-color: #1c202b; background: #1c202b; }
 #runtimePage .cnap-checkbox:not(.is-disabled):hover > input:checked + .cnap-checkbox-box::before,
 #runtimePage .cnap-checkbox:not(.is-disabled):hover > input:indeterminate + .cnap-checkbox-box::before { border-color: #363940; background: #363940; }
-#runtimePage .cnap-checkbox > input:checked + .cnap-checkbox-box::after { position: absolute; top: 4px; left: 5px; width: 4px; height: 7px; transform: rotate(45deg); border: solid #a7f3cf; border-width: 0 1.5px 1.5px 0; content: ""; }
+#runtimePage .cnap-checkbox > input:checked + .cnap-checkbox-box::after { position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.25 6.5 11.25 12.5 4.75' fill='none' stroke='%23a7f3cf' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 16px 16px no-repeat; content: ""; }
 #runtimePage .cnap-checkbox > input:indeterminate + .cnap-checkbox-box::after { position: absolute; top: 7px; left: 5px; width: 6px; height: 1.5px; border-radius: 2px; background: #a7f3cf; content: ""; }
 #runtimePage .cnap-checkbox > input:disabled + .cnap-checkbox-box::before { border-color: #d9d9d9; background: #f7f7f7; }
 #runtimePage .cnap-checkbox > input:disabled:checked + .cnap-checkbox-box::before,
@@ -1256,6 +1256,18 @@
 #runtimePage .runtime-setting-row.is-field-disabled .runtime-add-btn { border-color: #ccc; background: #fff; color: #181818; opacity: .4; cursor: not-allowed; }
 #runtimePage .runtime-setting-row.is-field-disabled .runtime-switch { background: #e8e8e8; cursor: not-allowed; }
 #runtimePage .runtime-setting-row.is-field-disabled .runtime-switch i { background: #fff; }
+#runtimePage .runtime-setting-row.is-field-disabled .runtime-setting-subrows .runtime-input-unit input:disabled {
+  border-color: #d9d9d9;
+  background: #f7f7f7;
+  color: #bfbfbf;
+  cursor: not-allowed;
+  opacity: 1;
+  -webkit-text-fill-color: #bfbfbf;
+  appearance: none;
+  -moz-appearance: textfield;
+}
+#runtimePage .runtime-setting-row.is-field-disabled .runtime-input-unit input:disabled::-webkit-inner-spin-button,
+#runtimePage .runtime-setting-row.is-field-disabled .runtime-input-unit input:disabled::-webkit-outer-spin-button { margin: 0; appearance: none; }
 #runtimePage .runtime-image-list.is-field-disabled .runtime-image-card,
 #runtimePage .runtime-image-list.is-field-disabled .runtime-version-pills { opacity: .56; }
 #runtimePage .runtime-image-list.is-field-disabled .runtime-image-shell button { cursor: not-allowed; }
@@ -1360,22 +1372,20 @@
 #runtimePage .runtime-inline-actions button { padding: 0; border: 0; background: transparent; color: #545454; font: 12px/20px "PingFang SC", sans-serif; cursor: pointer; }
 #runtimePage .runtime-inline-actions button:hover { color: #181818; }
 #runtimePage [data-runtime-config="credentials-config"] { margin-top: 32px; padding: 0 16px; border: 1px solid #e8e8e8; border-radius: 12px; }
-#runtimePage .runtime-credential-list { padding: 20px 0; }
-#runtimePage .runtime-credential-row { min-height: 0; align-items: start; padding: 0; border-bottom: 0; }
-#runtimePage .runtime-credential-content { min-width: 0; }
+#runtimePage .runtime-credential-list { padding: 16px 0; }
 #runtimePage .runtime-credential-heading { display: flex; min-height: 22px; align-items: center; justify-content: space-between; gap: 16px; }
-#runtimePage .runtime-credential-heading strong { font-weight: 500; }
+#runtimePage .runtime-credential-title { display: flex; align-items: center; gap: 8px; }
+#runtimePage .runtime-credential-title strong { font: 500 14px/22px "PingFang SC", sans-serif; white-space: nowrap; }
 #runtimePage .runtime-credential-actions { display: flex; align-items: center; gap: 16px; }
-#runtimePage .runtime-credential-actions button { display: inline-flex; height: 20px; align-items: center; gap: 6px; padding: 0; border: 0; background: transparent; color: #181818; font: 400 12px/20px "PingFang SC", sans-serif; white-space: nowrap; cursor: pointer; }
+#runtimePage .runtime-credential-actions button { display: inline-flex; height: 20px; align-items: center; gap: 6px; padding: 0; border: 0; background: transparent; color: #545454; font: 400 12px/20px "PingFang SC", sans-serif; white-space: nowrap; cursor: pointer; }
 #runtimePage .runtime-credential-actions button:hover { color: #545454; }
 #runtimePage .runtime-credential-actions svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.2; }
 #runtimePage .runtime-credential-description { display: none; margin: 4px 0 0; color: #545454; font: 400 12px/20px "PingFang SC", sans-serif; }
 #runtimePage.is-help-mode .runtime-credential-description { display: block; }
-#runtimePage .runtime-credential-add-list { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; margin-top: 12px; padding-left: 32px; }
+#runtimePage .runtime-credential-add-list { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; margin-top: 8px; padding-left: 32px; }
 #runtimePage .runtime-credential-add-list .runtime-add-btn { min-width: 116px; }
-#runtimePage [data-runtime-config="credentials-config"] .runtime-setting-icon { margin-top: 0; }
-#runtimePage [data-runtime-config="credentials-config"] .runtime-credential-row.is-field-disabled .runtime-credential-actions button { color: #181818; }
-#runtimePage [data-runtime-config="credentials-config"] .runtime-credential-row.is-field-disabled .runtime-add-btn { opacity: .4; }
+#runtimePage [data-runtime-config="credentials-config"] .runtime-credential-title .runtime-setting-icon { margin-top: 0; }
+#runtimePage [data-runtime-config="credentials-config"] .runtime-add-btn { opacity: .4; }
 #runtimePage .runtime-select-value { display: inline-flex; width: 160px; height: 32px; align-items: center; justify-content: space-between; padding: 4px 10px; border: 1px solid #d9d9d9; border-radius: 8px; background: #fff; color: #181818; font: 14px/22px "PingFang SC", sans-serif; }
 #runtimePage .runtime-select-value svg { width: 14px; height: 14px; fill: none; stroke: #8f8f8f; stroke-width: 1.5; }
 #runtimePage .runtime-setting-row-block { min-height: 68px; }
@@ -1392,9 +1402,9 @@
 #runtimePage .runtime-add-btn:disabled { opacity: .4; cursor: not-allowed; }
 #runtimePage .runtime-add-btn:disabled:hover { background: #fff; }
 #runtimePage .runtime-outline-btn { color: #545454; }
-#runtimePage .runtime-toc { position: sticky; top: 24px; z-index: 5; display: flex; width: 87px; height: 174px; flex-direction: row; gap: 12px; padding: 0; border-left: 0; }
-#runtimePage .runtime-toc-track { position: relative; width: 3px; height: 174px; flex: 0 0 3px; background: #f2f2f2; }
-#runtimePage .runtime-toc-current { position: absolute; top: 25px; left: 0; width: 3px; height: 20px; background: #41d08d; }
+#runtimePage .runtime-toc { position: sticky; top: 24px; z-index: 5; display: flex; width: 87px; min-height: 174px; flex-direction: row; gap: 12px; padding: 0; border-left: 0; }
+#runtimePage .runtime-toc-track { position: relative; width: 3px; min-height: 174px; height: 100%; flex: 0 0 3px; background: #f2f2f2; }
+#runtimePage .runtime-toc-current { position: absolute; top: 0; left: 0; width: 3px; height: 20px; background: #41d08d; transition: top .16s ease; }
 #runtimePage .runtime-toc-items { display: flex; width: 72px; flex-direction: column; gap: 8px; }
 #runtimePage .runtime-toc a { display: flex; height: 18px; align-items: center; padding: 0; color: #545454; font-size: 12px; line-height: 18px; text-decoration: none; white-space: nowrap; }
 #runtimePage .runtime-toc a:not(:first-child) { padding-left: 12px; }

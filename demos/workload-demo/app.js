@@ -1323,12 +1323,47 @@ document.addEventListener('click',event=>{
   if(runtimeClusterAddMenu&&!runtimeClusterAddMenu.contains(event.target)&&!runtimeLevelDropdown.contains(event.target)) runtimeClusterAddMenu.classList.add('hidden');
   if(runtimeLevelDropdown&&!runtimeLevelDropdown.contains(event.target)&&event.target!==runtimeLevelSwitch) closeRuntimeLevelDropdown();
 });
-document.querySelectorAll('[data-runtime-toc]').forEach(item=>item.addEventListener('click',event=>{
+const runtimeTocItems=[...document.querySelectorAll('[data-runtime-toc]')];
+document.querySelectorAll('.runtime-setting-row').forEach(row=>{
+  const title=row.querySelector(':scope > div > strong');
+  if(title?.textContent.trim()==='部署并发度'){
+    row.classList.add('is-field-disabled');
+    row.querySelectorAll('input').forEach(input=>{ input.disabled=true; });
+  }
+});
+const runtimeTocCurrent=document.querySelector('.runtime-toc-current');
+let runtimeTocFrame=0;
+function updateRuntimeTocFromScroll(){
+  if(!runtimeTocItems.length)return;
+  const workspaceRect=workspace?.getBoundingClientRect();
+  const viewportTop=(workspaceRect?.top||0)+24;
+  let activeIndex=0;
+  runtimeTocItems.forEach((item,index)=>{
+    const target=document.querySelector(`[data-runtime-config="${item.dataset.runtimeToc}"]`);
+    if(target&&target.getBoundingClientRect().top<=viewportTop)activeIndex=index;
+  });
+  runtimeTocItems.forEach((item,index)=>item.classList.toggle('is-current',index===activeIndex));
+  const activeItem=runtimeTocItems[activeIndex];
+  if(runtimeTocCurrent&&activeItem){
+    runtimeTocCurrent.style.top=`${activeItem.offsetTop+Math.max(0,(activeItem.offsetHeight-runtimeTocCurrent.offsetHeight)/2)}px`;
+  }
+}
+function scheduleRuntimeTocSync(){
+  if(runtimeTocFrame)return;
+  runtimeTocFrame=window.requestAnimationFrame(()=>{
+    runtimeTocFrame=0;
+    updateRuntimeTocFromScroll();
+  });
+}
+runtimeTocItems.forEach(item=>item.addEventListener('click',event=>{
   event.preventDefault();
   const target=document.querySelector(`[data-runtime-config="${item.dataset.runtimeToc}"]`);
-  if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
-  document.querySelectorAll('[data-runtime-toc]').forEach(node=>node.classList.toggle('is-current',node===item));
+  if(target)target.scrollIntoView({behavior:'smooth',block:'start'});
+  scheduleRuntimeTocSync();
 }));
+workspace?.addEventListener('scroll',scheduleRuntimeTocSync,{passive:true});
+window.addEventListener('resize',scheduleRuntimeTocSync,{passive:true});
+updateRuntimeTocFromScroll();
 document.querySelectorAll('[data-runtime-collapse]').forEach(button=>button.addEventListener('click',event=>{
   event.stopPropagation();
   const items=button.dataset.runtimeCollapse==='container'
@@ -1655,7 +1690,7 @@ function upgradeRuntimeCredentialsSection(){
   const section=document.querySelector('#runtimePage [data-runtime-config="credentials-config"]');
   if(!section||section.dataset.credentialsRefined==='true')return;
   section.dataset.credentialsRefined='true';
-  section.innerHTML=`<div class="runtime-credential-list"><div class="runtime-setting-row runtime-setting-row-block runtime-credential-row"><span class="runtime-setting-icon"><svg><use href="#i-runtime-open-one"/></svg></span><div class="runtime-credential-content"><div class="runtime-credential-heading"><strong>凭证管理</strong><div class="runtime-credential-actions"><button type="button"><svg><use href="#i-runtime-copy"/></svg><span>复制全部</span></button><button type="button"><svg><use href="#i-runtime-visible"/></svg><span>显示全部</span></button></div></div><p class="runtime-credential-description">为 Pod 添加额外的主机名解析条目，相当于在容器上配置 /etc/hosts 文件。在 hostAliases 中指定主机名和 IP 映射关系，Pod 内的进程可直接通过主机名访问指定的 IP 地址，无需依赖 DNS 服务。</p><div class="runtime-credential-add-list"><button class="runtime-add-btn" type="button"><svg><use href="#i-runtime-add"/></svg>添加凭证</button><button class="runtime-add-btn" type="button"><svg><use href="#i-runtime-add"/></svg>批量添加</button></div></div></div></div>`;
+  section.innerHTML=`<div class="runtime-credential-list"><div class="runtime-credential-heading"><div class="runtime-credential-title"><span class="runtime-setting-icon"><svg><use href="#i-runtime-open-one"/></svg></span><strong>凭证管理</strong></div><div class="runtime-credential-actions"><button type="button"><svg><use href="#i-runtime-copy"/></svg><span>复制全部</span></button><button type="button"><svg><use href="#i-runtime-visible"/></svg><span>显示全部</span></button></div></div><p class="runtime-credential-description">为 Pod 添加额外的主机名解析条目，相当于在容器上配置 /etc/hosts 文件。在 hostAliases 中指定主机名和 IP 映射关系，Pod 内的进程可直接通过主机名访问指定的 IP 地址，无需依赖 DNS 服务。</p><div class="runtime-credential-add-list"><button class="runtime-add-btn" type="button"><svg><use href="#i-runtime-add"/></svg>添加凭证</button><button class="runtime-add-btn" type="button"><svg><use href="#i-runtime-add"/></svg>批量添加</button></div></div>`;
 }
 upgradeRuntimeCredentialsSection();
 function upgradeRuntimeImageSection(){
@@ -1782,7 +1817,7 @@ function setupRuntimeFieldActivation(){
       cancelRestoreTimer();
       scope._runtimeRestoreTimer=setTimeout(()=>{
         if(toggle.dataset.runtimeFieldState==='restore')restoreRuntimeFieldToBlue(scope);
-      },500);
+      },300);
     };
     scope._runtimeRestoreHotZone={cancel:cancelRestoreTimer,schedule:scheduleRestoreTimer};
     toggle.addEventListener('pointerenter',cancelRestoreTimer);
