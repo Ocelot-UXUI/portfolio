@@ -1744,7 +1744,9 @@ window.CNAPInput?.initAll();
 function setRuntimeFieldEnabled(scope,enabled){
   scope.classList.toggle('is-field-enabled',enabled);
   scope.classList.toggle('is-field-disabled',!enabled);
-  const toggle=scope.querySelector(':scope > .runtime-setting-icon, :scope > .runtime-image-heading > .runtime-setting-icon');
+  const toggle=scope.matches('.runtime-rule-group')
+    ? scope.querySelector(':scope > .runtime-subsection-title > .runtime-setting-icon')
+    : scope.querySelector(':scope > .runtime-setting-icon, :scope > .runtime-image-heading > .runtime-setting-icon');
   toggle?.classList.toggle('is-active',enabled);
   toggle?.setAttribute('aria-pressed',String(enabled));
   scope.querySelectorAll('input,select,textarea,button').forEach(control=>{
@@ -1767,9 +1769,13 @@ function getRuntimeTooltipText(state){
   return `${current}的集群级配置，继承自 ${environment} 的环境级配置。点击可在当前层级覆盖为本地值`;
 }
 function setupRuntimeFieldActivation(){
-  const scopes=[...document.querySelectorAll('#runtimePage .runtime-setting-row'),document.querySelector('#runtime-container-image .runtime-image-list')].filter(Boolean);
+  const scopes=[...document.querySelectorAll('#runtimePage .runtime-setting-row, #runtimePage .runtime-rule-group'),document.querySelector('#runtime-container-image .runtime-image-list')].filter(Boolean);
   scopes.forEach(scope=>{
-    const icon=scope.matches('.runtime-image-list')?scope.querySelector(':scope > .runtime-image-heading > .runtime-setting-icon'):scope.querySelector(':scope > .runtime-setting-icon');
+    const icon=scope.matches('.runtime-image-list')
+      ? scope.querySelector(':scope > .runtime-image-heading > .runtime-setting-icon')
+      : scope.matches('.runtime-rule-group')
+        ? scope.querySelector(':scope > .runtime-subsection-title > .runtime-setting-icon')
+        : scope.querySelector(':scope > .runtime-setting-icon');
     if(!icon||!icon.querySelector('svg'))return;
     let toggle=icon;
     if(icon.tagName!=='BUTTON'){
@@ -1832,9 +1838,6 @@ function setupRuntimeFieldActivation(){
     setRuntimeFieldEnabled(scope,false);
     ensureRuntimeFieldTooltip(scope,getRuntimeTooltipText('default'));
   });
-  document.querySelectorAll('#runtimePage .runtime-rule-group .runtime-add-btn').forEach(button=>{
-    button.disabled=true;
-  });
 }
 function clearRuntimeFieldOverride(scope){
   scope._runtimeRestoreHotZone?.cancel();
@@ -1881,6 +1884,7 @@ function ensureRuntimeFieldTooltip(scope,text){
 }
 function markRuntimeFieldRestorePending(scope){
   if(!scope)return;
+  if(scope.matches('.runtime-rule-group'))return;
   const label=scope.matches('.runtime-image-list')
     ? scope.querySelector('.runtime-image-heading strong')
     : scope.querySelector(':scope > div:not(.runtime-setting-icon) strong');
@@ -1912,13 +1916,14 @@ function markRuntimeFieldRestorePending(scope){
 }
 function refreshRuntimeFieldTooltips(){
   document.querySelectorAll('#runtimePage [data-runtime-field-toggle]').forEach(toggle=>{
-    const scope=toggle.closest('.runtime-setting-row, .runtime-image-list');
+    const scope=toggle.closest('.runtime-setting-row, .runtime-rule-group, .runtime-image-list');
     if(!scope)return;
     ensureRuntimeFieldTooltip(scope,getRuntimeTooltipText(toggle.dataset.runtimeFieldState||'default'));
   });
 }
 function markRuntimeFieldCovered(scope){
   if(!scope||!scope.classList.contains('is-field-enabled'))return;
+  if(scope.matches('.runtime-rule-group'))return;
   const label=scope.matches('.runtime-image-list')
     ? scope.querySelector('.runtime-image-heading strong')
     : scope.querySelector(':scope > div:not(.runtime-setting-icon) strong');
