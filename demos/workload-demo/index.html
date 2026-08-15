@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>工作负载 | CNAP</title>
-  <link rel="stylesheet" href="./styles.css?v=20260815-01">
+  <link rel="stylesheet" href="./styles.css?v=20260815-12">
   <link rel="stylesheet" href="../../styles/project-navigation.css?v=20260809-14">
   <script src="../../scripts/project-navigation.js?v=20260809-3" defer></script>
   <style>
@@ -320,6 +320,22 @@
         <div class="empty hidden" id="emptyState">暂无符合条件的 Pod</div>
       </section>
       <section class="app-page-placeholder hidden" id="appPagePlaceholder" aria-live="polite"><p id="appPageTitle">页面内容占位</p></section>
+      <section class="service-exposure-page hidden" id="serviceExposurePage" aria-labelledby="serviceExposureTitle">
+        <div class="service-exposure-heading"><div class="service-exposure-tabs"><h1 id="serviceExposureTitle">流量接入</h1><i></i><button type="button">流量拓扑</button><button class="is-active" type="button">接入配置</button></div><button class="service-primary-action" type="button"><svg><use href="#i-runtime-add"/></svg>新增流量接入</button></div>
+        <div class="service-exposure-panel">
+          <div class="service-exposure-toolbar"><h2>Pod列表</h2><div><button class="service-filter" type="button">全部方式 <svg><use href="#i-chevron-down"/></svg></button><button class="service-filter" type="button">全部集群 <svg><use href="#i-chevron-down"/></svg></button></div></div>
+          <div class="service-exposure-grid">
+            <article class="service-card is-hovered"><div class="service-card-icon is-alb"><svg><use href="#i-runtime-tree"/></svg></div><div class="service-card-copy"><div><strong>order-api.k8s.bysz-1</strong><span class="service-type-pill is-blue">ALB</span></div><p>接入方式&nbsp; order-api <i></i> 工作负载&nbsp; 北京.bjyz-1 南京.bjyz-1</p></div><div class="service-card-actions"><button type="button" class="service-add-upstream" aria-label="新增上游接入"><svg><use href="#i-runtime-add"/></svg></button><button type="button" aria-label="设置"><svg><use href="#i-runtime-tree"/></svg></button><button type="button" aria-label="删除"><svg><use href="#i-runtime-delete"/></svg></button><span class="service-tooltip">新增上游接入<i></i></span></div></article>
+            <article class="service-card"><div class="service-card-icon is-node"><svg><use href="#i-runtime-cluster"/></svg></div><div class="service-card-copy"><div><strong>order-api.k8s.bysz-1</strong><span class="service-type-pill is-cyan">NodePort</span></div><p>接入方式&nbsp; order-api <i></i> 工作负载&nbsp; 南京.bjyz-1</p></div></article>
+            <article class="service-card"><div class="service-card-icon is-node"><svg><use href="#i-runtime-tree"/></svg></div><div class="service-card-copy"><div><strong>order-api.k8s.bysz-1</strong><span class="service-type-pill is-cyan">NodePort</span></div><p>接入方式&nbsp; order-worker <i></i> 工作负载&nbsp; 北京.bjyz-1</p></div></article>
+            <article class="service-card"><div class="service-card-icon is-cluster"><svg><use href="#i-runtime-cluster"/></svg></div><div class="service-card-copy"><div><strong>order-api.k8s.bysz-1</strong><span class="service-type-pill is-green">ClusterIP</span></div><p>接入方式&nbsp; order-api <i></i> 工作负载&nbsp; 北京.bjyz-1 南京.bjyz-1</p></div></article>
+            <article class="service-card"><div class="service-card-icon is-cluster"><svg><use href="#i-runtime-tree"/></svg></div><div class="service-card-copy"><div><strong>order-api.k8s.bysz-1</strong><span class="service-type-pill is-green">ClusterIP</span></div><p>接入方式&nbsp; order-worker <i></i> 工作负载&nbsp; 北京.bjyz-1</p></div></article>
+            <article class="service-card"><div class="service-card-icon is-cyan"><svg><use href="#i-runtime-container"/></svg></div><div class="service-card-copy"><div><strong>order-api.k8s.bysz-1</strong><span class="service-type-pill is-cyan">NodePort</span></div><p>接入方式&nbsp; order-api <i></i> 工作负载&nbsp; 北京.bjyz-1 南京.bjyz-1</p></div></article>
+            <article class="service-card"><div class="service-card-icon is-cyan"><svg><use href="#i-runtime-cluster"/></svg></div><div class="service-card-copy"><div><strong>order-api.k8s.bysz-1</strong><span class="service-type-pill is-cyan">NodePort</span></div><p>接入方式&nbsp; order-api <i></i> 工作负载&nbsp; 南京.bjyz-1</p></div></article>
+            <article class="service-card"><div class="service-card-icon is-alb"><svg><use href="#i-runtime-tree"/></svg></div><div class="service-card-copy"><div><strong>order-api.k8s.bysz-1</strong><span class="service-type-pill is-blue">ALB</span></div><p>接入方式&nbsp; order-api <i></i> 工作负载&nbsp; 南京.bjyz-1</p></div></article>
+          </div>
+        </div>
+      </section>
       <section class="runtime-page hidden" id="runtimePage" aria-labelledby="runtimePageTitle">
         <header class="runtime-page-header">
           <h1 id="runtimePageTitle">运行配置</h1>
