@@ -1625,7 +1625,7 @@
 
 #runtimePage .runtime-setting-row:has(> .runtime-switch-field) > .runtime-switch-field {
   min-height: 20px;
-  padding-left: 32px;
+  padding-left: 0;
 }
 
 #runtimePage .runtime-setting-row-stack {
@@ -2310,4 +2310,51 @@
 #runtimePage:not(.is-help-mode) .runtime-rule-block {
   margin-left: 32px;
   padding: 8px 0 12px;
+}
+
+/* Keep card borders without clipping field-state tooltips. */
+#runtimePage .runtime-setting-list,
+#runtimePage [data-runtime-config="credentials-config"] .runtime-credential-list {
+  overflow: visible;
+}
+
+#runtimePage [data-runtime-config="credentials-config"] .runtime-credential-list {
+  padding: 16px;
+}
+
+/* Field-state tooltips may cross card and row boundaries. */
+#runtimePage .runtime-section,
+#runtimePage .runtime-setting-list,
+#runtimePage .runtime-rule-group,
+#runtimePage .runtime-container-subsection,
+#runtimePage .runtime-image-shell,
+#runtimePage .runtime-code-table,
+#runtimePage [data-runtime-config="credentials-config"] .runtime-credential-list {
+  overflow: visible;
+}
+
+#runtimePage .runtime-setting-row.is-field-enabled:hover,
+#runtimePage .runtime-setting-row.is-field-disabled:hover,
+#runtimePage .runtime-image-list.is-field-enabled:hover,
+#runtimePage .runtime-image-list.is-field-disabled:hover {
+  z-index: 30;
+}
+
+#runtimePage .runtime-override-tooltip {
+  z-index: 40;
+}
+
+/* The preceding setting row already provides this divider. */
+#runtimePage .runtime-setting-row + .runtime-rule-group {
+  border-top: 0;
+}
+
+/* Align every leading field toggle to the standard setting-row baseline. */
+#runtimePage .runtime-setting-list > .runtime-rule-group {
+  margin-right: -16px;
+  margin-left: -16px;
+}
+
+#runtimePage .runtime-image-list {
+  padding-left: 17px;
 }
