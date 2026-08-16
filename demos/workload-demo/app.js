@@ -1388,8 +1388,72 @@ document.querySelectorAll('[data-runtime-collapse]').forEach(button=>button.addE
 }));
 document.querySelectorAll('[data-runtime-add]:not([data-runtime-add="level"])').forEach(button=>button.addEventListener('click',event=>{
   event.stopPropagation();
-  toast(`已打开新增${button.dataset.runtimeAdd==='workload'?'工作负载':button.dataset.runtimeAdd==='container'?'容器':'资源'}配置`);
+  if(button.dataset.runtimeAdd==='container'){
+    document.querySelector('#containerCreateModal')?.classList.remove('hidden');
+    return;
+  }
+  toast(`已打开新增${button.dataset.runtimeAdd==='workload'?'工作负载':'资源'}配置`);
 }));
+let runtimeAffinitySelectSequence=0;
+function createRuntimeAffinitySelect(label){
+  const selectId=`runtimeAffinityOperator-${++runtimeAffinitySelectSequence}`;
+  return `<div class="filter-select runtime-affinity-select" data-filter-select="${selectId}"><button type="button" class="filter-select-trigger" aria-haspopup="listbox" aria-expanded="false" aria-label="${label}"><span></span><svg aria-hidden="true"><use href="#i-chevron-down"/></svg></button><div class="filter-select-menu" role="listbox"></div><select id="${selectId}" class="filter-select-native" aria-label="${label}"><option value="in">在列表中(In)</option><option value="not-in">不在列表中(NotIn)</option><option value="exists">存在(Exists)</option></select></div>`;
+}
+function createRuntimeAffinityGroup(index){
+  const group=document.createElement('div');
+  group.className='runtime-affinity-group-card';
+  group.innerHTML=`<div class="runtime-affinity-group-head"><strong>条件组 ${index}</strong><button class="runtime-affinity-delete" type="button"><img src="./assets/service-exposure/delete.svg" alt="">删除该组</button></div><div class="runtime-affinity-table"><div class="runtime-affinity-row runtime-affinity-head"><span>标签键</span><span>操作符</span><span>值</span><span>操作</span></div><div class="runtime-affinity-row"><input aria-label="标签键 ${index}" placeholder="如 kubernetes.io/hostname">${createRuntimeAffinitySelect(`操作符 ${index}`)}<input aria-label="值 ${index}" placeholder="多个值用逗号分隔"><button class="runtime-affinity-expression-delete" type="button" aria-label="删除表达式"><img src="./assets/service-exposure/delete.svg" alt=""></button></div></div><button class="runtime-affinity-expression-add" type="button"><img src="./assets/service-exposure/add.svg" alt="">添加表达式</button>`;
+  return group;
+}
+function expandRuntimeHardRequirement(button){
+  const block=button.closest('.runtime-rule-block');
+  if(!block)return;
+  let groups=block.querySelector('.runtime-affinity-groups');
+  if(!groups){
+    groups=document.createElement('div');
+    groups.className='runtime-affinity-groups';
+    block.insertBefore(groups,button);
+  }
+  groups.append(createRuntimeAffinityGroup(groups.querySelectorAll('.runtime-affinity-group-card').length+1));
+  window.CNAPSelect?.initAll();
+  button.textContent='＋ 添加条件组';
+}
+document.querySelector('#runtimePage')?.addEventListener('click',event=>{
+  const addGroup=event.target.closest('.runtime-add-btn');
+  const addGroupTitle=addGroup?.closest('.runtime-rule-block')?.querySelector(':scope > strong')?.textContent.trim();
+  if(addGroup&&addGroup.textContent.includes('添加条件组')&&addGroupTitle?.startsWith('硬性要求')){ expandRuntimeHardRequirement(addGroup); return; }
+  const addExpression=event.target.closest('.runtime-affinity-expression-add');
+  if(addExpression){
+    const table=addExpression.parentElement.querySelector('.runtime-affinity-table');
+    const rowIndex=table.querySelectorAll('.runtime-affinity-row:not(.runtime-affinity-head)').length+1;
+    const row=document.createElement('div');
+    row.className='runtime-affinity-row';
+    row.innerHTML=`<input aria-label="标签键 ${rowIndex}" placeholder="如 kubernetes.io/hostname">${createRuntimeAffinitySelect(`操作符 ${rowIndex}`)}<input aria-label="值 ${rowIndex}" placeholder="多个值用逗号分隔"><button class="runtime-affinity-expression-delete" type="button" aria-label="删除表达式"><img src="./assets/service-exposure/delete.svg" alt=""></button>`;
+    table.append(row);
+    window.CNAPSelect?.initAll();
+    return;
+  }
+  const deleteGroup=event.target.closest('.runtime-affinity-delete');
+  if(deleteGroup){
+    const groups=deleteGroup.closest('.runtime-affinity-groups');
+    if(groups.querySelectorAll('.runtime-affinity-group-card').length>1)deleteGroup.closest('.runtime-affinity-group-card')?.remove();
+    return;
+  }
+  const deleteExpression=event.target.closest('.runtime-affinity-expression-delete');
+  if(deleteExpression){
+    const table=deleteExpression.closest('.runtime-affinity-table');
+    if(table.querySelectorAll('.runtime-affinity-row:not(.runtime-affinity-head)').length>1)deleteExpression.closest('.runtime-affinity-row')?.remove();
+  }
+});
+const containerCreateModal=document.querySelector('#containerCreateModal');
+const closeContainerCreate=()=>containerCreateModal?.classList.add('hidden');
+containerCreateModal?.querySelectorAll('.container-create-close,.container-create-cancel').forEach(button=>button.addEventListener('click',closeContainerCreate));
+containerCreateModal?.addEventListener('click',event=>{if(event.target===containerCreateModal)closeContainerCreate();});
+containerCreateModal?.querySelectorAll('.container-type-card').forEach(card=>card.addEventListener('click',()=>{
+  containerCreateModal.querySelectorAll('.container-type-card').forEach(item=>item.classList.remove('is-selected'));
+  card.classList.add('is-selected');
+}));
+containerCreateModal?.querySelector('.container-create-next')?.addEventListener('click',()=>toast('容器信息已保存'));
 document.querySelectorAll('.runtime-section-heading .runtime-icon-btn').forEach(button=>button.addEventListener('click',()=>{
   const section=button.closest('.runtime-section');
   section.classList.toggle('is-collapsed');
@@ -2013,13 +2077,22 @@ function closeServiceCreateModal(){
 function setServiceCreateStep(step){
   const modal=serviceCreateModal;
   if(!modal)return;
-  const firstStepElements=modal.querySelectorAll('.service-create-section-title,.service-create-group');
+  const firstStepElements=modal.querySelectorAll('.service-create-scroll > .service-create-section-title,.service-create-scroll > .service-create-group');
   const basicStep=modal.querySelector('#serviceCreateBasicStep');
+  const detailStep=modal.querySelector('#serviceCreateDetailStep');
+  const confirmStep=modal.querySelector('#serviceCreateConfirmStep');
   firstStepElements.forEach(item=>item.classList.toggle('hidden',step!==1));
   basicStep?.classList.toggle('hidden',step!==2);
+  detailStep?.classList.toggle('hidden',step!==3);
+  confirmStep?.classList.toggle('hidden',step!==4);
   modal.querySelectorAll('.service-create-steps > div').forEach((item,index)=>item.classList.toggle('is-active',index===step-1));
+  modal.querySelectorAll('[data-create-step-indicator]').forEach(indicator=>{
+    const indicatorStep=Number(indicator.dataset.createStepIndicator||0);
+    indicator.parentElement.classList.toggle('is-complete',indicatorStep<step);
+    indicator.textContent=indicatorStep<step?'✓':String(indicatorStep);
+  });
   modal.querySelector('.service-create-prev')?.classList.toggle('hidden',step===1);
-  modal.querySelector('.service-create-next').textContent=step===2?'下一步':'下一步';
+  modal.querySelector('.service-create-next').textContent=step===4?'发起操作':'下一步';
   modal.dataset.step=String(step);
 }
 function openServiceCreateModal(){
@@ -2030,7 +2103,10 @@ function openServiceCreateModal(){
 document.querySelector('.service-primary-action')?.addEventListener('click',openServiceCreateModal);
 serviceCreateModal?.querySelector('.service-create-close')?.addEventListener('click',closeServiceCreateModal);
 serviceCreateModal?.querySelector('.service-create-cancel')?.addEventListener('click',closeServiceCreateModal);
-serviceCreateModal?.querySelector('.service-create-prev')?.addEventListener('click',()=>setServiceCreateStep(1));
+serviceCreateModal?.querySelector('.service-create-prev')?.addEventListener('click',()=>{
+  const step=Number(serviceCreateModal.dataset.step||1);
+  setServiceCreateStep(Math.max(step-1,1));
+});
 serviceCreateModal?.querySelector('.service-create-next')?.addEventListener('click',()=>{
   const step=Number(serviceCreateModal.dataset.step||1);
   if(step===1&&!serviceCreateModal.querySelector('.service-create-option.is-selected')){
@@ -2039,7 +2115,8 @@ serviceCreateModal?.querySelector('.service-create-next')?.addEventListener('cli
     window.setTimeout(()=>toast.classList.add('hidden'),1800);
     return;
   }
-  setServiceCreateStep(Math.min(step+1,2));
+  if(step===4){ serviceCreateModal.classList.add('hidden'); return; }
+  setServiceCreateStep(Math.min(step+1,4));
 });
 serviceCreateModal?.addEventListener('click',event=>{if(event.target===serviceCreateModal)closeServiceCreateModal();});
 serviceCreateModal?.querySelectorAll('.service-create-option').forEach(option=>option.addEventListener('click',()=>{
@@ -2047,4 +2124,30 @@ serviceCreateModal?.querySelectorAll('.service-create-option').forEach(option=>o
   serviceCreateModal.querySelectorAll('.service-create-option').forEach(item=>item.classList.remove('is-selected'));
   if(!wasSelected)option.classList.add('is-selected');
 }));
+serviceCreateModal?.querySelectorAll('[data-create-toggle]').forEach(toggle=>toggle.addEventListener('click',()=>{
+  const isOn=toggle.classList.toggle('is-on');
+  toggle.setAttribute('aria-pressed',String(isOn));
+  const target=toggle.dataset.createToggle==='name'
+    ? serviceCreateModal.querySelector('#serviceCreateName')
+    : serviceCreateModal.querySelector('#serviceCreateCluster');
+  if(target)target.disabled=isOn;
+}));
+serviceCreateModal?.addEventListener('click',event=>{
+  const addButton=event.target.closest('.service-port-add');
+  if(addButton){
+    const table=serviceCreateModal.querySelector('.service-port-table');
+    const rowCount=table?.querySelectorAll('.service-port-row:not(.service-port-head)').length||0;
+    const row=document.createElement('div');
+    row.className='service-port-row';
+    row.setAttribute('role','row');
+    row.innerHTML=`<input aria-label="端口名称 ${rowCount+1}" placeholder="http"><input aria-label="对外端口号 ${rowCount+1}" inputmode="numeric"><input aria-label="目标端口名称 ${rowCount+1}" placeholder="http"><button class="service-port-delete" type="button" aria-label="删除端口映射 ${rowCount+1}">⌫</button>`;
+    table?.append(row);
+    return;
+  }
+  const deleteButton=event.target.closest('.service-port-delete');
+  if(deleteButton){
+    const row=deleteButton.closest('.service-port-row');
+    if(serviceCreateModal.querySelectorAll('.service-port-row:not(.service-port-head)').length>1)row?.remove();
+  }
+});
 renderClusterFilterOptions(); renderHistory(); render(); renderAppNavigation();

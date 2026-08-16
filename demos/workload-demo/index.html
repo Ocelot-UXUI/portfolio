@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>工作负载 | CNAP</title>
-  <link rel="stylesheet" href="./styles.css?v=20260815-27">
+  <link rel="stylesheet" href="./styles.css?v=20260816-40">
   <link rel="stylesheet" href="../../styles/project-navigation.css?v=20260809-14">
   <script src="../../scripts/project-navigation.js?v=20260809-3" defer></script>
   <style>
@@ -338,10 +338,10 @@
       </section>
       <div class="service-drawer-backdrop hidden" id="serviceDrawerBackdrop"></div>
       <aside class="service-drawer hidden" id="serviceDrawer" aria-labelledby="serviceDrawerTitle" aria-hidden="true">
-        <div class="service-drawer-header"><h2 id="serviceDrawerTitle">order-api.k8s.bysz-1</h2><div class="service-drawer-actions"><button type="button" aria-label="详情"><span class="drawer-figma-icon drawer-view-list"><img class="drawer-view-outline" src="./assets/service-exposure/drawer-view-outline.svg" alt=""><img class="drawer-view-lines" src="./assets/service-exposure/drawer-view-lines.svg" alt=""></span></button><button type="button" aria-label="配置"><span class="drawer-figma-icon drawer-hammer"><img src="./assets/service-exposure/drawer-hammer-path.svg" alt=""></span></button><button type="button" aria-label="风险"><span class="drawer-figma-icon drawer-harm"><img class="drawer-harm-outline" src="./assets/service-exposure/drawer-harm-outline.svg" alt=""><img class="drawer-harm-dot-one" src="./assets/service-exposure/drawer-harm-dot-one.svg" alt=""><img class="drawer-harm-dot-two" src="./assets/service-exposure/drawer-harm-dot-two.svg" alt=""></span></button><span class="drawer-action-divider"><img src="./assets/service-exposure/drawer-divider.svg" alt=""></span><button class="service-drawer-delete" type="button" aria-label="删除"><span class="drawer-figma-icon drawer-delete"><img src="./assets/service-exposure/drawer-delete.svg" alt=""></span></button><button class="service-drawer-close" type="button" aria-label="关闭">×</button></div></div>
+        <div class="service-drawer-header"><h2 id="serviceDrawerTitle">order-api.k8s.bysz-1</h2><div class="service-drawer-actions"><button type="button" aria-label="详情"><span class="drawer-figma-icon drawer-view-list"><img class="drawer-view-outline" src="./assets/service-exposure/drawer-view-outline.svg" alt=""><img class="drawer-view-lines" src="./assets/service-exposure/drawer-view-lines.svg" alt=""></span></button><button type="button" aria-label="配置"><span class="drawer-figma-icon drawer-hammer"><img src="./assets/service-exposure/drawer-hammer-path.svg" alt=""></span></button><button type="button" aria-label="风险"><span class="drawer-figma-icon drawer-harm"><img class="drawer-harm-outline" src="./assets/service-exposure/drawer-harm-outline.svg" alt=""><img class="drawer-harm-dot-one" src="./assets/service-exposure/drawer-harm-dot-one.svg" alt=""><img class="drawer-harm-dot-two" src="./assets/service-exposure/drawer-harm-dot-two.svg" alt=""></span></button><span class="drawer-action-divider"><img src="./assets/service-exposure/drawer-divider.svg" alt=""></span><button class="service-drawer-close" type="button" aria-label="关闭">×</button></div></div>
         <div class="service-drawer-body">
           <section class="service-drawer-section"><h3>Pod配置</h3><div class="service-drawer-fields service-drawer-fields-two"><div><label>类型</label><strong id="drawerPodType">ENS Group</strong></div><div><label>创建时间</label><strong>2026-07-28</strong></div><div><label>名称</label><strong id="drawerPodName">group.ec-ai-anchor-ai-anchor-prod.K8S.all</strong></div></div></section>
-          <section class="service-drawer-section"><h3>目标工作负载</h3><div class="service-drawer-table"><div><span>工作负载名称</span><span>集群</span></div><div><strong class="workload-status-tag" id="drawerWorkloadOne">order-worker</strong><strong id="drawerClusterOne">bjyz-1</strong></div><div><strong class="workload-status-tag" id="drawerWorkloadTwo">order-worker</strong><strong id="drawerClusterTwo">njxg-1</strong></div></div></section>
+          <section class="service-drawer-section"><h3>目标工作负载</h3><div class="service-drawer-table"><div><span>工作负载名称</span><span>集群</span></div><div><strong id="drawerWorkloadOne">order-worker</strong><strong class="drawer-cluster-cell"><i class="cluster-mini-icon" aria-hidden="true"><b></b><b></b><b></b><b></b></i><span id="drawerClusterOne">bjyz-1</span><em>集群标签</em></strong></div><div><strong id="drawerWorkloadTwo">order-worker</strong><strong class="drawer-cluster-cell"><i class="cluster-mini-icon" aria-hidden="true"><b></b><b></b><b></b><b></b></i><span id="drawerClusterTwo">njxg-1</span><em>集群标签</em></strong></div></div></section>
           <section class="service-drawer-section"><h3>基础配置</h3><div class="service-drawer-fields service-drawer-fields-two"><div><label>服务类型</label><strong id="drawerServiceType">LoadBalancer</strong></div><div><label>目标工作负载</label><strong id="drawerTargetWorkload">order-state（Statefaction）</strong></div></div></section>
           <section class="service-drawer-section"><h3>端口映射</h3><div class="service-drawer-table service-port-table"><div><span>名称</span><span>Service端口</span><span>目标端口</span><span>协议</span></div><div><strong>order-worker</strong><strong id="drawerServicePort">8080</strong><strong>8080</strong><strong>TCP</strong></div><div><strong>order-worker</strong><strong id="drawerServicePortTwo">8080</strong><strong>8080</strong><strong>TCP</strong></div></div></section>
         </div>
@@ -349,7 +349,7 @@
       <div class="service-create-overlay hidden" id="serviceCreateModal" aria-hidden="true">
         <div class="service-create-dialog" role="dialog" aria-modal="true" aria-labelledby="serviceCreateTitle">
           <header><h2 id="serviceCreateTitle">新增流量接入</h2><button class="service-create-close" type="button" aria-label="关闭">×</button></header>
-          <div class="service-create-steps"><div class="is-active"><b>1</b><span>选择方式</span></div><i></i><div><b>2</b><span>基础配置</span></div><i></i><div><b>3</b><span>详情配置</span></div><i></i><div><b>4</b><span>确认配置</span></div></div>
+          <div class="service-create-steps"><div class="is-active"><b data-create-step-indicator="1">1</b><span>选择方式</span></div><i></i><div><b data-create-step-indicator="2">2</b><span>基础配置</span></div><i></i><div><b data-create-step-indicator="3">3</b><span>详情配置</span></div><i></i><div><b data-create-step-indicator="4">4</b><span>确认配置</span></div></div>
           <div class="service-create-scroll">
             <div class="service-create-section-title"><h3>选择方式</h3><button type="button">全部下游 <svg><use href="#i-chevron-down"/></svg></button></div>
             <section class="service-create-group"><h4>集群内</h4><div class="service-create-options">
@@ -364,11 +364,57 @@
               <button class="service-create-option" type="button" data-create-type="NodePort"><span class="service-create-option-head"><i class="is-cyan"><svg><use href="#i-runtime-tree"/></svg></i><strong>NodePort</strong><em>常用</em></span><p>K8s 原生 Service，为服务分配集群内部 IP 和 DNS 域名，仅支持集群内访问。</p><small>下游&nbsp; POD<br>上游&nbsp; ENS Group</small></button>
             </div></section>
             <section class="service-create-group"><h4>外网</h4><div class="service-create-options"><button class="service-create-option" type="button" data-create-type="ALB"><span class="service-create-option-head"><i class="is-blue"><img src="./assets/service-exposure/branch-two.svg" alt=""></i><strong>ALB</strong></span><p>K8s 原生 Service，为服务分配集群内部 IP 和 DNS 域名，仅支持集群内访问。</p><small>下游&nbsp; ENS Service、ENS Group<br>上游&nbsp; —</small></button></div></section>
-            <section class="service-create-basic hidden" id="serviceCreateBasicStep"><h3>基础配置</h3><div class="service-basic-fields"><label>接入方式<input value="Headless"></label><label>名称<input value="order-api"></label><label>目标<button type="button">全部集群 <svg><use href="#i-chevron-down"/></svg></button></label><label>访问范围<button type="button">集群内 <svg><use href="#i-chevron-down"/></svg></button></label></div></section>
+            <section class="service-create-basic hidden" id="serviceCreateBasicStep">
+              <div class="service-create-section-title"><h3>目标工作负载</h3></div>
+              <div class="service-create-basic-group">
+                <label for="serviceCreateWorkload">工作负载</label>
+                <select id="serviceCreateWorkload" class="service-create-select"><option>order-api（Deployment）</option><option>order-worker（Deployment）</option></select>
+              </div>
+              <div class="service-create-basic-group">
+                <div class="service-create-basic-label"><div><label for="serviceCreateName">使用默认服务名称</label><p>开启后自动使用工作负载名称，关闭后可手动指定</p></div><button class="service-create-switch is-on" type="button" data-create-toggle="name" aria-pressed="true"><i></i></button></div>
+                <input id="serviceCreateName" class="service-create-text-input" value="order-worker-lb" disabled>
+                <p class="service-create-hint">即将创建的DNS名称：<strong>order-worker-lb.svc.local</strong></p>
+              </div>
+              <div class="service-create-basic-group">
+                <div class="service-create-basic-label"><div><label for="serviceCreateCluster">为所有集群启用</label><p>开启后自动使用工作负载名称，关闭后可手动指定</p></div><button class="service-create-switch is-on" type="button" data-create-toggle="cluster" aria-pressed="true"><i></i></button></div>
+                <select id="serviceCreateCluster" class="service-create-select" disabled><option>全部集群</option><option>cluster-bj</option><option>cluster-sh</option></select>
+              </div>
+            </section>
+            <section class="service-create-detail hidden" id="serviceCreateDetailStep">
+              <div class="service-create-section-title"><h3>端口映射</h3></div>
+              <div class="service-port-table" role="table" aria-label="端口映射">
+                <div class="service-port-row service-port-head" role="row"><span>端口名称</span><span>对外端口号</span><span>目标端口名称</span><span>操作</span></div>
+                <div class="service-port-row" role="row"><input aria-label="端口名称 1" placeholder="http"><input aria-label="对外端口号 1" value="80" inputmode="numeric"><input aria-label="目标端口名称 1" placeholder="http"><button class="service-port-delete" type="button" aria-label="删除端口映射 1">⌫</button></div>
+                <div class="service-port-row" role="row"><input aria-label="端口名称 2" placeholder="http"><input aria-label="对外端口号 2" value="80" inputmode="numeric"><input aria-label="目标端口名称 2" placeholder="http"><button class="service-port-delete" type="button" aria-label="删除端口映射 2">⌫</button></div>
+              </div>
+              <button class="service-port-add" type="button"><span aria-hidden="true">+</span>新增端口映射</button>
+            </section>
+            <section class="service-create-confirm hidden" id="serviceCreateConfirmStep">
+              <div class="service-create-section-title"><h3>配置概览</h3></div>
+              <div class="service-confirm-grid">
+                <div><span>接入方式</span><strong>Headless</strong></div>
+                <div><span>名称</span><strong>order-api</strong></div>
+                <div><span>目标</span><strong>全部集群</strong></div>
+                <div><span>访问范围</span><strong>集群内</strong></div>
+              </div>
+            </section>
           </div>
           <footer><button class="service-create-cancel" type="button">取消</button><button class="service-create-prev hidden" type="button">上一步</button><button class="service-create-next" type="button">下一步</button></footer>
         </div>
         <div class="service-create-toast hidden" id="serviceCreateToast">请选择一个接入方式</div>
+      </div>
+      <div class="container-create-overlay hidden" id="containerCreateModal" role="dialog" aria-modal="true" aria-labelledby="containerCreateTitle">
+        <div class="container-create-dialog">
+          <header><div><h2 id="containerCreateTitle">新增容器</h2><p>正在为工作负载 payment-service 新增一个容器。填写完成后将作为新容器加入该工作负载。</p></div><button class="container-create-close" type="button" aria-label="关闭">×</button></header>
+          <div class="container-create-body">
+            <div class="container-create-steps"><div class="is-active"><b>1</b><span>容器信息</span></div><i></i><div><b>2</b><span>镜像构建</span></div><i></i><div><b>3</b><span>容器规格</span></div><i></i><div><b>4</b><span>端口</span></div></div>
+            <div class="container-create-form">
+              <label>容器名称<input placeholder="例sidecar-proxy，容器在 Pod 内的唯一名称"><small>应用名称：sjiasiajsjiasjiasjiasjiasjiasjiasjias2</small></label>
+              <fieldset><legend>容器类型</legend><div class="container-type-options"><button class="container-type-card is-selected" type="button"><span class="container-type-icon is-box">✥</span><span><strong>普通容器</strong><small>普通应用容器，Pod启动时同步拉起，整个生命周期与Pod同步</small></span><i class="container-type-radio"></i></button><button class="container-type-card" type="button"><span class="container-type-icon is-ring">◌</span><span><strong>Init容器</strong><small>初始化容器，Pod启动时依次执行，所有Init容器成功退出后才拉起普通容器</small></span><i class="container-type-radio"></i></button></div></fieldset>
+            </div>
+          </div>
+          <footer><button class="container-create-cancel" type="button">取消</button><button class="container-create-next" type="button">下一步</button></footer>
+        </div>
       </div>
       <section class="runtime-page hidden" id="runtimePage" aria-labelledby="runtimePageTitle">
         <header class="runtime-page-header">
@@ -506,6 +552,6 @@
   <script src="./components/cnap-select.js?v=20260813-1"></script>
   <script src="./components/cnap-input.js?v=20260814-3"></script>
   <script src="./components/cnap-checkbox.js?v=20260814-2"></script>
-  <script src="./app.js?v=20260815-01"></script>
+  <script src="./app.js?v=20260816-09"></script>
 </body>
 </html>
