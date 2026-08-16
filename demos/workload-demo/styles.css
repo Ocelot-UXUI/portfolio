@@ -2661,6 +2661,36 @@
   min-width: 0;
 }
 
+/* The whole image-build content is one responsive framed group. */
+#runtimePage #runtime-container-image .runtime-image-list {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+}
+#runtimePage #runtime-container-image .runtime-image-source {
+  height: auto;
+  min-height: 94px;
+  padding: 16px 20px;
+}
+#runtimePage #runtime-container-image .runtime-image-heading {
+  margin: 16px 20px 0;
+}
+#runtimePage #runtime-container-image .runtime-image-shell {
+  margin: 8px 20px 20px;
+}
+#runtimePage #runtime-container-image .runtime-container-build-tail {
+  margin: 16px 0 0;
+  padding: 0 20px 8px;
+  overflow: visible;
+  border: 0;
+  border-top: 1px solid #e8e8e8;
+  border-radius: 0;
+}
+
 #runtimePage.is-help-mode .runtime-setting-subrows {
   gap: var(--runtime-space-s);
   padding-top: var(--runtime-space-xs);
