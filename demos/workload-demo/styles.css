@@ -2608,6 +2608,34 @@
   gap: var(--runtime-space-m);
 }
 
+/* Keep the Figma InputNumber and its unit inside the row bounds. */
+#runtimePage .runtime-setting-row > .runtime-input-unit {
+  display: flex;
+  width: 168px;
+  min-width: 168px;
+  box-sizing: border-box;
+  align-items: center;
+  gap: 8px;
+}
+#runtimePage .runtime-setting-row > .runtime-input-unit > .cnap-input[type="number"] {
+  flex: 0 0 136px;
+  width: 136px;
+  min-width: 136px;
+}
+#runtimePage .runtime-setting-row > .runtime-inline-control {
+  min-width: 0;
+  max-width: 100%;
+  flex-wrap: wrap;
+}
+#runtimePage .runtime-setting-row > .runtime-inline-control > .cnap-input[type="number"] {
+  flex: 0 0 136px;
+  width: 136px;
+  min-width: 136px;
+}
+#runtimePage .runtime-setting-row > div:not(.runtime-input-unit):not(.runtime-inline-control):not(.runtime-switch-field) {
+  min-width: 0;
+}
+
 #runtimePage.is-help-mode .runtime-setting-subrows {
   gap: var(--runtime-space-s);
   padding-top: var(--runtime-space-xs);
