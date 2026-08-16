@@ -1248,6 +1248,7 @@
 #runtimePage #runtime-container.is-container-context .runtime-section-heading > div { display: flex; align-items: center; gap: 8px; }
 #runtimePage #runtime-container.is-container-context .runtime-section-heading > div::before { width: 3px; height: 16px; flex: 0 0 3px; background: #72e8b1; content: ""; }
 #runtimePage #runtime-container.is-container-context .runtime-section-heading h3 { font: 500 16px/24px "PingFang SC", sans-serif; }
+#runtimePage #runtime-container { scroll-margin-top: 24px; }
 #runtimePage .runtime-section-heading p { margin: 4px 0 0; color: #8f8f8f; font-size: 12px; line-height: 20px; }
 #runtimePage .runtime-section-kicker { display: block; margin-bottom: 2px; color: #8f8f8f; font-size: 12px; line-height: 20px; }
 #runtimePage .runtime-icon-btn { display: grid; width: 24px; height: 24px; place-items: center; font-size: 16px; }
@@ -1289,8 +1290,14 @@
 #runtimePage .runtime-image-list.is-field-disabled .runtime-image-card,
 #runtimePage .runtime-image-list.is-field-disabled .runtime-version-pills { opacity: .56; }
 #runtimePage .runtime-image-list.is-field-disabled .runtime-image-shell button { cursor: not-allowed; }
+#runtimePage .runtime-image-base-group.is-field-disabled .runtime-image-card,
+#runtimePage .runtime-image-base-group.is-field-disabled .runtime-version-pills { opacity: .56; }
+#runtimePage .runtime-image-base-group.is-field-disabled .runtime-image-shell button { cursor: not-allowed; }
+#runtimePage .runtime-image-source.is-field-disabled .runtime-select-value { border-color: #d9d9d9; background: #f7f7f7; color: #bfbfbf; cursor: not-allowed; }
 #runtimePage .runtime-setting-row.is-field-disabled:has(> input:hover, > button:hover, .runtime-setting-subrows:hover, .runtime-inline-control:hover, .runtime-command-actions:hover) .runtime-override-tooltip,
-#runtimePage .runtime-image-list.is-field-disabled:has(.runtime-image-shell button:hover) .runtime-override-tooltip { display: block; }
+#runtimePage .runtime-image-list.is-field-disabled:has(.runtime-image-shell button:hover) .runtime-override-tooltip,
+#runtimePage .runtime-image-base-group.is-field-disabled:has(.runtime-image-shell button:hover) .runtime-override-tooltip,
+#runtimePage .runtime-image-source.is-field-disabled:has(.runtime-select-value:hover) .runtime-override-tooltip { display: block; }
 #runtimePage .cnap-input {
   display: block;
   box-sizing: border-box;
@@ -1328,9 +1335,13 @@
 #runtimePage .runtime-override-tag-pending { background: #fff3e0; color: #f58300; }
 #runtimePage .runtime-setting-row.is-field-enabled,
 #runtimePage .runtime-image-list.is-field-enabled,
+#runtimePage .runtime-image-source.is-field-enabled,
+#runtimePage .runtime-image-base-group.is-field-enabled,
 #runtimePage .runtime-rule-group.is-field-enabled,
 #runtimePage .runtime-setting-row.is-field-disabled,
 #runtimePage .runtime-image-list.is-field-disabled,
+#runtimePage .runtime-image-source.is-field-disabled,
+#runtimePage .runtime-image-base-group.is-field-disabled,
 #runtimePage .runtime-rule-group.is-field-disabled { position: relative; }
 #runtimePage .runtime-override-tooltip {
   position: absolute; z-index: 20; left: 0; bottom: calc(100% - 2px); display: none;
@@ -1385,6 +1396,28 @@
 #runtimePage .runtime-setting-subrows .runtime-input-unit input { width: 88px; }
 #runtimePage .runtime-setting-subrows .runtime-switch-field { min-height: 20px; }
 #runtimePage .runtime-setting-row-block > div:has(.runtime-add-btn) { display: flex; flex-wrap: wrap; gap: 8px; }
+#runtimePage .runtime-setting-row-block > .runtime-add-btn,
+#runtimePage .runtime-setting-row-block > .runtime-command-actions {
+  grid-column: 2 / -1;
+  justify-self: start;
+  margin-top: 8px;
+}
+#runtimePage .runtime-setting-row-block > div:has(> .runtime-add-btn) {
+  grid-column: 2 / -1;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+#runtimePage .runtime-setting-row-block > .runtime-command-actions {
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+#runtimePage .runtime-rule-block > .runtime-add-btn {
+  display: inline-flex;
+  margin-top: 8px;
+}
 #runtimePage .runtime-rule-block { padding: 8px 0 12px 32px; border-top: 1px solid #f0f0f0; }
 #runtimePage .runtime-rule-block strong { display: block; font-size: 14px; line-height: 22px; font-weight: 400; }
 #runtimePage .runtime-rule-block p { max-width: 620px; margin: 4px 0 12px; color: #8f8f8f; font-size: 12px; line-height: 20px; }
@@ -1395,7 +1428,9 @@
 #runtimePage .runtime-credential-list { padding: 16px 0; }
 #runtimePage .runtime-credential-heading { display: flex; min-height: 22px; align-items: center; justify-content: space-between; gap: 16px; }
 #runtimePage .runtime-credential-title { display: flex; align-items: center; gap: 8px; }
+#runtimePage .runtime-credential-title > div { display:flex; align-items:center; gap:8px; }
 #runtimePage .runtime-credential-title strong { font: 500 14px/22px "PingFang SC", sans-serif; white-space: nowrap; }
+#runtimePage .runtime-credential-status { height:20px; padding:0 8px; border:1px solid #99ccff; border-radius:12px; background:#e5f2ff; color:#0080ff; font:400 12px/18px "PingFang SC", sans-serif; }
 #runtimePage .runtime-credential-actions { display: flex; align-items: center; gap: 16px; }
 #runtimePage .runtime-credential-actions button { display: inline-flex; height: 20px; align-items: center; gap: 6px; padding: 0; border: 0; background: transparent; color: #545454; font: 400 12px/20px "PingFang SC", sans-serif; white-space: nowrap; cursor: pointer; }
 #runtimePage .runtime-credential-actions button:hover { color: #545454; }
@@ -1404,6 +1439,124 @@
 #runtimePage.is-help-mode .runtime-credential-description { display: block; }
 #runtimePage .runtime-credential-add-list { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; margin-top: 8px; padding-left: 32px; }
 #runtimePage .runtime-credential-add-list .runtime-add-btn { min-width: 116px; }
+#runtimePage .runtime-credential-table { display:grid; grid-template-columns:41px minmax(220px,1.2fr) minmax(190px,1fr) 92px; margin:16px 0 0 32px; background:#f7f7f7; border-radius:12px; overflow:hidden; }
+#runtimePage .runtime-credential-table-col { min-width:0; }
+#runtimePage .runtime-credential-table-head,
+#runtimePage .runtime-credential-table-cell { display:flex; min-height:48px; align-items:center; border-bottom:1px solid #e8e8e8; box-sizing:border-box; }
+#runtimePage .runtime-credential-table-head { padding:0 20px 0 4px; color:#8f8f8f; font:500 14px/22px "PingFang SC", sans-serif; }
+#runtimePage .runtime-credential-table-cell { gap:6px; padding:0 20px 0 4px; color:#181818; font:400 14px/22px "PingFang SC", sans-serif; }
+#runtimePage .runtime-credential-table-cell input { min-width:0; width:100%; height:32px; padding:4px 10px; border:1px solid #d9d9d9; border-radius:8px; background:#fff; color:#181818; font:400 14px/22px "PingFang SC", sans-serif; box-sizing:border-box; outline:0; }
+#runtimePage .runtime-credential-table-cell button { display:inline-flex; width:16px; height:16px; flex:0 0 16px; align-items:center; justify-content:center; padding:0; border:0; background:transparent; color:#545454; cursor:pointer; }
+#runtimePage .runtime-credential-table-cell button svg { width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:1.2; }
+#runtimePage .runtime-credential-secret { display:flex; min-width:0; flex:1; align-items:center; gap:4px; height:32px; padding:0 10px; border:1px solid #d9d9d9; border-radius:8px; background:#fff; box-sizing:border-box; }
+#runtimePage .runtime-credential-secret input { height:28px; padding:0; border:0; }
+#runtimePage .runtime-credential-operation .runtime-credential-table-cell { gap:12px; padding:0 20px; }
+#runtimePage .runtime-credential-table + .runtime-credential-add-list { margin-top:12px; }
+#runtimePage [data-runtime-config="credentials-config"].has-credential-data .runtime-credential-add-list .runtime-add-btn { opacity:1; }
+#runtimePage .runtime-code-repository-table { display:grid; grid-template-columns:40px 76px minmax(220px,266px) minmax(210px,245px) minmax(120px,1fr); margin:16px 0 0 32px; background:#fff; }
+#runtimePage .runtime-code-repository-col { min-width:0; }
+#runtimePage .runtime-code-repository-head,
+#runtimePage .runtime-code-repository-cell { display:flex; min-height:48px; align-items:center; overflow:hidden; border-bottom:1px solid #e8e8e8; box-sizing:border-box; }
+#runtimePage .runtime-code-repository-head { padding:0 20px 0 4px; color:#8f8f8f; font:500 14px/22px "PingFang SC",sans-serif; }
+#runtimePage .runtime-code-repository-cell { gap:6px; padding:0 20px; color:#181818; font:400 14px/22px "PingFang SC",sans-serif; }
+#runtimePage .runtime-code-repository-drag .runtime-code-repository-cell { padding-left:4px; padding-right:20px; color:#bfbfbf; }
+#runtimePage .runtime-code-repository-drag svg { width:14px; height:14px; }
+#runtimePage .runtime-code-repository-drag button,
+#runtimePage .runtime-code-repository-operation button { display:inline-flex; width:16px; height:16px; align-items:center; justify-content:center; padding:0; border:0; border-radius:4px; background:transparent; color:inherit; cursor:pointer; }
+#runtimePage .runtime-code-repository-drag button:hover,
+#runtimePage .runtime-code-repository-operation button:hover,
+#runtimePage .runtime-code-repository-operation button.is-active { background:#f0f0f0; color:#181818; }
+#runtimePage .runtime-disabled-input { display:flex; width:100%; height:32px; align-items:center; gap:8px; padding:4px 12px; border:1px solid #d9d9d9; border-radius:8px; background:#f7f7f7; color:#bfbfbf; box-sizing:border-box; }
+#runtimePage .runtime-disabled-input svg { width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:1.2; }
+#runtimePage .runtime-code-repository-operation .runtime-code-repository-cell { gap:10px; padding:0 20px; opacity:.4; }
+#runtimePage .runtime-code-repository-operation .runtime-code-repository-cell svg { width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:1.2; }
+#runtimePage .runtime-code-repository-table + .runtime-credential-add-list { margin-top:12px; opacity:.4; }
+#runtimePage .runtime-code-repository-operation .runtime-code-repository-cell { opacity:1; color:#545454; }
+#runtimePage .runtime-code-repository-list .runtime-add-btn { opacity:1; }
+
+#runtimePage #runtime-container-image .runtime-container-build-tail {
+  margin: 0 -16px;
+  border-top: 1px solid #e8e8e8;
+}
+
+#runtimePage #runtime-container-image .runtime-container-build-tail > .runtime-setting-row {
+  min-height: 94px;
+  margin: 0;
+  padding: 16px;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+#runtimePage #runtime-container-image .runtime-container-build-tail > .runtime-setting-row:last-child {
+  border-bottom: 0;
+}
+
+#runtimePage #runtime-container-image .runtime-code-repository-row {
+  align-items: start;
+}
+
+#runtimePage #runtime-container-image .runtime-code-repository-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  grid-column: 2 / -1;
+  width: 100%;
+  margin-top: 12px;
+}
+
+#runtimePage #runtime-container-image .runtime-code-repository-table {
+  width: 100%;
+  margin: 0;
+}
+
+#runtimePage #runtime-container-image .runtime-code-repository-content > .runtime-add-btn {
+  align-self: flex-start;
+}
+
+#runtimePage #runtime-container-image .runtime-container-build-tail .runtime-build-path {
+  grid-column: 2 / -1;
+  width: 100%;
+  min-height: 58px;
+  padding: 8px 12px;
+  resize: vertical;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  color: #181818;
+  font: 400 12px/20px "PingFang SC", sans-serif;
+}
+
+#runtimePage #runtime-container-image .runtime-build-inline {
+  display: flex;
+  grid-column: 2 / -1;
+  align-items: center;
+  gap: 16px;
+}
+
+#runtimePage #runtime-container-image .runtime-build-inline > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #8f8f8f;
+  font: 400 12px/20px "PingFang SC", sans-serif;
+}
+
+#runtimePage #runtime-container-image .runtime-build-inline > span svg {
+  width: 14px;
+  height: 14px;
+  color: #f58300;
+  fill: none;
+  stroke: none;
+}
+
+#runtimePage #runtime-container-image .runtime-build-select {
+  width: 160px;
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  background: #fff;
+  color: #545454;
+  font: 400 14px/22px "PingFang SC", sans-serif;
+}
 #runtimePage [data-runtime-config="credentials-config"] .runtime-credential-title .runtime-setting-icon { margin-top: 0; }
 #runtimePage [data-runtime-config="credentials-config"] .runtime-add-btn { opacity: .4; }
 #runtimePage .runtime-select-value { display: inline-flex; width: 160px; height: 32px; align-items: center; justify-content: space-between; padding: 4px 10px; border: 1px solid #d9d9d9; border-radius: 8px; background: #fff; color: #181818; font: 14px/22px "PingFang SC", sans-serif; }
@@ -1441,14 +1594,60 @@
   min-height: 94px; align-items: start; row-gap: 8px; padding-top: 16px; padding-bottom: 16px;
 }
 #runtimePage .runtime-command-row > .runtime-command-actions {
-  display: flex; grid-column: 2 / 4; min-width: 0; align-items: center; gap: 16px;
+  display: flex; grid-column: 2 / 4; min-width: 0; align-items: center; gap: 16px; margin-top: 0; padding-left: 3px;
+}
+
+/* Figma 467:15107: title row and action row are separate; the action row
+   starts 32px from the left edge and keeps its button/hint inline. */
+#runtimePage .runtime-command-row {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  column-gap: 8px;
+  row-gap: 8px;
+  align-items: start;
+}
+
+#runtimePage .runtime-command-row > .runtime-setting-icon {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: start;
+}
+
+#runtimePage .runtime-command-row > div:not(.runtime-command-actions) {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+#runtimePage .runtime-command-row > .runtime-command-actions {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+  margin: 0 0 0 32px;
+  padding: 0;
+}
+
+#runtimePage.is-help-mode .runtime-command-row > .runtime-command-actions {
+  display: flex;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
+#runtimePage.is-help-mode .runtime-command-row .runtime-row-hint {
+  display: inline-flex;
+  grid-column: auto;
+  margin: 0;
+  align-items: center;
+  white-space: nowrap;
 }
 #runtimePage .runtime-command-row .runtime-row-hint {
   display: inline-flex; grid-column: auto; align-items: center; gap: 4px; margin: 0;
   color: #8f8f8f; font: 400 12px/20px "PingFang SC", sans-serif; white-space: nowrap;
 }
 #runtimePage .runtime-command-row .runtime-row-hint svg {
-  width: 14px; height: 14px; flex: 0 0 14px; fill: none; stroke: #ff9b2f; stroke-width: 1.5;
+  width: 14px; height: 14px; flex: 0 0 14px; fill: none; stroke: none;
 }
 #runtimePage .runtime-container-content { min-width: 0; }
 #runtimePage .runtime-image-list { padding-left: 17px; }
@@ -1602,6 +1801,30 @@
   margin: 0;
   color: #181818;
   font: 500 14px/22px "PingFang SC", sans-serif;
+}
+
+/* Figma 467:8483 and 549:17780: Pod configuration is an intermediate level
+   between the workload title and the capacity/change content group. */
+#runtimePage .runtime-config-level-heading {
+  display: flex;
+  height: 24px;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 34px;
+}
+
+#runtimePage .runtime-config-level-heading > span {
+  display: block;
+  width: 3px;
+  height: 16px;
+  flex: 0 0 3px;
+  background: #72e8b1;
+}
+
+#runtimePage .runtime-config-level-heading h3 {
+  margin: 0;
+  color: #181818;
+  font: 500 16px/24px "PingFang SC", sans-serif;
 }
 
 #runtimePage .runtime-setting-list {
@@ -2466,6 +2689,91 @@
 
 #runtimePage [data-runtime-config="credentials-config"] .runtime-credential-list {
   padding: 16px;
+}
+
+#runtimePage [data-runtime-config="credentials-config"] .runtime-code-repository-list {
+  margin-top: 16px;
+}
+
+#runtimePage [data-runtime-config="credentials-config"] .runtime-credentials-manager {
+  padding: 0 16px;
+}
+
+#runtimePage [data-runtime-config="credentials-config"] .runtime-credential-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 0;
+}
+
+#runtimePage [data-runtime-config="credentials-config"] .runtime-credential-top {
+  display: flex;
+  min-height: 22px;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+#runtimePage [data-runtime-config="credentials-config"] .runtime-credential-top > .runtime-setting-icon {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+#runtimePage [data-runtime-config="credentials-config"] .runtime-credential-title {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  color: #181818;
+  font: 500 14px/22px "PingFang SC", sans-serif;
+}
+
+#runtimePage [data-runtime-config="credentials-config"] .runtime-credential-top .runtime-inline-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-left: auto;
+}
+
+#runtimePage [data-runtime-config="credentials-config"] .runtime-credential-top .runtime-inline-actions button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #545454;
+  font: 400 12px/20px "PingFang SC", sans-serif;
+}
+
+#runtimePage [data-runtime-config="credentials-config"] .runtime-credential-top .runtime-inline-actions svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.2;
+}
+
+#runtimePage [data-runtime-config="credentials-config"] .runtime-credential-top .runtime-credential-add-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 0 0 calc(100% - 32px);
+  width: auto;
+  margin-left: 32px;
+  margin-top: 0;
+  padding-left: 0;
+}
+
+#runtimePage [data-runtime-config="credentials-config"] .runtime-credential-top .runtime-add-btn {
+  align-self: flex-start;
+  opacity: .4;
 }
 
 /* Field-state tooltips may cross card and row boundaries. */

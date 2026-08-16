@@ -8,6 +8,18 @@
     <link rel="stylesheet" href="../styles/styles.css?v=20260728-4" />
     <link rel="stylesheet" href="../styles/project-navigation.css?v=20260809-14" />
     <script src="../scripts/project-navigation.js?v=20260809-3" defer></script>
+    <style>
+      .ai-workflow-scroll{display:flex;gap:22px;overflow-x:auto;padding:2px 2px 20px;scroll-snap-type:x proximity;scrollbar-width:thin}
+      .ai-workflow-scroll::-webkit-scrollbar{height:8px}
+      .ai-workflow-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.25);border-radius:4px}
+      .ai-workflow-scroll::-webkit-scrollbar-track{background:rgba(255,255,255,.06)}
+      .ai-workflow-scroll figure{flex:0 0 auto;margin:0;scroll-snap-align:start}
+      .ai-workflow-scroll img{display:block;height:min(76vh,780px);width:auto;border:1px solid rgba(255,255,255,.16);border-radius:10px;background:#fff;box-shadow:0 12px 36px rgba(0,0,0,.4)}
+      .ai-workflow-scroll figcaption{margin-top:10px;color:#777b86;font-size:13px;text-align:center}
+      .ai-workflow-block-title{margin:56px 0 10px;color:#fff;font-size:24px;font-weight:600;letter-spacing:.01em}
+      .ai-workflow-block-desc{margin:0 0 22px;color:#9195a1;font-size:14px;line-height:1.7}
+      @media(max-width:700px){.ai-workflow-block-title{margin-top:40px;font-size:20px}}
+    </style>
   </head>
   <body class="deliverables-page cnap-research-page">
     <header class="project-nav">
@@ -20,6 +32,7 @@
         <h1 id="cnap-materials-title">交付物</h1>
         <div class="deliverables-tabs" role="tablist" aria-label="交付物分类">
           <button type="button" role="tab" aria-controls="research-panel" aria-selected="true" tabindex="0" data-deliverable-tab="research">用户调研</button>
+          <button type="button" role="tab" aria-controls="ai-workflow-panel" aria-selected="false" tabindex="-1" data-deliverable-tab="ai-workflow">AI工作流</button>
         </div>
         <div class="deliverables-content" aria-live="polite">
           <section class="deliverable-panel" id="research-panel" data-deliverable-panel="research" role="tabpanel">
@@ -129,6 +142,47 @@
               </article>
             </section>
           </section>
+          <section class="deliverable-panel" id="ai-workflow-panel" data-deliverable-panel="ai-workflow" role="tabpanel" hidden>
+            <div class="research-subtabs ai-workflow-subtabs" role="tablist" aria-label="AI 工作流 Skill 分类">
+              <button type="button" role="tab" aria-controls="aiwf-review-panel" aria-selected="true" tabindex="0" data-aiworkflow-tab="review-check">评审前自查 Skill</button>
+            </div>
+            <section class="research-subpanel" id="aiwf-review-panel" data-aiworkflow-panel="review-check" role="tabpanel">
+            <article class="research-document">
+              <h2>CNAP 方案评审自查</h2>
+              <p>设计方案评审前使用该 Skill 按「交互」与「视觉」两条线分别自查，输出结构化评审报告，覆盖目标、信息、流程、状态、视觉、交付 6 项检查标准。</p>
+            </article>
+            <h3 class="ai-workflow-block-title">交互方案评审</h3>
+            <p class="ai-workflow-block-desc">聚焦目标对齐、流程闭环与状态完整，确认用户从入口到操作、反馈、结果走得通。</p>
+            <div class="ai-workflow-scroll" tabindex="0" aria-label="交互方案评审报告，可左右滚动">
+              <figure><img src="../assets/ai-workflow/review-01.png" alt="交互评审 第 1 页" loading="lazy"><figcaption>01</figcaption></figure>
+              <figure><img src="../assets/ai-workflow/review-02.png" alt="交互评审 第 2 页" loading="lazy"><figcaption>02</figcaption></figure>
+              <figure><img src="../assets/ai-workflow/review-03.png" alt="交互评审 第 3 页" loading="lazy"><figcaption>03</figcaption></figure>
+              <figure><img src="../assets/ai-workflow/review-04.png" alt="交互评审 第 4 页" loading="lazy"><figcaption>04</figcaption></figure>
+              <figure><img src="../assets/ai-workflow/review-05.png" alt="交互评审 第 5 页" loading="lazy"><figcaption>05</figcaption></figure>
+              <figure><img src="../assets/ai-workflow/review-06.png" alt="交互评审 第 6 页" loading="lazy"><figcaption>06</figcaption></figure>
+              <figure><img src="../assets/ai-workflow/review-07.png" alt="交互评审 第 7 页" loading="lazy"><figcaption>07</figcaption></figure>
+              <figure><img src="../assets/ai-workflow/review-08.png" alt="交互评审 第 8 页" loading="lazy"><figcaption>08</figcaption></figure>
+              <figure><img src="../assets/ai-workflow/review-09.png" alt="交互评审 第 9 页" loading="lazy"><figcaption>09</figcaption></figure>
+              <figure><img src="../assets/ai-workflow/review-10.png" alt="交互评审 第 10 页" loading="lazy"><figcaption>10</figcaption></figure>
+            </div>
+            <h3 class="ai-workflow-block-title">视觉方案评审</h3>
+            <p class="ai-workflow-block-desc">聚焦视觉一致与交付清楚，确认色彩、字号、间距、组件符合规范，研发与测试能理解规则与验收口径。</p>
+            <div class="ai-workflow-scroll" tabindex="0" aria-label="视觉方案评审报告，可左右滚动">
+              <figure><img src="../assets/ai-workflow/visual-01.png" alt="视觉评审 第 1 页" loading="lazy"><figcaption>01</figcaption></figure>
+              <figure><img src="../assets/ai-workflow/visual-02.png" alt="视觉评审 第 2 页" loading="lazy"><figcaption>02</figcaption></figure>
+              <figure><img src="../assets/ai-workflow/visual-03.png" alt="视觉评审 第 3 页" loading="lazy"><figcaption>03</figcaption></figure>
+              <figure><img src="../assets/ai-workflow/visual-04.png" alt="视觉评审 第 4 页" loading="lazy"><figcaption>04</figcaption></figure>
+              <figure><img src="../assets/ai-workflow/visual-05.png" alt="视觉评审 第 5 页" loading="lazy"><figcaption>05</figcaption></figure>
+              <figure><img src="../assets/ai-workflow/visual-06.png" alt="视觉评审 第 6 页" loading="lazy"><figcaption>06</figcaption></figure>
+              <figure><img src="../assets/ai-workflow/visual-07.png" alt="视觉评审 第 7 页" loading="lazy"><figcaption>07</figcaption></figure>
+              <figure><img src="../assets/ai-workflow/visual-08.png" alt="视觉评审 第 8 页" loading="lazy"><figcaption>08</figcaption></figure>
+              <figure><img src="../assets/ai-workflow/visual-09.png" alt="视觉评审 第 9 页" loading="lazy"><figcaption>09</figcaption></figure>
+              <figure><img src="../assets/ai-workflow/visual-10.png" alt="视觉评审 第 10 页" loading="lazy"><figcaption>10</figcaption></figure>
+              <figure><img src="../assets/ai-workflow/visual-11.png" alt="视觉评审 第 11 页" loading="lazy"><figcaption>11</figcaption></figure>
+              <figure><img src="../assets/ai-workflow/visual-12.png" alt="视觉评审 第 12 页" loading="lazy"><figcaption>12</figcaption></figure>
+            </div>
+            </section>
+          </section>
         </div>
       </section>
     </main>
@@ -164,7 +218,7 @@
         });
         deliverablePanels.forEach((panel) => { panel.hidden = panel.dataset.deliverablePanel !== target; });
       }));
-      const researchTabs = [...document.querySelectorAll(".research-subtabs [role=tab]")];
+      const researchTabs = [...document.querySelectorAll(".research-subtabs:not(.ai-workflow-subtabs) [role=tab]")];
       const researchPanels = [...document.querySelectorAll("[data-research-panel]")];
       researchTabs.forEach((tab) => tab.addEventListener("click", () => {
         const target = tab.dataset.researchTab;
@@ -174,6 +228,17 @@
           item.tabIndex = selected ? 0 : -1;
         });
         researchPanels.forEach((panel) => { panel.hidden = panel.dataset.researchPanel !== target; });
+      }));
+      const aiWorkflowTabs = [...document.querySelectorAll(".ai-workflow-subtabs [role=tab]")];
+      const aiWorkflowPanels = [...document.querySelectorAll("[data-aiworkflow-panel]")];
+      aiWorkflowTabs.forEach((tab) => tab.addEventListener("click", () => {
+        const target = tab.dataset.aiworkflowTab;
+        aiWorkflowTabs.forEach((item) => {
+          const selected = item === tab;
+          item.setAttribute("aria-selected", String(selected));
+          item.tabIndex = selected ? 0 : -1;
+        });
+        aiWorkflowPanels.forEach((panel) => { panel.hidden = panel.dataset.aiworkflowPanel !== target; });
       }));
       const satisfactionCanvas = document.querySelector("[data-cnap-satisfaction-chart]");
       if (satisfactionCanvas) {
