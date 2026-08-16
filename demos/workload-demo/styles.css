@@ -2691,11 +2691,23 @@
   border-radius: 0;
 }
 #runtimePage #runtime-container-image .runtime-image-source {
-  border-bottom-color: #e8e8e8;
+  position: relative;
+  border-bottom: 0;
+}
+#runtimePage #runtime-container-image .runtime-image-source::after,
+#runtimePage #runtime-container-image .runtime-image-base-group::after {
+  position: absolute;
+  right: 20px;
+  bottom: 0;
+  left: 20px;
+  height: 1px;
+  background: #e8e8e8;
+  content: "";
 }
 #runtimePage #runtime-container-image .runtime-image-base-group {
   padding: 0 20px 20px;
-  border-bottom: 1px solid #e8e8e8;
+  position: relative;
+  border-bottom: 0;
 }
 #runtimePage #runtime-container-image .runtime-image-base-group .runtime-image-heading {
   margin-right: 0;
