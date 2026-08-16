@@ -1052,7 +1052,7 @@ function updateRuntimeEditorHeader(target=activeRuntimeTarget,targetLabel='web1'
   const editor=document.querySelector('#runtimeEditor');
   if(!editor)return;
   activeRuntimeTarget=target;
-  const displayTargetLabel=targetLabel==='web1'?'web':targetLabel;
+  const displayTargetLabel=String(targetLabel).replace(/^web(\d+)$/i,'Web$1');
   const breadcrumb=editor.querySelector('.runtime-editor-breadcrumb');
   const title=editor.querySelector('.runtime-editor-title');
   const sectionTitle=document.querySelector('#runtimeEditorSectionTitle');
@@ -1767,7 +1767,7 @@ function upgradeRuntimeCredentialsSection(){
   const section=document.querySelector('#runtimePage [data-runtime-config="credentials-config"]');
   if(!section||section.dataset.credentialsRefined==='true')return;
   section.dataset.credentialsRefined='true';
-  section.innerHTML=`<div class="runtime-credential-list"><div class="runtime-credential-heading"><div class="runtime-credential-title"><span class="runtime-setting-icon"><svg><use href="#i-runtime-open-one"/></svg></span><strong>凭证管理</strong></div><div class="runtime-credential-actions"><button type="button"><svg><use href="#i-runtime-copy"/></svg><span>复制全部</span></button><button type="button"><svg><use href="#i-runtime-visible"/></svg><span>显示全部</span></button></div></div><p class="runtime-credential-description">为 Pod 添加额外的主机名解析条目，相当于在容器上配置 /etc/hosts 文件。在 hostAliases 中指定主机名和 IP 映射关系，Pod 内的进程可直接通过主机名访问指定的 IP 地址，无需依赖 DNS 服务。</p><div class="runtime-credential-add-list"><button class="runtime-add-btn" type="button"><svg><use href="#i-runtime-add"/></svg>添加凭证</button><button class="runtime-add-btn" type="button"><svg><use href="#i-runtime-add"/></svg>批量添加</button></div></div>`;
+  section.innerHTML=`<div class="runtime-credential-list runtime-credentials-manager"><div class="runtime-credential-inner"><div class="runtime-setting-row runtime-credential-top"><span class="runtime-setting-icon"><svg><use href="#i-runtime-open-one"/></svg></span><div class="runtime-credential-title"><strong>凭证管理</strong></div><div class="runtime-inline-actions"><button type="button"><svg><use href="#i-runtime-copy"/></svg><span>复制全部</span></button><button type="button"><svg><use href="#i-runtime-visible"/></svg><span>显示全部</span></button></div><div class="runtime-credential-add-list"><button class="runtime-add-btn" type="button"><svg><use href="#i-runtime-add"/></svg>添加凭证</button><button class="runtime-add-btn" type="button"><svg><use href="#i-runtime-add"/></svg>批量添加</button></div></div></div></div>`;
 }
 upgradeRuntimeCredentialsSection();
 function upgradeRuntimeImageSection(){
@@ -1775,6 +1775,14 @@ function upgradeRuntimeImageSection(){
   if(!section||section.dataset.imageRefined==='true')return;
   section.dataset.imageRefined='true';
   section.innerHTML=`<h4>镜像构建</h4><div class="runtime-image-list"><div class="runtime-image-source"><div class="runtime-image-source-title"><span class="runtime-setting-icon"><svg><use href="#i-runtime-open-one"/></svg></span><strong>镜像来源</strong></div><div class="runtime-image-source-controls"><div class="runtime-image-source-copy"><b>当前选择</b><span class="runtime-level-tag">其他标签</span><small>从预置的基础镜像出发，叠加自定义构建配置生成镜像</small></div><button class="runtime-select-value" type="button">基础镜像库 <svg><use href="#i-chevron-down"/></svg></button></div></div><div class="runtime-image-heading"><span class="runtime-setting-icon"><svg><use href="#i-runtime-open-one"/></svg></span><div class="runtime-image-heading-copy"><strong>基础镜像</strong><p>选择镜像构建的基础。百度基础镜像包含优化的发行版和技术栈镜像；社区标准镜像为官方发布的镜像。</p></div></div><div class="runtime-image-shell"><div class="runtime-image-tabs"><button class="is-active" type="button">百度基础镜像</button><button type="button">社区标准镜像</button></div><div class="runtime-image-panel"><div class="runtime-image-group"><p>基础OS发行版</p><div class="runtime-image-card-grid"><button class="runtime-image-card is-active" type="button"><span class="runtime-image-icon"><img src="./assets/runtime-images/ubuntu.png" alt=""></span><span>Ubuntu</span></button><button class="runtime-image-card" type="button"><span class="runtime-image-icon runtime-image-icon-light"><img src="./assets/runtime-images/alpine.png" alt=""></span><span>Alpine</span></button><button class="runtime-image-card" type="button"><span class="runtime-image-icon runtime-image-icon-light runtime-image-centos"><img src="./assets/runtime-images/centos.png" alt=""></span><span>CentOS</span></button></div><div class="runtime-image-version-card runtime-image-version-ubuntu"><span>选择 Ubuntu 版本</span><div class="runtime-version-pills"><button class="is-active" type="button">26.04 Resolute</button><button type="button">24.04 Noble</button><button type="button">24.04 Noble</button></div></div></div><div class="runtime-image-group"><p>技术栈</p><div class="runtime-image-card-grid"><button class="runtime-image-card" type="button"><span class="runtime-image-icon"><img src="./assets/runtime-images/ubuntu.png" alt=""></span><span>基础基础OS镜像</span></button><button class="runtime-image-card" type="button"><span class="runtime-image-icon runtime-image-icon-light"><img src="./assets/runtime-images/alpine.png" alt=""></span><span>百度 GCC</span></button><button class="runtime-image-card" type="button"><span class="runtime-image-icon runtime-image-icon-light runtime-image-centos"><img src="./assets/runtime-images/centos.png" alt=""></span><span>OpenJDK</span></button><button class="runtime-image-card is-active" type="button"><span class="runtime-image-icon"><img src="./assets/runtime-images/python.png" alt=""></span><span>Python</span></button><button class="runtime-image-card" type="button"><span class="runtime-image-icon runtime-image-icon-light"><img src="./assets/runtime-images/node.png" alt=""></span><span>Node</span></button><button class="runtime-image-card" type="button"><span class="runtime-image-icon runtime-image-icon-light runtime-image-centos"><img src="./assets/runtime-images/centos.png" alt=""></span><span>Go</span></button></div><div class="runtime-image-version-card runtime-image-version-python"><span>选择 Python 版本</span><div class="runtime-version-pills"><button class="is-active" type="button">3.14</button><button type="button">3.13</button><button type="button">3.12</button><button type="button">3.11</button><button type="button">2.7</button></div></div></div></div></div></div></div>`;
+  const baseHeading=section.querySelector('.runtime-image-heading');
+  const baseShell=section.querySelector('.runtime-image-shell');
+  if(baseHeading&&baseShell){
+    const baseGroup=document.createElement('div');
+    baseGroup.className='runtime-image-base-group';
+    baseHeading.before(baseGroup);
+    baseGroup.append(baseHeading,baseShell);
+  }
   const runtimeImageVariants=[
     {selector:'.runtime-image-version-ubuntu',cards:[['ubuntu-card.png','#fffdfc'],['base-os-card.png','#f5fdff'],['alpine-card.png','#fefcff']]},
     {selector:'.runtime-image-version-python',cards:[['base-os-card.png','#f8fcff'],['gcc-layer2.svg','#fffdfc'],['node-card.png','#fafdff'],['openjdk-card.png','#fafdff'],['go-card.png','#fafdff'],['python-card.png','#f5fdff']]}
@@ -1810,12 +1818,51 @@ function upgradeRuntimeImageSection(){
   });
 }
 upgradeRuntimeImageSection();
+
+function upgradeRuntimeContainerBuildSection(){
+  const section=document.querySelector('#runtimePage [data-runtime-config="container-image-config"]');
+  const imageList=section?.querySelector('.runtime-image-list');
+  if(!section||!imageList||section.dataset.buildRefined==='true')return;
+  section.dataset.buildRefined='true';
+  const tail=document.createElement('div');
+  tail.className='runtime-container-build-tail';
+  tail.innerHTML=`<div class="runtime-setting-row runtime-setting-row-block"><span class="runtime-setting-icon"><svg><use href="#i-runtime-open-one"/></svg></span><div><strong>预装组件</strong><input class="runtime-full-input" placeholder="搜索并选择要预装的 Linux 软件包，例如：输入 cuda，即可快速过滤对应版本"></div></div><div class="runtime-setting-row runtime-setting-row-block"><span class="runtime-setting-icon"><svg><use href="#i-runtime-open-one"/></svg></span><div><strong>自定义 Dockerfile 命令</strong></div><button class="runtime-add-btn" type="button"><svg><use href="#i-runtime-add"/></svg>添加标签</button></div><div class="runtime-setting-row runtime-setting-row-block runtime-code-repository-row"><span class="runtime-setting-icon"><svg><use href="#i-runtime-open-one"/></svg></span><div class="runtime-container-content"><strong>代码库</strong><div class="runtime-code-repository-content"><button class="runtime-add-btn" type="button" data-credential-add="code-repository"><svg><use href="#i-runtime-add"/></svg>添加代码库</button></div></div></div><div class="runtime-setting-row runtime-setting-row-block"><span class="runtime-setting-icon"><svg><use href="#i-runtime-open-one"/></svg></span><div><strong>部署路径</strong><textarea class="runtime-build-path" placeholder="部署到镜像中的路径，如 /home/work/app"></textarea></div></div><div class="runtime-setting-row runtime-setting-row-block runtime-command-row"><span class="runtime-setting-icon"><svg><use href="#i-runtime-open-one"/></svg></span><div><strong>启动命令</strong></div><div class="runtime-build-inline"><button class="runtime-add-btn" type="button"><svg><use href="#i-runtime-add"/></svg>添加启动命令</button><span><svg><use href="#i-runtime-attention"/></svg>未设置，将使用基础镜像默认的启动命令</span></div></div><div class="runtime-setting-row runtime-setting-row-block runtime-command-row"><span class="runtime-setting-icon"><svg><use href="#i-runtime-open-one"/></svg></span><div><strong>默认参数</strong></div><div class="runtime-build-inline"><button class="runtime-add-btn" type="button"><svg><use href="#i-runtime-add"/></svg>添加默认参数</button><span><svg><use href="#i-runtime-attention"/></svg>未设置，将使用基础镜像默认的参数</span></div></div><div class="runtime-setting-row"><span class="runtime-setting-icon"><svg><use href="#i-runtime-open-one"/></svg></span><div><strong>压缩格式</strong></div><select class="runtime-build-select"><option>gzip</option></select></div><div class="runtime-setting-row"><span class="runtime-setting-icon"><svg><use href="#i-runtime-open-one"/></svg></span><div><strong>多平台构建</strong><p>关闭（仅构建当前架构）</p></div><button class="runtime-switch" type="button" aria-pressed="false"><i></i></button></div>`;
+  imageList.append(tail);
+  const codeRow=tail.querySelector('.runtime-code-repository-row');
+  const addButton=codeRow?.querySelector('[data-credential-add="code-repository"]');
+  addButton?.addEventListener('click',()=>{
+    if(codeRow.querySelector('.runtime-code-repository-table'))return;
+    const table=document.createElement('div');
+    table.className='runtime-code-repository-table';
+    const rows=Array.from({length:3},(_,index)=>index+1);
+    table.innerHTML=`<div class="runtime-code-repository-col runtime-code-repository-drag"><div class="runtime-code-repository-head"></div>${rows.map(()=>'<div class="runtime-code-repository-cell"><button type="button" class="runtime-repository-drag" aria-label="拖动排序"><svg><use href="#i-runtime-drag"/></svg></button></div>').join('')}</div><div class="runtime-code-repository-col runtime-code-repository-index"><div class="runtime-code-repository-head">序号</div>${rows.map(index=>`<div class="runtime-code-repository-cell">${index}</div>`).join('')}</div><div class="runtime-code-repository-col runtime-code-repository-name"><div class="runtime-code-repository-head">代码库</div>${rows.map(()=>'<div class="runtime-code-repository-cell"><div class="runtime-disabled-input"><svg><use href="#i-runtime-search"/></svg><span>输入或搜索代码库</span></div></div>').join('')}</div><div class="runtime-code-repository-col runtime-code-repository-build"><div class="runtime-code-repository-head">BCloud 构建配置</div>${rows.map(()=>'<div class="runtime-code-repository-cell"><div class="runtime-disabled-input"><span>构建配置名</span></div></div>').join('')}</div><div class="runtime-code-repository-col runtime-code-repository-operation"><div class="runtime-code-repository-head">操作</div>${rows.map(()=>'<div class="runtime-code-repository-cell"><button type="button" data-repository-action="external" aria-label="查看代码库"><svg><use href="#i-runtime-external"/></svg></button><button type="button" data-repository-action="copy" aria-label="复制代码库配置"><svg><use href="#i-runtime-copy"/></svg></button><button type="button" data-repository-action="visible" aria-label="显示代码库配置"><svg><use href="#i-runtime-visible"/></svg></button><button type="button" data-repository-action="delete" aria-label="删除代码库"><svg><use href="#i-runtime-delete"/></svg></button></div>').join('')}</div>`;
+    const repositoryContent=codeRow.querySelector('.runtime-code-repository-content');
+    repositoryContent.insertBefore(table,addButton);
+    table.addEventListener('click',event=>{
+      const action=event.target.closest('[data-repository-action]');
+      if(!action)return;
+      if(action.dataset.repositoryAction==='delete'){
+        const cell=action.closest('.runtime-code-repository-cell');
+        const column=cell?.closest('.runtime-code-repository-col');
+        const rowIndex=cell&&column?Array.from(column.querySelectorAll('.runtime-code-repository-cell')).indexOf(cell):-1;
+        if(rowIndex>=0)table.querySelectorAll('.runtime-code-repository-col').forEach(col=>col.querySelectorAll('.runtime-code-repository-cell')[rowIndex]?.remove());
+        return;
+      }
+      action.classList.toggle('is-active');
+    });
+  });
+}
+upgradeRuntimeContainerBuildSection();
 window.CNAPInput?.initAll();
 function setRuntimeFieldEnabled(scope,enabled){
   scope.classList.toggle('is-field-enabled',enabled);
   scope.classList.toggle('is-field-disabled',!enabled);
   const toggle=scope.matches('.runtime-rule-group')
     ? scope.querySelector(':scope > .runtime-subsection-title > .runtime-setting-icon')
+    : scope.matches('.runtime-image-base-group')
+      ? scope.querySelector(':scope > .runtime-image-heading > .runtime-setting-icon')
+      : scope.matches('.runtime-image-source')
+        ? scope.querySelector(':scope > .runtime-image-source-title > .runtime-setting-icon')
     : scope.querySelector(':scope > .runtime-setting-icon, :scope > .runtime-image-heading > .runtime-setting-icon');
   toggle?.classList.toggle('is-active',enabled);
   toggle?.setAttribute('aria-pressed',String(enabled));
@@ -1839,10 +1886,12 @@ function getRuntimeTooltipText(state){
   return `${current}的集群级配置，继承自 ${environment} 的环境级配置。点击可在当前层级覆盖为本地值`;
 }
 function setupRuntimeFieldActivation(){
-  const scopes=[...document.querySelectorAll('#runtimePage .runtime-setting-row, #runtimePage .runtime-rule-group'),document.querySelector('#runtime-container-image .runtime-image-list')].filter(Boolean);
+  const scopes=[...document.querySelectorAll('#runtimePage .runtime-setting-row, #runtimePage .runtime-rule-group, #runtime-container-image .runtime-image-source, #runtime-container-image .runtime-image-base-group')].filter(Boolean);
   scopes.forEach(scope=>{
-    const icon=scope.matches('.runtime-image-list')
+    const icon=scope.matches('.runtime-image-base-group')
       ? scope.querySelector(':scope > .runtime-image-heading > .runtime-setting-icon')
+      : scope.matches('.runtime-image-source')
+        ? scope.querySelector(':scope > .runtime-image-source-title > .runtime-setting-icon')
       : scope.matches('.runtime-rule-group')
         ? scope.querySelector(':scope > .runtime-subsection-title > .runtime-setting-icon')
         : scope.querySelector(':scope > .runtime-setting-icon');
@@ -2151,3 +2200,4 @@ serviceCreateModal?.addEventListener('click',event=>{
   }
 });
 renderClusterFilterOptions(); renderHistory(); render(); renderAppNavigation();
+document.querySelectorAll('#runtimePage .runtime-row-hint use, #runtimePage .runtime-build-inline > span use').forEach(use=>use.setAttribute('href','#i-runtime-warning-hint'));
