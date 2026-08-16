@@ -2008,6 +2008,7 @@
 
 #runtimePage .runtime-rule-block {
   margin-left: 32px;
+  margin-right: 32px;
   padding: 16px 0;
   border-top-color: #e8e8e8;
 }
