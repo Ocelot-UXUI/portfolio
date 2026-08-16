@@ -2724,6 +2724,21 @@
   border-top: 0;
 }
 
+/* Affinity groups use the same inset divider as their inner rule blocks. */
+#runtimePage .runtime-setting-list > .runtime-rule-group {
+  position: relative;
+  border-top: 0;
+}
+#runtimePage .runtime-setting-list > .runtime-rule-group + .runtime-rule-group::before {
+  position: absolute;
+  top: 0;
+  right: 32px;
+  left: 32px;
+  height: 1px;
+  background: #e8e8e8;
+  content: "";
+}
+
 #runtimePage.is-help-mode .runtime-setting-subrows {
   gap: var(--runtime-space-s);
   padding-top: var(--runtime-space-xs);
