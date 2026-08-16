@@ -1275,18 +1275,6 @@
 #runtimePage .runtime-setting-row.is-field-disabled .runtime-add-btn { border-color: #ccc; background: #fff; color: #181818; opacity: .4; cursor: not-allowed; }
 #runtimePage .runtime-setting-row.is-field-disabled .runtime-switch { background: #e8e8e8; cursor: not-allowed; }
 #runtimePage .runtime-setting-row.is-field-disabled .runtime-switch i { background: #fff; }
-#runtimePage .runtime-setting-row.is-field-disabled .runtime-setting-subrows .runtime-input-unit input:disabled {
-  border-color: #d9d9d9;
-  background: #f7f7f7;
-  color: #bfbfbf;
-  cursor: not-allowed;
-  opacity: 1;
-  -webkit-text-fill-color: #bfbfbf;
-  appearance: none;
-  -moz-appearance: textfield;
-}
-#runtimePage .runtime-setting-row.is-field-disabled .runtime-input-unit input:disabled::-webkit-inner-spin-button,
-#runtimePage .runtime-setting-row.is-field-disabled .runtime-input-unit input:disabled::-webkit-outer-spin-button { margin: 0; appearance: none; }
 #runtimePage .runtime-image-list.is-field-disabled .runtime-image-card,
 #runtimePage .runtime-image-list.is-field-disabled .runtime-version-pills { opacity: .56; }
 #runtimePage .runtime-image-list.is-field-disabled .runtime-image-shell button { cursor: not-allowed; }
@@ -1322,10 +1310,24 @@
 #runtimePage .cnap-input[type="number"] { appearance: textfield; }
 #runtimePage .cnap-input[type="number"]::-webkit-inner-spin-button,
 #runtimePage .cnap-input[type="number"]::-webkit-outer-spin-button { appearance: none; margin: 0; }
+#runtimePage .cnap-input[type="number"] {
+  width: 136px;
+  min-width: 136px;
+  padding: 4px 10px;
+}
+#runtimePage .cnap-input[type="number"]:disabled {
+  padding: 4px 12px;
+  border-color: #d9d9d9;
+  background: #f7f7f7;
+  color: #bfbfbf;
+  -webkit-text-fill-color: #bfbfbf;
+  cursor: not-allowed;
+}
 #runtimePage .runtime-full-input.cnap-input { width: 100%; min-width: 0; }
-#runtimePage .runtime-input-unit .cnap-input { width: 100%; min-width: 0; }
+#runtimePage .runtime-input-unit .cnap-input:not([type="number"]) { width: 100%; min-width: 0; }
+#runtimePage .runtime-input-unit .cnap-input[type="number"] { width: 136px; min-width: 136px; }
 #runtimePage .runtime-setting-subrows .runtime-input-unit .cnap-input { width: 88px; min-width: 88px; }
-#runtimePage .runtime-inline-control > .cnap-input { width: 100px; min-width: 0; }
+#runtimePage .runtime-inline-control > .cnap-input[type="number"] { width: 136px; min-width: 136px; }
 #runtimePage .runtime-setting-icon svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round; }
 #runtimePage .runtime-setting-row strong { display: block; font-size: 14px; line-height: 22px; font-weight: 500; }
 #runtimePage .runtime-field-title { display: inline-flex; align-items: center; gap: 4px; vertical-align: top; }
@@ -1371,7 +1373,7 @@
 #runtimePage .runtime-setting-row .runtime-switch { margin-right: 4px; }
 #runtimePage .runtime-setting-row:has(> .runtime-switch-field) {
   align-items: start;
-  row-gap: 8px;
+  row-gap: 24px;
 }
 #runtimePage .runtime-setting-row:has(> .runtime-switch-field) > div:not(.runtime-switch-field),
 #runtimePage .runtime-setting-row:has(> .runtime-switch-field) > .runtime-switch-field {
@@ -1649,6 +1651,37 @@
 #runtimePage .runtime-command-row .runtime-row-hint svg {
   width: 14px; height: 14px; flex: 0 0 14px; fill: none; stroke: none;
 }
+#runtimePage .runtime-container-subsection .runtime-command-row {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: 8px;
+  row-gap: 8px;
+  min-height: 132px;
+  align-items: start;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+#runtimePage .runtime-container-subsection .runtime-command-row > .runtime-setting-icon {
+  grid-column: 1;
+  grid-row: 1;
+}
+#runtimePage .runtime-container-subsection .runtime-command-row > div:not(.runtime-command-actions) {
+  grid-column: 2;
+  grid-row: 1;
+}
+#runtimePage .runtime-container-subsection .runtime-command-row > .runtime-command-actions {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  display: flex;
+  width: auto;
+  min-width: 0;
+  align-items: center;
+  justify-self: start;
+  gap: 16px;
+  margin: 0 0 0 30px;
+  padding: 0;
+}
 #runtimePage .runtime-container-content { min-width: 0; }
 #runtimePage .runtime-image-list { padding-left: 17px; }
 #runtimePage .runtime-image-source {
@@ -1752,7 +1785,6 @@
 #runtimePage:not(.is-help-mode) .runtime-setting-row p,
 #runtimePage:not(.is-help-mode) .runtime-setting-subrows label small,
 #runtimePage:not(.is-help-mode) .runtime-rule-block p,
-#runtimePage:not(.is-help-mode) .runtime-row-hint,
 #runtimePage:not(.is-help-mode) .runtime-inline-description small { display: none; }
 #runtimePage .runtime-inline-control { display: flex; align-items: center; gap: 10px; white-space: nowrap; }
 #runtimePage .runtime-switch-field {
@@ -2045,6 +2077,8 @@
   #runtimePage .runtime-setting-row > .runtime-input-unit,
   #runtimePage .runtime-setting-row > .runtime-inline-control { grid-column: 2; justify-self: start; margin-top: 4px; }
   #runtimePage .runtime-row-hint { grid-column: 2; margin: 0; }
+  #runtimePage .runtime-command-row > .runtime-command-actions { align-items: flex-start; flex-direction: column; gap: 4px; }
+  #runtimePage .runtime-command-row .runtime-row-hint { white-space: normal; }
   #runtimePage .runtime-code-table-head { grid-template-columns: 1fr 1fr 56px; }
   #runtimePage .runtime-inline-control { flex-wrap: wrap; white-space: normal; }
 }

@@ -1172,6 +1172,7 @@ function applyRuntimeContext(context,value=runtimeContextSelection[context],{ann
       button.setAttribute('aria-pressed',String(enabled));
     });
     editor.scrollTo({top:0,behavior:'auto'});
+    syncRuntimeInheritedControls();
     page.classList.remove('is-context-refreshing');
     if(announce)toast(`已切换到${profile.label}：${runtimeContextValueLabels[value]} 配置`);
   },180);
@@ -1827,6 +1828,7 @@ function upgradeRuntimeContainerBuildSection(){
   const tail=document.createElement('div');
   tail.className='runtime-container-build-tail';
   tail.innerHTML=`<div class="runtime-setting-row runtime-setting-row-block"><span class="runtime-setting-icon"><svg><use href="#i-runtime-open-one"/></svg></span><div><strong>预装组件</strong><input class="runtime-full-input" placeholder="搜索并选择要预装的 Linux 软件包，例如：输入 cuda，即可快速过滤对应版本"></div></div><div class="runtime-setting-row runtime-setting-row-block"><span class="runtime-setting-icon"><svg><use href="#i-runtime-open-one"/></svg></span><div><strong>自定义 Dockerfile 命令</strong></div><button class="runtime-add-btn" type="button"><svg><use href="#i-runtime-add"/></svg>添加标签</button></div><div class="runtime-setting-row runtime-setting-row-block runtime-code-repository-row"><span class="runtime-setting-icon"><svg><use href="#i-runtime-open-one"/></svg></span><div class="runtime-container-content"><strong>代码库</strong><div class="runtime-code-repository-content"><button class="runtime-add-btn" type="button" data-credential-add="code-repository"><svg><use href="#i-runtime-add"/></svg>添加代码库</button></div></div></div><div class="runtime-setting-row runtime-setting-row-block"><span class="runtime-setting-icon"><svg><use href="#i-runtime-open-one"/></svg></span><div><strong>部署路径</strong><textarea class="runtime-build-path" placeholder="部署到镜像中的路径，如 /home/work/app"></textarea></div></div><div class="runtime-setting-row runtime-setting-row-block runtime-command-row"><span class="runtime-setting-icon"><svg><use href="#i-runtime-open-one"/></svg></span><div><strong>启动命令</strong></div><div class="runtime-build-inline"><button class="runtime-add-btn" type="button"><svg><use href="#i-runtime-add"/></svg>添加启动命令</button><span><svg><use href="#i-runtime-attention"/></svg>未设置，将使用基础镜像默认的启动命令</span></div></div><div class="runtime-setting-row runtime-setting-row-block runtime-command-row"><span class="runtime-setting-icon"><svg><use href="#i-runtime-open-one"/></svg></span><div><strong>默认参数</strong></div><div class="runtime-build-inline"><button class="runtime-add-btn" type="button"><svg><use href="#i-runtime-add"/></svg>添加默认参数</button><span><svg><use href="#i-runtime-attention"/></svg>未设置，将使用基础镜像默认的参数</span></div></div><div class="runtime-setting-row"><span class="runtime-setting-icon"><svg><use href="#i-runtime-open-one"/></svg></span><div><strong>压缩格式</strong></div><select class="runtime-build-select"><option>gzip</option></select></div><div class="runtime-setting-row"><span class="runtime-setting-icon"><svg><use href="#i-runtime-open-one"/></svg></span><div><strong>多平台构建</strong><p>关闭（仅构建当前架构）</p></div><button class="runtime-switch" type="button" aria-pressed="false"><i></i></button></div>`;
+  tail.querySelectorAll('.runtime-command-row').forEach(row=>row.remove());
   imageList.append(tail);
   const codeRow=tail.querySelector('.runtime-code-repository-row');
   const addButton=codeRow?.querySelector('[data-credential-add="code-repository"]');
@@ -1853,6 +1855,10 @@ function upgradeRuntimeContainerBuildSection(){
   });
 }
 upgradeRuntimeContainerBuildSection();
+document.querySelectorAll('#runtimePage .runtime-input-unit input, #runtimePage .runtime-inline-control input').forEach(input=>{
+  input.type='number';
+  input.min='0';
+});
 window.CNAPInput?.initAll();
 function setRuntimeFieldEnabled(scope,enabled){
   scope.classList.toggle('is-field-enabled',enabled);
@@ -1869,6 +1875,13 @@ function setRuntimeFieldEnabled(scope,enabled){
   scope.querySelectorAll('input,select,textarea,button').forEach(control=>{
     if(control===toggle)return;
     control.disabled=!enabled;
+  });
+}
+function syncRuntimeInheritedControls(){
+  document.querySelectorAll('#runtimePage .runtime-setting-row.is-field-disabled, #runtimePage .runtime-rule-group.is-field-disabled, #runtimePage .runtime-image-list.is-field-disabled, #runtimePage .runtime-image-source.is-field-disabled, #runtimePage .runtime-image-base-group.is-field-disabled').forEach(scope=>{
+    scope.querySelectorAll('input,select,textarea,button:not(.runtime-setting-icon)').forEach(control=>{
+      control.disabled=true;
+    });
   });
 }
 function getRuntimeTooltipText(state){
@@ -2071,6 +2084,7 @@ document.addEventListener('click',event=>{
   if(scope)markRuntimeFieldCovered(scope);
 });
 setupRuntimeFieldActivation();
+syncRuntimeInheritedControls();
 document.querySelector('#closeHistoryBtn').addEventListener('click',()=>historyDrawer.classList.add('hidden'));
 document.addEventListener('click',event=>{if(!event.target.closest('.filter-select'))closeFilterSelects(); if(!event.target.closest('#actionMenu'))closeMenu(); if(!event.target.closest('#accountPopover') && !event.target.closest('[data-context="account"]')) closeAccountPopover(); if(!event.target.closest('#envPopover') && !event.target.closest('[data-context="environment"]')) closeEnvPopover(); if(!event.target.closest('#clusterPopover') && !event.target.closest('[data-context="cluster"]')) closeClusterPopover(); if(!event.target.closest('#compactMorePopover') && !event.target.closest('#primaryMoreBtn')) closeCompactMore();});
 document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeMenu();closeAccountPopover();closeEnvPopover();closeClusterPopover();closeCompactMore();runtimeClusterAddMenu?.classList.add('hidden');closeRuntimeLevelDropdown();closeModal();closeInstanceDetail();historyDrawer.classList.add('hidden');closeServiceDrawer();closeServiceCreateModal();}});

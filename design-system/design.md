@@ -111,6 +111,8 @@
 
 运行配置页面模式见 [patterns/runtime-config.md](patterns/runtime-config.md)。
 
+数字输入组件规范见 [docs/design-system/input-number.md](../docs/design-system/input-number.md)。
+
 ## 八、AI 生成约束
 
 - 后续 CNAP 配置页必须优先加载本文件和 `patterns/runtime-config.md`。
