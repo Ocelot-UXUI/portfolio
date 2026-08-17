@@ -140,7 +140,7 @@ const actions = {
   'delete-deployment':{label:'删除部署资源', icon:'apps', detail:'将清除所选集群上的部署资源，此操作不可撤销。'}
 };
 const appNavLabels = { workload:'工作负载', exposure:'服务暴露', logs:'日志', terminal:'终端', monitor:'监控', runtime:'运行配置', settings:'应用设置' };
-const unavailableAppNav = new Set(['exposure','logs','terminal','monitor','settings']);
+const unavailableAppNav = new Set(['logs','terminal','monitor','settings']);
 const workloadSections = document.querySelectorAll('[data-workload-section]');
 const appPagePlaceholder = document.querySelector('#appPagePlaceholder');
 const appPageTitle = document.querySelector('#appPageTitle');
