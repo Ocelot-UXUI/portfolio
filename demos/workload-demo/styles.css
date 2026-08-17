@@ -1175,6 +1175,7 @@
   min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
+  padding-bottom: 120px;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
