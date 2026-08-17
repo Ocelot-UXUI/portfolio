@@ -1910,6 +1910,7 @@ function syncRuntimeInheritedControls(){
     if(isApplication){
       setRuntimeFieldEnabled(scope,true);
       scope.querySelector('.runtime-override-tooltip')?.remove();
+      scope.querySelectorAll('.runtime-override-tag').forEach(tag=>tag.remove());
       toggle?.removeAttribute('aria-describedby');
     } else if(toggle?.dataset.runtimeFieldState==='active'){
       setRuntimeFieldEnabled(scope,true);
@@ -2088,6 +2089,7 @@ function refreshRuntimeFieldTooltips(){
   });
 }
 function markRuntimeFieldCovered(scope){
+  if(activeRuntimeContext==='application')return;
   if(!scope||!scope.classList.contains('is-field-enabled'))return;
   if(scope.matches('.runtime-rule-group'))return;
   const label=scope.matches('.runtime-image-list')
