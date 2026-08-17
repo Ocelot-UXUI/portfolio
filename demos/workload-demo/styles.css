@@ -3231,3 +3231,8 @@
   margin-right: -16px;
   margin-left: -16px;
 }
+
+/* Keep the credential actions on the same title-to-content rhythm as other rows. */
+#runtimePage [data-runtime-config="credentials-config"] .runtime-credential-top .runtime-credential-add-list {
+  margin-top: 16px;
+}
