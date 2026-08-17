@@ -3232,6 +3232,20 @@
   margin-left: -16px;
 }
 
+/* Figma 560:8800: help-mode rows use 20px vertical padding and top-aligned inheritance controls. */
+#runtimePage.is-help-mode .runtime-setting-row {
+  align-items: start;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+#runtimePage.is-help-mode .runtime-setting-row > .runtime-setting-icon {
+  align-self: start;
+  margin-top: 0;
+}
+#runtimePage.is-help-mode .runtime-setting-row p {
+  margin-top: 4px;
+}
+
 /* Keep the credential actions on the same title-to-content rhythm as other rows. */
 #runtimePage [data-runtime-config="credentials-config"] .runtime-credential-top .runtime-credential-add-list {
   margin-top: 8px;
