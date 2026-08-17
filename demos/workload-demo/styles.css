@@ -3691,3 +3691,18 @@
 #runtimePage.is-help-mode #runtime-container-runtime .runtime-setting-row:has(> .runtime-input-unit) {
   align-items: center;
 }
+
+/* Keep container and Pod configuration at one level; indent container leaves below them. */
+#runtimePage .runtime-container-items {
+  align-items: flex-end;
+}
+#runtimePage .runtime-container-header {
+  width: 212px;
+  height: 32px;
+  padding-left: 20px;
+}
+#runtimePage .runtime-tree-leaf {
+  width: 212px;
+  height: 32px;
+  padding-left: 56px;
+}
