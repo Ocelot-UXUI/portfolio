@@ -57,7 +57,7 @@ const labels = { running:'运行中', error:'异常', blocked:'已摘流' };
 const clusterLabels = Object.fromEntries(clusterDefinitions.map(cluster=>[cluster.id,cluster.name]));
 const clusterMeta = Object.fromEntries(clusterDefinitions.map(cluster=>[cluster.id,cluster]));
 const clusterPages = Object.fromEntries(clusterDefinitions.map(cluster=>[cluster.id,{page:1,pageSize:10}]));
-const state = { status:'all', cluster:'all', traffic:'all', query:'', clusterPages, viewMode:'detailed', collapsedClusters:new Set(), selected:new Set(), pausedPods:new Set(), instanceSummaryCollapsed:false, selectedContainer:0, activeInstanceId:null, executing:false, primaryNav:'apps', appNav:'workload', appNavExpanded:true, secondaryCollapsed:false, accountTab:'all', accountQuery:'', compactMoreOpen:false, envTab:'all', envQuery:'', selectedEnv:'imeonline', clusterQuery:'', selectedCluster:'imeonline' };
+const state = { status:'all', cluster:'all', traffic:'all', query:'', clusterPages, viewMode:'detailed', collapsedClusters:new Set(), selected:new Set(), pausedPods:new Set(), instanceSummaryCollapsed:false, selectedContainer:0, activeInstanceId:null, executing:false, primaryNav:'apps', appNav:'workload', appNavExpanded:true, secondaryCollapsed:false, accountTab:'all', accountQuery:'', compactMoreOpen:false, envTab:'all', envQuery:'', selectedEnv:'imeonline', clusterQuery:'', selectedCluster:'all' };
 const clusterGroups = document.querySelector('#clusterGroups');
 const workspace = document.querySelector('.workspace');
 const workloadStickyStack = document.querySelector('#workloadStickyStack');
@@ -176,13 +176,13 @@ const environments = [
   { id:'kefu-c', name:'kefu-c', tag:'Mesh环境', icon:'image_23.png', tab:'test', recent:true },
   { id:'icafe-web-20260530', name:'icafe-web-20260530', tag:'特殊环境', icon:'image_24.png', tab:'test', recent:false }
 ];
-const clusters = clusterDefinitions.map(cluster=>({
-  id:cluster.id,
-  name:cluster.id,
-  tag:cluster.tag,
-  available:cluster.podCount,
-  expected:cluster.podCount
-}));
+const clusters = [
+  {id:'imeonline',name:'beijing-eci',tag:'AKS',available:20,expected:10},
+  {id:'edge-prod',name:'chengdu-eci',tag:'ECI',available:20,expected:10},
+  {id:'beijing-eci',name:'guangzhou-k8s',tag:'ABS',available:20,expected:10},
+  {id:'chengdu-eci',name:'icafe-web-20260530',tag:'CCC',available:20,expected:10},
+  {id:'guangzhou-k8s',name:'icafe-web-20260530',tag:'ECI',available:20,expected:10}
+];
 
 function syncFilterSelect(selectId){
   window.CNAPSelect?.sync(selectId);
