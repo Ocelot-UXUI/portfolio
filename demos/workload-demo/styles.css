@@ -1419,6 +1419,7 @@
 #runtimePage #runtime-container.is-container-context .runtime-section-heading > div { display: flex; align-items: center; gap: 8px; }
 #runtimePage #runtime-container.is-container-context .runtime-section-heading > div::before { width: 3px; height: 16px; flex: 0 0 3px; background: #72e8b1; content: ""; }
 #runtimePage #runtime-container.is-container-context .runtime-section-heading h3 { font: 500 16px/24px "PingFang SC", sans-serif; }
+#runtimePage #runtime-container > .runtime-section-heading { display: none; }
 #runtimePage #runtime-container { scroll-margin-top: 24px; }
 #runtimePage .runtime-section-heading p { margin: 4px 0 0; color: #8f8f8f; font-size: 12px; line-height: 20px; }
 #runtimePage .runtime-section-kicker { display: block; margin-bottom: 2px; color: #8f8f8f; font-size: 12px; line-height: 20px; }
@@ -2066,6 +2067,10 @@
   margin: 0;
   color: #181818;
   font: 500 16px/24px "PingFang SC", sans-serif;
+}
+#runtimePage .runtime-container-level-heading + .runtime-container-subsection {
+  margin-top: 0;
+  padding-top: 0;
 }
 
 #runtimePage .runtime-setting-list {
