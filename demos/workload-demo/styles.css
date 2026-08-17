@@ -1175,7 +1175,11 @@
   min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
-  scrollbar-gutter: stable;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+#runtimePage .runtime-editor::-webkit-scrollbar {
+  display: none;
 }
 #runtimePage .runtime-setting-row > :nth-child(2) { min-width: 0; }
 #runtimePage .runtime-setting-row > .runtime-input-unit,
