@@ -140,6 +140,7 @@ const actions = {
   'delete-deployment':{label:'删除部署资源', icon:'apps', detail:'将清除所选集群上的部署资源，此操作不可撤销。'}
 };
 const appNavLabels = { workload:'工作负载', exposure:'服务暴露', logs:'日志', terminal:'终端', monitor:'监控', runtime:'运行配置', settings:'应用设置' };
+const unavailableAppNav = new Set(['exposure','logs','terminal','monitor','settings']);
 const workloadSections = document.querySelectorAll('[data-workload-section]');
 const appPagePlaceholder = document.querySelector('#appPagePlaceholder');
 const appPageTitle = document.querySelector('#appPageTitle');
@@ -214,6 +215,12 @@ function renderAppNavigation(){
   const moreIcon = document.querySelector('#primaryMoreBtn img');
   if(moreIcon) moreIcon.src = primaryNavIconSrc('more', state.compactMoreOpen);
   document.querySelectorAll('[data-app-nav]').forEach(button=>{
+    const unavailable=unavailableAppNav.has(button.dataset.appNav);
+    button.disabled=unavailable;
+    button.classList.toggle('is-unavailable',unavailable);
+    button.setAttribute('aria-disabled',unavailable?'true':'false');
+    if(unavailable)button.title='本期未开放';
+    else button.removeAttribute('title');
     button.classList.toggle('active', button.dataset.appNav === state.appNav);
     const image = button.querySelector('img');
     if(image) image.src = `${figmaIconPath}/${appNavIcons[button.dataset.appNav]}`;
@@ -1023,6 +1030,7 @@ document.querySelectorAll('[data-primary-nav]').forEach(button=>button.addEventL
   renderAppNavigation();
 }));
 document.querySelectorAll('[data-app-nav]').forEach(button=>button.addEventListener('click',()=>{
+  if(button.disabled)return;
   state.appNav=button.dataset.appNav;
   renderAppNavigation();
 }));
