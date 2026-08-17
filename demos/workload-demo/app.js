@@ -1042,11 +1042,14 @@ const applicationMenuItems=[
   {name:'icafe-web-2',initial:'i',tone:'yellow',favorite:false},
   {name:'icafe-web-20260530',initial:'i',tone:'purple',favorite:false}
 ];
+let applicationMenuTab='favorite';
 function renderApplicationMenu(query='',focusInput=false){
   const list=applicationMenuItems.filter(item=>!query||item.name.toLowerCase().includes(query.toLowerCase()));
-  const listMarkup=list.length?list.map(item=>`<button class="application-menu-row" data-application-select="${item.name}"><span class="application-avatar ${item.tone}">${item.initial}</span><span class="application-name">${item.name}</span><span class="application-star" aria-label="${item.favorite?'已收藏':'未收藏'}">${item.favorite?'★':''}</span></button>`).join(''):'<p class="application-menu-empty">未找到匹配应用</p>';
-  menu.innerHTML=`<h3 class="application-menu-title">配置应用层级</h3><label class="application-menu-search"><svg aria-hidden="true"><use href="#i-runtime-search"/></svg><input data-application-search aria-label="搜索应用" placeholder="搜索应用"></label><div class="application-menu-tabs"><button data-application-tab="all">可用应用</button><button class="is-active" data-application-tab="favorite">收藏应用</button><button data-application-tab="recent">最近访问</button><button class="application-menu-open-list" data-application-open-list>打开应用列表</button></div><div class="application-menu-list">${listMarkup}</div><div class="application-menu-divider"></div><div class="application-menu-footer"><button data-application-create>${icon('add')}新建应用</button><button data-application-permission>${icon('clipboard')}申请应用权限</button></div>`;
-  if(focusInput) menu.querySelector('[data-application-search]').focus();
+  const listMarkup=list.length?list.map(item=>`<button class="application-menu-row" data-application-select="${item.name}"><span class="application-avatar ${item.tone}">${item.initial}</span><span class="application-name">${item.name}</span><span class="application-star" data-application-favorite="${item.name}" aria-label="${item.favorite?'取消收藏':'添加收藏'}">${item.favorite?'★':''}</span></button>`).join(''):'<p class="application-menu-empty">未找到匹配应用</p>';
+  const escapedQuery=query.replaceAll('&','&amp;').replaceAll('"','&quot;');
+  menu.innerHTML=`<label class="application-menu-search"><svg aria-hidden="true"><use href="#i-runtime-search"/></svg><input data-application-search aria-label="搜索应用" placeholder="请输入应用名称" value="${escapedQuery}"></label><div class="application-menu-tabs"><button class="${applicationMenuTab==='all'?'is-active':''}" data-application-tab="all">全部可用应用</button><button class="${applicationMenuTab==='favorite'?'is-active':''}" data-application-tab="favorite">我收藏的应用</button><button class="${applicationMenuTab==='recent'?'is-active':''}" data-application-tab="recent">最近访问</button><button class="application-menu-open-list" data-application-open-list>打开应用列表</button></div><div class="application-menu-list">${listMarkup}</div><div class="application-menu-divider"></div><div class="application-menu-footer"><button data-application-create>${icon('add')}新建应用</button><button data-application-permission>${icon('clipboard')}申请应用权限</button></div>`;
+  const search=menu.querySelector('[data-application-search]');
+  if(focusInput){ search.focus(); search.setSelectionRange(query.length,query.length); }
 }
 function openApplicationMenu(trigger){
   closeAccountPopover(); closeEnvPopover(); closeClusterPopover();
@@ -1740,16 +1743,21 @@ document.querySelector('#clearSelectionBtn').addEventListener('click',()=>{state
 menu.addEventListener('click',event=>{const item=event.target.closest('[data-menu-action]');if(!item)return;const pod=menu.dataset.pod;const cluster=menu.dataset.cluster;const key=item.dataset.menuAction; if(key==='history') openHistory(); else if(key==='detail') openInstanceDetail(pod); else if(key==='refresh'){toast('Pod 列表已刷新');render();} else if(key==='collapse-cluster') setWorkloadCollapsed(cluster,true); else if(key==='expand-cluster') setWorkloadCollapsed(cluster,false); else if(key==='restart-row') triggerAction('restart',[pod]); else if(key==='delete-deployment') triggerAction('delete-deployment'); else if(key==='more-customize') toast('导航设置将在后续版本开放'); else if(key.startsWith('context-')) toast(`已切换${menu.dataset.context || ''}：${item.textContent.trim()}`); else if(key==='header-preferences') toast('已打开偏好设置'); else if(key==='header-help') toast('已打开帮助文档'); else toast(`已选择${item.textContent.trim()}`); closeMenu();});
 menu.addEventListener('input',event=>{
   const search=event.target.closest('[data-application-search]');
-  if(search) renderApplicationMenu(search.value,false);
+  if(search) renderApplicationMenu(search.value,true);
 });
 menu.addEventListener('click',event=>{
   const tab=event.target.closest('[data-application-tab]');
   if(tab){
+    applicationMenuTab=tab.dataset.applicationTab;
     menu.querySelectorAll('[data-application-tab]').forEach(item=>item.classList.toggle('is-active',item===tab));
     return;
   }
-  const star=event.target.closest('.application-star');
-  if(star){ star.textContent=star.textContent?'':'★'; return; }
+  const star=event.target.closest('[data-application-favorite]');
+  if(star){
+    const item=applicationMenuItems.find(candidate=>candidate.name===star.dataset.applicationFavorite);
+    if(item){ item.favorite=!item.favorite; renderApplicationMenu(menu.querySelector('[data-application-search]')?.value||'',false); }
+    return;
+  }
   const app=event.target.closest('[data-application-select]');
   if(app){ toast(`已切换应用：${app.dataset.applicationSelect}`); closeMenu(); return; }
   if(event.target.closest('[data-application-open-list]')){ toast('已打开应用列表'); return; }
