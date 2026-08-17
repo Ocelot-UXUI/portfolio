@@ -3670,6 +3670,10 @@
   padding-top: 0;
   padding-bottom: 0;
 }
+#runtimePage [data-runtime-config="credentials-config"] .runtime-credential-list.runtime-credentials-manager {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
 
 /* A value-only runtime row stays vertically centered in help mode. */
 #runtimePage.is-help-mode #runtime-container-runtime .runtime-setting-row:has(> .runtime-input-unit) {
