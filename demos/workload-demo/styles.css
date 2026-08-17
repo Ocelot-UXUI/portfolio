@@ -1234,6 +1234,28 @@
 #runtimePage.is-application-context #runtime-container-image .runtime-container-build-tail > .runtime-setting-row > .runtime-container-content {
   grid-column: 1 !important;
 }
+
+/* Secondary add actions stay stacked below their title when inheritance is removed. */
+#runtimePage.is-application-context .runtime-setting-row-block:has(> .runtime-add-btn) {
+  grid-template-columns: minmax(0, 1fr) !important;
+  grid-template-rows: auto auto !important;
+  row-gap: 8px;
+}
+#runtimePage.is-application-context .runtime-setting-row-block:has(> .runtime-add-btn) > div {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+}
+#runtimePage.is-application-context .runtime-setting-row-block:has(> .runtime-add-btn) > .runtime-add-btn {
+  grid-column: 1 !important;
+  grid-row: 2 !important;
+  justify-self: start;
+  margin-top: 0 !important;
+}
+#runtimePage.is-application-context .runtime-credential-add-list,
+#runtimePage.is-application-context .runtime-code-repository-content {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
 #runtimePage:not(.hidden) {
   overflow: hidden;
 }
