@@ -1370,7 +1370,7 @@
 #runtimePage .runtime-container-parent { width: 233px; justify-content: space-between; padding-left: 24px; }
 #runtimePage .runtime-container-header { display: flex; width: 233px; height: 32px; align-items: center; justify-content: space-between; padding-left: 17px; box-sizing: border-box; }
 #runtimePage .runtime-container-header .runtime-container-parent { width: auto; flex: 1; justify-content: flex-start; gap: 4px; padding-left: 0; }
-#runtimePage .runtime-tree-leaf { width: 220px; padding-left: 40px; }
+#runtimePage .runtime-tree-leaf { width: 212px; padding-left: 40px; }
 #runtimePage .runtime-tree-resource-item { width: 240px; padding-left: 24px; }
 #runtimePage .runtime-tree-leaf,
 #runtimePage .runtime-tree-resource-item { position: relative; justify-content: flex-start; gap: 4px; cursor: default; }
