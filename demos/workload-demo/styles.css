@@ -3380,3 +3380,28 @@
   margin-left: 32px;
   justify-content: space-between;
 }
+
+/* Figma 467:15148: traffic detection is stacked in the regular state too. */
+#runtimePage:not(.is-help-mode) #runtime-container-runtime .runtime-setting-row:has(> .runtime-inline-control) {
+  grid-template-columns: 22px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: 8px;
+  row-gap: 8px;
+  align-items: center;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+#runtimePage:not(.is-help-mode) #runtime-container-runtime .runtime-setting-row:has(> .runtime-inline-control) > .runtime-setting-icon {
+  grid-column: 1;
+  grid-row: 1;
+}
+#runtimePage:not(.is-help-mode) #runtime-container-runtime .runtime-setting-row:has(> .runtime-inline-control) > div:not(.runtime-inline-control) {
+  grid-column: 2;
+  grid-row: 1;
+}
+#runtimePage:not(.is-help-mode) #runtime-container-runtime .runtime-setting-row:has(> .runtime-inline-control) > .runtime-inline-control {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  margin-left: 32px;
+  justify-content: space-between;
+}
