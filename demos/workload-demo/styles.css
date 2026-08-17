@@ -2732,6 +2732,17 @@
   overflow: visible;
 }
 
+/* All rows inside image build share the same top-aligned title/content baseline. */
+#runtimePage #runtime-container-image .runtime-container-build-tail > .runtime-setting-row {
+  align-items: start;
+}
+#runtimePage #runtime-container-image .runtime-container-build-tail > .runtime-setting-row > .runtime-setting-icon {
+  align-self: start;
+}
+#runtimePage #runtime-container-image .runtime-container-build-tail > .runtime-setting-row > div:not(.runtime-inline-control):not(.runtime-build-inline) {
+  align-self: start;
+}
+
 /* Affinity groups use the same inset divider as their inner rule blocks. */
 #runtimePage .runtime-setting-list > .runtime-rule-group {
   position: relative;
