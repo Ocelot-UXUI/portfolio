@@ -2741,6 +2741,23 @@
   content: "";
 }
 
+/* One vertical rhythm for every title-to-content stack. */
+#runtimePage {
+  --runtime-title-content-gap: 16px;
+}
+#runtimePage .runtime-setting-row-block > .runtime-add-btn,
+#runtimePage .runtime-setting-row-block > div:has(> .runtime-add-btn),
+#runtimePage .runtime-rule-block > .runtime-add-btn,
+#runtimePage .runtime-credential-add-list,
+#runtimePage #runtime-container-image .runtime-code-repository-content,
+#runtimePage .runtime-image-source-controls,
+#runtimePage #runtime-container-image .runtime-image-shell,
+#runtimePage .runtime-full-input,
+#runtimePage .runtime-code-table,
+#runtimePage .runtime-port-list {
+  margin-top: var(--runtime-title-content-gap);
+}
+
 #runtimePage.is-help-mode .runtime-setting-subrows {
   gap: var(--runtime-space-s);
   padding-top: var(--runtime-space-xs);
