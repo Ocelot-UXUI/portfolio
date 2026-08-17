@@ -1769,6 +1769,8 @@ function upgradeRuntimeCredentialsSection(){
   if(!section||section.dataset.credentialsRefined==='true')return;
   section.dataset.credentialsRefined='true';
   section.innerHTML=`<div class="runtime-credential-list runtime-credentials-manager"><div class="runtime-credential-inner"><div class="runtime-setting-row runtime-credential-top"><span class="runtime-setting-icon"><svg><use href="#i-runtime-open-one"/></svg></span><div class="runtime-credential-title"><strong>凭证管理</strong></div><div class="runtime-inline-actions"><button type="button"><svg><use href="#i-runtime-copy"/></svg><span>复制全部</span></button><button type="button"><svg><use href="#i-runtime-visible"/></svg><span>显示全部</span></button></div><div class="runtime-credential-add-list"><button class="runtime-add-btn" type="button"><svg><use href="#i-runtime-add"/></svg>添加凭证</button><button class="runtime-add-btn" type="button"><svg><use href="#i-runtime-add"/></svg>批量添加</button></div></div></div></div>`;
+  const credentialActions=section.querySelector('.runtime-credential-add-list');
+  if(credentialActions)credentialActions.style.marginTop='16px';
 }
 upgradeRuntimeCredentialsSection();
 function upgradeRuntimeImageSection(){
