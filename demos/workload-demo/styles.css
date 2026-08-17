@@ -3425,7 +3425,7 @@
 }
 #runtimePage #runtime-container-image .runtime-code-repository-content,
 #runtimePage #runtime-container-image .runtime-setting-row:has(> .runtime-build-path) > .runtime-build-path {
-  margin-top: 16px;
+  margin-top: var(--runtime-space-xs);
 }
 
 /* Figma 467:13064 - base spacing and medium-control geometry.
