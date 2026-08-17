@@ -1899,10 +1899,22 @@ function setRuntimeFieldEnabled(scope,enabled){
   });
 }
 function syncRuntimeInheritedControls(){
-  document.querySelectorAll('#runtimePage .runtime-setting-row.is-field-disabled, #runtimePage .runtime-rule-group.is-field-disabled, #runtimePage .runtime-image-list.is-field-disabled, #runtimePage .runtime-image-source.is-field-disabled, #runtimePage .runtime-image-base-group.is-field-disabled').forEach(scope=>{
-    scope.querySelectorAll('input,select,textarea,button:not(.runtime-setting-icon)').forEach(control=>{
-      control.disabled=true;
-    });
+  const page=document.querySelector('#runtimePage');
+  if(!page)return;
+  const scopes=[...page.querySelectorAll('.runtime-setting-row, .runtime-rule-group, .runtime-image-list, .runtime-image-source, .runtime-image-base-group')];
+  const isApplication=activeRuntimeContext==='application';
+  page.classList.toggle('is-application-context',isApplication);
+  scopes.forEach(scope=>{
+    const toggle=scope.querySelector('[data-runtime-field-toggle]');
+    if(isApplication){
+      setRuntimeFieldEnabled(scope,true);
+      scope.querySelector('.runtime-override-tooltip')?.remove();
+      toggle?.removeAttribute('aria-describedby');
+    } else if(toggle?.dataset.runtimeFieldState==='active'){
+      setRuntimeFieldEnabled(scope,true);
+    } else {
+      setRuntimeFieldEnabled(scope,false);
+    }
   });
 }
 function getRuntimeTooltipText(state){
