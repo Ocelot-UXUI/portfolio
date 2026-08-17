@@ -3403,5 +3403,22 @@
   grid-column: 1 / -1;
   grid-row: 2;
   margin-left: 32px;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto 100px auto;
+  gap: 12px;
+  align-items: center;
+}
+#runtimePage #runtime-container-runtime .runtime-setting-row:has(> .runtime-inline-control) > .runtime-inline-control > span {
+  min-width: 0;
+}
+#runtimePage #runtime-container-runtime .runtime-setting-row:has(> .runtime-inline-control) > .runtime-inline-control > .runtime-switch {
+  grid-column: 2;
+}
+#runtimePage #runtime-container-runtime .runtime-setting-row:has(> .runtime-inline-control) > .runtime-inline-control > input {
+  grid-column: 3;
+  width: 100px;
+  min-width: 100px;
+}
+#runtimePage #runtime-container-runtime .runtime-setting-row:has(> .runtime-inline-control) > .runtime-inline-control > em {
+  grid-column: 4;
 }
