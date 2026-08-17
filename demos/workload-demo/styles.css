@@ -1210,6 +1210,30 @@
 #runtimePage.is-application-context .runtime-image-heading > .runtime-setting-icon {
   display: none !important;
 }
+
+/* Application context has no leading inheritance column; reset layouts that depended on it. */
+#runtimePage.is-application-context .runtime-setting-row,
+#runtimePage.is-application-context .runtime-setting-row.runtime-setting-row-stack {
+  grid-template-columns: minmax(0, 1fr) auto !important;
+}
+#runtimePage.is-application-context .runtime-setting-row > div:not(.runtime-inline-control):not(.runtime-setting-subrows):not(.runtime-switch-field),
+#runtimePage.is-application-context .runtime-setting-row.runtime-setting-row-stack > div {
+  grid-column: 1 !important;
+}
+#runtimePage.is-application-context .runtime-setting-row > .runtime-setting-subrows {
+  grid-column: 1 / -1 !important;
+}
+#runtimePage.is-application-context #runtime-container-runtime .runtime-setting-row:has(> .runtime-inline-control) {
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+#runtimePage.is-application-context #runtime-container-runtime .runtime-setting-row:has(> .runtime-inline-control) > .runtime-inline-control {
+  grid-column: 1 / -1 !important;
+  margin-left: 0 !important;
+}
+#runtimePage.is-application-context #runtime-container-image .runtime-container-build-tail > .runtime-setting-row > div,
+#runtimePage.is-application-context #runtime-container-image .runtime-container-build-tail > .runtime-setting-row > .runtime-container-content {
+  grid-column: 1 !important;
+}
 #runtimePage:not(.hidden) {
   overflow: hidden;
 }
