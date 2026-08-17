@@ -2690,6 +2690,81 @@
   .toast-region .toast{width:100%;justify-content:flex-start}
 }
 
+/* Runtime configuration stays usable between tablet and phone widths. */
+@media (max-width: 900px) {
+  body { min-width: 0; }
+  .global-header { padding-right: 10px; padding-left: 10px; }
+  .brand,
+  .breadcrumbs,
+  .header-search,
+  .header-assistant { display: none; }
+  .header-tools { margin-left: auto; }
+  .secondary-nav { width: 60px !important; padding: 20px 6px !important; }
+  .secondary-nav > header { display: none !important; }
+  .secondary-nav > nav { width: 48px !important; gap: 4px !important; }
+  .secondary-nav > nav button { width: 48px !important; height: 48px !important; justify-content: center !important; padding: 0 !important; }
+  .secondary-nav > nav button > span { display: none !important; }
+  .secondary-nav .secondary-collapse { width: 48px !important; margin: auto auto 0 !important; }
+  .workspace { min-width: 0; padding: 16px; }
+  #runtimePage .runtime-page-header { height: auto !important; align-items: flex-start; flex-wrap: wrap; gap: 12px; }
+  #runtimePage .runtime-page-actions { flex: 1 1 100%; flex-wrap: wrap; }
+  #runtimePage .runtime-context-row { height: auto; align-items: flex-start; flex-wrap: wrap; padding-top: 8px; padding-bottom: 8px; }
+  #runtimePage .runtime-context-main { flex: 1 1 100%; flex-wrap: wrap; row-gap: 8px; }
+  #runtimePage .runtime-context-tabs { flex-wrap: wrap; }
+  #runtimePage .runtime-context-help { width: 100%; margin-left: 0; }
+  #runtimePage .runtime-layout { grid-template-columns: minmax(168px, 31%) minmax(0, 1fr); gap: 16px; padding: 24px 16px; }
+  #runtimePage .runtime-tree,
+  #runtimePage .runtime-tree-list,
+  #runtimePage .runtime-tree-group,
+  #runtimePage .runtime-tree-heading,
+  #runtimePage .runtime-container-header,
+  #runtimePage .runtime-container-items,
+  #runtimePage .runtime-tree-children,
+  #runtimePage .runtime-workload-items { width: 100%; }
+  #runtimePage .runtime-tree-item,
+  #runtimePage .runtime-tree-leaf,
+  #runtimePage .runtime-tree-resource-item { max-width: 100%; }
+  #runtimePage .runtime-editor-title { flex-wrap: wrap; height: auto; margin-bottom: 24px; }
+}
+
+@media (max-width: 700px) {
+  body { overflow: auto !important; }
+  body .portfolio-demo-app { display: block !important; height: auto; min-height: 100vh; overflow: visible; }
+  body .portfolio-mobile-fallback { display: none !important; }
+  .global-header { position: sticky; top: 0; z-index: 20; }
+  .primary-nav,
+  .secondary-nav { display: none !important; }
+  .shell { height: auto; min-height: calc(100vh - 56px); }
+  .workspace { width: 100%; min-height: calc(100vh - 56px); overflow: visible; padding: 16px 12px 32px; }
+  #runtimePage { height: auto; min-height: 0; overflow: visible; }
+  #runtimePage .runtime-page-header { padding-bottom: 12px; }
+  #runtimePage .runtime-page-header h1 { font-size: 22px; line-height: 30px; }
+  #runtimePage .runtime-context-row { height: auto; min-height: 44px; flex-wrap: wrap; padding: 8px 0; }
+  #runtimePage .runtime-save-state { width: 100%; margin-left: 0; }
+  #runtimePage .runtime-layout { display: flex; flex-direction: column; gap: 16px; min-height: 0; padding: 16px 0 0; overflow: visible; }
+  #runtimePage .runtime-tree { position: static; min-height: 0; padding: 0 0 12px; border-bottom: 1px solid #e8e8e8; }
+  #runtimePage .runtime-tree-list { max-height: 184px; overflow-y: auto; padding-right: 4px; }
+  #runtimePage .runtime-tree-group,
+  #runtimePage .runtime-tree-heading,
+  #runtimePage .runtime-tree-children,
+  #runtimePage .runtime-workload-items { width: 100%; }
+  #runtimePage .runtime-tree-item,
+  #runtimePage .runtime-tree-leaf,
+  #runtimePage .runtime-tree-resource-item,
+  #runtimePage .runtime-tree-parent { width: 100%; max-width: 100%; }
+  #runtimePage .runtime-editor { height: auto; overflow: visible; padding-bottom: 48px; }
+  #runtimePage .runtime-form-grid { grid-template-columns: minmax(0, 1fr); gap: 12px; padding: 16px; }
+  #runtimePage .runtime-setting-row { grid-template-columns: 22px minmax(0, 1fr); gap: 8px; }
+  #runtimePage .runtime-setting-row > .runtime-input-unit,
+  #runtimePage .runtime-setting-row > .runtime-inline-control,
+  #runtimePage .runtime-setting-row > .runtime-switch-field,
+  #runtimePage .runtime-setting-row > input,
+  #runtimePage .runtime-setting-row > select { grid-column: 2; justify-self: start; max-width: 100%; }
+  #runtimePage .runtime-resource-head { display: none; }
+  #runtimePage .runtime-resource-row { grid-template-columns: minmax(0, 1fr) 72px 72px; gap: 8px; }
+  #runtimePage .runtime-resource-row > :last-child { display: none; }
+}
+
 /* The workload surface is desktop-oriented; keep the mobile fallback from
    inheriting the demo's fixed canvas width. */
 @media (max-width:700px){
@@ -3720,4 +3795,79 @@
   width: 212px;
   height: 32px;
   padding-left: 56px;
+}
+
+/* Application hierarchy picker follows Figma node 185:1396. */
+.action-menu.application-menu {
+  width: 480px;
+  min-height: 370px;
+  overflow: hidden;
+  padding: 8px 4px 4px;
+  border: 0;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, .1);
+}
+.application-menu-search {
+  display: flex;
+  width: 464px;
+  height: 32px;
+  align-items: center;
+  gap: 6px;
+  margin: 0 auto 2px;
+  padding: 7px 13px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  color: #bfbfbf;
+}
+.application-menu-search .figma-icon,
+.application-menu-search svg { width: 16px; height: 16px; flex: 0 0 16px; }
+.application-menu-search input { width: 100%; min-width: 0; padding: 0; border: 0; outline: 0; color: #181818; font: 400 14px/22px "PingFang SC", sans-serif; }
+.application-menu-search input::placeholder { color: #bfbfbf; }
+.application-menu-tabs { display: flex; height: 42px; align-items: stretch; gap: 32px; padding: 0 4px; }
+.application-menu-tabs button { position: relative; height: 36px; padding: 8px 0; border: 0; background: transparent; color: #545454; font: 400 12px/20px "PingFang SC", sans-serif; white-space: nowrap; }
+.application-menu-tabs button.is-active { color: #181818; font-weight: 500; }
+.application-menu-tabs button.is-active::after { position: absolute; right: 16px; bottom: 0; left: 16px; height: 2px; border-radius: 4px; background: #181818; content: ""; }
+.application-menu-tabs .application-menu-open-list { margin-left: auto; color: #4471ec; }
+.application-menu-tabs .application-menu-open-list::after { display: none; }
+.application-menu-list { display: flex; min-height: 232px; flex-direction: column; gap: 2px; padding: 0 4px; }
+.application-menu-row { display: flex; width: 100%; height: 58px; align-items: center; gap: 8px; padding: 8px; border: 0; border-radius: 8px; background: #fff; color: #181818; text-align: left; cursor: pointer; }
+.application-menu-row:hover { background: #f7f7f7; }
+.application-avatar { display: grid; width: 32px; height: 32px; flex: 0 0 32px; place-items: center; border-radius: 50%; color: #fff; font: 500 14px/19px "PingFang SC", sans-serif; text-transform: lowercase; }
+.application-avatar.mint { background: #a2e8ce; }
+.application-avatar.blue { background: #b1d4ff; }
+.application-avatar.yellow { background: #fee685; }
+.application-avatar.purple { background: #b8c4ff; }
+.application-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 400 14px/22px "PingFang SC", sans-serif; }
+.application-star { margin-left: auto; color: #f28a00; font-size: 18px; line-height: 20px; }
+.application-menu-empty { margin: 48px 0; color: #8f8f8f; text-align: center; font-size: 14px; }
+.application-menu-divider { width: 456px; height: 1px; margin: 0 auto; background: #f0f0f0; }
+.application-menu-footer { display: flex; height: 40px; align-items: center; justify-content: space-between; }
+.application-menu-footer button { display: inline-flex; width: 232px; height: 32px; align-items: center; justify-content: center; gap: 8px; padding: 6px 0; border: 0; border-radius: 24px; background: #fff; color: #181818; font: 400 14px/22px "PingFang SC", sans-serif; cursor: pointer; }
+.application-menu-footer button:hover { background: #f7f7f7; }
+.application-menu-footer .figma-icon,
+.application-menu-footer svg { width: 16px; height: 16px; }
+
+/* Final responsive runtime surface overrides. */
+@media (max-width: 700px) {
+  body { min-width: 0 !important; overflow: auto !important; }
+  body .portfolio-demo-app { display: block !important; height: auto !important; min-height: 100vh; overflow: visible !important; }
+  body .portfolio-mobile-fallback { display: none !important; }
+  .primary-nav, .secondary-nav { display: none !important; }
+  .shell { height: auto; min-height: calc(100vh - 56px); }
+  .workspace { width: 100%; min-height: calc(100vh - 56px); overflow: visible; padding: 16px 12px 32px; }
+  #runtimePage.runtime-page { width: 100% !important; max-width: 100% !important; min-width: 0 !important; margin: 0 !important; height: auto; min-height: 0; overflow: visible; }
+  #runtimePage .runtime-layout { display: flex; flex-direction: column; min-height: 0; overflow: visible; }
+  #runtimePage .runtime-layout,
+  #runtimePage .runtime-editor { width: 100%; max-width: 100%; min-width: 0; }
+  #runtimePage .runtime-tree { position: static; min-height: 0; }
+  #runtimePage .runtime-editor { height: auto; overflow: visible; }
+  #runtimePage .runtime-version-tooltip { display: none; }
+  #runtimePage .runtime-setting-row > .runtime-input-unit { width: 100%; min-width: 0; }
+  #runtimePage .runtime-setting-row > .runtime-input-unit > .cnap-input[type="number"] { flex: 1 1 auto; width: auto; min-width: 0; }
+  .global-header,
+  .portfolio-demo-app,
+  .workspace { width: 100%; min-width: 0; max-width: 100%; overflow-x: hidden; }
+  .breadcrumbs { display: none !important; }
+  #runtimePage .runtime-image-source-copy { min-width: 0; max-width: 100%; }
 }

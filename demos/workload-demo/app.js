@@ -1031,9 +1031,32 @@ function openClusterPopover(trigger){
   document.querySelector('#clusterSearchInput').focus();
 }
 function openMenu(trigger,items){
+  menu.className='action-menu';
   const rect=trigger.getBoundingClientRect();
   menu.innerHTML=items.map(item=>`<button data-menu-action="${item.key}">${item.icon?icon(item.icon):''}${item.label}</button>`).join('');
   menu.style.top=`${rect.bottom+6}px`; menu.style.left=`${Math.min(rect.left,window.innerWidth-190)}px`; menu.classList.remove('hidden');
+}
+const applicationMenuItems=[
+  {name:'test-sandbox-2',initial:'t',tone:'mint',favorite:true},
+  {name:'kefu-c',initial:'k',tone:'blue',favorite:true},
+  {name:'icafe-web-2',initial:'i',tone:'yellow',favorite:false},
+  {name:'icafe-web-20260530',initial:'i',tone:'purple',favorite:false}
+];
+function renderApplicationMenu(query='',focusInput=false){
+  const list=applicationMenuItems.filter(item=>!query||item.name.toLowerCase().includes(query.toLowerCase()));
+  const listMarkup=list.length?list.map(item=>`<button class="application-menu-row" data-application-select="${item.name}"><span class="application-avatar ${item.tone}">${item.initial}</span><span class="application-name">${item.name}</span><span class="application-star" aria-label="${item.favorite?'已收藏':'未收藏'}">${item.favorite?'★':''}</span></button>`).join(''):'<p class="application-menu-empty">未找到匹配应用</p>';
+  menu.innerHTML=`<label class="application-menu-search">${icon('search')}<input data-application-search aria-label="搜索应用" placeholder="请输入应用名称"></label><div class="application-menu-tabs"><button data-application-tab="all">全部可用应用</button><button class="is-active" data-application-tab="favorite">我收藏的应用</button><button data-application-tab="recent">最近访问</button><button class="application-menu-open-list" data-application-open-list>打开应用列表</button></div><div class="application-menu-list">${listMarkup}</div><div class="application-menu-divider"></div><div class="application-menu-footer"><button data-application-create>${icon('add')}新建应用</button><button data-application-permission>${icon('clipboard')}申请应用权限</button></div>`;
+  if(focusInput) menu.querySelector('[data-application-search]').focus();
+}
+function openApplicationMenu(trigger){
+  closeAccountPopover(); closeEnvPopover(); closeClusterPopover();
+  menu.className='action-menu application-menu';
+  const rect=trigger.getBoundingClientRect();
+  menu.style.top=`${rect.bottom+6}px`;
+  menu.style.left=`${Math.max(8,Math.min(rect.left-8,window.innerWidth-496))}px`;
+  menu.dataset.context='应用';
+  menu.classList.remove('hidden');
+  renderApplicationMenu('',true);
 }
 
 function triggerAction(actionKey,ids=[]){ closeMenu(); openConfirm(actionKey,ids); }
@@ -1540,6 +1563,7 @@ document.querySelectorAll('[data-context]').forEach(button=>button.addEventListe
   if(key==='account'){ openAccountPopover(button); return; }
   if(key==='environment'){ openEnvPopover(button); return; }
   if(key==='cluster'){ openClusterPopover(button); return; }
+  if(key==='application'){ openApplicationMenu(button); return; }
   const lists={
     application:[{key:'context-application-payment',label:'Payment-api',icon:'apps'},{key:'context-application-order',label:'Order-service',icon:'apps'},{key:'context-application-gateway',label:'Gateway',icon:'apps'}]
   };
@@ -1714,6 +1738,24 @@ clusterGroups.addEventListener('click',event=>{
 document.querySelectorAll('[data-bulk-action]').forEach(button=>button.addEventListener('click',()=>triggerAction(button.dataset.bulkAction,[...state.selected])));
 document.querySelector('#clearSelectionBtn').addEventListener('click',()=>{state.selected.clear();render();});
 menu.addEventListener('click',event=>{const item=event.target.closest('[data-menu-action]');if(!item)return;const pod=menu.dataset.pod;const cluster=menu.dataset.cluster;const key=item.dataset.menuAction; if(key==='history') openHistory(); else if(key==='detail') openInstanceDetail(pod); else if(key==='refresh'){toast('Pod 列表已刷新');render();} else if(key==='collapse-cluster') setWorkloadCollapsed(cluster,true); else if(key==='expand-cluster') setWorkloadCollapsed(cluster,false); else if(key==='restart-row') triggerAction('restart',[pod]); else if(key==='delete-deployment') triggerAction('delete-deployment'); else if(key==='more-customize') toast('导航设置将在后续版本开放'); else if(key.startsWith('context-')) toast(`已切换${menu.dataset.context || ''}：${item.textContent.trim()}`); else if(key==='header-preferences') toast('已打开偏好设置'); else if(key==='header-help') toast('已打开帮助文档'); else toast(`已选择${item.textContent.trim()}`); closeMenu();});
+menu.addEventListener('input',event=>{
+  const search=event.target.closest('[data-application-search]');
+  if(search) renderApplicationMenu(search.value,false);
+});
+menu.addEventListener('click',event=>{
+  const tab=event.target.closest('[data-application-tab]');
+  if(tab){
+    menu.querySelectorAll('[data-application-tab]').forEach(item=>item.classList.toggle('is-active',item===tab));
+    return;
+  }
+  const star=event.target.closest('.application-star');
+  if(star){ star.textContent=star.textContent?'':'★'; return; }
+  const app=event.target.closest('[data-application-select]');
+  if(app){ toast(`已切换应用：${app.dataset.applicationSelect}`); closeMenu(); return; }
+  if(event.target.closest('[data-application-open-list]')){ toast('已打开应用列表'); return; }
+  if(event.target.closest('[data-application-create]')){ toast('新建应用'); return; }
+  if(event.target.closest('[data-application-permission]')){ toast('申请应用权限'); return; }
+});
 modalBackdrop.addEventListener('click',event=>{if(event.target===modalBackdrop)closeModal();});
 modal.addEventListener('change',event=>{
   if(event.target.matches('[data-modal-select-all]')) modal.querySelectorAll('[data-modal-cluster]').forEach(input=>{input.checked=event.target.checked;if(!event.target.checked){const unavailable=modal.querySelector(`[data-modal-unavailable="${input.dataset.modalCluster}"]`);if(unavailable)unavailable.value=unavailable.dataset.initialValue;}});
