@@ -3296,3 +3296,33 @@
 #runtimePage .runtime-setting-row .runtime-switch {
   margin-right: 0;
 }
+
+/* Figma 560:8800: image-build inheritance controls follow the help-mode baseline. */
+#runtimePage.is-help-mode #runtime-container-image .runtime-image-source {
+  height: auto;
+  min-height: 0;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+#runtimePage.is-help-mode #runtime-container-image .runtime-image-source-title,
+#runtimePage.is-help-mode #runtime-container-image .runtime-image-heading {
+  align-items: flex-start;
+}
+#runtimePage.is-help-mode #runtime-container-image .runtime-image-source-title .runtime-setting-icon,
+#runtimePage.is-help-mode #runtime-container-image .runtime-image-heading .runtime-setting-icon {
+  align-self: flex-start;
+  margin-top: 0;
+}
+#runtimePage.is-help-mode #runtime-container-image .runtime-image-source-controls {
+  margin-top: 16px;
+}
+#runtimePage.is-help-mode #runtime-container-image .runtime-image-heading {
+  margin-top: 20px;
+}
+#runtimePage.is-help-mode #runtime-container-image .runtime-image-heading-copy p {
+  display: block;
+  margin-top: 4px;
+}
+#runtimePage.is-help-mode #runtime-container-image .runtime-image-shell {
+  margin-top: 16px;
+}
