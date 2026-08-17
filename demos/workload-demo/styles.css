@@ -1150,6 +1150,33 @@
 #runtimePage .runtime-setting-list,
 #runtimePage .runtime-setting-row,
 #runtimePage .runtime-container-content { min-width: 0; }
+
+/* Runtime owns the scroll area: page chrome, tree and toc stay fixed while the editor moves. */
+#runtimePage {
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+#runtimePage .runtime-page-header,
+#runtimePage .runtime-context-row {
+  position: static;
+  top: auto;
+  flex: none;
+}
+#runtimePage .runtime-layout {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+#runtimePage .runtime-editor {
+  height: 100%;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+}
 #runtimePage .runtime-setting-row > :nth-child(2) { min-width: 0; }
 #runtimePage .runtime-setting-row > .runtime-input-unit,
 #runtimePage .runtime-setting-row > .runtime-inline-control { max-width: 100%; }
