@@ -1182,6 +1182,26 @@
 #runtimePage .runtime-editor::-webkit-scrollbar {
   display: none;
 }
+#runtimePage.is-application-context .runtime-setting-icon,
+#runtimePage.is-application-context .runtime-image-source-title > .runtime-setting-icon,
+#runtimePage.is-application-context .runtime-image-heading > .runtime-setting-icon,
+#runtimePage.is-application-context .runtime-rule-group .runtime-setting-icon {
+  display: none;
+}
+#runtimePage.is-application-context .runtime-setting-row {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+#runtimePage.is-application-context .runtime-setting-row > div:not(.runtime-inline-control):not(.runtime-setting-subrows):not(.runtime-switch-field) {
+  grid-column: 1;
+}
+#runtimePage.is-application-context .runtime-setting-row > .runtime-switch-field,
+#runtimePage.is-application-context .runtime-setting-row > .runtime-input-unit,
+#runtimePage.is-application-context .runtime-setting-row > input,
+#runtimePage.is-application-context .runtime-setting-row > select,
+#runtimePage.is-application-context .runtime-setting-row > button:not(.runtime-setting-icon),
+#runtimePage.is-application-context .runtime-setting-row > .runtime-inline-control {
+  grid-column: 2;
+}
 #runtimePage:not(.hidden) {
   overflow: hidden;
 }
