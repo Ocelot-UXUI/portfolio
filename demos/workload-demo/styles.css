@@ -2757,7 +2757,7 @@
 #runtimePage .runtime-port-list {
   margin-top: var(--runtime-title-content-gap);
 }
-#runtimePage #runtime-container-image .runtime-setting-row-block:has(> .runtime-add-btn) > .runtime-add-btn {
+#runtimePage .runtime-setting-row-block:has(> .runtime-add-btn) > .runtime-add-btn {
   margin-top: 0;
 }
 #runtimePage #runtime-container-image .runtime-code-repository-row > .runtime-container-content {
