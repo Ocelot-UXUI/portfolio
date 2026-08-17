@@ -2764,6 +2764,9 @@
 #runtimePage #runtime-container-image .runtime-code-repository-row > .runtime-container-content {
   gap: 0;
 }
+#runtimePage [data-runtime-config="credentials-config"] .runtime-credential-top .runtime-credential-add-list {
+  margin-top: var(--runtime-title-content-gap, 16px);
+}
 
 #runtimePage.is-help-mode .runtime-setting-subrows {
   gap: var(--runtime-space-s);
