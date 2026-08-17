@@ -1347,6 +1347,7 @@ document.querySelectorAll('.runtime-setting-row').forEach(row=>{
 });
 const runtimeTocCurrent=document.querySelector('.runtime-toc-current');
 const runtimeEditorScroll=document.querySelector('#runtimeEditor');
+const runtimeScrollLevelTitle=document.querySelector('.runtime-config-level-heading h3');
 let runtimeTocFrame=0;
 function updateRuntimeTocFromScroll(){
   if(!runtimeTocItems.length)return;
@@ -1361,6 +1362,14 @@ function updateRuntimeTocFromScroll(){
   const activeItem=runtimeTocItems[activeIndex];
   if(runtimeTocCurrent&&activeItem){
     runtimeTocCurrent.style.top=`${activeItem.offsetTop+Math.max(0,(activeItem.offsetHeight-runtimeTocCurrent.offsetHeight)/2)}px`;
+  }
+  if(activeRuntimeTarget==='pod-config'){
+    const containerSection=document.querySelector('[data-runtime-config="container-config"]');
+    const isContainerPhase=containerSection&&containerSection.getBoundingClientRect().top<=viewportTop;
+    const breadcrumb=document.querySelector('.runtime-editor-breadcrumb strong');
+    const nextLabel=isContainerPhase?'容器':'Pod配置';
+    if(breadcrumb)breadcrumb.textContent=nextLabel;
+    if(runtimeScrollLevelTitle)runtimeScrollLevelTitle.textContent=nextLabel;
   }
 }
 function scheduleRuntimeTocSync(){
