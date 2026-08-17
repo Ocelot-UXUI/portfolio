@@ -1338,6 +1338,10 @@ document.addEventListener('click',event=>{
   if(runtimeLevelDropdown&&!runtimeLevelDropdown.contains(event.target)&&event.target!==runtimeLevelSwitch) closeRuntimeLevelDropdown();
 });
 const runtimeTocItems=[...document.querySelectorAll('[data-runtime-toc]')];
+const runtimeTocGroups={
+  pod:document.querySelector('[data-runtime-toc-group="pod"]'),
+  container:document.querySelector('[data-runtime-toc-group="container"]')
+};
 document.querySelectorAll('.runtime-setting-row').forEach(row=>{
   const title=row.querySelector(':scope > div > strong');
   if(title?.textContent.trim()==='部署并发度'){
@@ -1352,18 +1356,13 @@ function updateRuntimeTocFromScroll(){
   if(!runtimeTocItems.length)return;
   const editorRect=runtimeEditorScroll?.getBoundingClientRect();
   const viewportTop=(editorRect?.top||workspace?.getBoundingClientRect().top||0)+24;
-  const containerStart=document.querySelector('[data-runtime-config="container-image-config"]');
+  const containerStart=document.querySelector('[data-runtime-config="container-config"]');
   const isContainerPhase=Boolean(containerStart&&containerStart.getBoundingClientRect().top<=viewportTop);
-  const podItems=runtimeTocItems.slice(0,6);
-  const containerItems=[runtimeTocItems[0],...runtimeTocItems.slice(6)];
+  const podItems=[...runtimeTocGroups.pod.querySelectorAll('[data-runtime-toc]')];
+  const containerItems=[...runtimeTocGroups.container.querySelectorAll('[data-runtime-toc]')];
   const phaseItems=isContainerPhase?containerItems:podItems;
-  runtimeTocItems.forEach((item,index)=>{
-    const shouldShow=phaseItems.includes(item);
-    item.hidden=!shouldShow;
-    item.classList.toggle('is-phase-hidden',!shouldShow);
-  });
-  const rootItem=runtimeTocItems[0];
-  if(rootItem)rootItem.textContent=isContainerPhase?'容器':'Pod配置';
+  runtimeTocGroups.pod.hidden=isContainerPhase;
+  runtimeTocGroups.container.hidden=!isContainerPhase;
   let activeIndex=0;
   phaseItems.forEach((item,index)=>{
     const target=document.querySelector(`[data-runtime-config="${item.dataset.runtimeToc}"]`);
@@ -1385,10 +1384,7 @@ function scheduleRuntimeTocSync(){
 }
 runtimeTocItems.forEach(item=>item.addEventListener('click',event=>{
   event.preventDefault();
-  const targetKey=item===runtimeTocItems[0]&&item.textContent.trim()==='容器'
-    ? 'container-image-config'
-    : item.dataset.runtimeToc;
-  const target=document.querySelector(`[data-runtime-config="${targetKey}"]`);
+  const target=document.querySelector(`[data-runtime-config="${item.dataset.runtimeToc}"]`);
   if(target&&runtimeEditorScroll){
     const editorRect=runtimeEditorScroll.getBoundingClientRect();
     const targetTop=target.getBoundingClientRect().top-editorRect.top+runtimeEditorScroll.scrollTop-24;
