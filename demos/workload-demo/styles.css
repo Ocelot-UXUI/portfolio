@@ -1256,6 +1256,11 @@
   margin-left: 0 !important;
   padding-left: 0 !important;
 }
+#runtimePage.is-application-context [data-runtime-config="credentials-config"] .runtime-add-btn {
+  opacity: 1 !important;
+  pointer-events: auto;
+  cursor: pointer;
+}
 
 /* Affinity content also loses the inheritance column at application level. */
 #runtimePage.is-application-context .runtime-rule-group {
