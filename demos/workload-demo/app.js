@@ -1087,7 +1087,7 @@ function updateRuntimeEditorHeader(target=activeRuntimeTarget,targetLabel='web1'
     if(isContainer)breadcrumb.querySelector('strong').textContent=displayTargetLabel;
   }
   if(title)title.classList.toggle('is-container-context',isContainer);
-  if(sectionTitle)sectionTitle.textContent=isContainer?displayTargetLabel:'容器配置';
+  if(sectionTitle)sectionTitle.textContent=isContainer?'容器':'容器配置';
   containerSection?.classList.toggle('is-container-context',isContainer);
 }
 updateRuntimeEditorHeader();
