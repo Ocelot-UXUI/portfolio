@@ -1368,6 +1368,9 @@ function updateRuntimeTocFromScroll(){
     const target=document.querySelector(`[data-runtime-config="${item.dataset.runtimeToc}"]`);
     if(target&&target.getBoundingClientRect().top<=viewportTop)activeIndex=index;
   });
+  const isAtEditorBottom=runtimeEditorScroll
+    && runtimeEditorScroll.scrollTop+runtimeEditorScroll.clientHeight>=runtimeEditorScroll.scrollHeight-4;
+  if(isAtEditorBottom)activeIndex=phaseItems.length-1;
   runtimeTocItems.forEach(item=>item.classList.remove('is-current'));
   const activeItem=phaseItems[activeIndex];
   activeItem?.classList.add('is-current');
