@@ -3647,6 +3647,17 @@
   min-height: 76px;
   padding: 16px 20px;
   box-sizing: border-box;
+  position: relative;
+  border-bottom: 0;
+}
+#runtimePage #runtime-container-image .runtime-container-build-tail > .runtime-setting-row:not(:last-child)::after {
+  position: absolute;
+  right: 40px;
+  bottom: 0;
+  left: 40px;
+  height: 1px;
+  background: #e8e8e8;
+  content: "";
 }
 #runtimePage .runtime-rule-group > .runtime-rule-block:last-child {
   padding-bottom: 0;
