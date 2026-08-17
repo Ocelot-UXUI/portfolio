@@ -1144,6 +1144,7 @@ function applyRuntimeContext(context,value=runtimeContextSelection[context],{ann
   activeRuntimeContext=context;
   runtimeContextSelection[context]=value;
   refreshRuntimeFieldTooltips();
+  syncRuntimeInheritedControls();
   window.clearTimeout(runtimeContextRefreshTimer);
   document.querySelectorAll('.runtime-context-chip[data-runtime-context]').forEach(chip=>{
     const selected=chip.dataset.runtimeContext===context;
