@@ -3240,3 +3240,45 @@
 #runtimePage #runtime-container-image .runtime-setting-row:has(> .runtime-build-path) > .runtime-build-path {
   margin-top: 16px;
 }
+
+/* Figma 467:13064 - base spacing and medium-control geometry.
+   Keep the compact/help row heights above, while normalising the reusable
+   title-to-content rhythm and inline component spacing. */
+#runtimePage {
+  --runtime-title-content-gap: var(--runtime-space-xs);
+}
+
+#runtimePage .cnap-input {
+  width: 160px;
+  min-width: 160px;
+}
+
+#runtimePage .cnap-input[type="number"],
+#runtimePage .runtime-setting-row > .runtime-input-unit > .cnap-input[type="number"],
+#runtimePage .runtime-setting-subrows .runtime-input-unit .cnap-input[type="number"],
+#runtimePage .runtime-setting-row > .runtime-inline-control > .cnap-input[type="number"] {
+  width: 100px;
+  min-width: 100px;
+  flex-basis: 100px;
+}
+
+#runtimePage .runtime-setting-row > .runtime-input-unit,
+#runtimePage .runtime-setting-subrows .runtime-input-unit {
+  width: 122px;
+  min-width: 122px;
+  gap: var(--runtime-space-xs);
+}
+
+#runtimePage .runtime-inline-control,
+#runtimePage .runtime-switch-field,
+#runtimePage .runtime-inline-actions,
+#runtimePage .runtime-credential-actions,
+#runtimePage .runtime-build-inline,
+#runtimePage .runtime-command-row > .runtime-command-actions,
+#runtimePage .runtime-container-subsection .runtime-command-row > .runtime-command-actions {
+  gap: var(--runtime-space-xs);
+}
+
+#runtimePage .runtime-setting-row .runtime-switch {
+  margin-right: 0;
+}
