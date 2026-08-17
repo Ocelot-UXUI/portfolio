@@ -1336,7 +1336,7 @@
 #runtimePage .runtime-tree-item { position: relative; width: 220px; padding: 0 8px 0 40px; color: #181818; }
 #runtimePage .runtime-tree-item.runtime-tree-app { width: 240px; padding-left: 24px; color: #181818; }
 #runtimePage .runtime-tree-item.runtime-tree-app::before { position: absolute; left: 7px; width: 8px; height: 8px; border-bottom: 1px solid #d9d9d9; border-left: 1px solid #d9d9d9; border-radius: 0 0 0 4px; content: ""; }
-#runtimePage .runtime-tree-item.is-active { width: 220px; padding-left: 32px; background: #e6faf1; color: #181818; }
+#runtimePage .runtime-tree-item.is-active { width: 220px; padding-left: 40px; background: #e6faf1; color: #181818; }
 #runtimePage .runtime-tree-item.is-active::before { display: none; }
 #runtimePage .runtime-tree-item:not(.runtime-tree-app)::before { position: absolute; left: 0; width: 8px; height: 1px; background: #d9d9d9; content: ""; }
 #runtimePage .runtime-tree-dot { position: absolute; left: 14px; width: 7px; height: 7px; border: 1px solid #bfbfbf; border-radius: 50%; background: #fff; }
