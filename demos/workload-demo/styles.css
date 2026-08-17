@@ -1789,7 +1789,7 @@
 #runtimePage .runtime-toc a.is-current { color: #20ad6a; font-weight: 400; }
 #runtimePage .runtime-toc a.is-current::before { display: none; }
 #runtimePage .runtime-container-subsections { padding-top: 0; }
-#runtimePage .runtime-container-subsection { margin-top: 32px; padding-top: 32px; border-top: 1px solid #f0f0f0; }
+#runtimePage .runtime-container-subsection { margin-top: 32px; padding-top: 32px; border-top: 0; }
 #runtimePage .runtime-container-subsection:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
 #runtimePage .runtime-container-subsection > h4 { margin: 0 0 16px; font-size: 16px; line-height: 24px; font-weight: 600; }
 #runtimePage .runtime-container-subsection .runtime-setting-row { min-height: 76px; }
