@@ -1247,10 +1247,18 @@ document.querySelector('.runtime-context-tabs')?.addEventListener('keydown',even
   applyRuntimeContext(tabs[nextIndex].dataset.runtimeContext);
 });
 document.querySelectorAll('[data-runtime-target]').forEach(item=>item.addEventListener('click',()=>{
+  document.querySelector('.runtime-container-header')?.classList.remove('is-active');
   document.querySelectorAll('[data-runtime-target]').forEach(node=>node.classList.toggle('is-active',node===item));
   updateRuntimeEditorHeader(item.dataset.runtimeTarget,item.querySelector(':scope > span')?.textContent.trim()||'web1');
   document.querySelector('#runtimeEditor')?.scrollTo({top:0,behavior:'smooth'});
 }));
+document.querySelector('.runtime-container-header')?.addEventListener('click',event=>{
+  if(event.target.closest('button'))return;
+  document.querySelectorAll('[data-runtime-target]').forEach(node=>node.classList.remove('is-active'));
+  event.currentTarget.classList.add('is-active');
+  updateRuntimeEditorHeader('container-config','容器');
+  document.querySelector('#runtimeEditor')?.scrollTo({top:0,behavior:'smooth'});
+});
 document.querySelectorAll('[data-runtime-delete-type]').forEach(button=>button.addEventListener('click',event=>{
   event.stopPropagation();
   openRuntimeDeleteConfirm(button);
