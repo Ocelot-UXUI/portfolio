@@ -2189,7 +2189,6 @@
   padding: 16px 0;
   border-top-color: #e8e8e8;
 }
-
 #runtimePage .runtime-rule-block:first-of-type {
   margin-top: 8px;
 }
@@ -3638,4 +3637,16 @@
 #runtimePage.is-application-context .runtime-image-source-title > .runtime-setting-icon,
 #runtimePage.is-application-context .runtime-image-heading > .runtime-setting-icon {
   display: none !important;
+}
+
+/* Final spacing corrections for framed build options and nested affinity rules. */
+#runtimePage #runtime-container-image .runtime-container-build-tail {
+  padding-bottom: 0;
+}
+#runtimePage #runtime-container-image .runtime-container-build-tail > .runtime-setting-row {
+  min-height: 76px;
+  box-sizing: border-box;
+}
+#runtimePage .runtime-rule-group > .runtime-rule-block:last-child {
+  padding-bottom: 0;
 }
