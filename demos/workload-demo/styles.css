@@ -545,8 +545,9 @@
 .env-name{font-size:14px;line-height:22px;margin-right:4px}
 .env-type-tag{height:20px;padding:0 8px;border-radius:4px;background:#f2f2f2;color:#595959;font-size:12px;line-height:20px}
 .env-empty,.cluster-empty{margin:0;padding:18px;color:#8f8f8f;text-align:center;font-size:14px;line-height:22px}
-.cluster-list-header,.cluster-row{display:grid;grid-template-columns:200px 36px 101px;column-gap:55px;align-items:center;width:100%;padding-right:8px;padding-left:8px}
-.cluster-list-header{height:38px;margin-bottom:2px;color:#8f8f8f;font-size:14px;line-height:22px;font-weight:500}
+.cluster-list-header,.cluster-row{display:grid;align-items:center;width:100%;padding-right:8px;padding-left:8px}
+.cluster-list-header{grid-template-columns:minmax(0,1fr) 101px;height:38px;margin-bottom:2px;border-radius:8px;background:#e6faf1;color:#8f8f8f;font-size:12px;line-height:20px;font-weight:400}
+.cluster-row{grid-template-columns:200px 36px 101px;column-gap:55px}
 .cluster-list-header>span:first-child{display:flex;align-items:center;gap:2px}
 .cluster-list-header>span:first-child img{width:6px;height:4px}
 .cluster-list-header>span:last-child{text-align:right}
