@@ -1720,8 +1720,8 @@
 }
 #runtimePage .runtime-image-source-title {
   display: flex;
-  height: 22px;
-  align-items: center;
+  min-height: 22px;
+  align-items: flex-start;
   gap: 8px;
 }
 #runtimePage .runtime-image-source-title .runtime-setting-icon,
@@ -1746,7 +1746,7 @@
 #runtimePage .runtime-image-source-copy small { min-width: 0; overflow: hidden; color: #8f8f8f; font-size: 12px; line-height: 18px; text-overflow: ellipsis; white-space: nowrap; }
 #runtimePage .runtime-image-source-controls > .runtime-select-value { flex: 0 0 160px; }
 #runtimePage .runtime-image-heading { margin-top: 16px; }
-#runtimePage .runtime-image-heading { display: flex; height: 22px; align-items: center; gap: 8px; }
+#runtimePage .runtime-image-heading { display: flex; min-height: 22px; align-items: flex-start; gap: 8px; }
 #runtimePage .runtime-image-heading .runtime-setting-icon { width: 22px; height: 22px; }
 #runtimePage .runtime-image-heading-copy { min-width: 0; }
 #runtimePage .runtime-image-heading strong { display: block; font-size: 14px; line-height: 22px; font-weight: 500; }
