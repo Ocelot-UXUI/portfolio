@@ -2727,6 +2727,11 @@
   border-top: 0;
 }
 
+/* Inherited-state tooltips belong to image source/base rows and must escape the outer frame. */
+#runtimePage #runtime-container-image .runtime-image-list {
+  overflow: visible;
+}
+
 /* Affinity groups use the same inset divider as their inner rule blocks. */
 #runtimePage .runtime-setting-list > .runtime-rule-group {
   position: relative;
