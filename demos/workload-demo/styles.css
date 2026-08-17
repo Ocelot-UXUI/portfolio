@@ -3652,9 +3652,9 @@
 }
 #runtimePage #runtime-container-image .runtime-container-build-tail > .runtime-setting-row:not(:last-child)::after {
   position: absolute;
-  right: 0;
+  right: 20px;
   bottom: 0;
-  left: 0;
+  left: 20px;
   height: 1px;
   background: #e8e8e8;
   content: "";
