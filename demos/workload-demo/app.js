@@ -1346,11 +1346,12 @@ document.querySelectorAll('.runtime-setting-row').forEach(row=>{
   }
 });
 const runtimeTocCurrent=document.querySelector('.runtime-toc-current');
+const runtimeEditorScroll=document.querySelector('#runtimeEditor');
 let runtimeTocFrame=0;
 function updateRuntimeTocFromScroll(){
   if(!runtimeTocItems.length)return;
-  const workspaceRect=workspace?.getBoundingClientRect();
-  const viewportTop=(workspaceRect?.top||0)+24;
+  const editorRect=runtimeEditorScroll?.getBoundingClientRect();
+  const viewportTop=(editorRect?.top||workspace?.getBoundingClientRect().top||0)+24;
   let activeIndex=0;
   runtimeTocItems.forEach((item,index)=>{
     const target=document.querySelector(`[data-runtime-config="${item.dataset.runtimeToc}"]`);
@@ -1372,10 +1373,14 @@ function scheduleRuntimeTocSync(){
 runtimeTocItems.forEach(item=>item.addEventListener('click',event=>{
   event.preventDefault();
   const target=document.querySelector(`[data-runtime-config="${item.dataset.runtimeToc}"]`);
-  if(target)target.scrollIntoView({behavior:'smooth',block:'start'});
+  if(target&&runtimeEditorScroll){
+    const editorRect=runtimeEditorScroll.getBoundingClientRect();
+    const targetTop=target.getBoundingClientRect().top-editorRect.top+runtimeEditorScroll.scrollTop-24;
+    runtimeEditorScroll.scrollTo({top:targetTop,behavior:'smooth'});
+  }else target?.scrollIntoView({behavior:'smooth',block:'start'});
   scheduleRuntimeTocSync();
 }));
-workspace?.addEventListener('scroll',scheduleRuntimeTocSync,{passive:true});
+runtimeEditorScroll?.addEventListener('scroll',scheduleRuntimeTocSync,{passive:true});
 window.addEventListener('resize',scheduleRuntimeTocSync,{passive:true});
 updateRuntimeTocFromScroll();
 document.querySelectorAll('[data-runtime-collapse]').forEach(button=>button.addEventListener('click',event=>{
