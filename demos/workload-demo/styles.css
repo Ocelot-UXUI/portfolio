@@ -2921,15 +2921,6 @@
   position: relative;
   border-top: 0;
 }
-#runtimePage .runtime-setting-list > .runtime-rule-group + .runtime-rule-group::before {
-  position: absolute;
-  top: 0;
-  right: 32px;
-  left: 32px;
-  height: 1px;
-  background: #e8e8e8;
-  content: "";
-}
 
 /* One vertical rhythm for every title-to-content stack. */
 #runtimePage {
