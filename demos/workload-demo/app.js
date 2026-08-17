@@ -1347,29 +1347,33 @@ document.querySelectorAll('.runtime-setting-row').forEach(row=>{
 });
 const runtimeTocCurrent=document.querySelector('.runtime-toc-current');
 const runtimeEditorScroll=document.querySelector('#runtimeEditor');
-const runtimeScrollLevelTitle=document.querySelector('.runtime-config-level-heading h3');
 let runtimeTocFrame=0;
 function updateRuntimeTocFromScroll(){
   if(!runtimeTocItems.length)return;
   const editorRect=runtimeEditorScroll?.getBoundingClientRect();
   const viewportTop=(editorRect?.top||workspace?.getBoundingClientRect().top||0)+24;
-  let activeIndex=0;
+  const containerStart=document.querySelector('[data-runtime-config="container-image-config"]');
+  const isContainerPhase=Boolean(containerStart&&containerStart.getBoundingClientRect().top<=viewportTop);
+  const podItems=runtimeTocItems.slice(0,6);
+  const containerItems=[runtimeTocItems[0],...runtimeTocItems.slice(6)];
+  const phaseItems=isContainerPhase?containerItems:podItems;
   runtimeTocItems.forEach((item,index)=>{
+    const shouldShow=phaseItems.includes(item);
+    item.hidden=!shouldShow;
+    item.classList.toggle('is-phase-hidden',!shouldShow);
+  });
+  const rootItem=runtimeTocItems[0];
+  if(rootItem)rootItem.textContent=isContainerPhase?'容器':'Pod配置';
+  let activeIndex=0;
+  phaseItems.forEach((item,index)=>{
     const target=document.querySelector(`[data-runtime-config="${item.dataset.runtimeToc}"]`);
     if(target&&target.getBoundingClientRect().top<=viewportTop)activeIndex=index;
   });
-  runtimeTocItems.forEach((item,index)=>item.classList.toggle('is-current',index===activeIndex));
-  const activeItem=runtimeTocItems[activeIndex];
+  runtimeTocItems.forEach(item=>item.classList.remove('is-current'));
+  const activeItem=phaseItems[activeIndex];
+  activeItem?.classList.add('is-current');
   if(runtimeTocCurrent&&activeItem){
     runtimeTocCurrent.style.top=`${activeItem.offsetTop+Math.max(0,(activeItem.offsetHeight-runtimeTocCurrent.offsetHeight)/2)}px`;
-  }
-  if(activeRuntimeTarget==='pod-config'){
-    const containerSection=document.querySelector('[data-runtime-config="container-config"]');
-    const isContainerPhase=containerSection&&containerSection.getBoundingClientRect().top<=viewportTop;
-    const breadcrumb=document.querySelector('.runtime-editor-breadcrumb strong');
-    const nextLabel=isContainerPhase?'容器':'Pod配置';
-    if(breadcrumb)breadcrumb.textContent=nextLabel;
-    if(runtimeScrollLevelTitle)runtimeScrollLevelTitle.textContent=nextLabel;
   }
 }
 function scheduleRuntimeTocSync(){
@@ -1381,7 +1385,10 @@ function scheduleRuntimeTocSync(){
 }
 runtimeTocItems.forEach(item=>item.addEventListener('click',event=>{
   event.preventDefault();
-  const target=document.querySelector(`[data-runtime-config="${item.dataset.runtimeToc}"]`);
+  const targetKey=item===runtimeTocItems[0]&&item.textContent.trim()==='容器'
+    ? 'container-image-config'
+    : item.dataset.runtimeToc;
+  const target=document.querySelector(`[data-runtime-config="${targetKey}"]`);
   if(target&&runtimeEditorScroll){
     const editorRect=runtimeEditorScroll.getBoundingClientRect();
     const targetTop=target.getBoundingClientRect().top-editorRect.top+runtimeEditorScroll.scrollTop-24;
