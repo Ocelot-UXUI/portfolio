@@ -1918,6 +1918,13 @@
 #runtimePage .runtime-image-source-copy .runtime-level-tag { flex: 0 0 auto; white-space: nowrap; }
 #runtimePage .runtime-image-source-copy b { font-size: 14px; line-height: 22px; font-weight: 400; }
 #runtimePage .runtime-image-source-copy small { min-width: 0; overflow: hidden; color: #8f8f8f; font-size: 12px; line-height: 18px; text-overflow: ellipsis; white-space: nowrap; }
+#runtimePage .runtime-image-source-copy small {
+  flex: 1 1 auto;
+  overflow: visible;
+  overflow-wrap: anywhere;
+  text-overflow: clip;
+  white-space: normal;
+}
 #runtimePage .runtime-image-source-controls > .runtime-select-value { flex: 0 0 160px; }
 #runtimePage .runtime-image-heading { margin-top: 16px; }
 #runtimePage .runtime-image-heading { display: flex; min-height: 22px; align-items: flex-start; gap: 8px; }
