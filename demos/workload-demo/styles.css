@@ -1519,9 +1519,11 @@
 #runtimePage #runtime-container-image .runtime-setting-row:has(> .runtime-build-path) {
   grid-template-columns: 32px minmax(0, 1fr);
   grid-template-rows: auto auto;
-  row-gap: 12px;
+  row-gap: 16px;
   min-height: 136px;
   align-items: start;
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 #runtimePage #runtime-container-image .runtime-setting-row:has(> .runtime-build-path) > div {
   grid-column: 2;
