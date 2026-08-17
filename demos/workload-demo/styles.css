@@ -1202,6 +1202,14 @@
 #runtimePage.is-application-context .runtime-setting-row > .runtime-inline-control {
   grid-column: 2;
 }
+
+/* Application-level fields have no inheritance affordance, including affinity groups. */
+#runtimePage.is-application-context .runtime-setting-icon,
+#runtimePage.is-application-context .runtime-rule-group > .runtime-subsection-title > .runtime-setting-icon,
+#runtimePage.is-application-context .runtime-image-source-title > .runtime-setting-icon,
+#runtimePage.is-application-context .runtime-image-heading > .runtime-setting-icon {
+  display: none !important;
+}
 #runtimePage:not(.hidden) {
   overflow: hidden;
 }
@@ -3525,4 +3533,12 @@
 }
 #runtimePage.is-help-mode #runtime-container-spec .runtime-setting-row > .runtime-setting-icon {
   align-self: start;
+}
+
+/* Final cascade: application-level fields never show inheritance affordances. */
+#runtimePage.is-application-context .runtime-setting-icon,
+#runtimePage.is-application-context .runtime-rule-group > .runtime-subsection-title > .runtime-setting-icon,
+#runtimePage.is-application-context .runtime-image-source-title > .runtime-setting-icon,
+#runtimePage.is-application-context .runtime-image-heading > .runtime-setting-icon {
+  display: none !important;
 }
