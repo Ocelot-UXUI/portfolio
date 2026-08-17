@@ -3234,5 +3234,9 @@
 
 /* Keep the credential actions on the same title-to-content rhythm as other rows. */
 #runtimePage [data-runtime-config="credentials-config"] .runtime-credential-top .runtime-credential-add-list {
+  margin-top: 8px;
+}
+#runtimePage #runtime-container-image .runtime-code-repository-content,
+#runtimePage #runtime-container-image .runtime-setting-row:has(> .runtime-build-path) > .runtime-build-path {
   margin-top: 16px;
 }
