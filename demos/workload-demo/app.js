@@ -1113,7 +1113,7 @@ function addRuntimeHelpDescriptions(){
     if(!text||label.parentElement?.querySelector(':scope > p'))return;
     const description=document.createElement('p');
     description.textContent=text;
-    label.parentElement.append(description);
+    label.insertAdjacentElement('afterend',description);
   });
   document.querySelectorAll('#runtimePage .runtime-subsection-title h4').forEach(label=>{
     const title=label.parentElement;
