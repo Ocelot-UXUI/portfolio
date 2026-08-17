@@ -2792,47 +2792,6 @@
   align-self: start;
 }
 
-/* Figma 481:7206: image-build tail rows are 94px with an 8px title/content gap. */
-#runtimePage #runtime-container-image .runtime-container-build-tail > .runtime-setting-row {
-  box-sizing: border-box;
-  min-height: 94px;
-  height: auto;
-  padding: 16px;
-  grid-template-columns: 22px minmax(0, 1fr);
-  column-gap: 8px;
-  align-items: start;
-}
-#runtimePage #runtime-container-image .runtime-container-build-tail > .runtime-setting-row:has(.runtime-full-input),
-#runtimePage #runtime-container-image .runtime-container-build-tail > .runtime-setting-row:has(.runtime-build-path),
-#runtimePage #runtime-container-image .runtime-container-build-tail > .runtime-setting-row:has(.runtime-code-repository-content) {
-  grid-template-rows: auto;
-}
-#runtimePage #runtime-container-image .runtime-container-build-tail .runtime-full-input,
-#runtimePage #runtime-container-image .runtime-container-build-tail .runtime-build-path,
-#runtimePage #runtime-container-image .runtime-container-build-tail .runtime-code-repository-content {
-  margin-top: 8px;
-}
-#runtimePage #runtime-container-image .runtime-container-build-tail > .runtime-setting-row:has(> .runtime-add-btn),
-#runtimePage #runtime-container-image .runtime-container-build-tail > .runtime-setting-row:has(> .runtime-build-select),
-#runtimePage #runtime-container-image .runtime-container-build-tail > .runtime-setting-row:has(> .runtime-switch) {
-  grid-template-rows: 22px 32px;
-  row-gap: 8px;
-}
-#runtimePage #runtime-container-image .runtime-container-build-tail > .runtime-setting-row:has(> .runtime-add-btn) > div,
-#runtimePage #runtime-container-image .runtime-container-build-tail > .runtime-setting-row:has(> .runtime-build-select) > div,
-#runtimePage #runtime-container-image .runtime-container-build-tail > .runtime-setting-row:has(> .runtime-switch) > div {
-  grid-column: 2;
-  grid-row: 1;
-}
-#runtimePage #runtime-container-image .runtime-container-build-tail > .runtime-setting-row:has(> .runtime-add-btn) > .runtime-add-btn,
-#runtimePage #runtime-container-image .runtime-container-build-tail > .runtime-setting-row:has(> .runtime-build-select) > .runtime-build-select,
-#runtimePage #runtime-container-image .runtime-container-build-tail > .runtime-setting-row:has(> .runtime-switch) > .runtime-switch {
-  grid-column: 2;
-  grid-row: 2;
-  margin-top: 0;
-  justify-self: start;
-}
-
 /* Affinity groups use the same inset divider as their inner rule blocks. */
 #runtimePage .runtime-setting-list > .runtime-rule-group {
   position: relative;
