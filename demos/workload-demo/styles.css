@@ -2743,35 +2743,6 @@
   align-self: start;
 }
 
-/* Image-build fields use one title row followed by one content row. */
-#runtimePage #runtime-container-image .runtime-container-build-tail > .runtime-setting-row {
-  grid-template-columns: 32px minmax(0, 1fr);
-  grid-template-rows: auto auto;
-  row-gap: 0;
-}
-#runtimePage #runtime-container-image .runtime-container-build-tail > .runtime-setting-row > div:not(.runtime-inline-control):not(.runtime-build-inline) {
-  grid-column: 2;
-  grid-row: 1;
-  min-width: 0;
-}
-#runtimePage #runtime-container-image .runtime-container-build-tail > .runtime-setting-row > .runtime-add-btn,
-#runtimePage #runtime-container-image .runtime-container-build-tail > .runtime-setting-row > .runtime-build-select,
-#runtimePage #runtime-container-image .runtime-container-build-tail > .runtime-setting-row > .runtime-switch,
-#runtimePage #runtime-container-image .runtime-container-build-tail > .runtime-setting-row > .runtime-build-path {
-  grid-column: 2 / -1;
-  grid-row: 2;
-  justify-self: start;
-  margin-top: var(--runtime-title-content-gap, 16px);
-}
-#runtimePage #runtime-container-image .runtime-container-build-tail > .runtime-setting-row > .runtime-build-select {
-  width: 160px;
-  min-width: 160px;
-  height: 32px;
-}
-#runtimePage #runtime-container-image .runtime-container-build-tail > .runtime-setting-row > .runtime-switch {
-  justify-self: start;
-}
-
 /* Affinity groups use the same inset divider as their inner rule blocks. */
 #runtimePage .runtime-setting-list > .runtime-rule-group {
   position: relative;
