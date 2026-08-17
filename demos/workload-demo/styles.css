@@ -1256,6 +1256,33 @@
   margin-left: 0 !important;
   padding-left: 0 !important;
 }
+
+/* Affinity content also loses the inheritance column at application level. */
+#runtimePage.is-application-context .runtime-rule-group {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  padding-right: 0;
+  padding-left: 0;
+}
+#runtimePage.is-application-context .runtime-rule-group > .runtime-subsection-title,
+#runtimePage.is-application-context .runtime-rule-group > .runtime-rule-block {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+}
+#runtimePage.is-application-context .runtime-setting-list > .runtime-rule-group + .runtime-rule-group::before {
+  right: 0;
+  left: 0;
+}
+#runtimePage.is-application-context.is-help-mode .runtime-rule-group > .runtime-subsection-title {
+  grid-template-columns: minmax(0, 1fr);
+  margin-right: 0;
+  margin-left: 0;
+}
+#runtimePage.is-application-context.is-help-mode .runtime-rule-group > .runtime-subsection-title > h4,
+#runtimePage.is-application-context.is-help-mode .runtime-rule-group > .runtime-subsection-title > p {
+  grid-column: 1;
+  margin-left: 0;
+}
 #runtimePage:not(.hidden) {
   overflow: hidden;
 }
