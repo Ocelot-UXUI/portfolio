@@ -3479,3 +3479,16 @@
 #runtimePage #runtime-container-runtime .runtime-setting-row:has(> .runtime-inline-control) > .runtime-inline-control > em {
   grid-column: 4;
 }
+
+/* Help-mode specifications center the title/copy block against its control group. */
+#runtimePage.is-help-mode #runtime-container-spec .runtime-setting-row {
+  grid-template-columns: 22px minmax(0, 1fr) auto;
+  column-gap: 8px;
+  align-items: center;
+}
+#runtimePage.is-help-mode #runtime-container-spec .runtime-setting-row > .runtime-setting-icon,
+#runtimePage.is-help-mode #runtime-container-spec .runtime-setting-row > div,
+#runtimePage.is-help-mode #runtime-container-spec .runtime-setting-row > .runtime-input-unit,
+#runtimePage.is-help-mode #runtime-container-spec .runtime-setting-row > .runtime-switch {
+  align-self: center;
+}
