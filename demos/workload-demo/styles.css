@@ -3179,9 +3179,9 @@
 
 /* Service exposure page from Figma 534:6287. */
 .service-exposure-page { min-height: calc(100vh - 112px); color: #181818; }
-.service-exposure-heading { display:flex; align-items:center; justify-content:space-between; min-height:64px; }
+.service-exposure-heading { display:flex; height:30px; align-items:center; justify-content:space-between; min-height:30px; margin-bottom:36px; }
 .service-exposure-tabs { display:flex; align-items:center; gap:32px; height:100%; }
-.service-exposure-tabs h1 { margin:0; font-size:24px; line-height:32px; font-weight:600; }
+.service-exposure-tabs h1 { margin:0; font-size:20px; line-height:30px; font-weight:500; }
 .service-exposure-tabs > i { width:1px; height:24px; background:#d9d9d9; }
 .service-exposure-tabs button { position:relative; height:32px; padding:0; border:0; background:transparent; color:#8f8f8f; font:500 14px/22px "PingFang SC",sans-serif; }
 .service-exposure-tabs button.is-active { color:#181818; }
