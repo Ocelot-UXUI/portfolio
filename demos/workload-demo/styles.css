@@ -3326,3 +3326,35 @@
 #runtimePage.is-help-mode #runtime-container-image .runtime-image-shell {
   margin-top: 16px;
 }
+
+/* Help-mode affinity groups: keep the inheritance icon, title, copy and rules on one grid. */
+#runtimePage.is-help-mode .runtime-rule-group > .runtime-subsection-title {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  column-gap: 8px;
+  row-gap: 4px;
+  align-items: start;
+  margin: 0 32px;
+}
+#runtimePage.is-help-mode .runtime-rule-group > .runtime-subsection-title > .runtime-setting-icon {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: start;
+}
+#runtimePage.is-help-mode .runtime-rule-group > .runtime-subsection-title > h4 {
+  grid-column: 2;
+  grid-row: 1;
+  margin: 0;
+}
+#runtimePage.is-help-mode .runtime-rule-group > .runtime-subsection-title > p {
+  grid-column: 2;
+  grid-row: 2;
+  margin: 0;
+}
+#runtimePage.is-help-mode .runtime-rule-group > .runtime-rule-block {
+  margin-right: 32px;
+  margin-left: 32px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
