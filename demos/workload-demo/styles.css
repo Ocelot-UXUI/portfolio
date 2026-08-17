@@ -3820,6 +3820,7 @@
   border-radius: 8px;
   color: #bfbfbf;
 }
+.application-menu-title { margin: 2px 12px 8px; color: #181818; font: 500 14px/22px "PingFang SC", sans-serif; }
 .application-menu-search .figma-icon,
 .application-menu-search svg { width: 16px; height: 16px; flex: 0 0 16px; }
 .application-menu-search input { width: 100%; min-width: 0; padding: 0; border: 0; outline: 0; color: #181818; font: 400 14px/22px "PingFang SC", sans-serif; }
