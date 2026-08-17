@@ -3696,10 +3696,25 @@
 #runtimePage .runtime-container-items {
   align-items: flex-end;
 }
+#runtimePage .runtime-container-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
 #runtimePage .runtime-container-header {
   width: 212px;
   height: 32px;
   padding-left: 20px;
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+}
+#runtimePage .runtime-container-header:hover {
+  background: #f2f2f2;
+}
+#runtimePage .runtime-container-header.is-active {
+  background: #e6faf1;
+}
 }
 #runtimePage .runtime-tree-leaf {
   width: 212px;
