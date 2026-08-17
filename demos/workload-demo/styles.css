@@ -3823,7 +3823,7 @@
   color: #bfbfbf;
 }
 .application-menu-search .figma-icon,
-.application-menu-search svg { width: 16px; height: 16px; flex: 0 0 16px; }
+.application-menu-search svg { width: 16px; height: 16px; flex: 0 0 16px; color: #bfbfbf; stroke: currentColor; }
 .application-menu-search input { width: 100%; min-width: 0; padding: 0; border: 0; outline: 0; color: #181818; font: 400 14px/22px "PingFang SC", sans-serif; }
 .application-menu-search input::placeholder { color: #bfbfbf; }
 .application-menu-tabs { display: flex; height: 42px; align-items: stretch; gap: 32px; margin: 0 4px 8px; }
