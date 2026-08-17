@@ -1694,13 +1694,15 @@
 #runtimePage #runtime-container-image .runtime-container-build-tail .runtime-build-path {
   grid-column: 2 / -1;
   width: 100%;
-  min-height: 58px;
+  height: 100px;
+  min-height: 100px;
   padding: 8px 12px;
   resize: vertical;
   border: 1px solid #d9d9d9;
   border-radius: 8px;
   color: #181818;
-  font: 400 12px/20px "PingFang SC", sans-serif;
+  font: 400 14px/22px "PingFang SC", sans-serif;
+  box-sizing: border-box;
 }
 
 #runtimePage #runtime-container-image .runtime-build-inline {
