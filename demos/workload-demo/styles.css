@@ -3641,10 +3641,11 @@
 
 /* Final spacing corrections for framed build options and nested affinity rules. */
 #runtimePage #runtime-container-image .runtime-container-build-tail {
-  padding-bottom: 0;
+  padding: 0;
 }
 #runtimePage #runtime-container-image .runtime-container-build-tail > .runtime-setting-row {
   min-height: 76px;
+  padding: 16px 20px;
   box-sizing: border-box;
 }
 #runtimePage .runtime-rule-group > .runtime-rule-block:last-child {
