@@ -1182,6 +1182,12 @@
 #runtimePage .runtime-editor::-webkit-scrollbar {
   display: none;
 }
+#runtimePage:not(.hidden) {
+  overflow: hidden;
+}
+.workspace:has(> #runtimePage:not(.hidden)) {
+  overflow: hidden;
+}
 #runtimePage .runtime-setting-row > :nth-child(2) { min-width: 0; }
 #runtimePage .runtime-setting-row > .runtime-input-unit,
 #runtimePage .runtime-setting-row > .runtime-inline-control { max-width: 100%; }
