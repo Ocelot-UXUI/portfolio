@@ -141,6 +141,7 @@ const actions = {
 };
 const appNavLabels = { workload:'工作负载', exposure:'服务暴露', logs:'日志', terminal:'终端', monitor:'监控', runtime:'运行配置', settings:'应用设置' };
 const unavailableAppNav = new Set(['logs','terminal','monitor','settings']);
+const unavailablePrimaryNav = new Set(['home','affairs','environment','changes','resources','account']);
 const workloadSections = document.querySelectorAll('[data-workload-section]');
 const appPagePlaceholder = document.querySelector('#appPagePlaceholder');
 const appPageTitle = document.querySelector('#appPageTitle');
@@ -207,12 +208,24 @@ function renderAppNavigation(){
   const isRuntime = isApplication && state.appNav === 'runtime';
   syncCompactNavigation();
   document.querySelectorAll('[data-primary-nav]').forEach(button=>{
+    const unavailable=unavailablePrimaryNav.has(button.dataset.primaryNav);
+    button.disabled=unavailable;
+    button.classList.toggle('is-unavailable',unavailable);
+    button.setAttribute('aria-disabled',unavailable?'true':'false');
+    if(unavailable)button.title='本期未开放';
     const selected = button.dataset.primaryNav === state.primaryNav;
     button.classList.toggle('active', selected);
     const image = button.querySelector('img');
     if(image) image.src = primaryNavIconSrc(button.dataset.primaryNav, selected);
   });
   const moreIcon = document.querySelector('#primaryMoreBtn img');
+  const moreButton = document.querySelector('#primaryMoreBtn');
+  if(moreButton){
+    moreButton.disabled=true;
+    moreButton.classList.add('is-unavailable');
+    moreButton.setAttribute('aria-disabled','true');
+    moreButton.title='本期未开放';
+  }
   if(moreIcon) moreIcon.src = primaryNavIconSrc('more', state.compactMoreOpen);
   document.querySelectorAll('[data-app-nav]').forEach(button=>{
     const unavailable=unavailableAppNav.has(button.dataset.appNav);
@@ -1026,6 +1039,7 @@ function openMenu(trigger,items){
 function triggerAction(actionKey,ids=[]){ closeMenu(); openConfirm(actionKey,ids); }
 
 document.querySelectorAll('[data-primary-nav]').forEach(button=>button.addEventListener('click',()=>{
+  if(button.disabled)return;
   state.primaryNav=button.dataset.primaryNav;
   renderAppNavigation();
 }));

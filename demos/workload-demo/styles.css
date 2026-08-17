@@ -1264,6 +1264,15 @@
   background: transparent;
   cursor: not-allowed;
 }
+.primary-nav button.is-unavailable,
+.primary-nav button.is-unavailable:hover,
+.primary-nav #primaryMoreBtn.is-unavailable,
+.primary-nav #primaryMoreBtn.is-unavailable:hover {
+  opacity: .42;
+  color: #9aa0a8;
+  background: transparent;
+  cursor: not-allowed;
+}
 #runtimePage.is-application-context [data-runtime-config="credentials-config"] .runtime-add-btn {
   opacity: 1 !important;
   pointer-events: auto;
