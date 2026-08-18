@@ -2596,8 +2596,12 @@
 .action-menu.application-menu.application-menu-react{width:480px;padding:0;border:0;background:transparent;box-shadow:none;overflow:visible}
 .application-menu-react>div{width:480px}
 .application-menu-react>div button{width:auto;height:auto;padding:0;border:0;border-radius:0;background:transparent;color:inherit;font:inherit;text-align:left}
-.application-menu-react>div>div:nth-child(2) button{height:36px}
-.application-menu-react>div>div:last-child button{height:32px;padding:0;justify-content:center;text-align:center}
+.application-menu-react>div>div>div:first-child{height:32px!important;margin-bottom:4px!important}
+.application-menu-react>div>div>div:nth-child(2){height:40px!important;margin-bottom:10px!important}
+.application-menu-react>div>div>div:nth-child(2) button{height:40px!important;outline:0!important}
+.application-menu-react>div>div>div:nth-child(2) button::after{right:0!important;bottom:0!important;left:0!important;width:auto!important}
+.application-menu-react>div>div>div:last-child button{height:32px;padding:0;justify-content:center;text-align:center}
+.application-menu-react>div button:focus{outline:0!important}
 
 /* Keep the portfolio shell quiet so the CNAP product surface stays primary. */
 .portfolio-project-nav.project-nav{
@@ -3833,10 +3837,10 @@
 .application-menu-search svg { width: 16px; height: 16px; flex: 0 0 16px; color: #bfbfbf; stroke: currentColor; }
 .application-menu-search input { width: 100%; min-width: 0; padding: 0; border: 0; outline: 0; color: #181818; font: 400 14px/22px "PingFang SC", sans-serif; }
 .application-menu-search input::placeholder { color: #bfbfbf; }
-.application-menu-tabs { display: flex; height: 36px; align-items: stretch; gap: 32px; margin: 0 4px 6px; }
-.application-menu-tabs button { position: relative; height: 36px; padding: 8px 0; border: 0; background: transparent; color: #545454; font: 400 12px/20px "PingFang SC", sans-serif; white-space: nowrap; }
+.application-menu-tabs { display: flex; height: 40px; align-items: stretch; gap: 32px; margin: 0 4px 10px; }
+.application-menu-tabs button { position: relative; height: 40px; padding: 10px 0; border: 0; outline: 0; background: transparent; color: #545454; font: 400 12px/20px "PingFang SC", sans-serif; white-space: nowrap; }
 .application-menu-tabs button.is-active { color: #181818; font-weight: 500; }
-.application-menu-tabs button.is-active::after { position: absolute; right: 16px; bottom: 0; left: 16px; height: 2px; border-radius: 4px; background: #181818; content: ""; }
+.application-menu-tabs button.is-active::after { position: absolute; right: 0; bottom: 0; left: 0; height: 2px; border-radius: 4px; background: #181818; content: ""; }
 .application-menu-tabs .application-menu-open-list { margin-left: auto; color: #4471ec; }
 .application-menu-tabs .application-menu-open-list::after { display: none; }
 .application-menu-list { display: flex; min-height: 0; flex-direction: column; gap: 2px; margin-bottom: 2px; padding: 0 4px; }
