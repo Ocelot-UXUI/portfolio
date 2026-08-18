@@ -950,7 +950,7 @@ function yamlMarkup(pod){
 }
 function openInstanceDetail(id,tab='detail'){ const pod=pods.find(item=>item[0]===id); if(!pod)return; if(state.activeInstanceId!==id){state.selectedContainer=0;state.activeInstanceId=id;} instanceModal.innerHTML=instanceMarkup(pod,tab); detailBackdrop.classList.remove('hidden'); }
 function closeInstanceDetail(){ detailBackdrop.classList.add('hidden'); instanceModal.innerHTML=''; }
-function closeMenu(){ menu.classList.add('hidden'); menu.innerHTML=''; }
+function closeMenu(){ window.unmountCnapApplicationDropdown?.(menu); menu.classList.add('hidden'); menu.innerHTML=''; }
 function closeCompactMore(){ state.compactMoreOpen=false; compactMorePopover.classList.add('hidden'); const trigger=document.querySelector('#primaryMoreBtn'); trigger.classList.remove('active'); trigger.querySelector('img').src=primaryNavIconSrc('more'); }
 function syncCompactNavigation(){
   const replacement = document.querySelector('.primary-replaceable');
@@ -1059,6 +1059,10 @@ function openApplicationMenu(trigger){
   menu.style.left=`${Math.max(8,Math.min(rect.left-8,window.innerWidth-496))}px`;
   menu.dataset.context='应用';
   menu.classList.remove('hidden');
+  if(window.mountCnapApplicationDropdown){
+    window.mountCnapApplicationDropdown(menu,{items:applicationMenuItems,onSelect:id=>{toast(`已切换应用：${id}`);closeMenu();},onAction:action=>toast(action)});
+    return;
+  }
   renderApplicationMenu('',true);
 }
 

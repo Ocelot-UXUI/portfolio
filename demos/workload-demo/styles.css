@@ -2592,6 +2592,13 @@
 #instanceModal.fullscreen .terminal-screen{width:100%}
 .action-menu{z-index:60}
 
+/* The React island owns its panel dimensions; the legacy menu wrapper only positions it. */
+.action-menu.application-menu.application-menu-react{width:480px;padding:0;border:0;background:transparent;box-shadow:none;overflow:visible}
+.application-menu-react>div{width:480px}
+.application-menu-react>div button{width:auto;height:auto;padding:0;border:0;border-radius:0;background:transparent;color:inherit;font:inherit;text-align:left}
+.application-menu-react>div>div:nth-child(2) button{height:36px}
+.application-menu-react>div>div:last-child button{height:32px;padding:0;justify-content:center;text-align:center}
+
 /* Keep the portfolio shell quiet so the CNAP product surface stays primary. */
 .portfolio-project-nav.project-nav{
   --project-nav-edge:clamp(190px,16vw,320px);
