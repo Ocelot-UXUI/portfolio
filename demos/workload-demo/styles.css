@@ -3803,11 +3803,80 @@
 #runtimePage .runtime-container-header.is-active {
   background: #e6faf1;
 }
-}
 #runtimePage .runtime-tree-leaf {
   width: 212px;
   height: 32px;
   padding-left: 56px;
+}
+
+/* Runtime tree alignment follows Figma node 580:3189. */
+#runtimePage .runtime-tree {
+  top: 22px;
+  width: 240px;
+}
+#runtimePage .runtime-search {
+  display: none;
+}
+#runtimePage .runtime-tree-list {
+  gap: 8px;
+  margin-top: 0;
+}
+#runtimePage .runtime-tree-group,
+#runtimePage .runtime-tree-children,
+#runtimePage .runtime-workload-items {
+  gap: 4px;
+}
+#runtimePage .runtime-tree-heading {
+  width: 240px;
+  height: 32px;
+  gap: 8px;
+}
+#runtimePage .runtime-icon-action {
+  width: 32px;
+  height: 32px;
+  flex-basis: 32px;
+  padding: 8px;
+}
+#runtimePage .runtime-icon-action svg {
+  width: 16px;
+  height: 16px;
+}
+#runtimePage .runtime-tree-parent {
+  width: 240px;
+  height: 32px;
+  gap: 4px;
+  padding-left: 24px;
+}
+#runtimePage .runtime-tree-item {
+  width: 220px;
+  height: 32px;
+  padding-left: 44px;
+}
+#runtimePage .runtime-container-row {
+  width: 233px;
+}
+#runtimePage .runtime-container-header {
+  width: 233px;
+  height: 32px;
+  padding-left: 36px;
+}
+#runtimePage .runtime-container-header .runtime-container-parent {
+  width: auto;
+  padding-left: 0;
+}
+#runtimePage .runtime-container-items {
+  width: 220px;
+  gap: 4px;
+}
+#runtimePage .runtime-tree-leaf {
+  width: 220px;
+  height: 32px;
+  padding-left: 64px;
+}
+#runtimePage .runtime-resource-tree .runtime-tree-resource-item {
+  width: 240px;
+  height: 32px;
+  padding-left: 24px;
 }
 
 /* Application picker follows Figma node 4:34580. */
