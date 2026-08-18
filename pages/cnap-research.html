@@ -9,16 +9,78 @@
     <link rel="stylesheet" href="../styles/project-navigation.css?v=20260809-14" />
     <script src="../scripts/project-navigation.js?v=20260809-3" defer></script>
     <style>
-      .ai-workflow-scroll{display:flex;gap:22px;overflow-x:auto;padding:2px 2px 20px;scroll-snap-type:x proximity;scrollbar-width:thin}
-      .ai-workflow-scroll::-webkit-scrollbar{height:8px}
-      .ai-workflow-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.25);border-radius:4px}
-      .ai-workflow-scroll::-webkit-scrollbar-track{background:rgba(255,255,255,.06)}
-      .ai-workflow-scroll figure{flex:0 0 auto;margin:0;scroll-snap-align:start}
-      .ai-workflow-scroll img{display:block;height:min(76vh,780px);width:auto;border:1px solid rgba(255,255,255,.16);border-radius:10px;background:#fff;box-shadow:0 12px 36px rgba(0,0,0,.4)}
-      .ai-workflow-scroll figcaption{margin-top:10px;color:#777b86;font-size:13px;text-align:center}
-      .ai-workflow-block-title{margin:56px 0 10px;color:#fff;font-size:24px;font-weight:600;letter-spacing:.01em}
-      .ai-workflow-block-desc{margin:0 0 22px;color:#9195a1;font-size:14px;line-height:1.7}
-      @media(max-width:700px){.ai-workflow-block-title{margin-top:40px;font-size:20px}}
+      .cnap-research-page .deliverables-shell{width:min(100% - 80px,1180px);padding-top:72px}
+      .deliverables-intro{display:block}
+      .cnap-research-page .deliverables-shell h1{font-size:clamp(40px,4.6vw,60px);letter-spacing:0}
+      .cnap-research-page .deliverables-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:48px;border-top:1px solid rgba(255,255,255,.16);border-bottom:1px solid rgba(255,255,255,.16)}
+      .cnap-research-page .deliverables-tabs button{display:grid;grid-template-columns:26px minmax(0,1fr);gap:4px 12px;min-width:0;padding:20px 22px 18px;border-right:1px solid rgba(255,255,255,.12);color:#7f8491;text-align:left}
+      .cnap-research-page .deliverables-tabs button:last-child{border-right:0}
+      .cnap-research-page .deliverables-tabs button:before{content:attr(data-tab-index);grid-row:1 / span 2;color:#5f6472;font-size:12px;font-weight:600;line-height:24px}
+      .cnap-research-page .deliverables-tabs button:after{display:none}
+      .cnap-research-page .deliverables-tabs button>span{color:inherit;font-size:17px;font-weight:600;line-height:24px}
+      .cnap-research-page .deliverables-tabs button>small{overflow:hidden;color:#686d7b;font-size:12px;font-weight:400;line-height:18px;text-overflow:ellipsis;white-space:nowrap}
+      .cnap-research-page .deliverables-tabs button[aria-selected="true"]{background:#f1f2f4;color:#11131a}
+      .cnap-research-page .deliverables-tabs button[aria-selected="true"]:before,.cnap-research-page .deliverables-tabs button[aria-selected="true"]>small{color:#656a77}
+      .cnap-research-page .deliverables-content{margin-top:0;padding-top:40px;border-top:0}
+      .cnap-research-page .deliverable-panel{padding-top:0}
+      .cnap-research-page .research-subtabs,.artifact-subtabs{display:flex;gap:0;margin:0 0 40px;padding-bottom:0;border-bottom:1px solid rgba(255,255,255,.13);overflow-x:auto;scrollbar-width:none}
+      .cnap-research-page .research-subtabs::-webkit-scrollbar,.artifact-subtabs::-webkit-scrollbar{display:none}
+      .cnap-research-page .research-subtabs button,.artifact-subtabs button{position:relative;height:auto;padding:0 24px 15px;border:0;border-radius:0;background:transparent;color:#747987;font:inherit;font-size:14px;font-weight:500;white-space:nowrap;cursor:pointer}
+      .cnap-research-page .research-subtabs button:first-child,.artifact-subtabs button:first-child{padding-left:0}
+      .cnap-research-page .research-subtabs button:hover,.artifact-subtabs button:hover{color:#d7d9df}
+      .cnap-research-page .research-subtabs button[aria-selected="true"],.artifact-subtabs button[aria-selected="true"]{border:0;background:transparent;color:#fff}
+      .cnap-research-page .research-subtabs button[aria-selected="true"]:after,.artifact-subtabs button[aria-selected="true"]:after{content:"";position:absolute;right:24px;bottom:-1px;left:24px;height:2px;background:#fff}
+      .cnap-research-page .research-subtabs button:first-child[aria-selected="true"]:after,.artifact-subtabs button:first-child[aria-selected="true"]:after{left:0}
+      .artifact-subtabs button>small{margin-left:7px;color:#5f6472;font-size:11px;font-weight:500}
+      .artifact-subtabs button[aria-selected="true"]>small{color:#9ca0ab}
+      .artifact-subpanel[hidden]{display:none}
+      .artifact-heading{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:32px;align-items:start;margin-bottom:22px}
+      .artifact-heading h3{margin:0 0 8px;color:#fff;font-size:23px;font-weight:600;line-height:1.4}
+      .artifact-page-total{padding-top:5px;color:#737886;font-size:12px;white-space:nowrap}
+      .artifact-viewer{overflow:hidden;border:1px solid rgba(255,255,255,.14);background:#0c0e15}
+      .artifact-viewer-toolbar{display:flex;align-items:center;justify-content:space-between;min-height:52px;padding:0 16px;border-bottom:1px solid rgba(255,255,255,.11);background:#11131b}
+      .artifact-page-status{color:#9a9eaa;font-size:12px;font-variant-numeric:tabular-nums}
+      .artifact-viewer-actions{display:flex;gap:6px}
+      .artifact-viewer-actions button,.document-lightbox button{display:inline-grid;place-items:center;width:34px;height:34px;padding:0;border:1px solid rgba(255,255,255,.14);border-radius:4px;background:transparent;color:#d8dae1;font-size:17px;line-height:1;cursor:pointer;transition:background .16s ease,border-color .16s ease,color .16s ease}
+      .artifact-viewer-actions button:hover,.document-lightbox button:hover{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.07);color:#fff}
+      .artifact-viewer-actions button:disabled{opacity:.28;cursor:default}
+      .ai-workflow-scroll{display:flex;gap:18px;overflow-x:auto;padding:18px;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.24) rgba(255,255,255,.05)}
+      .ai-workflow-scroll::-webkit-scrollbar{height:7px}
+      .ai-workflow-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.24)}
+      .ai-workflow-scroll::-webkit-scrollbar-track{background:rgba(255,255,255,.05)}
+      .ai-workflow-scroll figure{position:relative;flex:0 0 min(72%,640px);margin:0;scroll-snap-align:start}
+      .ai-workflow-scroll img{display:block;width:100%;height:auto;border:0;background:#fff;cursor:zoom-in;box-shadow:0 10px 30px rgba(0,0,0,.32)}
+      .ai-workflow-scroll figcaption{position:absolute;right:10px;bottom:10px;min-width:30px;padding:5px 7px;border-radius:3px;background:rgba(10,11,16,.78);color:#d8dae2;font-size:11px;text-align:center;backdrop-filter:blur(8px)}
+      .document-lightbox{position:fixed;inset:0;z-index:1000;display:grid;grid-template-columns:54px minmax(0,1fr) 54px;grid-template-rows:52px minmax(0,1fr);gap:12px;padding:14px;background:rgba(5,6,9,.94);backdrop-filter:blur(12px)}
+      .document-lightbox[hidden]{display:none}
+      .document-lightbox-bar{grid-column:1 / -1;display:flex;align-items:center;justify-content:space-between;color:#c6c9d1;font-size:12px;font-variant-numeric:tabular-nums}
+      .document-lightbox-stage{grid-column:2;grid-row:2;display:grid;place-items:center;min-width:0;min-height:0;overflow:auto}
+      .document-lightbox-stage img{display:block;max-width:100%;max-height:100%;width:auto;height:auto;background:#fff;box-shadow:0 18px 64px rgba(0,0,0,.5)}
+      .document-lightbox-prev{grid-column:1;grid-row:2;align-self:center}
+      .document-lightbox-next{grid-column:3;grid-row:2;align-self:center}
+      .document-lightbox-close{width:38px!important;height:38px!important}
+      body.is-lightbox-open{overflow:hidden}
+      @media(max-width:700px){
+        .cnap-research-page .deliverables-shell{width:calc(100% - 32px);padding-top:42px}
+        .cnap-research-page .deliverables-tabs{margin-top:34px}
+        .cnap-research-page .deliverables-tabs button{display:block;padding:15px 10px;text-align:center}
+        .cnap-research-page .deliverables-tabs button:before,.cnap-research-page .deliverables-tabs button>small{display:none}
+        .cnap-research-page .deliverables-tabs button>span{font-size:14px}
+        .cnap-research-page .deliverables-content{padding-top:28px}
+        .deliverable-panel-header{margin-bottom:28px;padding-bottom:28px}
+        .cnap-research-page .research-subtabs,.artifact-subtabs{margin-bottom:30px}
+        .cnap-research-page .research-subtabs button,.artifact-subtabs button{padding-right:16px;padding-left:16px;font-size:13px}
+        .cnap-research-page .research-subtabs button:first-child,.artifact-subtabs button:first-child{padding-left:0}
+        .cnap-research-page .research-subtabs button[aria-selected="true"]:after,.artifact-subtabs button[aria-selected="true"]:after{right:16px;left:16px}
+        .cnap-research-page .research-subtabs button:first-child[aria-selected="true"]:after,.artifact-subtabs button:first-child[aria-selected="true"]:after{left:0}
+        .artifact-heading{grid-template-columns:1fr;gap:4px}
+        .artifact-heading h3{font-size:20px}
+        .artifact-page-total{padding-top:0}
+        .ai-workflow-scroll{gap:12px;padding:12px}
+        .ai-workflow-scroll figure{flex-basis:100%}
+        .artifact-viewer-toolbar{min-height:48px;padding:0 12px}
+        .document-lightbox{grid-template-columns:42px minmax(0,1fr) 42px;gap:6px;padding:10px}
+      }
     </style>
   </head>
   <body class="deliverables-page cnap-research-page">
@@ -29,10 +91,15 @@
     </header>
     <main class="deliverables-main">
       <section class="deliverables-shell" aria-labelledby="cnap-materials-title">
-        <h1 id="cnap-materials-title">交付物</h1>
+        <div class="deliverables-intro">
+          <div>
+            <h1 id="cnap-materials-title">项目交付物</h1>
+          </div>
+        </div>
         <div class="deliverables-tabs" role="tablist" aria-label="交付物分类">
-          <button type="button" role="tab" aria-controls="research-panel" aria-selected="true" tabindex="0" data-deliverable-tab="research">用户调研</button>
-          <button type="button" role="tab" aria-controls="ai-workflow-panel" aria-selected="false" tabindex="-1" data-deliverable-tab="ai-workflow">AI工作流</button>
+          <button type="button" role="tab" aria-controls="research-panel" aria-selected="true" tabindex="0" data-deliverable-tab="research" data-tab-index="01"><span>用户调研</span></button>
+          <button type="button" role="tab" aria-controls="ai-workflow-panel" aria-selected="false" tabindex="-1" data-deliverable-tab="ai-workflow" data-tab-index="02"><span>AI 工作流</span></button>
+          <button type="button" role="tab" aria-controls="walkthrough-panel" aria-selected="false" tabindex="-1" data-deliverable-tab="walkthrough" data-tab-index="03"><span>设计走查</span></button>
         </div>
         <div class="deliverables-content" aria-live="polite">
           <section class="deliverable-panel" id="research-panel" data-deliverable-panel="research" role="tabpanel">
@@ -143,16 +210,13 @@
             </section>
           </section>
           <section class="deliverable-panel" id="ai-workflow-panel" data-deliverable-panel="ai-workflow" role="tabpanel" hidden>
-            <div class="research-subtabs ai-workflow-subtabs" role="tablist" aria-label="AI 工作流 Skill 分类">
-              <button type="button" role="tab" aria-controls="aiwf-review-panel" aria-selected="true" tabindex="0" data-aiworkflow-tab="review-check">评审前自查 Skill</button>
-            </div>
-            <section class="research-subpanel" id="aiwf-review-panel" data-aiworkflow-panel="review-check" role="tabpanel">
-            <article class="research-document">
-              <h2>CNAP 方案评审自查</h2>
-              <p>设计方案评审前使用该 Skill 按「交互」与「视觉」两条线分别自查，输出结构化评审报告，覆盖目标、信息、流程、状态、视觉、交付 6 项检查标准。</p>
-            </article>
-            <h3 class="ai-workflow-block-title">交互方案评审</h3>
-            <p class="ai-workflow-block-desc">聚焦目标对齐、流程闭环与状态完整，确认用户从入口到操作、反馈、结果走得通。</p>
+            <div class="artifact-switcher">
+              <div class="artifact-subtabs" role="tablist" aria-label="AI 工作流评审类型">
+                <button type="button" role="tab" aria-controls="ai-interaction-panel" aria-selected="true" tabindex="0" data-artifact-tab="ai-interaction">交互方案评审 <small>10 页</small></button>
+                <button type="button" role="tab" aria-controls="ai-visual-panel" aria-selected="false" tabindex="-1" data-artifact-tab="ai-visual">视觉方案评审 <small>12 页</small></button>
+              </div>
+              <section class="artifact-subpanel" id="ai-interaction-panel" data-artifact-panel="ai-interaction" role="tabpanel">
+                <div class="artifact-heading"><h3>交互方案评审</h3><span class="artifact-page-total">共 10 页</span></div>
             <div class="ai-workflow-scroll" tabindex="0" aria-label="交互方案评审报告，可左右滚动">
               <figure><img src="../assets/ai-workflow/review-01.png" alt="交互评审 第 1 页" loading="lazy"><figcaption>01</figcaption></figure>
               <figure><img src="../assets/ai-workflow/review-02.png" alt="交互评审 第 2 页" loading="lazy"><figcaption>02</figcaption></figure>
@@ -165,8 +229,9 @@
               <figure><img src="../assets/ai-workflow/review-09.png" alt="交互评审 第 9 页" loading="lazy"><figcaption>09</figcaption></figure>
               <figure><img src="../assets/ai-workflow/review-10.png" alt="交互评审 第 10 页" loading="lazy"><figcaption>10</figcaption></figure>
             </div>
-            <h3 class="ai-workflow-block-title">视觉方案评审</h3>
-            <p class="ai-workflow-block-desc">聚焦视觉一致与交付清楚，确认色彩、字号、间距、组件符合规范，研发与测试能理解规则与验收口径。</p>
+              </section>
+              <section class="artifact-subpanel" id="ai-visual-panel" data-artifact-panel="ai-visual" role="tabpanel" hidden>
+                <div class="artifact-heading"><h3>视觉方案评审</h3><span class="artifact-page-total">共 12 页</span></div>
             <div class="ai-workflow-scroll" tabindex="0" aria-label="视觉方案评审报告，可左右滚动">
               <figure><img src="../assets/ai-workflow/visual-01.png" alt="视觉评审 第 1 页" loading="lazy"><figcaption>01</figcaption></figure>
               <figure><img src="../assets/ai-workflow/visual-02.png" alt="视觉评审 第 2 页" loading="lazy"><figcaption>02</figcaption></figure>
@@ -181,7 +246,52 @@
               <figure><img src="../assets/ai-workflow/visual-11.png" alt="视觉评审 第 11 页" loading="lazy"><figcaption>11</figcaption></figure>
               <figure><img src="../assets/ai-workflow/visual-12.png" alt="视觉评审 第 12 页" loading="lazy"><figcaption>12</figcaption></figure>
             </div>
-            </section>
+              </section>
+            </div>
+          </section>
+          <section class="deliverable-panel" id="walkthrough-panel" data-deliverable-panel="walkthrough" role="tabpanel" hidden>
+            <div class="artifact-switcher">
+              <div class="artifact-subtabs" role="tablist" aria-label="设计走查文档">
+                <button type="button" role="tab" aria-controls="walkthrough-components-panel" aria-selected="true" tabindex="0" data-artifact-tab="walkthrough-components">组件验收 <small>7 页</small></button>
+                <button type="button" role="tab" aria-controls="walkthrough-workload-panel" aria-selected="false" tabindex="-1" data-artifact-tab="walkthrough-workload">工作负载 <small>8 页</small></button>
+                <button type="button" role="tab" aria-controls="walkthrough-navigation-panel" aria-selected="false" tabindex="-1" data-artifact-tab="walkthrough-navigation">导航与框架 <small>5 页</small></button>
+              </div>
+              <section class="artifact-subpanel" id="walkthrough-components-panel" data-artifact-panel="walkthrough-components" role="tabpanel">
+                <div class="artifact-heading"><h3>组件设计验收</h3><span class="artifact-page-total">共 7 页</span></div>
+            <div class="ai-workflow-scroll" tabindex="0" aria-label="组件设计验收报告，共 7 页，可左右滚动">
+              <figure><img src="../assets/cnap-walkthrough/components-1.png" alt="组件设计验收 第 1 页" loading="lazy"><figcaption>01</figcaption></figure>
+              <figure><img src="../assets/cnap-walkthrough/components-2.png" alt="组件设计验收 第 2 页" loading="lazy"><figcaption>02</figcaption></figure>
+              <figure><img src="../assets/cnap-walkthrough/components-3.png" alt="组件设计验收 第 3 页" loading="lazy"><figcaption>03</figcaption></figure>
+              <figure><img src="../assets/cnap-walkthrough/components-4.png" alt="组件设计验收 第 4 页" loading="lazy"><figcaption>04</figcaption></figure>
+              <figure><img src="../assets/cnap-walkthrough/components-5.png" alt="组件设计验收 第 5 页" loading="lazy"><figcaption>05</figcaption></figure>
+              <figure><img src="../assets/cnap-walkthrough/components-6.png" alt="组件设计验收 第 6 页" loading="lazy"><figcaption>06</figcaption></figure>
+              <figure><img src="../assets/cnap-walkthrough/components-7.png" alt="组件设计验收 第 7 页" loading="lazy"><figcaption>07</figcaption></figure>
+            </div>
+              </section>
+              <section class="artifact-subpanel" id="walkthrough-workload-panel" data-artifact-panel="walkthrough-workload" role="tabpanel" hidden>
+                <div class="artifact-heading"><h3>工作负载走查</h3><span class="artifact-page-total">共 8 页</span></div>
+            <div class="ai-workflow-scroll" tabindex="0" aria-label="工作负载走查报告，共 8 页，可左右滚动">
+              <figure><img src="../assets/cnap-walkthrough/workload-1.png" alt="工作负载走查 第 1 页" loading="lazy"><figcaption>01</figcaption></figure>
+              <figure><img src="../assets/cnap-walkthrough/workload-2.png" alt="工作负载走查 第 2 页" loading="lazy"><figcaption>02</figcaption></figure>
+              <figure><img src="../assets/cnap-walkthrough/workload-3.png" alt="工作负载走查 第 3 页" loading="lazy"><figcaption>03</figcaption></figure>
+              <figure><img src="../assets/cnap-walkthrough/workload-4.png" alt="工作负载走查 第 4 页" loading="lazy"><figcaption>04</figcaption></figure>
+              <figure><img src="../assets/cnap-walkthrough/workload-5.png" alt="工作负载走查 第 5 页" loading="lazy"><figcaption>05</figcaption></figure>
+              <figure><img src="../assets/cnap-walkthrough/workload-6.png" alt="工作负载走查 第 6 页" loading="lazy"><figcaption>06</figcaption></figure>
+              <figure><img src="../assets/cnap-walkthrough/workload-7.png" alt="工作负载走查 第 7 页" loading="lazy"><figcaption>07</figcaption></figure>
+              <figure><img src="../assets/cnap-walkthrough/workload-8.png" alt="工作负载走查 第 8 页" loading="lazy"><figcaption>08</figcaption></figure>
+            </div>
+              </section>
+              <section class="artifact-subpanel" id="walkthrough-navigation-panel" data-artifact-panel="walkthrough-navigation" role="tabpanel" hidden>
+                <div class="artifact-heading"><h3>导航与框架走查</h3><span class="artifact-page-total">共 5 页</span></div>
+            <div class="ai-workflow-scroll" tabindex="0" aria-label="导航与框架走查报告，共 5 页，可左右滚动">
+              <figure><img src="../assets/cnap-walkthrough/navigation-1.png" alt="导航与框架走查 第 1 页" loading="lazy"><figcaption>01</figcaption></figure>
+              <figure><img src="../assets/cnap-walkthrough/navigation-2.png" alt="导航与框架走查 第 2 页" loading="lazy"><figcaption>02</figcaption></figure>
+              <figure><img src="../assets/cnap-walkthrough/navigation-3.png" alt="导航与框架走查 第 3 页" loading="lazy"><figcaption>03</figcaption></figure>
+              <figure><img src="../assets/cnap-walkthrough/navigation-4.png" alt="导航与框架走查 第 4 页" loading="lazy"><figcaption>04</figcaption></figure>
+              <figure><img src="../assets/cnap-walkthrough/navigation-5.png" alt="导航与框架走查 第 5 页" loading="lazy"><figcaption>05</figcaption></figure>
+            </div>
+              </section>
+            </div>
           </section>
         </div>
       </section>
@@ -217,6 +327,7 @@
           item.tabIndex = selected ? 0 : -1;
         });
         deliverablePanels.forEach((panel) => { panel.hidden = panel.dataset.deliverablePanel !== target; });
+        requestAnimationFrame(() => document.querySelectorAll(".ai-workflow-scroll").forEach((strip) => strip._updateViewer?.()));
       }));
       const researchTabs = [...document.querySelectorAll(".research-subtabs:not(.ai-workflow-subtabs) [role=tab]")];
       const researchPanels = [...document.querySelectorAll("[data-research-panel]")];
@@ -229,17 +340,148 @@
         });
         researchPanels.forEach((panel) => { panel.hidden = panel.dataset.researchPanel !== target; });
       }));
-      const aiWorkflowTabs = [...document.querySelectorAll(".ai-workflow-subtabs [role=tab]")];
-      const aiWorkflowPanels = [...document.querySelectorAll("[data-aiworkflow-panel]")];
-      aiWorkflowTabs.forEach((tab) => tab.addEventListener("click", () => {
-        const target = tab.dataset.aiworkflowTab;
-        aiWorkflowTabs.forEach((item) => {
-          const selected = item === tab;
-          item.setAttribute("aria-selected", String(selected));
-          item.tabIndex = selected ? 0 : -1;
+      document.querySelectorAll(".artifact-switcher").forEach((switcher) => {
+        const tabs = [...switcher.querySelectorAll("[data-artifact-tab]")];
+        const panels = [...switcher.querySelectorAll("[data-artifact-panel]")];
+        tabs.forEach((tab) => tab.addEventListener("click", () => {
+          const target = tab.dataset.artifactTab;
+          tabs.forEach((item) => {
+            const selected = item === tab;
+            item.setAttribute("aria-selected", String(selected));
+            item.tabIndex = selected ? 0 : -1;
+          });
+          panels.forEach((panel) => { panel.hidden = panel.dataset.artifactPanel !== target; });
+          requestAnimationFrame(() => switcher.querySelectorAll(".ai-workflow-scroll").forEach((strip) => strip._updateViewer?.()));
+        }));
+      });
+
+      const lightbox = document.createElement("div");
+      lightbox.className = "document-lightbox";
+      lightbox.hidden = true;
+      lightbox.setAttribute("role", "dialog");
+      lightbox.setAttribute("aria-modal", "true");
+      lightbox.setAttribute("aria-label", "文档页面预览");
+      const lightboxBar = document.createElement("div");
+      lightboxBar.className = "document-lightbox-bar";
+      const lightboxStatus = document.createElement("span");
+      const lightboxClose = document.createElement("button");
+      lightboxClose.className = "document-lightbox-close";
+      lightboxClose.type = "button";
+      lightboxClose.textContent = "×";
+      lightboxClose.title = "关闭预览";
+      lightboxClose.setAttribute("aria-label", "关闭预览");
+      lightboxBar.append(lightboxStatus, lightboxClose);
+      const lightboxStage = document.createElement("div");
+      lightboxStage.className = "document-lightbox-stage";
+      const lightboxImage = document.createElement("img");
+      lightboxStage.append(lightboxImage);
+      const lightboxPrevious = document.createElement("button");
+      lightboxPrevious.className = "document-lightbox-prev";
+      lightboxPrevious.type = "button";
+      lightboxPrevious.textContent = "←";
+      lightboxPrevious.title = "上一页";
+      lightboxPrevious.setAttribute("aria-label", "上一页");
+      const lightboxNext = document.createElement("button");
+      lightboxNext.className = "document-lightbox-next";
+      lightboxNext.type = "button";
+      lightboxNext.textContent = "→";
+      lightboxNext.title = "下一页";
+      lightboxNext.setAttribute("aria-label", "下一页");
+      lightbox.append(lightboxBar, lightboxPrevious, lightboxStage, lightboxNext);
+      document.body.append(lightbox);
+
+      let lightboxImages = [];
+      let lightboxIndex = 0;
+      let lightboxReturnTarget = null;
+      const renderLightbox = () => {
+        const source = lightboxImages[lightboxIndex];
+        if (!source) return;
+        lightboxImage.src = source.currentSrc || source.src;
+        lightboxImage.alt = source.alt;
+        lightboxStatus.textContent = `${String(lightboxIndex + 1).padStart(2, "0")} / ${String(lightboxImages.length).padStart(2, "0")}`;
+        lightboxPrevious.disabled = lightboxIndex === 0;
+        lightboxNext.disabled = lightboxIndex === lightboxImages.length - 1;
+      };
+      const openLightbox = (images, index, target) => {
+        lightboxImages = images;
+        lightboxIndex = index;
+        lightboxReturnTarget = target;
+        renderLightbox();
+        lightbox.hidden = false;
+        document.body.classList.add("is-lightbox-open");
+        lightboxClose.focus();
+      };
+      const closeLightbox = () => {
+        lightbox.hidden = true;
+        document.body.classList.remove("is-lightbox-open");
+        lightboxReturnTarget?.focus();
+      };
+      lightboxPrevious.addEventListener("click", () => { if (lightboxIndex > 0) { lightboxIndex -= 1; renderLightbox(); } });
+      lightboxNext.addEventListener("click", () => { if (lightboxIndex < lightboxImages.length - 1) { lightboxIndex += 1; renderLightbox(); } });
+      lightboxClose.addEventListener("click", closeLightbox);
+      lightbox.addEventListener("click", (event) => { if (event.target === lightbox || event.target === lightboxStage) closeLightbox(); });
+      document.addEventListener("keydown", (event) => {
+        if (lightbox.hidden) return;
+        if (event.key === "Escape") closeLightbox();
+        if (event.key === "ArrowLeft" && lightboxIndex > 0) { lightboxIndex -= 1; renderLightbox(); }
+        if (event.key === "ArrowRight" && lightboxIndex < lightboxImages.length - 1) { lightboxIndex += 1; renderLightbox(); }
+      });
+
+      document.querySelectorAll(".ai-workflow-scroll").forEach((strip) => {
+        const figures = [...strip.querySelectorAll("figure")];
+        const images = figures.map((figure) => figure.querySelector("img"));
+        const viewer = document.createElement("div");
+        viewer.className = "artifact-viewer";
+        const toolbar = document.createElement("div");
+        toolbar.className = "artifact-viewer-toolbar";
+        const status = document.createElement("span");
+        status.className = "artifact-page-status";
+        const actions = document.createElement("div");
+        actions.className = "artifact-viewer-actions";
+        const previous = document.createElement("button");
+        previous.type = "button";
+        previous.textContent = "←";
+        previous.title = "上一页";
+        previous.setAttribute("aria-label", "上一页");
+        const next = document.createElement("button");
+        next.type = "button";
+        next.textContent = "→";
+        next.title = "下一页";
+        next.setAttribute("aria-label", "下一页");
+        actions.append(previous, next);
+        toolbar.append(status, actions);
+        strip.before(viewer);
+        viewer.append(toolbar, strip);
+        let currentIndex = 0;
+        const update = () => {
+          if (!strip.clientWidth) return;
+          const center = strip.scrollLeft + strip.clientWidth / 2;
+          currentIndex = figures.reduce((closest, figure, index) => {
+            const figureCenter = figure.offsetLeft - strip.offsetLeft + figure.offsetWidth / 2;
+            const closestCenter = figures[closest].offsetLeft - strip.offsetLeft + figures[closest].offsetWidth / 2;
+            return Math.abs(figureCenter - center) < Math.abs(closestCenter - center) ? index : closest;
+          }, 0);
+          status.textContent = `${String(currentIndex + 1).padStart(2, "0")} / ${String(figures.length).padStart(2, "0")}`;
+          previous.disabled = currentIndex === 0;
+          next.disabled = currentIndex === figures.length - 1;
+        };
+        const goTo = (index) => {
+          const target = Math.max(0, Math.min(figures.length - 1, index));
+          strip.scrollTo({ left: figures[target].offsetLeft - strip.offsetLeft, behavior: "smooth" });
+        };
+        previous.addEventListener("click", () => goTo(currentIndex - 1));
+        next.addEventListener("click", () => goTo(currentIndex + 1));
+        strip.addEventListener("scroll", () => requestAnimationFrame(update), { passive: true });
+        images.forEach((image, index) => {
+          image.tabIndex = 0;
+          image.setAttribute("role", "button");
+          image.setAttribute("aria-label", `${image.alt}，点击放大`);
+          image.addEventListener("click", () => openLightbox(images, index, image));
+          image.addEventListener("keydown", (event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); openLightbox(images, index, image); } });
         });
-        aiWorkflowPanels.forEach((panel) => { panel.hidden = panel.dataset.aiworkflowPanel !== target; });
-      }));
+        strip._updateViewer = update;
+        update();
+      });
       const satisfactionCanvas = document.querySelector("[data-cnap-satisfaction-chart]");
       if (satisfactionCanvas) {
         const context = satisfactionCanvas.getContext("2d");
