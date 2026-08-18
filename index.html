@@ -419,6 +419,71 @@
         line-height: 1.75;
       }
 
+      .prototype-homepage .portfolio-index {
+        padding: 0 clamp(24px, 5vw, 76px) 120px;
+        background: #08090b;
+      }
+
+      .prototype-homepage .portfolio-index-inner {
+        display: grid;
+        grid-template-columns: minmax(130px, .34fr) minmax(0, 1fr);
+        gap: clamp(36px, 7vw, 112px);
+        padding-top: 34px;
+        border-top: 1px solid rgba(255, 255, 255, .16);
+      }
+
+      .prototype-homepage .portfolio-index-title {
+        margin: 0;
+        color: var(--ink-subtle);
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.55;
+      }
+
+      .prototype-homepage .portfolio-index-list {
+        display: flex;
+        margin: 0;
+        padding: 0;
+        flex-direction: column;
+        gap: 0;
+        list-style: none;
+      }
+
+      .prototype-homepage .portfolio-index-item {
+        display: grid;
+        grid-template-columns: minmax(120px, .38fr) minmax(0, 1fr) 20px;
+        align-items: baseline;
+        gap: 24px;
+        min-height: 52px;
+        padding: 14px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, .11);
+      }
+
+      .prototype-homepage .portfolio-index-item:first-child {
+        padding-top: 0;
+      }
+
+      .prototype-homepage .portfolio-index-name {
+        color: var(--ink);
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 1.55;
+      }
+
+      .prototype-homepage .portfolio-index-description {
+        min-width: 0;
+        color: var(--ink-subtle);
+        font-size: 14px;
+        line-height: 1.55;
+      }
+
+      .prototype-homepage .portfolio-index-arrow {
+        color: var(--ink-muted);
+        font-size: 15px;
+        line-height: 1;
+        text-align: right;
+      }
+
       html.motion-ready .prototype-homepage .section-reveal .section-copy-step {
         opacity: 0;
         transform: translateY(var(--copy-distance));
@@ -584,6 +649,31 @@
           min-height: 0;
           margin-bottom: 14px;
           font-size: 22px;
+        }
+
+        .prototype-homepage .portfolio-index {
+          padding-bottom: 88px;
+        }
+
+        .prototype-homepage .portfolio-index-inner {
+          grid-template-columns: 1fr;
+          gap: 26px;
+          padding-top: 26px;
+        }
+
+        .prototype-homepage .portfolio-index-item {
+          grid-template-columns: minmax(0, 1fr) 18px;
+          gap: 6px 16px;
+        }
+
+        .prototype-homepage .portfolio-index-description {
+          grid-column: 1;
+        }
+
+        .prototype-homepage .portfolio-index-arrow {
+          grid-column: 2;
+          grid-row: 1 / span 2;
+          align-self: center;
         }
 
       }
@@ -2177,6 +2267,29 @@
             <article class="about-strength section-copy-step"><h3>AI 场景创新，<br />2 个 0-1 项目经验</h3><p>理解 AI 能力边界，将 AI 能力转化为用户价值</p></article>
             <article class="about-strength section-copy-step"><h3>具备商业敏感度，<br />打通转化链路</h3><p>打通小红书从“内容种草”到“交易转化”的完整链路</p></article>
             <article class="about-strength section-copy-step"><h3>深入一线，<br />挖掘隐性用户需求</h3><p>成为美团骑手，挖掘到“习以为常”背后的隐性痛点，解决真实问题</p></article>
+          </div>
+        </section>
+
+        <section class="portfolio-index section-reveal" aria-labelledby="portfolio-index-title">
+          <div class="portfolio-index-inner">
+            <h2 class="portfolio-index-title section-copy-step" id="portfolio-index-title">更多内容</h2>
+            <ul class="portfolio-index-list">
+              <li class="portfolio-index-item section-copy-step">
+                <span class="portfolio-index-name">内容占位一</span>
+                <span class="portfolio-index-description">这里放一句简短说明，概括内容主题与价值</span>
+                <span class="portfolio-index-arrow" aria-hidden="true">↗</span>
+              </li>
+              <li class="portfolio-index-item section-copy-step">
+                <span class="portfolio-index-name">内容占位二</span>
+                <span class="portfolio-index-description">这里放一句简短说明，帮助访客快速判断是否感兴趣</span>
+                <span class="portfolio-index-arrow" aria-hidden="true">↗</span>
+              </li>
+              <li class="portfolio-index-item section-copy-step">
+                <span class="portfolio-index-name">内容占位三</span>
+                <span class="portfolio-index-description">这里放一句简短说明，后续可替换为文章、实验或其他作品</span>
+                <span class="portfolio-index-arrow" aria-hidden="true">↗</span>
+              </li>
+            </ul>
           </div>
         </section>
 
