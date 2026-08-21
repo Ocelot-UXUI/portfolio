@@ -118,9 +118,33 @@
     });
     document.body.append(revealZone);
 
+    // Iframe demos swallow pointer events: once the cursor moves into an
+    // iframe the parent document stops receiving pointermove, so any
+    // "is hovering over the navigation" state set while the cursor was
+    // inside the 64px reveal zone sticks forever. Use a delayed hide that
+    // fires when the cursor leaves the reveal zone, plus an immediate
+    // override on every iframe's pointerenter.
+    let revealLeaveTimer = 0;
+    const cancelRevealHide = () => {
+      if (revealLeaveTimer) {
+        window.clearTimeout(revealLeaveTimer);
+        revealLeaveTimer = 0;
+      }
+    };
+    const scheduleRevealHide = () => {
+      cancelRevealHide();
+      revealLeaveTimer = window.setTimeout(() => {
+        revealLeaveTimer = 0;
+        if (document.body.classList.contains("demo-nav-hidden")) {
+          document.body.classList.remove("demo-nav-hovering");
+        }
+      }, 220);
+    };
+
     const setHidden = (hidden) => {
       document.body.classList.toggle("demo-nav-hidden", hidden);
       document.body.classList.remove("demo-nav-hovering");
+      cancelRevealHide();
       revealZone.hidden = !hidden;
       button.setAttribute("aria-pressed", String(hidden));
       button.setAttribute("aria-label", hidden ? "固定显示导航" : "隐藏导航");
@@ -140,6 +164,15 @@
     };
     revealZone.addEventListener("pointerenter", revealFromTopEdge);
     revealZone.addEventListener("pointermove", revealFromTopEdge, { passive: true });
+    revealZone.addEventListener("pointerleave", scheduleRevealHide);
+    document.querySelectorAll("iframe").forEach((iframe) => {
+      iframe.addEventListener("pointerenter", () => {
+        cancelRevealHide();
+        if (document.body.classList.contains("demo-nav-hidden")) {
+          document.body.classList.remove("demo-nav-hovering");
+        }
+      });
+    });
 
     const compactViewport = matchMedia("(max-width: 700px)");
     compactViewport.addEventListener("change", (event) => {
@@ -151,6 +184,7 @@
     document.addEventListener("pointermove", (event) => {
       if (!document.body.classList.contains("demo-nav-hidden")) return;
       const revealHeight = compactViewport.matches ? 52 : 64;
+      if (event.clientY <= revealHeight) cancelRevealHide();
       const companion = document.body.querySelector(":scope > .demo-nav-companion");
       const isInsideNavigation = header.contains(event.target) || companion?.contains(event.target);
       const isHovering = document.body.classList.contains("demo-nav-hovering");
