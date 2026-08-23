@@ -26,9 +26,23 @@ let skills = [
   { id: 5, category: "personal", name: "数据洞察", description: "从业务数据中定位体验问题和设计机会", icon: "image_19.png", enabled: false, editable: true },
   { id: 6, category: "team", name: "团队设计规范", description: "查询团队组件、样式与交付规范", icon: "image_38.png", enabled: true, editable: false },
   { id: 7, category: "team", name: "需求预审", description: "检查需求目标、边界与异常状态是否完整", icon: "image_49.png", enabled: true, editable: false },
-  { id: 8, category: "builtIn", name: "网页搜索", description: "搜索网页并提取与任务相关的信息", icon: "image_12.png", enabled: true, editable: false },
-  { id: 9, category: "builtIn", name: "文件读取", description: "读取文档、表格、演示文稿和图片内容", icon: "image_15.png", enabled: true, editable: false },
-  { id: 10, category: "builtIn", name: "图片生成", description: "根据描述创建或编辑图片素材", icon: "image_17.png", enabled: false, editable: false }
+  { id: 8, category: "builtIn", name: "dodo-ip-emoji-creato-2.0", description: "dodo IP 表情包创作工具。触发词：dodo emoji 表情、dodo IP 表情…", icon: "image_12.png", enabled: true, editable: false },
+  { id: 9, category: "builtIn", name: "product-iteration-planner", description: "产品功能上线后的二次迭代分析助手。支持灵活的材料准备方式", icon: "image_15.png", enabled: false, editable: false },
+  { id: 10, category: "builtIn", name: "dodo-ip-emoji-creato-2.0", description: "dodo IP 表情包创作工具。触发词：dodo emoji 表情、dodo IP 表情…", icon: "image_17.png", enabled: true, editable: false },
+  { id: 11, category: "builtIn", name: "product-iteration-planner", description: "产品功能上线后的二次迭代分析助手。支持灵活的材料准备方式", icon: "image_19.png", enabled: false, editable: false }
+];
+
+const recommendedSkillPages = [
+  [
+    { name: "龙虾社区", description: "这里是龙虾专属的效率社区——“龙虾充电站”…", mark: "", uses: "10" },
+    { name: "daily-ai-news", description: "龙虾每日 AI 热点推送，包含图片和查看原文", mark: "", uses: "10" },
+    { name: "每日热榜", description: "每日热榜技能 - 查询微博、知乎、B 站、抖音等…", mark: "", uses: "10" }
+  ],
+  [
+    { name: "企业搜索", description: "百度企业内部六类信息检索与分析", mark: "", uses: "10" },
+    { name: "龙虾社区", description: "发现龙虾专属的效率经验和实用技巧", mark: "", uses: "10" },
+    { name: "文档摘要", description: "读取长文档并给出重点、风险和行动项", mark: "", uses: "10" }
+  ]
 ];
 
 let conversations = [
@@ -65,6 +79,8 @@ const skillShareModal = document.querySelector("[data-skill-share-modal]");
 const skillUploadForm = document.querySelector("[data-skill-upload-form]");
 const skillShareForm = document.querySelector("[data-skill-share-form]");
 const skillFileInput = document.querySelector("[data-skill-file]");
+const skillRecommendations = document.querySelector("[data-skill-recommendations]");
+const skillDetailModal = document.querySelector("[data-skill-detail-modal]");
 const gearGrid = document.querySelector("[data-gear-grid]");
 const modelButton = document.querySelector("[data-model-button]");
 const modelMenu = document.querySelector("[data-model-menu]");
@@ -84,7 +100,9 @@ let conversationFilter = "all";
 let conversationQuery = "";
 let multiSelectMode = false;
 let selectedConversations = new Set();
-let activeSkillCategory = "personal";
+let activeSkillCategory = "builtIn";
+let activeSkillPage = 0;
+let activeRecommendedSkill = null;
 let selectedSkillFile = null;
 let activeMenuTarget = null;
 let toastTimer;
@@ -176,9 +194,10 @@ function openFloatingMenu(anchor, items, target) {
 }
 
 function skillRow(item) {
+  const isBuiltIn = item.category === "builtIn";
   return `
     <article class="skill-row" data-skill-id="${item.id}">
-      <img class="skill-icon" src="assets/skills/${item.icon}" alt="" />
+      ${isBuiltIn ? '<span class="skill-icon skill-icon--figma"><img src="assets/skill-center/smile.svg" alt="" /><img src="assets/skill-center/smile-details.svg" alt="" /><img src="assets/skill-center/smile-eyes.svg" alt="" /><img src="assets/skill-center/smile-mouth.svg" alt="" /></span>' : `<span class="skill-icon"><img src="assets/skills/${item.icon}" alt="" /></span>`}
       <div class="skill-copy">
         <h2>${escapeHTML(item.name)}</h2>
         <p>${escapeHTML(item.description)}</p>
@@ -192,15 +211,40 @@ function skillRow(item) {
     </article>`;
 }
 
+function renderRecommendations() {
+  const items = recommendedSkillPages[activeSkillPage];
+  skillRecommendations.innerHTML = items.map((item, index) => `
+    <button class="recommendation-card" type="button" data-recommended-skill="${index}">
+      <span class="recommendation-mark"><img src="assets/skill-center/smile.svg" alt="" /><img src="assets/skill-center/smile-details.svg" alt="" /><img src="assets/skill-center/smile-eyes.svg" alt="" /><img src="assets/skill-center/smile-mouth.svg" alt="" /></span>
+      <span class="recommendation-copy"><strong>${escapeHTML(item.name)}</strong><small>${escapeHTML(item.description)}</small></span>
+      <span class="recommendation-footer"><span>${item.uses} 人已使用</span><b>查看详情 →</b></span>
+    </button>`).join("");
+  document.querySelectorAll("[data-skill-page]").forEach((button) => button.classList.toggle("is-active", Number(button.dataset.skillPage) === activeSkillPage));
+}
+
 function renderSkills() {
   const query = skillsSearch.value.trim().toLowerCase();
   const items = skills.filter((item) => item.category === activeSkillCategory && (
     !query || item.name.toLowerCase().includes(query) || item.description.toLowerCase().includes(query)
   ));
-  skillsCount.textContent = `${items.length} 个技能`;
+  const categoryNames = { personal: "我安装的", team: "来自 Skill 中心的", builtIn: "dodo 内置的" };
+  document.querySelector("[data-skill-library-title]").textContent = categoryNames[activeSkillCategory];
+  skillsCount.textContent = activeSkillCategory === "builtIn" ? "" : `${items.length} 个技能已启用`;
+  document.querySelector("[data-skills-bulk-toggle]").textContent = items.length && items.every((item) => item.enabled) ? "全部关闭" : "全部开启";
   skillsList.innerHTML = items.length
     ? items.map(skillRow).join("")
     : '<div class="skills-empty"><img src="assets/skills/image_35.png" alt="" /><strong>没有找到相关技能</strong><span>试试其他关键词或切换分类</span></div>';
+}
+
+function openSkillDetail(item) {
+  activeRecommendedSkill = item;
+  document.querySelector("[data-skill-detail-mark]").textContent = item.mark;
+  document.querySelector("[data-skill-detail-name]").textContent = item.name;
+  document.querySelector("[data-skill-detail-description]").textContent = item.description;
+  document.querySelector("[data-skill-detail-uses]").textContent = `已被 ${item.uses} 人使用`;
+  const isInstalled = skills.some((skill) => skill.name === item.name);
+  document.querySelector("[data-install-recommended-skill]").textContent = isInstalled ? "已安装" : "安装技能";
+  skillDetailModal.hidden = false;
 }
 
 function closeSkillCreateMenu() {
@@ -223,6 +267,11 @@ function closeSkillModals() {
   resetSkillUploadForm();
   skillShareForm.reset();
   document.querySelector("[data-install-skill-button]").disabled = true;
+}
+
+function closeSkillDetail() {
+  skillDetailModal.hidden = true;
+  activeRecommendedSkill = null;
 }
 
 function updateSkillUploadState() {
@@ -274,6 +323,7 @@ function showSection(section) {
   skillsView.hidden = !isSkills;
   placeholderView.hidden = isSkills;
   if (isSkills) {
+    renderRecommendations();
     renderSkills();
   } else {
     const [title, copy, icon] = sectionCopy[section];
@@ -389,7 +439,46 @@ skillCreateMenu.addEventListener("click", (event) => {
     sendButton.disabled = false;
     prompt.focus();
   }
-  if (action === "center") showToast("正在打开 Skill 中心");
+  if (action === "center") showSection("skills");
+});
+
+skillRecommendations.addEventListener("click", (event) => {
+  const card = event.target.closest("[data-recommended-skill]");
+  if (!card) return;
+  openSkillDetail(recommendedSkillPages[activeSkillPage][Number(card.dataset.recommendedSkill)]);
+});
+
+document.querySelectorAll("[data-skill-page]").forEach((button) => button.addEventListener("click", () => {
+  activeSkillPage = Number(button.dataset.skillPage);
+  renderRecommendations();
+}));
+
+document.querySelector("[data-skills-bulk-toggle]").addEventListener("click", () => {
+  const items = skills.filter((item) => item.category === activeSkillCategory);
+  const enable = !items.every((item) => item.enabled);
+  items.forEach((item) => { item.enabled = enable; });
+  renderSkills();
+  showToast(enable ? "技能已全部开启" : "技能已全部关闭");
+});
+
+document.querySelectorAll("[data-close-skill-detail]").forEach((button) => button.addEventListener("click", closeSkillDetail));
+document.querySelector("[data-install-recommended-skill]").addEventListener("click", () => {
+  if (!activeRecommendedSkill) return;
+  const skillName = activeRecommendedSkill.name;
+  if (skills.some((skill) => skill.name === activeRecommendedSkill.name)) {
+    showToast("这个技能已经安装了");
+    return;
+  }
+  skills.unshift({ id: Date.now(), category: "personal", name: activeRecommendedSkill.name, description: activeRecommendedSkill.description, icon: "image_38.png", enabled: true, editable: true });
+  activeSkillCategory = "personal";
+  document.querySelectorAll("[data-skill-category]").forEach((tab) => {
+    const active = tab.dataset.skillCategory === "personal";
+    tab.classList.toggle("is-active", active);
+    tab.setAttribute("aria-selected", String(active));
+  });
+  closeSkillDetail();
+  renderSkills();
+  showToast(`${skillName} 已安装`);
 });
 
 skillsList.addEventListener("click", (event) => {

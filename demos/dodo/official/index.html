@@ -172,7 +172,7 @@
         <section class="skills-view" hidden data-skills-view>
           <header class="skills-header">
             <div>
-              <h1>技能</h1>
+              <div class="skill-center-title"><h1>技能</h1></div>
               <p>统一管理赋予 dodo 更强大的能力</p>
             </div>
             <div class="skills-toolbar">
@@ -194,13 +194,19 @@
             </div>
           </header>
 
-          <div class="skills-category-tabs" role="tablist" aria-label="技能分类">
-            <button class="is-active" type="button" role="tab" aria-selected="true" data-skill-category="personal">个人</button>
-            <button type="button" role="tab" aria-selected="false" data-skill-category="team">团队</button>
-            <button type="button" role="tab" aria-selected="false" data-skill-category="builtIn">dodo内置</button>
+          <div class="skill-center-tabs" role="tablist" aria-label="技能分类">
+            <button type="button" role="tab" aria-selected="false" data-skill-category="personal">我安装的</button>
+            <button type="button" role="tab" aria-selected="false" data-skill-category="team">来自 Skill 中心的</button>
+            <button class="is-active" type="button" role="tab" aria-selected="true" data-skill-category="builtIn">dodo 自带的</button>
           </div>
-          <p class="skills-count" aria-live="polite" data-skills-count></p>
-          <div class="skills-list" data-skills-list></div>
+          <section class="skill-recommendations" aria-labelledby="recommend-skills-title">
+            <div class="skill-section-heading"><div><h2 id="recommend-skills-title">允许调用推荐技能</h2><p>开启后，dodo 的推荐清单中的技能可被随时调用，关闭时则仅内置技能生效</p></div><div class="skill-page-dots" aria-label="推荐技能分页"><button class="is-active" type="button" data-skill-page="0" aria-label="第 1 页"></button><button type="button" data-skill-page="1" aria-label="第 2 页"></button></div></div>
+            <div class="skill-recommendation-grid" data-skill-recommendations></div>
+          </section>
+          <section class="skill-library" aria-labelledby="skill-library-title">
+            <div class="skill-section-heading skill-library-heading"><div><h2 id="skill-library-title" data-skill-library-title>dodo 内置的</h2><p data-skills-count aria-live="polite"></p></div><button class="skill-bulk-button" type="button" data-skills-bulk-toggle>全部关闭</button></div>
+            <div class="skills-list" data-skills-list></div>
+          </section>
         </section>
 
         <section class="placeholder-view" hidden data-placeholder-view>
@@ -253,6 +259,16 @@
         <div class="skill-form-row"><label for="skill-share-link"><span>*</span>共享链接</label><input id="skill-share-link" placeholder="粘贴链接或分享口令" autocomplete="off" data-skill-share-link /></div>
         <footer><button class="secondary-button" type="button" data-close-skill-modal>取消</button><button class="primary-button" type="submit" disabled data-install-skill-button>安装</button></footer>
       </form>
+    </div>
+
+    <div class="skill-modal" hidden data-skill-detail-modal>
+      <button class="skill-modal-backdrop" type="button" aria-label="关闭技能详情" data-close-skill-detail></button>
+      <section class="skill-dialog skill-detail-dialog" aria-label="技能详情">
+        <header><div class="skill-detail-heading"><span class="skill-detail-mark" data-skill-detail-mark>✦</span><div><h2 data-skill-detail-name>技能</h2><p data-skill-detail-meta>dodo Skill 中心</p></div></div><button type="button" aria-label="关闭" data-close-skill-detail><img src="assets/skills/image_42.png" alt="" /></button></header>
+        <p class="skill-detail-description" data-skill-detail-description></p>
+        <div class="skill-detail-info"><span>来自 Skill 中心</span><span data-skill-detail-uses>已被 0 人使用</span></div>
+        <footer><button class="secondary-button" type="button" data-close-skill-detail>取消</button><button class="primary-button" type="button" data-install-recommended-skill>安装技能</button></footer>
+      </section>
     </div>
 
     <div class="floating-menu" hidden data-floating-menu></div>
