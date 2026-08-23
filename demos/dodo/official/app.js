@@ -32,6 +32,21 @@ let skills = [
   { id: 11, category: "builtIn", name: "product-iteration-planner", description: "产品功能上线后的二次迭代分析助手。支持灵活的材料准备方式", icon: "image_19.png", enabled: false, editable: false }
 ];
 
+let artifacts = [
+  { id: 1, name: "设计系统规范转 Figma 结构.md", type: "markdown", date: "今天 14:20", favorite: true, preview: "markdown" },
+  { id: 2, name: "Q3 用户访谈洞察.xlsx", type: "表格", date: "今天 11:42", favorite: false, preview: "sheet" },
+  { id: 3, name: "dodo 品牌配图方案.png", type: "图片", date: "昨天 18:08", favorite: false, preview: "image" },
+  { id: 4, name: "技能中心体验评审.pptx", type: "演示文稿", date: "昨天 15:30", favorite: false, preview: "slides" },
+  { id: 5, name: "自动化任务配置.ts", type: "代码", date: "08-20", favorite: false, preview: "code" },
+  { id: 6, name: "竞品研究总结.docx", type: "文档", date: "08-19", favorite: true, preview: "document" },
+  { id: 7, name: "产品演示录屏.mp4", type: "视频", date: "08-18", favorite: false, preview: "image" },
+  { id: 8, name: "需求评审会议纪要.md", type: "markdown", date: "08-17", favorite: false, preview: "markdown" }
+];
+let recycleBin = [];
+let artifactFavoriteOnly = false;
+let artifactLayout = "grid";
+let pendingArtifactDeleteId = null;
+
 const recommendedSkillPages = [
   [
     { name: "龙虾社区", description: "这里是龙虾专属的效率社区——“龙虾充电站”…", mark: "", uses: "10" },
@@ -68,6 +83,7 @@ const promptForm = document.querySelector("[data-prompt-form]");
 const sendButton = document.querySelector(".send-button");
 const homeView = document.querySelector("[data-home-view]");
 const skillsView = document.querySelector("[data-skills-view]");
+const artifactsView = document.querySelector("[data-artifacts-view]");
 const placeholderView = document.querySelector("[data-placeholder-view]");
 const skillsList = document.querySelector("[data-skills-list]");
 const skillsCount = document.querySelector("[data-skills-count]");
@@ -94,6 +110,9 @@ const conversationSearchClear = document.querySelector("[data-conversation-searc
 const floatingMenu = document.querySelector("[data-floating-menu]");
 const workspaceModal = document.querySelector("[data-workspace-modal]");
 const workspaceForm = document.querySelector("[data-workspace-form]");
+const artifactGrid = document.querySelector("[data-artifact-grid]");
+const artifactDeleteModal = document.querySelector("[data-artifact-delete-modal]");
+const recycleModal = document.querySelector("[data-recycle-modal]");
 let gearSetIndex = 0;
 let conversationTab = "all";
 let conversationFilter = "all";
@@ -236,6 +255,38 @@ function renderSkills() {
     : '<div class="skills-empty"><img src="assets/skills/image_35.png" alt="" /><strong>没有找到相关技能</strong><span>试试其他关键词或切换分类</span></div>';
 }
 
+function artifactPreview(type) {
+  if (type === "sheet") return '<div class="artifact-preview artifact-preview--sheet"><b>渠道</b><b>访问量</b><b>转化</b><span>搜索</span><span>32,840</span><span>6.2%</span><span>推荐</span><span>18,292</span><span>5.6%</span></div>';
+  if (type === "code") return '<div class="artifact-preview artifact-preview--code"><span>01&nbsp; export const task = () =&gt; {</span><span>02&nbsp;&nbsp; return dodo.create()</span><span>03&nbsp; }</span></div>';
+  if (type === "slides") return '<div class="artifact-preview artifact-preview--slides"><b></b><i></i><i></i><i></i></div>';
+  if (type === "markdown") return '<div class="artifact-preview artifact-preview--markdown"><b># 项目复盘</b><i></i><i></i><i></i><i></i></div>';
+  if (type === "image") return '<div class="artifact-preview artifact-preview--image"><i></i><b></b></div>';
+  return '<div class="artifact-preview artifact-preview--document"><b></b><i></i><i></i><i></i></div>';
+}
+
+function renderArtifacts() {
+  const items = artifacts.filter((item) => !artifactFavoriteOnly || item.favorite);
+  document.querySelector("[data-artifact-total]").textContent = `共 ${items.length} 个产物`;
+  artifactGrid.classList.toggle("is-list", artifactLayout === "list");
+  artifactGrid.innerHTML = items.length ? items.map((item) => `
+    <article class="artifact-card" data-artifact-id="${item.id}">
+      <header><div><h2>${escapeHTML(item.name)}</h2><p>${item.type} · ${item.date}</p></div><div class="artifact-card-actions"><button type="button" data-artifact-fav aria-label="收藏">${item.favorite ? "★" : "☆"}</button><button type="button" data-artifact-delete aria-label="删除">⋮</button></div></header>
+      ${artifactPreview(item.preview)}
+      <button class="artifact-delete-option" type="button" data-artifact-delete>删除</button>
+    </article>`).join("") : '<div class="artifact-empty">没有符合条件的产物</div>';
+}
+
+function updateRecycleCount() {
+  document.querySelector("[data-recycle-count]").textContent = `(${recycleBin.length})`;
+}
+
+function renderRecycleBin() {
+  const query = document.querySelector("[data-recycle-search]").value.trim().toLowerCase();
+  const items = recycleBin.filter((item) => item.name.toLowerCase().includes(query));
+  document.querySelector("[data-recycle-list]").innerHTML = items.length ? items.map((item) => `
+    <article class="recycle-item" data-recycle-id="${item.id}"><span class="recycle-file-icon">▧</span><div><strong>${escapeHTML(item.name)}</strong><small>剩余 30 天</small></div><div class="recycle-item-actions"><button type="button" data-artifact-restore>恢复</button><button type="button" data-artifact-purge>彻底删除</button></div></article>`).join("") : '<div class="recycle-empty">手动删除的文件会出现在这里，可恢复或彻底删除</div>';
+}
+
 function openSkillDetail(item) {
   activeRecommendedSkill = item;
   document.querySelector("[data-skill-detail-mark]").textContent = item.mark;
@@ -311,6 +362,7 @@ function renderGear() {
 function showHome() {
   homeView.hidden = false;
   skillsView.hidden = true;
+  artifactsView.hidden = true;
   placeholderView.hidden = true;
   closeSkillCreateMenu();
   document.querySelectorAll(".nav-item").forEach((item) => item.classList.remove("is-active"));
@@ -320,11 +372,15 @@ function showHome() {
 function showSection(section) {
   homeView.hidden = true;
   const isSkills = section === "skills";
+  const isArtifacts = section === "artifacts";
   skillsView.hidden = !isSkills;
-  placeholderView.hidden = isSkills;
+  artifactsView.hidden = !isArtifacts;
+  placeholderView.hidden = isSkills || isArtifacts;
   if (isSkills) {
     renderRecommendations();
     renderSkills();
+  } else if (isArtifacts) {
+    renderArtifacts();
   } else {
     const [title, copy, icon] = sectionCopy[section];
     placeholderView.querySelector("[data-placeholder-title]").textContent = title;
@@ -506,6 +562,49 @@ skillsList.addEventListener("click", (event) => {
       showToast("技能信息已更新");
     }
   }
+});
+
+document.querySelector("[data-artifact-favorite]").addEventListener("click", (event) => {
+  artifactFavoriteOnly = !artifactFavoriteOnly;
+  event.currentTarget.classList.toggle("is-active", artifactFavoriteOnly);
+  event.currentTarget.textContent = artifactFavoriteOnly ? "★ 仅看收藏" : "☆ 仅看收藏";
+  renderArtifacts();
+});
+document.querySelectorAll("[data-artifact-layout]").forEach((button) => button.addEventListener("click", () => {
+  artifactLayout = button.dataset.artifactLayout;
+  renderArtifacts();
+}));
+artifactGrid.addEventListener("click", (event) => {
+  const card = event.target.closest("[data-artifact-id]");
+  if (!card) return;
+  const item = artifacts.find((artifact) => artifact.id === Number(card.dataset.artifactId));
+  if (!item) return;
+  if (event.target.closest("[data-artifact-fav]")) { item.favorite = !item.favorite; renderArtifacts(); return; }
+  if (event.target.closest("[data-artifact-delete]")) { pendingArtifactDeleteId = item.id; artifactDeleteModal.hidden = false; }
+});
+document.querySelectorAll("[data-close-artifact-modal]").forEach((button) => button.addEventListener("click", () => { artifactDeleteModal.hidden = true; pendingArtifactDeleteId = null; }));
+document.querySelector("[data-confirm-artifact-delete]").addEventListener("click", () => {
+  const item = artifacts.find((artifact) => artifact.id === pendingArtifactDeleteId);
+  if (!item) return;
+  recycleBin.unshift({ ...item, deletedAt: Date.now() });
+  artifacts = artifacts.filter((artifact) => artifact.id !== item.id);
+  pendingArtifactDeleteId = null;
+  artifactDeleteModal.hidden = true;
+  updateRecycleCount();
+  renderArtifacts();
+  showToast("已删除，可在回收站恢复");
+});
+document.querySelector("[data-open-recycle]").addEventListener("click", () => { recycleModal.hidden = false; renderRecycleBin(); });
+document.querySelectorAll("[data-close-recycle]").forEach((button) => button.addEventListener("click", () => { recycleModal.hidden = true; }));
+document.querySelector("[data-recycle-search]").addEventListener("input", renderRecycleBin);
+document.querySelector("[data-recycle-list]").addEventListener("click", (event) => {
+  const row = event.target.closest("[data-recycle-id]");
+  if (!row) return;
+  const id = Number(row.dataset.recycleId);
+  const item = recycleBin.find((artifact) => artifact.id === id);
+  if (!item) return;
+  if (event.target.closest("[data-artifact-restore]")) { artifacts.unshift(item); recycleBin = recycleBin.filter((artifact) => artifact.id !== id); updateRecycleCount(); renderRecycleBin(); renderArtifacts(); showToast("文件已恢复"); }
+  if (event.target.closest("[data-artifact-purge]")) { recycleBin = recycleBin.filter((artifact) => artifact.id !== id); updateRecycleCount(); renderRecycleBin(); showToast("文件已彻底删除"); }
 });
 
 skillFileInput.addEventListener("change", () => selectSkillFile(skillFileInput.files[0]));

@@ -209,6 +209,18 @@
           </section>
         </section>
 
+        <section class="artifacts-view" hidden data-artifacts-view>
+          <header class="artifacts-header">
+            <div><h1>产物</h1><p>dodo 造物，遇见更好的日常</p></div>
+            <button class="recycle-entry" type="button" data-open-recycle>♲ 回收站 <span data-recycle-count>(0)</span></button>
+          </header>
+          <div class="artifact-filters">
+            <div class="artifact-tabs" role="tablist"><button class="is-active" type="button" data-artifact-source="artifact">产物</button><button type="button" data-artifact-source="upload">上传</button></div>
+            <div class="artifact-filter-actions"><span data-artifact-total>共 8 个产物</span><button type="button" data-artifact-favorite>☆ 仅看收藏</button><button type="button" data-artifact-layout="grid">▦</button><button type="button" data-artifact-layout="list">☷</button></div>
+          </div>
+          <div class="artifact-grid" data-artifact-grid></div>
+        </section>
+
         <section class="placeholder-view" hidden data-placeholder-view>
           <div class="placeholder-icon" data-placeholder-icon><img src="assets/navigation/image_3.png" alt="" /></div>
           <h1 data-placeholder-title>知识</h1>
@@ -268,6 +280,19 @@
         <p class="skill-detail-description" data-skill-detail-description></p>
         <div class="skill-detail-info"><span>来自 Skill 中心</span><span data-skill-detail-uses>已被 0 人使用</span></div>
         <footer><button class="secondary-button" type="button" data-close-skill-detail>取消</button><button class="primary-button" type="button" data-install-recommended-skill>安装技能</button></footer>
+      </section>
+    </div>
+
+    <div class="artifact-modal" hidden data-artifact-delete-modal>
+      <button class="artifact-modal-backdrop" type="button" aria-label="取消删除" data-close-artifact-modal></button>
+      <section class="artifact-confirm-dialog"><h2><span>!</span>确定删除该文件吗？</h2><p>删除后会移动到资产回收站，可在回收站恢复文件。</p><footer><button type="button" data-close-artifact-modal>取消</button><button class="is-danger" type="button" data-confirm-artifact-delete>删除</button></footer></section>
+    </div>
+
+    <div class="artifact-modal" hidden data-recycle-modal>
+      <button class="artifact-modal-backdrop" type="button" aria-label="关闭回收站" data-close-recycle></button>
+      <section class="recycle-dialog" aria-label="回收站">
+        <header><h2>回收站</h2><label><span>⌕</span><input type="search" placeholder="搜索文件名称" data-recycle-search /></label><button type="button" aria-label="关闭" data-close-recycle>×</button></header>
+        <div class="recycle-list" data-recycle-list></div>
       </section>
     </div>
 
