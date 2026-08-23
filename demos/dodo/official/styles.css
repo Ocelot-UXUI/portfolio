@@ -65,8 +65,9 @@
 .sidebar-scroll{padding:14px 16px 0;overflow-x:hidden;overflow-y:auto;flex:1;scrollbar-width:thin;scrollbar-color:#cfd3d4 transparent}
 .primary-nav{display:grid;margin:0;gap:6px}
 .primary-nav .nav-item{width:248px;height:38px;padding:8px 12px;gap:12px;border-radius:8px;color:#2e2e2e;font-size:14px;line-height:22px}
-.primary-nav .nav-item img{width:20px;height:20px}
+.primary-nav .nav-item img{width:20px;height:20px;border-radius:4px;background:#f5f5f5;transition:background-color .15s ease}
 .primary-nav .nav-item:hover,.primary-nav .nav-item.is-active{background:#f0f0f0}
+.primary-nav .nav-item:hover img,.primary-nav .nav-item.is-active img{background:#fff}
 .sidebar-group{margin-top:20px}
 .group-title-row{position:sticky;top:0;z-index:3;height:20px;background:#f7f9fa}
 .group-title{height:20px;padding:0 12px;gap:4px;color:#8f8f8f;font-size:12px;line-height:20px}
@@ -98,7 +99,7 @@
 .conversation-tabs{width:210px;height:27px;padding:2px;border-radius:8px;flex:none;background:#f0f0f0}
 .conversation-tabs button{width:68px;height:23px;padding:0;border-radius:7px;color:#545454;font-size:12px;line-height:20px}
 .conversation-tabs button.is-active{background:#fff;color:#181818;box-shadow:none}
-.filter-button{width:28px;height:27px;border-radius:8px;background:#f0f0f0}
+.filter-button{width:28px;height:27px;border-radius:8px;background:#fff}
 .filter-button:hover,.filter-button[aria-expanded="true"]{background:#e8e8e8}
 .filter-button img{width:16px;height:16px}
 .conversation-search[hidden]{display:none}
