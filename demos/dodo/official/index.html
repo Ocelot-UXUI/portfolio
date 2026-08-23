@@ -10,57 +10,73 @@
   <body>
     <div class="app-shell">
       <aside class="sidebar" id="sidebar" aria-label="Dodo 主导航">
-        <button class="sidebar-logo" type="button" aria-label="返回 Dodo 首页" data-home>
-          <img src="assets/navigation/image_31.png" alt="dodo dodo doit." />
-        </button>
+        <div class="sidebar-fixed-header">
+          <div class="window-bar" aria-hidden="true">
+            <img class="window-controls" src="assets/navigation/window-controls.svg" alt="" />
+            <button class="collapse-button" type="button" aria-label="收起侧栏" data-sidebar-toggle><img src="assets/navigation/sidebar-collapse.svg" alt="" /></button>
+          </div>
+          <button class="nav-item new-chat" type="button" data-new-chat>
+            <img src="assets/navigation/new-chat.svg" alt="" /><span>新的对话</span>
+          </button>
+        </div>
 
         <div class="sidebar-scroll">
           <nav class="primary-nav" aria-label="功能导航">
-            <button class="nav-item new-chat" type="button" data-new-chat>
-              <img src="assets/navigation/image_2.png" alt="" /><span>新的对话</span>
-            </button>
             <button class="nav-item" type="button" data-section="knowledge">
-              <img src="assets/navigation/image_3.png" alt="" /><span>知识</span>
+              <img src="assets/navigation/nav-knowledge.svg" alt="" /><span>知识</span>
             </button>
             <button class="nav-item" type="button" data-section="skills">
-              <img src="assets/navigation/image_4.png" alt="" /><span>技能</span>
+              <img src="assets/navigation/nav-skill.svg" alt="" /><span>技能</span>
             </button>
             <button class="nav-item" type="button" data-section="artifacts">
-              <img src="assets/navigation/image_5.png" alt="" /><span>产物</span>
-            </button>
-            <button class="nav-item" type="button" data-section="automation">
-              <img src="assets/navigation/image_6.png" alt="" /><span>自动化任务</span>
+              <img src="assets/navigation/nav-artifact.svg" alt="" /><span>产物</span>
             </button>
             <button class="nav-item" type="button" data-section="settings">
-              <img src="assets/navigation/image_7.png" alt="" /><span>设置</span>
+              <img src="assets/navigation/nav-settings.svg" alt="" /><span>设置</span>
             </button>
           </nav>
 
           <section class="sidebar-group workspace-group">
             <div class="group-title-row">
               <button class="group-title" type="button" aria-expanded="true" data-group-toggle>
-                <span>专属工区</span><img class="section-chevron" src="assets/navigation/image_21.png" alt="" />
+                <span>专属工区</span><img class="section-chevron" src="assets/navigation/section-chevron.svg" alt="" />
               </button>
-              <button class="section-add" type="button" aria-label="新建工区" data-add-workspace><img src="assets/navigation/image_2.png" alt="" /></button>
+              <button class="section-add" type="button" aria-label="新建工区" data-add-workspace><img src="assets/navigation/section-add.svg" alt="" /></button>
             </div>
             <div class="group-content" data-group-content>
               <div class="workspace-row" data-workspace-row>
-                <button class="workspace-item" type="button" data-workspace="工区一">
-                  <img src="assets/navigation/image_22.png" alt="" /><span>工区一</span>
+                <button class="workspace-item" type="button" data-workspace="竞品分析">
+                  <img src="assets/navigation/workspace-competitor.svg" alt="" /><span>竞品分析</span>
                 </button>
-                <button class="row-more" type="button" aria-label="工区一更多操作" data-row-menu="workspace"><img src="assets/navigation/image_43.png" alt="" /></button>
-              </div>
-              <div class="workspace-row" data-workspace-row>
-                <button class="workspace-item is-active" type="button" data-workspace="设计评审">
-                  <img src="assets/navigation/image_23.png" alt="" /><span>设计评审</span>
-                </button>
-                <button class="row-more" type="button" aria-label="设计评审更多操作" data-row-menu="workspace"><img src="assets/navigation/image_43.png" alt="" /></button>
+                <button class="row-more" type="button" aria-label="竞品分析更多操作" data-row-menu="workspace"><img src="assets/navigation/image_43.png" alt="" /></button>
               </div>
               <div class="workspace-row workspace-task-row">
-                <button class="workspace-item workspace-task" type="button" data-conversation="dodo 新手功能介绍">
-                  <span>dodo，我是不会使用 AI 产品的小白用户，请介绍你拥有什么功能</span>
+                <button class="workspace-item workspace-task" type="button" data-conversation="创建定时任务">
+                  <img src="assets/navigation/workspace-alarm.svg" alt="" /><span>创建定时任务</span>
                 </button>
-                <button class="row-more" type="button" aria-label="任务更多操作" data-row-menu="task"><img src="assets/navigation/image_43.png" alt="" /></button>
+              </div>
+              <div class="workspace-row workspace-task-row">
+                <button class="workspace-item workspace-task" type="button" data-conversation="设计系统规范转 Figma">
+                  <img src="assets/navigation/workspace-book.svg" alt="" /><span>设计系统规范转 Figma</span>
+                </button>
+              </div>
+              <div class="workspace-row" data-workspace-row>
+                <button class="workspace-item" type="button" data-workspace="数据分析">
+                  <img src="assets/navigation/workspace-data.svg" alt="" /><span>数据分析</span>
+                </button>
+                <button class="row-more" type="button" aria-label="数据分析更多操作" data-row-menu="workspace"><img src="assets/navigation/image_43.png" alt="" /></button>
+              </div>
+              <div class="workspace-row" data-workspace-row>
+                <button class="workspace-item" type="button" data-workspace="工区产品设计">
+                  <img src="assets/navigation/workspace-product.svg" alt="" /><span>工区产品设计</span>
+                </button>
+                <button class="row-more" type="button" aria-label="工区产品设计更多操作" data-row-menu="workspace"><img src="assets/navigation/image_43.png" alt="" /></button>
+              </div>
+              <div class="workspace-row" data-workspace-row>
+                <button class="workspace-item" type="button" data-workspace="周报与日常工作">
+                  <img src="assets/navigation/workspace-report.svg" alt="" /><span>周报与日常工作</span>
+                </button>
+                <button class="row-more" type="button" aria-label="周报与日常工作更多操作" data-row-menu="workspace"><img src="assets/navigation/image_43.png" alt="" /></button>
               </div>
             </div>
           </section>
@@ -68,12 +84,12 @@
           <section class="sidebar-group conversation-group">
             <div class="group-title-row conversation-title-row">
               <button class="group-title" type="button" aria-expanded="true" data-conversation-toggle>
-                <span>我的对话</span><img class="section-chevron" src="assets/navigation/image_21.png" alt="" />
+                <span>我的对话</span><img class="section-chevron" src="assets/navigation/conversation-chevron.svg" alt="" />
               </button>
               <div class="conversation-head-actions">
-                <button type="button" aria-label="刷新对话" data-refresh-conversations><span class="sprite-icon sprite-refresh" aria-hidden="true"></span></button>
-                <button type="button" aria-label="搜索对话" data-search-conversations><span class="sprite-icon sprite-search" aria-hidden="true"></span></button>
-                <button type="button" aria-label="批量管理" data-multi-select><span class="sprite-icon sprite-list" aria-hidden="true"></span></button>
+                <button type="button" aria-label="刷新对话" data-refresh-conversations><img src="assets/navigation/conversation-refresh.svg" alt="" /></button>
+                <button type="button" aria-label="搜索对话" data-search-conversations><img src="assets/navigation/conversation-search.svg" alt="" /></button>
+                <button type="button" aria-label="批量管理" data-multi-select><img src="assets/navigation/conversation-multiselect.svg" alt="" /></button>
               </div>
             </div>
             <div class="conversation-content" data-conversation-content>
@@ -83,7 +99,15 @@
                   <button type="button" role="tab" aria-selected="false" data-conversation-tab="source">按来源</button>
                   <button type="button" role="tab" aria-selected="false" data-conversation-tab="favorite">收藏</button>
                 </div>
-                <button class="filter-button" type="button" aria-label="筛选对话" aria-expanded="false" data-filter-button><img src="assets/navigation/image_11.png" alt="" /></button>
+                <button class="filter-button" type="button" aria-label="筛选对话" aria-expanded="false" data-filter-button><img src="assets/navigation/conversation-filter.svg" alt="" /></button>
+              </div>
+              <div class="conversation-search" hidden data-conversation-search>
+                <label>
+                  <img src="assets/navigation/search-icon.svg" alt="" />
+                  <input type="text" placeholder="搜索任务标题关键词" aria-label="搜索任务标题关键词" data-conversation-search-input />
+                  <button class="conversation-search-clear" type="button" aria-label="清空搜索" hidden data-conversation-search-clear><img src="assets/navigation/search-clear.svg" alt="" /></button>
+                </label>
+                <button type="button" data-conversation-search-cancel>取消</button>
               </div>
               <div class="conversation-list" data-conversation-list></div>
             </div>
@@ -92,11 +116,10 @@
 
         <div class="sidebar-bottom">
           <button class="profile" type="button" data-profile>
-            <img class="avatar" src="assets/navigation/image_90.png" alt="" />
+            <img class="avatar" src="assets/navigation/profile-avatar.png" alt="" />
             <span class="profile-copy"><strong>郭昱成</strong></span>
-            <span class="profile-more"><img src="assets/navigation/image_97.png" alt="" /></span>
+            <span class="profile-more"><img src="assets/navigation/profile-chevron.svg" alt="" /></span>
           </button>
-          <button class="collapse-button" type="button" aria-label="收起侧栏" data-sidebar-toggle><img src="assets/navigation/image_20.png" alt="" /></button>
         </div>
       </aside>
 

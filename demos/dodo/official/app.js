@@ -32,17 +32,20 @@ let skills = [
 ];
 
 let conversations = [
-  { id: 1, title: "设计评审报告优化", source: "专属工区", favorite: true, pinned: true },
-  { id: 2, title: "Dodo 导航区状态梳理", source: "专属工区", favorite: false, pinned: false },
-  { id: 3, title: "CNAP 用户调研结论", source: "网页端", favorite: true, pinned: false },
-  { id: 4, title: "作品集首页动效调整", source: "网页端", favorite: false, pinned: false },
-  { id: 5, title: "访谈记录总结", source: "飞书", favorite: false, pinned: false },
-  { id: 6, title: "竞品分析资料整理", source: "飞书", favorite: false, pinned: false }
+  { id: 1, title: "dodo，我是不会使用 AI 产品的小白用户，请介绍你拥有什么功能", source: "客户端", icon: "source-web.svg", favorite: false, pinned: true },
+  { id: 2, title: "如流单聊·wangxinyang", source: "客户端", icon: "source-web.svg", favorite: false, pinned: false },
+  { id: 3, title: "AI 行业资讯日报", source: "自动化任务", icon: "source-alarm.svg", favorite: false, pinned: false },
+  { id: 4, title: "设计系统规范转 Figma 结构化 Markdown", source: "客户端", icon: "source-book.svg", favorite: true, pinned: false },
+  { id: 5, title: "Web 端设计系统规范文档", source: "如流端", icon: "source-book.svg", favorite: false, pinned: false },
+  { id: 6, title: "次级模型无限额自动切换方案", source: "网页端", icon: "source-sphere.svg", favorite: false, pinned: false }
 ];
 
 const sourceIcons = {
+  "客户端": "assets/navigation/source-web.svg",
+  "如流端": "assets/navigation/source-book.svg",
+  "自动化任务": "assets/navigation/source-alarm.svg",
   "专属工区": "assets/navigation/image_23.png",
-  "网页端": "assets/navigation/image_22.png",
+  "网页端": "assets/navigation/source-sphere.svg",
   "飞书": "assets/navigation/image_3.png"
 };
 
@@ -69,12 +72,16 @@ const sidebar = document.querySelector("#sidebar");
 const backdrop = document.querySelector("[data-sidebar-backdrop]");
 const toast = document.querySelector("[data-toast]");
 const conversationList = document.querySelector("[data-conversation-list]");
+const conversationSearch = document.querySelector("[data-conversation-search]");
+const conversationSearchInput = document.querySelector("[data-conversation-search-input]");
+const conversationSearchClear = document.querySelector("[data-conversation-search-clear]");
 const floatingMenu = document.querySelector("[data-floating-menu]");
 const workspaceModal = document.querySelector("[data-workspace-modal]");
 const workspaceForm = document.querySelector("[data-workspace-form]");
 let gearSetIndex = 0;
 let conversationTab = "all";
 let conversationFilter = "all";
+let conversationQuery = "";
 let multiSelectMode = false;
 let selectedConversations = new Set();
 let activeSkillCategory = "personal";
@@ -103,6 +110,7 @@ function getVisibleConversations() {
   if (conversationTab === "favorite") items = items.filter((item) => item.favorite);
   if (conversationFilter === "pinned") items = items.filter((item) => item.pinned);
   if (conversationFilter === "recent") items = items.slice(0, 3);
+  if (conversationQuery) items = items.filter((item) => item.title.toLowerCase().includes(conversationQuery.toLowerCase()));
   return items;
 }
 
@@ -111,8 +119,9 @@ function conversationRow(item) {
     <div class="conversation-row" data-conversation-id="${item.id}">
       <button class="conversation-item" type="button" data-conversation="${escapeHTML(item.title)}">
         ${multiSelectMode ? `<span class="conversation-check ${selectedConversations.has(item.id) ? "is-checked" : ""}" aria-hidden="true"><img src="assets/navigation/${selectedConversations.has(item.id) ? "image_38.png" : "image_36.png"}" alt="" /></span>` : ""}
-        ${item.favorite ? '<span class="favorite-mark" aria-label="已收藏"><img src="assets/navigation/image_18.png" alt="" /></span>' : ""}
+        <img class="conversation-source-icon" src="assets/navigation/${item.icon || "source-web.svg"}" alt="" />
         <span>${escapeHTML(item.title)}</span>
+        ${item.favorite ? '<span class="favorite-mark" aria-label="已收藏"><img src="assets/navigation/conversation-favorite.svg" alt="" /></span>' : ""}
       </button>
       <button class="row-more" type="button" aria-label="${escapeHTML(item.title)}更多操作" data-row-menu="conversation"><img src="assets/navigation/image_43.png" alt="" /></button>
     </div>`;
@@ -520,7 +529,7 @@ workspaceForm.addEventListener("submit", (event) => {
   row.dataset.workspaceRow = "";
   row.innerHTML = `
     <button class="workspace-item" type="button" data-workspace="${escapeHTML(name)}">
-      <img src="assets/navigation/image_22.png" alt="" /><span>${escapeHTML(name)}</span>
+      <img src="assets/navigation/workspace-competitor.svg" alt="" /><span>${escapeHTML(name)}</span>
     </button>
     <button class="row-more" type="button" aria-label="${escapeHTML(name)}更多操作" data-row-menu="workspace"><img src="assets/navigation/image_43.png" alt="" /></button>`;
   document.querySelector("[data-group-content]").append(row);
@@ -563,10 +572,32 @@ document.querySelector("[data-refresh-conversations]").addEventListener("click",
 });
 
 document.querySelector("[data-search-conversations]").addEventListener("click", () => {
-  const query = window.prompt("搜索对话");
-  if (query === null) return;
-  const match = conversations.find((item) => item.title.includes(query.trim()));
-  showToast(match ? `找到：${match.title}` : "未找到相关对话");
+  sidebar.classList.add("is-searching");
+  conversationSearch.hidden = false;
+  conversationSearchInput.focus();
+});
+
+conversationSearchInput.addEventListener("input", () => {
+  conversationQuery = conversationSearchInput.value.trim();
+  conversationSearchClear.hidden = !conversationSearchInput.value;
+  renderConversations();
+});
+
+conversationSearchClear.addEventListener("click", () => {
+  conversationSearchInput.value = "";
+  conversationQuery = "";
+  conversationSearchClear.hidden = true;
+  conversationSearchInput.focus();
+  renderConversations();
+});
+
+document.querySelector("[data-conversation-search-cancel]").addEventListener("click", () => {
+  conversationQuery = "";
+  conversationSearchInput.value = "";
+  conversationSearchClear.hidden = true;
+  conversationSearch.hidden = true;
+  sidebar.classList.remove("is-searching");
+  renderConversations();
 });
 
 document.querySelector("[data-multi-select]").addEventListener("click", () => {
