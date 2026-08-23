@@ -46,6 +46,7 @@ let recycleBin = [];
 let artifactFavoriteOnly = false;
 let artifactLayout = "grid";
 let pendingArtifactDeleteId = null;
+let activeArtifactMenuId = null;
 
 const recommendedSkillPages = [
   [
@@ -269,10 +270,10 @@ function renderArtifacts() {
   document.querySelector("[data-artifact-total]").textContent = `共 ${items.length} 个产物`;
   artifactGrid.classList.toggle("is-list", artifactLayout === "list");
   artifactGrid.innerHTML = items.length ? items.map((item) => `
-    <article class="artifact-card" data-artifact-id="${item.id}">
-      <header><div><h2>${escapeHTML(item.name)}</h2><p>${item.type} · ${item.date}</p></div><div class="artifact-card-actions"><button type="button" data-artifact-fav aria-label="收藏">${item.favorite ? "★" : "☆"}</button><button type="button" data-artifact-delete aria-label="删除">⋮</button></div></header>
+    <article class="artifact-card ${item.favorite ? "is-favorite" : ""}" data-artifact-id="${item.id}">
+      <header><div><h2>${escapeHTML(item.name)}</h2><p>${item.type} · ${item.date}</p></div><div class="artifact-card-actions"><button type="button" data-artifact-chat aria-label="发起对话" title="对话">◇</button><button type="button" data-artifact-download aria-label="下载" title="下载">↓</button><button type="button" data-artifact-fav aria-label="收藏" title="收藏">${item.favorite ? "★" : "☆"}</button><button type="button" data-artifact-more aria-label="更多操作" title="更多">⋮</button></div></header>
       ${artifactPreview(item.preview)}
-      <button class="artifact-delete-option" type="button" data-artifact-delete>删除</button>
+      <div class="artifact-card-menu ${activeArtifactMenuId === item.id ? "is-open" : ""}"><button type="button" data-artifact-delete><span>♲</span>删除</button></div>
     </article>`).join("") : '<div class="artifact-empty">没有符合条件的产物</div>';
 }
 
@@ -579,8 +580,16 @@ artifactGrid.addEventListener("click", (event) => {
   if (!card) return;
   const item = artifacts.find((artifact) => artifact.id === Number(card.dataset.artifactId));
   if (!item) return;
+  if (event.target.closest("[data-artifact-chat]")) { showToast(`已基于「${item.name}」发起对话`); return; }
+  if (event.target.closest("[data-artifact-download]")) { showToast(`正在下载「${item.name}」`); return; }
   if (event.target.closest("[data-artifact-fav]")) { item.favorite = !item.favorite; renderArtifacts(); return; }
-  if (event.target.closest("[data-artifact-delete]")) { pendingArtifactDeleteId = item.id; artifactDeleteModal.hidden = false; }
+  if (event.target.closest("[data-artifact-more]")) { activeArtifactMenuId = activeArtifactMenuId === item.id ? null : item.id; renderArtifacts(); return; }
+  if (event.target.closest("[data-artifact-delete]")) { activeArtifactMenuId = null; pendingArtifactDeleteId = item.id; artifactDeleteModal.hidden = false; }
+});
+document.addEventListener("click", (event) => {
+  if (!activeArtifactMenuId || event.target.closest("[data-artifact-more]") || event.target.closest(".artifact-card-menu")) return;
+  activeArtifactMenuId = null;
+  renderArtifacts();
 });
 document.querySelectorAll("[data-close-artifact-modal]").forEach((button) => button.addEventListener("click", () => { artifactDeleteModal.hidden = true; pendingArtifactDeleteId = null; }));
 document.querySelector("[data-confirm-artifact-delete]").addEventListener("click", () => {
