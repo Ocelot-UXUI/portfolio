@@ -33,18 +33,20 @@ let skills = [
 ];
 
 let artifacts = [
-  { id: 1, name: "设计系统规范转 Figma 结构.md", type: "markdown", date: "今天 14:20", favorite: true, preview: "markdown" },
-  { id: 2, name: "Q3 用户访谈洞察.xlsx", type: "表格", date: "今天 11:42", favorite: false, preview: "sheet" },
-  { id: 3, name: "dodo 品牌配图方案.png", type: "图片", date: "昨天 18:08", favorite: false, preview: "image" },
-  { id: 4, name: "技能中心体验评审.pptx", type: "演示文稿", date: "昨天 15:30", favorite: false, preview: "slides" },
-  { id: 5, name: "自动化任务配置.ts", type: "代码", date: "08-20", favorite: false, preview: "code" },
-  { id: 6, name: "竞品研究总结.docx", type: "文档", date: "08-19", favorite: true, preview: "document" },
-  { id: 7, name: "产品演示录屏.mp4", type: "视频", date: "08-18", favorite: false, preview: "image" },
-  { id: 8, name: "需求评审会议纪要.md", type: "markdown", date: "08-17", favorite: false, preview: "markdown" }
+  { id: 1, name: "snake.html", type: "HTML", size: "12.96 KB", date: "2025-12-25 00:23", favorite: false, asset: "code-preview.png" },
+  { id: 2, name: "dodo骑马.png", type: "图片", size: "12.96 KB", date: "2025-12-25 00:23", favorite: false, asset: "horse-preview-2.png" },
+  { id: 3, name: "53ae4364_产品设计技术文档_V1.0.pdf", type: "PDF", size: "12.96 KB", date: "2025-12-25 00:23", favorite: false, asset: "document-preview-2.png" },
+  { id: 4, name: "53ae4364_产品设计技术文档_V1.0.pdf", type: "PDF", size: "12.96 KB", date: "2025-12-25 00:23", favorite: false, asset: "document-preview.png" },
+  { id: 5, name: "snake.html", type: "HTML", size: "12.96 KB", date: "2025-12-25 00:23", favorite: false, asset: "code-preview.png" },
+  { id: 6, name: "dodo骑马.png", type: "图片", size: "12.96 KB", date: "2025-12-25 00:23", favorite: true, asset: "character-preview.png" },
+  { id: 7, name: "产品设计技术文档_V1.0.pdf", type: "PDF", size: "12.96 KB", date: "2025-12-25 00:23", favorite: false, asset: "document-preview-2.png" },
+  { id: 8, name: "dodo骑马.png", type: "图片", size: "12.96 KB", date: "2025-12-25 00:23", favorite: false, asset: "horse-preview-2.png" }
 ];
 let recycleBin = [];
+let artifactTotalCount = 82;
 let artifactFavoriteOnly = false;
 let artifactLayout = "grid";
+let artifactQuery = "";
 let pendingArtifactDeleteId = null;
 let activeArtifactMenuId = null;
 
@@ -256,23 +258,19 @@ function renderSkills() {
     : '<div class="skills-empty"><img src="assets/skills/image_35.png" alt="" /><strong>没有找到相关技能</strong><span>试试其他关键词或切换分类</span></div>';
 }
 
-function artifactPreview(type) {
-  if (type === "sheet") return '<div class="artifact-preview artifact-preview--sheet"><b>渠道</b><b>访问量</b><b>转化</b><span>搜索</span><span>32,840</span><span>6.2%</span><span>推荐</span><span>18,292</span><span>5.6%</span></div>';
-  if (type === "code") return '<div class="artifact-preview artifact-preview--code"><span>01&nbsp; export const task = () =&gt; {</span><span>02&nbsp;&nbsp; return dodo.create()</span><span>03&nbsp; }</span></div>';
-  if (type === "slides") return '<div class="artifact-preview artifact-preview--slides"><b></b><i></i><i></i><i></i></div>';
-  if (type === "markdown") return '<div class="artifact-preview artifact-preview--markdown"><b># 项目复盘</b><i></i><i></i><i></i><i></i></div>';
-  if (type === "image") return '<div class="artifact-preview artifact-preview--image"><i></i><b></b></div>';
-  return '<div class="artifact-preview artifact-preview--document"><b></b><i></i><i></i><i></i></div>';
+function artifactPreview(item) {
+  return `<div class="artifact-preview ${item.type === "HTML" ? "is-cover" : "is-contain"}"><img src="assets/artifacts/${item.asset}" alt="${escapeHTML(item.name)}预览" /></div>`;
 }
 
 function renderArtifacts() {
-  const items = artifacts.filter((item) => !artifactFavoriteOnly || item.favorite);
-  document.querySelector("[data-artifact-total]").textContent = `共 ${items.length} 个产物`;
+  const items = artifacts.filter((item) => (!artifactFavoriteOnly || item.favorite) && (!artifactQuery || item.name.toLowerCase().includes(artifactQuery)));
+  document.querySelector("[data-artifact-total]").textContent = `共 ${artifactFavoriteOnly || artifactQuery ? items.length : artifactTotalCount} 个产物`;
   artifactGrid.classList.toggle("is-list", artifactLayout === "list");
   artifactGrid.innerHTML = items.length ? items.map((item) => `
     <article class="artifact-card ${item.favorite ? "is-favorite" : ""}" data-artifact-id="${item.id}">
-      <header><div><h2>${escapeHTML(item.name)}</h2><p>${item.type} · ${item.date}</p></div><div class="artifact-card-actions"><button type="button" data-artifact-chat aria-label="发起对话" title="对话">◇</button><button type="button" data-artifact-download aria-label="下载" title="下载">↓</button><button type="button" data-artifact-fav aria-label="收藏" title="收藏">${item.favorite ? "★" : "☆"}</button><button type="button" data-artifact-more aria-label="更多操作" title="更多">⋮</button></div></header>
-      ${artifactPreview(item.preview)}
+      <div class="artifact-card-actions"><button type="button" data-artifact-chat aria-label="前往对话" title="前往对话"><span class="artifact-chat-icon"><img src="assets/artifacts/action-chat-a.svg" alt="" /><img src="assets/artifacts/action-chat-b.svg" alt="" /></span></button><button type="button" data-artifact-download aria-label="下载" title="下载"><img src="assets/artifacts/action-download.svg" alt="" /></button><button type="button" data-artifact-fav aria-label="收藏" title="收藏"><img src="assets/artifacts/action-favorite.svg" alt="" /></button><button type="button" data-artifact-more aria-label="更多操作" title="更多">⋮</button></div>
+      ${artifactPreview(item)}
+      <footer><h2>${escapeHTML(item.name)}</h2><div><span>${item.size}</span><time>${item.date}</time></div></footer>
       <div class="artifact-card-menu ${activeArtifactMenuId === item.id ? "is-open" : ""}"><button type="button" data-artifact-delete><span>♲</span>删除</button></div>
     </article>`).join("") : '<div class="artifact-empty">没有符合条件的产物</div>';
 }
@@ -571,9 +569,18 @@ document.querySelector("[data-artifact-favorite]").addEventListener("click", (ev
   event.currentTarget.textContent = artifactFavoriteOnly ? "★ 仅看收藏" : "☆ 仅看收藏";
   renderArtifacts();
 });
+document.querySelector("[data-artifact-search]").addEventListener("input", (event) => {
+  artifactQuery = event.target.value.trim().toLowerCase();
+  renderArtifacts();
+});
 document.querySelectorAll("[data-artifact-layout]").forEach((button) => button.addEventListener("click", () => {
   artifactLayout = button.dataset.artifactLayout;
+  document.querySelectorAll("[data-artifact-layout]").forEach((item) => item.classList.toggle("is-active", item === button));
   renderArtifacts();
+}));
+document.querySelectorAll("[data-artifact-source]").forEach((button) => button.addEventListener("click", () => {
+  document.querySelectorAll("[data-artifact-source]").forEach((item) => item.classList.toggle("is-active", item === button));
+  document.querySelector("[data-artifact-total]").textContent = button.dataset.artifactSource === "upload" ? "共 42 个上传附件" : `共 ${artifactTotalCount} 个产物`;
 }));
 artifactGrid.addEventListener("click", (event) => {
   const card = event.target.closest("[data-artifact-id]");
@@ -597,6 +604,7 @@ document.querySelector("[data-confirm-artifact-delete]").addEventListener("click
   if (!item) return;
   recycleBin.unshift({ ...item, deletedAt: Date.now() });
   artifacts = artifacts.filter((artifact) => artifact.id !== item.id);
+  artifactTotalCount -= 1;
   pendingArtifactDeleteId = null;
   artifactDeleteModal.hidden = true;
   updateRecycleCount();
@@ -612,7 +620,7 @@ document.querySelector("[data-recycle-list]").addEventListener("click", (event) 
   const id = Number(row.dataset.recycleId);
   const item = recycleBin.find((artifact) => artifact.id === id);
   if (!item) return;
-  if (event.target.closest("[data-artifact-restore]")) { artifacts.unshift(item); recycleBin = recycleBin.filter((artifact) => artifact.id !== id); updateRecycleCount(); renderRecycleBin(); renderArtifacts(); showToast("文件已恢复"); }
+  if (event.target.closest("[data-artifact-restore]")) { artifacts.unshift(item); artifactTotalCount += 1; recycleBin = recycleBin.filter((artifact) => artifact.id !== id); updateRecycleCount(); renderRecycleBin(); renderArtifacts(); showToast("文件已恢复"); }
   if (event.target.closest("[data-artifact-purge]")) { recycleBin = recycleBin.filter((artifact) => artifact.id !== id); updateRecycleCount(); renderRecycleBin(); showToast("文件已彻底删除"); }
 });
 
