@@ -104,6 +104,7 @@ const gearGrid = document.querySelector("[data-gear-grid]");
 const modelButton = document.querySelector("[data-model-button]");
 const modelMenu = document.querySelector("[data-model-menu]");
 const sidebar = document.querySelector("#sidebar");
+const sidebarScroll = document.querySelector(".sidebar-scroll");
 const backdrop = document.querySelector("[data-sidebar-backdrop]");
 const toast = document.querySelector("[data-toast]");
 const conversationList = document.querySelector("[data-conversation-list]");
@@ -268,10 +269,10 @@ function renderArtifacts() {
   artifactGrid.classList.toggle("is-list", artifactLayout === "list");
   artifactGrid.innerHTML = items.length ? items.map((item) => `
     <article class="artifact-card ${item.favorite ? "is-favorite" : ""}" data-artifact-id="${item.id}">
-      <div class="artifact-card-actions"><button type="button" data-artifact-chat aria-label="前往对话" title="前往对话"><span class="artifact-chat-icon"><img src="assets/artifacts/action-chat-a.svg" alt="" /><img src="assets/artifacts/action-chat-b.svg" alt="" /></span></button><button type="button" data-artifact-download aria-label="下载" title="下载"><img src="assets/artifacts/action-download.svg" alt="" /></button><button type="button" data-artifact-fav aria-label="收藏" title="收藏"><img src="assets/artifacts/action-favorite.svg" alt="" /></button><button type="button" data-artifact-more aria-label="更多操作" title="更多"><img src="assets/artifacts/action-more.svg" alt="" /></button></div>
+      <div class="artifact-card-actions"><button type="button" data-artifact-chat aria-label="前往对话" title="前往对话"><img src="assets/artifacts/action-chat.svg" alt="" /></button><button type="button" data-artifact-download aria-label="下载" title="下载"><img src="assets/artifacts/action-download.svg" alt="" /></button><button type="button" data-artifact-fav aria-label="${item.favorite ? "取消收藏" : "收藏"}" title="${item.favorite ? "取消收藏" : "收藏"}"><img src="assets/artifacts/${item.favorite ? "action-favorite.svg" : "action-favorite-off.svg"}" alt="" /></button><button type="button" data-artifact-more aria-label="更多操作" title="更多"><img src="assets/artifacts/action-more.svg" alt="" /></button></div>
       ${artifactPreview(item)}
       <footer><h2>${escapeHTML(item.name)}</h2><div><span>${item.size}</span><time>${item.date}</time></div></footer>
-      <div class="artifact-card-menu ${activeArtifactMenuId === item.id ? "is-open" : ""}"><button type="button" data-artifact-delete><span>♲</span>删除</button></div>
+      <div class="artifact-card-menu ${activeArtifactMenuId === item.id ? "is-open" : ""}"><button type="button" data-artifact-delete><img class="artifact-delete-icon" src="assets/artifacts/delete-outline.svg" alt="" /><span>删除</span></button></div>
     </article>`).join("") : '<div class="artifact-empty">没有符合条件的产物</div>';
 }
 
@@ -711,6 +712,13 @@ document.querySelector("[data-new-chat]").addEventListener("click", () => {
   sendButton.disabled = true;
   prompt.focus();
 });
+
+function updateSidebarScrollState() {
+  sidebar.classList.toggle("is-scrolled", sidebarScroll.scrollTop > 0);
+}
+
+sidebarScroll.addEventListener("scroll", updateSidebarScrollState, { passive: true });
+updateSidebarScrollState();
 
 document.querySelector("[data-add-workspace]").addEventListener("click", () => {
   workspaceModal.hidden = false;
