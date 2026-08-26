@@ -36,9 +36,9 @@ let artifacts = [
   { id: 1, name: "snake.html", type: "HTML", size: "12.96 KB", date: "2025-12-25 00:23", favorite: false, asset: "code-preview.png" },
   { id: 2, name: "dodo骑马.png", type: "图片", size: "12.96 KB", date: "2025-12-25 00:23", favorite: false, asset: "horse-preview-2.png" },
   { id: 3, name: "53ae4364_产品设计技术文档_V1.0.pdf", type: "PDF", size: "12.96 KB", date: "2025-12-25 00:23", favorite: false, asset: "document-preview-2.png" },
-  { id: 4, name: "53ae4364_产品设计技术文档_V1.0.pdf", type: "PDF", size: "12.96 KB", date: "2025-12-25 00:23", favorite: false, asset: "document-preview.png" },
+  { id: 4, name: "53ae4364_产品设计技术文档_V1.0.pdf", type: "PDF", size: "12.96 KB", date: "2025-12-25 00:23", favorite: false, asset: "document-preview-2.png" },
   { id: 5, name: "snake.html", type: "HTML", size: "12.96 KB", date: "2025-12-25 00:23", favorite: false, asset: "code-preview.png" },
-  { id: 6, name: "dodo骑马.png", type: "图片", size: "12.96 KB", date: "2025-12-25 00:23", favorite: true, asset: "character-preview.png" },
+  { id: 6, name: "dodo骑马.png", type: "图片", size: "12.96 KB", date: "2025-12-25 00:23", favorite: false, asset: "character-preview.png" },
   { id: 7, name: "产品设计技术文档_V1.0.pdf", type: "PDF", size: "12.96 KB", date: "2025-12-25 00:23", favorite: false, asset: "document-preview-2.png" },
   { id: 8, name: "dodo骑马.png", type: "图片", size: "12.96 KB", date: "2025-12-25 00:23", favorite: false, asset: "horse-preview-2.png" }
 ];
@@ -107,6 +107,8 @@ const sidebar = document.querySelector("#sidebar");
 const sidebarScroll = document.querySelector(".sidebar-scroll");
 const backdrop = document.querySelector("[data-sidebar-backdrop]");
 const toast = document.querySelector("[data-toast]");
+const toastIcon = document.querySelector("[data-toast-icon]");
+const toastMessage = document.querySelector("[data-toast-message]");
 const conversationList = document.querySelector("[data-conversation-list]");
 const conversationSearch = document.querySelector("[data-conversation-search]");
 const conversationSearchInput = document.querySelector("[data-conversation-search-input]");
@@ -130,8 +132,11 @@ let selectedSkillFile = null;
 let activeMenuTarget = null;
 let toastTimer;
 
-function showToast(message) {
-  toast.textContent = message;
+function showToast(message, type = "success") {
+  const normalizedType = ["success", "error", "warning"].includes(type) ? type : "success";
+  toast.dataset.type = normalizedType;
+  toastIcon.src = `assets/toast-${normalizedType}.svg`;
+  toastMessage.textContent = message;
   toast.classList.add("is-visible");
   window.clearTimeout(toastTimer);
   toastTimer = window.setTimeout(() => toast.classList.remove("is-visible"), 1900);
@@ -280,11 +285,22 @@ function updateRecycleCount() {
   document.querySelector("[data-recycle-count]").textContent = `(${recycleBin.length})`;
 }
 
+function artifactTypeIcon(item) {
+  const filename = item.name.toLowerCase();
+  if (/\.(png|jpe?g|gif|webp|svg)$/.test(filename)) return "image.svg";
+  if (/\.md$/.test(filename)) return "markdown.svg";
+  if (/\.(ppt|pptx)$/.test(filename)) return "presentation.svg";
+  if (/\.(xls|xlsx|csv)$/.test(filename)) return "spreadsheet.svg";
+  if (/\.(mp3|wav|m4a|mp4|mov)$/.test(filename)) return "audio.svg";
+  if (/\.(zip|rar|7z)$/.test(filename)) return "archive.svg";
+  return "generic.svg";
+}
+
 function renderRecycleBin() {
   const query = document.querySelector("[data-recycle-search]").value.trim().toLowerCase();
   const items = recycleBin.filter((item) => item.name.toLowerCase().includes(query));
   document.querySelector("[data-recycle-list]").innerHTML = items.length ? items.map((item) => `
-    <article class="recycle-item" data-recycle-id="${item.id}"><span class="recycle-file-icon">▧</span><div><strong>${escapeHTML(item.name)}</strong><small>剩余 30 天</small></div><div class="recycle-item-actions"><button type="button" data-artifact-restore>恢复</button><button type="button" data-artifact-purge>彻底删除</button></div></article>`).join("") : '<div class="recycle-empty">手动删除的文件会出现在这里，可恢复或彻底删除</div>';
+    <article class="recycle-item" data-recycle-id="${item.id}"><span class="recycle-file-icon"><img src="assets/artifacts/types/${artifactTypeIcon(item)}" alt="" /></span><div><strong>${escapeHTML(item.name)}</strong></div><small class="recycle-retention">剩余 30 天</small><div class="recycle-item-actions"><button type="button" data-artifact-restore aria-label="恢复"><img src="assets/artifacts/recycle-restore.svg" alt="" /><span class="recycle-icon-tooltip" role="tooltip"><span>恢复</span><img src="assets/artifacts/tooltip-arrow.svg" alt="" /></span></button><button type="button" data-artifact-purge aria-label="彻底删除"><img src="assets/artifacts/recycle-delete.svg" alt="" /><span class="recycle-icon-tooltip" role="tooltip"><span>彻底删除</span><img src="assets/artifacts/tooltip-arrow.svg" alt="" /></span></button></div></article>`).join("") : '<div class="recycle-empty"><img src="assets/artifacts/recycle-empty.png" alt="" /><p>暂无数据</p></div>';
 }
 
 function openSkillDetail(item) {
@@ -333,7 +349,7 @@ function selectSkillFile(file) {
   if (!file) return;
   const extension = file.name.split(".").pop()?.toLowerCase();
   if (!['zip', 'skill'].includes(extension)) {
-    showToast("仅支持 .zip 或 .skill 格式");
+    showToast("仅支持 .zip 或 .skill 格式", "error");
     return;
   }
   selectedSkillFile = file;
@@ -522,7 +538,7 @@ document.querySelector("[data-install-recommended-skill]").addEventListener("cli
   if (!activeRecommendedSkill) return;
   const skillName = activeRecommendedSkill.name;
   if (skills.some((skill) => skill.name === activeRecommendedSkill.name)) {
-    showToast("这个技能已经安装了");
+    showToast("这个技能已经安装了", "warning");
     return;
   }
   skills.unshift({ id: Date.now(), category: "personal", name: activeRecommendedSkill.name, description: activeRecommendedSkill.description, icon: "image_38.png", enabled: true, editable: true });

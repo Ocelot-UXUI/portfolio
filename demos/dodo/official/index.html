@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Dodo 主动式 AI 工作台正式版交互 Demo" />
     <title>Dodo 正式版 Demo</title>
-    <link rel="stylesheet" href="styles.css?v=20260824-navigation-states-5" />
+    <link rel="stylesheet" href="styles.css?v=20260825-global-message-2" />
   </head>
   <body>
     <div class="app-shell">
@@ -213,7 +213,7 @@
           <header class="artifacts-header">
             <div><h1>产物</h1><p>dodo 造物，遇见更好的日常</p></div>
             <div class="artifact-header-tools">
-              <label class="artifact-search"><span>⌕</span><input type="search" placeholder="搜索对话/产物名称" data-artifact-search /></label>
+              <label class="artifact-search"><img src="assets/artifacts/search-field.svg" alt="" aria-hidden="true" /><input type="search" placeholder="搜索对话/产物名称" data-artifact-search /></label>
               <div class="artifact-view-toggle"><button type="button" data-artifact-layout="list" aria-label="列表模式"><img src="assets/artifacts/view-list.svg" alt="" /></button><button class="is-active" type="button" data-artifact-layout="grid" aria-label="卡片模式"><img src="assets/artifacts/view-grid.svg" alt="" /></button></div>
             </div>
           </header>
@@ -295,13 +295,16 @@
     <div class="artifact-modal" hidden data-recycle-modal>
       <button class="artifact-modal-backdrop" type="button" aria-label="关闭回收站" data-close-recycle></button>
       <section class="recycle-dialog" aria-label="回收站">
-        <header><h2>回收站</h2><label><span>⌕</span><input type="search" placeholder="搜索文件名称" data-recycle-search /></label><button type="button" aria-label="关闭" data-close-recycle>×</button></header>
+        <header><h2>回收站</h2><label><img src="assets/artifacts/search-field.svg" alt="" aria-hidden="true" /><input type="search" placeholder="搜索文件名称" data-recycle-search /></label><button type="button" aria-label="关闭" data-close-recycle>×</button></header>
         <div class="recycle-list" data-recycle-list></div>
       </section>
     </div>
 
     <div class="floating-menu" hidden data-floating-menu></div>
-    <div class="toast" role="status" aria-live="polite" data-toast></div>
-    <script src="app.js"></script>
+    <div class="toast" role="status" aria-live="polite" data-toast data-type="success">
+      <img src="assets/toast-success.svg" alt="" data-toast-icon />
+      <span data-toast-message></span>
+    </div>
+    <script src="app.js?v=20260825-global-message-2"></script>
   </body>
 </html>
