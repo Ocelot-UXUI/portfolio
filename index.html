@@ -817,7 +817,9 @@
         }
 
         .prototype-homepage .cnap-signature,
-        .prototype-homepage .remi-signature {
+        .prototype-homepage .remi-signature,
+        .prototype-homepage .reading-signature,
+        .prototype-homepage .xhs-signature {
           display: none;
         }
 
@@ -2318,6 +2320,28 @@
         pointer-events: none;
       }
 
+      .prototype-homepage .reading-signature {
+        position: absolute;
+        z-index: -1;
+        right: -30px;
+        bottom: -92px;
+        width: min(68%, 440px);
+        height: auto;
+        opacity: .3;
+        pointer-events: none;
+      }
+
+      .prototype-homepage .xhs-signature {
+        position: absolute;
+        z-index: -1;
+        right: -28px;
+        bottom: -88px;
+        width: min(70%, 450px);
+        height: auto;
+        opacity: .3;
+        pointer-events: none;
+      }
+
       /* Shift the desktop toward the larger left card when active, preserving
          its full canvas while keeping the two phone projects exposed. */
       .prototype-homepage .hero-stack-cnap:hover,
@@ -2572,6 +2596,7 @@
               <h3>碎片时间下的快速阅读APP</h3>
               <p>提升用户的平均阅读时间与留存</p>
               <ul><li>C端</li><li>AI功能探索</li><li>竞品分析</li><li>0-1项目</li></ul>
+              <img class="reading-signature" src="assets/adaptive-reading-signature.png" alt="Adaptive Reading" aria-hidden="true" />
             </div>
             <div class="showcase-media"><img src="assets/figma-projects/image_4.png" alt="快速阅读 APP 手机界面" /></div>
           </a>
@@ -2580,6 +2605,7 @@
               <h3>小红书 本地生活体验升级</h3>
               <p>提升用户从种草到下单核销的转化效率</p>
               <ul><li>C端</li><li>交互流程优化</li><li>构建消费链路</li><li>页面重构</li></ul>
+              <img class="xhs-signature" src="assets/content-commerce-signature.png" alt="Content Commerce" aria-hidden="true" />
             </div>
             <div class="showcase-media"><img src="assets/figma-projects/image_5.png" alt="小红书本地生活双手机界面" /></div>
           </a>

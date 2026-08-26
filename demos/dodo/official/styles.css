@@ -171,3 +171,38 @@
 .sidebar-fixed-header .new-chat{background:transparent}
 .sidebar-fixed-header .new-chat:hover,.sidebar-fixed-header .new-chat:focus-visible{background:#e2f6d9}
 .sidebar-scroll{padding-top:6px}
+
+/* Figma 1:28880 — Message / global feedback, centered along the page top edge. */
+.toast{position:fixed;top:64px;right:auto;bottom:auto;left:50%;z-index:200;display:flex;width:max-content;max-width:calc(100vw - 32px);height:42px;padding:10px 16px;align-items:center;gap:8px;border-radius:12px;background:#fff;color:#181818;box-shadow:0 2px 6px rgba(0,0,0,.1);font-family:"PingFang SC","Microsoft YaHei",sans-serif;font-size:14px;font-weight:500;line-height:22px;white-space:nowrap;opacity:0;pointer-events:none;transform:translate(-50%,-8px);transition:opacity .2s ease,transform .2s ease}
+.toast img{display:block;width:16px;height:16px;flex:0 0 16px}
+.toast span{display:block;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.toast.is-visible{opacity:1;transform:translate(-50%,0)}
+@media(max-width:760px){.toast{top:16px;right:auto;bottom:auto;left:50%;max-width:calc(100vw - 32px)}}
+.artifact-search>img{display:block;width:16px;height:16px;flex:0 0 16px;object-fit:contain}
+.recycle-dialog header label>img{display:block;width:16px;height:16px;flex:0 0 16px;object-fit:contain}
+.recycle-dialog header>button{position:relative;font-size:0}
+.recycle-dialog header>button::before,.recycle-dialog header>button::after{position:absolute;top:50%;left:50%;display:block;width:18px;height:2px;border-radius:1px;background:#73797b;content:"";transform:translate(-50%,-50%) rotate(45deg)}
+.recycle-dialog header>button::after{transform:translate(-50%,-50%) rotate(-45deg)}
+.artifact-card>footer h2{line-height:18px}
+.artifact-card>footer>div{margin-top:6px}
+.recycle-item{height:64px;padding:0 16px;gap:12px;border-radius:12px}
+.recycle-item:hover{background:#f2f2f2}
+.recycle-file-icon{display:block;width:32px;height:32px;flex:0 0 32px;background:transparent}
+.recycle-file-icon img{display:block;width:100%;height:100%;object-fit:contain}
+.recycle-item>div:not(.recycle-item-actions){gap:0}
+.recycle-item strong{color:#212121;font-size:16px;font-weight:400;line-height:24px}
+.recycle-retention{margin-left:auto;color:#999;font-size:14px;line-height:22px;white-space:nowrap}
+.recycle-item>.recycle-item-actions{display:flex!important;min-width:auto;flex:0 0 auto;flex-direction:row;gap:12px;margin-left:12px;align-items:center;opacity:0;pointer-events:none;transition:opacity .15s ease}
+.recycle-item:hover .recycle-item-actions{opacity:1;pointer-events:auto}
+.recycle-item-actions button{position:relative;display:grid;width:28px;height:28px;padding:0;place-items:center;border-radius:6px;background:transparent;color:#545454}
+.recycle-item-actions button:last-child{color:#545454}
+.recycle-item-actions button:hover{background:#e7e7e7}
+.recycle-item-actions button:first-child img{display:block;width:13px;height:12px}
+.recycle-item-actions button:last-child img{display:block;width:13px;height:14px}
+.recycle-icon-tooltip{position:absolute;bottom:calc(100% + 6px);left:50%;z-index:5;display:flex;align-items:center;flex-direction:column;visibility:hidden;opacity:0;pointer-events:none;transform:translate(-50%,4px);transition:opacity .15s ease,transform .15s ease,visibility .15s}
+.recycle-icon-tooltip>span{display:block;padding:5px 12px;border-radius:8px;background:#fff;color:#181818;box-shadow:0 2px 6px rgba(0,0,0,.1);font-family:"PingFang SC","Microsoft YaHei",sans-serif;font-size:14px;font-weight:400;line-height:22px;white-space:nowrap}
+.recycle-icon-tooltip>img{display:block!important;width:12px!important;height:6px!important}
+.recycle-item-actions button:hover .recycle-icon-tooltip,.recycle-item-actions button:focus-visible .recycle-icon-tooltip{visibility:visible;opacity:1;transform:translate(-50%,0)}
+.recycle-empty{display:flex;min-height:250px;padding:25px;align-items:center;justify-content:center;flex-direction:column;gap:4px;color:#bfbfbf;font-size:14px;line-height:22px;text-align:center}
+.recycle-empty img{display:block;width:80px;height:80px;object-fit:contain}
+.recycle-empty p{margin:0}
