@@ -3,91 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Dodo Skill 一期交互探索｜郭昱成作品集" />
-    <title>Dodo Skill 一期 | 郭昱成作品集</title>
-    <link rel="stylesheet" href="../styles/styles.css?v=20260727-1" />
+    <meta name="description" content="AI 设计工作流实践与复盘｜从用户反馈到需求上线｜郭昱成作品集" />
+    <title>AI 设计工作流实践与复盘 | 郭昱成作品集</title>
+    <link rel="stylesheet" href="../styles/styles.css?v=20260726-8" />
     <link rel="stylesheet" href="../styles/project-navigation.css?v=20260809-14" />
     <script src="../scripts/project-navigation.js?v=20260809-3" defer></script>
-    <style>
-      .dodo-page { min-height: 100vh; background: #080910; color: #fff; }
-      .dodo-hero { min-height: 54vh; padding: 10vw 10vw 7vw; display: flex; flex-direction: column; justify-content: flex-end; background: radial-gradient(circle at 76% 20%, rgba(74, 222, 128, .18), transparent 28%), linear-gradient(140deg, #05060b, #11191b 58%, #162b20); }
-      .dodo-eyebrow { margin: 0 0 18px; color: #9be98c; font-size: 12px; letter-spacing: 1.5px; }
-      .dodo-hero h1 { max-width: 920px; margin: 0; font-size: clamp(48px, 8vw, 116px); line-height: .96; letter-spacing: 0; font-weight: 650; }
-      .dodo-hero p { max-width: 650px; margin: 32px 0 0; color: #cbd5cf; font-size: 15px; line-height: 1.8; }
-      .dodo-meta { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 30px; }
-      .dodo-meta span { padding: 7px 11px; border: 1px solid rgba(155, 233, 140, .28); color: #cdeccd; font-size: 11px; letter-spacing: .5px; }
-      .dodo-story { max-width: 1280px; margin: 0 auto; padding: 76px 6vw 24px; }
-      .dodo-story-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 72px; }
-      .dodo-story-label { color: #9be98c; font-size: 11px; letter-spacing: 1.4px; }
-      .dodo-story h2 { margin: 16px 0 18px; font-size: clamp(30px, 4vw, 56px); line-height: 1.08; font-weight: 600; }
-      .dodo-story p { margin: 0; color: #aeb8b2; font-size: 14px; line-height: 1.9; }
-      .dodo-decision { display: grid; gap: 1px; background: rgba(255,255,255,.13); border: 1px solid rgba(255,255,255,.13); }
-      .dodo-decision article { padding: 24px; background: #0e1213; }
-      .dodo-decision strong { display: block; margin-bottom: 9px; color: #fff; font-size: 14px; }
-      .dodo-decision span { color: #9ca9a1; font-size: 13px; line-height: 1.7; }
-      .dodo-demos { max-width: 1280px; margin: 0 auto; padding: 52px 6vw 110px; }
-      .dodo-demos-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 24px; }
-      .dodo-demos-head h2 { margin: 0; font-size: 28px; font-weight: 600; }
-      .dodo-demos-head p { max-width: 450px; margin: 0; color: #8f9a93; font-size: 12px; line-height: 1.7; text-align: right; }
-      .dodo-demo-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
-      .dodo-demo-link { min-height: 250px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; border: 1px solid rgba(255,255,255,.14); background: #0d1111; color: #fff; text-decoration: none; transition: transform .22s ease, border-color .22s ease, background .22s ease; }
-      .dodo-demo-link--official { grid-column: 1 / -1; min-height: 290px; border-color: rgba(155,233,140,.42); background: linear-gradient(110deg, #101914 0%, #0d1111 66%); }
-      .dodo-demo-link--official h3 { font-size: 32px; }
-      .dodo-demo-link:hover { transform: translateY(-5px); border-color: rgba(155,233,140,.72); background: #111a15; }
-      .dodo-demo-link small { color: #9be98c; font-size: 11px; letter-spacing: 1.2px; }
-      .dodo-demo-link h3 { margin: 34px 0 10px; font-size: 24px; font-weight: 600; }
-      .dodo-demo-link p { max-width: 350px; margin: 0; color: #9ca9a1; font-size: 13px; line-height: 1.75; }
-      .dodo-demo-link strong { margin-top: 28px; color: #fff; font-size: 12px; font-weight: 500; }
-      .dodo-note { margin: 18px 0 0; color: #78857c; font-size: 11px; line-height: 1.7; }
-      @media (max-width: 760px) { .dodo-hero { min-height: 48vh; padding: 80px 8vw 54px; } .dodo-story { padding: 56px 6vw 20px; } .dodo-story-grid { grid-template-columns: 1fr; gap: 30px; } .dodo-demos { padding: 38px 6vw 70px; } .dodo-demos-head { display: block; } .dodo-demos-head p { margin-top: 12px; text-align: left; } .dodo-demo-links { grid-template-columns: 1fr; } }
-    </style>
   </head>
-  <body class="dodo-page">
+  <body>
     <header class="project-nav">
       <a class="project-back" href="../index.html" aria-label="返回首页"><span aria-hidden="true">←</span><span class="project-back-label">返回首页</span></a>
-      <div class="project-nav-title">Dodo Skill 一期交互探索</div>
-      <p class="project-nav-index">01 / 05</p>
+      <p class="project-nav-title">AI 设计工作流实践与复盘</p>
+      <label class="project-view-switch"><span>当前展示</span><select aria-label="切换 AI 设计工作流项目展示" data-view-switch data-current="dodo.html"><option value="dodo.html" selected>案例 Deck</option><option value="dodo-demo.html">交互 Demo</option><option value="dodo-materials.html">交付物</option></select></label>
     </header>
-    <main>
-      <section class="dodo-hero">
-        <p class="dodo-eyebrow">DODO SKILL · INTERACTION EXPLORATION</p>
-        <h1>把 Skill<br />变成可管理的资产。</h1>
-        <p>围绕个人 Skill 与内置 Skill 的管理体验，探索列表、详情、编辑、版本记录和历史恢复之间的关系。本页同时呈现正式版产品 Demo 与两个独立的局部交互探索。</p>
-        <div class="dodo-meta"><span>B 端 AI 工具</span><span>交互设计</span><span>方案对比</span><span>HTML Prototype</span></div>
-      </section>
-      <section class="dodo-story">
-        <div class="dodo-story-grid">
-          <div><span class="dodo-story-label">PROJECT LOGIC</span><h2>同一目标，两个交互方向。</h2><p>两版都围绕 Skill 的发现、启用、编辑和版本管理展开。作品集保留它们作为一次从局部浮层到完整历史视图的探索过程。</p></div>
-          <div class="dodo-decision"><article><strong>方案 1 · 轻量版本记录</strong><span>版本记录以浮层承载，用户不离开 Skill 详情页，适合快速查看与回退。</span></article><article><strong>方案 2 · 完整历史视图</strong><span>历史记录升级为全屏视图，并将本地记录与发布版本拆成更清晰的管理空间。</span></article><article><strong>展示边界</strong><span>当前 Demo 使用前端模拟数据，真实 Diff、版本接口、权限和发布流程不在本次展示范围内。</span></article></div>
-        </div>
-      </section>
-      <section class="dodo-demos" aria-labelledby="dodo-demos-title">
-        <div class="dodo-demos-head"><h2 id="dodo-demos-title">独立交互 Demo</h2><p>正式版作为主要体验入口，两套探索方案独立保留，用于呈现版本管理交互的演进过程。</p></div>
-        <div class="dodo-demo-links">
-          <a class="dodo-demo-link dodo-demo-link--official" href="dodo-demo-official.html"><div><small>OFFICIAL VERSION</small><h3>Dodo 正式版</h3><p>基于最终首页方案构建的完整可交互 Demo，包含导航、对话输入、模型选择和装备推荐。</p></div><strong>打开正式版 Demo →</strong></a>
-          <a class="dodo-demo-link" href="dodo-demo-1.html"><div><small>VERSION 01</small><h3>版本记录浮层</h3><p>以轻量浮层承载本地记录和发布版本，重点观察详情页上下文中的版本查看与恢复。</p></div><strong>打开方案 1 Demo →</strong></a>
-          <a class="dodo-demo-link" href="dodo-demo-2.html"><div><small>VERSION 02</small><h3>历史记录视图</h3><p>将版本记录升级为独立历史视图，重点观察本地记录、发布版本和回滚路径的管理关系。</p></div><strong>打开方案 2 Demo →</strong></a>
-        </div>
-        <p class="dodo-note">说明：原型中的列表、Skill 内容、版本记录和 Diff 均为预置模拟数据；页面用于展示信息架构与交互逻辑，不承诺与线上系统的数据状态同步。</p>
+    <main id="top">
+      <section class="slides" aria-label="AI 设计工作流实践与复盘项目案例">
+        <img id="dodo-slide-1" src="../assets/dodo/pages/page-01.png" alt="AI 设计工作流实践与复盘项目概览" fetchpriority="high" />
+        <img id="dodo-slide-2" src="../assets/dodo/pages/page-02.png" alt="从用户反馈到需求上线" loading="lazy" />
+        <img id="dodo-slide-3" src="../assets/dodo/pages/page-03.png" alt="根据任务条件选择不同的设计工作方式" loading="lazy" />
+        <img id="dodo-slide-4" src="../assets/dodo/pages/page-04.png" alt="AI 生成页面时不了解产品规范的挑战" loading="lazy" />
+        <img id="dodo-slide-5" src="../assets/dodo/pages/page-05.png" alt="Agent 体验原则" loading="lazy" />
+        <img id="dodo-slide-6" src="../assets/dodo/pages/page-06.png" alt="规范与元素层知识体系基座" loading="lazy" />
+        <img id="dodo-slide-7" src="../assets/dodo/pages/page-07.png" alt="Agent 体验原则与产品规范应用结果" loading="lazy" />
+        <img id="dodo-slide-8" src="../assets/dodo/pages/page-08.png" alt="工作流沉淀为 Skill 的判断" loading="lazy" />
+        <img id="dodo-slide-9" src="../assets/dodo/pages/page-09.png" alt="AI 设计工作流与 Skills" loading="lazy" />
+        <img id="dodo-slide-10" src="../assets/dodo/pages/page-10.png" alt="工作流知识与工程化沉淀" loading="lazy" />
+        <img id="dodo-slide-11" src="../assets/dodo/pages/page-11.png" alt="设计走查流程与输出结果" loading="lazy" />
       </section>
     </main>
-    <footer>DODO SKILL · INTERACTION EXPLORATION · 2026</footer>
-    <script>
-      const stickyNav = document.querySelector(".project-nav");
-      let previousScrollY = window.scrollY;
-      let downwardScrollDistance = 0;
-      const NAV_HIDE_DISTANCE = 24;
-      window.addEventListener("scroll", () => {
-        if (!stickyNav) return;
-        const currentScrollY = window.scrollY;
-        const delta = currentScrollY - previousScrollY;
-        if (currentScrollY <= 96 || delta <= 0) downwardScrollDistance = 0;
-        else downwardScrollDistance += delta;
-        stickyNav.classList.toggle("is-scrolled", currentScrollY > 16);
-        stickyNav.classList.toggle("project-nav--compact", currentScrollY > 96);
-        stickyNav.classList.toggle("project-nav--hidden", currentScrollY > 96 && downwardScrollDistance >= NAV_HIDE_DISTANCE);
-        previousScrollY = currentScrollY;
-      }, { passive: true });
-    </script>
+    <footer>AI DESIGN WORKFLOW · GUO YUCHENG · 2026</footer>
   </body>
 </html>

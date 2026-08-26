@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="AI 设计工作流实践项目交付物｜郭昱成作品集" />
+    <title>AI 设计工作流交付物 | 郭昱成作品集</title>
+    <link rel="stylesheet" href="../styles/styles.css?v=20260726-8" />
+    <link rel="stylesheet" href="../styles/project-navigation.css?v=20260809-14" />
+    <script src="../scripts/project-navigation.js?v=20260809-3" defer></script>
+    <style>
+      .dodo-materials-intro{max-width:720px;margin:18px 0 0;color:#8f94a1;font-size:15px;line-height:1.8}
+      .dodo-material-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:54px}
+      .dodo-material-card{min-height:280px;padding:30px;display:flex;flex-direction:column;border:1px solid rgba(255,255,255,.14);border-radius:8px;background:#0d0f15}
+      .dodo-material-card:first-child{grid-column:1/-1;min-height:320px;background:linear-gradient(135deg,rgba(64,103,215,.16),#0d0f15 62%);border-color:rgba(92,132,240,.42)}
+      .dodo-material-card small{color:#738fdc;font-size:11px;letter-spacing:.12em}
+      .dodo-material-card h2{margin:30px 0 12px;font-size:clamp(24px,2.4vw,36px);font-weight:620}
+      .dodo-material-card p{max-width:620px;margin:0;color:#9095a1;font-size:14px;line-height:1.8}
+      .dodo-material-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto;padding-top:34px}
+      .dodo-material-link{display:inline-flex;align-items:center;min-height:42px;padding:0 15px;border:1px solid rgba(255,255,255,.18);border-radius:5px;color:#f3f4f7;font-size:13px;text-decoration:none}
+      .dodo-material-link:hover,.dodo-material-link:focus-visible{border-color:#6d91ef;background:rgba(91,127,224,.1)}
+      @media(max-width:760px){.dodo-material-grid{grid-template-columns:1fr}.dodo-material-card:first-child{grid-column:auto}.dodo-material-card{min-height:260px}}
+    </style>
+  </head>
+  <body class="deliverables-page">
+    <header class="project-nav">
+      <a class="project-back" href="../index.html" aria-label="返回首页"><span aria-hidden="true">←</span><span class="project-back-label">返回首页</span></a>
+      <p class="project-nav-title">AI 设计工作流实践与复盘</p>
+      <label class="project-view-switch"><span>当前展示</span><select aria-label="切换 AI 设计工作流项目展示" data-view-switch data-current="dodo-materials.html"><option value="dodo.html">案例 Deck</option><option value="dodo-demo.html">交互 Demo</option><option value="dodo-materials.html" selected>交付物</option></select></label>
+    </header>
+    <main class="deliverables-main">
+      <section class="deliverables-shell" aria-labelledby="dodo-materials-title">
+        <h1 id="dodo-materials-title">交付物</h1>
+        <p class="dodo-materials-intro">项目中沉淀的体验原则、产品规范知识与设计走查 Skill。案例 Deck 负责讲清决策过程，这里保留可继续复用的成果。</p>
+        <div class="dodo-material-grid">
+          <article class="dodo-material-card">
+            <small>01 · EXPERIENCE GUIDELINE</small>
+            <h2>Dodo Agent 体验设计指南</h2>
+            <p>定义 Agent 的角色、语言原则与任务执行阶段，帮助 Agent 在关键操作中自动补全确认、结果反馈和误操作补救机制。</p>
+            <div class="dodo-material-actions"><a class="dodo-material-link" href="dodo.html#dodo-slide-5">查看案例页 →</a><a class="dodo-material-link" href="../assets/dodo/dodo-experience-guide.md" download>下载指南 .md ↓</a></div>
+          </article>
+          <article class="dodo-material-card">
+            <small>02 · PRODUCT KNOWLEDGE BASE</small>
+            <h2>规范与元素层知识体系基座</h2>
+            <p>把交互规则、设计 Token 与组件模板整理为 Agent 可调用的产品知识，使生成页面从“能完成”走向“符合产品规范”。</p>
+            <div class="dodo-material-actions"><a class="dodo-material-link" href="dodo.html#dodo-slide-6">查看沉淀过程 →</a></div>
+          </article>
+          <article class="dodo-material-card">
+            <small>03 · DESIGN REVIEW SKILL</small>
+            <h2>设计评审前自检 Skill</h2>
+            <p>串联输入识别、准入判断、证据采集、问题分级和报告生成，输出可以直接执行的设计走查结论。</p>
+            <div class="dodo-material-actions"><a class="dodo-material-link" href="design-review-skill.html">查看 Skill →</a><a class="dodo-material-link" href="../assets/skills/design-review-skill-v1.4.0.zip" download>下载 Skill .zip ↓</a></div>
+          </article>
+        </div>
+      </section>
+    </main>
+    <footer>AI DESIGN WORKFLOW · DELIVERABLES · 2026</footer>
+  </body>
+</html>

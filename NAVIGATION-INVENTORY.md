@@ -19,14 +19,14 @@
 - `demos/workload-demo/index.html`：CNAP 交互 Demo
 - `pages/skip-read.html`：快速阅读 APP
 - `pages/xiaohongshu.html`：小红书本地生活
-- `pages/dodo.html`：Dodo 项目入口
-- `pages/dodo-demo-official.html`：Dodo 正式版 Demo
-- `pages/dodo-demo-1.html`：Dodo 方案 1 Demo
-- `pages/dodo-demo-2.html`：Dodo 方案 2 Demo
+- `pages/dodo.html`：AI 设计工作流实践案例 Deck
+- `pages/dodo-demo.html`：Dodo 正式版交互 Demo
+- `pages/dodo-materials.html`：AI 设计工作流项目交付物
 
 ## 兼容入口
 
 - `xiaohongshu.html`：立即跳转到 `pages/xiaohongshu.html`，不单独维护视觉状态。
+- `pages/dodo-demo-official.html`：立即跳转到 `pages/dodo-demo.html`，保留旧链接兼容。
 
 ## 共享实现
 
