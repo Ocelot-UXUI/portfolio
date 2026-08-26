@@ -17,7 +17,10 @@
       .dodo-download-slide{position:relative}
       .dodo-download-link{position:absolute;left:85.31%;top:7.4%;width:10.55%;height:5.25%;z-index:2;display:block;border-radius:12px;cursor:pointer}
       .dodo-download-link:focus-visible{outline:3px solid #fff;outline-offset:4px}
-      @media(max-width:700px){.dodo-cover-demo{left:1%;top:22%;width:56%;height:58%;border-radius:10px}.dodo-cover-demo iframe{border-radius:9px}.dodo-cover-demo-label{right:7px;top:7px;padding:4px 6px;font-size:9px}}
+      .dodo-process-panel{position:absolute;left:4.17%;top:25.46%;width:53.9%;height:70%;z-index:1;display:grid;place-items:center;overflow:hidden;border:1px solid rgba(255,255,255,.24);border-radius:16px;background:#151923;box-shadow:0 14px 36px rgba(0,0,0,.3)}
+      .dodo-process-gif{display:block;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
+      .dodo-process-label{position:absolute;left:14px;top:12px;z-index:2;padding:5px 8px;border-radius:5px;background:rgba(10,13,21,.72);color:#fff;font-size:11px;letter-spacing:.04em;pointer-events:none}
+      @media(max-width:700px){.dodo-cover-demo{left:1%;top:22%;width:56%;height:58%;border-radius:10px}.dodo-cover-demo iframe{border-radius:9px}.dodo-cover-demo-label{right:7px;top:7px;padding:4px 6px;font-size:9px}.dodo-process-panel{left:4%;top:25%;width:56%;height:70%;border-radius:9px}.dodo-process-label{left:7px;top:7px;padding:4px 6px;font-size:9px}}
     </style>
   </head>
   <body>
@@ -46,6 +49,10 @@
         <img id="dodo-slide-10" src="../assets/dodo/pages/page-10.png" alt="工作流知识与工程化沉淀" loading="lazy" />
         <div id="dodo-slide-11" class="case-slide-frame dodo-download-slide">
           <img src="../assets/dodo/pages/page-11.png" alt="设计走查流程与输出结果" loading="lazy" />
+          <div class="dodo-process-panel" aria-label="设计走查流程录屏">
+            <span class="dodo-process-label">走查流程 · 录屏</span>
+            <img class="dodo-process-gif" src="../assets/dodo/dodo-review-process.gif" alt="设计走查流程录屏" loading="lazy" />
+          </div>
           <a class="dodo-download-link" href="../assets/skills/design-review-skills.zip" download="design-review-skills.zip" aria-label="下载设计走查 Skills 压缩包" title="点击下载设计走查 Skills"></a>
         </div>
       </section>
