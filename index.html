@@ -270,52 +270,19 @@
       .prototype-homepage .dodo-project-preview {
         position: relative;
         width: min(100%, 620px);
-        aspect-ratio: 1.48;
+        aspect-ratio: 16 / 9;
         overflow: hidden;
         border: .75px solid rgba(255, 255, 255, .13);
-        background: #f7f9fa;
+        background: #15191f;
         box-shadow: 0 24px 50px rgba(0, 0, 0, .28);
         transform: rotate(2deg);
       }
 
-      .prototype-homepage .dodo-project-preview::before {
-        position: absolute;
-        z-index: 2;
-        top: 0;
-        right: 0;
-        left: 0;
-        height: 28px;
-        background: #121717;
-        content: "DODO · SKILL";
-        color: #cdeccd;
-        font-size: 9px;
-        line-height: 28px;
-        letter-spacing: 1.1px;
-        text-align: center;
-      }
-
-      .prototype-homepage .dodo-project-preview::after {
-        position: absolute;
-        z-index: 1;
-        top: 28px;
-        bottom: 0;
-        left: 0;
-        width: 24%;
-        border-right: 1px solid #e4e8e7;
-        background: #f1f5f3;
-        content: "";
-      }
-
-      .prototype-homepage .dodo-project-preview span {
-        position: absolute;
-        z-index: 3;
-        top: 48px;
-        left: 30%;
+      .prototype-homepage .dodo-project-preview img {
         display: block;
-        width: 56%;
-        height: 12px;
-        background: #dbeadf;
-        box-shadow: 0 28px #e9eeee, 0 56px #e9eeee, 0 84px #dbeadf, 0 112px #e9eeee;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
 
       .prototype-homepage {
@@ -2303,8 +2270,9 @@
         z-index: -1;
         right: -24px;
         bottom: -24px;
-        width: min(50%, 330px);
-        height: auto;
+        width: auto;
+        height: 100px;
+        max-width: 78%;
         opacity: .28;
         pointer-events: none;
       }
@@ -2314,8 +2282,9 @@
         z-index: -1;
         left: -24px;
         bottom: -28px;
-        width: min(50%, 330px);
-        height: auto;
+        width: auto;
+        height: 100px;
+        max-width: 78%;
         opacity: .32;
         pointer-events: none;
       }
@@ -2325,8 +2294,9 @@
         z-index: -1;
         right: -30px;
         bottom: -92px;
-        width: min(68%, 440px);
-        height: auto;
+        width: auto;
+        height: 100px;
+        max-width: 78%;
         opacity: .3;
         pointer-events: none;
       }
@@ -2336,8 +2306,9 @@
         z-index: -1;
         right: -28px;
         bottom: -88px;
-        width: min(70%, 450px);
-        height: auto;
+        width: auto;
+        height: 100px;
+        max-width: 78%;
         opacity: .3;
         pointer-events: none;
       }
@@ -2563,12 +2534,12 @@
           <div class="showcase-heading section-reveal"><h2 class="section-copy-step" id="projects-title">项目</h2></div>
           <a class="project-showcase project-showcase-dodo" id="project-dodo" href="pages/dodo.html" data-project-hotspot>
             <div class="showcase-copy">
-              <h3>Dodo Skill 一期交互探索</h3>
-              <p>围绕个人 Skill 与内置 Skill 的管理体验，保留两套方案进行交互对比</p>
-              <ul><li>B端</li><li>AI 产品</li><li>交互探索</li><li>双版本 Demo</li></ul>
+              <h3>AI 设计工作流实践与复盘</h3>
+              <p>从用户反馈到需求上线，将设计判断沉淀为可复用的规范与 Skills</p>
+              <ul><li>AI 产品</li><li>端到端工作流</li><li>设计工程化</li><li>可交互 Demo</li></ul>
             </div>
             <div class="showcase-media">
-              <div class="dodo-project-preview" aria-hidden="true"><span></span></div>
+              <div class="dodo-project-preview" aria-hidden="true"><img src="assets/dodo/pages/page-01.png" alt="" /></div>
             </div>
           </a>
           <a class="project-showcase project-showcase-cnap" id="project-cnap" href="pages/cnap-research.html" data-project-hotspot>
