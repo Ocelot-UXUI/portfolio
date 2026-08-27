@@ -164,7 +164,9 @@ body {
   z-index: 151 !important;
   border-color: transparent !important;
   outline: none !important;
-  box-shadow: 0 0 0 var(--guide-pulse-outline) #5f85ff, 0 0 18px rgba(81, 128, 249, .42);
+  box-shadow: 0 0 0 var(--guide-pulse-outline) #5f85ff,
+    0 0 22px rgba(81, 128, 249, .56),
+    0 0 72px rgba(81, 128, 249, .28);
   animation: demo-guide-pulse 1.8s ease-in-out infinite !important;
 }
 
@@ -179,10 +181,14 @@ body {
 
 @keyframes demo-guide-pulse {
   0%, 100% {
-    box-shadow: 0 0 0 var(--guide-pulse-outline, 1.25px) #5f85ff, 0 0 16px rgba(81, 128, 249, .42);
+    box-shadow: 0 0 0 var(--guide-pulse-outline, 1.25px) #5f85ff,
+      0 0 18px rgba(81, 128, 249, .56),
+      0 0 72px rgba(81, 128, 249, .28);
   }
   50% {
-    box-shadow: 0 0 0 var(--guide-pulse-outline, 1.25px) #5f85ff, 0 0 44px rgba(81, 128, 249, .84);
+    box-shadow: 0 0 0 var(--guide-pulse-outline, 1.25px) #5f85ff,
+      0 0 52px rgba(81, 128, 249, .95),
+      0 0 120px rgba(81, 128, 249, .52);
   }
 }
 
@@ -192,16 +198,25 @@ body {
   }
 }
 
-.artifact-card-menu.is-open:has(.demo-guide-target) {
+/* The menu is rendered by replacing the artifact card. Apply its final
+   transparent shell as soon as it opens, so there is no one-frame white menu
+   flash before the delete target receives the guide class. */
+.artifact-card-menu.is-open {
   padding: 0 !important;
   border: 0 !important;
   background: transparent !important;
   box-shadow: none !important;
 }
 
-.artifact-card-menu.is-open .demo-guide-target {
+.artifact-card-menu.is-open [data-artifact-delete] {
   background: #fff !important;
   border-radius: 10px !important;
+}
+
+/* The card is re-rendered when More is clicked; do not animate the action
+   buttons during that DOM handoff. */
+.artifact-card-actions button {
+  transition: none !important;
 }
 
 .recycle-item.demo-guide-reveal-actions .recycle-item-actions {
