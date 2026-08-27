@@ -15,6 +15,18 @@ body {
   position: relative;
 }
 
+/* Paint the Deck's target view from the first frame; otherwise the original
+   welcome screen can flash before focus-mode switches to the artifact list. */
+.deck-focus-mode .home-view,
+.deck-focus-mode .skills-view,
+.deck-focus-mode .placeholder-view {
+  display: none !important;
+}
+
+.deck-focus-mode .artifacts-view[hidden] {
+  display: block !important;
+}
+
 .app-shell {
   position: absolute !important;
   display: flex !important;
