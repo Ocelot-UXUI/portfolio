@@ -1,0 +1,7829 @@
+{
+  "generatedBy": "Portfolio Asset Collector v2",
+  "assets": [
+    {
+      "file": "Currency-Close--88-118545.svg",
+      "kind": "icon",
+      "name": "Currency-Close",
+      "confidence": "high",
+      "reason": "名称与结构都符合图标特征",
+      "source": {
+        "nodeId": "88:118545",
+        "nodeName": "Currency-Close",
+        "nodeType": "FRAME",
+        "parentId": "88:118543",
+        "parentName": "Frame 1912055755",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Frame 1912055755",
+          "Currency-Close"
+        ],
+        "bounds": {
+          "x": 732,
+          "y": 5,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 8846,
+            "y": 2013
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Currency-Close--88-118628.svg",
+      "kind": "icon",
+      "name": "Currency-Close",
+      "confidence": "high",
+      "reason": "名称与结构都符合图标特征",
+      "source": {
+        "nodeId": "88:118628",
+        "nodeName": "Currency-Close",
+        "nodeType": "FRAME",
+        "parentId": "88:118625",
+        "parentName": "Group 2147227478",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227478",
+          "Currency-Close"
+        ],
+        "bounds": {
+          "x": 6946,
+          "y": 2129,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 8846,
+            "y": 2444
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Currency-Close--88-118630.svg",
+      "kind": "icon",
+      "name": "Currency-Close",
+      "confidence": "high",
+      "reason": "名称与结构都符合图标特征",
+      "source": {
+        "nodeId": "88:118630",
+        "nodeName": "Currency-Close",
+        "nodeType": "FRAME",
+        "parentId": "88:118625",
+        "parentName": "Group 2147227478",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227478",
+          "Currency-Close"
+        ],
+        "bounds": {
+          "x": 6952,
+          "y": 2333,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 8852,
+            "y": 2648
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Currency-Close--88-118632.svg",
+      "kind": "icon",
+      "name": "Currency-Close",
+      "confidence": "high",
+      "reason": "名称与结构都符合图标特征",
+      "source": {
+        "nodeId": "88:118632",
+        "nodeName": "Currency-Close",
+        "nodeType": "FRAME",
+        "parentId": "88:118625",
+        "parentName": "Group 2147227478",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227478",
+          "Currency-Close"
+        ],
+        "bounds": {
+          "x": 6952,
+          "y": 2381,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 8852,
+            "y": 2696
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Currency-Close--88-118634.svg",
+      "kind": "icon",
+      "name": "Currency-Close",
+      "confidence": "high",
+      "reason": "名称与结构都符合图标特征",
+      "source": {
+        "nodeId": "88:118634",
+        "nodeName": "Currency-Close",
+        "nodeType": "FRAME",
+        "parentId": "88:118625",
+        "parentName": "Group 2147227478",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227478",
+          "Currency-Close"
+        ],
+        "bounds": {
+          "x": 6952,
+          "y": 2429,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 8852,
+            "y": 2744
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Currency-Close--88-118935.svg",
+      "kind": "icon",
+      "name": "Currency-Close",
+      "confidence": "high",
+      "reason": "名称与结构都符合图标特征",
+      "source": {
+        "nodeId": "88:118935",
+        "nodeName": "Currency-Close",
+        "nodeType": "FRAME",
+        "parentId": "88:118877",
+        "parentName": "Group 2147227628",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227628",
+          "Currency-Close"
+        ],
+        "bounds": {
+          "x": 4501,
+          "y": 169,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 6401,
+            "y": 484
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Currency-Close--88-119025.svg",
+      "kind": "icon",
+      "name": "Currency-Close",
+      "confidence": "high",
+      "reason": "名称与结构都符合图标特征",
+      "source": {
+        "nodeId": "88:119025",
+        "nodeName": "Currency-Close",
+        "nodeType": "FRAME",
+        "parentId": "88:119021",
+        "parentName": "Group 2147227468",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227330",
+          "Group 2147227468",
+          "Currency-Close"
+        ],
+        "bounds": {
+          "x": 4502,
+          "y": 1189,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 6402,
+            "y": 1504
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Currency-Close--88-119179.svg",
+      "kind": "icon",
+      "name": "Currency-Close",
+      "confidence": "high",
+      "reason": "名称与结构都符合图标特征",
+      "source": {
+        "nodeId": "88:119179",
+        "nodeName": "Currency-Close",
+        "nodeType": "FRAME",
+        "parentId": "88:119175",
+        "parentName": "Group 2147227468",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227468",
+          "Currency-Close"
+        ],
+        "bounds": {
+          "x": 4197,
+          "y": 2213,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 6097,
+            "y": 2528
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Icon--88-118393.svg",
+      "kind": "icon",
+      "name": "Icon",
+      "confidence": "high",
+      "reason": "名称与结构都符合图标特征",
+      "source": {
+        "nodeId": "88:118393",
+        "nodeName": "Icon",
+        "nodeType": "FRAME",
+        "parentId": "88:118392",
+        "parentName": "Button",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227308",
+          "Button",
+          "Icon"
+        ],
+        "bounds": {
+          "x": 6,
+          "y": 6,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 3771,
+            "y": 2514
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Icon--88-118896.svg",
+      "kind": "icon",
+      "name": "Icon",
+      "confidence": "high",
+      "reason": "名称与结构都符合图标特征",
+      "source": {
+        "nodeId": "88:118896",
+        "nodeName": "Icon",
+        "nodeType": "FRAME",
+        "parentId": "88:118877",
+        "parentName": "Group 2147227628",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227628",
+          "Icon"
+        ],
+        "bounds": {
+          "x": 3371,
+          "y": 1003,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 5271,
+            "y": 1318
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Icon--88-118977.svg",
+      "kind": "icon",
+      "name": "Icon",
+      "confidence": "high",
+      "reason": "名称与结构都符合图标特征",
+      "source": {
+        "nodeId": "88:118977",
+        "nodeName": "Icon",
+        "nodeType": "FRAME",
+        "parentId": "88:118976",
+        "parentName": "Button",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227330",
+          "Group 2147227329",
+          "Group 2147227308",
+          "Button",
+          "Icon"
+        ],
+        "bounds": {
+          "x": 6,
+          "y": 6,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 5272,
+            "y": 2338
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Icon--88-119349.svg",
+      "kind": "icon",
+      "name": "Icon",
+      "confidence": "high",
+      "reason": "名称与结构都符合图标特征",
+      "source": {
+        "nodeId": "88:119349",
+        "nodeName": "Icon",
+        "nodeType": "FRAME",
+        "parentId": "88:119348",
+        "parentName": "Button",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227681",
+          "Group 2147227308",
+          "Button",
+          "Icon"
+        ],
+        "bounds": {
+          "x": 6,
+          "y": 6,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 3771,
+            "y": 1317
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Icon--88-119569.svg",
+      "kind": "icon",
+      "name": "Icon",
+      "confidence": "high",
+      "reason": "名称与结构都符合图标特征",
+      "source": {
+        "nodeId": "88:119569",
+        "nodeName": "Icon",
+        "nodeType": "FRAME",
+        "parentId": "88:119568",
+        "parentName": "Button",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227680",
+          "Group 2147227308",
+          "Button",
+          "Icon"
+        ],
+        "bounds": {
+          "x": 6,
+          "y": 6,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 2271,
+            "y": 1320
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Icon--88-119886.svg",
+      "kind": "icon",
+      "name": "Icon",
+      "confidence": "high",
+      "reason": "名称与结构都符合图标特征",
+      "source": {
+        "nodeId": "88:119886",
+        "nodeName": "Icon",
+        "nodeType": "FRAME",
+        "parentId": "88:119885",
+        "parentName": "Button",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227678",
+          "Group 2147227443",
+          "Button",
+          "Icon"
+        ],
+        "bounds": {
+          "x": 6,
+          "y": 6,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 6792,
+            "y": 1312
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Icon--88-120100.svg",
+      "kind": "icon",
+      "name": "Icon",
+      "confidence": "high",
+      "reason": "名称与结构都符合图标特征",
+      "source": {
+        "nodeId": "88:120100",
+        "nodeName": "Icon",
+        "nodeType": "FRAME",
+        "parentId": "88:120099",
+        "parentName": "Button",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227679",
+          "Group 2147227308",
+          "Button",
+          "Icon"
+        ],
+        "bounds": {
+          "x": 6,
+          "y": 6,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 8332,
+            "y": 1312
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "icon-Currency-Details--88-118760.svg",
+      "kind": "icon",
+      "name": "icon/Currency/Details",
+      "confidence": "high",
+      "reason": "实例来源组件“icon/Currency/Details”符合图标特征",
+      "source": {
+        "nodeId": "88:118760",
+        "nodeName": "icon/Currency/Details",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118311",
+        "parentName": "Frame 2147227269",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "icon/Currency/Details"
+        ],
+        "bounds": {
+          "x": 5437,
+          "y": 1388,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 7337,
+            "y": 1703
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "icon-Currency-Details--88-118762.svg",
+      "kind": "icon",
+      "name": "icon/Currency/Details",
+      "confidence": "high",
+      "reason": "实例来源组件“icon/Currency/Details”符合图标特征",
+      "source": {
+        "nodeId": "88:118762",
+        "nodeName": "icon/Currency/Details",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118311",
+        "parentName": "Frame 2147227269",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "icon/Currency/Details"
+        ],
+        "bounds": {
+          "x": 5932,
+          "y": 1388,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 7832,
+            "y": 1703
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "icon-Currency-Details--88-118819.svg",
+      "kind": "icon",
+      "name": "icon/Currency/Details",
+      "confidence": "high",
+      "reason": "实例来源组件“icon/Currency/Details”符合图标特征",
+      "source": {
+        "nodeId": "88:118819",
+        "nodeName": "icon/Currency/Details",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118311",
+        "parentName": "Frame 2147227269",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "icon/Currency/Details"
+        ],
+        "bounds": {
+          "x": 5437,
+          "y": 1837,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 7337,
+            "y": 2152
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "icon-Currency-Details--88-120031.svg",
+      "kind": "icon",
+      "name": "icon/Currency/Details",
+      "confidence": "high",
+      "reason": "实例来源组件“icon/Currency/Details”符合图标特征",
+      "source": {
+        "nodeId": "88:120031",
+        "nodeName": "icon/Currency/Details",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118311",
+        "parentName": "Frame 2147227269",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "icon/Currency/Details"
+        ],
+        "bounds": {
+          "x": 7432,
+          "y": 1187,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 9332,
+            "y": 1502
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "icon-Currency-Download--88-118345.svg",
+      "kind": "icon",
+      "name": "icon/Currency/Download",
+      "confidence": "high",
+      "reason": "实例来源组件“icon/Currency/Download”符合图标特征",
+      "source": {
+        "nodeId": "88:118345",
+        "nodeName": "icon/Currency/Download",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118311",
+        "parentName": "Frame 2147227269",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "icon/Currency/Download"
+        ],
+        "bounds": {
+          "x": 1064,
+          "y": 2218,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 2964,
+            "y": 2533
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "icon-Currency-Download--88-118853.svg",
+      "kind": "icon",
+      "name": "icon/Currency/Download",
+      "confidence": "high",
+      "reason": "实例来源组件“icon/Currency/Download”符合图标特征",
+      "source": {
+        "nodeId": "88:118853",
+        "nodeName": "icon/Currency/Download",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118849",
+        "parentName": "Group 2147227637",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227637",
+          "icon/Currency/Download"
+        ],
+        "bounds": {
+          "x": 804,
+          "y": 2120,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 2704,
+            "y": 2435
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "icon-Currency-Download--88-118932.svg",
+      "kind": "icon",
+      "name": "icon/Currency/Download",
+      "confidence": "high",
+      "reason": "实例来源组件“icon/Currency/Download”符合图标特征",
+      "source": {
+        "nodeId": "88:118932",
+        "nodeName": "icon/Currency/Download",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118877",
+        "parentName": "Group 2147227628",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227628",
+          "icon/Currency/Download"
+        ],
+        "bounds": {
+          "x": 4285,
+          "y": 169,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 6185,
+            "y": 484
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "icon-Currency-Download--88-119022.svg",
+      "kind": "icon",
+      "name": "icon/Currency/Download",
+      "confidence": "high",
+      "reason": "实例来源组件“icon/Currency/Download”符合图标特征",
+      "source": {
+        "nodeId": "88:119022",
+        "nodeName": "icon/Currency/Download",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119021",
+        "parentName": "Group 2147227468",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227330",
+          "Group 2147227468",
+          "icon/Currency/Download"
+        ],
+        "bounds": {
+          "x": 4286,
+          "y": 1189,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 6186,
+            "y": 1504
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "icon-Currency-Download--88-119176.svg",
+      "kind": "icon",
+      "name": "icon/Currency/Download",
+      "confidence": "high",
+      "reason": "实例来源组件“icon/Currency/Download”符合图标特征",
+      "source": {
+        "nodeId": "88:119176",
+        "nodeName": "icon/Currency/Download",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119175",
+        "parentName": "Group 2147227468",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227468",
+          "icon/Currency/Download"
+        ],
+        "bounds": {
+          "x": 3981,
+          "y": 2213,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 5881,
+            "y": 2528
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "icon-Currency-Download--88-119686.svg",
+      "kind": "icon",
+      "name": "icon/Currency/Download",
+      "confidence": "high",
+      "reason": "实例来源组件“icon/Currency/Download”符合图标特征",
+      "source": {
+        "nodeId": "88:119686",
+        "nodeName": "icon/Currency/Download",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119682",
+        "parentName": "Group 2147227638",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227680",
+          "Group 2147227639",
+          "Group 2147227638",
+          "icon/Currency/Download"
+        ],
+        "bounds": {
+          "x": 1468,
+          "y": 621,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 3368,
+            "y": 936
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "icon-Currency-More01--88-118624.svg",
+      "kind": "icon",
+      "name": "icon/Currency/More01",
+      "confidence": "high",
+      "reason": "实例来源组件“icon/Currency/More01”符合图标特征",
+      "source": {
+        "nodeId": "88:118624",
+        "nodeName": "icon/Currency/More01",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118609",
+        "parentName": "Group 2147227475",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227475",
+          "icon/Currency/More01"
+        ],
+        "bounds": {
+          "x": 7901,
+          "y": 1203,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 9801,
+            "y": 1518
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "icon-Currency-More01--88-118759.svg",
+      "kind": "icon",
+      "name": "icon/Currency/More01",
+      "confidence": "high",
+      "reason": "实例来源组件“icon/Currency/More01”符合图标特征",
+      "source": {
+        "nodeId": "88:118759",
+        "nodeName": "icon/Currency/More01",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118311",
+        "parentName": "Frame 2147227269",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "icon/Currency/More01"
+        ],
+        "bounds": {
+          "x": 5463,
+          "y": 1388,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 7363,
+            "y": 1703
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "icon-Currency-More01--88-118761.svg",
+      "kind": "icon",
+      "name": "icon/Currency/More01",
+      "confidence": "high",
+      "reason": "实例来源组件“icon/Currency/More01”符合图标特征",
+      "source": {
+        "nodeId": "88:118761",
+        "nodeName": "icon/Currency/More01",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118311",
+        "parentName": "Frame 2147227269",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "icon/Currency/More01"
+        ],
+        "bounds": {
+          "x": 5958,
+          "y": 1388,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 7858,
+            "y": 1703
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "icon-Currency-More01--88-118818.svg",
+      "kind": "icon",
+      "name": "icon/Currency/More01",
+      "confidence": "high",
+      "reason": "实例来源组件“icon/Currency/More01”符合图标特征",
+      "source": {
+        "nodeId": "88:118818",
+        "nodeName": "icon/Currency/More01",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118311",
+        "parentName": "Frame 2147227269",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "icon/Currency/More01"
+        ],
+        "bounds": {
+          "x": 5463,
+          "y": 1837,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 7363,
+            "y": 2152
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "icon-Currency-More01--88-120030.svg",
+      "kind": "icon",
+      "name": "icon/Currency/More01",
+      "confidence": "high",
+      "reason": "实例来源组件“icon/Currency/More01”符合图标特征",
+      "source": {
+        "nodeId": "88:120030",
+        "nodeName": "icon/Currency/More01",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118311",
+        "parentName": "Frame 2147227269",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "icon/Currency/More01"
+        ],
+        "bounds": {
+          "x": 7458,
+          "y": 1187,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 9358,
+            "y": 1502
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "icon-Currency-Search--88-118390.svg",
+      "kind": "icon",
+      "name": "icon/Currency/Search",
+      "confidence": "high",
+      "reason": "实例来源组件“icon/Currency/Search”符合图标特征",
+      "source": {
+        "nodeId": "88:118390",
+        "nodeName": "icon/Currency/Search",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118367",
+        "parentName": "Group 2147227308",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227308",
+          "icon/Currency/Search"
+        ],
+        "bounds": {
+          "x": 1817,
+          "y": 1473,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 3717,
+            "y": 1788
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "icon-Currency-Search--88-118894.svg",
+      "kind": "icon",
+      "name": "icon/Currency/Search",
+      "confidence": "high",
+      "reason": "实例来源组件“icon/Currency/Search”符合图标特征",
+      "source": {
+        "nodeId": "88:118894",
+        "nodeName": "icon/Currency/Search",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118877",
+        "parentName": "Group 2147227628",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227628",
+          "icon/Currency/Search"
+        ],
+        "bounds": {
+          "x": 3317,
+          "y": 450,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 5217,
+            "y": 765
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "icon-Currency-Search--88-118974.svg",
+      "kind": "icon",
+      "name": "icon/Currency/Search",
+      "confidence": "high",
+      "reason": "实例来源组件“icon/Currency/Search”符合图标特征",
+      "source": {
+        "nodeId": "88:118974",
+        "nodeName": "icon/Currency/Search",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118951",
+        "parentName": "Group 2147227308",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227330",
+          "Group 2147227329",
+          "Group 2147227308",
+          "icon/Currency/Search"
+        ],
+        "bounds": {
+          "x": 3318,
+          "y": 1470,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 5218,
+            "y": 1785
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "icon-Currency-Search--88-119346.svg",
+      "kind": "icon",
+      "name": "icon/Currency/Search",
+      "confidence": "high",
+      "reason": "实例来源组件“icon/Currency/Search”符合图标特征",
+      "source": {
+        "nodeId": "88:119346",
+        "nodeName": "icon/Currency/Search",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119323",
+        "parentName": "Group 2147227308",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227681",
+          "Group 2147227308",
+          "icon/Currency/Search"
+        ],
+        "bounds": {
+          "x": 1817,
+          "y": 452,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 3717,
+            "y": 767
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "icon-Currency-Search--88-119566.svg",
+      "kind": "icon",
+      "name": "icon/Currency/Search",
+      "confidence": "high",
+      "reason": "实例来源组件“icon/Currency/Search”符合图标特征",
+      "source": {
+        "nodeId": "88:119566",
+        "nodeName": "icon/Currency/Search",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119543",
+        "parentName": "Group 2147227308",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227680",
+          "Group 2147227308",
+          "icon/Currency/Search"
+        ],
+        "bounds": {
+          "x": 317,
+          "y": 452,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 2217,
+            "y": 767
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "icon-Currency-Search--88-119883.svg",
+      "kind": "icon",
+      "name": "icon/Currency/Search",
+      "confidence": "high",
+      "reason": "实例来源组件“icon/Currency/Search”符合图标特征",
+      "source": {
+        "nodeId": "88:119883",
+        "nodeName": "icon/Currency/Search",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119860",
+        "parentName": "Group 2147227443",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227678",
+          "Group 2147227443",
+          "icon/Currency/Search"
+        ],
+        "bounds": {
+          "x": 4838,
+          "y": 450,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 6738,
+            "y": 765
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "icon-Currency-Search--88-120097.svg",
+      "kind": "icon",
+      "name": "icon/Currency/Search",
+      "confidence": "high",
+      "reason": "实例来源组件“icon/Currency/Search”符合图标特征",
+      "source": {
+        "nodeId": "88:120097",
+        "nodeName": "icon/Currency/Search",
+        "nodeType": "INSTANCE",
+        "parentId": "88:120074",
+        "parentName": "Group 2147227308",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227679",
+          "Group 2147227308",
+          "icon/Currency/Search"
+        ],
+        "bounds": {
+          "x": 6378,
+          "y": 450,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 8278,
+            "y": 765
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "icon-Currency-Warn02--88-118568.svg",
+      "kind": "icon",
+      "name": "icon/Currency/Warn02",
+      "confidence": "high",
+      "reason": "名称与结构都符合图标特征",
+      "source": {
+        "nodeId": "88:118568",
+        "nodeName": "icon/Currency/Warn02",
+        "nodeType": "FRAME",
+        "parentId": "88:118566",
+        "parentName": "Group 2147227440",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227479",
+          "Group 2147227440",
+          "icon/Currency/Warn02"
+        ],
+        "bounds": {
+          "x": 6214,
+          "y": 1915,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 8114,
+            "y": 2230
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "icon-Currency-Warn02--88-119979.svg",
+      "kind": "icon",
+      "name": "icon/Currency/Warn02",
+      "confidence": "high",
+      "reason": "名称与结构都符合图标特征",
+      "source": {
+        "nodeId": "88:119979",
+        "nodeName": "icon/Currency/Warn02",
+        "nodeType": "FRAME",
+        "parentId": "88:119977",
+        "parentName": "Group 2147227631",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227678",
+          "Group 2147227632",
+          "Group 2147227631",
+          "icon/Currency/Warn02"
+        ],
+        "bounds": {
+          "x": 5720,
+          "y": 257,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 7620,
+            "y": 572
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "icon-Currency-Warn02--88-120176.svg",
+      "kind": "icon",
+      "name": "icon/Currency/Warn02",
+      "confidence": "high",
+      "reason": "名称与结构都符合图标特征",
+      "source": {
+        "nodeId": "88:120176",
+        "nodeName": "icon/Currency/Warn02",
+        "nodeType": "FRAME",
+        "parentId": "88:120174",
+        "parentName": "Group 2147227631",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227679",
+          "Group 2147227633",
+          "Group 2147227631",
+          "icon/Currency/Warn02"
+        ],
+        "bounds": {
+          "x": 7260,
+          "y": 257,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 9160,
+            "y": 572
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "icon-operate-calendar--88-119789.svg",
+      "kind": "icon",
+      "name": "icon/operate/calendar",
+      "confidence": "high",
+      "reason": "实例来源组件“icon/operate/calendar”符合图标特征",
+      "source": {
+        "nodeId": "88:119789",
+        "nodeName": "icon/operate/calendar",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119784",
+        "parentName": "Group 2147227458",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227458",
+          "icon/operate/calendar"
+        ],
+        "bounds": {
+          "x": 797,
+          "y": 1794,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 2697,
+            "y": 2109
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-1912058201--88-118413.svg",
+      "kind": "icon",
+      "name": "Group 1912058201",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:118413",
+        "nodeName": "Group 1912058201",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118412",
+        "parentName": "Frame 1912058192",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227308",
+          "Frame 2147227257",
+          "Frame 1912058192",
+          "Group 1912058201"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 10,
+          "width": 18,
+          "height": 18,
+          "absolute": {
+            "x": 3557,
+            "y": 1871
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-1912058201--88-118913.svg",
+      "kind": "icon",
+      "name": "Group 1912058201",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:118913",
+        "nodeName": "Group 1912058201",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118877",
+        "parentName": "Group 2147227628",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227628",
+          "Group 1912058201"
+        ],
+        "bounds": {
+          "x": 3157,
+          "y": 533,
+          "width": 18,
+          "height": 18,
+          "absolute": {
+            "x": 5057,
+            "y": 848
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-1912058201--88-118997.svg",
+      "kind": "icon",
+      "name": "Group 1912058201",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:118997",
+        "nodeName": "Group 1912058201",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118996",
+        "parentName": "Frame 1912058192",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227330",
+          "Group 2147227329",
+          "Group 2147227308",
+          "Frame 2147227257",
+          "Frame 1912058192",
+          "Group 1912058201"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 10,
+          "width": 18,
+          "height": 18,
+          "absolute": {
+            "x": 5058,
+            "y": 1868
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-1912058201--88-119369.svg",
+      "kind": "icon",
+      "name": "Group 1912058201",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119369",
+        "nodeName": "Group 1912058201",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119368",
+        "parentName": "Frame 1912058192",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227681",
+          "Group 2147227308",
+          "Frame 2147227257",
+          "Frame 1912058192",
+          "Group 1912058201"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 10,
+          "width": 18,
+          "height": 18,
+          "absolute": {
+            "x": 3557,
+            "y": 850
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-1912058201--88-119589.svg",
+      "kind": "icon",
+      "name": "Group 1912058201",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119589",
+        "nodeName": "Group 1912058201",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119588",
+        "parentName": "Frame 1912058192",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227680",
+          "Group 2147227308",
+          "Frame 2147227257",
+          "Frame 1912058192",
+          "Group 1912058201"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 10,
+          "width": 18,
+          "height": 18,
+          "absolute": {
+            "x": 2057,
+            "y": 850
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-1912058201--88-119906.svg",
+      "kind": "icon",
+      "name": "Group 1912058201",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119906",
+        "nodeName": "Group 1912058201",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119905",
+        "parentName": "Frame 1912058192",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227678",
+          "Group 2147227443",
+          "Frame 2147227257",
+          "Frame 1912058192",
+          "Group 1912058201"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 10,
+          "width": 18,
+          "height": 18,
+          "absolute": {
+            "x": 6578,
+            "y": 848
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-1912058201--88-120120.svg",
+      "kind": "icon",
+      "name": "Group 1912058201",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:120120",
+        "nodeName": "Group 1912058201",
+        "nodeType": "INSTANCE",
+        "parentId": "88:120119",
+        "parentName": "Frame 1912058192",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227679",
+          "Group 2147227308",
+          "Frame 2147227257",
+          "Frame 1912058192",
+          "Group 1912058201"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 10,
+          "width": 18,
+          "height": 18,
+          "absolute": {
+            "x": 8118,
+            "y": 848
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-118389.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:118389",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118387",
+        "parentName": "Frame 1912058190",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227308",
+          "Frame 1912058190",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 52,
+          "y": 2,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 3609,
+            "y": 1787
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-118529.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:118529",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118527",
+        "parentName": "Frame 1912058194",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227338",
+          "Frame 1912058194",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 130,
+          "y": 23.999998092651367,
+          "width": 15.999998092651367,
+          "height": 15.999998092651367,
+          "absolute": {
+            "x": 3995,
+            "y": 1941
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-118536.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:118536",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118534",
+        "parentName": "Frame 1912058194",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Frame 1912058194",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 147,
+          "y": 23.999998092651367,
+          "width": 15.999998092651367,
+          "height": 15.999998092651367,
+          "absolute": {
+            "x": 3677,
+            "y": 2755
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-118541.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:118541",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118539",
+        "parentName": "Frame 2147227263",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Frame 2147227263",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 82,
+          "y": 8,
+          "width": 15.999998092651367,
+          "height": 15.999998092651367,
+          "absolute": {
+            "x": 3825,
+            "y": 2739
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-118660.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:118660",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118625",
+        "parentName": "Group 2147227478",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227478",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 6525,
+          "y": 2332,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 8425,
+            "y": 2647
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-118664.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:118664",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118661",
+        "parentName": "Group 2147227498",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227478",
+          "Group 2147227498",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 6365,
+          "y": 2332,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 8265,
+            "y": 2647
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-118670.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:118670",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118665",
+        "parentName": "Group 2147227497",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227478",
+          "Group 2147227497",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 6525,
+          "y": 2380,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 8425,
+            "y": 2695
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-118671.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:118671",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118665",
+        "parentName": "Group 2147227497",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227478",
+          "Group 2147227497",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 6525,
+          "y": 2428,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 8425,
+            "y": 2743
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-118672.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:118672",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118665",
+        "parentName": "Group 2147227497",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227478",
+          "Group 2147227497",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 6908,
+          "y": 2428,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 8808,
+            "y": 2743
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-118831.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:118831",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118829",
+        "parentName": "Frame 2147227074",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227657",
+          "Frame 2147227086",
+          "Frame 1912058193",
+          "Frame 2147227074",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 80,
+          "y": 18.999998092651367,
+          "width": 15.999998092651367,
+          "height": 15.999998092651367,
+          "absolute": {
+            "x": 2125,
+            "y": 1660
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-118836.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:118836",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118834",
+        "parentName": "Frame 2147227074",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227657",
+          "Frame 2147227087",
+          "Frame 1912058193",
+          "Frame 2147227074",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 64,
+          "y": 3,
+          "width": 15.999998092651367,
+          "height": 15.999998092651367,
+          "absolute": {
+            "x": 2272,
+            "y": 1644
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-118893.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:118893",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118891",
+        "parentName": "Frame 1912058190",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227628",
+          "Frame 1912058190",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 52,
+          "y": 2,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 5109,
+            "y": 764
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-118973.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:118973",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118971",
+        "parentName": "Frame 1912058190",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227330",
+          "Group 2147227329",
+          "Group 2147227308",
+          "Frame 1912058190",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 52,
+          "y": 2,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 5110,
+            "y": 1784
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-119227.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119227",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119225",
+        "parentName": "Frame 2147227266",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Frame 2147227266",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 82,
+          "y": 8,
+          "width": 15.999998092651367,
+          "height": 15.999998092651367,
+          "absolute": {
+            "x": 3948,
+            "y": 2484
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-119282.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119282",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119280",
+        "parentName": "Frame 2147227074",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Frame 2147227259",
+          "Frame 1912058193",
+          "Frame 2147227074",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 64,
+          "y": 3,
+          "width": 15.999998092651367,
+          "height": 15.999998092651367,
+          "absolute": {
+            "x": 2272,
+            "y": 2110
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-119287.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119287",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119285",
+        "parentName": "Frame 2147227074",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Frame 2147227267",
+          "Frame 1912058193",
+          "Frame 2147227074",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 64,
+          "y": 3,
+          "width": 15.999998092651367,
+          "height": 15.999998092651367,
+          "absolute": {
+            "x": 2272,
+            "y": 2110
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-119308.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119308",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119306",
+        "parentName": "Frame 2147227074",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227658",
+          "Frame 2147227076",
+          "Frame 1912058193",
+          "Frame 2147227074",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 80,
+          "y": 18.999998092651367,
+          "width": 15.999998092651367,
+          "height": 15.999998092651367,
+          "absolute": {
+            "x": 4795,
+            "y": 1610
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-119313.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119313",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119311",
+        "parentName": "Frame 2147227074",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227658",
+          "Frame 2147227268",
+          "Frame 1912058193",
+          "Frame 2147227074",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 80,
+          "y": 18.999998092651367,
+          "width": 15.999998092651367,
+          "height": 15.999998092651367,
+          "absolute": {
+            "x": 4919,
+            "y": 1610
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-119345.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119345",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119343",
+        "parentName": "Frame 1912058190",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227681",
+          "Group 2147227308",
+          "Frame 1912058190",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 52,
+          "y": 2,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 3609,
+            "y": 766
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-119436.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119436",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119434",
+        "parentName": "Frame 1912058194",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227681",
+          "Group 2147227338",
+          "Frame 1912058194",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 130,
+          "y": 23.999998092651367,
+          "width": 15.999998092651367,
+          "height": 15.999998092651367,
+          "absolute": {
+            "x": 3995,
+            "y": 919
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-119471.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119471",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119469",
+        "parentName": "Frame 1912058194",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227681",
+          "Group 2147227339",
+          "Frame 1912058194",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 147,
+          "y": 23.999998092651367,
+          "width": 15.999998092651367,
+          "height": 15.999998092651367,
+          "absolute": {
+            "x": 4012,
+            "y": 1265
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-119528.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119528",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119526",
+        "parentName": "Frame 2147227074",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227681",
+          "Group 2147227659",
+          "Frame 2147227076",
+          "Frame 1912058193",
+          "Frame 2147227074",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 80,
+          "y": 18.999998092651367,
+          "width": 15.999998092651367,
+          "height": 15.999998092651367,
+          "absolute": {
+            "x": 4797,
+            "y": 589
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-119533.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119533",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119531",
+        "parentName": "Frame 2147227074",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227681",
+          "Group 2147227659",
+          "Frame 2147227268",
+          "Frame 1912058193",
+          "Frame 2147227074",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 80,
+          "y": 18.999998092651367,
+          "width": 15.999998092651367,
+          "height": 15.999998092651367,
+          "absolute": {
+            "x": 4921,
+            "y": 589
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-119565.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119565",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119563",
+        "parentName": "Frame 1912058190",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227680",
+          "Group 2147227308",
+          "Frame 1912058190",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 52,
+          "y": 2,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 2109,
+            "y": 766
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-119721.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119721",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119719",
+        "parentName": "Frame 2147227074",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227680",
+          "Group 2147227676",
+          "Group 2147227660",
+          "Frame 2147227076",
+          "Frame 1912058193",
+          "Frame 2147227074",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 80,
+          "y": 18.999998092651367,
+          "width": 15.999998092651367,
+          "height": 15.999998092651367,
+          "absolute": {
+            "x": 3296,
+            "y": 589
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-119726.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119726",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119724",
+        "parentName": "Frame 2147227074",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227680",
+          "Group 2147227676",
+          "Group 2147227660",
+          "Frame 2147227268",
+          "Frame 1912058193",
+          "Frame 2147227074",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 80,
+          "y": 18.999998092651367,
+          "width": 15.999998092651367,
+          "height": 15.999998092651367,
+          "absolute": {
+            "x": 3420,
+            "y": 589
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-119764.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119764",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119762",
+        "parentName": "Frame 2147227074",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227677",
+          "Group 2147227660",
+          "Frame 2147227076",
+          "Frame 1912058193",
+          "Frame 2147227074",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 80,
+          "y": 18.999998092651367,
+          "width": 15.999998092651367,
+          "height": 15.999998092651367,
+          "absolute": {
+            "x": 3007,
+            "y": 2926
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-119769.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119769",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119767",
+        "parentName": "Frame 2147227074",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227677",
+          "Group 2147227660",
+          "Frame 2147227268",
+          "Frame 1912058193",
+          "Frame 2147227074",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 80,
+          "y": 18.999998092651367,
+          "width": 15.999998092651367,
+          "height": 15.999998092651367,
+          "absolute": {
+            "x": 3131,
+            "y": 2926
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-119781.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119781",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119779",
+        "parentName": "Frame 2147227074",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Frame 2147227268",
+          "Frame 1912058193",
+          "Frame 2147227074",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 80,
+          "y": 18.999998092651367,
+          "width": 15.999998092651367,
+          "height": 15.999998092651367,
+          "absolute": {
+            "x": 2125,
+            "y": 2126
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-119790.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119790",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118311",
+        "parentName": "Frame 2147227269",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 561,
+          "y": 1811,
+          "width": 15.999998092651367,
+          "height": 15.999998092651367,
+          "absolute": {
+            "x": 2461,
+            "y": 2126
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-119827.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119827",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119825",
+        "parentName": "Frame 1912058193",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227678",
+          "Frame 2147227085",
+          "Frame 1912059666",
+          "Frame 1912058193",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 168,
+          "y": 27,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 7010,
+            "y": 551
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-119830.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119830",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119828",
+        "parentName": "Frame 1912058192",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227678",
+          "Frame 2147227085",
+          "Frame 1912059666",
+          "Frame 1912058192",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 168,
+          "y": 27,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 7010,
+            "y": 593
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-119833.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119833",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119831",
+        "parentName": "Frame 1912058194",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227678",
+          "Frame 2147227085",
+          "Frame 1912059666",
+          "Frame 1912058194",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 168,
+          "y": 27,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 7010,
+            "y": 635
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-119836.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119836",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119834",
+        "parentName": "Frame 1912058195",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227678",
+          "Frame 2147227085",
+          "Frame 1912059666",
+          "Frame 1912058195",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 168,
+          "y": 27,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 7010,
+            "y": 677
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-119882.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119882",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119880",
+        "parentName": "Frame 1912058190",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227678",
+          "Group 2147227443",
+          "Frame 1912058190",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 52,
+          "y": 2,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 6630,
+            "y": 764
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-120041.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:120041",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:120039",
+        "parentName": "Frame 1912058193",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227679",
+          "Frame 1912058194",
+          "Frame 1912059666",
+          "Frame 1912058193",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 168,
+          "y": 27,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 8550,
+            "y": 551
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-120044.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:120044",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:120042",
+        "parentName": "Frame 1912058192",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227679",
+          "Frame 1912058194",
+          "Frame 1912059666",
+          "Frame 1912058192",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 168,
+          "y": 27,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 8550,
+            "y": 593
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-120047.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:120047",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:120045",
+        "parentName": "Frame 1912058194",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227679",
+          "Frame 1912058194",
+          "Frame 1912059666",
+          "Frame 1912058194",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 168,
+          "y": 27,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 8550,
+            "y": 635
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-120050.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:120050",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:120048",
+        "parentName": "Frame 1912058195",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227679",
+          "Frame 1912058194",
+          "Frame 1912059666",
+          "Frame 1912058195",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 168,
+          "y": 27,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 8550,
+            "y": 677
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "arrow01-down-line--88-120096.svg",
+      "kind": "icon",
+      "name": "arrow01-down-line",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:120096",
+        "nodeName": "arrow01-down-line",
+        "nodeType": "INSTANCE",
+        "parentId": "88:120094",
+        "parentName": "Frame 1912058190",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227679",
+          "Group 2147227308",
+          "Frame 1912058190",
+          "arrow01-down-line"
+        ],
+        "bounds": {
+          "x": 52,
+          "y": 2,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 8170,
+            "y": 764
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "产物-转曲--88-118382.svg",
+      "kind": "icon",
+      "name": "产物-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:118382",
+        "nodeName": "产物-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118381",
+        "parentName": "Frame 7",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227308",
+          "Frame 6",
+          "Frame 7",
+          "产物-转曲"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 9,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 3557,
+            "y": 1694
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "产物-转曲--88-118887.svg",
+      "kind": "icon",
+      "name": "产物-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:118887",
+        "nodeName": "产物-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118877",
+        "parentName": "Group 2147227628",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227628",
+          "产物-转曲"
+        ],
+        "bounds": {
+          "x": 3157,
+          "y": 356,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 5057,
+            "y": 671
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "产物-转曲--88-118966.svg",
+      "kind": "icon",
+      "name": "产物-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:118966",
+        "nodeName": "产物-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118965",
+        "parentName": "Frame 7",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227330",
+          "Group 2147227329",
+          "Group 2147227308",
+          "Frame 6",
+          "Frame 7",
+          "产物-转曲"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 9,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 5058,
+            "y": 1691
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "产物-转曲--88-119338.svg",
+      "kind": "icon",
+      "name": "产物-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119338",
+        "nodeName": "产物-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119337",
+        "parentName": "Frame 7",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227681",
+          "Group 2147227308",
+          "Frame 6",
+          "Frame 7",
+          "产物-转曲"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 9,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 3557,
+            "y": 673
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "产物-转曲--88-119558.svg",
+      "kind": "icon",
+      "name": "产物-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119558",
+        "nodeName": "产物-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119557",
+        "parentName": "Frame 7",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227680",
+          "Group 2147227308",
+          "Frame 6",
+          "Frame 7",
+          "产物-转曲"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 9,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 2057,
+            "y": 673
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "产物-转曲--88-119875.svg",
+      "kind": "icon",
+      "name": "产物-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119875",
+        "nodeName": "产物-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119874",
+        "parentName": "Frame 7",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227678",
+          "Group 2147227443",
+          "Frame 6",
+          "Frame 7",
+          "产物-转曲"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 9,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 6578,
+            "y": 671
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "产物-转曲--88-120089.svg",
+      "kind": "icon",
+      "name": "产物-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:120089",
+        "nodeName": "产物-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:120088",
+        "parentName": "Frame 7",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227679",
+          "Group 2147227308",
+          "Frame 6",
+          "Frame 7",
+          "产物-转曲"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 9,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 8118,
+            "y": 671
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "列表切换-转曲--88-119209.svg",
+      "kind": "icon",
+      "name": "列表切换-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119209",
+        "nodeName": "列表切换-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119208",
+        "parentName": "Frame 1912058190",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Frame 2147227086",
+          "Frame 1912058190",
+          "列表切换-转曲"
+        ],
+        "bounds": {
+          "x": 7.999999523162842,
+          "y": 7.999999523162842,
+          "width": 14.000000953674316,
+          "height": 14.000000953674316,
+          "absolute": {
+            "x": 2246,
+            "y": 1493
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "列表切换-转曲--88-119218.svg",
+      "kind": "icon",
+      "name": "列表切换-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119218",
+        "nodeName": "列表切换-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119217",
+        "parentName": "Frame 1912058190",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Frame 2147227087",
+          "Frame 1912058190",
+          "列表切换-转曲"
+        ],
+        "bounds": {
+          "x": 7.999999523162842,
+          "y": 7.999999523162842,
+          "width": 14.000000953674316,
+          "height": 14.000000953674316,
+          "absolute": {
+            "x": 2057,
+            "y": 1493
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "列表切换-转曲--88-119275.svg",
+      "kind": "icon",
+      "name": "列表切换-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119275",
+        "nodeName": "列表切换-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119274",
+        "parentName": "Frame 1912058190",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227656",
+          "Frame 2147227271",
+          "Frame 1912058190",
+          "列表切换-转曲"
+        ],
+        "bounds": {
+          "x": 7.999999523162842,
+          "y": 7.999999523162842,
+          "width": 14.000000953674316,
+          "height": 14.000000953674316,
+          "absolute": {
+            "x": 4885,
+            "y": 1516
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "列表切换-转曲--88-119520.svg",
+      "kind": "icon",
+      "name": "列表切换-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119520",
+        "nodeName": "列表切换-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119519",
+        "parentName": "Frame 1912058190",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227681",
+          "Group 2147227655",
+          "Frame 2147227271",
+          "Frame 1912058190",
+          "列表切换-转曲"
+        ],
+        "bounds": {
+          "x": 7.999999523162842,
+          "y": 7.999999523162842,
+          "width": 14.000000953674316,
+          "height": 14.000000953674316,
+          "absolute": {
+            "x": 4885,
+            "y": 495
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "列表切换-转曲--88-119713.svg",
+      "kind": "icon",
+      "name": "列表切换-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119713",
+        "nodeName": "列表切换-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119712",
+        "parentName": "Frame 1912058190",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227680",
+          "Group 2147227676",
+          "Frame 2147227266",
+          "Frame 1912058190",
+          "列表切换-转曲"
+        ],
+        "bounds": {
+          "x": 7.999999523162842,
+          "y": 7.999999523162842,
+          "width": 14.000000953674316,
+          "height": 14.000000953674316,
+          "absolute": {
+            "x": 3385,
+            "y": 495
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "列表切换-转曲--88-119756.svg",
+      "kind": "icon",
+      "name": "列表切换-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119756",
+        "nodeName": "列表切换-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119755",
+        "parentName": "Frame 1912058190",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227677",
+          "Frame 2147227266",
+          "Frame 1912058190",
+          "列表切换-转曲"
+        ],
+        "bounds": {
+          "x": 7.999999523162842,
+          "y": 7.999999523162842,
+          "width": 14.000000953674316,
+          "height": 14.000000953674316,
+          "absolute": {
+            "x": 3096,
+            "y": 2832
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "成功--88-118353.svg",
+      "kind": "icon",
+      "name": "成功",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:118353",
+        "nodeName": "成功",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118352",
+        "parentName": "Frame 2147227261",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Frame 2147227261",
+          "成功"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 10,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 2832,
+            "y": 2627
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "成功--88-118691.svg",
+      "kind": "icon",
+      "name": "成功",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:118691",
+        "nodeName": "成功",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118690",
+        "parentName": "Frame 2147227264",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Frame 2147227264",
+          "成功"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 10,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 8999,
+            "y": 3066
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "技能-转曲--88-118379.svg",
+      "kind": "icon",
+      "name": "技能-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:118379",
+        "nodeName": "技能-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118378",
+        "parentName": "Frame 6",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227308",
+          "Frame 6",
+          "Frame 6",
+          "技能-转曲"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 9,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 3557,
+            "y": 1650
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "技能-转曲--88-118885.svg",
+      "kind": "icon",
+      "name": "技能-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:118885",
+        "nodeName": "技能-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118877",
+        "parentName": "Group 2147227628",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227628",
+          "技能-转曲"
+        ],
+        "bounds": {
+          "x": 3157,
+          "y": 312,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 5057,
+            "y": 627
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "技能-转曲--88-118963.svg",
+      "kind": "icon",
+      "name": "技能-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:118963",
+        "nodeName": "技能-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118962",
+        "parentName": "Frame 6",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227330",
+          "Group 2147227329",
+          "Group 2147227308",
+          "Frame 6",
+          "Frame 6",
+          "技能-转曲"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 9,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 5058,
+            "y": 1647
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "技能-转曲--88-119335.svg",
+      "kind": "icon",
+      "name": "技能-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119335",
+        "nodeName": "技能-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119334",
+        "parentName": "Frame 6",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227681",
+          "Group 2147227308",
+          "Frame 6",
+          "Frame 6",
+          "技能-转曲"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 9,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 3557,
+            "y": 629
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "技能-转曲--88-119555.svg",
+      "kind": "icon",
+      "name": "技能-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119555",
+        "nodeName": "技能-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119554",
+        "parentName": "Frame 6",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227680",
+          "Group 2147227308",
+          "Frame 6",
+          "Frame 6",
+          "技能-转曲"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 9,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 2057,
+            "y": 629
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "技能-转曲--88-119872.svg",
+      "kind": "icon",
+      "name": "技能-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119872",
+        "nodeName": "技能-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119871",
+        "parentName": "Frame 6",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227678",
+          "Group 2147227443",
+          "Frame 6",
+          "Frame 6",
+          "技能-转曲"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 9,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 6578,
+            "y": 627
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "技能-转曲--88-120086.svg",
+      "kind": "icon",
+      "name": "技能-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:120086",
+        "nodeName": "技能-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:120085",
+        "parentName": "Frame 6",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227679",
+          "Group 2147227308",
+          "Frame 6",
+          "Frame 6",
+          "技能-转曲"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 9,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 8118,
+            "y": 627
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "收起--88-119039.svg",
+      "kind": "icon",
+      "name": "收起",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119039",
+        "nodeName": "收起",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119038",
+        "parentName": "Frame 1912057183",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227330",
+          "Group 2147227176",
+          "Frame 1912057238",
+          "Frame 1912057183",
+          "收起"
+        ],
+        "bounds": {
+          "x": 0,
+          "y": 5.6283769607543945,
+          "width": 13.153940200805664,
+          "height": 12.743246078491211,
+          "absolute": {
+            "x": 5359,
+            "y": 1579.62841796875
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "收起--88-119044.svg",
+      "kind": "icon",
+      "name": "收起",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119044",
+        "nodeName": "收起",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119043",
+        "parentName": "Frame 1912057188",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227330",
+          "Group 2147227176",
+          "Frame 1912057238",
+          "Frame 1912057188",
+          "收起"
+        ],
+        "bounds": {
+          "x": 20,
+          "y": 5.5,
+          "width": 13,
+          "height": 13,
+          "absolute": {
+            "x": 5379,
+            "y": 1607.5
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "收起--88-119060.svg",
+      "kind": "icon",
+      "name": "收起",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119060",
+        "nodeName": "收起",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119059",
+        "parentName": "Frame 1912057238",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227330",
+          "Group 2147227176",
+          "Frame 1912057238",
+          "Frame 1912057238",
+          "收起"
+        ],
+        "bounds": {
+          "x": 20,
+          "y": 19,
+          "width": 13.999999046325684,
+          "height": 13.562889099121094,
+          "absolute": {
+            "x": 5379,
+            "y": 1705
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "知识-转曲--88-118376.svg",
+      "kind": "icon",
+      "name": "知识-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:118376",
+        "nodeName": "知识-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118375",
+        "parentName": "Frame 5",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227308",
+          "Frame 6",
+          "Frame 5",
+          "知识-转曲"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 9,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 3557,
+            "y": 1606
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "知识-转曲--88-118883.svg",
+      "kind": "icon",
+      "name": "知识-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:118883",
+        "nodeName": "知识-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118877",
+        "parentName": "Group 2147227628",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227628",
+          "知识-转曲"
+        ],
+        "bounds": {
+          "x": 3157,
+          "y": 268,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 5057,
+            "y": 583
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "知识-转曲--88-118960.svg",
+      "kind": "icon",
+      "name": "知识-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:118960",
+        "nodeName": "知识-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118959",
+        "parentName": "Frame 5",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227330",
+          "Group 2147227329",
+          "Group 2147227308",
+          "Frame 6",
+          "Frame 5",
+          "知识-转曲"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 9,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 5058,
+            "y": 1603
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "知识-转曲--88-119332.svg",
+      "kind": "icon",
+      "name": "知识-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119332",
+        "nodeName": "知识-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119331",
+        "parentName": "Frame 5",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227681",
+          "Group 2147227308",
+          "Frame 6",
+          "Frame 5",
+          "知识-转曲"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 9,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 3557,
+            "y": 585
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "知识-转曲--88-119552.svg",
+      "kind": "icon",
+      "name": "知识-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119552",
+        "nodeName": "知识-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119551",
+        "parentName": "Frame 5",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227680",
+          "Group 2147227308",
+          "Frame 6",
+          "Frame 5",
+          "知识-转曲"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 9,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 2057,
+            "y": 585
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "知识-转曲--88-119869.svg",
+      "kind": "icon",
+      "name": "知识-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119869",
+        "nodeName": "知识-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119868",
+        "parentName": "Frame 5",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227678",
+          "Group 2147227443",
+          "Frame 6",
+          "Frame 5",
+          "知识-转曲"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 9,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 6578,
+            "y": 583
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "知识-转曲--88-120083.svg",
+      "kind": "icon",
+      "name": "知识-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:120083",
+        "nodeName": "知识-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:120082",
+        "parentName": "Frame 5",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227679",
+          "Group 2147227308",
+          "Frame 6",
+          "Frame 5",
+          "知识-转曲"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 9,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 8118,
+            "y": 583
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "筛选-转曲--88-118391.svg",
+      "kind": "icon",
+      "name": "筛选-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:118391",
+        "nodeName": "筛选-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118367",
+        "parentName": "Group 2147227308",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227308",
+          "筛选-转曲"
+        ],
+        "bounds": {
+          "x": 1877,
+          "y": 1472,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 3777,
+            "y": 1787
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "筛选-转曲--88-118895.svg",
+      "kind": "icon",
+      "name": "筛选-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:118895",
+        "nodeName": "筛选-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118877",
+        "parentName": "Group 2147227628",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227628",
+          "筛选-转曲"
+        ],
+        "bounds": {
+          "x": 3377,
+          "y": 449,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 5277,
+            "y": 764
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "筛选-转曲--88-118975.svg",
+      "kind": "icon",
+      "name": "筛选-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:118975",
+        "nodeName": "筛选-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118951",
+        "parentName": "Group 2147227308",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227330",
+          "Group 2147227329",
+          "Group 2147227308",
+          "筛选-转曲"
+        ],
+        "bounds": {
+          "x": 3378,
+          "y": 1469,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 5278,
+            "y": 1784
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "筛选-转曲--88-119347.svg",
+      "kind": "icon",
+      "name": "筛选-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119347",
+        "nodeName": "筛选-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119323",
+        "parentName": "Group 2147227308",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227681",
+          "Group 2147227308",
+          "筛选-转曲"
+        ],
+        "bounds": {
+          "x": 1877,
+          "y": 451,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 3777,
+            "y": 766
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "筛选-转曲--88-119567.svg",
+      "kind": "icon",
+      "name": "筛选-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119567",
+        "nodeName": "筛选-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119543",
+        "parentName": "Group 2147227308",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227680",
+          "Group 2147227308",
+          "筛选-转曲"
+        ],
+        "bounds": {
+          "x": 377,
+          "y": 451,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 2277,
+            "y": 766
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "筛选-转曲--88-119884.svg",
+      "kind": "icon",
+      "name": "筛选-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119884",
+        "nodeName": "筛选-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119860",
+        "parentName": "Group 2147227443",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227678",
+          "Group 2147227443",
+          "筛选-转曲"
+        ],
+        "bounds": {
+          "x": 4898,
+          "y": 449,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 6798,
+            "y": 764
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "筛选-转曲--88-120098.svg",
+      "kind": "icon",
+      "name": "筛选-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:120098",
+        "nodeName": "筛选-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:120074",
+        "parentName": "Group 2147227308",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227679",
+          "Group 2147227308",
+          "筛选-转曲"
+        ],
+        "bounds": {
+          "x": 6438,
+          "y": 449,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 8338,
+            "y": 764
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "设置-转曲--88-118385.svg",
+      "kind": "icon",
+      "name": "设置-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:118385",
+        "nodeName": "设置-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118384",
+        "parentName": "Frame 2",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227308",
+          "Frame 6",
+          "Frame 2",
+          "设置-转曲"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 9,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 3557,
+            "y": 1738
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "设置-转曲--88-118889.svg",
+      "kind": "icon",
+      "name": "设置-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:118889",
+        "nodeName": "设置-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118877",
+        "parentName": "Group 2147227628",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227628",
+          "设置-转曲"
+        ],
+        "bounds": {
+          "x": 3157,
+          "y": 400,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 5057,
+            "y": 715
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "设置-转曲--88-118969.svg",
+      "kind": "icon",
+      "name": "设置-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:118969",
+        "nodeName": "设置-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:118968",
+        "parentName": "Frame 2",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227330",
+          "Group 2147227329",
+          "Group 2147227308",
+          "Frame 6",
+          "Frame 2",
+          "设置-转曲"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 9,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 5058,
+            "y": 1735
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "设置-转曲--88-119341.svg",
+      "kind": "icon",
+      "name": "设置-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119341",
+        "nodeName": "设置-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119340",
+        "parentName": "Frame 2",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227681",
+          "Group 2147227308",
+          "Frame 6",
+          "Frame 2",
+          "设置-转曲"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 9,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 3557,
+            "y": 717
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "设置-转曲--88-119561.svg",
+      "kind": "icon",
+      "name": "设置-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119561",
+        "nodeName": "设置-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119560",
+        "parentName": "Frame 2",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227680",
+          "Group 2147227308",
+          "Frame 6",
+          "Frame 2",
+          "设置-转曲"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 9,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 2057,
+            "y": 717
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "设置-转曲--88-119822.svg",
+      "kind": "icon",
+      "name": "设置-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119822",
+        "nodeName": "设置-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119821",
+        "parentName": "Frame 1912059665",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227678",
+          "Frame 2147227085",
+          "Frame 1912059665",
+          "设置-转曲"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 2,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 6854,
+            "y": 478
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "设置-转曲--88-119878.svg",
+      "kind": "icon",
+      "name": "设置-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:119878",
+        "nodeName": "设置-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:119877",
+        "parentName": "Frame 2",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227678",
+          "Group 2147227443",
+          "Frame 6",
+          "Frame 2",
+          "设置-转曲"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 9,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 6578,
+            "y": 715
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "设置-转曲--88-120036.svg",
+      "kind": "icon",
+      "name": "设置-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:120036",
+        "nodeName": "设置-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:120035",
+        "parentName": "Frame 1912059665",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227679",
+          "Frame 1912058194",
+          "Frame 1912059665",
+          "设置-转曲"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 2,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 8394,
+            "y": 478
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "设置-转曲--88-120092.svg",
+      "kind": "icon",
+      "name": "设置-转曲",
+      "confidence": "review",
+      "reason": "小型纯图形组件，但名称未明确说明是图标",
+      "source": {
+        "nodeId": "88:120092",
+        "nodeName": "设置-转曲",
+        "nodeType": "INSTANCE",
+        "parentId": "88:120091",
+        "parentName": "Frame 2",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227679",
+          "Group 2147227308",
+          "Frame 6",
+          "Frame 2",
+          "设置-转曲"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 9,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 8118,
+            "y": 715
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Component-2--88-118705.svg",
+      "kind": "icon",
+      "name": "Component 2",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:118705",
+        "nodeName": "Component 2",
+        "nodeType": "FRAME",
+        "parentId": "88:118700",
+        "parentName": "Group 2147227486",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227486",
+          "Component 2"
+        ],
+        "bounds": {
+          "x": 5038,
+          "y": 1160,
+          "width": 24,
+          "height": 14,
+          "absolute": {
+            "x": 6938,
+            "y": 1475
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Component-2--88-118812.svg",
+      "kind": "icon",
+      "name": "Component 2",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:118812",
+        "nodeName": "Component 2",
+        "nodeType": "FRAME",
+        "parentId": "88:118311",
+        "parentName": "Frame 2147227269",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Component 2"
+        ],
+        "bounds": {
+          "x": 5038,
+          "y": 1617,
+          "width": 24,
+          "height": 14,
+          "absolute": {
+            "x": 6938,
+            "y": 1932
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Component-2--88-119956.svg",
+      "kind": "icon",
+      "name": "Component 2",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119956",
+        "nodeName": "Component 2",
+        "nodeType": "FRAME",
+        "parentId": "88:119951",
+        "parentName": "Group 2147227485",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227678",
+          "Group 2147227485",
+          "Component 2"
+        ],
+        "bounds": {
+          "x": 5572,
+          "y": 319,
+          "width": 24,
+          "height": 14,
+          "absolute": {
+            "x": 7472,
+            "y": 634
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Component-3--88-118815.svg",
+      "kind": "icon",
+      "name": "Component 3",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:118815",
+        "nodeName": "Component 3",
+        "nodeType": "FRAME",
+        "parentId": "88:118311",
+        "parentName": "Frame 2147227269",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Component 3"
+        ],
+        "bounds": {
+          "x": 5038,
+          "y": 1837,
+          "width": 24,
+          "height": 14,
+          "absolute": {
+            "x": 6938,
+            "y": 2152
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-118346.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:118346",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:118311",
+        "parentName": "Frame 2147227269",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 1125,
+          "y": 2218,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 3025,
+            "y": 2533
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-118405.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:118405",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:118404",
+        "parentName": "Frame 1912058191",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227308",
+          "Frame 2147227257",
+          "Frame 1912058191",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 10,
+          "width": 18,
+          "height": 18,
+          "absolute": {
+            "x": 3557,
+            "y": 1827
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-118417.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:118417",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:118416",
+        "parentName": "Frame 13",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227308",
+          "Frame 2147227257",
+          "Frame 9",
+          "Frame 13",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 10,
+          "width": 18,
+          "height": 18,
+          "absolute": {
+            "x": 3557,
+            "y": 1915
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-118424.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:118424",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:118423",
+        "parentName": "Frame 10",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227308",
+          "Frame 2147227257",
+          "Frame 10",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 10,
+          "width": 18,
+          "height": 18,
+          "absolute": {
+            "x": 3557,
+            "y": 1959
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-118430.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:118430",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:118429",
+        "parentName": "Frame 12",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227308",
+          "Frame 2147227257",
+          "Frame 12",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 10,
+          "width": 18,
+          "height": 18,
+          "absolute": {
+            "x": 3557,
+            "y": 2003
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-118854.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:118854",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:118849",
+        "parentName": "Group 2147227637",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227637",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 840,
+          "y": 2120,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 2740,
+            "y": 2435
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-118906.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:118906",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:118877",
+        "parentName": "Group 2147227628",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227628",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 3157,
+          "y": 489,
+          "width": 18,
+          "height": 18,
+          "absolute": {
+            "x": 5057,
+            "y": 804
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-118915.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:118915",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:118877",
+        "parentName": "Group 2147227628",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227628",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 3157,
+          "y": 577,
+          "width": 18,
+          "height": 18,
+          "absolute": {
+            "x": 5057,
+            "y": 892
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-118921.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:118921",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:118877",
+        "parentName": "Group 2147227628",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227628",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 3157,
+          "y": 621,
+          "width": 18,
+          "height": 18,
+          "absolute": {
+            "x": 5057,
+            "y": 936
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-118926.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:118926",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:118877",
+        "parentName": "Group 2147227628",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227628",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 3157,
+          "y": 665,
+          "width": 18,
+          "height": 18,
+          "absolute": {
+            "x": 5057,
+            "y": 980
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-118933.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:118933",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:118877",
+        "parentName": "Group 2147227628",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227628",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 4329,
+          "y": 169,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 6229,
+            "y": 484
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-118989.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:118989",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:118988",
+        "parentName": "Frame 1912058191",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227330",
+          "Group 2147227329",
+          "Group 2147227308",
+          "Frame 2147227257",
+          "Frame 1912058191",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 10,
+          "width": 18,
+          "height": 18,
+          "absolute": {
+            "x": 5058,
+            "y": 1824
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-119001.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119001",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:119000",
+        "parentName": "Frame 13",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227330",
+          "Group 2147227329",
+          "Group 2147227308",
+          "Frame 2147227257",
+          "Frame 9",
+          "Frame 13",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 10,
+          "width": 18,
+          "height": 18,
+          "absolute": {
+            "x": 5058,
+            "y": 1912
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-119008.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119008",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:119007",
+        "parentName": "Frame 10",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227330",
+          "Group 2147227329",
+          "Group 2147227308",
+          "Frame 2147227257",
+          "Frame 10",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 10,
+          "width": 18,
+          "height": 18,
+          "absolute": {
+            "x": 5058,
+            "y": 1956
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-119014.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119014",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:119013",
+        "parentName": "Frame 12",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227330",
+          "Group 2147227329",
+          "Group 2147227308",
+          "Frame 2147227257",
+          "Frame 12",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 10,
+          "width": 18,
+          "height": 18,
+          "absolute": {
+            "x": 5058,
+            "y": 2000
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-119023.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119023",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:119021",
+        "parentName": "Group 2147227468",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227330",
+          "Group 2147227468",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 4330,
+          "y": 1189,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 6230,
+            "y": 1504
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-119177.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119177",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:119175",
+        "parentName": "Group 2147227468",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227468",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 4025,
+          "y": 2213,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 5925,
+            "y": 2528
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-119316.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119316",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:119315",
+        "parentName": "Frame 2147227259",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227658",
+          "Frame 2147227077",
+          "Frame 2147227259",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 0,
+          "y": 4,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 4595,
+            "y": 1595
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-119361.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119361",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:119360",
+        "parentName": "Frame 1912058191",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227681",
+          "Group 2147227308",
+          "Frame 2147227257",
+          "Frame 1912058191",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 10,
+          "width": 18,
+          "height": 18,
+          "absolute": {
+            "x": 3557,
+            "y": 806
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-119373.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119373",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:119372",
+        "parentName": "Frame 13",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227681",
+          "Group 2147227308",
+          "Frame 2147227257",
+          "Frame 9",
+          "Frame 13",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 10,
+          "width": 18,
+          "height": 18,
+          "absolute": {
+            "x": 3557,
+            "y": 894
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-119380.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119380",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:119379",
+        "parentName": "Frame 10",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227681",
+          "Group 2147227308",
+          "Frame 2147227257",
+          "Frame 10",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 10,
+          "width": 18,
+          "height": 18,
+          "absolute": {
+            "x": 3557,
+            "y": 938
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-119386.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119386",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:119385",
+        "parentName": "Frame 12",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227681",
+          "Group 2147227308",
+          "Frame 2147227257",
+          "Frame 12",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 10,
+          "width": 18,
+          "height": 18,
+          "absolute": {
+            "x": 3557,
+            "y": 982
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-119536.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119536",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:119535",
+        "parentName": "Frame 2147227259",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227681",
+          "Group 2147227659",
+          "Frame 2147227077",
+          "Frame 2147227259",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 0,
+          "y": 4,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 4597,
+            "y": 574
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-119581.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119581",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:119580",
+        "parentName": "Frame 1912058191",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227680",
+          "Group 2147227308",
+          "Frame 2147227257",
+          "Frame 1912058191",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 10,
+          "width": 18,
+          "height": 18,
+          "absolute": {
+            "x": 2057,
+            "y": 806
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-119593.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119593",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:119592",
+        "parentName": "Frame 13",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227680",
+          "Group 2147227308",
+          "Frame 2147227257",
+          "Frame 9",
+          "Frame 13",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 10,
+          "width": 18,
+          "height": 18,
+          "absolute": {
+            "x": 2057,
+            "y": 894
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-119600.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119600",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:119599",
+        "parentName": "Frame 10",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227680",
+          "Group 2147227308",
+          "Frame 2147227257",
+          "Frame 10",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 10,
+          "width": 18,
+          "height": 18,
+          "absolute": {
+            "x": 2057,
+            "y": 938
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-119606.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119606",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:119605",
+        "parentName": "Frame 12",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227680",
+          "Group 2147227308",
+          "Frame 2147227257",
+          "Frame 12",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 10,
+          "width": 18,
+          "height": 18,
+          "absolute": {
+            "x": 2057,
+            "y": 982
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-119687.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119687",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:119682",
+        "parentName": "Group 2147227638",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227680",
+          "Group 2147227639",
+          "Group 2147227638",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 1504,
+          "y": 621,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 3404,
+            "y": 936
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-119729.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119729",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:119728",
+        "parentName": "Frame 2147227259",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227680",
+          "Group 2147227676",
+          "Group 2147227660",
+          "Frame 2147227077",
+          "Frame 2147227259",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 0,
+          "y": 4,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 3096,
+            "y": 574
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-119772.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119772",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:119771",
+        "parentName": "Frame 2147227259",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227677",
+          "Group 2147227660",
+          "Frame 2147227077",
+          "Frame 2147227259",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 0,
+          "y": 4,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 2807,
+            "y": 2911
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-119898.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119898",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:119897",
+        "parentName": "Frame 1912058191",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227678",
+          "Group 2147227443",
+          "Frame 2147227257",
+          "Frame 1912058191",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 10,
+          "width": 18,
+          "height": 18,
+          "absolute": {
+            "x": 6578,
+            "y": 804
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-119910.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119910",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:119909",
+        "parentName": "Frame 13",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227678",
+          "Group 2147227443",
+          "Frame 2147227257",
+          "Frame 9",
+          "Frame 13",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 10,
+          "width": 18,
+          "height": 18,
+          "absolute": {
+            "x": 6578,
+            "y": 892
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-119917.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119917",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:119916",
+        "parentName": "Frame 10",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227678",
+          "Group 2147227443",
+          "Frame 2147227257",
+          "Frame 10",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 10,
+          "width": 18,
+          "height": 18,
+          "absolute": {
+            "x": 6578,
+            "y": 936
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-119923.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119923",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:119922",
+        "parentName": "Frame 12",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227678",
+          "Group 2147227443",
+          "Frame 2147227257",
+          "Frame 12",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 10,
+          "width": 18,
+          "height": 18,
+          "absolute": {
+            "x": 6578,
+            "y": 980
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-120112.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:120112",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:120111",
+        "parentName": "Frame 1912058191",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227679",
+          "Group 2147227308",
+          "Frame 2147227257",
+          "Frame 1912058191",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 10,
+          "width": 18,
+          "height": 18,
+          "absolute": {
+            "x": 8118,
+            "y": 804
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-120124.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:120124",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:120123",
+        "parentName": "Frame 13",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227679",
+          "Group 2147227308",
+          "Frame 2147227257",
+          "Frame 9",
+          "Frame 13",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 10,
+          "width": 18,
+          "height": 18,
+          "absolute": {
+            "x": 8118,
+            "y": 892
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-120131.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:120131",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:120130",
+        "parentName": "Frame 10",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227679",
+          "Group 2147227308",
+          "Frame 2147227257",
+          "Frame 10",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 10,
+          "width": 18,
+          "height": 18,
+          "absolute": {
+            "x": 8118,
+            "y": 936
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame--88-120137.svg",
+      "kind": "icon",
+      "name": "Frame",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:120137",
+        "nodeName": "Frame",
+        "nodeType": "FRAME",
+        "parentId": "88:120136",
+        "parentName": "Frame 12",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227679",
+          "Group 2147227308",
+          "Frame 2147227257",
+          "Frame 12",
+          "Frame"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 10,
+          "width": 18,
+          "height": 18,
+          "absolute": {
+            "x": 8118,
+            "y": 980
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame-1912058189--88-119210.svg",
+      "kind": "icon",
+      "name": "Frame 1912058189",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119210",
+        "nodeName": "Frame 1912058189",
+        "nodeType": "FRAME",
+        "parentId": "88:119207",
+        "parentName": "Frame 2147227086",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Frame 2147227086",
+          "Frame 1912058189"
+        ],
+        "bounds": {
+          "x": 32,
+          "y": 2,
+          "width": 28,
+          "height": 28,
+          "absolute": {
+            "x": 2268,
+            "y": 1486
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame-1912058189--88-119219.svg",
+      "kind": "icon",
+      "name": "Frame 1912058189",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119219",
+        "nodeName": "Frame 1912058189",
+        "nodeType": "FRAME",
+        "parentId": "88:119216",
+        "parentName": "Frame 2147227087",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Frame 2147227087",
+          "Frame 1912058189"
+        ],
+        "bounds": {
+          "x": 32,
+          "y": 2,
+          "width": 28,
+          "height": 28,
+          "absolute": {
+            "x": 2079,
+            "y": 1486
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame-1912058189--88-119276.svg",
+      "kind": "icon",
+      "name": "Frame 1912058189",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119276",
+        "nodeName": "Frame 1912058189",
+        "nodeType": "FRAME",
+        "parentId": "88:119273",
+        "parentName": "Frame 2147227271",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227656",
+          "Frame 2147227271",
+          "Frame 1912058189"
+        ],
+        "bounds": {
+          "x": 32,
+          "y": 2,
+          "width": 28,
+          "height": 28,
+          "absolute": {
+            "x": 4907,
+            "y": 1509
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame-1912058189--88-119521.svg",
+      "kind": "icon",
+      "name": "Frame 1912058189",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119521",
+        "nodeName": "Frame 1912058189",
+        "nodeType": "FRAME",
+        "parentId": "88:119518",
+        "parentName": "Frame 2147227271",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227681",
+          "Group 2147227655",
+          "Frame 2147227271",
+          "Frame 1912058189"
+        ],
+        "bounds": {
+          "x": 32,
+          "y": 2,
+          "width": 28,
+          "height": 28,
+          "absolute": {
+            "x": 4907,
+            "y": 488
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame-1912058189--88-119714.svg",
+      "kind": "icon",
+      "name": "Frame 1912058189",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119714",
+        "nodeName": "Frame 1912058189",
+        "nodeType": "FRAME",
+        "parentId": "88:119711",
+        "parentName": "Frame 2147227266",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227680",
+          "Group 2147227676",
+          "Frame 2147227266",
+          "Frame 1912058189"
+        ],
+        "bounds": {
+          "x": 32,
+          "y": 2,
+          "width": 28,
+          "height": 28,
+          "absolute": {
+            "x": 3407,
+            "y": 488
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Frame-1912058189--88-119757.svg",
+      "kind": "icon",
+      "name": "Frame 1912058189",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119757",
+        "nodeName": "Frame 1912058189",
+        "nodeType": "FRAME",
+        "parentId": "88:119754",
+        "parentName": "Frame 2147227266",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227677",
+          "Frame 2147227266",
+          "Frame 1912058189"
+        ],
+        "bounds": {
+          "x": 32,
+          "y": 2,
+          "width": 28,
+          "height": 28,
+          "absolute": {
+            "x": 3118,
+            "y": 2825
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Grope--88-119268.svg",
+      "kind": "icon",
+      "name": "Grope",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119268",
+        "nodeName": "Grope",
+        "nodeType": "FRAME",
+        "parentId": "88:119267",
+        "parentName": "Frame 1912058193",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227656",
+          "Group 2147227625",
+          "Frame 1912058197",
+          "Frame 1912058193",
+          "Grope"
+        ],
+        "bounds": {
+          "x": 0,
+          "y": 3,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 4595,
+            "y": 1515
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Grope--88-119513.svg",
+      "kind": "icon",
+      "name": "Grope",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119513",
+        "nodeName": "Grope",
+        "nodeType": "FRAME",
+        "parentId": "88:119512",
+        "parentName": "Frame 1912058193",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227681",
+          "Group 2147227655",
+          "Group 2147227625",
+          "Frame 1912058197",
+          "Frame 1912058193",
+          "Grope"
+        ],
+        "bounds": {
+          "x": 0,
+          "y": 3,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 4595,
+            "y": 494
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Grope--88-119706.svg",
+      "kind": "icon",
+      "name": "Grope",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119706",
+        "nodeName": "Grope",
+        "nodeType": "FRAME",
+        "parentId": "88:119705",
+        "parentName": "Frame 1912058193",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227680",
+          "Group 2147227676",
+          "Group 2147227627",
+          "Frame 1912058197",
+          "Frame 1912058193",
+          "Grope"
+        ],
+        "bounds": {
+          "x": 0,
+          "y": 3,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 3095,
+            "y": 494
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Grope--88-119749.svg",
+      "kind": "icon",
+      "name": "Grope",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119749",
+        "nodeName": "Grope",
+        "nodeType": "FRAME",
+        "parentId": "88:119748",
+        "parentName": "Frame 1912058193",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227677",
+          "Group 2147227627",
+          "Frame 1912058197",
+          "Frame 1912058193",
+          "Grope"
+        ],
+        "bounds": {
+          "x": 0,
+          "y": 3,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 2806,
+            "y": 2831
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-2147227171--I88-118369-903-10957.svg",
+      "kind": "icon",
+      "name": "Group 2147227171",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "I88:118369;903:10957",
+        "nodeName": "Group 2147227171",
+        "nodeType": "GROUP",
+        "parentId": "I88:118369;903:10956",
+        "parentName": "Frame 1912058258",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227308",
+          "logo",
+          "Frame 1912058258",
+          "Group 2147227171"
+        ],
+        "bounds": {
+          "x": 1.000101923942566,
+          "y": 1.5,
+          "width": 33.999549865722656,
+          "height": 26,
+          "absolute": {
+            "x": 3558,
+            "y": 1498
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-2147227171--I88-118862-903-10957.svg",
+      "kind": "icon",
+      "name": "Group 2147227171",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "I88:118862;903:10957",
+        "nodeName": "Group 2147227171",
+        "nodeType": "GROUP",
+        "parentId": "I88:118862;903:10956",
+        "parentName": "Frame 1912058258",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227328",
+          "Group 2147227308",
+          "logo",
+          "Frame 1912058258",
+          "Group 2147227171"
+        ],
+        "bounds": {
+          "x": 1.000101923942566,
+          "y": 1.5,
+          "width": 33.999549865722656,
+          "height": 26,
+          "absolute": {
+            "x": 5118,
+            "y": 475
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-2147227171--I88-118953-903-10957.svg",
+      "kind": "icon",
+      "name": "Group 2147227171",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "I88:118953;903:10957",
+        "nodeName": "Group 2147227171",
+        "nodeType": "GROUP",
+        "parentId": "I88:118953;903:10956",
+        "parentName": "Frame 1912058258",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227330",
+          "Group 2147227329",
+          "Group 2147227308",
+          "logo",
+          "Frame 1912058258",
+          "Group 2147227171"
+        ],
+        "bounds": {
+          "x": 1.000101923942566,
+          "y": 1.5,
+          "width": 33.999549865722656,
+          "height": 26,
+          "absolute": {
+            "x": 5059,
+            "y": 1495
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-2147227171--I88-119325-903-10957.svg",
+      "kind": "icon",
+      "name": "Group 2147227171",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "I88:119325;903:10957",
+        "nodeName": "Group 2147227171",
+        "nodeType": "GROUP",
+        "parentId": "I88:119325;903:10956",
+        "parentName": "Frame 1912058258",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227681",
+          "Group 2147227308",
+          "logo",
+          "Frame 1912058258",
+          "Group 2147227171"
+        ],
+        "bounds": {
+          "x": 1.000101923942566,
+          "y": 1.5,
+          "width": 33.999549865722656,
+          "height": 26,
+          "absolute": {
+            "x": 3558,
+            "y": 477
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-2147227171--I88-119545-903-10957.svg",
+      "kind": "icon",
+      "name": "Group 2147227171",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "I88:119545;903:10957",
+        "nodeName": "Group 2147227171",
+        "nodeType": "GROUP",
+        "parentId": "I88:119545;903:10956",
+        "parentName": "Frame 1912058258",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227680",
+          "Group 2147227308",
+          "logo",
+          "Frame 1912058258",
+          "Group 2147227171"
+        ],
+        "bounds": {
+          "x": 1.000101923942566,
+          "y": 1.5,
+          "width": 33.999549865722656,
+          "height": 26,
+          "absolute": {
+            "x": 2058,
+            "y": 477
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-2147227171--I88-119862-903-10957.svg",
+      "kind": "icon",
+      "name": "Group 2147227171",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "I88:119862;903:10957",
+        "nodeName": "Group 2147227171",
+        "nodeType": "GROUP",
+        "parentId": "I88:119862;903:10956",
+        "parentName": "Frame 1912058258",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227678",
+          "Group 2147227443",
+          "logo",
+          "Frame 1912058258",
+          "Group 2147227171"
+        ],
+        "bounds": {
+          "x": 1.000101923942566,
+          "y": 1.5,
+          "width": 33.999549865722656,
+          "height": 26,
+          "absolute": {
+            "x": 6579,
+            "y": 475
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-2147227171--I88-120076-903-10957.svg",
+      "kind": "icon",
+      "name": "Group 2147227171",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "I88:120076;903:10957",
+        "nodeName": "Group 2147227171",
+        "nodeType": "GROUP",
+        "parentId": "I88:120076;903:10956",
+        "parentName": "Frame 1912058258",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227679",
+          "Group 2147227308",
+          "logo",
+          "Frame 1912058258",
+          "Group 2147227171"
+        ],
+        "bounds": {
+          "x": 1.000101923942566,
+          "y": 1.5,
+          "width": 33.999549865722656,
+          "height": 26,
+          "absolute": {
+            "x": 8119,
+            "y": 475
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-2147227266--88-118397.svg",
+      "kind": "icon",
+      "name": "Group 2147227266",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:118397",
+        "nodeName": "Group 2147227266",
+        "nodeType": "GROUP",
+        "parentId": "88:118367",
+        "parentName": "Group 2147227308",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227308",
+          "Group 2147227266"
+        ],
+        "bounds": {
+          "x": 1847,
+          "y": 1473,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 3747,
+            "y": 1788
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-2147227266--88-118900.svg",
+      "kind": "icon",
+      "name": "Group 2147227266",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:118900",
+        "nodeName": "Group 2147227266",
+        "nodeType": "GROUP",
+        "parentId": "88:118877",
+        "parentName": "Group 2147227628",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227628",
+          "Group 2147227266"
+        ],
+        "bounds": {
+          "x": 3347,
+          "y": 450,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 5247,
+            "y": 765
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-2147227266--88-118981.svg",
+      "kind": "icon",
+      "name": "Group 2147227266",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:118981",
+        "nodeName": "Group 2147227266",
+        "nodeType": "GROUP",
+        "parentId": "88:118951",
+        "parentName": "Group 2147227308",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227330",
+          "Group 2147227329",
+          "Group 2147227308",
+          "Group 2147227266"
+        ],
+        "bounds": {
+          "x": 3348,
+          "y": 1470,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 5248,
+            "y": 1785
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-2147227266--88-119353.svg",
+      "kind": "icon",
+      "name": "Group 2147227266",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119353",
+        "nodeName": "Group 2147227266",
+        "nodeType": "GROUP",
+        "parentId": "88:119323",
+        "parentName": "Group 2147227308",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227681",
+          "Group 2147227308",
+          "Group 2147227266"
+        ],
+        "bounds": {
+          "x": 1847,
+          "y": 452,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 3747,
+            "y": 767
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-2147227266--88-119573.svg",
+      "kind": "icon",
+      "name": "Group 2147227266",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119573",
+        "nodeName": "Group 2147227266",
+        "nodeType": "GROUP",
+        "parentId": "88:119543",
+        "parentName": "Group 2147227308",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227680",
+          "Group 2147227308",
+          "Group 2147227266"
+        ],
+        "bounds": {
+          "x": 347,
+          "y": 452,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 2247,
+            "y": 767
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-2147227266--88-119890.svg",
+      "kind": "icon",
+      "name": "Group 2147227266",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119890",
+        "nodeName": "Group 2147227266",
+        "nodeType": "GROUP",
+        "parentId": "88:119860",
+        "parentName": "Group 2147227443",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227678",
+          "Group 2147227443",
+          "Group 2147227266"
+        ],
+        "bounds": {
+          "x": 4868,
+          "y": 450,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 6768,
+            "y": 765
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-2147227266--88-120104.svg",
+      "kind": "icon",
+      "name": "Group 2147227266",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:120104",
+        "nodeName": "Group 2147227266",
+        "nodeType": "GROUP",
+        "parentId": "88:120074",
+        "parentName": "Group 2147227308",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227679",
+          "Group 2147227308",
+          "Group 2147227266"
+        ],
+        "bounds": {
+          "x": 6408,
+          "y": 450,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 8308,
+            "y": 765
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-2147227303--88-119622.svg",
+      "kind": "icon",
+      "name": "Group 2147227303",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119622",
+        "nodeName": "Group 2147227303",
+        "nodeType": "GROUP",
+        "parentId": "88:119613",
+        "parentName": "Group 2147227311",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227680",
+          "Group 2147227321",
+          "Group 2147227311",
+          "Group 2147227303"
+        ],
+        "bounds": {
+          "x": 827,
+          "y": 619,
+          "width": 24,
+          "height": 24,
+          "absolute": {
+            "x": 2727,
+            "y": 934
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-2147227304--88-118463.svg",
+      "kind": "icon",
+      "name": "Group 2147227304",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:118463",
+        "nodeName": "Group 2147227304",
+        "nodeType": "GROUP",
+        "parentId": "88:118456",
+        "parentName": "Group 2147227651",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227651",
+          "Group 2147227304"
+        ],
+        "bounds": {
+          "x": 2244,
+          "y": 1956.32763671875,
+          "width": 24,
+          "height": 24,
+          "absolute": {
+            "x": 4144,
+            "y": 2271.32763671875
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-2147227409--88-120020.svg",
+      "kind": "icon",
+      "name": "Group 2147227409",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:120020",
+        "nodeName": "Group 2147227409",
+        "nodeType": "GROUP",
+        "parentId": "88:120017",
+        "parentName": "Group 2147227672",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227672",
+          "Group 2147227409"
+        ],
+        "bounds": {
+          "x": 7488,
+          "y": 1187,
+          "width": 24,
+          "height": 14,
+          "absolute": {
+            "x": 9388,
+            "y": 1502
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-2147227409--88-120158.svg",
+      "kind": "icon",
+      "name": "Group 2147227409",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:120158",
+        "nodeName": "Group 2147227409",
+        "nodeType": "GROUP",
+        "parentId": "88:120032",
+        "parentName": "Group 2147227679",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227679",
+          "Group 2147227409"
+        ],
+        "bounds": {
+          "x": 7108,
+          "y": 503,
+          "width": 24,
+          "height": 14,
+          "absolute": {
+            "x": 9008,
+            "y": 818
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-2147227409--88-120194.svg",
+      "kind": "icon",
+      "name": "Group 2147227409",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:120194",
+        "nodeName": "Group 2147227409",
+        "nodeType": "GROUP",
+        "parentId": "88:120191",
+        "parentName": "Group 2147227671",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227679",
+          "Group 2147227673",
+          "Group 2147227671",
+          "Group 2147227409"
+        ],
+        "bounds": {
+          "x": 7108,
+          "y": 321,
+          "width": 24,
+          "height": 14,
+          "absolute": {
+            "x": 9008,
+            "y": 636
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-2147227409--88-120208.svg",
+      "kind": "icon",
+      "name": "Group 2147227409",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:120208",
+        "nodeName": "Group 2147227409",
+        "nodeType": "GROUP",
+        "parentId": "88:120205",
+        "parentName": "Group 2147227671",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227674",
+          "Group 2147227671",
+          "Group 2147227409"
+        ],
+        "bounds": {
+          "x": 6576,
+          "y": 1187,
+          "width": 24,
+          "height": 14,
+          "absolute": {
+            "x": 8476,
+            "y": 1502
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-2147227409--88-120221.svg",
+      "kind": "icon",
+      "name": "Group 2147227409",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:120221",
+        "nodeName": "Group 2147227409",
+        "nodeType": "GROUP",
+        "parentId": "88:120218",
+        "parentName": "Group 2147227671",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227675",
+          "Group 2147227671",
+          "Group 2147227409"
+        ],
+        "bounds": {
+          "x": 7032,
+          "y": 1187,
+          "width": 24,
+          "height": 14,
+          "absolute": {
+            "x": 8932,
+            "y": 1502
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-2147227441--88-118576.svg",
+      "kind": "icon",
+      "name": "Group 2147227441",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:118576",
+        "nodeName": "Group 2147227441",
+        "nodeType": "GROUP",
+        "parentId": "88:118559",
+        "parentName": "Group 2147227479",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227479",
+          "Group 2147227441"
+        ],
+        "bounds": {
+          "x": 6262,
+          "y": 1848,
+          "width": 36,
+          "height": 36,
+          "absolute": {
+            "x": 8162,
+            "y": 2163
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-2147227445--88-118788.svg",
+      "kind": "icon",
+      "name": "Group 2147227445",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:118788",
+        "nodeName": "Group 2147227445",
+        "nodeType": "GROUP",
+        "parentId": "88:118311",
+        "parentName": "Frame 2147227269",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227445"
+        ],
+        "bounds": {
+          "x": 5493,
+          "y": 1617,
+          "width": 24,
+          "height": 14,
+          "absolute": {
+            "x": 7393,
+            "y": 1932
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-2147227445--88-118801.svg",
+      "kind": "icon",
+      "name": "Group 2147227445",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:118801",
+        "nodeName": "Group 2147227445",
+        "nodeType": "GROUP",
+        "parentId": "88:118311",
+        "parentName": "Frame 2147227269",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227445"
+        ],
+        "bounds": {
+          "x": 5493,
+          "y": 1837,
+          "width": 24,
+          "height": 14,
+          "absolute": {
+            "x": 7393,
+            "y": 2152
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-2147227445--88-119961.svg",
+      "kind": "icon",
+      "name": "Group 2147227445",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119961",
+        "nodeName": "Group 2147227445",
+        "nodeType": "GROUP",
+        "parentId": "88:119818",
+        "parentName": "Group 2147227678",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227678",
+          "Group 2147227445"
+        ],
+        "bounds": {
+          "x": 6016,
+          "y": 319,
+          "width": 24,
+          "height": 14,
+          "absolute": {
+            "x": 7916,
+            "y": 634
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-2147227446--88-120145.svg",
+      "kind": "icon",
+      "name": "Group 2147227446",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:120145",
+        "nodeName": "Group 2147227446",
+        "nodeType": "GROUP",
+        "parentId": "88:120032",
+        "parentName": "Group 2147227679",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227679",
+          "Group 2147227446"
+        ],
+        "bounds": {
+          "x": 7554,
+          "y": 321,
+          "width": 24,
+          "height": 14,
+          "absolute": {
+            "x": 9454,
+            "y": 636
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-2147227446--88-120162.svg",
+      "kind": "icon",
+      "name": "Group 2147227446",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:120162",
+        "nodeName": "Group 2147227446",
+        "nodeType": "GROUP",
+        "parentId": "88:120032",
+        "parentName": "Group 2147227679",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227679",
+          "Group 2147227446"
+        ],
+        "bounds": {
+          "x": 7554,
+          "y": 503,
+          "width": 24,
+          "height": 14,
+          "absolute": {
+            "x": 9454,
+            "y": 818
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-2147227449--88-118750.svg",
+      "kind": "icon",
+      "name": "Group 2147227449",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:118750",
+        "nodeName": "Group 2147227449",
+        "nodeType": "GROUP",
+        "parentId": "88:118311",
+        "parentName": "Frame 2147227269",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227449"
+        ],
+        "bounds": {
+          "x": 5493,
+          "y": 1160,
+          "width": 24,
+          "height": 14,
+          "absolute": {
+            "x": 7393,
+            "y": 1475
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-2147227450--88-119939.svg",
+      "kind": "icon",
+      "name": "Group 2147227450",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119939",
+        "nodeName": "Group 2147227450",
+        "nodeType": "GROUP",
+        "parentId": "88:119818",
+        "parentName": "Group 2147227678",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227678",
+          "Group 2147227450"
+        ],
+        "bounds": {
+          "x": 6016,
+          "y": 499,
+          "width": 24,
+          "height": 14,
+          "absolute": {
+            "x": 7916,
+            "y": 814
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-2147227474--88-118622.svg",
+      "kind": "icon",
+      "name": "Group 2147227474",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:118622",
+        "nodeName": "Group 2147227474",
+        "nodeType": "GROUP",
+        "parentId": "88:118609",
+        "parentName": "Group 2147227475",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227475",
+          "Group 2147227474"
+        ],
+        "bounds": {
+          "x": 7896,
+          "y": 1198,
+          "width": 24,
+          "height": 24,
+          "absolute": {
+            "x": 9796,
+            "y": 1513
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-2147227490--88-118754.svg",
+      "kind": "icon",
+      "name": "Group 2147227490",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:118754",
+        "nodeName": "Group 2147227490",
+        "nodeType": "GROUP",
+        "parentId": "88:118311",
+        "parentName": "Frame 2147227269",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227490"
+        ],
+        "bounds": {
+          "x": 5493,
+          "y": 1388,
+          "width": 24,
+          "height": 14,
+          "absolute": {
+            "x": 7393,
+            "y": 1703
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "Group-2147227603--88-119935.svg",
+      "kind": "icon",
+      "name": "Group 2147227603",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119935",
+        "nodeName": "Group 2147227603",
+        "nodeType": "GROUP",
+        "parentId": "88:119818",
+        "parentName": "Group 2147227678",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227678",
+          "Group 2147227603"
+        ],
+        "bounds": {
+          "x": 5572,
+          "y": 499,
+          "width": 24,
+          "height": 14,
+          "absolute": {
+            "x": 7472,
+            "y": 814
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "成功--88-118356.svg",
+      "kind": "icon",
+      "name": "成功",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:118356",
+        "nodeName": "成功",
+        "nodeType": "FRAME",
+        "parentId": "88:118355",
+        "parentName": "Frame 2147227262",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Frame 2147227262",
+          "成功"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 10,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 2998,
+            "y": 2627
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "成功--88-118694.svg",
+      "kind": "icon",
+      "name": "成功",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:118694",
+        "nodeName": "成功",
+        "nodeType": "FRAME",
+        "parentId": "88:118693",
+        "parentName": "Frame 2147227265",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Frame 2147227265",
+          "成功"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 10,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 9194,
+            "y": 3066
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "文件-文件-1-1--88-119050.svg",
+      "kind": "icon",
+      "name": "文件-文件-1 1",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119050",
+        "nodeName": "文件-文件-1 1",
+        "nodeType": "FRAME",
+        "parentId": "88:119049",
+        "parentName": "Frame 1912057236",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227330",
+          "Group 2147227176",
+          "Frame 1912057238",
+          "Frame 1912057237",
+          "Frame 1912057236",
+          "文件-文件-1 1"
+        ],
+        "bounds": {
+          "x": 0,
+          "y": 4,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 5399,
+            "y": 1635
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "文件-文件-1-1--88-119065.svg",
+      "kind": "icon",
+      "name": "文件-文件-1 1",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119065",
+        "nodeName": "文件-文件-1 1",
+        "nodeType": "FRAME",
+        "parentId": "88:119064",
+        "parentName": "Frame 1912057239",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227330",
+          "Group 2147227176",
+          "Frame 1912057238",
+          "Frame 1912057239",
+          "文件-文件-1 1"
+        ],
+        "bounds": {
+          "x": 40,
+          "y": 5,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 5399,
+            "y": 1719
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "文件-文件-1-2--88-119055.svg",
+      "kind": "icon",
+      "name": "文件-文件-1 2",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119055",
+        "nodeName": "文件-文件-1 2",
+        "nodeType": "FRAME",
+        "parentId": "88:119054",
+        "parentName": "Frame 1912057187",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227330",
+          "Group 2147227176",
+          "Frame 1912057238",
+          "Frame 1912057187",
+          "文件-文件-1 2"
+        ],
+        "bounds": {
+          "x": 40,
+          "y": 5,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 5399,
+            "y": 1663
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "文件-文件-1-2--88-119070.svg",
+      "kind": "icon",
+      "name": "文件-文件-1 2",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119070",
+        "nodeName": "文件-文件-1 2",
+        "nodeType": "FRAME",
+        "parentId": "88:119069",
+        "parentName": "Frame 1912057240",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227330",
+          "Group 2147227176",
+          "Frame 1912057238",
+          "Frame 1912057240",
+          "文件-文件-1 2"
+        ],
+        "bounds": {
+          "x": 40,
+          "y": 5,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 5399,
+            "y": 1747
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "文件-文件-1-2--88-119075.svg",
+      "kind": "icon",
+      "name": "文件-文件-1 2",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119075",
+        "nodeName": "文件-文件-1 2",
+        "nodeType": "FRAME",
+        "parentId": "88:119074",
+        "parentName": "Frame 1912057241",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227330",
+          "Group 2147227176",
+          "Frame 1912057238",
+          "Frame 1912057241",
+          "文件-文件-1 2"
+        ],
+        "bounds": {
+          "x": 40,
+          "y": 5,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 5399,
+            "y": 1775
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "文件-文件-1-2--88-119080.svg",
+      "kind": "icon",
+      "name": "文件-文件-1 2",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119080",
+        "nodeName": "文件-文件-1 2",
+        "nodeType": "FRAME",
+        "parentId": "88:119079",
+        "parentName": "Frame 1912057242",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227330",
+          "Group 2147227176",
+          "Frame 1912057238",
+          "Frame 1912057242",
+          "文件-文件-1 2"
+        ],
+        "bounds": {
+          "x": 40,
+          "y": 5,
+          "width": 14,
+          "height": 14,
+          "absolute": {
+            "x": 5399,
+            "y": 1803
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "新增-1--88-118372.svg",
+      "kind": "icon",
+      "name": "新增 1",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:118372",
+        "nodeName": "新增 1",
+        "nodeType": "FRAME",
+        "parentId": "88:118371",
+        "parentName": "Frame 1",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227308",
+          "Frame 6",
+          "Frame 1",
+          "新增 1"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 9,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 3557,
+            "y": 1562
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "新增-1--88-118593.svg",
+      "kind": "icon",
+      "name": "新增 1",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:118593",
+        "nodeName": "新增 1",
+        "nodeType": "FRAME",
+        "parentId": "88:118592",
+        "parentName": "Frame 1912058190",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Frame 1912058249",
+          "Frame 1912058192",
+          "Frame 1912058190",
+          "新增 1"
+        ],
+        "bounds": {
+          "x": 16,
+          "y": 8,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 8128,
+            "y": 1743
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "新增-1--88-118673.svg",
+      "kind": "icon",
+      "name": "新增 1",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:118673",
+        "nodeName": "新增 1",
+        "nodeType": "FRAME",
+        "parentId": "88:118625",
+        "parentName": "Group 2147227478",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227478",
+          "新增 1"
+        ],
+        "bounds": {
+          "x": 6323,
+          "y": 2467,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 8223,
+            "y": 2782
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "新增-1--88-118880.svg",
+      "kind": "icon",
+      "name": "新增 1",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:118880",
+        "nodeName": "新增 1",
+        "nodeType": "FRAME",
+        "parentId": "88:118877",
+        "parentName": "Group 2147227628",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227628",
+          "新增 1"
+        ],
+        "bounds": {
+          "x": 3157,
+          "y": 224,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 5057,
+            "y": 539
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "新增-1--88-118956.svg",
+      "kind": "icon",
+      "name": "新增 1",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:118956",
+        "nodeName": "新增 1",
+        "nodeType": "FRAME",
+        "parentId": "88:118955",
+        "parentName": "Frame 1",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227330",
+          "Group 2147227329",
+          "Group 2147227308",
+          "Frame 6",
+          "Frame 1",
+          "新增 1"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 9,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 5058,
+            "y": 1559
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "新增-1--88-119328.svg",
+      "kind": "icon",
+      "name": "新增 1",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119328",
+        "nodeName": "新增 1",
+        "nodeType": "FRAME",
+        "parentId": "88:119327",
+        "parentName": "Frame 1",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227681",
+          "Group 2147227308",
+          "Frame 6",
+          "Frame 1",
+          "新增 1"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 9,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 3557,
+            "y": 541
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "新增-1--88-119548.svg",
+      "kind": "icon",
+      "name": "新增 1",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119548",
+        "nodeName": "新增 1",
+        "nodeType": "FRAME",
+        "parentId": "88:119547",
+        "parentName": "Frame 1",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227680",
+          "Group 2147227308",
+          "Frame 6",
+          "Frame 1",
+          "新增 1"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 9,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 2057,
+            "y": 541
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "新增-1--88-119852.svg",
+      "kind": "icon",
+      "name": "新增 1",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119852",
+        "nodeName": "新增 1",
+        "nodeType": "FRAME",
+        "parentId": "88:119851",
+        "parentName": "Frame 1912058190",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227678",
+          "Group 2147227442",
+          "Frame 1912058249",
+          "Frame 1912058192",
+          "Frame 1912058190",
+          "新增 1"
+        ],
+        "bounds": {
+          "x": 16,
+          "y": 8,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 7866,
+            "y": 492
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "新增-1--88-119865.svg",
+      "kind": "icon",
+      "name": "新增 1",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:119865",
+        "nodeName": "新增 1",
+        "nodeType": "FRAME",
+        "parentId": "88:119864",
+        "parentName": "Frame 1",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227678",
+          "Group 2147227443",
+          "Frame 6",
+          "Frame 1",
+          "新增 1"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 9,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 6578,
+            "y": 539
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "新增-1--88-120066.svg",
+      "kind": "icon",
+      "name": "新增 1",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:120066",
+        "nodeName": "新增 1",
+        "nodeType": "FRAME",
+        "parentId": "88:120065",
+        "parentName": "Frame 1912058190",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227679",
+          "Group 2147227400",
+          "Frame 1912058249",
+          "Frame 1912058192",
+          "Frame 1912058190",
+          "新增 1"
+        ],
+        "bounds": {
+          "x": 16,
+          "y": 8,
+          "width": 16,
+          "height": 16,
+          "absolute": {
+            "x": 9406,
+            "y": 492
+          }
+        }
+      },
+      "error": null
+    },
+    {
+      "file": "新增-1--88-120079.svg",
+      "kind": "icon",
+      "name": "新增 1",
+      "confidence": "review",
+      "reason": "小型纯矢量容器，需要人工确认边界",
+      "source": {
+        "nodeId": "88:120079",
+        "nodeName": "新增 1",
+        "nodeType": "FRAME",
+        "parentId": "88:120078",
+        "parentName": "Frame 1",
+        "path": [
+          "【0513】产物和自动化任务优化",
+          "Frame 2147227269",
+          "Group 2147227679",
+          "Group 2147227308",
+          "Frame 6",
+          "Frame 1",
+          "新增 1"
+        ],
+        "bounds": {
+          "x": 12,
+          "y": 9,
+          "width": 20,
+          "height": 20,
+          "absolute": {
+            "x": 8118,
+            "y": 539
+          }
+        }
+      },
+      "error": null
+    }
+  ]
+}

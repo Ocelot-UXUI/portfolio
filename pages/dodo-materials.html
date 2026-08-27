@@ -9,17 +9,21 @@
     <link rel="stylesheet" href="../styles/project-navigation.css?v=20260809-14" />
     <script src="../scripts/project-navigation.js?v=20260809-3" defer></script>
     <style>
-      .dodo-materials-intro{max-width:720px;margin:18px 0 0;color:#8f94a1;font-size:15px;line-height:1.8}
-      .dodo-material-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:54px}
-      .dodo-material-card{min-height:280px;padding:30px;display:flex;flex-direction:column;border:1px solid rgba(255,255,255,.14);border-radius:8px;background:#0d0f15}
-      .dodo-material-card:first-child{grid-column:1/-1;min-height:320px;background:linear-gradient(135deg,rgba(64,103,215,.16),#0d0f15 62%);border-color:rgba(92,132,240,.42)}
-      .dodo-material-card small{color:#738fdc;font-size:11px;letter-spacing:.12em}
-      .dodo-material-card h2{margin:30px 0 12px;font-size:clamp(24px,2.4vw,36px);font-weight:620}
-      .dodo-material-card p{max-width:620px;margin:0;color:#9095a1;font-size:14px;line-height:1.8}
-      .dodo-material-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto;padding-top:34px}
-      .dodo-material-link{display:inline-flex;align-items:center;min-height:42px;padding:0 15px;border:1px solid rgba(255,255,255,.18);border-radius:5px;color:#f3f4f7;font-size:13px;text-decoration:none}
-      .dodo-material-link:hover,.dodo-material-link:focus-visible{border-color:#6d91ef;background:rgba(91,127,224,.1)}
-      @media(max-width:760px){.dodo-material-grid{grid-template-columns:1fr}.dodo-material-card:first-child{grid-column:auto}.dodo-material-card{min-height:260px}}
+      .dodo-document{width:min(100%,980px)}
+      .dodo-document pre{margin:0 0 18px;padding:16px 18px;overflow:auto;border:1px solid rgba(255,255,255,.14);background:#0d0f17;color:#d9dbe1;font:12px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre}
+      .dodo-document code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+      .dodo-document :not(pre)>code{padding:2px 5px;border-radius:3px;background:rgba(255,255,255,.08);font-size:.9em}
+      .dodo-document .research-callout{margin:0 0 2px!important}
+      .dodo-document table{width:100%;margin:0 0 20px;border-collapse:collapse;border:1px solid rgba(255,255,255,.14);font-size:13px;line-height:1.6}
+      .dodo-document th,.dodo-document td{padding:10px 12px;vertical-align:top;border:1px solid rgba(255,255,255,.1);text-align:left}
+      .dodo-document th{background:#171a25;color:#fff;font-weight:650}
+      /* 交付物页只保留内容需要的间距，避免文档之间出现空区。 */
+      .deliverables-shell{padding-top:clamp(48px,6vw,80px);padding-bottom:72px}
+      .deliverables-tabs{margin-top:36px}
+      .deliverables-content{margin-top:32px}
+      .deliverable-panel{padding-top:24px}
+      .research-subtabs{margin-bottom:20px}
+      @media(max-width:700px){.dodo-document pre{padding:13px 14px;font-size:11px}.dodo-document table{font-size:12px}.dodo-document th,.dodo-document td{min-width:132px;padding:9px 10px}}
     </style>
   </head>
   <body class="deliverables-page">
@@ -31,29 +35,226 @@
     <main class="deliverables-main">
       <section class="deliverables-shell" aria-labelledby="dodo-materials-title">
         <h1 id="dodo-materials-title">交付物</h1>
-        <p class="dodo-materials-intro">项目中沉淀的体验原则、产品规范知识与设计走查 Skill。案例 Deck 负责讲清决策过程，这里保留可继续复用的成果。</p>
-        <div class="dodo-material-grid">
-          <article class="dodo-material-card">
-            <small>01 · EXPERIENCE GUIDELINE</small>
-            <h2>Dodo Agent 体验设计指南</h2>
-            <p>定义 Agent 的角色、语言原则与任务执行阶段，帮助 Agent 在关键操作中自动补全确认、结果反馈和误操作补救机制。</p>
-            <div class="dodo-material-actions"><a class="dodo-material-link" href="dodo.html#dodo-slide-5">查看案例页 →</a><a class="dodo-material-link" href="../assets/dodo/dodo-experience-guide.md" download>下载指南 .md ↓</a></div>
-          </article>
-          <article class="dodo-material-card">
-            <small>02 · PRODUCT KNOWLEDGE BASE</small>
-            <h2>规范与元素层知识体系基座</h2>
-            <p>把交互规则、设计 Token 与组件模板整理为 Agent 可调用的产品知识，使生成页面从“能完成”走向“符合产品规范”。</p>
-            <div class="dodo-material-actions"><a class="dodo-material-link" href="dodo.html#dodo-slide-6">查看沉淀过程 →</a></div>
-          </article>
-          <article class="dodo-material-card">
-            <small>03 · DESIGN REVIEW SKILL</small>
-            <h2>设计评审前自检 Skill</h2>
-            <p>串联输入识别、准入判断、证据采集、问题分级和报告生成，输出可以直接执行的设计走查结论。</p>
-            <div class="dodo-material-actions"><a class="dodo-material-link" href="design-review-skill.html">查看 Skill →</a><a class="dodo-material-link" href="../assets/skills/design-review-skills.zip" download="design-review-skills.zip">下载 Skills .zip ↓</a></div>
-          </article>
+        <div class="deliverables-tabs" role="tablist" aria-label="Dodo 交付物分类">
+          <button type="button" role="tab" aria-controls="guidelines-panel" aria-selected="true" tabindex="0" data-deliverable-tab="guidelines">设计规范</button>
+          <button type="button" role="tab" aria-controls="review-panel" aria-selected="false" tabindex="-1" data-deliverable-tab="review">设计走查 Skill</button>
+        </div>
+        <div class="deliverables-content" aria-live="polite">
+          <section class="deliverable-panel" id="guidelines-panel" data-deliverable-panel="guidelines" role="tabpanel">
+            <div class="research-subtabs" role="tablist" aria-label="Dodo 设计规范文档">
+              <button type="button" role="tab" aria-selected="true" tabindex="0" data-guideline-tab="experience">体验设计指南</button>
+              <button type="button" role="tab" aria-selected="false" tabindex="-1" data-guideline-tab="interaction">产品知识基座</button>
+            </div>
+            <section class="research-subpanel" data-guideline-panel="experience" role="tabpanel"></section>
+            <section class="research-subpanel" data-guideline-panel="interaction" role="tabpanel" hidden></section>
+          </section>
+          <section class="deliverable-panel" id="review-panel" data-deliverable-panel="review" role="tabpanel" hidden>
+            <section class="research-subpanel" data-review-document aria-label="工作负载页面完整设计走查报告"></section>
+          </section>
         </div>
       </section>
     </main>
     <footer>AI DESIGN WORKFLOW · DELIVERABLES · 2026</footer>
+    <script src="dodo-materials-data.js?v=20260827-1"></script>
+    <script src="dodo-materials-review-data.js?v=20260827-2"></script>
+    <script>
+      const stickyNav = document.querySelector("header.project-nav");
+      let previousScrollY = window.scrollY;
+      let downwardScrollDistance = 0;
+      const NAV_HIDE_DISTANCE = 24;
+      const updateStickyNav = () => {
+        if (!stickyNav) return;
+        const currentScrollY = window.scrollY;
+        const compact = currentScrollY > 96;
+        const scrollDelta = currentScrollY - previousScrollY;
+        if (!compact || scrollDelta <= 0) downwardScrollDistance = 0;
+        else downwardScrollDistance += scrollDelta;
+        stickyNav.classList.toggle("is-scrolled", currentScrollY > 16);
+        stickyNav.classList.toggle("project-nav--compact", compact);
+        stickyNav.classList.toggle("project-nav--hidden", compact && downwardScrollDistance >= NAV_HIDE_DISTANCE);
+        previousScrollY = currentScrollY;
+      };
+      updateStickyNav();
+      window.addEventListener("scroll", updateStickyNav, { passive: true });
+
+      const appendInlineMarkdown = (element, content) => {
+        const segments = content.split(/(\*\*[^*]+\*\*|`[^`]+`)/g);
+        segments.forEach((segment) => {
+          if (segment.startsWith("**") && segment.endsWith("**")) {
+            const strong = document.createElement("strong");
+            strong.textContent = segment.slice(2, -2);
+            element.append(strong);
+          } else if (segment.startsWith("`") && segment.endsWith("`")) {
+            const code = document.createElement("code");
+            code.textContent = segment.slice(1, -1);
+            element.append(code);
+          } else {
+            element.append(document.createTextNode(segment.replace(/\\([+_()])/g, "$1")));
+          }
+        });
+      };
+
+      const parseTableCells = (line) => line.trim().replace(/^\||\|$/g, "").split("|").map((cell) => cell.trim());
+      const isTableDivider = (line) => /^\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?$/.test(line.trim());
+      const renderDocument = (panel, markdown, titleOverride) => {
+        if (!panel || panel.dataset.rendered === "true") return;
+        panel.dataset.rendered = "true";
+        const article = document.createElement("article");
+        article.className = "research-document dodo-document";
+        const lines = markdown.split(/\r?\n/);
+        let list = null;
+        let codeLines = null;
+        let table = null;
+        let tableBody = null;
+        let tableHasHeader = false;
+        const closeTable = () => {
+          if (!table) return;
+          table.append(tableBody);
+          article.append(table);
+          table = null;
+          tableBody = null;
+          tableHasHeader = false;
+        };
+        const closeList = () => { list = null; };
+
+        lines.forEach((line, index) => {
+          if (line.startsWith("```")) {
+            closeList();
+            closeTable();
+            if (codeLines) {
+              const pre = document.createElement("pre");
+              const code = document.createElement("code");
+              code.textContent = codeLines.join("\n");
+              pre.append(code);
+              article.append(pre);
+              codeLines = null;
+            } else {
+              codeLines = [];
+            }
+            return;
+          }
+          if (codeLines) {
+            codeLines.push(line);
+            return;
+          }
+          if (line.trim().startsWith("|")) {
+            closeList();
+            if (isTableDivider(line)) return;
+            if (!table) {
+              table = document.createElement("table");
+              tableBody = document.createElement("tbody");
+            }
+            const row = document.createElement("tr");
+            const useHeader = !tableHasHeader;
+            parseTableCells(line).forEach((cell) => {
+              const item = document.createElement(useHeader ? "th" : "td");
+              appendInlineMarkdown(item, cell);
+              row.append(item);
+            });
+            tableBody.append(row);
+            tableHasHeader = true;
+            return;
+          }
+          closeTable();
+          const heading = line.match(/^(#{1,3})\s+(.+)$/);
+          const unordered = line.match(/^\s*[-*]\s+(.+)$/);
+          const ordered = line.match(/^\s*\d+\.\s+(.+)$/);
+          if (heading) {
+            closeList();
+            const level = heading[1].length;
+            const element = document.createElement(level === 1 ? "h2" : level === 2 ? "h3" : "h4");
+            appendInlineMarkdown(element, level === 1 && titleOverride ? titleOverride : heading[2]);
+            article.append(element);
+            return;
+          }
+          if (line.trim() === "---") {
+            closeList();
+            article.append(document.createElement("hr"));
+            return;
+          }
+          if (unordered || ordered) {
+            const type = unordered ? "ul" : "ol";
+            if (!list || list.tagName.toLowerCase() !== type) {
+              list = document.createElement(type);
+              article.append(list);
+            }
+            const item = document.createElement("li");
+            appendInlineMarkdown(item, (unordered || ordered)[1]);
+            list.append(item);
+            return;
+          }
+          if (line.startsWith(">")) {
+            closeList();
+            const quoteText = line.replace(/^>\s?/, "").trim();
+            if (!quoteText) return;
+            const callout = document.createElement("p");
+            callout.className = "research-callout";
+            appendInlineMarkdown(callout, quoteText);
+            article.append(callout);
+            return;
+          }
+          if (line.trim()) {
+            closeList();
+            const paragraph = document.createElement("p");
+            appendInlineMarkdown(paragraph, line.trim());
+            article.append(paragraph);
+          } else {
+            closeList();
+          }
+          if (index === lines.length - 1) closeTable();
+        });
+        if (codeLines) {
+          const pre = document.createElement("pre");
+          const code = document.createElement("code");
+          code.textContent = codeLines.join("\n");
+          pre.append(code);
+          article.append(pre);
+        }
+        closeTable();
+        panel.append(article);
+      };
+
+      const guidelineTabs = [...document.querySelectorAll("[data-guideline-tab]")];
+      const guidelinePanels = [...document.querySelectorAll("[data-guideline-panel]")];
+      const showGuideline = (target) => {
+        guidelineTabs.forEach((tab) => {
+          const selected = tab.dataset.guidelineTab === target;
+          tab.setAttribute("aria-selected", String(selected));
+          tab.tabIndex = selected ? 0 : -1;
+        });
+        guidelinePanels.forEach((panel) => {
+          const selected = panel.dataset.guidelinePanel === target;
+          panel.hidden = !selected;
+          if (selected) {
+            renderDocument(
+              panel,
+              window.dodoDeliverableDocuments?.[target] || "",
+              target === "interaction" ? "产品知识基座" : undefined
+            );
+          }
+        });
+      };
+      guidelineTabs.forEach((tab) => tab.addEventListener("click", () => showGuideline(tab.dataset.guidelineTab)));
+      showGuideline("experience");
+
+      const deliverableTabs = [...document.querySelectorAll(".deliverables-tabs [role=tab]")];
+      const deliverablePanels = [...document.querySelectorAll("[data-deliverable-panel]")];
+      deliverableTabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          const target = tab.dataset.deliverableTab;
+          deliverableTabs.forEach((item) => {
+            const selected = item === tab;
+            item.setAttribute("aria-selected", String(selected));
+            item.tabIndex = selected ? 0 : -1;
+          });
+          deliverablePanels.forEach((panel) => {
+            panel.hidden = panel.dataset.deliverablePanel !== target;
+          });
+          if (target === "review") {
+            renderDocument(document.querySelector("[data-review-document]"), window.dodoReviewDocument || "");
+          }
+        });
+      });
+    </script>
   </body>
 </html>

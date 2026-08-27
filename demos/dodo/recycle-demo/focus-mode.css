@@ -246,11 +246,11 @@ body {
 .demo-cursor {
   position: absolute;
   z-index: 170;
-  width: 88px;
-  height: 90px;
+  width: 176px;
+  height: 180px;
   pointer-events: none;
   opacity: 0;
-  transform: translate(-28px, -30px);
+  transform: translate(-56px, -60px);
   transition: left 700ms cubic-bezier(.2, .75, .2, 1), top 700ms cubic-bezier(.2, .75, .2, 1), opacity 220ms ease;
 }
 
@@ -264,8 +264,12 @@ body {
   opacity: 1;
 }
 
+.demo-cursor.is-hiding {
+  transition: opacity 420ms ease;
+}
+
 .demo-cursor.is-clicking {
-  transform: translate(-28px, -30px) scale(.86);
+  transform: translate(-56px, -60px) scale(.86);
 }
 
 /* Match the product's card hover without introducing a tutorial highlight. */
