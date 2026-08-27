@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Dodo 主动式 AI 工作台正式版交互 Demo" />
+    <title>Dodo 正式版 Demo</title>
+    <link rel="stylesheet" href="styles.css?v=20260827-actions-1" />
+    <link rel="stylesheet" href="focus-mode.css?v=20260827-intro-16" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" id="sidebar" aria-label="Dodo 主导航">
+        <div class="sidebar-fixed-header">
+          <div class="window-bar" aria-hidden="true">
+            <img class="window-controls" src="assets/navigation/window-controls.svg" alt="" />
+            <button class="collapse-button" type="button" aria-label="收起侧栏" data-sidebar-toggle><img src="assets/navigation/sidebar-collapse.svg" alt="" /></button>
+          </div>
+          <button class="nav-item new-chat" type="button" data-new-chat>
+            <img src="assets/navigation/new-chat.svg" alt="" /><span>新的对话</span>
+          </button>
+        </div>
+
+        <div class="sidebar-scroll">
+          <nav class="primary-nav" aria-label="功能导航">
+            <button class="nav-item" type="button" data-section="knowledge">
+              <img src="assets/navigation/nav-knowledge.svg" alt="" /><span>知识</span>
+            </button>
+            <button class="nav-item" type="button" data-section="skills">
+              <img src="assets/navigation/nav-skill.svg" alt="" /><span>技能</span>
+            </button>
+            <button class="nav-item" type="button" data-section="artifacts">
+              <img src="assets/navigation/nav-artifact.svg" alt="" /><span>产物</span>
+            </button>
+            <button class="nav-item" type="button" data-section="settings">
+              <img src="assets/navigation/nav-settings.svg" alt="" /><span>设置</span>
+            </button>
+          </nav>
+
+          <section class="sidebar-group workspace-group">
+            <div class="group-title-row">
+              <button class="group-title" type="button" aria-expanded="true" data-group-toggle>
+                <span>专属工区</span><img class="section-chevron" src="assets/navigation/section-chevron.svg" alt="" />
+              </button>
+              <button class="section-add" type="button" aria-label="新建工区" data-add-workspace><img src="assets/navigation/section-add.svg" alt="" /></button>
+            </div>
+            <div class="group-content" data-group-content>
+              <div class="workspace-row" data-workspace-row>
+                <button class="workspace-item" type="button" data-workspace="竞品分析">
+                  <img src="assets/navigation/workspace-competitor.svg" alt="" /><span>竞品分析</span>
+                </button>
+                  <button class="row-more" type="button" aria-label="竞品分析更多操作" data-row-menu="workspace"><img src="assets/navigation/image_43.png" alt="" /></button>
+              </div>
+              <div class="workspace-row workspace-task-row">
+                <button class="workspace-item workspace-task" type="button" data-conversation="创建定时任务">
+                  <img src="assets/navigation/workspace-alarm.svg" alt="" /><span>创建定时任务</span>
+                </button>
+              </div>
+              <div class="workspace-row workspace-task-row">
+                <button class="workspace-item workspace-task" type="button" data-conversation="设计系统规范转 Figma">
+                  <img src="assets/navigation/workspace-book.svg" alt="" /><span>设计系统规范转 Figma</span>
+                </button>
+              </div>
+              <div class="workspace-row" data-workspace-row>
+                <button class="workspace-item" type="button" data-workspace="数据分析">
+                  <img src="assets/navigation/workspace-data.svg" alt="" /><span>数据分析</span>
+                </button>
+                  <button class="row-more" type="button" aria-label="数据分析更多操作" data-row-menu="workspace"><img src="assets/navigation/image_43.png" alt="" /></button>
+              </div>
+              <div class="workspace-row" data-workspace-row>
+                <button class="workspace-item" type="button" data-workspace="工区产品设计">
+                  <img src="assets/navigation/workspace-product.svg" alt="" /><span>工区产品设计</span>
+                </button>
+                <button class="row-more" type="button" aria-label="工区产品设计更多操作" data-row-menu="workspace"><img src="assets/navigation/image_43.png" alt="" /></button>
+              </div>
+              <div class="workspace-row" data-workspace-row>
+                <button class="workspace-item" type="button" data-workspace="周报与日常工作">
+                  <img src="assets/navigation/workspace-report.svg" alt="" /><span>周报与日常工作</span>
+                </button>
+                <button class="row-more" type="button" aria-label="周报与日常工作更多操作" data-row-menu="workspace"><img src="assets/navigation/image_43.png" alt="" /></button>
+              </div>
+            </div>
+          </section>
+
+          <section class="sidebar-group conversation-group">
+            <div class="group-title-row conversation-title-row">
+              <button class="group-title" type="button" aria-expanded="true" data-conversation-toggle>
+                <span>我的对话</span><img class="section-chevron" src="assets/navigation/conversation-chevron.svg" alt="" />
+              </button>
+              <div class="conversation-head-actions">
+                <button type="button" aria-label="刷新对话" data-refresh-conversations><img src="assets/navigation/conversation-refresh.svg" alt="" /></button>
+                <button type="button" aria-label="搜索对话" data-search-conversations><img src="assets/navigation/conversation-search.svg" alt="" /></button>
+                <button type="button" aria-label="批量管理" data-multi-select><img src="assets/navigation/conversation-multiselect.svg" alt="" /></button>
+              </div>
+            </div>
+            <div class="conversation-content" data-conversation-content>
+              <div class="conversation-tools">
+                <div class="conversation-tabs" role="tablist" aria-label="对话分类">
+                  <button class="is-active" type="button" role="tab" aria-selected="true" data-conversation-tab="all">全部</button>
+                  <button type="button" role="tab" aria-selected="false" data-conversation-tab="source">按来源</button>
+                  <button type="button" role="tab" aria-selected="false" data-conversation-tab="favorite">收藏</button>
+                </div>
+                <button class="filter-button" type="button" aria-label="筛选对话" aria-expanded="false" data-filter-button><img src="assets/navigation/conversation-filter.svg" alt="" /></button>
+              </div>
+              <div class="conversation-search" hidden data-conversation-search>
+                <label>
+                  <img src="assets/navigation/search-icon.svg" alt="" />
+                  <input type="text" placeholder="搜索任务标题关键词" aria-label="搜索任务标题关键词" data-conversation-search-input />
+                  <button class="conversation-search-clear" type="button" aria-label="清空搜索" hidden data-conversation-search-clear><img src="assets/navigation/search-clear.svg" alt="" /></button>
+                </label>
+                <button type="button" data-conversation-search-cancel>取消</button>
+              </div>
+              <div class="conversation-list" data-conversation-list></div>
+            </div>
+          </section>
+        </div>
+
+        <div class="sidebar-bottom">
+          <button class="profile" type="button" data-profile>
+            <img class="avatar" src="assets/navigation/profile-avatar.png" alt="" />
+            <span class="profile-copy"><strong>郭昱成</strong></span>
+            <span class="profile-more"><img src="assets/navigation/profile-chevron.svg" alt="" /></span>
+          </button>
+        </div>
+      </aside>
+
+      <main class="main-stage">
+        <button class="mobile-menu" type="button" aria-label="打开导航" data-sidebar-toggle><img src="assets/navigation/image_20.png" alt="" /></button>
+        <section class="home-view" data-home-view>
+          <div class="hero-brand" aria-label="I'm dodo">
+            <img src="assets/image_21.png" alt="I'm dodo." />
+          </div>
+
+          <form class="prompt-box" data-prompt-form>
+            <textarea id="prompt" rows="2" placeholder="发消息给 dodo，告诉我你想完成什么..." aria-label="输入消息"></textarea>
+            <div class="prompt-toolbar">
+              <div class="tool-buttons" aria-label="输入工具">
+                <button type="button" class="icon-button" title="添加附件" aria-label="添加附件"><img src="assets/navigation/image_106.png" alt="" /></button>
+                <button type="button" class="icon-button" title="添加图片" aria-label="添加图片"><img src="assets/navigation/image_80.png" alt="" /></button>
+                <button type="button" class="icon-button" title="联网搜索" aria-label="联网搜索"><img src="assets/navigation/image_79.png" alt="" /></button>
+                <button type="button" class="icon-button is-selected" title="安全模式" aria-label="安全模式"><img src="assets/navigation/image_66.png" alt="" /></button>
+                <button type="button" class="icon-button" title="调用技能" aria-label="调用技能"><img src="assets/navigation/image_70.png" alt="" /></button>
+              </div>
+              <div class="prompt-actions">
+                <div class="model-picker">
+                  <button class="model-button" type="button" aria-expanded="false" data-model-button>
+                    <span data-model-label>文心大模型 4.5</span><img class="chevron" src="assets/navigation/image_97.png" alt="" />
+                  </button>
+                  <div class="model-menu" role="menu" data-model-menu>
+                    <button type="button" role="menuitem" data-model="文心大模型 4.5"><strong>文心大模型 4.5</strong><small>均衡 · 推荐</small></button>
+                    <button type="button" role="menuitem" data-model="深度思考模型"><strong>深度思考模型</strong><small>复杂分析</small></button>
+                    <button type="button" role="menuitem" data-model="快速响应模型"><strong>快速响应模型</strong><small>高效对话</small></button>
+                  </div>
+                </div>
+                <button class="voice-button" type="button" aria-label="语音输入" title="语音输入"><span class="prompt-sprite prompt-sprite-voice" aria-hidden="true"></span></button>
+                <button class="send-button" type="submit" aria-label="发送消息" disabled><span class="prompt-sprite prompt-sprite-send" aria-hidden="true"></span></button>
+              </div>
+            </div>
+          </form>
+
+          <section class="gear-section" aria-labelledby="gear-title">
+            <div class="gear-heading">
+              <div><span class="spark"><img src="assets/navigation/image_59.png" alt="" /></span><h2 id="gear-title">dodo 的装备</h2></div>
+              <div class="gear-controls">
+                <button type="button" data-refresh><img src="assets/image_29.png" alt="" />换一批</button>
+                <button type="button" data-more>更多装备 <img class="gear-more-icon" src="assets/image_27.png" alt="" /></button>
+              </div>
+            </div>
+            <div class="gear-grid" data-gear-grid></div>
+          </section>
+        </section>
+
+        <section class="skills-view" hidden data-skills-view>
+          <header class="skills-header">
+            <div>
+              <div class="skill-center-title"><h1>技能</h1></div>
+              <p>统一管理赋予 dodo 更强大的能力</p>
+            </div>
+            <div class="skills-toolbar">
+              <label class="skills-search" for="skills-search">
+                <img src="assets/skills/image_10.png" alt="" />
+                <input id="skills-search" type="search" placeholder="搜索技能" autocomplete="off" data-skills-search />
+              </label>
+              <div class="skill-create-wrap">
+                <button class="skills-new-button" type="button" aria-expanded="false" data-skill-create-button>
+                  <img src="assets/skills/image_11.png" alt="" /><span>新技能</span>
+                </button>
+                <div class="skill-create-menu" hidden data-skill-create-menu>
+                  <button type="button" data-create-action="upload"><img src="assets/skills/image_52.png" alt="" /><span><strong>创建技能</strong><small>上传本地技能文件</small></span></button>
+                  <button type="button" data-create-action="share"><img src="assets/skills/image_53.png" alt="" /><span><strong>添加共享链接</strong><small>通过链接安装已有技能</small></span></button>
+                  <button type="button" data-create-action="write"><img src="assets/skills/image_54.png" alt="" /><span><strong>让 dodo 写一个</strong><small>描述需求，由 dodo 创建</small></span></button>
+                  <button type="button" data-create-action="center"><img src="assets/skills/image_55.png" alt="" /><span><strong>去 Skill 中心</strong><small>发现更多公开技能</small></span></button>
+                </div>
+              </div>
+            </div>
+          </header>
+
+          <div class="skill-center-tabs" role="tablist" aria-label="技能分类">
+            <button type="button" role="tab" aria-selected="false" data-skill-category="personal">我安装的</button>
+            <button type="button" role="tab" aria-selected="false" data-skill-category="team">来自 Skill 中心的</button>
+            <button class="is-active" type="button" role="tab" aria-selected="true" data-skill-category="builtIn">dodo 自带的</button>
+          </div>
+          <section class="skill-recommendations" aria-labelledby="recommend-skills-title">
+            <div class="skill-section-heading"><div><h2 id="recommend-skills-title">允许调用推荐技能</h2><p>开启后，dodo 的推荐清单中的技能可被随时调用，关闭时则仅内置技能生效</p></div><div class="skill-page-dots" aria-label="推荐技能分页"><button class="is-active" type="button" data-skill-page="0" aria-label="第 1 页"></button><button type="button" data-skill-page="1" aria-label="第 2 页"></button></div></div>
+            <div class="skill-recommendation-grid" data-skill-recommendations></div>
+          </section>
+          <section class="skill-library" aria-labelledby="skill-library-title">
+            <div class="skill-section-heading skill-library-heading"><div><h2 id="skill-library-title" data-skill-library-title>dodo 内置的</h2><p data-skills-count aria-live="polite"></p></div><button class="skill-bulk-button" type="button" data-skills-bulk-toggle>全部关闭</button></div>
+            <div class="skills-list" data-skills-list></div>
+          </section>
+        </section>
+
+        <section class="artifacts-view" hidden data-artifacts-view>
+          <header class="artifacts-header">
+            <div><h1>产物</h1><p>dodo 造物，遇见更好的日常</p></div>
+            <div class="artifact-header-tools">
+              <label class="artifact-search"><img src="assets/artifacts/search-field.svg" alt="" aria-hidden="true" /><input type="search" placeholder="搜索对话/产物名称" data-artifact-search /></label>
+              <div class="artifact-view-toggle"><button type="button" data-artifact-layout="list" aria-label="列表模式"><img src="assets/artifacts/view-list.svg" alt="" /></button><button class="is-active" type="button" data-artifact-layout="grid" aria-label="卡片模式"><img src="assets/artifacts/view-grid.svg" alt="" /></button></div>
+            </div>
+          </header>
+          <div class="artifact-filters">
+            <div class="artifact-tabs" role="tablist"><button class="is-active" type="button" data-artifact-source="artifact">产物</button><button type="button" data-artifact-source="upload">上传</button></div>
+            <div class="artifact-filter-actions"><span data-artifact-total>共 8 个产物</span><i></i><button type="button" data-artifact-favorite>☆ 仅看收藏</button><button type="button">全部类型<span class="filter-chevron" aria-hidden="true"></span></button><button type="button">全部时间<span class="filter-chevron" aria-hidden="true"></span></button></div>
+          </div>
+          <div class="artifact-grid" data-artifact-grid></div>
+          <button class="recycle-entry recycle-entry--floating" type="button" data-open-recycle><img src="assets/artifacts/recycle.svg" alt="" />回收站 <span data-recycle-count>(0)</span></button>
+        </section>
+
+        <section class="placeholder-view" hidden data-placeholder-view>
+          <div class="placeholder-icon" data-placeholder-icon><img src="assets/navigation/image_3.png" alt="" /></div>
+          <h1 data-placeholder-title>知识</h1>
+          <p data-placeholder-copy>这里集中管理 dodo 可以调用的内容。</p>
+          <button type="button" data-home>返回首页</button>
+        </section>
+      </main>
+    </div>
+
+    <div class="sidebar-backdrop" data-sidebar-backdrop></div>
+    <div class="workspace-modal" hidden data-workspace-modal>
+      <button class="modal-backdrop" type="button" aria-label="关闭新建工区弹窗" data-close-workspace></button>
+      <form class="workspace-dialog" data-workspace-form>
+        <header><h2>新建工区</h2><button type="button" aria-label="关闭" data-close-workspace><img src="assets/navigation/image_112.png" alt="" /></button></header>
+        <div class="workspace-form-row"><label for="workspace-name"><span>*</span>工区名称</label><input id="workspace-name" maxlength="30" placeholder="请输入工区名称，限制在30字以内" required /></div>
+        <div class="workspace-form-row"><label><span>*</span>工区类型</label><button class="workspace-type" type="button" disabled>个人工区 <img src="assets/navigation/image_97.png" alt="" /></button></div>
+        <p class="workspace-form-hint">将创建云端目录，dodo 所有端都可以使用（个人工区最多创建 2 个）</p>
+        <footer><button type="button" class="secondary-button" data-close-workspace>取消</button><button type="submit" class="primary-button">创建</button></footer>
+      </form>
+    </div>
+    <div class="skill-modal" hidden data-skill-upload-modal>
+      <button class="skill-modal-backdrop" type="button" aria-label="关闭创建技能弹窗" data-close-skill-modal></button>
+      <form class="skill-dialog skill-upload-dialog" data-skill-upload-form>
+        <header><h2>创建技能</h2><button type="button" aria-label="关闭" data-close-skill-modal><img src="assets/skills/image_42.png" alt="" /></button></header>
+        <input class="skill-file-input" id="skill-file" type="file" accept=".zip,.skill" data-skill-file />
+        <label class="skill-upload-zone" for="skill-file" data-skill-drop-zone>
+          <img src="assets/skills/image_43.png" alt="" />
+          <strong>点击或拖拽上传技能文件</strong>
+          <span>支持 .zip 或 .skill 格式</span>
+        </label>
+        <div class="uploaded-file-row" hidden data-uploaded-file>
+          <img src="assets/skills/image_45.png" alt="" />
+          <span><strong data-uploaded-file-name></strong><small>文件上传成功</small></span>
+          <button type="button" aria-label="移除文件" data-remove-skill-file><img src="assets/skills/image_47.png" alt="" /></button>
+        </div>
+        <div class="skill-form-row"><label for="skill-name"><span>*</span>名称</label><input id="skill-name" maxlength="40" placeholder="请输入技能名称" required data-skill-name /></div>
+        <div class="skill-form-row"><label for="skill-display-name">展示名称</label><input id="skill-display-name" maxlength="40" placeholder="请输入技能展示名称" data-skill-display-name /></div>
+        <div class="skill-form-row"><label for="skill-description">技能描述</label><textarea id="skill-description" maxlength="200" placeholder="介绍这个技能可以帮助你完成什么" data-skill-description></textarea><small><span data-description-count>0</span>/200</small></div>
+        <footer><button class="secondary-button" type="button" data-close-skill-modal>取消</button><button class="primary-button" type="submit" disabled data-upload-skill-button>上传</button></footer>
+      </form>
+    </div>
+
+    <div class="skill-modal" hidden data-skill-share-modal>
+      <button class="skill-modal-backdrop" type="button" aria-label="关闭添加共享链接弹窗" data-close-skill-modal></button>
+      <form class="skill-dialog skill-share-dialog" data-skill-share-form>
+        <header><h2>添加共享链接</h2><button type="button" aria-label="关闭" data-close-skill-modal><img src="assets/skills/image_51.png" alt="" /></button></header>
+        <p>输入技能共享链接或分享口令，安装后可在个人技能中使用。</p>
+        <div class="skill-form-row"><label for="skill-share-link"><span>*</span>共享链接</label><input id="skill-share-link" placeholder="粘贴链接或分享口令" autocomplete="off" data-skill-share-link /></div>
+        <footer><button class="secondary-button" type="button" data-close-skill-modal>取消</button><button class="primary-button" type="submit" disabled data-install-skill-button>安装</button></footer>
+      </form>
+    </div>
+
+    <div class="skill-modal" hidden data-skill-detail-modal>
+      <button class="skill-modal-backdrop" type="button" aria-label="关闭技能详情" data-close-skill-detail></button>
+      <section class="skill-dialog skill-detail-dialog" aria-label="技能详情">
+        <header><div class="skill-detail-heading"><span class="skill-detail-mark" data-skill-detail-mark>✦</span><div><h2 data-skill-detail-name>技能</h2><p data-skill-detail-meta>dodo Skill 中心</p></div></div><button type="button" aria-label="关闭" data-close-skill-detail><img src="assets/skills/image_42.png" alt="" /></button></header>
+        <p class="skill-detail-description" data-skill-detail-description></p>
+        <div class="skill-detail-info"><span>来自 Skill 中心</span><span data-skill-detail-uses>已被 0 人使用</span></div>
+        <footer><button class="secondary-button" type="button" data-close-skill-detail>取消</button><button class="primary-button" type="button" data-install-recommended-skill>安装技能</button></footer>
+      </section>
+    </div>
+
+    <div class="artifact-modal" hidden data-artifact-delete-modal>
+      <button class="artifact-modal-backdrop" type="button" aria-label="取消删除" data-close-artifact-modal></button>
+      <section class="artifact-confirm-dialog"><h2><span>!</span>确定删除该文件吗？</h2><p>删除后会移动到资产回收站，可在回收站恢复文件。</p><footer><button type="button" data-close-artifact-modal>取消</button><button class="is-danger" type="button" data-confirm-artifact-delete>删除</button></footer></section>
+    </div>
+
+    <div class="artifact-modal" hidden data-recycle-modal>
+      <button class="artifact-modal-backdrop" type="button" aria-label="关闭回收站" data-close-recycle></button>
+      <section class="recycle-dialog" aria-label="回收站">
+        <header><h2>回收站</h2><label><img src="assets/artifacts/search-field.svg" alt="" aria-hidden="true" /><input type="search" placeholder="搜索文件名称" data-recycle-search /></label><button type="button" aria-label="关闭" data-close-recycle>×</button></header>
+        <div class="recycle-list" data-recycle-list></div>
+      </section>
+    </div>
+
+    <div class="floating-menu" hidden data-floating-menu></div>
+    <div class="toast" role="status" aria-live="polite" data-toast data-type="success">
+      <img src="assets/toast-success.svg" alt="" data-toast-icon />
+      <span data-toast-message></span>
+    </div>
+    <script src="app.js?v=20260825-global-message-2"></script>
+    <script src="focus-mode.js?v=20260827-intro-6"></script>
+  </body>
+</html>

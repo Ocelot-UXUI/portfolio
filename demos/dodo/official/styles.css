@@ -50,7 +50,7 @@
 .artifact-card-menu{width:112px;padding:8px;border-color:#e5e5e5;border-radius:10px;box-shadow:0 10px 24px rgba(0,0,0,.12)}.artifact-card-menu button{height:36px;padding:0 12px;gap:10px;color:#545454;font-size:14px;font-weight:400}.artifact-card-menu button:hover{background:#f5f5f5}.artifact-card-menu img.artifact-delete-icon{display:block;width:16px;height:16px;min-width:16px;flex:0 0 16px;object-fit:contain}
 
 /* The conversation glyph has more whitespace in its 48px Figma viewBox. */
-.artifact-card-actions [data-artifact-chat]>img{width:20px;height:20px}
+.artifact-card-actions [data-artifact-chat]>img{width:16px;height:16px}
 
 /* Keep the home mark as a compact visual anchor, not a page-sized banner. */
 .home-view{padding-top:104px}.hero-brand{width:420px;height:auto;margin:0 auto 46px}.hero-brand img{width:100%;height:auto}
@@ -206,3 +206,9 @@
 .recycle-empty{display:flex;min-height:250px;padding:25px;align-items:center;justify-content:center;flex-direction:column;gap:4px;color:#bfbfbf;font-size:14px;line-height:22px;text-align:center}
 .recycle-empty img{display:block;width:80px;height:80px;object-fit:contain}
 .recycle-empty p{margin:0}
+
+/* The first recycle row sits against the list's top edge: open its tooltip
+   downward so the list viewport never clips it. Other rows still open upward. */
+.recycle-item:first-child .recycle-icon-tooltip{top:calc(100% + 6px);bottom:auto;flex-direction:column-reverse;transform:translate(-50%,-4px)}
+.recycle-item:first-child .recycle-icon-tooltip>img{transform:rotate(180deg)}
+.recycle-item:first-child .recycle-item-actions button:hover .recycle-icon-tooltip,.recycle-item:first-child .recycle-item-actions button:focus-visible .recycle-icon-tooltip{transform:translate(-50%,0)}

@@ -1,0 +1,269 @@
+/*
+ * Deck embed mode.
+ * Preserve the original desktop UI, remove the sidebar, then scale the entire
+ * 1160px content canvas as one unit. The iframe never drives responsive reflow.
+ */
+html,
+body {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  overflow: hidden !important;
+}
+
+body {
+  position: relative;
+}
+
+.app-shell {
+  position: absolute !important;
+  display: flex !important;
+  width: 1160px !important;
+  min-width: 1160px !important;
+  min-height: 900px !important;
+  overflow: visible !important;
+  transform-origin: 0 0;
+}
+
+.sidebar,
+.sidebar.is-collapsed {
+  display: none !important;
+}
+
+.main-stage,
+.main-stage.is-expanded {
+  display: block !important;
+  width: 1160px !important;
+  min-width: 1160px !important;
+  min-height: 900px !important;
+  margin-left: 0 !important;
+  overflow: visible !important;
+}
+
+.mobile-menu {
+  display: none !important;
+}
+
+.artifacts-view {
+  width: 100% !important;
+  height: auto !important;
+  min-height: 900px !important;
+  padding: 24px 32px 72px !important;
+  overflow: visible !important;
+}
+
+.artifacts-view[hidden] {
+  display: none !important;
+}
+
+.artifacts-header {
+  display: flex !important;
+  flex-direction: row !important;
+}
+
+.artifact-header-tools {
+  display: flex !important;
+  width: auto !important;
+  flex-wrap: nowrap !important;
+  gap: 12px !important;
+}
+
+.artifact-search {
+  width: 280px !important;
+  min-width: 0 !important;
+  flex: none !important;
+}
+
+.artifact-filters {
+  display: flex !important;
+  margin-top: 30px !important;
+  align-items: center !important;
+  flex-direction: row !important;
+}
+
+.artifact-filter-actions {
+  width: auto !important;
+  overflow: visible !important;
+  flex-wrap: nowrap !important;
+}
+
+.artifact-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 354px)) !important;
+  gap: 16px !important;
+  overflow: visible !important;
+}
+
+.artifact-card {
+  width: auto !important;
+  height: 289px !important;
+}
+
+.artifact-preview {
+  height: 230px !important;
+  min-height: 230px !important;
+}
+
+.recycle-list {
+  overflow: hidden !important;
+}
+
+/* The scrim belongs to the iframe viewport; only dialog content follows the
+   scaled design canvas. This keeps the overlay edge-to-edge without enlarging
+   either the recycle bin or the delete confirmation dialog. */
+.artifact-modal {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  place-items: center !important;
+}
+
+.artifact-modal[hidden] {
+  display: none !important;
+}
+
+.artifact-modal-backdrop {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: rgba(20, 24, 25, 0.45) !important;
+}
+
+.artifact-confirm-dialog {
+  transform: scale(var(--demo-scale, 1));
+  transform-origin: center;
+}
+
+.recycle-dialog {
+  transform: scale(var(--recycle-scale, 0.9));
+  transform-origin: center;
+}
+
+/* Global feedback remains at the component's original 1:1 size. */
+.toast {
+  transform: translate(-50%, -8px) scale(1) !important;
+}
+
+.toast.is-visible {
+  transform: translate(-50%, 0) scale(1) !important;
+}
+
+.recycle-entry--floating {
+  position: fixed !important;
+  right: 24px !important;
+  bottom: 24px !important;
+  z-index: 150 !important;
+}
+
+.demo-guide-target {
+  --guide-pulse-outline: 1.25px;
+  z-index: 151 !important;
+  border-color: transparent !important;
+  outline: none !important;
+  box-shadow: 0 0 0 var(--guide-pulse-outline) #5f85ff, 0 0 18px rgba(81, 128, 249, .42);
+  animation: demo-guide-pulse 1.8s ease-in-out infinite !important;
+}
+
+.app-shell .demo-guide-target,
+.artifact-confirm-dialog .demo-guide-target {
+  --guide-pulse-outline: var(--guide-canvas-outline, 1.25px);
+}
+
+.recycle-dialog .demo-guide-target {
+  --guide-pulse-outline: var(--guide-recycle-outline, 1.25px);
+}
+
+@keyframes demo-guide-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 var(--guide-pulse-outline, 1.25px) #5f85ff, 0 0 16px rgba(81, 128, 249, .42);
+  }
+  50% {
+    box-shadow: 0 0 0 var(--guide-pulse-outline, 1.25px) #5f85ff, 0 0 44px rgba(81, 128, 249, .84);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demo-guide-target {
+    animation: none !important;
+  }
+}
+
+.artifact-card-menu.is-open:has(.demo-guide-target) {
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.artifact-card-menu.is-open .demo-guide-target {
+  background: #fff !important;
+  border-radius: 10px !important;
+}
+
+.recycle-item.demo-guide-reveal-actions .recycle-item-actions {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+/* Keep the tooltip for the first recycle item inside the visible list area. */
+.recycle-item:first-child .recycle-icon-tooltip {
+  top: calc(100% + 6px);
+  bottom: auto;
+  flex-direction: column-reverse;
+  transform: translate(-50%, -4px);
+}
+
+.recycle-item:first-child .recycle-icon-tooltip > img {
+  transform: rotate(180deg);
+}
+
+.recycle-item:first-child .recycle-item-actions button:hover .recycle-icon-tooltip,
+.recycle-item:first-child .recycle-item-actions button:focus-visible .recycle-icon-tooltip {
+  transform: translate(-50%, 0);
+}
+
+/* The opening motion explains where the live interaction begins. It is a
+   visual cursor only: real pointer input remains fully available. */
+.demo-cursor {
+  position: absolute;
+  z-index: 170;
+  width: 88px;
+  height: 90px;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-28px, -30px);
+  transition: left 700ms cubic-bezier(.2, .75, .2, 1), top 700ms cubic-bezier(.2, .75, .2, 1), opacity 220ms ease;
+}
+
+.demo-cursor svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.demo-cursor.is-visible {
+  opacity: 1;
+}
+
+.demo-cursor.is-clicking {
+  transform: translate(-28px, -30px) scale(.86);
+}
+
+/* Match the product's card hover without introducing a tutorial highlight. */
+.artifact-card.demo-card-hover {
+  border-color: #545454 !important;
+}
+
+.artifact-card.demo-card-hover .artifact-card-actions {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+.artifact-card.demo-card-hover .artifact-card-actions button {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
