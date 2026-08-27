@@ -52,7 +52,6 @@
   // The first pass is intentionally self-explanatory: show the cursor path
   // before asking the viewer to take over the deletion flow.
   let guideStep = "intro";
-  let recycleGuideTimer = 0;
   let introRun = 0;
 
   const demoCursor = document.createElement("div");
@@ -122,7 +121,7 @@
     const run = ++introRun;
     guideStep = "intro";
     clearGuide();
-    demoCursor.classList.remove("is-visible", "is-clicking");
+    demoCursor.classList.remove("is-visible", "is-clicking", "is-hiding");
 
     const card = document.querySelector("[data-artifact-grid] .artifact-card");
     if (!card) return;
@@ -151,26 +150,23 @@
 
     await wait(220);
     if (run !== introRun) return;
+    demoCursor.classList.add("is-hiding");
     demoCursor.classList.remove("is-visible", "is-clicking");
     guideStep = "delete";
     applyGuide();
+    window.setTimeout(() => {
+      if (run === introRun) demoCursor.classList.remove("is-hiding");
+    }, 460);
   };
 
   const restartGuide = () => {
-    window.clearTimeout(recycleGuideTimer);
     if (recycleModal) recycleModal.hidden = true;
     requestAnimationFrame(startIntro);
   };
 
   const showRecycleGuide = () => {
     guideStep = "recycle";
-    window.clearTimeout(recycleGuideTimer);
     applyGuide();
-    recycleGuideTimer = window.setTimeout(() => {
-      if (guideStep === "recycle") {
-        recycleEntry?.classList.remove("demo-guide-target");
-      }
-    }, 1600);
   };
 
   document.addEventListener("click", (event) => {
@@ -180,7 +176,6 @@
       showRecycleGuide();
       return;
     } else if (event.target.closest("[data-open-recycle]")) {
-      window.clearTimeout(recycleGuideTimer);
       guideStep = "restore";
     } else if (event.target.closest("[data-artifact-purge]")) {
       // Purging is the end of the story: return to the first actionable state
