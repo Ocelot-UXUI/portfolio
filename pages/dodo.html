@@ -13,11 +13,11 @@
       .dodo-cover-slide>img{display:block;width:100%;height:100%;object-fit:cover;pointer-events:none}
       .dodo-cover-demo{position:absolute;z-index:3;left:4.0104%;top:24.7222%;width:59.375%;height:64.537%;overflow:hidden;border:0;border-radius:24px;background:#fff;box-shadow:none;}
       .dodo-cover-demo iframe{display:block;width:100%;height:100%;border:0;border-radius:0;background:#fff;pointer-events:auto}
-      .dodo-download-slide{position:relative}
+      .dodo-download-slide{position:relative;aspect-ratio:16/9;overflow:hidden}
       .dodo-download-link{position:absolute;left:85.31%;top:7.4%;width:10.55%;height:5.25%;z-index:2;display:block;border-radius:12px;cursor:pointer}
       .dodo-download-link:focus-visible{outline:3px solid #fff;outline-offset:4px}
       .dodo-process-panel{position:absolute;left:4.17%;top:25.46%;width:53.9%;height:74.54%;z-index:1;display:grid;place-items:center;overflow:hidden;border:0;border-radius:0;background:#151923;box-shadow:none}
-      .dodo-process-gif{display:block;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
+      .dodo-process-media{display:block;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
       .dodo-process-label{position:absolute;left:14px;top:12px;z-index:2;padding:5px 8px;border-radius:5px;background:rgba(10,13,21,.72);color:#fff;font-size:11px;letter-spacing:.04em;pointer-events:none}
       @media(max-width:700px){.dodo-cover-demo{left:4%;top:24.7%;width:59.4%;height:64.6%;border-radius:12px}.dodo-cover-demo iframe{border-radius:0}.dodo-process-panel{left:4%;top:25%;width:56%;height:75%;border-radius:0}.dodo-process-label{left:7px;top:7px;padding:4px 6px;font-size:9px}}
     </style>
@@ -31,24 +31,26 @@
     <main id="top">
       <section class="slides" aria-label="AI 设计工作流实践与复盘项目案例">
         <div id="dodo-slide-1" class="case-slide-frame dodo-cover-slide" aria-label="AI 设计工作流实践与复盘项目概览">
-          <img src="../assets/dodo/pages/page-01.png" alt="AI 设计工作流实践与复盘项目概览" fetchpriority="high" />
+          <img src="../assets/dodo/pages/page-01.webp" alt="AI 设计工作流实践与复盘项目概览" width="1920" height="1080" fetchpriority="high" decoding="async" />
           <div class="dodo-cover-demo">
             <iframe title="Dodo 资产与回收站聚焦交互 Demo" src="../demos/dodo/recycle-demo/index.html"></iframe>
           </div>
         </div>
-        <img id="dodo-slide-2" src="../assets/dodo/pages/page-02.png" alt="从用户反馈到需求上线" loading="lazy" />
-        <img id="dodo-slide-3" src="../assets/dodo/pages/page-03.png" alt="根据任务条件选择不同的设计工作方式" loading="lazy" />
-        <img id="dodo-slide-4" src="../assets/dodo/pages/page-04.png" alt="AI 生成页面时不了解产品规范的挑战" loading="lazy" />
-        <img id="dodo-slide-5" src="../assets/dodo/pages/page-05.png" alt="Agent 体验原则" loading="lazy" />
-        <img id="dodo-slide-6" src="../assets/dodo/pages/page-06.png" alt="规范与元素层知识体系基座" loading="lazy" />
-        <img id="dodo-slide-7" src="../assets/dodo/pages/page-07.png" alt="Agent 体验原则与产品规范应用结果" loading="lazy" />
-        <img id="dodo-slide-8" src="../assets/dodo/pages/page-08.png" alt="工作流沉淀为 Skill 的判断" loading="lazy" />
-        <img id="dodo-slide-9" src="../assets/dodo/pages/page-09.png" alt="AI 设计工作流与 Skills" loading="lazy" />
-        <img id="dodo-slide-10" src="../assets/dodo/pages/page-10.png" alt="工作流知识与工程化沉淀" loading="lazy" />
+        <img id="dodo-slide-2" src="../assets/dodo/pages/page-02.webp" alt="从用户反馈到需求上线" width="1920" height="1080" loading="lazy" decoding="async" />
+        <img id="dodo-slide-3" src="../assets/dodo/pages/page-03.webp" alt="根据任务条件选择不同的设计工作方式" width="1920" height="1080" loading="lazy" decoding="async" />
+        <img id="dodo-slide-4" src="../assets/dodo/pages/page-04.webp" alt="AI 生成页面时不了解产品规范的挑战" width="1920" height="1080" loading="lazy" decoding="async" />
+        <img id="dodo-slide-5" src="../assets/dodo/pages/page-05.webp" alt="Agent 体验原则" width="1920" height="1080" loading="lazy" decoding="async" />
+        <img id="dodo-slide-6" src="../assets/dodo/pages/page-06.webp" alt="规范与元素层知识体系基座" width="1920" height="1080" loading="lazy" decoding="async" />
+        <img id="dodo-slide-7" src="../assets/dodo/pages/page-07.webp" alt="Agent 体验原则与产品规范应用结果" width="1920" height="1080" loading="lazy" decoding="async" />
+        <img id="dodo-slide-8" src="../assets/dodo/pages/page-08.webp" alt="工作流沉淀为 Skill 的判断" width="1920" height="1080" loading="lazy" decoding="async" />
+        <img id="dodo-slide-9" src="../assets/dodo/pages/page-09.webp" alt="AI 设计工作流与 Skills" width="1920" height="1080" loading="lazy" decoding="async" />
+        <img id="dodo-slide-10" src="../assets/dodo/pages/page-10.webp" alt="工作流知识与工程化沉淀" width="1920" height="1080" loading="lazy" decoding="async" />
         <div id="dodo-slide-11" class="case-slide-frame dodo-download-slide">
-          <img src="../assets/dodo/pages/page-11.png" alt="设计走查流程与输出结果" loading="lazy" />
+          <img src="../assets/dodo/pages/page-11.webp" alt="设计走查流程与输出结果" width="1920" height="1080" loading="lazy" decoding="async" />
           <div class="dodo-process-panel" aria-label="设计走查流程录屏">
-            <img class="dodo-process-gif" src="../assets/dodo/dodo-review-process-high-quality.gif" alt="设计走查流程录屏" loading="lazy" />
+            <video class="dodo-process-media" muted playsinline loop preload="none" poster="../assets/dodo/dodo-review-process-poster.webp" aria-label="设计走查流程录屏">
+              <source data-src="../assets/dodo/dodo-review-process-high-quality.mp4" type="video/mp4" />
+            </video>
           </div>
           <a class="dodo-download-link" href="../assets/skills/design-review-skills.zip" download="design-review-skills.zip" aria-label="下载设计走查 Skills 压缩包" title="点击下载设计走查 Skills"></a>
         </div>
@@ -56,6 +58,31 @@
     </main>
     <footer>AI DESIGN WORKFLOW · GUO YUCHENG · 2026</footer>
     <script>
+      const processVideo = document.querySelector(".dodo-process-media");
+      const loadProcessVideo = () => {
+        if (!processVideo || processVideo.dataset.loaded === "true") return;
+        processVideo.querySelectorAll("source[data-src]").forEach((source) => {
+          source.src = source.dataset.src;
+        });
+        processVideo.dataset.loaded = "true";
+        processVideo.load();
+      };
+      if (processVideo && "IntersectionObserver" in window) {
+        const processVideoObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              loadProcessVideo();
+              processVideo.play().catch(() => {});
+            } else if (!processVideo.paused) {
+              processVideo.pause();
+            }
+          });
+        }, { rootMargin: "700px 0px" });
+        processVideoObserver.observe(processVideo);
+      } else if (processVideo) {
+        loadProcessVideo();
+      }
+
       const stickyNav = document.querySelector("header.project-nav");
       let previousScrollY = window.scrollY;
       let downwardScrollDistance = 0;
