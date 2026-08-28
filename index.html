@@ -14,7 +14,7 @@
     <script src="scripts/project-navigation.js?v=20260809-3" defer></script>
     <style>
       .prototype-homepage .nav {
-        overflow: visible;
+        overflow: hidden;
         background: rgba(6, 7, 12, .34);
         -webkit-backdrop-filter: blur(30px) saturate(185%);
         backdrop-filter: blur(30px) saturate(185%);
@@ -261,6 +261,17 @@
         border-top: 0;
       }
 
+      @media (min-width: 701px) {
+        .prototype-homepage .project-showcase,
+        .prototype-homepage .project-showcase:nth-of-type(even) {
+          padding-inline: clamp(32px, 5.2vw, 84px);
+        }
+
+        .prototype-homepage .showcase-heading {
+          padding-inline: clamp(32px, 5.2vw, 84px);
+        }
+      }
+
       .prototype-homepage .project-showcase-dodo .showcase-media {
         display: flex;
         align-items: center;
@@ -270,7 +281,7 @@
       .prototype-homepage .dodo-project-preview {
         position: relative;
         width: min(100%, 620px);
-        aspect-ratio: 16 / 9;
+        aspect-ratio: 2360 / 1474;
         overflow: hidden;
         border: .75px solid rgba(255, 255, 255, .13);
         background: #15191f;
@@ -297,7 +308,7 @@
         isolation: isolate;
         overflow: hidden;
         border-top: 0;
-        padding: 120px clamp(24px, 5vw, 76px) 132px;
+        padding: clamp(24px, 2vw, 48px) clamp(24px, 5vw, 76px) 132px;
         background: #08090b;
       }
 
@@ -600,6 +611,15 @@
         animation-delay: 40ms;
       }
 
+      /* Keep the name visible immediately; it should not animate into the viewport. */
+      html.motion-ready .prototype-homepage .about .about-heading h2.about-name-static {
+        -webkit-mask-image: none;
+        mask-image: none;
+        transform: none;
+        animation: none !important;
+        will-change: auto;
+      }
+
       /* 「我创建的 Skill」区域：标题 + 三个项目名走 mask-reveal 滑下出现，
          视觉效果参考「郭昱成」标题（project-copy-mask-reveal） */
       html.motion-ready .prototype-homepage .portfolio-index .portfolio-index-title,
@@ -783,6 +803,7 @@
           align-self: center;
         }
 
+        .prototype-homepage .dodo-signature,
         .prototype-homepage .cnap-signature,
         .prototype-homepage .remi-signature,
         .prototype-homepage .reading-signature,
@@ -832,7 +853,7 @@
         gap: 8px;
         border-radius: 36px;
         background: #1c202b;
-        color: #dc5619;
+        color: #fff;
         box-shadow: 0 12px 28px rgba(0, 0, 0, .36), inset 0 1px rgba(255, 255, 255, .07);
         font-family: "PingFang SC", sans-serif;
         font-size: 17px;
@@ -2070,18 +2091,22 @@
         align-items: center;
         flex-direction: column;
         justify-content: flex-start;
-        min-height: calc(110svh - 56px);
+        overflow: hidden;
+        overflow: clip;
+        min-height: clamp(661px, calc(100svh - 110px), 1324px);
         padding: clamp(40px, 6vh, 72px) clamp(14px, 3.5vw, 44px) 22px;
         background:
-          linear-gradient(180deg, rgba(8, 9, 10, .54) 0%, rgba(8, 9, 10, .72) 40%, #08090a 78%),
+          linear-gradient(90deg, rgba(8, 9, 10, .98) 0%, rgba(8, 9, 10, .68) 8%, rgba(8, 9, 10, 0) 18%, rgba(8, 9, 10, 0) 82%, rgba(8, 9, 10, .68) 92%, rgba(8, 9, 10, .98) 100%),
+          linear-gradient(180deg, rgba(8, 9, 10, .54) 0%, rgba(8, 9, 10, .72) 40%, rgba(8, 9, 10, .82) 82%, rgba(8, 9, 10, .92) 100%),
           linear-gradient(90deg, rgba(8, 9, 10, .32), transparent 42%, rgba(8, 9, 10, .18)),
-          url("assets/hero-background-lines.webp") center 48% / 86% auto no-repeat,
+          url("assets/hero-background-lines.webp") center 48% / 100% auto no-repeat,
           #08090a;
       }
 
       .prototype-homepage .hero-stack-gallery::after { display: none; }
 
       .prototype-homepage .hero-stack-top {
+        position: relative;
         flex: 0 0 auto;
         display: flex;
         flex-direction: column;
@@ -2089,8 +2114,8 @@
         align-items: center;
         min-height: 0;
         width: 100%;
-        margin-top: 10vh;
-        margin-bottom: 8vh;
+        margin-top: 7vh;
+        margin-bottom: 5vh;
       }
 
       .prototype-homepage .hero-stack-copy {
@@ -2114,12 +2139,18 @@
       .prototype-homepage .hero-stack-copy p {
         margin: 12px 0 0;
         color: rgba(232, 134, 84, .88);
-        font-size: 9px;
-        font-weight: 500;
+        font-size: clamp(12px, .78vw, 14px);
+        font-weight: 600;
         line-height: 1.45;
         letter-spacing: .1em;
         text-shadow: 0 3px 14px rgba(0, 0, 0, .72);
         text-transform: uppercase;
+      }
+
+      .prototype-homepage .hero-stack-meta {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
       }
 
       .prototype-homepage .hero-signature {
@@ -2134,6 +2165,33 @@
         user-select: none;
       }
 
+      @media (min-width: 1050px) {
+        .prototype-homepage .hero-stack-top {
+          min-height: 162px;
+        }
+
+        .prototype-homepage .hero-stack-meta {
+          position: absolute;
+          z-index: 2;
+          top: -30px;
+          left: 50%;
+          width: clamp(110px, 10vw, 132px);
+          opacity: 1;
+          pointer-events: none;
+          transform: translateX(-50%);
+        }
+
+        .prototype-homepage .hero-stack-copy p {
+          margin-top: 0;
+        }
+
+        .prototype-homepage .hero-signature {
+          width: 100%;
+          margin: 0;
+          filter: drop-shadow(0 8px 20px rgba(0, 0, 0, .28));
+        }
+      }
+
       .prototype-homepage .hero-project-stack {
         position: relative;
         z-index: 1;
@@ -2141,7 +2199,7 @@
         height: min(36vh, 320px);
         min-height: 240px;
         margin-top: 0;
-        margin-bottom: 6vh;
+        margin-bottom: 3vh;
         flex: 0 0 auto;
         perspective: 1600px;
       }
@@ -2175,7 +2233,7 @@
         z-index: 6;
         box-shadow: 0 28px 48px rgba(0, 0, 0, .44);
         outline: 2px solid transparent;
-        transform: translateY(-14px) scale(1.06) rotate(var(--hero-card-rotate));
+        transform: translateY(clamp(20px, 3vh, 32px)) scale(1.06) rotate(var(--hero-card-rotate));
       }
 
       .prototype-homepage .hero-project-stack-card > img {
@@ -2229,10 +2287,10 @@
         --hero-card-rotate: -2.5deg;
         z-index: 2;
         bottom: 0;
-        left: 34%;
-        width: 44%;
+        left: 30%;
+        width: 48%;
         aspect-ratio: 1890 / 1194;
-        transform: rotate(var(--hero-card-rotate));
+        transform: translateY(clamp(42px, 5vh, 60px)) rotate(var(--hero-card-rotate));
       }
 
       .prototype-homepage .hero-stack-cnap > img {
@@ -2255,6 +2313,7 @@
       .prototype-homepage .cnap-showcase-image {
         display: block;
         width: min(60vw, 820px);
+        height: auto;
         aspect-ratio: 2655 / 1641;
         margin-left: -84px;
         border: 0;
@@ -2313,42 +2372,171 @@
         pointer-events: none;
       }
 
+      /* Keep every project signature aligned to the Xiaohongshu / Reading reference. */
+      .prototype-homepage .dodo-signature,
+      .prototype-homepage .cnap-signature,
+      .prototype-homepage .remi-signature,
+      .prototype-homepage .reading-signature,
+      .prototype-homepage .xhs-signature {
+        position: static;
+        z-index: 0;
+        display: block;
+        align-self: flex-end;
+        flex: 0 0 auto;
+        width: 300px;
+        height: 100px;
+        max-width: 72%;
+        margin: 24px 0 0;
+        opacity: 1;
+        object-fit: contain;
+        object-position: right center;
+        pointer-events: none;
+      }
+
+      /* Signatures are part of the shared copy layout, not copy-reveal text. */
+      html.motion-ready .prototype-homepage .project-showcase .showcase-copy > .dodo-signature,
+      html.motion-ready .prototype-homepage .project-showcase .showcase-copy > .cnap-signature,
+      html.motion-ready .prototype-homepage .project-showcase .showcase-copy > .remi-signature,
+      html.motion-ready .prototype-homepage .project-showcase .showcase-copy > .reading-signature,
+      html.motion-ready .prototype-homepage .project-showcase .showcase-copy > .xhs-signature {
+        -webkit-mask-image: none;
+        mask-image: none;
+        transform: none;
+        animation: none !important;
+        will-change: auto;
+      }
+
+      /* Use one visual grid for every desktop project. Intrinsic image sizes
+         must not change the two column widths or the outer alignment lines. */
+      @media (min-width: 701px) {
+        .prototype-homepage .project-showcase,
+        .prototype-homepage .project-showcase:nth-of-type(even) {
+          grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        }
+
+        .prototype-homepage .project-showcase .showcase-copy {
+          display: flex;
+          flex-direction: column;
+          width: min(100%, 600px);
+          min-height: 360px;
+          padding: 0;
+        }
+
+        .prototype-homepage .project-showcase .showcase-copy h3 {
+          min-height: 60px;
+          font-size: clamp(34px, 3vw, 44px);
+          line-height: 1.35;
+        }
+
+        .prototype-homepage .project-showcase .showcase-copy > p {
+          min-height: 66px;
+          font-size: clamp(18px, 1.5vw, 22px);
+        }
+
+        .prototype-homepage .project-showcase .showcase-copy ul {
+          min-height: 32px;
+        }
+
+        .prototype-homepage .project-showcase .showcase-copy li {
+          font-size: clamp(16px, 1.25vw, 18px);
+        }
+
+        .prototype-homepage .project-showcase .showcase-media {
+          height: min(620px, 46vw);
+          align-self: center;
+        }
+
+        .prototype-homepage .project-showcase-dodo .showcase-copy,
+        .prototype-homepage .project-showcase-remi .showcase-copy,
+        .prototype-homepage .project-showcase-xhs .showcase-copy {
+          justify-self: start;
+          margin-left: 0;
+        }
+
+        .prototype-homepage .project-showcase-cnap .showcase-copy,
+        .prototype-homepage .project-showcase-reading .showcase-copy {
+          justify-self: end;
+          margin-left: 0;
+        }
+
+        .prototype-homepage .dodo-project-preview {
+          width: min(100%, 650px);
+        }
+
+        .prototype-homepage .project-showcase-dodo .showcase-media {
+          justify-content: flex-end;
+        }
+
+        .prototype-homepage .cnap-showcase-image {
+          width: min(100%, 640px);
+          margin-left: 0;
+        }
+
+        .prototype-homepage .project-showcase .showcase-media.laptop-device {
+          width: min(100%, 640px);
+          height: auto;
+          margin-right: 0;
+        }
+
+        .prototype-homepage .project-showcase-reading .showcase-media > img {
+          width: min(100%, 540px);
+          height: min(620px, 43vw);
+          margin-left: 0;
+          object-position: left center;
+          -webkit-mask-image:
+            linear-gradient(to right, transparent 0%, #000 20%, #000 100%),
+            linear-gradient(to bottom, #000 0%, #000 68%, transparent 89%);
+          mask-image:
+            linear-gradient(to right, transparent 0%, #000 20%, #000 100%),
+            linear-gradient(to bottom, #000 0%, #000 68%, transparent 89%);
+          -webkit-mask-composite: source-in;
+          mask-composite: intersect;
+        }
+
+        .prototype-homepage .project-showcase-xhs .showcase-media > img {
+          width: min(100%, 520px);
+          height: min(660px, 46vw);
+          margin-right: max(-74px, -5.1vw);
+          object-position: right center;
+        }
+      }
+
       /* Shift the desktop toward the larger left card when active, preserving
          its full canvas while keeping the two phone projects exposed. */
       .prototype-homepage .hero-stack-cnap:hover,
       .prototype-homepage .hero-stack-cnap:focus-visible {
         z-index: 6;
-        transform: translate3d(-100px, -14px, 84px) scale(1.035) rotate(var(--hero-card-rotate));
+        transform: translate3d(-100px, 24px, 84px) scale(1.035) rotate(var(--hero-card-rotate));
       }
 
       .prototype-homepage .hero-stack-remi {
         --hero-card-rotate: -5.5deg;
         z-index: 1;
         bottom: 0;
-        left: 10%;
-        width: 40%;
+        left: 6%;
+        width: 44%;
         aspect-ratio: 1.575;
-        transform: rotate(var(--hero-card-rotate));
+        transform: translateY(clamp(42px, 5vh, 60px)) rotate(var(--hero-card-rotate));
       }
 
       .prototype-homepage .hero-stack-xhs {
         --hero-card-rotate: 2.5deg;
         z-index: 4;
         bottom: 0;
-        left: 73%;
-        width: 12%;
+        left: 70%;
+        width: 14%;
         aspect-ratio: .482;
-        transform: rotate(var(--hero-card-rotate));
+        transform: translateY(clamp(42px, 5vh, 60px)) rotate(var(--hero-card-rotate));
       }
 
       .prototype-homepage .hero-stack-reading {
         --hero-card-rotate: 5.5deg;
         z-index: 3;
         bottom: 0;
-        left: 84%;
-        width: 12%;
+        left: 82%;
+        width: 14%;
         aspect-ratio: .477;
-        transform: rotate(var(--hero-card-rotate));
+        transform: translateY(clamp(42px, 5vh, 60px)) rotate(var(--hero-card-rotate));
       }
 
       .prototype-homepage .hero-stack-xhs,
@@ -2389,7 +2577,7 @@
         .prototype-homepage .hero-stack-copy h1 { font-size: 28px; }
         .prototype-homepage .hero-stack-desktop-title { display: none; }
         .prototype-homepage .hero-stack-mobile-title { display: inline; }
-        .prototype-homepage .hero-stack-copy p { margin-top: 11px; font-size: 9px; }
+        .prototype-homepage .hero-stack-copy p { margin-top: 11px; font-size: 11px; }
 
         .prototype-homepage .hero-signature {
           width: min(23.8vw, 108px);
@@ -2419,13 +2607,75 @@
         }
 
         .prototype-homepage .hero-stack-copy h1 { font-size: 28px; }
-        .prototype-homepage .hero-stack-copy p { margin-top: 8px; font-size: 9px; }
+        .prototype-homepage .hero-stack-copy p { margin-top: 8px; font-size: 11px; }
         .prototype-homepage .hero-signature { width: min(11.2vw, 119px); }
         .prototype-homepage .hero-project-stack {
           height: min(40svh, 260px);
           min-height: 200px;
           margin-top: 0;
           flex: 0 0 auto;
+        }
+      }
+
+      @media (min-width: 701px) and (max-height: 800px) {
+        .prototype-homepage .about {
+          padding-top: clamp(14px, 1.5vw, 24px);
+        }
+      }
+
+      /* On shorter desktop screens, keep the first line of About visible
+         below the hero without letting the project previews spill into it. */
+      @media (min-width: 701px) and (min-height: 621px) and (max-height: 800px) {
+        .prototype-homepage .hero.hero-stack-gallery {
+          min-height: 610px;
+          padding-bottom: 0;
+        }
+
+        .prototype-homepage .hero-stack-cnap,
+        .prototype-homepage .hero-stack-remi,
+        .prototype-homepage .hero-stack-xhs,
+        .prototype-homepage .hero-stack-reading {
+          transform: translateY(-28px) rotate(var(--hero-card-rotate));
+        }
+
+        .prototype-homepage .hero-stack-cnap:hover,
+        .prototype-homepage .hero-stack-cnap:focus-visible {
+          transform: translate3d(-100px, -28px, 84px) scale(1.035) rotate(var(--hero-card-rotate));
+        }
+
+        .prototype-homepage .hero-project-stack {
+          margin-bottom: 0;
+        }
+
+        .prototype-homepage .about {
+          padding-top: 0;
+        }
+
+        .prototype-homepage .about-heading {
+          gap: 20px;
+        }
+
+        .prototype-homepage .about-heading h2 {
+          font-size: clamp(36px, 3.4vw, 50px);
+        }
+
+        .prototype-homepage .about-name-row {
+          gap: 20px;
+        }
+
+        .prototype-homepage .about-signature {
+          width: clamp(86px, 8.5vw, 116px);
+          transform: translateY(-4px);
+        }
+
+        .prototype-homepage .about-contact {
+          gap: 4px;
+          margin-bottom: 4px;
+          font-size: 12px;
+        }
+
+        .prototype-homepage .about-strengths {
+          margin-top: clamp(28px, 3vw, 44px);
         }
       }
 
@@ -2469,9 +2719,10 @@
           <div class="hero-stack-top">
             <div class="hero-stack-copy">
               <h1><span class="hero-stack-desktop-title">有 AI 工作流，懂用户，<br />能推动事情发生</span><span class="hero-stack-mobile-title">有 AI 工作流，<br />懂用户，<br />能推动事情发生</span></h1>
-              <p>2024 - 2026</p>
             </div>
-            <img class="hero-signature" src="assets/hero-signature-ai-native.webp" alt="AI Native 手写字" width="1800" height="424" decoding="async" />
+            <div class="hero-stack-meta">
+              <img class="hero-signature" src="assets/hero-signature-ai-native.webp" alt="AI Native 手写字" width="1800" height="424" decoding="async" />
+            </div>
           </div>
           <div class="hero-project-stack" aria-label="精选项目预览">
             <a class="hero-project-stack-card hero-stack-cnap" href="pages/cnap-research.html" aria-label="查看 CNAP 云原生工作负载管理项目"><img src="assets/hero-projects/cnap-desktop.webp" alt="CNAP 云原生工作负载管理界面" width="1890" height="1194" decoding="async" /><span class="hero-project-tooltip"><b>CNAP 云原生工作负载管理</b><small>通过用户调研重构云原生部署与运维体验，降低平台使用门槛与排障成本</small></span></a>
@@ -2484,10 +2735,10 @@
         <section class="about section-reveal" id="about">
           <div class="about-heading">
             <div class="about-name-row">
-              <h2 class="section-copy-step">郭昱成</h2>
+              <h2 class="about-name-static">郭昱成</h2>
               <img class="about-signature" src="assets/about-me-signature.webp" alt="About me" width="1676" height="484" loading="lazy" decoding="async" />
             </div>
-            <div class="about-contact section-copy-step">
+            <div class="about-contact">
               <a href="mailto:1004080451@qq.com">1004080451@qq.com</a>
               <a href="tel:13343215048">13343215048</a>
             </div>
@@ -2537,9 +2788,10 @@
               <h3>AI 设计工作流实践与复盘</h3>
               <p>从用户反馈到需求上线，将设计判断沉淀为可复用的规范与 Skills</p>
               <ul><li>AI 产品</li><li>端到端工作流</li><li>设计工程化</li><li>可交互 Demo</li></ul>
+              <img class="dodo-signature" src="assets/ai-workflow-signature.webp" alt="AI Workflow" width="1200" height="402" loading="lazy" decoding="async" aria-hidden="true" />
             </div>
             <div class="showcase-media">
-              <div class="dodo-project-preview" aria-hidden="true"><img src="assets/dodo/pages/page-01.webp" alt="" width="1920" height="1080" loading="lazy" decoding="async" /></div>
+              <div class="dodo-project-preview" aria-hidden="true"><img src="assets/dodo-product-assets.webp" alt="dodo 产物页面" width="2360" height="1474" loading="lazy" decoding="async" /></div>
             </div>
           </a>
           <a class="project-showcase project-showcase-cnap" id="project-cnap" href="pages/cnap-research.html" data-project-hotspot>
@@ -2581,7 +2833,7 @@
             <div class="showcase-media"><img src="assets/figma-projects/image_5.webp" alt="小红书本地生活双手机界面" width="3244" height="4505" loading="lazy" decoding="async" /></div>
           </a>
           <div class="project-hover-cursor" aria-hidden="true">
-            <span class="project-hover-label"><span>查看</span><img src="assets/figma-button/image_orange.png" alt="" /></span>
+            <span class="project-hover-label"><span>查看</span><img src="assets/figma-button/image_white.svg" alt="" /></span>
           </div>
         </section>
 
