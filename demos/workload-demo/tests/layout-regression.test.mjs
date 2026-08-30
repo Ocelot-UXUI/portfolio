@@ -48,3 +48,15 @@ test('runtime configuration fills the workspace through the 1100px desktop break
     /@media\s*\(min-width:\s*701px\)\s*and\s*\(max-width:\s*1100px\)\s*\{[^]*?\.workspace:has\(>\s*#runtimePage:not\(\.hidden\)\)\s*\{[^}]*padding:\s*0/s,
   );
 });
+
+test('runtime configuration fills the workspace at every desktop width', () => {
+  assert.match(styles, /@media\s*\(min-width:\s*701px\)\s*\{/);
+  assert.match(
+    styles,
+    /@media\s*\(min-width:\s*701px\)\s*\{[^]*?\.workspace:has\(>\s*#runtimePage:not\(\.hidden\)\)\s*\{[^}]*padding:\s*0/s,
+  );
+  assert.match(
+    styles,
+    /@media\s*\(min-width:\s*701px\)\s*\{[^]*?#runtimePage\.runtime-page\s*\{[^}]*height:\s*100%[^}]*min-height:\s*0[^}]*margin:\s*0/s,
+  );
+});

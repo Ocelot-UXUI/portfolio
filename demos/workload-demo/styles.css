@@ -3986,3 +3986,25 @@ html:has(body.demo-nav-capable > .portfolio-project-nav.project-nav) {
     overflow-y: auto;
   }
 }
+
+/* Desktop runtime configuration always owns the full workspace. This keeps
+   browser window height and width changes from producing a blank footer. */
+@media (min-width: 701px) {
+  .workspace:has(> #runtimePage:not(.hidden)) {
+    padding: 0;
+  }
+
+  #runtimePage.runtime-page {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    margin: 0;
+    padding: 16px 16px 0;
+  }
+
+  #runtimePage .runtime-tree {
+    height: 100%;
+    min-height: 0;
+    overflow-y: auto;
+  }
+}
