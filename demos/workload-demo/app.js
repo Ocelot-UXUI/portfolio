@@ -139,7 +139,7 @@ const actions = {
   delete:{label:'删除并缩容', icon:'apps', detail:'将删除目标实例并降低副本数，此操作可能影响服务容量。', fails:true},
   'delete-deployment':{label:'删除部署资源', icon:'apps', detail:'将清除所选集群上的部署资源，此操作不可撤销。'}
 };
-const appNavLabels = { workload:'工作负载', exposure:'服务暴露', logs:'日志', terminal:'终端', monitor:'监控', runtime:'运行配置', settings:'应用设置' };
+const appNavLabels = { workload:'工作负载', exposure:'流量接入', logs:'日志', terminal:'终端', monitor:'监控', runtime:'运行配置', settings:'应用设置' };
 const unavailableAppNav = new Set(['logs','terminal','monitor','settings']);
 const unavailablePrimaryNav = new Set(['home','affairs','environment','changes','resources','account']);
 const workloadSections = document.querySelectorAll('[data-workload-section]');
@@ -950,7 +950,7 @@ function yamlMarkup(pod){
 }
 function openInstanceDetail(id,tab='detail'){ const pod=pods.find(item=>item[0]===id); if(!pod)return; if(state.activeInstanceId!==id){state.selectedContainer=0;state.activeInstanceId=id;} instanceModal.innerHTML=instanceMarkup(pod,tab); detailBackdrop.classList.remove('hidden'); }
 function closeInstanceDetail(){ detailBackdrop.classList.add('hidden'); instanceModal.innerHTML=''; }
-function closeMenu(){ window.unmountCnapApplicationDropdown?.(menu); menu.classList.add('hidden'); menu.innerHTML=''; }
+function closeMenu(){ window.unmountCnapApplicationDropdown?.(menu); menu.classList.add('hidden'); menu.innerHTML=''; delete menu.dataset.menuType; }
 function closeCompactMore(){ state.compactMoreOpen=false; compactMorePopover.classList.add('hidden'); const trigger=document.querySelector('#primaryMoreBtn'); trigger.classList.remove('active'); trigger.querySelector('img').src=primaryNavIconSrc('more'); }
 function syncCompactNavigation(){
   const replacement = document.querySelector('.primary-replaceable');
@@ -1031,6 +1031,8 @@ function openClusterPopover(trigger){
   document.querySelector('#clusterSearchInput').focus();
 }
 function openMenu(trigger,items){
+  window.unmountCnapApplicationDropdown?.(menu);
+  delete menu.dataset.menuType;
   menu.className='action-menu';
   const rect=trigger.getBoundingClientRect();
   menu.innerHTML=items.map(item=>`<button data-menu-action="${item.key}">${item.icon?icon(item.icon):''}${item.label}</button>`).join('');
@@ -1042,14 +1044,14 @@ const applicationMenuItems=[
   {name:'icafe-web-2',initial:'i',tone:'yellow',favorite:false},
   {name:'icafe-web-20260530',initial:'i',tone:'purple',favorite:false}
 ];
-let applicationMenuTab='favorite';
-function renderApplicationMenu(query='',focusInput=false){
-  const list=applicationMenuItems.filter(item=>!query||item.name.toLowerCase().includes(query.toLowerCase()));
-  const listMarkup=list.length?list.map(item=>`<button class="application-menu-row" data-application-select="${item.name}"><span class="application-avatar ${item.tone}">${item.initial}</span><span class="application-name">${item.name}</span><span class="application-star" data-application-favorite="${item.name}" aria-label="${item.favorite?'取消收藏':'添加收藏'}">${item.favorite?'★':''}</span></button>`).join(''):'<p class="application-menu-empty">未找到匹配应用</p>';
-  const escapedQuery=query.replaceAll('&','&amp;').replaceAll('"','&quot;');
-  menu.innerHTML=`<label class="application-menu-search"><svg aria-hidden="true"><use href="#i-runtime-search"/></svg><input data-application-search aria-label="搜索应用" placeholder="请输入应用名称" value="${escapedQuery}"></label><div class="application-menu-tabs"><button class="${applicationMenuTab==='all'?'is-active':''}" data-application-tab="all">全部可用应用</button><button class="${applicationMenuTab==='favorite'?'is-active':''}" data-application-tab="favorite">我收藏的应用</button><button class="${applicationMenuTab==='recent'?'is-active':''}" data-application-tab="recent">最近访问</button><button class="application-menu-open-list" data-application-open-list>打开应用列表</button></div><div class="application-menu-list">${listMarkup}</div><div class="application-menu-divider"></div><div class="application-menu-footer"><button data-application-create>${icon('add')}新建应用</button><button data-application-permission>${icon('clipboard')}申请应用权限</button></div>`;
-  const search=menu.querySelector('[data-application-search]');
-  if(focusInput){ search.focus(); search.setSelectionRange(query.length,query.length); }
+function mountApplicationDropdown(){
+  if(!window.mountCnapApplicationDropdown)return false;
+  window.mountCnapApplicationDropdown(menu,{
+    items:applicationMenuItems,
+    onSelect:id=>{toast(`已切换应用：${id}`);closeMenu();},
+    onAction:action=>toast(action)
+  });
+  return true;
 }
 function openApplicationMenu(trigger){
   closeAccountPopover(); closeEnvPopover(); closeClusterPopover();
@@ -1058,12 +1060,19 @@ function openApplicationMenu(trigger){
   menu.style.top=`${rect.bottom+6}px`;
   menu.style.left=`${Math.max(8,Math.min(rect.left-8,window.innerWidth-496))}px`;
   menu.dataset.context='应用';
+  menu.dataset.menuType='application';
   menu.classList.remove('hidden');
-  if(window.mountCnapApplicationDropdown){
-    window.mountCnapApplicationDropdown(menu,{items:applicationMenuItems,onSelect:id=>{toast(`已切换应用：${id}`);closeMenu();},onAction:action=>toast(action)});
-    return;
-  }
-  renderApplicationMenu('',true);
+  if(mountApplicationDropdown())return;
+  menu.innerHTML='<div class="application-menu-loading" role="status">正在加载应用…</div>';
+  window.cnapApplicationDropdownReady
+    ?.then(()=>{
+      if(menu.dataset.menuType==='application'&&!menu.classList.contains('hidden'))mountApplicationDropdown();
+    })
+    .catch(()=>{
+      if(menu.dataset.menuType==='application'&&!menu.classList.contains('hidden')){
+        menu.innerHTML='<div class="application-menu-loading is-error" role="alert">应用列表加载失败，请重试</div>';
+      }
+    });
 }
 
 function triggerAction(actionKey,ids=[]){ closeMenu(); openConfirm(actionKey,ids); }
@@ -1745,29 +1754,6 @@ clusterGroups.addEventListener('click',event=>{
 document.querySelectorAll('[data-bulk-action]').forEach(button=>button.addEventListener('click',()=>triggerAction(button.dataset.bulkAction,[...state.selected])));
 document.querySelector('#clearSelectionBtn').addEventListener('click',()=>{state.selected.clear();render();});
 menu.addEventListener('click',event=>{const item=event.target.closest('[data-menu-action]');if(!item)return;const pod=menu.dataset.pod;const cluster=menu.dataset.cluster;const key=item.dataset.menuAction; if(key==='history') openHistory(); else if(key==='detail') openInstanceDetail(pod); else if(key==='refresh'){toast('Pod 列表已刷新');render();} else if(key==='collapse-cluster') setWorkloadCollapsed(cluster,true); else if(key==='expand-cluster') setWorkloadCollapsed(cluster,false); else if(key==='restart-row') triggerAction('restart',[pod]); else if(key==='delete-deployment') triggerAction('delete-deployment'); else if(key==='more-customize') toast('导航设置将在后续版本开放'); else if(key.startsWith('context-')) toast(`已切换${menu.dataset.context || ''}：${item.textContent.trim()}`); else if(key==='header-preferences') toast('已打开偏好设置'); else if(key==='header-help') toast('已打开帮助文档'); else toast(`已选择${item.textContent.trim()}`); closeMenu();});
-menu.addEventListener('input',event=>{
-  const search=event.target.closest('[data-application-search]');
-  if(search) renderApplicationMenu(search.value,true);
-});
-menu.addEventListener('click',event=>{
-  const tab=event.target.closest('[data-application-tab]');
-  if(tab){
-    applicationMenuTab=tab.dataset.applicationTab;
-    menu.querySelectorAll('[data-application-tab]').forEach(item=>item.classList.toggle('is-active',item===tab));
-    return;
-  }
-  const star=event.target.closest('[data-application-favorite]');
-  if(star){
-    const item=applicationMenuItems.find(candidate=>candidate.name===star.dataset.applicationFavorite);
-    if(item){ item.favorite=!item.favorite; renderApplicationMenu(menu.querySelector('[data-application-search]')?.value||'',false); }
-    return;
-  }
-  const app=event.target.closest('[data-application-select]');
-  if(app){ toast(`已切换应用：${app.dataset.applicationSelect}`); closeMenu(); return; }
-  if(event.target.closest('[data-application-open-list]')){ toast('已打开应用列表'); return; }
-  if(event.target.closest('[data-application-create]')){ toast('新建应用'); return; }
-  if(event.target.closest('[data-application-permission]')){ toast('申请应用权限'); return; }
-});
 modalBackdrop.addEventListener('click',event=>{if(event.target===modalBackdrop)closeModal();});
 modal.addEventListener('change',event=>{
   if(event.target.matches('[data-modal-select-all]')) modal.querySelectorAll('[data-modal-cluster]').forEach(input=>{input.checked=event.target.checked;if(!event.target.checked){const unavailable=modal.querySelector(`[data-modal-unavailable="${input.dataset.modalCluster}"]`);if(unavailable)unavailable.value=unavailable.dataset.initialValue;}});

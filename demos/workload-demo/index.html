@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>工作负载 | CNAP</title>
-  <link rel="stylesheet" href="./styles.css?v=20260818-3">
+  <link rel="stylesheet" href="./styles.css?v=20260830-2">
   <link rel="stylesheet" href="../../styles/project-navigation.css?v=20260809-14">
   <script src="../../scripts/project-navigation.js?v=20260809-3" defer></script>
   <style>
@@ -264,7 +264,7 @@
       <header><p class="secondary-title">应用</p></header>
       <nav>
         <button class="active" data-app-nav="workload"><img src="./assets/figma-navigation-4-1319/image_45.png" alt=""><span>工作负载</span></button>
-        <button data-app-nav="exposure"><img src="./assets/figma-navigation-4-1319/image_46.png" alt=""><span>服务暴露</span></button>
+        <button data-app-nav="exposure"><img src="./assets/figma-navigation-4-1319/image_46.png" alt=""><span>流量接入</span></button>
         <button data-app-nav="logs"><img src="./assets/figma-navigation-4-1319/image_47.png" alt=""><span>日志</span></button>
         <button data-app-nav="terminal"><img src="./assets/figma-navigation-4-1319/image_48.png" alt=""><span>终端</span></button>
         <button data-app-nav="monitor"><img src="./assets/figma-navigation-4-1319/image_49.png" alt=""><span>监控</span></button>
@@ -556,7 +556,27 @@
   <script src="./components/cnap-select.js?v=20260813-1"></script>
   <script src="./components/cnap-input.js?v=20260814-3"></script>
   <script src="./components/cnap-checkbox.js?v=20260814-2"></script>
-  <script src="./components/cnap-application-dropdown.bundle.js?v=20260818-2"></script>
-  <script src="./app.js?v=20260818-2"></script>
+  <script src="./app.js?v=20260830-1"></script>
+  <script data-deferred-src="./components/cnap-application-dropdown.bundle.js?v=20260830-1">
+    (() => {
+      const source = document.currentScript.dataset.deferredSrc;
+      window.cnapApplicationDropdownReady = new Promise((resolve, reject) => {
+        const loadApplicationDropdown = () => {
+          const script = document.createElement("script");
+          script.src = source;
+          script.fetchPriority = "low";
+          script.addEventListener("load", resolve, { once: true });
+          script.addEventListener("error", reject, { once: true });
+          document.head.append(script);
+        };
+
+        if ("requestIdleCallback" in window) {
+          window.requestIdleCallback(loadApplicationDropdown, { timeout: 1500 });
+        } else {
+          window.setTimeout(loadApplicationDropdown, 0);
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
