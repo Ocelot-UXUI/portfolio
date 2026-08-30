@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CNAP 二级指标满意度变化</title>
+  <style>
+    :root {
+      --paper: #f6f6f4;
+      --ink: #20211f;
+      --muted: #777a74;
+      --line: #d9dad5;
+      --green: #24c448;
+      --q2: #a9c990;
+      --q3: #7795ee;
+      --q4: #292a28;
+      --orange: #ef9f48;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; background: #111; color: var(--ink); }
+    body { font-family: Inter, "SF Pro Display", "PingFang SC", "Microsoft YaHei", sans-serif; }
+    button { font: inherit; }
+
+    .report {
+      width: min(1520px, calc(100vw - 40px));
+      min-height: min(940px, calc(100vh - 40px));
+      margin: 20px auto;
+      padding: 30px 42px 34px;
+      overflow: hidden;
+      background: var(--paper);
+      position: relative;
+    }
+
+    .topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--line);
+      font-size: 12px;
+      color: #666963;
+    }
+
+    .nav { display: flex; gap: 28px; }
+    .nav span:first-child { color: var(--ink); font-weight: 700; position: relative; }
+    .nav span:first-child::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -10px;
+      height: 3px;
+      border-radius: 4px;
+      background: var(--green);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 390px minmax(0, 1fr);
+      gap: 46px;
+      padding-top: 34px;
+    }
+
+    .copy { position: relative; z-index: 2; }
+    .eyebrow {
+      margin: 0 0 18px;
+      color: #70736d;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .08em;
+    }
+    h1 {
+      margin: 0;
+      max-width: 380px;
+      font-size: clamp(46px, 4.3vw, 70px);
+      line-height: .98;
+      letter-spacing: -.055em;
+      font-weight: 760;
+    }
+    .lede {
+      margin: 34px 0 0;
+      max-width: 325px;
+      color: #454743;
+      font-size: 16px;
+      line-height: 1.55;
+    }
+    .lede strong { color: var(--ink); }
+
+    .takeaways {
+      display: grid;
+      gap: 14px;
+      margin-top: 30px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+    }
+    .takeaway { display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: start; }
+    .takeaway b {
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: #232421;
+      color: white;
+      font-size: 12px;
+    }
+    .takeaway p { margin: 3px 0 0; font-size: 13px; line-height: 1.45; }
+
+    .visual { min-width: 0; position: relative; }
+    .visual-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      margin-bottom: 14px;
+    }
+    .visual-title small { display: block; color: var(--muted); font-size: 12px; margin-bottom: 6px; }
+    .visual-title strong { font-size: 18px; }
+    .tools { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; }
+    .sorter {
+      display: inline-flex;
+      padding: 3px;
+      border: 1px solid #d2d3cf;
+      border-radius: 8px;
+      background: #eeeeeb;
+    }
+    .sorter button {
+      border: 0;
+      border-radius: 5px;
+      padding: 7px 10px;
+      color: #74766f;
+      background: transparent;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    .sorter button[aria-pressed="true"] { color: var(--ink); background: white; box-shadow: 0 1px 4px #00000012; }
+
+    .legend { display: flex; align-items: center; gap: 14px; min-height: 36px; color: #686b65; font-size: 11px; }
+    .legend span { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+    .legend i { display: inline-block; width: 9px; height: 16px; border-radius: 2px 2px 0 0; }
+    .legend .dark-key { background: var(--q4); }
+    .legend .light-key { background: #a5a6a2; }
+
+    .chart-shell {
+      position: relative;
+      height: 610px;
+      padding: 54px 18px 0;
+      border-top: 1px solid var(--line);
+    }
+    .gridline {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      height: 1px;
+      background: #ddded9;
+    }
+    .gridline:nth-child(1) { top: 154px; }
+    .gridline:nth-child(2) { top: 266px; }
+    .gridline:nth-child(3) { top: 378px; }
+    .baseline { position: absolute; left: 18px; right: 18px; top: 490px; height: 1px; background: #aaaCA6; }
+
+    .group-bands {
+      position: absolute;
+      inset: 54px 18px 120px;
+      display: grid;
+      grid-template-columns: 6fr 4fr 7fr;
+      pointer-events: none;
+    }
+    .band { position: relative; border-right: 1px dashed #c8cac4; }
+    .band:last-child { border-right: 0; }
+    .band::before {
+      content: attr(data-label);
+      position: absolute;
+      top: -34px;
+      left: 10px;
+      color: #7b7e77;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .06em;
+    }
+    .band:first-child { background: linear-gradient(180deg, rgba(239,159,72,.07), transparent 72%); }
+    .band:first-child::before { color: #c37424; }
+
+    .bars {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      top: 54px;
+      height: 436px;
+      display: flex;
+      align-items: flex-end;
+      gap: 7px;
+    }
+    .metric {
+      flex: 1 1 0;
+      min-width: 0;
+      height: 100%;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      cursor: default;
+    }
+    .bar {
+      width: min(36px, 76%);
+      min-width: 16px;
+      height: calc(var(--value) * 1%);
+      border-radius: 5px 5px 1px 1px;
+      background: #a5a6a2;
+      position: relative;
+      transition: height .45s cubic-bezier(.2,.8,.2,1), opacity .2s;
+    }
+    .metric.priority .bar { background: var(--q4); }
+    .metric:hover .bar, .metric:focus-visible .bar { background: #111; }
+    .metric:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; }
+    .mark {
+      position: absolute;
+      left: 50%;
+      width: 10px;
+      height: 10px;
+      margin-left: -5px;
+      border-radius: 50%;
+      border: 2px solid var(--paper);
+      transform: translateY(50%);
+      z-index: 3;
+      display: none;
+    }
+    .mark.q2 { bottom: calc(var(--q2v) * 1%); background: var(--q2); }
+    .mark.q3 { bottom: calc(var(--q3v) * 1%); background: var(--q3); }
+    /* 重点通过排序和分组表达，不额外叠加手绘圈选 */
+    .metric.focus .bar::after { display: none; }
+    .label {
+      position: absolute;
+      top: calc(100% + 12px);
+      left: 50%;
+      width: 50px;
+      transform: translateX(-50%);
+      color: #575a54;
+      font-size: 10px;
+      line-height: 1.15;
+      text-align: center;
+      word-break: break-all;
+    }
+    .metric.focus .label { color: #20211f; font-weight: 700; }
+
+    .annotation {
+      position: absolute;
+      z-index: 4;
+      color: var(--green);
+      font-family: KaiTi, STKaiti, "Comic Sans MS", cursive;
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: .03em;
+      pointer-events: none;
+      display: none;
+    }
+    .annotation.low { left: 5%; top: 7px; transform: rotate(-3deg); }
+    .annotation.low::after {
+      content: "↘";
+      display: inline-block;
+      margin-left: 7px;
+      font-family: sans-serif;
+      font-size: 30px;
+      transform: rotate(15deg);
+    }
+    .annotation.gain { right: 4%; top: 92px; transform: rotate(2deg); text-align: center; }
+    .annotation.gain::after {
+      content: "↙";
+      display: block;
+      margin-top: -3px;
+      font-family: sans-serif;
+      font-size: 34px;
+    }
+
+    .hero-stat {
+      position: absolute;
+      right: 32px;
+      top: 10px;
+      z-index: 5;
+      width: 208px;
+      padding: 13px 14px 14px;
+      color: #171817;
+      font-family: KaiTi, STKaiti, "Comic Sans MS", cursive;
+      font-size: 17px;
+      font-weight: 900;
+      line-height: 1.12;
+      text-align: center;
+      transform: rotate(2deg);
+    }
+    .hero-stat strong { display: block; margin-bottom: 2px; font-size: 31px; }
+    /* 结论数字保持轻量呈现，不再使用外框 */
+    .hero-stat::before { display: none; }
+
+    .tooltip {
+      position: fixed;
+      z-index: 20;
+      width: 220px;
+      padding: 13px 14px;
+      border: 1px solid #d2d4cd;
+      border-radius: 8px;
+      background: rgba(255,255,255,.96);
+      box-shadow: 0 12px 32px #00000018;
+      pointer-events: none;
+      opacity: 0;
+      transform: translate(10px, 10px);
+      transition: opacity .12s;
+    }
+    .tooltip.show { opacity: 1; }
+    .tooltip strong { display: block; margin-bottom: 8px; font-size: 14px; }
+    .tooltip p { margin: 3px 0; color: #5e615b; font-size: 12px; line-height: 1.35; }
+    .tooltip b { color: var(--ink); }
+
+    .footnote {
+      position: absolute;
+      left: 42px;
+      right: 42px;
+      bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      gap: 28px;
+      color: #91948d;
+      font-size: 9px;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 1100px) {
+      .report { width: 100%; margin: 0; min-height: 100vh; padding: 26px 24px 80px; }
+      .hero { grid-template-columns: 1fr; }
+      .copy { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+      .lede { margin-top: 0; }
+      .takeaways { grid-column: 1 / -1; grid-template-columns: repeat(3, 1fr); }
+      .footnote { left: 24px; right: 24px; }
+    }
+    @media (max-width: 720px) {
+      .report { overflow-x: auto; }
+      .topline .nav { gap: 12px; }
+      .nav span:nth-child(n+3) { display: none; }
+      .hero { min-width: 960px; }
+      .copy { grid-template-columns: 360px 1fr; }
+      h1 { font-size: 52px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="report">
+    <header class="topline">
+      <nav class="nav" aria-label="报告章节"><span>用户洞察</span><span>季度追踪</span><span>核心问题</span><span>设计策略</span></nav>
+      <span>CNAP EXPERIENCE RESEARCH · 2025 Q4</span>
+    </header>
+
+    <section class="hero">
+      <div class="copy">
+        <div>
+          <p class="eyebrow">QUARTERLY SATISFACTION TRACKING</p>
+          <h1>回升正在发生，<br>但核心路径仍需重做</h1>
+        </div>
+        <p class="lede">2025Q4 多数指标较上季回升，体验修复开始见效；但<strong>部署排障、性能、设计布局与部署管理</strong>仍处于相对低位，优先级高于继续优化高满意度模块。</p>
+        <div class="takeaways" aria-label="核心结论">
+          <div class="takeaway"><b>01</b><p><strong>先解决阻断。</strong><br>部署与排障决定用户能否完成核心任务。</p></div>
+          <div class="takeaway"><b>02</b><p><strong>再降低找寻成本。</strong><br>布局问题持续影响导航、理解与操作。</p></div>
+          <div class="takeaway"><b>03</b><p><strong>守住已有优势。</strong><br>环境、服务与数据追溯保持相对高位。</p></div>
+        </div>
+      </div>
+
+      <div class="visual">
+        <div class="visual-head">
+          <div class="visual-title"><small>相对位置 · 不展示具体满意度数值</small><strong>17 项二级指标，按行动优先级重新排序</strong></div>
+          <div class="tools">
+            <div class="legend" aria-label="图例">
+              <span><i class="dark-key"></i>优先重构</span>
+              <span><i class="light-key"></i>继续观察 / 体验优势</span>
+            </div>
+            <div class="sorter" aria-label="排序方式">
+              <button type="button" data-sort="priority" aria-pressed="true">按 Q4 优先级</button>
+              <button type="button" data-sort="change" aria-pressed="false">按季度变化</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="chart-shell">
+          <div class="gridline"></div><div class="gridline"></div><div class="gridline"></div><div class="baseline"></div>
+          <div class="group-bands" aria-hidden="true">
+            <div class="band" data-label="优先重构"></div><div class="band" data-label="继续观察"></div><div class="band" data-label="体验优势"></div>
+          </div>
+          <div class="hero-stat"><strong>12 / 17</strong>项指标较上季回升</div>
+          <div class="annotation low">四项持续低位</div>
+          <div class="annotation gain">回升不是终点<br>优势需要守住</div>
+          <div class="bars" id="bars" role="list" aria-label="满意度相对位置图"></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="tooltip" id="tooltip" role="status" aria-live="polite"></div>
+    <footer class="footnote">
+      <span>注：柱高仅表达同一问卷口径下的相对位置；为保护内部数据，不展示具体满意度数值。</span>
+      <span>排序逻辑：先看当前低位，再结合跨季度趋势判断行动优先级。</span>
+    </footer>
+  </main>
+
+  <script>
+    const data = [
+      {name:"整体", q2:57, q3:38, q4:57}, {name:"新建应用", q2:86, q3:75, q4:81},
+      {name:"应用配置", q2:52, q3:31, q4:52}, {name:"多环境", q2:75, q3:70, q4:75},
+      {name:"备份", q2:73, q3:73, q4:54}, {name:"部署管理", q2:34, q3:18, q4:30},
+      {name:"部署排障", q2:15, q3:12, q4:17}, {name:"数据追溯", q2:94, q3:65, q4:89},
+      {name:"流水线", q2:60, q3:28, q4:49}, {name:"查询运维", q2:65, q3:41, q4:41},
+      {name:"服务暴露", q2:83, q3:25, q4:83}, {name:"环境管理", q2:81, q3:46, q4:81},
+      {name:"新建环境", q2:91, q3:89, q4:89}, {name:"功能全面", q2:73, q3:68, q4:68},
+      {name:"设计布局", q2:28, q3:12, q4:24}, {name:"视觉呈现", q2:78, q3:36, q4:78},
+      {name:"性能", q2:17, q3:23, q4:17}
+    ];
+    const bars = document.getElementById("bars");
+    const tooltip = document.getElementById("tooltip");
+    const focusNames = new Set(["部署排障", "性能", "设计布局", "部署管理"]);
+
+    function trend(item) {
+      const delta = item.q4 - item.q3;
+      if (delta > 2) return "较上季回升";
+      if (delta < -2) return "较上季下降";
+      return "与上季基本持平";
+    }
+    function level(item) {
+      if (item.q4 < 50) return "优先重构";
+      if (item.q4 < 70) return "继续观察";
+      return "体验优势";
+    }
+    function render(mode = "priority") {
+      const sorted = [...data].sort(mode === "change"
+        ? (a,b) => (a.q4-a.q3) - (b.q4-b.q3)
+        : (a,b) => a.q4 - b.q4 || (a.q4-a.q3) - (b.q4-b.q3));
+      bars.innerHTML = "";
+      sorted.forEach((item, index) => {
+        const el = document.createElement("div");
+        el.className = "metric" + (item.q4 < 50 ? " priority" : "") + (focusNames.has(item.name) ? " focus" : "");
+        el.tabIndex = 0;
+        el.setAttribute("role", "listitem");
+        el.setAttribute("aria-label", `${item.name}，${level(item)}，${trend(item)}`);
+        el.style.setProperty("--q2v", item.q2);
+        el.style.setProperty("--q3v", item.q3);
+        el.style.setProperty("--tilt", `${index % 2 ? 3 : -4}deg`);
+        el.innerHTML = `<span class="mark q2"></span><span class="mark q3"></span><div class="bar" style="--value:${item.q4}"></div><span class="label">${item.name}</span>`;
+        const show = (event) => {
+          tooltip.innerHTML = `<strong>${item.name}</strong><p>当前判断：<b>${level(item)}</b></p><p>季度变化：<b>${trend(item)}</b></p>`;
+          tooltip.classList.add("show"); move(event);
+        };
+        const move = (event) => {
+          const x = event.clientX || el.getBoundingClientRect().left;
+          const y = event.clientY || el.getBoundingClientRect().top;
+          tooltip.style.left = `${Math.min(window.innerWidth - 240, x + 8)}px`;
+          tooltip.style.top = `${Math.min(window.innerHeight - 110, y + 8)}px`;
+        };
+        el.addEventListener("mouseenter", show); el.addEventListener("mousemove", move);
+        el.addEventListener("mouseleave", () => tooltip.classList.remove("show"));
+        el.addEventListener("focus", show); el.addEventListener("blur", () => tooltip.classList.remove("show"));
+        bars.appendChild(el);
+      });
+      document.querySelector(".group-bands").style.opacity = mode === "priority" ? "1" : "0";
+      document.querySelectorAll(".annotation, .hero-stat").forEach(el => el.style.opacity = mode === "priority" ? "1" : ".18");
+    }
+
+    document.querySelectorAll("[data-sort]").forEach(button => button.addEventListener("click", () => {
+      document.querySelectorAll("[data-sort]").forEach(item => item.setAttribute("aria-pressed", String(item === button)));
+      render(button.dataset.sort);
+    }));
+    render();
+  </script>
+</body>
+</html>
