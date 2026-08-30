@@ -13,6 +13,9 @@ const {default: react} = await import(path.join(libraryDirectory, 'node_modules/
 export default defineConfig({
     root: integrationDirectory,
     plugins: [react()],
+    define: {
+        'process.env.NODE_ENV': JSON.stringify('production'),
+    },
     resolve: {
         alias: {
             '@': path.join(libraryDirectory, 'src'),

@@ -1,7 +1,8 @@
 # Local component integration
 
 The application picker is bundled from the local `frontend-v2` component library.
-The generated bundle is already included by `index.html`, so the demo can still be opened directly as a local file.
+The generated bundle is loaded after the core demo initializes, so it does not block the first render.
+The Vite config explicitly replaces `process.env.NODE_ENV` because the IIFE runs directly in the browser without Node globals.
 
 To rebuild it after changing `frontend-v2`, set `CNAP_LIBRARY_ROOT` and run Vite from that library's installed dependencies:
 

@@ -2778,6 +2778,41 @@
   #runtimePage .runtime-resource-row > :last-child { display: none; }
 }
 
+/* The product shell scrolls internally, so the shared portfolio gutter would
+   otherwise leave a permanent empty strip on the right. */
+html:has(body.demo-nav-capable > .portfolio-project-nav.project-nav) {
+  scrollbar-gutter: auto;
+}
+
+/* Keep the primary utility sprite anchored when the portfolio nav is hidden
+   and the product shell gains the reclaimed vertical space. */
+.primary-bottom {
+  flex: 0 0 160px;
+  margin: auto auto 0 !important;
+}
+
+/* Compact desktop runtime layout: cancel the wide-canvas bleed and let the
+   runtime surface, tree, and editor consume the whole workspace height. */
+@media (min-width: 701px) and (max-width: 900px) {
+  .workspace:has(> #runtimePage:not(.hidden)) {
+    padding: 0;
+  }
+
+  #runtimePage.runtime-page {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    margin: 0;
+    padding: 16px 8px 0;
+  }
+
+  #runtimePage .runtime-tree {
+    height: 100%;
+    min-height: 0;
+    overflow-y: auto;
+  }
+}
+
 /* The workload surface is desktop-oriented; keep the mobile fallback from
    inheriting the demo's fixed canvas width. */
 @media (max-width:700px){
@@ -3890,45 +3925,14 @@
   background: #fff;
   box-shadow: 0 1px 5px rgba(0, 0, 0, .1);
 }
-.application-menu-search {
-  display: flex;
-  width: 100%;
-  height: 32px;
-  align-items: center;
-  gap: 6px;
-  margin: 0 0 2px;
-  padding: 7px 13px;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  color: #bfbfbf;
+.application-menu-loading {
+  display: grid;
+  min-height: 120px;
+  place-items: center;
+  color: #8f8f8f;
+  font: 400 14px/22px "PingFang SC", sans-serif;
 }
-.application-menu-search .figma-icon,
-.application-menu-search svg { width: 16px; height: 16px; flex: 0 0 16px; color: #bfbfbf; stroke: currentColor; }
-.application-menu-search input { width: 100%; min-width: 0; padding: 0; border: 0; outline: 0; color: #181818; font: 400 14px/22px "PingFang SC", sans-serif; }
-.application-menu-search input::placeholder { color: #bfbfbf; }
-.application-menu-tabs { display: flex; height: 40px; align-items: stretch; gap: 32px; margin: 0 4px 10px; }
-.application-menu-tabs button { position: relative; height: 40px; padding: 10px 0; border: 0; outline: 0; background: transparent; color: #545454; font: 400 12px/20px "PingFang SC", sans-serif; white-space: nowrap; }
-.application-menu-tabs button.is-active { color: #181818; font-weight: 500; }
-.application-menu-tabs button.is-active::after { position: absolute; right: 0; bottom: 0; left: 0; height: 2px; border-radius: 4px; background: #181818; content: ""; }
-.application-menu-tabs .application-menu-open-list { margin-left: auto; color: #4471ec; }
-.application-menu-tabs .application-menu-open-list::after { display: none; }
-.application-menu-list { display: flex; min-height: 0; flex-direction: column; gap: 2px; margin-bottom: 2px; padding: 0 4px; }
-.application-menu-row { display: flex; width: 100%; height: 48px; align-items: center; gap: 8px; padding: 8px; border: 0; border-radius: 8px; background: #fff; color: #181818; text-align: left; cursor: pointer; }
-.application-menu-row:hover { background: #f7f7f7; }
-.application-avatar { display: grid; width: 32px; height: 32px; flex: 0 0 32px; place-items: center; border-radius: 50%; color: #fff; font: 500 14px/19px "PingFang SC", sans-serif; text-transform: lowercase; }
-.application-avatar.mint { background: #a2e8ce; }
-.application-avatar.blue { background: #b1d4ff; }
-.application-avatar.yellow { background: #fee685; }
-.application-avatar.purple { background: #b8c4ff; }
-.application-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 400 14px/22px "PingFang SC", sans-serif; }
-.application-star { margin-left: auto; color: #f28a00; font-size: 18px; line-height: 20px; }
-.application-menu-empty { margin: 48px 0; color: #8f8f8f; text-align: center; font-size: 14px; }
-.application-menu-divider { width: calc(100% - 8px); height: 1px; margin: 0 auto 2px; background: #f0f0f0; }
-.application-menu-footer { display: flex; height: 40px; align-items: center; justify-content: space-between; }
-.application-menu-footer button { display: inline-flex; width: 232px; height: 32px; align-items: center; justify-content: center; gap: 8px; padding: 6px 0; border: 0; border-radius: 24px; background: #fff; color: #181818; font: 400 14px/22px "PingFang SC", sans-serif; cursor: pointer; }
-.application-menu-footer button:hover { background: #f7f7f7; }
-.application-menu-footer .figma-icon,
-.application-menu-footer svg { width: 16px; height: 16px; }
+.application-menu-loading.is-error { color: #e62c4b; }
 
 /* Final responsive runtime surface overrides. */
 @media (max-width: 700px) {
