@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Figma 原型素材导出器｜郭昱成作品集" />
+    <title>Figma 原型素材导出器 | 郭昱成作品集</title>
+    <link rel="stylesheet" href="../styles/styles.css?v=20260727-1" />
+    <link rel="stylesheet" href="../styles/project-navigation.css?v=20260809-14" />
+    <script src="../scripts/project-navigation.js?v=20260809-3" defer></script>
+    <style>
+      :root { color-scheme: dark; }
+      body.asset-exporter-page { margin: 0; background: #08090a; color: #f7f7f5; font-family: "Space Grotesk", "Noto Sans SC", "PingFang SC", sans-serif; }
+      .asset-exporter-page * { box-sizing: border-box; }
+      .asset-exporter-page main { overflow: hidden; }
+      .asset-exporter-page .project-section-rail, .asset-exporter-page .project-section-rail-tooltip { display: none !important; }
+      .asset-hero { position: relative; min-height: 700px; padding: 160px 32px 84px; overflow: hidden; background: radial-gradient(circle at 82% 24%, rgba(220,86,25,.17), transparent 25%), #08090a; }
+      .asset-hero::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(112deg, transparent 46%, rgba(255,255,255,.04) 46.1%, transparent 46.35%); opacity: .45; }
+      .asset-wrap { position: relative; z-index: 1; width: min(1180px, 100%); margin: 0 auto; }
+      .asset-hero-grid { display: grid; grid-template-columns: minmax(0, .78fr) minmax(400px, 1fr); gap: clamp(54px, 9vw, 132px); align-items: center; }
+      .asset-kicker { margin: 0 0 18px; color: #f18a53; font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+      .asset-hero h1 { max-width: 580px; margin: 0; font-size: clamp(48px, 6.4vw, 84px); font-weight: 620; line-height: 1.04; letter-spacing: -.04em; }
+      .asset-lead { max-width: 510px; margin: 26px 0 0; color: #bcbabe; font-size: 16px; line-height: 1.85; }
+      .asset-stats { display: flex; gap: 22px; flex-wrap: wrap; margin-top: 38px; color: #8f8e90; font-size: 12px; }
+      .asset-stats strong { display: block; margin-bottom: 5px; color: #f6f3ef; font-size: 14px; font-weight: 600; }
+      .plugin-window { position: relative; padding: 18px; border: 1px solid rgba(255,255,255,.16); border-radius: 14px; background: linear-gradient(145deg, rgba(30,31,35,.96), rgba(14,15,17,.97)); box-shadow: 0 30px 70px rgba(0,0,0,.38), inset 0 1px rgba(255,255,255,.08); }
+      .plugin-window::after { content: ""; position: absolute; right: -80px; bottom: -110px; width: 220px; height: 220px; border-radius: 50%; background: rgba(220,86,25,.17); filter: blur(34px); pointer-events: none; }
+      .plugin-titlebar { display: flex; align-items: center; justify-content: space-between; padding: 4px 3px 16px; border-bottom: 1px solid rgba(255,255,255,.11); }
+      .plugin-brand small { display: block; margin-bottom: 5px; color: #dc5619; font-size: 9px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
+      .plugin-brand b { font-size: 18px; letter-spacing: -.02em; }
+      .plugin-status { padding: 6px 9px; border: 1px solid rgba(220,86,25,.36); border-radius: 99px; color: #f6b18e; background: rgba(220,86,25,.12); font-size: 10px; }
+      .plugin-toolbar { display: flex; gap: 7px; align-items: center; margin: 15px 0 12px; }
+      .plugin-button { padding: 8px 10px; border: 1px solid rgba(255,255,255,.12); border-radius: 6px; color: #d7d6d3; background: rgba(255,255,255,.05); font-size: 11px; }
+      .plugin-button.primary { margin-left: auto; border-color: transparent; color: #fff; background: #dc5619; box-shadow: 0 7px 16px rgba(220,86,25,.27); }
+      .plugin-group { position: relative; z-index: 1; padding: 12px; border: 1px solid rgba(255,255,255,.1); border-radius: 8px; background: rgba(8,9,10,.56); }
+      .plugin-group + .plugin-group { margin-top: 10px; }
+      .plugin-group-head { display: flex; align-items: center; gap: 7px; margin-bottom: 8px; color: #f4f3f0; font-size: 12px; font-weight: 650; }
+      .plugin-count { padding: 2px 6px; border-radius: 99px; color: #a6a4a2; background: rgba(255,255,255,.08); font-size: 9px; }
+      .plugin-row { display: grid; grid-template-columns: 14px minmax(0,1fr) auto; gap: 8px; align-items: center; padding: 7px 0; color: #d5d3d1; font-size: 11px; }
+      .plugin-row + .plugin-row { border-top: 1px solid rgba(255,255,255,.07); }
+      .plugin-check { width: 13px; height: 13px; border: 1px solid #ef8a55; border-radius: 3px; background: #dc5619; box-shadow: inset 0 0 0 2px #dc5619; }
+      .plugin-check.empty { border-color: rgba(255,255,255,.27); background: transparent; box-shadow: none; }
+      .plugin-meta { color: #77777a; font-size: 10px; white-space: nowrap; }
+      .asset-section { padding: 96px 32px; border-top: 1px solid rgba(255,255,255,.12); }
+      .asset-section--muted { background: #0b0c0f; }
+      .asset-section-head { display: grid; grid-template-columns: 210px minmax(0,1fr); gap: 48px; margin-bottom: 46px; }
+      .asset-section-number { color: #767579; font-size: 12px; font-variant-numeric: tabular-nums; }
+      .asset-section h2 { max-width: 680px; margin: 0; color: #fff; font-size: clamp(30px, 4vw, 52px); font-weight: 620; line-height: 1.15; letter-spacing: -.03em; }
+      .asset-section-head p { max-width: 660px; margin: 16px 0 0; color: #969498; font-size: 14px; line-height: 1.85; }
+      .asset-problem { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid rgba(255,255,255,.14); }
+      .asset-problem article { min-height: 190px; padding: 28px 32px 28px 0; border-bottom: 1px solid rgba(255,255,255,.1); }
+      .asset-problem article:nth-child(even) { padding-left: 32px; border-left: 1px solid rgba(255,255,255,.1); }
+      .asset-problem small { display: block; margin-bottom: 12px; color: #dc5619; font-size: 11px; font-weight: 700; letter-spacing: .12em; }
+      .asset-problem h3 { margin: 0; color: #f5f4f1; font-size: 21px; font-weight: 600; }
+      .asset-problem p { margin: 12px 0 0; color: #969498; font-size: 14px; line-height: 1.75; }
+      .asset-flow { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid rgba(255,255,255,.14); }
+      .asset-flow article { min-height: 250px; padding: 26px 24px 26px 0; border-bottom: 1px solid rgba(255,255,255,.1); }
+      .asset-flow article + article { padding-left: 24px; border-left: 1px solid rgba(255,255,255,.1); }
+      .asset-flow small { display: block; margin-bottom: 48px; color: #777579; font-size: 11px; }
+      .asset-flow h3 { margin: 0; color: #f7f6f3; font-size: 18px; font-weight: 600; }
+      .asset-flow p { margin: 13px 0 0; color: #969498; font-size: 13px; line-height: 1.8; }
+      .asset-output { display: grid; grid-template-columns: minmax(250px,.75fr) minmax(0,1.25fr); gap: 72px; align-items: center; }
+      .asset-output p { margin: 0; color: #a09ea2; font-size: 15px; line-height: 1.9; }
+      .asset-output-list { border: 1px solid rgba(255,255,255,.15); border-radius: 10px; background: #111217; overflow: hidden; }
+      .asset-output-row { display: flex; align-items: center; justify-content: space-between; gap: 22px; padding: 18px 20px; }
+      .asset-output-row + .asset-output-row { border-top: 1px solid rgba(255,255,255,.1); }
+      .asset-output-row code { color: #f5f3ef; font-family: "SFMono-Regular", Consolas, monospace; font-size: 13px; }
+      .asset-output-row span { color: #858388; font-size: 12px; text-align: right; }
+      .asset-note { margin-top: 22px; color: #737176; font-size: 12px; line-height: 1.7; }
+      .asset-footer { padding: 30px 32px; color: #68676c; font-size: 11px; text-align: center; letter-spacing: .08em; }
+      @media (max-width: 800px) {
+        .asset-hero { min-height: 0; padding: 120px 24px 58px; }
+        .asset-hero-grid, .asset-output { grid-template-columns: 1fr; gap: 40px; }
+        .asset-section { padding: 62px 24px; }
+        .asset-section-head { grid-template-columns: 1fr; gap: 12px; margin-bottom: 34px; }
+        .asset-problem, .asset-flow { grid-template-columns: 1fr; }
+        .asset-problem article, .asset-problem article:nth-child(even), .asset-flow article, .asset-flow article + article { min-height: auto; padding: 23px 0; border-left: 0; }
+        .asset-flow small { margin-bottom: 20px; }
+        .asset-output { gap: 28px; }
+      }
+    </style>
+  </head>
+  <body class="asset-exporter-page dodo-page">
+    <header class="project-nav">
+      <a class="project-back" href="../index.html" aria-label="返回首页"><span aria-hidden="true">←</span><span class="project-back-label">返回首页</span></a>
+      <div class="project-nav-title">Figma 原型素材导出器</div>
+      <p class="project-nav-index">TOOL 01 / 01</p>
+    </header>
+    <main>
+      <section class="asset-hero">
+        <div class="asset-wrap asset-hero-grid">
+          <div>
+            <p class="asset-kicker">Figma Plugin · Prototype toolkit</p>
+            <h1>原型素材<br />导出器</h1>
+            <p class="asset-lead">从选中的设计 Frame 中提取真实图片与完整图标，整理成可直接进入网页原型搭建的素材包。</p>
+            <div class="asset-stats"><span><strong>IMAGE Fill</strong>保留原始图片</span><span><strong>≤ 160 px</strong>完整图标导出 SVG</span><span><strong>500 个</strong>单次导出上限</span></div>
+          </div>
+          <div class="plugin-window" aria-label="原型素材导出器界面示意">
+            <div class="plugin-titlebar"><div class="plugin-brand"><small>Prototype toolkit</small><b>原型素材导出器</b></div><span class="plugin-status">扫描完成</span></div>
+            <div class="plugin-toolbar"><span class="plugin-button">重新扫描</span><span class="plugin-button">全选</span><span class="plugin-button">清空</span><span class="plugin-button primary">导出已勾选素材</span></div>
+            <div class="plugin-group"><div class="plugin-group-head">原始图片 <span class="plugin-count">18</span></div><div class="plugin-row"><span class="plugin-check"></span><span>hero-cover.png</span><span class="plugin-meta">3 处使用</span></div><div class="plugin-row"><span class="plugin-check"></span><span>product-preview.png</span><span class="plugin-meta">1440×900</span></div></div>
+            <div class="plugin-group"><div class="plugin-group-head">图标候选 <span class="plugin-count">26</span></div><div class="plugin-row"><span class="plugin-check"></span><span>navigation-arrow</span><span class="plugin-meta">高置信</span></div><div class="plugin-row"><span class="plugin-check empty"></span><span>status-badge</span><span class="plugin-meta">待确认</span></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="asset-section">
+        <div class="asset-wrap">
+          <div class="asset-section-head"><span class="asset-section-number">01</span><div><h2>把“找素材”从手工整理，变成导出前的一次判断。</h2><p>原型开发需要的是可复用的原始素材，而不是一张张截取的设计稿。这个插件负责把散落在 Frame 内的真实图片与完整图标提出来，同时保留它们的来源信息。</p></div></div>
+          <div class="asset-problem"><article><small>INPUT</small><h3>从选区开始</h3><p>在 Figma 中选择一个或多个 Frame，插件读取当前选区，不修改设计文件。</p></article><article><small>IMAGE</small><h3>识别原始图片</h3><p>有 IMAGE fill 的图层按图片内容去重，避免同一张素材被重复导出。</p></article><article><small>ICON</small><h3>保留完整图标</h3><p>有矢量内容且尺寸不超过 160 px 的组件或实例，整体导出 SVG，而不是拆成零散路径。</p></article><article><small>CONFIDENCE</small><h3>把不确定留给人判断</h3><p>高置信度素材默认勾选；结构不明确的候选项进入“待确认”，由使用者决定是否导出。</p></article></div>
+        </div>
+      </section>
+
+      <section class="asset-section asset-section--muted">
+        <div class="asset-wrap">
+          <div class="asset-section-head"><span class="asset-section-number">02</span><div><h2>扫描、筛选、导出，服务于下一步原型搭建。</h2></div></div>
+          <div class="asset-flow"><article><small>01</small><h3>选择 Frame</h3><p>从页面或局部模块开始，不需要导出完整画板。</p></article><article><small>02</small><h3>扫描与分类</h3><p>区分 IMAGE fill、完整图标和需要确认的候选素材；空图形在扫描阶段过滤。</p></article><article><small>03</small><h3>勾选确认</h3><p>根据实际原型需要调整结果。被 Figma 判定为空的特殊节点会自动跳过。</p></article><article><small>04</small><h3>导出素材包</h3><p>一次最多导出 500 个，文件名附带节点 ID，避免同名图层在 ZIP 中互相覆盖。</p></article></div>
+        </div>
+      </section>
+
+      <section class="asset-section">
+        <div class="asset-wrap">
+          <div class="asset-section-head"><span class="asset-section-number">03</span><div><h2>交给原型搭建的，不止是一堆文件。</h2><p>导出结果同时记录素材在哪里、为什么被选中；失败信息单独保留，让后续定位和复用有迹可循。</p></div></div>
+          <div class="asset-output"><div><p>生成的 <b>prototype-assets.zip</b> 里包含图片、SVG 图标和素材清单。它让设计稿里的真实内容可以直接接入网页原型，而不需要重新搜图、截图或猜测来源。</p><p class="asset-note">规则边界：不导出完整 Frame、不修改 Figma 文件，也不会把图标组件拆成一条条 Vector 路径。</p></div><div class="asset-output-list"><div class="asset-output-row"><code>images/hero-cover_12-93.png</code><span>原始图片 · 去重导出</span></div><div class="asset-output-row"><code>icons/navigation-arrow_4-18.svg</code><span>完整图标 · SVG</span></div><div class="asset-output-row"><code>asset-manifest.json</code><span>素材位置与来源记录</span></div><div class="asset-output-row"><code>export-errors.json</code><span>仅在失败时生成</span></div></div></div>
+        </div>
+      </section>
+    </main>
+    <footer class="asset-footer">FIGMA PROTOTYPE ASSET EXPORTER · GUO YUCHENG · 2026</footer>
+  </body>
+</html>

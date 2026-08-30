@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>继承配置方案对比</title>
+  <style>
+    :root {
+      --ink: #171b1f;
+      --muted: #66706b;
+      --line: #dfe7e2;
+      --soft-line: #edf2ef;
+      --green: #45d99a;
+      --green-deep: #129765;
+      --green-soft: #eafbf3;
+      --green-wash: #f6fcf9;
+      --blue: #4f8cff;
+      --blue-soft: #edf4ff;
+      --orange: #ff9d3d;
+      --orange-soft: #fff5e8;
+      --red: #ef5d70;
+      --red-soft: #fff0f2;
+      --shadow: 0 16px 45px rgba(24, 51, 39, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-width: 1180px;
+      background: #eef3f0;
+      color: var(--ink);
+      font-family: Inter, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    }
+
+    .stage {
+      width: 1920px;
+      height: 1080px;
+      margin: 0 auto;
+      padding: 62px 76px 54px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 91% 8%, rgba(69, 217, 154, .10), transparent 22%),
+        #fff;
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      gap: 24px;
+    }
+
+    .eyebrow {
+      color: var(--green-deep);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 40px;
+      line-height: 1.15;
+      letter-spacing: -.02em;
+    }
+
+    .subtitle {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 20px;
+      line-height: 1.55;
+    }
+
+    .problem-strip {
+      display: grid;
+      grid-template-columns: 210px 1fr;
+      gap: 22px;
+      align-items: center;
+      padding: 19px 22px;
+      border: 1px solid #ccebdd;
+      border-radius: 18px;
+      background: linear-gradient(90deg, var(--green-soft), #fbfefc 74%);
+    }
+
+    .problem-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--green-deep);
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .problem-label span:first-child {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: var(--green);
+      font-size: 16px;
+    }
+
+    .question-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .question {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 50px;
+      padding: 0 16px;
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: inset 0 0 0 1px rgba(25, 102, 72, .08);
+      color: #35423c;
+      font-size: 17px;
+      font-weight: 650;
+    }
+
+    .question b {
+      color: var(--green-deep);
+      font-size: 14px;
+    }
+
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      min-height: 0;
+    }
+
+    .solution {
+      min-height: 0;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: #fff;
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .solution.recommended {
+      border-color: rgba(69, 217, 154, .75);
+      box-shadow: 0 18px 52px rgba(31, 157, 104, .13);
+    }
+
+    .solution.recommended::after {
+      content: "最终采用";
+      position: absolute;
+      right: 24px;
+      top: 24px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      color: #08764c;
+      background: #dff9ec;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .solution-kicker {
+      color: #9aa39f;
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .solution h2 {
+      margin: 0;
+      font-size: 28px;
+      letter-spacing: -.01em;
+    }
+
+    .solution-desc {
+      margin: 8px 0 0;
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    .demo {
+      min-height: 0;
+      padding: 16px;
+      border: 1px solid var(--soft-line);
+      border-radius: 18px;
+      background: var(--green-wash);
+      display: grid;
+      align-content: center;
+      gap: 12px;
+    }
+
+    .panel-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #7c8781;
+      font-size: 13px;
+    }
+
+    .config-row {
+      min-height: 78px;
+      padding: 14px 16px;
+      border: 1px solid #dfe5e2;
+      border-radius: 13px;
+      background: #fff;
+      box-shadow: 0 8px 22px rgba(25, 61, 44, .06);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .field-title {
+      margin-bottom: 7px;
+      font-size: 16px;
+      font-weight: 750;
+    }
+
+    .field-help {
+      color: #8a948f;
+      font-size: 13px;
+    }
+
+    .row-actions {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .value {
+      min-width: 98px;
+      padding: 9px 12px;
+      border: 1px solid #d8dfdb;
+      border-radius: 9px;
+      text-align: right;
+      color: #555e59;
+      background: #f8faf9;
+      font-size: 15px;
+    }
+
+    .pill, .icon-pill, .edit {
+      border: 0;
+      font: inherit;
+      white-space: nowrap;
+    }
+
+    .pill {
+      padding: 8px 11px;
+      border-radius: 9px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .pill.source { color: #3a4e44; background: #eef3f0; }
+    .pill.covered { color: #2469d8; background: var(--blue-soft); }
+    .pill.restore { color: #d34c61; background: var(--red-soft); }
+
+    .edit {
+      padding: 9px 13px;
+      border: 1px solid #cfd8d3;
+      border-radius: 9px;
+      color: #39463f;
+      background: #fff;
+      font-size: 13px;
+      font-weight: 750;
+      cursor: pointer;
+    }
+
+    .edit:hover { border-color: var(--green); color: var(--green-deep); }
+
+    .compact-row {
+      position: relative;
+      min-height: 116px;
+    }
+
+    .compact-row .config-row { position: absolute; inset: 18px 0 0; }
+
+    .status-stack {
+      position: absolute;
+      z-index: 2;
+      right: 118px;
+      top: 0;
+      display: flex;
+      gap: 8px;
+    }
+
+    .icon-pill {
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      display: grid;
+      place-items: center;
+      background: #fff;
+      border: 1px solid #d8e1dc;
+      color: var(--green-deep);
+      font-size: 17px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 7px 17px rgba(25, 61, 44, .08);
+    }
+
+    .tooltip {
+      position: absolute;
+      right: 34px;
+      top: 47px;
+      z-index: 3;
+      width: 250px;
+      padding: 12px 14px;
+      border: 1px solid #bfead7;
+      border-radius: 11px;
+      color: #355148;
+      background: #fff;
+      box-shadow: 0 12px 28px rgba(18, 86, 57, .13);
+      font-size: 13px;
+      line-height: 1.5;
+      opacity: 0;
+      transform: translateY(-5px);
+      pointer-events: none;
+      transition: .18s ease;
+    }
+
+    .compact-row:hover .tooltip,
+    .compact-row:focus-within .tooltip {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .signals {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .signal {
+      padding: 13px 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      line-height: 1.45;
+      font-weight: 700;
+    }
+
+    .signal.good { color: #176f4c; background: var(--green-soft); }
+    .signal.cost { color: #825421; background: var(--orange-soft); }
+
+    .decision {
+      display: grid;
+      grid-template-columns: 210px 1fr auto;
+      gap: 24px;
+      align-items: center;
+      padding: 18px 22px;
+      border-radius: 18px;
+      color: #fff;
+      background: #1d2823;
+    }
+
+    .decision-title {
+      color: #8ef0c4;
+      font-size: 20px;
+      font-weight: 850;
+    }
+
+    .decision-copy {
+      color: #dce4e0;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .flow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .flow span {
+      padding: 8px 10px;
+      border-radius: 8px;
+      color: #213029;
+      background: #fff;
+    }
+
+    .flow i { color: #72dbae; font-style: normal; }
+
+    @media (max-width: 1919px) {
+      body { min-width: 0; }
+      .stage {
+        transform-origin: top left;
+        transform: scale(calc(100vw / 1920));
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="stage">
+    <header>
+      <div class="eyebrow">02 · 设计探索</div>
+      <h1>两种呈现策略，平衡理解与效率</h1>
+      <p class="subtitle">围绕继承来源、覆盖状态与恢复操作，探索信息应该展开到什么程度。</p>
+    </header>
+
+    <section class="problem-strip" aria-label="共同设计目标">
+      <div class="problem-label"><span>?</span>共同回答三件事</div>
+      <div class="question-list">
+        <div class="question"><b>01</b> 这个值继承自哪一级？</div>
+        <div class="question"><b>02</b> 当前层级是否修改过？</div>
+        <div class="question"><b>03</b> 如何恢复上层配置？</div>
+      </div>
+    </section>
+
+    <section class="comparison" aria-label="方案对比">
+      <article class="solution">
+        <header>
+          <div class="solution-kicker">方案一 · 优先保证理解</div>
+          <h2>信息直接展开，关系一眼看清</h2>
+          <p class="solution-desc">将继承来源、覆盖状态和恢复入口放在配置项旁，不用额外操作也能看懂当前关系。</p>
+        </header>
+
+        <div class="demo">
+          <div class="panel-title"><span>容量与变更</span><span>信息就地展示</span></div>
+          <div class="config-row">
+            <div>
+              <div class="field-title">实例数量</div>
+              <div class="field-help">工作负载启动的 Pod 数量</div>
+            </div>
+            <div class="row-actions">
+              <span class="pill source">继承自：环境</span>
+              <span class="value">3</span>
+              <button class="edit">编辑</button>
+            </div>
+          </div>
+          <div class="config-row">
+            <div>
+              <div class="field-title">实例数量</div>
+              <div class="field-help">当前层级已修改，覆盖上层配置</div>
+            </div>
+            <div class="row-actions">
+              <span class="pill covered">已覆盖</span>
+              <span class="value">6</span>
+              <span class="pill restore">恢复继承</span>
+            </div>
+          </div>
+        </div>
+
+        <footer class="signals">
+          <div class="signal good">✓ 关系完整，状态与操作都能直接看到</div>
+          <div class="signal cost">△ 重复信息多，复杂表单容易拥挤</div>
+        </footer>
+      </article>
+
+      <article class="solution recommended">
+        <header>
+          <div class="solution-kicker">方案二 · 兼顾浏览效率</div>
+          <h2>状态统一收起，需要时再展开</h2>
+          <p class="solution-desc">默认仅保留统一状态入口；需要时查看来源与恢复操作，通过“编辑”明确触发覆盖。</p>
+        </header>
+
+        <div class="demo">
+          <div class="panel-title"><span>容量与变更</span><span>悬浮状态图标查看详情</span></div>
+          <div class="compact-row">
+            <div class="status-stack">
+              <button class="icon-pill" aria-label="查看继承状态">↳</button>
+            </div>
+            <div class="tooltip"><strong>继承自：环境</strong><br />当前值 3；点击“编辑”后才会覆盖当前层级。</div>
+            <div class="config-row">
+              <div>
+                <div class="field-title">实例数量</div>
+                <div class="field-help">工作负载启动的 Pod 数量</div>
+              </div>
+              <div class="row-actions">
+                <span class="value">3</span>
+                <button class="edit" id="editBtn">编辑</button>
+              </div>
+            </div>
+          </div>
+          <div class="compact-row">
+            <div class="status-stack">
+              <button class="icon-pill" style="color:#3f79e9" aria-label="查看覆盖状态">●</button>
+            </div>
+            <div class="tooltip"><strong>当前层级已覆盖</strong><br />原值继承自环境；可在此恢复上层配置。</div>
+            <div class="config-row">
+              <div>
+                <div class="field-title">实例数量</div>
+                <div class="field-help">工作负载启动的 Pod 数量</div>
+              </div>
+              <div class="row-actions">
+                <span class="value">6</span>
+                <button class="edit">恢复继承</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <footer class="signals">
+          <div class="signal good">✓ 页面轻量，长表单扫读更快</div>
+          <div class="signal cost">△ 入口更深，需要悬浮说明与操作反馈</div>
+        </footer>
+      </article>
+    </section>
+
+    <section class="decision" aria-label="最终决策">
+      <div class="decision-title">最终选择 · 方案二</div>
+      <div class="decision-copy">配置项较多时，默认保持页面轻量；用户需要查看或修改时，再展开来源与操作，在状态可理解性和扫读效率之间取得平衡。</div>
+      <div class="flow" aria-label="最终交互流程">
+        <span>查看继承</span><i>→</i><span>点击编辑</span><i>→</i><span>完成覆盖</span><i>→</i><span>恢复继承</span>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>分类讨论：不同需求，设计师介入到哪一步？</title>
+    <style>
+      :root {
+        --bg: #121936;
+        --panel: rgba(35, 47, 87, 0.92);
+        --line: rgba(178, 194, 255, 0.2);
+        --text: #f6f8ff;
+        --muted: #b7c1e2;
+        --blue: #7d8cff;
+        --cyan: #58d8ff;
+        --green: #5bdfb3;
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-width: 1180px;
+        background:
+          radial-gradient(circle at 18% 0%, rgba(89, 93, 255, .28), transparent 28%),
+          radial-gradient(circle at 90% 100%, rgba(37, 193, 255, .16), transparent 25%),
+          var(--bg);
+        color: var(--text);
+        font-family: Inter, "PingFang SC", "Microsoft YaHei", sans-serif;
+      }
+
+      .slide {
+        width: min(1600px, 100vw);
+        min-height: 900px;
+        margin: 0 auto;
+        padding: 72px 90px 76px;
+      }
+
+      .eyebrow {
+        color: var(--cyan);
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: .16em;
+      }
+      h1 {
+        margin: 14px 0 12px;
+        font-size: 43px;
+        line-height: 1.18;
+        letter-spacing: -.03em;
+      }
+      .subhead {
+        margin: 0;
+        color: var(--muted);
+        font-size: 18px;
+      }
+
+      .legend {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 10px;
+        margin: 40px 0 14px;
+        color: #d2d9f4;
+        font-size: 14px;
+      }
+      .legend .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--cyan);
+        box-shadow: 0 0 18px rgba(88, 216, 255, .8);
+      }
+      .legend .arrow { color: var(--green); font-size: 20px; margin-left: 14px; }
+
+      .flow {
+        display: grid;
+        grid-template-columns: 220px repeat(5, minmax(0, 1fr)) 126px;
+        gap: 10px;
+        align-items: stretch;
+      }
+
+      .row {
+        position: relative;
+        margin-bottom: 17px;
+      }
+      .type, .stage, .role {
+        min-height: 136px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+        border-radius: 16px;
+      }
+      .type {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 22px 20px;
+      }
+      .type .number {
+        margin-bottom: 10px;
+        color: var(--cyan);
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: .12em;
+      }
+      .type h2 { margin: 0 0 8px; font-size: 20px; }
+      .type p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+
+      .stage {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 18px 14px;
+        color: #eef1ff;
+        text-align: center;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 1.48;
+      }
+      .stage.owned {
+        border-color: rgba(88, 216, 255, .7);
+        background: linear-gradient(145deg, rgba(35, 105, 163, .9), rgba(34, 58, 104, .92));
+        box-shadow: inset 0 0 0 1px rgba(122, 219, 255, .1), 0 8px 22px rgba(17, 79, 154, .14);
+      }
+      .stage.owned::before {
+        content: "设计师负责";
+        position: absolute;
+        top: 11px;
+        left: 12px;
+        color: #79e1ff;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: .08em;
+      }
+      .stage:not(.last)::after {
+        content: "›";
+        position: absolute;
+        z-index: 2;
+        right: -17px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: #586eff;
+        color: white;
+        font-size: 25px;
+        line-height: 19px;
+        font-weight: 300;
+      }
+      .stage b { color: var(--cyan); font-weight: 700; }
+
+      .role {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 15px;
+        border-color: rgba(91, 223, 179, .45);
+        background: linear-gradient(145deg, rgba(64, 131, 145, .45), rgba(34, 57, 91, .9));
+        color: var(--cyan);
+        text-align: center;
+        font-size: 16px;
+        font-weight: 750;
+        line-height: 1.4;
+      }
+      .role span { display: block; color: #dffcf2; font-size: 12px; font-weight: 500; margin-top: 5px; }
+
+      .row.one .stage:nth-of-type(3) b { color: #9ea9ff; }
+      .row.two .stage:nth-of-type(3) b { color: #8fe8ff; }
+      .row.three .stage:nth-of-type(3) b { color: #65f1c4; }
+
+    </style>
+  </head>
+  <body>
+    <main class="slide">
+      <div class="eyebrow">CLASSIFICATION</div>
+      <h1>不同需求，设计师负责到哪一步？</h1>
+      <p class="subhead">所有节点均以设计师行动展开；蓝色表示可由设计师直接全权负责的环节。</p>
+
+      <div class="legend"><span class="dot"></span><span>设计师直接负责</span><span class="arrow">↓</span><span>负责范围逐步扩大</span></div>
+
+      <section class="flow row one">
+        <div class="type"><div class="number">MODE 01</div><h2>复杂业务需求</h2><p>核心页面 / 功能 / 业务逻辑</p></div>
+        <div class="stage">参与需求澄清<br>理解业务目标</div>
+        <div class="stage owned">拆解业务流程<br>明确页面状态</div>
+        <div class="stage owned">完成交互方案<br>组织设计评审</div>
+        <div class="stage">对接研发落地<br>跟进联调开发</div>
+        <div class="stage last owned">设计走查<br>验收还原度</div>
+        <div class="role">方案质量<span>负责设计结果</span></div>
+      </section>
+
+      <section class="flow row two">
+        <div class="type"><div class="number">MODE 02</div><h2>仅前端需求</h2><p>配置、视觉、局部功能改动</p></div>
+        <div class="stage">参与需求澄清<br>确认局部改动</div>
+        <div class="stage owned">基于代码库<br>判断改动边界</div>
+        <div class="stage owned">在现有代码中<br>完成设计方案</div>
+        <div class="stage owned">提交代码<br>发起 CR 上线</div>
+        <div class="stage last owned">确认上线结果<br>完成页面自验</div>
+        <div class="role">设计 + 交付<span>负责实现结果</span></div>
+      </section>
+
+      <section class="flow row three">
+        <div class="type"><div class="number">MODE 03</div><h2>用户问题驱动</h2><p>反馈、研究或走查中发现的问题</p></div>
+        <div class="stage owned">多渠道收集反馈<br>主动发现问题</div>
+        <div class="stage owned">分析体验问题<br>确定迭代优先级</div>
+        <div class="stage owned">AI 生成原型<br>完成关键决策</div>
+        <div class="stage owned">驱动开发上线<br>把关交付质量</div>
+        <div class="stage last owned">完成预走查<br>反馈闭环与沉淀</div>
+        <div class="role">端到端闭环<span>负责问题结果</span></div>
+      </section>
+
+    </main>
+  </body>
+</html>

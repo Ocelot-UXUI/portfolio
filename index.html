@@ -2168,17 +2168,29 @@
       @media (min-width: 1050px) {
         .prototype-homepage .hero-stack-top {
           min-height: 162px;
+          display: grid;
+          grid-template-columns: minmax(0, 1fr) minmax(280px, .58fr);
+          align-items: start;
+          column-gap: clamp(40px, 8vw, 140px);
+        }
+
+        /* The headline and the AI Native mark occupy opposite sides of the
+           hero. Their edges now follow the two visual anchors in the artwork. */
+        .prototype-homepage .hero-stack-copy {
+          justify-self: start;
+          text-align: left;
         }
 
         .prototype-homepage .hero-stack-meta {
-          position: absolute;
+          position: static;
           z-index: 2;
-          top: -30px;
-          left: 50%;
-          width: clamp(110px, 10vw, 132px);
+          justify-self: end;
+          align-self: start;
+          width: clamp(240px, 22vw, 380px);
+          margin-top: 0;
           opacity: 1;
           pointer-events: none;
-          transform: translateX(-50%);
+          transform: none;
         }
 
         .prototype-homepage .hero-stack-copy p {
@@ -2393,6 +2405,25 @@
         pointer-events: none;
       }
 
+      /* The signature follows the side where that project's copy sits. Keep
+         the alignment explicit instead of forcing every asset to the right. */
+      .prototype-homepage .project-showcase-dodo .dodo-signature,
+      .prototype-homepage .project-showcase-remi .remi-signature,
+      .prototype-homepage .project-showcase-xhs .xhs-signature {
+        align-self: flex-start;
+        margin-left: 0;
+        margin-right: auto;
+        object-position: left center;
+      }
+
+      .prototype-homepage .project-showcase-cnap .cnap-signature,
+      .prototype-homepage .project-showcase-reading .reading-signature {
+        align-self: flex-end;
+        margin-left: auto;
+        margin-right: 0;
+        object-position: right center;
+      }
+
       /* Signatures are part of the shared copy layout, not copy-reveal text. */
       html.motion-ready .prototype-homepage .project-showcase .showcase-copy > .dodo-signature,
       html.motion-ready .prototype-homepage .project-showcase .showcase-copy > .cnap-signature,
@@ -2498,6 +2529,15 @@
           height: min(660px, 46vw);
           margin-right: max(-74px, -5.1vw);
           object-position: right center;
+        }
+
+        /* Give the two final project signatures a little more presence while
+           keeping their shared baseline and copy column unchanged. */
+        .prototype-homepage .project-showcase-reading .reading-signature,
+        .prototype-homepage .project-showcase-xhs .xhs-signature {
+          width: 360px;
+          height: 120px;
+          max-width: 80%;
         }
       }
 
@@ -2721,7 +2761,7 @@
               <h1><span class="hero-stack-desktop-title">有 AI 工作流，懂用户，<br />能推动事情发生</span><span class="hero-stack-mobile-title">有 AI 工作流，<br />懂用户，<br />能推动事情发生</span></h1>
             </div>
             <div class="hero-stack-meta">
-              <img class="hero-signature" src="assets/hero-signature-ai-native.webp" alt="AI Native 手写字" width="1800" height="424" decoding="async" />
+              <img class="hero-signature" src="assets/hero-signature-ai-native-orange.webp" alt="AI Native 手写字" width="2172" height="724" decoding="async" />
             </div>
           </div>
           <div class="hero-project-stack" aria-label="精选项目预览">
@@ -2753,8 +2793,8 @@
 
         <section class="portfolio-index section-reveal" aria-labelledby="portfolio-index-title">
           <div class="portfolio-index-inner">
-            <img class="portfolio-index-signature" src="assets/skill-assets-signature.webp" alt="" width="3584" height="1754" loading="lazy" decoding="async" aria-hidden="true" />
-            <h2 class="portfolio-index-title section-copy-step" id="portfolio-index-title">我创建的 Skill</h2>
+            <img class="portfolio-index-signature" src="assets/skill-assets-signature.webp" alt="" width="2081" height="756" loading="lazy" decoding="async" aria-hidden="true" />
+            <h2 class="portfolio-index-title section-copy-step" id="portfolio-index-title">我做的设计工具</h2>
             <ul class="portfolio-index-list">
               <li class="portfolio-index-item section-copy-step">
                 <a class="portfolio-index-link" href="pages/design-review-skill.html">
@@ -2764,18 +2804,11 @@
                 </a>
               </li>
               <li class="portfolio-index-item section-copy-step">
-                <div class="portfolio-index-link">
-                  <span class="portfolio-index-name">内容占位二</span>
-                  <span class="portfolio-index-description">这里放一句简短说明，帮助访客快速判断是否感兴趣</span>
+                <a class="portfolio-index-link" href="pages/figma-asset-exporter.html">
+                  <span class="portfolio-index-name">Figma 原型素材导出器</span>
+                  <span class="portfolio-index-description">从选中的 Frame 提取图片与图标，导出可直接进入网页原型搭建的素材包</span>
                   <span class="portfolio-index-arrow" aria-hidden="true">↗</span>
-                </div>
-              </li>
-              <li class="portfolio-index-item section-copy-step">
-                <div class="portfolio-index-link">
-                  <span class="portfolio-index-name">内容占位三</span>
-                  <span class="portfolio-index-description">这里放一句简短说明，后续可替换为文章、实验或其他作品</span>
-                  <span class="portfolio-index-arrow" aria-hidden="true">↗</span>
-                </div>
+                </a>
               </li>
             </ul>
           </div>
