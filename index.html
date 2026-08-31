@@ -2719,6 +2719,26 @@
         }
       }
 
+      /* Lift desktop hover cards into the hero instead of letting their
+         enlarged bottom edge meet the following About section. */
+      @media (min-width: 701px) {
+        .prototype-homepage .hero.hero-stack-gallery:has(.hero-project-stack-card:hover),
+        .prototype-homepage .hero.hero-stack-gallery:has(.hero-project-stack-card:focus-visible) {
+          position: relative;
+          z-index: 2;
+        }
+
+        .prototype-homepage .hero-project-stack-card:hover,
+        .prototype-homepage .hero-project-stack-card:focus-visible {
+          transform: translate3d(0, clamp(-28px, -3vh, -20px), 0) scale(1.06) rotate(var(--hero-card-rotate));
+        }
+
+        .prototype-homepage .hero-stack-cnap:hover,
+        .prototype-homepage .hero-stack-cnap:focus-visible {
+          transform: translate3d(-100px, clamp(-28px, -3vh, -20px), 84px) scale(1.035) rotate(var(--hero-card-rotate));
+        }
+      }
+
     </style>
   </head>
   <body class="prototype-homepage">
