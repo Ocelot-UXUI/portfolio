@@ -2779,6 +2779,44 @@
         }
       }
 
+      /* Compact the project showcase so each case reads as one tighter unit. */
+      @media (min-width: 701px) {
+        .prototype-homepage .showcase-heading {
+          min-height: 88px;
+          padding-top: 24px;
+          padding-bottom: 24px;
+        }
+
+        .prototype-homepage .project-showcase,
+        .prototype-homepage .project-showcase:nth-of-type(even) {
+          min-height: 560px;
+        }
+
+        .prototype-homepage .project-showcase .showcase-copy {
+          min-height: 280px;
+        }
+
+        .prototype-homepage .project-showcase .showcase-copy h3 {
+          min-height: 52px;
+        }
+
+        .prototype-homepage .project-showcase .showcase-copy > p {
+          min-height: 52px;
+        }
+
+        .prototype-homepage .project-showcase .showcase-media {
+          height: min(500px, 40vw);
+        }
+
+        .prototype-homepage .project-showcase-reading .showcase-media > img {
+          height: min(500px, 40vw);
+        }
+
+        .prototype-homepage .project-showcase-xhs .showcase-media > img {
+          height: min(520px, 41vw);
+        }
+      }
+
     </style>
   </head>
   <body class="prototype-homepage">
