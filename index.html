@@ -2748,6 +2748,24 @@
         }
       }
 
+      /* Keep the homepage's main headings on one typographic and horizontal grid. */
+      @media (min-width: 701px) {
+        .prototype-homepage .hero-stack-copy h1,
+        .prototype-homepage .about-heading h2,
+        .prototype-homepage .showcase-heading h2,
+        .prototype-homepage .project-showcase .showcase-copy h3 {
+          font-size: clamp(30px, 2.35vw, 36px);
+        }
+
+        .prototype-homepage .hero-stack-copy {
+          margin-left: clamp(0px, 1.5vw, 32px);
+        }
+
+        .prototype-homepage .hero-stack-meta {
+          margin-right: clamp(0px, 1.5vw, 32px);
+        }
+      }
+
     </style>
   </head>
   <body class="prototype-homepage">
