@@ -2750,6 +2750,11 @@
 
       /* Keep the homepage's main headings on one typographic and horizontal grid. */
       @media (min-width: 701px) {
+        .prototype-homepage .hero.hero-stack-gallery {
+          padding-right: clamp(24px, 5vw, 76px);
+          padding-left: clamp(24px, 5vw, 76px);
+        }
+
         .prototype-homepage .hero-stack-copy h1,
         .prototype-homepage .about-heading h2,
         .prototype-homepage .showcase-heading h2,
@@ -2758,11 +2763,19 @@
         }
 
         .prototype-homepage .hero-stack-copy {
-          margin-left: clamp(0px, 1.5vw, 32px);
+          margin-left: 0;
         }
 
         .prototype-homepage .hero-stack-meta {
-          margin-right: clamp(0px, 1.5vw, 32px);
+          margin-right: 0;
+        }
+
+        .prototype-homepage .hero-stack-remi {
+          left: 4%;
+        }
+
+        .prototype-homepage .hero-stack-cnap {
+          left: 26%;
         }
       }
 
