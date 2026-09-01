@@ -119,7 +119,8 @@
       }
 
       .prototype-homepage .nav-contact:hover .nav-contact-qr,
-      .prototype-homepage .nav-contact:focus-within .nav-contact-qr {
+      .prototype-homepage .nav-contact:focus-within .nav-contact-qr,
+      .prototype-homepage .nav-contact.is-open .nav-contact-qr {
         opacity: 1;
         transform: translateY(0) scale(1);
         visibility: visible;
@@ -3011,8 +3012,25 @@
       window.addEventListener("scroll", updateStickyNav, { passive: true });
 
       const contactTrigger = document.querySelector(".nav-contact-trigger");
+      const contactPanel = document.querySelector(".nav-contact");
       const copyToast = document.querySelector(".copy-toast");
       let copyToastTimer = 0;
+
+      const setContactPanelOpen = (isOpen) => {
+        contactPanel?.classList.toggle("is-open", isOpen);
+      };
+
+      contactPanel?.addEventListener("pointerenter", () => setContactPanelOpen(true));
+      contactPanel?.addEventListener("pointerleave", () => setContactPanelOpen(false));
+      contactTrigger?.addEventListener("focus", () => setContactPanelOpen(true));
+      contactTrigger?.addEventListener("blur", () => {
+        window.setTimeout(() => {
+          if (!contactPanel?.matches(":focus-within")) setContactPanelOpen(false);
+        }, 0);
+      });
+      document.addEventListener("pointerdown", (event) => {
+        if (contactPanel && !contactPanel.contains(event.target)) setContactPanelOpen(false);
+      });
 
       const showContactToast = (message) => {
         if (!copyToast) return;
@@ -3063,7 +3081,10 @@
         }
       };
 
-      contactTrigger?.addEventListener("click", () => copyContactValue("qwe1004080451", "微信号"));
+      contactTrigger?.addEventListener("click", () => {
+        setContactPanelOpen(true);
+        copyContactValue("qwe1004080451", "微信号");
+      });
       document.querySelectorAll("[data-copy-value]").forEach((button) => {
         button.addEventListener("click", () => copyContactValue(button.dataset.copyValue, button.dataset.copyLabel));
       });
