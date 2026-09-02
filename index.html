@@ -307,7 +307,7 @@
       .prototype-homepage .about {
         position: relative;
         isolation: isolate;
-        overflow: hidden;
+        overflow: visible;
         border-top: 0;
         padding: clamp(24px, 2vw, 48px) clamp(24px, 5vw, 76px) 132px;
         background: #08090b;
@@ -335,6 +335,7 @@
         align-items: end;
         justify-content: space-between;
         gap: 32px;
+        z-index: 3;
       }
 
       .prototype-homepage .about-name-row {
@@ -366,7 +367,7 @@
         gap: 8px;
         margin: 0 0 10px;
         color: var(--ink-subtle);
-        font-size: 15px;
+        font-size: 18px;
         line-height: 1.5;
         text-align: right;
       }
@@ -374,6 +375,34 @@
       .prototype-homepage .about-contact a {
         color: inherit;
         text-decoration: none;
+      }
+
+      .prototype-homepage .about-contact-group {
+        display: flex;
+        align-items: flex-end;
+        gap: 16px;
+        flex: 0 0 auto;
+      }
+
+      .prototype-homepage .about-contact-popover {
+        margin: 0 0 7px;
+      }
+
+      .prototype-homepage .about-contact-trigger {
+        width: 42px;
+        min-width: 42px;
+        height: 42px;
+        padding: 0;
+      }
+
+      .prototype-homepage .about-contact-trigger .nav-contact-icon {
+        width: 19px;
+        height: 19px;
+        flex-basis: 19px;
+      }
+
+      .prototype-homepage .about-contact-trigger .nav-contact-icon > path {
+        display: none;
       }
 
       .prototype-homepage .about-strengths {
@@ -749,9 +778,21 @@
           display: block;
         }
 
-        .prototype-homepage .about-contact {
+        .prototype-homepage .about-contact-group {
+          align-items: center;
+          justify-content: flex-start;
+          gap: 12px;
           margin-top: 18px;
+        }
+
+        .prototype-homepage .about-contact {
+          margin-top: 0;
           text-align: left;
+          font-size: 15px;
+        }
+
+        .prototype-homepage .about-contact-popover {
+          margin: 0;
         }
 
         .prototype-homepage .about-strengths {
@@ -2831,7 +2872,7 @@
         </ul>
         <div class="nav-contact">
           <button class="nav-cta nav-contact-trigger" type="button" aria-label="Let's talk，点击复制微信号，悬浮展开联系方式">
-            <svg class="nav-contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" fill="currentColor" aria-hidden="true">
+            <svg id="wechat-icon" class="nav-contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" fill="currentColor" aria-hidden="true">
               <path d="M 13 4 C 7.486 4 3 7.813 3 12.5 C 3 14.089 3.511375 15.622891 4.484375 16.962891 L 3.9023438 21.515625 L 7.9238281 19.826172 C 9.2157664 20.473405 10.661622 20.845152 12.171875 20.951172 C 12.911761 23.89542 15.984593 26 19.5 26 C 20.952474 26 22.272207 25.588631 23.429688 24.96875 L 26.337891 26.601562 L 25.894531 22.833984 C 26.553846 21.884082 27 20.785589 27 19.582031 C 27 17.01804 25.280055 14.888016 22.853516 13.849609 C 22.940874 13.398313 23 12.947264 23 12.5 C 23 7.813 18.514 4 13 4 z M 9.5625 9.171875 C 10.3405 9.171875 10.96875 9.8001719 10.96875 10.576172 C 10.96875 11.352172 10.3395 11.984375 9.5625 11.984375 C 8.7855 11.984375 8.15625 11.354172 8.15625 10.576172 C 8.15625 9.8001719 8.7855 9.171875 9.5625 9.171875 z M 17.234375 9.171875 C 18.011375 9.171875 18.640625 9.8001719 18.640625 10.576172 C 18.640625 11.354172 18.011375 11.984375 17.234375 11.984375 C 16.455375 11.984375 15.828125 11.354172 15.828125 10.576172 C 15.828125 9.7991719 16.457375 9.171875 17.234375 9.171875 z M 19.5 15.166016 C 22.639675 15.166016 25 17.238427 25 19.582031 C 25 20.470335 24.677694 21.29295 24.091797 22.005859 L 23.822266 22.333984 L 23.871094 22.755859 L 23.892578 22.935547 L 23.449219 22.6875 L 22.941406 23.015625 C 22.007387 23.622187 20.813397 24 19.5 24 C 16.360325 24 14 21.925636 14 19.582031 C 14 17.239644 16.360511 15.166016 19.5 15.166016 z M 16.986328 17.429688 C 16.396328 17.429687 15.921875 17.906141 15.921875 18.494141 C 15.921875 19.082141 16.397328 19.560547 16.986328 19.560547 C 17.573328 19.560547 18.051734 19.082141 18.052734 18.494141 C 18.052734 17.906141 17.574328 17.429688 16.986328 17.429688 z M 22.033203 17.429688 C 21.446203 17.429688 20.96875 17.906141 20.96875 18.494141 C 20.96875 19.082141 21.445203 19.560547 22.033203 19.560547 C 22.622203 19.560547 23.101562 19.082141 23.101562 18.494141 C 23.101563 17.906141 22.622203 17.429688 22.033203 17.429688 z" />
             </svg>
             <span class="nav-contact-label">Let's talk</span>
@@ -2877,9 +2918,32 @@
               <h2 class="about-name-static">郭昱成</h2>
               <img class="about-signature" src="assets/about-me-signature.webp" alt="About me" width="1676" height="484" loading="lazy" decoding="async" />
             </div>
-            <div class="about-contact">
-              <a href="mailto:1004080451@qq.com">1004080451@qq.com</a>
-              <a href="tel:13343215048">13343215048</a>
+            <div class="about-contact-group">
+              <div class="about-contact">
+                <a href="mailto:1004080451@qq.com">1004080451@qq.com</a>
+                <a href="tel:13343215048">13343215048</a>
+              </div>
+              <div class="nav-contact about-contact-popover">
+                <button class="nav-cta nav-contact-trigger about-contact-trigger" type="button" aria-label="打开联系方式">
+                  <svg class="nav-contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" fill="currentColor" aria-hidden="true">
+                    <use href="#wechat-icon" />
+                    <path d="M 13 4 C 7.486 4 3 7.813 3 12.5 C 3 14.089 3.511375 15.622891 4.484375 16.962891 L 3.9023438 21.515625 L 7.9238281 19.826172 C 9.2157664 20.473405 10.661622 20.845152 12.171875 20.951172 C 12.911761 23.89542 15.984593 26 19.5 26 C 20.952474 26 22.272207 25.588631 23.429688 24.96875 L 26.337891 26.601562 L 25.894531 22.833984 C 26.553846 21.884082 27 20.785589 27 19.582031 C 27 17.01804 25.280055 14.888016 22.853516 13.849609 C 22.940874 13.398313 23 12.947264 23 12.5 C 23 7.813 18.514 4 13 4 z M 9.5625 9.171875 C 10.3405 9.171875 10.96875 9.8001719 10.96875 10.576172 C 10.96875 11.352172 10.3395 11.984375 9.5625 11.984375 C 8.7855 11.984375 8.15625 11.354172 8.15625 10.576172 C 8.15625 9.8001719 8.7855 9.171875 9.5625 9.171875 z M 17.234375 9.171875 C 18.011375 9.171875 18.640625 9.8001719 18.640625 10.576172 C 18.640625 11.354172 18.011375 11.984375 17.234375 11.984375 C 16.455375 11.984375 15.828125 11.354172 15.828125 10.576172 C 15.828125 9.7991719 16.457375 9.171875 17.234375 9.171875 z M 19.5 15.166016 C 22.639675 15.166016 25 17.238427 25 19.582031 C 25 20.470335 24.677694 21.29295 24.091797 22.005859 L 23.822266 22.333984 L 23.871094 22.755859 L 23.892578 22.935547 L 23.449219 22.6875 L 22.941406 23.015625 C 22.007387 23.622187 20.813397 24 19.5 24 C 16.360325 24 14 21.925636 14 19.582031 C 14 17.239644 16.360511 15.166016 19.5 15.166016 z M 16.986328 17.429688 C 16.396328 17.429687 15.921875 17.906141 15.921875 18.494141 C 15.921875 19.082141 16.397328 19.560547 16.986328 19.560547 C 17.573328 19.560547 18.051734 19.082141 18.052734 18.494141 C 18.052734 17.906141 17.574328 17.429688 16.986328 17.429688 z M 22.033203 17.429688 C 21.446203 17.429688 20.96875 17.906141 20.96875 18.494141 C 20.96875 19.082141 21.445203 19.560547 22.033203 19.560547 C 22.622203 19.560547 23.101562 19.082141 22.033203 17.429688 z" />
+                  </svg>
+                </button>
+                <div class="nav-contact-qr" aria-label="联系方式">
+                  <div class="nav-contact-actions">
+                    <button class="nav-contact-copy" type="button" data-copy-value="qwe1004080451" data-copy-label="微信号">
+                      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="5.25" y="5.25" width="7.5" height="7.5" rx="1.25" stroke="currentColor"/><path d="M10.75 5.25V4.5A1.25 1.25 0 0 0 9.5 3.25h-4A1.25 1.25 0 0 0 4.25 4.5v4A1.25 1.25 0 0 0 5.5 9.75h.25" stroke="currentColor"/></svg>
+                      <span>复制微信号</span>
+                    </button>
+                    <button class="nav-contact-copy" type="button" data-copy-qr aria-label="复制微信二维码图片">
+                      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2.25" y="2.25" width="11.5" height="11.5" rx="1.5" stroke="currentColor"/><circle cx="5.25" cy="5.25" r="1" fill="currentColor"/><path d="m3.5 11 2.6-2.6 1.8 1.8 1.6-1.6 3 3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      <span>复制二维码</span>
+                    </button>
+                  </div>
+                  <img src="assets/contact-wechat.png" alt="微信二维码" />
+                </div>
+              </div>
             </div>
           </div>
           <div class="about-strengths">
@@ -3011,25 +3075,36 @@
       updateStickyNav();
       window.addEventListener("scroll", updateStickyNav, { passive: true });
 
-      const contactTrigger = document.querySelector(".nav-contact-trigger");
-      const contactPanel = document.querySelector(".nav-contact");
+      const contactPanels = [...document.querySelectorAll(".nav-contact")];
       const copyToast = document.querySelector(".copy-toast");
       let copyToastTimer = 0;
 
-      const setContactPanelOpen = (isOpen) => {
-        contactPanel?.classList.toggle("is-open", isOpen);
+      const setContactPanelOpen = (panel, isOpen) => {
+        panel?.classList.toggle("is-open", isOpen);
+        panel?.querySelector(".nav-contact-trigger")?.setAttribute("aria-expanded", String(isOpen));
       };
 
-      contactPanel?.addEventListener("pointerenter", () => setContactPanelOpen(true));
-      contactPanel?.addEventListener("pointerleave", () => setContactPanelOpen(false));
-      contactTrigger?.addEventListener("focus", () => setContactPanelOpen(true));
-      contactTrigger?.addEventListener("blur", () => {
-        window.setTimeout(() => {
-          if (!contactPanel?.matches(":focus-within")) setContactPanelOpen(false);
-        }, 0);
+      contactPanels.forEach((panel) => {
+        const trigger = panel.querySelector(".nav-contact-trigger");
+        const isCopyTrigger = !panel.classList.contains("about-contact-popover");
+
+        panel.addEventListener("pointerenter", () => setContactPanelOpen(panel, true));
+        panel.addEventListener("pointerleave", () => setContactPanelOpen(panel, false));
+        trigger?.addEventListener("focus", () => setContactPanelOpen(panel, true));
+        trigger?.addEventListener("blur", () => {
+          window.setTimeout(() => {
+            if (!panel.matches(":focus-within")) setContactPanelOpen(panel, false);
+          }, 0);
+        });
+        trigger?.addEventListener("click", () => {
+          setContactPanelOpen(panel, true);
+          if (isCopyTrigger) copyContactValue("qwe1004080451", "微信号");
+        });
       });
       document.addEventListener("pointerdown", (event) => {
-        if (contactPanel && !contactPanel.contains(event.target)) setContactPanelOpen(false);
+        contactPanels.forEach((panel) => {
+          if (!panel.contains(event.target)) setContactPanelOpen(panel, false);
+        });
       });
 
       const showContactToast = (message) => {
@@ -3081,14 +3156,10 @@
         }
       };
 
-      contactTrigger?.addEventListener("click", () => {
-        setContactPanelOpen(true);
-        copyContactValue("qwe1004080451", "微信号");
-      });
       document.querySelectorAll("[data-copy-value]").forEach((button) => {
         button.addEventListener("click", () => copyContactValue(button.dataset.copyValue, button.dataset.copyLabel));
       });
-      document.querySelector("[data-copy-qr]")?.addEventListener("click", copyQrImage);
+      document.querySelectorAll("[data-copy-qr]").forEach((button) => button.addEventListener("click", copyQrImage));
 
       const navLinks = [...document.querySelectorAll("[data-nav-link]")];
       const navIndicator = document.querySelector(".nav-active-indicator");
