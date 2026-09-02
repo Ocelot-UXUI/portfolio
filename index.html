@@ -403,7 +403,7 @@
 
       .prototype-homepage .about-resume {
         display: grid;
-        gap: clamp(40px, 4.4vw, 72px);
+        row-gap: clamp(64px, 6.4vw, 104px);
         margin-top: clamp(48px, 5.5vw, 88px);
         color: var(--ink);
       }
@@ -411,7 +411,7 @@
       .prototype-homepage .about-resume-overview,
       .prototype-homepage .about-resume-main {
         display: grid;
-        gap: clamp(32px, 5vw, 84px);
+        gap: clamp(28px, 4vw, 64px);
       }
 
       .prototype-homepage .about-resume-overview {
@@ -427,7 +427,7 @@
         display: grid;
         grid-template-columns: max-content minmax(0, 1fr);
         align-items: start;
-        gap: clamp(20px, 2.4vw, 36px);
+        gap: clamp(16px, 1.8vw, 28px);
         min-width: 0;
       }
 
@@ -442,14 +442,14 @@
       .prototype-homepage .about-resume-body,
       .prototype-homepage .about-resume-details {
         display: grid;
-        gap: 4px;
+        gap: 2px;
         min-width: 0;
       }
 
       .prototype-homepage .about-resume-body {
         color: rgba(255, 255, 255, .82);
         font-size: clamp(15px, 1.08vw, 22px);
-        line-height: 1.9;
+        line-height: 1.55;
       }
 
       .prototype-homepage .about-resume-school,
@@ -457,7 +457,7 @@
         color: var(--ink);
         font-size: clamp(20px, 1.55vw, 28px);
         font-weight: 600;
-        line-height: 1.55;
+        line-height: 1.35;
       }
 
       .prototype-homepage .about-resume-meta {
@@ -465,7 +465,7 @@
       }
 
       .prototype-homepage .about-resume-awards {
-        gap: clamp(20px, 2.4vw, 36px);
+        gap: clamp(16px, 1.8vw, 28px);
       }
 
       .prototype-homepage .about-resume-awards .about-resume-body {
@@ -483,8 +483,8 @@
         display: grid;
         grid-template-columns: max-content minmax(0, 1fr);
         align-items: start;
-        gap: clamp(20px, 2.4vw, 36px);
-        padding-top: clamp(28px, 3vw, 48px);
+        gap: clamp(16px, 1.8vw, 28px);
+        padding-top: clamp(24px, 2.6vw, 42px);
         border-top: 1px solid rgba(255, 255, 255, .32);
       }
 
@@ -499,14 +499,14 @@
         display: flex;
         align-items: baseline;
         justify-content: space-between;
-        gap: 20px;
+        gap: 16px;
       }
 
       .prototype-homepage .about-resume-role,
       .prototype-homepage .about-resume-date {
         color: var(--ink);
         font-size: clamp(15px, 1.08vw, 22px);
-        line-height: 1.75;
+        line-height: 1.45;
         white-space: nowrap;
       }
 
@@ -520,25 +520,25 @@
 
       .prototype-homepage .about-resume-item {
         display: grid;
-        gap: 8px;
+        gap: 4px;
       }
 
       .prototype-homepage .about-resume-item + .about-resume-item {
-        margin-top: 14px;
+        margin-top: 18px;
       }
 
       .prototype-homepage .about-resume-item-title {
         color: var(--ink);
         font-size: clamp(17px, 1.3vw, 24px);
         font-weight: 600;
-        line-height: 1.6;
+        line-height: 1.4;
       }
 
       .prototype-homepage .about-resume-description {
         margin: 0;
         color: rgba(255, 255, 255, .72);
         font-size: clamp(14px, 1.08vw, 22px);
-        line-height: 1.9;
+        line-height: 1.65;
       }
 
       .prototype-homepage .about-strengths {
@@ -939,13 +939,13 @@
         }
 
         .prototype-homepage .about-resume {
-          gap: 40px;
+          row-gap: 52px;
           margin-top: 48px;
         }
 
         .prototype-homepage .about-resume-overview,
         .prototype-homepage .about-resume-main {
-          gap: 34px;
+          gap: 28px;
         }
 
         .prototype-homepage .about-resume-block,
@@ -970,6 +970,18 @@
         .prototype-homepage .about-resume-date,
         .prototype-homepage .about-resume-description {
           font-size: 15px;
+        }
+
+        .prototype-homepage .about-resume-body {
+          line-height: 1.6;
+        }
+
+        .prototype-homepage .about-resume-description {
+          line-height: 1.7;
+        }
+
+        .prototype-homepage .about-resume-item + .about-resume-item {
+          margin-top: 16px;
         }
 
         .prototype-homepage .about-resume-entry-head {
