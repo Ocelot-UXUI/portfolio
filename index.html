@@ -479,9 +479,20 @@
         min-width: 0;
       }
 
-      .prototype-homepage .about-resume-column .about-resume-entry + .about-resume-entry {
+      .prototype-homepage .about-resume-projects {
+        display: grid;
+        grid-template-columns: max-content minmax(0, 1fr);
+        align-items: start;
+        gap: clamp(20px, 2.4vw, 36px);
         padding-top: clamp(28px, 3vw, 48px);
         border-top: 1px solid rgba(255, 255, 255, .32);
+      }
+
+      .prototype-homepage .about-resume-project-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: clamp(28px, 4vw, 64px);
+        min-width: 0;
       }
 
       .prototype-homepage .about-resume-entry-head {
@@ -938,9 +949,15 @@
         }
 
         .prototype-homepage .about-resume-block,
-        .prototype-homepage .about-resume-entry {
+        .prototype-homepage .about-resume-entry,
+        .prototype-homepage .about-resume-projects {
           grid-template-columns: 1fr;
           gap: 8px;
+        }
+
+        .prototype-homepage .about-resume-project-grid {
+          grid-template-columns: 1fr;
+          gap: 28px;
         }
 
         .prototype-homepage .about-resume-label {
@@ -3173,26 +3190,26 @@
                     </div>
                   </div>
                 </article>
-                <article class="about-resume-entry">
-                  <div class="about-resume-label">个人项目</div>
-                  <div class="about-resume-details">
-                    <div class="about-resume-item">
-                      <div class="about-resume-entry-head">
-                        <strong class="about-resume-entry-title">职场人的阅读学习 APP</strong>
-                        <span class="about-resume-role">UX UI 设计师</span>
-                      </div>
-                      <span class="about-resume-date">2025.11–12</span>
-                      <p class="about-resume-description">设计 AI 阅读工作流，将碎片化输入沉淀为可复用的个人知识，提升阅读效率。</p>
-                    </div>
-                    <div class="about-resume-item">
-                      <div class="about-resume-entry-head">
-                        <strong class="about-resume-entry-title">小红书“本地生活”体验升级</strong>
-                        <span class="about-resume-role">UX UI 设计师</span>
-                      </div>
-                      <span class="about-resume-date">2025.09–11</span>
-                      <p class="about-resume-description">重构地图、搜索与下单路径，打通本地生活从种草到消费的完整链路，提升转化率与 GMV。</p>
-                    </div>
+              </div>
+            </div>
+            <div class="about-resume-projects">
+              <div class="about-resume-label">个人项目</div>
+              <div class="about-resume-project-grid">
+                <article class="about-resume-item">
+                  <div class="about-resume-entry-head">
+                    <strong class="about-resume-entry-title">职场人的阅读学习 APP</strong>
+                    <span class="about-resume-role">UX UI 设计师</span>
                   </div>
+                  <span class="about-resume-date">2025.11–12</span>
+                  <p class="about-resume-description">设计 AI 阅读工作流，将碎片化输入沉淀为可复用的个人知识，提升阅读效率。</p>
+                </article>
+                <article class="about-resume-item">
+                  <div class="about-resume-entry-head">
+                    <strong class="about-resume-entry-title">小红书“本地生活”体验升级</strong>
+                    <span class="about-resume-role">UX UI 设计师</span>
+                  </div>
+                  <span class="about-resume-date">2025.09–11</span>
+                  <p class="about-resume-description">重构地图、搜索与下单路径，打通本地生活从种草到消费的完整链路，提升转化率与 GMV。</p>
                 </article>
               </div>
             </div>
