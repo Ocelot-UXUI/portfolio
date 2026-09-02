@@ -345,6 +345,36 @@
         flex: 1 1 auto;
       }
 
+      .prototype-homepage .about-name-highlights {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px 16px;
+        align-self: center;
+        margin-left: clamp(4px, 1vw, 16px);
+        color: rgba(255, 255, 255, .7);
+        font-size: clamp(13px, 1.08vw, 18px);
+        line-height: 1.4;
+        white-space: nowrap;
+      }
+
+      .prototype-homepage .about-name-highlights span + span {
+        position: relative;
+        padding-left: 16px;
+      }
+
+      .prototype-homepage .about-name-highlights span + span::before {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, .42);
+        content: "";
+        transform: translateY(-50%);
+      }
+
       .prototype-homepage .about-signature {
         width: clamp(120px, 13vw, 190px);
         height: auto;
@@ -915,6 +945,23 @@
         .prototype-homepage .about-signature {
           width: clamp(140px, 32vw, 190px);
           transform: translateY(-6px);
+        }
+
+        .prototype-homepage .about-name-row {
+          flex-wrap: wrap;
+        }
+
+        .prototype-homepage .about-name-highlights {
+          flex: 1 0 100%;
+          gap: 6px 14px;
+          align-self: auto;
+          margin: 6px 0 0;
+          font-size: 14px;
+          white-space: normal;
+        }
+
+        .prototype-homepage .about-name-highlights span + span {
+          padding-left: 14px;
         }
 
         .prototype-homepage .about-heading {
@@ -3118,6 +3165,11 @@
             <div class="about-name-row">
               <h2 class="about-name-static">郭昱成</h2>
               <img class="about-signature" src="assets/about-me-signature.webp" alt="About me" width="1676" height="484" loading="lazy" decoding="async" />
+              <div class="about-name-highlights" aria-label="教育与实习经历">
+                <span>西南交通大学</span>
+                <span>百度</span>
+                <span>商汤科技</span>
+              </div>
             </div>
             <div class="about-contact-group">
               <div class="about-contact">
