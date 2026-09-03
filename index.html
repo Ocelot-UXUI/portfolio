@@ -302,6 +302,9 @@
         --copy-step: 110ms;
         --copy-distance: 12px;
         --copy-easing: cubic-bezier(.16, 1, .3, 1);
+        --space-hero-about: clamp(48px, 5vw, 72px);
+        --space-about-resume: clamp(36px, 4vw, 56px);
+        --space-resume-strengths: clamp(72px, 8vw, 112px);
       }
 
       .prototype-homepage .about {
@@ -309,7 +312,7 @@
         isolation: isolate;
         overflow: visible;
         border-top: 0;
-        padding: clamp(24px, 2vw, 48px) clamp(24px, 5vw, 76px) 132px;
+        padding: var(--space-hero-about) clamp(24px, 5vw, 76px) 132px;
         background: #08090b;
       }
 
@@ -434,7 +437,7 @@
       .prototype-homepage .about-resume {
         display: grid;
         row-gap: clamp(28px, 3vw, 48px);
-        margin-top: clamp(48px, 5.5vw, 88px);
+        margin-top: var(--space-about-resume);
         color: var(--ink);
       }
 
@@ -575,7 +578,7 @@
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: clamp(14px, 1.6vw, 26px);
-        margin-top: clamp(120px, 12vw, 184px);
+        margin-top: var(--space-resume-strengths);
       }
 
       .prototype-homepage .about-strength {
@@ -934,7 +937,7 @@
         }
 
         .prototype-homepage .about {
-          padding-top: 88px;
+          padding-top: 56px;
           padding-bottom: 88px;
         }
 
@@ -987,7 +990,7 @@
 
         .prototype-homepage .about-resume {
           row-gap: 24px;
-          margin-top: 48px;
+          margin-top: 40px;
         }
 
         .prototype-homepage .about-resume-overview,
@@ -1046,7 +1049,7 @@
         .prototype-homepage .about-strengths {
           grid-template-columns: 1fr;
           gap: 42px;
-          margin-top: 128px;
+          margin-top: 72px;
         }
 
         .prototype-homepage .about-strength h3 {
@@ -2969,12 +2972,6 @@
         }
       }
 
-      @media (min-width: 701px) and (max-height: 800px) {
-        .prototype-homepage .about {
-          padding-top: clamp(14px, 1.5vw, 24px);
-        }
-      }
-
       /* On shorter desktop screens, keep the first line of About visible
          below the hero without letting the project previews spill into it. */
       @media (min-width: 701px) and (min-height: 621px) and (max-height: 800px) {
@@ -3000,10 +2997,6 @@
           margin-bottom: 0;
         }
 
-        .prototype-homepage .about {
-          padding-top: 0;
-        }
-
         .prototype-homepage .about-heading {
           gap: 20px;
         }
@@ -3027,9 +3020,6 @@
           font-size: 12px;
         }
 
-        .prototype-homepage .about-strengths {
-          margin-top: clamp(28px, 3vw, 44px);
-        }
       }
 
       /* Lift desktop hover cards into the hero instead of letting their
