@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CNAP 总策略页预览</title>
+    <style>
+      :root {
+        --paper: #f7f6f2;
+        --ink: #171a20;
+        --muted: #71767e;
+        --green: #50d7a0;
+        --green-deep: #178a64;
+        --green-soft: #ddf8ed;
+        --line: #dce3df;
+        --navy: #1f2430;
+      }
+
+      * { box-sizing: border-box; }
+
+      html, body {
+        width: 100%;
+        min-height: 100%;
+        margin: 0;
+      }
+
+      body {
+        display: grid;
+        place-items: center;
+        min-height: 100vh;
+        padding: 24px;
+        color: var(--ink);
+        font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+        background: #dedfdc;
+      }
+
+      .canvas {
+        position: relative;
+        width: min(96vw, 177.7778vh);
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+        padding: 4.2% 4.4% 3.6%;
+        background:
+          radial-gradient(circle at 17% 22%, rgba(255,255,255,.82), transparent 30%),
+          radial-gradient(circle at 83% 70%, rgba(80,215,160,.045), transparent 27%),
+          repeating-linear-gradient(102deg, rgba(38,47,43,.014) 0 1px, transparent 1px 7px),
+          var(--paper);
+        box-shadow: 0 24px 70px rgba(26, 31, 28, .18);
+      }
+
+      .topline {
+        display: flex;
+        align-items: center;
+        gap: 13px;
+        color: var(--green-deep);
+        font-size: clamp(12px, 1.05vw, 20px);
+        font-weight: 650;
+        letter-spacing: .08em;
+      }
+
+      .topline::before {
+        width: 32px;
+        height: 3px;
+        content: "";
+        border-radius: 999px;
+        background: var(--green);
+      }
+
+      h1 {
+        margin: 10px 0 12px;
+        font-size: clamp(28px, 2.25vw, 44px);
+        line-height: 1.18;
+        letter-spacing: -.035em;
+      }
+
+      .lead {
+        width: 82%;
+        margin: 0;
+        color: var(--muted);
+        font-size: clamp(13px, 1.02vw, 19px);
+        font-weight: 520;
+        line-height: 1.72;
+      }
+
+      .strategy-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 9.5% minmax(0, 1fr);
+        align-items: stretch;
+        height: 64%;
+        margin-top: 3.2%;
+      }
+
+      .card {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        padding: 4.4% 5% 3.8%;
+        overflow: hidden;
+        border: 1.5px solid rgba(80, 215, 160, .55);
+        border-radius: 22px;
+        background: rgba(255, 255, 255, .61);
+      }
+
+      .card::after {
+        position: absolute;
+        right: -36px;
+        top: -56px;
+        width: 176px;
+        height: 176px;
+        content: "";
+        border-radius: 50%;
+        background: rgba(80, 215, 160, .09);
+      }
+
+      .card-head {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        align-items: end;
+        gap: 18px;
+        padding-bottom: 3.8%;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .num {
+        color: var(--green);
+        font-family: Arial, sans-serif;
+        font-size: clamp(40px, 4vw, 78px);
+        font-weight: 500;
+        line-height: .82;
+        letter-spacing: -.06em;
+      }
+
+      .card h2 {
+        margin: 0 0 5px;
+        font-size: clamp(20px, 1.58vw, 31px);
+        line-height: 1.15;
+      }
+
+      .card-subtitle {
+        margin: 0;
+        color: var(--muted);
+        font-size: clamp(11px, .86vw, 16px);
+        font-weight: 550;
+      }
+
+      .role {
+        position: relative;
+        z-index: 1;
+        align-self: start;
+        padding: 7px 12px;
+        border-radius: 999px;
+        color: var(--green-deep);
+        font-size: clamp(10px, .72vw, 14px);
+        font-weight: 700;
+        background: var(--green-soft);
+        white-space: nowrap;
+      }
+
+      .content {
+        display: grid;
+        gap: 3.6%;
+        flex: 1;
+        padding-top: 3.8%;
+      }
+
+      .block-label {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        margin-bottom: 7px;
+        color: var(--ink);
+        font-size: clamp(11px, .84vw, 16px);
+        font-weight: 750;
+      }
+
+      .block-label::before {
+        width: 6px;
+        height: 6px;
+        content: "";
+        border-radius: 50%;
+        background: var(--green);
+      }
+
+      .block p {
+        margin: 0;
+        color: var(--muted);
+        font-size: clamp(10px, .75vw, 14.5px);
+        font-weight: 510;
+        line-height: 1.58;
+      }
+
+      .flow-group {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .flow {
+        min-width: 0;
+        padding: 12px 13px;
+        border-radius: 13px;
+        background: rgba(221, 248, 237, .66);
+      }
+
+      .flow strong {
+        display: block;
+        margin-bottom: 7px;
+        font-size: clamp(10px, .76vw, 14px);
+      }
+
+      .steps {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        color: var(--green-deep);
+        font-size: clamp(8px, .63vw, 12px);
+        font-weight: 650;
+        white-space: nowrap;
+      }
+
+      .steps i {
+        flex: 1;
+        height: 1px;
+        min-width: 7px;
+        background: rgba(23, 138, 100, .38);
+      }
+
+      .pipeline {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr auto 1fr;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .pipeline span {
+        padding: 11px 8px;
+        border-radius: 12px;
+        color: var(--green-deep);
+        font-size: clamp(8px, .66vw, 12.5px);
+        font-weight: 700;
+        text-align: center;
+        background: var(--green-soft);
+      }
+
+      .pipeline b {
+        color: var(--green);
+        font-size: clamp(12px, .9vw, 17px);
+      }
+
+      .outcome {
+        display: flex;
+        align-items: center;
+        min-height: 46px;
+        margin-top: auto;
+        padding: 10px 14px;
+        border-radius: 13px;
+        color: #fff;
+        font-size: clamp(9px, .72vw, 14px);
+        font-weight: 650;
+        line-height: 1.45;
+        background: var(--navy);
+      }
+
+      .metric {
+        color: var(--green);
+        font-size: 1.45em;
+        font-weight: 760;
+        margin: 0 4px;
+      }
+
+      .bridge {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        min-width: 0;
+      }
+
+      .bridge-label {
+        width: 115%;
+        color: var(--muted);
+        font-size: clamp(8px, .62vw, 12px);
+        font-weight: 650;
+        line-height: 1.45;
+        text-align: center;
+      }
+
+      .arrow {
+        position: relative;
+        width: 70%;
+        height: 2px;
+        background: var(--green);
+      }
+
+      .arrow::before {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        display: grid;
+        place-items: center;
+        width: 38px;
+        height: 38px;
+        content: "✓";
+        transform: translate(-50%, -50%);
+        border: 6px solid var(--paper);
+        border-radius: 50%;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 800;
+        background: var(--green);
+      }
+
+      .arrow::after {
+        position: absolute;
+        right: -1px;
+        top: 50%;
+        width: 9px;
+        height: 9px;
+        content: "";
+        transform: translateY(-50%) rotate(45deg);
+        border-top: 2px solid var(--green);
+        border-right: 2px solid var(--green);
+      }
+
+      @media (max-width: 900px) {
+        body { padding: 0; background: var(--paper); }
+        .canvas {
+          width: 100%;
+          min-height: 100vh;
+          aspect-ratio: auto;
+          overflow: visible;
+          padding: 40px 24px;
+          box-shadow: none;
+        }
+        .lead { width: 100%; }
+        .strategy-grid {
+          grid-template-columns: 1fr;
+          height: auto;
+          gap: 24px;
+          margin-top: 34px;
+        }
+        .card { padding: 26px 24px; }
+        .bridge { min-height: 76px; }
+        .bridge-label { width: 100%; }
+        .arrow { width: 2px; height: 56px; }
+        .arrow::after {
+          right: auto;
+          left: 50%;
+          top: auto;
+          bottom: 0;
+          transform: translateX(-50%) rotate(135deg);
+        }
+        .flow-group { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="canvas" aria-label="CNAP 改版总策略页">
+      <header>
+        <div class="topline">整体策略</div>
+        <h1>先重构核心任务，再沉淀页面规则</h1>
+        <p class="lead">
+          前期调研发现，问题不只存在于单个页面：用户端，系统层级打断了状态排查与配置调整；团队端，页面缺少统一规则，相似需求仍需反复讨论。因此，我先解决两条高频任务，再从改版方案中提炼可复用规则，支撑后续页面稳定生成。
+        </p>
+      </header>
+
+      <section class="strategy-grid" aria-label="两条设计主线">
+        <article class="card">
+          <div class="card-head">
+            <div class="num">01</div>
+            <div>
+              <h2>重构核心任务</h2>
+              <p class="card-subtitle">让状态排查更连续，让配置调整更清晰</p>
+            </div>
+            <span class="role">解决当下</span>
+          </div>
+
+          <div class="content">
+            <div class="block">
+              <div class="block-label">解决什么</div>
+              <p>用户需要在多个层级与页面间反复跳转，既难以快速定位实例、判断状态，也无法分辨配置来源与修改结果。</p>
+            </div>
+
+            <div class="block">
+              <div class="block-label">怎么解决</div>
+              <div class="flow-group">
+                <div class="flow">
+                  <strong>状态排查</strong>
+                  <div class="steps"><span>一屏浏览</span><i></i><span>信息分层</span><i></i><span>详情直达</span></div>
+                </div>
+                <div class="flow">
+                  <strong>配置调整</strong>
+                  <div class="steps"><span>来源前置</span><i></i><span>按需覆盖</span><i></i><span>即时反馈</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="outcome">降低查找与判断成本，让继承、覆盖和恢复关系变得可感知、可操作。</div>
+          </div>
+        </article>
+
+        <div class="bridge" aria-label="将验证后的设计判断沉淀为规则">
+          <div class="bridge-label">将验证后的<br />设计判断沉淀为规则</div>
+          <div class="arrow" aria-hidden="true"></div>
+        </div>
+
+        <article class="card">
+          <div class="card-head">
+            <div class="num">02</div>
+            <div>
+              <h2>沉淀页面规则</h2>
+              <p class="card-subtitle">让设计判断可复用，让后续页面可生成</p>
+            </div>
+            <span class="role">支撑未来</span>
+          </div>
+
+          <div class="content">
+            <div class="block">
+              <div class="block-label">解决什么</div>
+              <p>相似页面缺少统一判断，布局、信息密度与复杂表单每次都要重新讨论，容易产生设计差异与实现偏差。</p>
+            </div>
+
+            <div class="block">
+              <div class="block-label">怎么解决</div>
+              <div class="pipeline">
+                <span>提炼通用模块</span><b>→</b><span>划定使用边界</span><b>→</b><span>转化交互规则</span>
+              </div>
+            </div>
+
+            <div class="outcome">形成页面规范与 Agent 上下文，结合组件库生成后续页面，重复沟通成本减少 <span class="metric">20%</span>。</div>
+          </div>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
