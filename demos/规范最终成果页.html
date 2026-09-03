@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>规范最终成果页</title>
+  <style>
+    :root{--ink:#171c20;--muted:#788287;--line:#dfe5e3;--mint:#54d99f;--mint-soft:#e9faf3;--panel:#f5f7f7;--blue:#8bd4ee}
+    *{box-sizing:border-box} body{margin:0;background:#e9ecec;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}
+    .page{width:1920px;height:1080px;margin:auto;background:#fff;padding:80px;overflow:hidden}
+    .eyebrow{font-size:28px;color:#a0a6a8;letter-spacing:2px;margin-bottom:14px}.title{font-size:58px;line-height:1.2;letter-spacing:-2px;margin:0}.sub{font-size:27px;font-weight:600;margin:34px 0 44px}
+    .hero{display:grid;grid-template-columns:470px 520px 1fr;gap:42px;align-items:start}
+    .statement{padding-top:22px}.statement h2{font-size:31px;line-height:1.4;margin:0 0 22px}.statement p{font-size:20px;line-height:1.8;color:var(--muted);margin:0;max-width:440px}.quote{margin-top:48px;padding:22px 24px;background:var(--mint-soft);border-left:5px solid var(--mint);font-size:22px;font-weight:700;line-height:1.55}
+    .system{background:var(--panel);border-radius:18px;padding:24px 26px}.system-title{font-size:22px;font-weight:700;margin-bottom:24px}.node{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px 20px;position:relative;margin-bottom:34px;box-shadow:0 8px 20px rgba(27,55,47,.04)}.node:not(:last-child):after{content:"↓";position:absolute;left:50%;bottom:-31px;color:#55c795;font-size:24px;font-weight:700}.node-label{font-size:15px;color:#48b987;margin-bottom:8px;font-weight:700}.node-name{font-size:22px;font-weight:700;margin-bottom:6px}.node-desc{font-size:15px;color:var(--muted);line-height:1.5}.node.final{background:var(--mint);border-color:var(--mint);}.node.final .node-label,.node.final .node-desc{color:#176648}.node.final .node-name{font-size:25px}
+    .outputs{min-width:0}.outputs-title{font-size:22px;font-weight:700;margin:0 0 16px}.output-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.output{background:var(--panel);border-radius:14px;padding:16px}.output h3{font-size:18px;margin:0 0 12px}.screen{height:245px;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden;box-shadow:0 8px 20px rgba(27,55,47,.05)}.bar{height:24px;background:#27333b;padding:7px 9px}.bar i{display:inline-block;width:5px;height:5px;background:#95a4a9;border-radius:50%;margin-right:4px}.screenbody{display:grid;grid-template-columns:38px 1fr;height:221px}.rail{background:#26323a;padding-top:18px}.rail b{display:block;width:13px;height:13px;border:1px solid #93a5ab;border-radius:3px;margin:0 auto 18px}.ui{background:#f7f9fa;padding:15px 14px}.uihead{display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:12px}.btn{background:#40c995;color:white;font-size:9px;padding:5px 8px;border-radius:3px}.cards{display:grid;grid-template-columns:1fr 1fr;gap:7px}.card{background:white;border:1px solid #e4e9e9;border-radius:4px;padding:8px}.line{height:5px;background:#dce7e6;border-radius:3px;margin-bottom:7px}.line.s{width:52%}.tag{display:inline-block;background:#def7eb;color:#31ad7e;font-size:8px;padding:3px 5px;border-radius:2px}.table-ui{background:white;border:1px solid #e4e9e9;border-radius:4px}.filters{height:26px;border-bottom:1px solid #edf0f0;padding:7px;display:flex;gap:5px}.filters i{display:block;width:52px;height:8px;background:#e8eeee;border-radius:2px}.tr{height:28px;border-bottom:1px solid #f0f2f2;display:grid;grid-template-columns:1.3fr 1fr 1fr .5fr;gap:5px;padding:10px 7px}.tr i{height:5px;background:#dce6e6;border-radius:4px}.tr i:last-child{background:#9ce2c0}.caption{color:#7e898b;font-size:14px;line-height:1.5;margin-top:11px}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px}.metric{background:var(--mint);border-radius:14px;padding:20px 24px;display:flex;align-items:baseline;gap:12px}.metric strong{font-size:45px}.metric span{font-size:17px;font-weight:700}
+    .foot{margin-top:32px;display:flex;justify-content:space-between;align-items:center}.foot p{font-size:23px;font-weight:700;margin:0}.foot em{font-style:normal;color:#27ad7c}
+    @media(max-width:1200px){.page{transform:scale(.55);transform-origin:top left;margin-bottom:-480px}}
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="eyebrow">设计成果</div>
+    <h1 class="title">将隐性设计经验，转成 Agent 可执行的页面规则</h1>
+    <div class="sub">沉淀页面级交互规范，支撑后续业务页面快速生成</div>
+    <section class="hero">
+      <div class="statement">
+        <h2>最终形成的不是一套页面模板，而是一套页面生成能力。</h2>
+        <p>我把分散在不同页面中的设计判断提炼出来，形成可复用、可解释、可继续扩展的规则资产，并连接到后续页面生成流程。</p>
+        <div class="quote">统一的不是页面长相，而是同类问题的解决方式。</div>
+      </div>
+      <div class="system">
+        <div class="system-title">最终交付物</div>
+        <div class="node"><div class="node-label">01 / 规则资产</div><div class="node-name">页面级交互规范</div><div class="node-desc">页面结构、布局方式与信息呈现规则</div></div>
+        <div class="node"><div class="node-label">02 / 上下文资产</div><div class="node-name">MD 交互说明</div><div class="node-desc">将设计判断转成 Agent 可以理解的上下文</div></div>
+        <div class="node"><div class="node-label">03 / 能力资产</div><div class="node-name">可复用代码组件库</div><div class="node-desc">为后续页面生成提供可直接调用的组件</div></div>
+        <div class="node final"><div class="node-label">最终结果</div><div class="node-name">快速生成后续业务页面</div><div class="node-desc">审批策略、变更管控等页面可按规则继续扩展</div></div>
+      </div>
+      <div class="outputs">
+        <div class="outputs-title">规则被应用到真实页面</div>
+        <div class="output-grid">
+          <div class="output"><h3>审批策略</h3><div class="screen"><div class="bar"><i></i><i></i><i></i></div><div class="screenbody"><div class="rail"><b></b><b></b><b></b></div><div class="ui"><div class="uihead"><span>审批策略</span><span class="btn">新建策略</span></div><div class="table-ui"><div class="filters"><i></i><i></i><i></i></div><div class="tr"><i></i><i></i><i></i><i></i></div><div class="tr"><i></i><i></i><i></i><i></i></div><div class="tr"><i></i><i></i><i></i><i></i></div><div class="tr"><i></i><i></i><i></i><i></i></div></div></div></div></div><div class="caption">表格、筛选与行内操作规则得到复用</div></div>
+          <div class="output"><h3>变更管控</h3><div class="screen"><div class="bar"><i></i><i></i><i></i></div><div class="screenbody"><div class="rail"><b></b><b></b><b></b></div><div class="ui"><div class="uihead"><span>变更管控</span><span class="btn">新建规则</span></div><div class="cards"><div class="card"><div class="line"></div><span class="tag">生效中</span><div class="line s"></div></div><div class="card"><div class="line"></div><span class="tag">已停止</span><div class="line s"></div></div><div class="card"><div class="line"></div><span class="tag">生效中</span><div class="line s"></div></div><div class="card"><div class="line"></div><span class="tag">生效中</span><div class="line s"></div></div></div></div></div></div><div class="caption">卡片、状态与配置入口规则得到复用</div></div>
+        </div>
+        <div class="metrics"><div class="metric"><strong>30%</strong><span>纵向空间占用减少</span></div><div class="metric"><strong>20%</strong><span>横向空间占用减少</span></div><div class="metric"><strong>20%</strong><span>重复沟通成本减少</span></div></div>
+      </div>
+    </section>
+    <div class="foot"><p>从每页重新设计，转向<span> 按规则快速生成</span></p><p><em>设计判断 → 规则资产 → 页面能力</em></p></div>
+  </main>
+</body>
+</html>

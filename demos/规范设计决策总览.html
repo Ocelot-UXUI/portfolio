@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>规范设计决策总览</title>
+  <style>
+    :root {
+      --bg: #172337;
+      --panel: #1c2a41;
+      --panel-2: #213049;
+      --line: rgba(151, 174, 210, .20);
+      --line-strong: rgba(151, 174, 210, .34);
+      --text: #f3f5f9;
+      --muted: #9eabc0;
+      --muted-2: #6f7e95;
+      --violet: #6558ff;
+      --violet-2: #877cff;
+      --blue: #5988ff;
+      --mint: #4bd7b1;
+      --warm: #ffb66f;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; background: #0e1725; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--text);
+    }
+
+    .page {
+      width: 1920px;
+      height: 1080px;
+      margin: 0 auto;
+      padding: 54px 64px 48px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 83% 12%, rgba(101, 88, 255, .10), transparent 26%),
+        linear-gradient(180deg, #182438 0%, #172337 72%, #1d2a41 72%, #1d2a41 100%);
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 25px;
+      border-bottom: 1px solid var(--line-strong);
+    }
+    .header-title {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 30px;
+      font-weight: 760;
+      letter-spacing: .02em;
+    }
+    .header-title i {
+      width: 28px;
+      height: 8px;
+      border-radius: 2px;
+      background: var(--violet);
+      box-shadow: 0 0 18px rgba(101,88,255,.55);
+    }
+    .header-en {
+      color: rgba(164, 177, 201, .28);
+      font: 700 28px/1 Arial, sans-serif;
+      letter-spacing: .02em;
+    }
+
+    .intro {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-top: 28px;
+    }
+    .intro h1 {
+      margin: 0;
+      font-size: 42px;
+      line-height: 1.15;
+      letter-spacing: -.025em;
+    }
+    .intro p {
+      width: 660px;
+      margin: 0 0 4px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.7;
+      text-align: right;
+    }
+
+    .decisions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 38px;
+      margin-top: 30px;
+    }
+    .decision {
+      min-width: 0;
+      padding: 24px 26px 22px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(24, 36, 56, .38);
+    }
+    .diagram {
+      height: 170px;
+      position: relative;
+      padding: 14px 6px 4px;
+    }
+    .decision-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 4px;
+    }
+    .decision-head h2 {
+      margin: 0;
+      font-size: 25px;
+      letter-spacing: -.01em;
+    }
+    .index {
+      color: var(--violet-2);
+      font: 700 16px Arial, sans-serif;
+      letter-spacing: .08em;
+    }
+    .decision-line {
+      margin: 10px 0 0;
+      color: var(--violet-2);
+      font-size: 16px;
+      font-weight: 650;
+    }
+    .reasoning {
+      margin-top: 18px;
+      padding-top: 15px;
+      border-top: 1px solid var(--line);
+    }
+    .reason-row {
+      display: grid;
+      grid-template-columns: 58px 1fr;
+      gap: 12px;
+      margin-bottom: 11px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    .reason-row b { color: #dce2ec; font-weight: 650; }
+    .reason-row em { color: var(--violet-2); font-style: normal; }
+
+    /* 01: 从零散组件到页面骨架 */
+    .parts { position: absolute; left: 16px; top: 26px; width: 178px; height: 116px; }
+    .part { position: absolute; height: 18px; border: 1px solid #3b4b66; border-radius: 3px; background: rgba(88, 103, 137, .14); }
+    .part::before { content: ""; display: block; width: 38%; height: 100%; background: rgba(101,88,255,.30); }
+    .p1 { width: 112px; left: 0; top: 0; }
+    .p2 { width: 154px; left: 24px; top: 34px; }
+    .p3 { width: 92px; left: 7px; top: 68px; }
+    .p4 { width: 128px; left: 42px; top: 102px; }
+    .to { position: absolute; left: 222px; top: 77px; color: var(--violet-2); font-size: 26px; }
+    .skeleton { position: absolute; right: 10px; top: 17px; width: 236px; height: 135px; border: 1px solid #485a78; border-radius: 5px; padding: 12px; }
+    .sk-top { height: 17px; background: rgba(101,88,255,.28); border-radius: 2px; }
+    .sk-body { display: grid; grid-template-columns: 72px 1fr; gap: 8px; height: 91px; margin-top: 8px; }
+    .sk-nav { border: 1px solid #3a4b67; background: rgba(83, 100, 134, .12); }
+    .sk-main { display: grid; grid-template-rows: 29px 1fr; gap: 7px; }
+    .sk-main div { border: 1px solid #3a4b67; background: rgba(83, 100, 134, .12); }
+    .anchor { position: absolute; width: 12px; height: 12px; border: 3px solid #fff; border-radius: 50%; background: var(--violet); box-shadow: 0 0 0 4px rgba(101,88,255,.16); }
+    .a1 { right: 225px; top: 25px; } .a2 { right: 147px; top: 56px; } .a3 { right: 24px; top: 95px; }
+    .linkline { position: absolute; height: 1px; background: var(--violet); transform-origin: left center; opacity: .85; }
+    .l1 { right: 146px; top: 31px; width: 79px; } .l2 { right: 22px; top: 62px; width: 126px; transform: rotate(18deg); }
+
+    /* 02: 场景分支 */
+    .source-box { position: absolute; left: 14px; top: 63px; width: 118px; height: 38px; border: 1px solid #465875; border-radius: 4px; background: rgba(101,88,255,.22); }
+    .source-box::after { content: "页面规则"; display: grid; place-items: center; height: 100%; color: #c9c5ff; font-size: 13px; }
+    .branch { position: absolute; height: 1px; background: var(--violet); transform-origin: left center; }
+    .b1 { left: 132px; top: 82px; width: 118px; transform: rotate(-26deg); }
+    .b2 { left: 132px; top: 82px; width: 118px; transform: rotate(26deg); }
+    .scene { position: absolute; width: 205px; height: 54px; padding: 8px 10px; border: 1px solid #40516c; border-radius: 4px; background: rgba(26,39,61,.82); }
+    .scene strong { display: block; color: #e8ebf2; font-size: 13px; }
+    .scene span { display: block; margin-top: 4px; color: var(--muted-2); font-size: 11px; }
+    .scene.one { right: 14px; top: 15px; } .scene.two { right: 14px; bottom: 15px; }
+    .scene-dot { position: absolute; left: -6px; top: 21px; width: 11px; height: 11px; border-radius: 50%; background: var(--violet); box-shadow: 0 0 0 4px rgba(101,88,255,.17); }
+
+    /* 03: 信息呈现方式 */
+    .always { position: absolute; left: 10px; top: 22px; width: 180px; }
+    .mini-row { display: grid; grid-template-columns: 55px 1fr; gap: 7px; margin-bottom: 8px; }
+    .mini-row i, .mini-row span { height: 20px; border: 1px solid #3e506d; border-radius: 3px; }
+    .mini-row i { background: rgba(101,88,255,.28); }
+    .always .ghost { opacity: .36; }
+    .appear-arrow { position: absolute; left: 205px; top: 76px; color: var(--violet-2); font-size: 26px; }
+    .modes { position: absolute; right: 3px; top: 11px; width: 250px; }
+    .mode { display: grid; grid-template-columns: 28px 1fr; gap: 9px; align-items: center; height: 43px; margin-bottom: 8px; padding: 0 10px; border: 1px solid #40516d; border-radius: 4px; color: #dbe1ec; font-size: 12px; }
+    .mode i { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; color: white; background: rgba(101,88,255,.62); font-style: normal; font-size: 11px; }
+
+    .application {
+      margin: 30px -64px 0;
+      padding: 25px 64px 0;
+      border-top: 1px solid rgba(135, 124, 255, .24);
+    }
+    .application-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 17px;
+    }
+    .application-title { color: var(--violet-2); font-size: 20px; font-weight: 700; }
+    .application-copy { color: var(--muted); font-size: 14px; }
+    .application-grid { display: grid; grid-template-columns: 1.05fr 1.05fr .9fr; gap: 24px; }
+    .app-card {
+      height: 212px;
+      padding: 15px 17px;
+      border: 1px solid var(--line);
+      border-radius: 7px;
+      background: rgba(15, 25, 40, .45);
+    }
+    .app-label { display: flex; align-items: center; justify-content: space-between; margin-bottom: 11px; font-size: 13px; color: #d7ddea; }
+    .app-label span:last-child { color: var(--muted-2); font-size: 11px; }
+
+    .ui-page { height: 154px; border-radius: 5px; overflow: hidden; background: #f7f9fc; color: #354052; }
+    .ui-top { height: 25px; display: flex; align-items: center; padding: 0 9px; background: #fff; border-bottom: 1px solid #e6e9ef; font-size: 8px; }
+    .ui-body { display: grid; grid-template-columns: 55px 1fr; height: 129px; }
+    .ui-nav { padding: 9px 6px; background: #eef1f6; }
+    .ui-nav i { display: block; height: 7px; margin-bottom: 8px; border-radius: 2px; background: #d7dce7; }
+    .ui-nav i.active { background: var(--violet); }
+    .ui-main { padding: 10px 12px; }
+    .ui-title { width: 74px; height: 8px; margin-bottom: 10px; border-radius: 2px; background: #626d7d; }
+    .ui-form { display: grid; grid-template-columns: repeat(2, 1fr); gap: 7px 10px; }
+    .ui-field { height: 27px; padding: 4px; border: 1px solid #e0e4eb; border-radius: 3px; background: white; }
+    .ui-field::before { content: ""; display: block; width: 34%; height: 4px; margin-bottom: 4px; background: #b6becb; }
+    .ui-field::after { content: ""; display: block; width: 90%; height: 7px; background: #f0f2f6; }
+
+    .matrix { display: grid; grid-template-columns: 70px repeat(2,1fr); grid-template-rows: 28px repeat(2, 58px); gap: 6px; color: var(--muted); font-size: 10px; }
+    .matrix > div { display: grid; place-items: center; border: 1px solid #3a4c68; border-radius: 4px; }
+    .matrix .axis { border: none; color: #8f9cb2; }
+    .matrix .cell { display: block; padding: 7px; background: rgba(88, 106, 145, .08); }
+    .matrix .cell b { display: block; color: #dfe4ed; margin-bottom: 4px; font-size: 11px; }
+    .matrix .cell span { color: #7f8ca2; line-height: 1.4; }
+
+    .execution { display: grid; grid-template-columns: 1fr 30px 1fr; align-items: center; gap: 8px; height: 145px; }
+    .asset-stack { display: grid; gap: 7px; }
+    .asset { height: 37px; padding: 7px 9px; border: 1px solid #3c4e6b; border-radius: 4px; background: rgba(52,70,102,.18); }
+    .asset b { display: block; color: #dfe4ed; font-size: 10px; }
+    .asset span { display: block; margin-top: 2px; color: #76859c; font-size: 8px; }
+    .exec-arrow { color: var(--violet-2); font-size: 22px; text-align: center; }
+    .output { height: 127px; padding: 10px; border: 1px solid rgba(101,88,255,.55); border-radius: 5px; background: linear-gradient(150deg, rgba(101,88,255,.20), rgba(75,215,177,.08)); }
+    .output small { color: #aaa3ff; font-size: 9px; }
+    .output strong { display: block; margin-top: 8px; font-size: 15px; line-height: 1.45; }
+    .output p { margin: 8px 0 0; color: #8f9bb0; font-size: 9px; line-height: 1.5; }
+    .metric { display: inline-flex; align-items: baseline; gap: 4px; margin-top: 8px; color: var(--mint); }
+    .metric b { font: 700 19px Arial, sans-serif; }
+    .metric span { font-size: 9px; }
+
+    .footer-note {
+      position: absolute;
+      left: 64px;
+      bottom: 18px;
+      color: rgba(168,179,198,.40);
+      font: 600 10px Arial, sans-serif;
+      letter-spacing: .12em;
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <div class="header-title">制定规范的方法：场景适配 <i></i></div>
+      <div class="header-en">Page-level Design Rules</div>
+    </header>
+
+    <section class="intro">
+      <h1>不是统一所有页面，而是明确什么该统一、什么需要变化</h1>
+      <p>围绕规范层级、适配边界与信息呈现，建立能够覆盖复杂业务场景的页面级设计规则。</p>
+    </section>
+
+    <section class="decisions">
+      <article class="decision">
+        <div class="diagram">
+          <div class="parts"><i class="part p1"></i><i class="part p2"></i><i class="part p3"></i><i class="part p4"></i></div>
+          <div class="to">→</div>
+          <div class="skeleton"><div class="sk-top"></div><div class="sk-body"><div class="sk-nav"></div><div class="sk-main"><div></div><div></div></div></div></div>
+          <i class="anchor a1"></i><i class="anchor a2"></i><i class="anchor a3"></i><i class="linkline l1"></i><i class="linkline l2"></i>
+        </div>
+        <div class="decision-head"><h2>规范深入页面层级</h2><span class="index">01</span></div>
+        <p class="decision-line">从定义单个组件，转向定义页面组合关系</p>
+        <div class="reasoning">
+          <div class="reason-row"><b>判断</b><span>组件规范只能约束局部样式，无法回答复杂页面应该如何搭建。</span></div>
+          <div class="reason-row"><b>决策</b><span>从典型复杂页面提取稳定骨架，统一模块的<em>层级、位置与组合方式</em>。</span></div>
+          <div class="reason-row"><b>边界</b><span>固定页面结构，不限制随业务变化的具体内容。</span></div>
+        </div>
+      </article>
+
+      <article class="decision">
+        <div class="diagram">
+          <div class="source-box"></div><i class="branch b1"></i><i class="branch b2"></i>
+          <div class="scene one"><i class="scene-dot"></i><strong>简单场景</strong><span>轻量布局 · 快速浏览与填写</span></div>
+          <div class="scene two"><i class="scene-dot"></i><strong>复杂场景</strong><span>分组布局 · 保留信息关联</span></div>
+        </div>
+        <div class="decision-head"><h2>按场景划分适配边界</h2><span class="index">02</span></div>
+        <p class="decision-line">一致的是判断规则，而不是所有页面长得一样</p>
+        <div class="reasoning">
+          <div class="reason-row"><b>判断</b><span>信息复杂度和使用目的不同，单一模板会牺牲效率或可读性。</span></div>
+          <div class="reason-row"><b>决策</b><span>按<em>简单 / 复杂、编辑 / 预览</em>划分场景，分别制定布局规则。</span></div>
+          <div class="reason-row"><b>边界</b><span>同类场景保持一致，跨场景允许有依据地变化。</span></div>
+        </div>
+      </article>
+
+      <article class="decision">
+        <div class="diagram">
+          <div class="always">
+            <div class="mini-row"><i></i><span></span></div><div class="mini-row"><i></i><span></span></div>
+            <div class="mini-row ghost"><i></i><span></span></div><div class="mini-row ghost"><i></i><span></span></div>
+          </div>
+          <div class="appear-arrow">→</div>
+          <div class="modes"><div class="mode"><i>1</i><span>低频信息 · 按需呈现</span></div><div class="mode"><i>2</i><span>解释信息 · 帮助模式</span></div><div class="mode"><i>3</i><span>列表信息 · 密度切换</span></div></div>
+        </div>
+        <div class="decision-head"><h2>设计信息出现时机</h2><span class="index">03</span></div>
+        <p class="decision-line">不直接删减信息，而是控制信息何时、以何种密度出现</p>
+        <div class="reasoning">
+          <div class="reason-row"><b>判断</b><span>信息完整不等于持续展示，过量信息会增加视觉干扰。</span></div>
+          <div class="reason-row"><b>决策</b><span>用<em>按需呈现、帮助模式与密度切换</em>平衡完整性和效率。</span></div>
+          <div class="reason-row"><b>边界</b><span>核心任务信息始终可见，辅助信息在需要时出现。</span></div>
+        </div>
+      </article>
+    </section>
+
+    <section class="application">
+      <div class="application-head"><div class="application-title">规范如何落到页面</div><div class="application-copy">从设计判断，到场景规则，再到可被准确复现的规范资产</div></div>
+      <div class="application-grid">
+        <div class="app-card">
+          <div class="app-label"><span>页面骨架｜统一模块关系</span><span>STRUCTURE</span></div>
+          <div class="ui-page"><div class="ui-top">业务平台 / 创建任务</div><div class="ui-body"><div class="ui-nav"><i></i><i class="active"></i><i></i><i></i></div><div class="ui-main"><div class="ui-title"></div><div class="ui-form"><div class="ui-field"></div><div class="ui-field"></div><div class="ui-field"></div><div class="ui-field"></div><div class="ui-field"></div><div class="ui-field"></div></div></div></div></div>
+        </div>
+        <div class="app-card">
+          <div class="app-label"><span>场景矩阵｜让变化有据可依</span><span>ADAPTATION</span></div>
+          <div class="matrix">
+            <div></div><div class="axis">编辑</div><div class="axis">预览</div>
+            <div class="axis">简单</div><div class="cell"><b>快速填写</b><span>紧凑排列，降低操作距离</span></div><div class="cell"><b>快速浏览</b><span>弱化控件，突出结果</span></div>
+            <div class="axis">复杂</div><div class="cell"><b>分组编辑</b><span>保留关联，逐组完成</span></div><div class="cell"><b>结构阅读</b><span>强化层级，按需展开</span></div>
+          </div>
+        </div>
+        <div class="app-card">
+          <div class="app-label"><span>落地验证｜规则能否被准确执行</span><span>EXECUTION</span></div>
+          <div class="execution">
+            <div class="asset-stack"><div class="asset"><b>MD 交互说明</b><span>交互链路 / 状态 / 边界</span></div><div class="asset"><b>代码组件库</b><span>结构 / 样式 / 复用方式</span></div><div class="asset"><b>页面级规则</b><span>骨架 / 场景 / 呈现策略</span></div></div>
+            <div class="exec-arrow">→</div>
+            <div class="output"><small>RULE VALIDATION</small><strong>设计、开发与 AI<br/>读取同一套规则</strong><p>AI 不是设计起点，而是检验规范是否清晰、完整、可执行的验证者。</p><div class="metric"><b>-20%</b><span>重复沟通成本</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="footer-note">DESIGN DECISIONS / PAGE-LEVEL SPECIFICATION / 2026</div>
+  </main>
+</body>
+</html>

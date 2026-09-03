@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>从逐页设计，到按规则生成</title>
+  <style>
+    :root {
+      --ink: #1f292d;
+      --muted: #7b878b;
+      --line: #e9eeee;
+      --warm: #f8f5f2;
+      --warm-line: #eaded8;
+      --red: #db806f;
+      --mint: #43c995;
+      --mint-soft: #effbf6;
+      --blue: #4f9be8;
+      --blue-soft: #eff6fd;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #eef1f0;
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    .canvas {
+      width: 1920px;
+      height: 1080px;
+      margin: 0 auto;
+      padding: 72px 88px 64px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--blue);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 4px;
+      border-radius: 99px;
+      background: var(--blue);
+    }
+
+    h1 {
+      margin: 20px 0 12px;
+      font-size: 56px;
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      font-weight: 800;
+    }
+    .subtitle {
+      margin: 0;
+      font-size: 23px;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+
+    .compare {
+      display: grid;
+      grid-template-columns: 1fr 92px 1fr;
+      gap: 28px;
+      align-items: center;
+      margin-top: 48px;
+    }
+
+    .panel {
+      height: 540px;
+      padding: 28px 30px 24px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      position: relative;
+    }
+    .panel.before { background: var(--warm); border-color: var(--warm-line); }
+    .panel.after { background: var(--mint-soft); border-color: #cfeee0; }
+
+    .panel-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(31, 41, 45, 0.1);
+    }
+    .en {
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .before .en { color: var(--red); }
+    .after .en { color: var(--mint); }
+    .panel-title {
+      margin-top: 7px;
+      font-size: 29px;
+      font-weight: 800;
+    }
+    .panel-note {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+      align-items: center;
+      margin-top: 28px;
+    }
+    .step { min-width: 0; }
+    .step-card {
+      min-height: 112px;
+      padding: 13px 10px 12px;
+      border: 1px solid rgba(31, 41, 45, 0.1);
+      border-radius: 12px;
+      background: rgba(255,255,255,.72);
+    }
+    .after .step-card {
+      background: rgba(255,255,255,.86);
+      border-color: #c9e9dc;
+    }
+    .step-no {
+      display: inline-flex;
+      width: 26px;
+      height: 26px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--red);
+      font: 700 13px Arial, sans-serif;
+    }
+    .after .step-no { background: var(--mint); }
+    .step-text {
+      display: block;
+      margin-top: 12px;
+      font-size: 16px;
+      line-height: 1.45;
+      font-weight: 700;
+    }
+    .arrow {
+      align-self: center;
+      color: #b8c0c0;
+      font-size: 20px;
+      text-align: center;
+    }
+    .before .step:nth-child(7) .step-card { border-style: dashed; }
+    .before .step:nth-child(7) .step-text { color: var(--red); }
+    .after .step:nth-child(5) .step-card { border: 2px solid var(--mint); }
+    .after .step:nth-child(5) .step-text { color: #20966c; }
+
+    .tags {
+      display: flex;
+      gap: 10px;
+      margin-top: 30px;
+    }
+    .tag {
+      padding: 8px 14px;
+      border-radius: 99px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .before .tag { color: #a76054; background: #f3e1dc; }
+    .after .tag { color: #238362; background: #d8f2e7; }
+
+    .center {
+      display: flex;
+      height: 540px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+    .center-label {
+      padding: 9px 12px;
+      border: 1px solid #cae8dc;
+      border-radius: 8px;
+      color: #238362;
+      background: #effbf6;
+      font-size: 13px;
+      font-weight: 700;
+      writing-mode: vertical-rl;
+      letter-spacing: .12em;
+    }
+    .center-arrow {
+      color: var(--mint);
+      font-size: 38px;
+      line-height: 1;
+    }
+
+    .result {
+      display: grid;
+      grid-template-columns: 330px 1fr;
+      gap: 44px;
+      align-items: center;
+      margin-top: 42px;
+      padding: 22px 32px;
+      border-radius: 16px;
+      background: #202a2e;
+      color: #fff;
+    }
+    .metric {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      white-space: nowrap;
+    }
+    .metric strong {
+      color: #7ce2b5;
+      font: 800 48px Arial, sans-serif;
+      letter-spacing: -0.05em;
+    }
+    .metric span { font-size: 17px; font-weight: 700; }
+    .result-copy { border-left: 1px solid rgba(255,255,255,.22); padding-left: 34px; }
+    .result-copy strong { font-size: 20px; }
+    .result-copy p { margin: 7px 0 0; color: #b8c3c4; font-size: 16px; }
+    .result-copy em { color: #7ce2b5; font-style: normal; }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 18px;
+      color: #a2acad;
+      font-size: 13px;
+      letter-spacing: .04em;
+    }
+  </style>
+</head>
+<body>
+  <main class="canvas">
+    <div class="eyebrow">WORKFLOW SHIFT / 设计工作方式变化</div>
+    <h1>从逐页设计，到按规则生成</h1>
+    <p class="subtitle">将页面规范、交互说明与代码组件接入 Agent，让新页面不再从零开始。</p>
+
+    <section class="compare">
+      <article class="panel before">
+        <div class="panel-head">
+          <div>
+            <div class="en">Before</div>
+            <div class="panel-title">重复决策，反复对齐</div>
+          </div>
+          <div class="panel-note">每个页面都重新开始</div>
+        </div>
+        <div class="flow">
+          <div class="step"><div class="step-card"><span class="step-no">01</span><span class="step-text">接收页面需求</span></div></div>
+          <div class="arrow">→</div>
+          <div class="step"><div class="step-card"><span class="step-no">02</span><span class="step-text">重新理解业务</span></div></div>
+          <div class="arrow">→</div>
+          <div class="step"><div class="step-card"><span class="step-no">03</span><span class="step-text">逐页寻找参考</span></div></div>
+          <div class="arrow">→</div>
+          <div class="step"><div class="step-card"><span class="step-no">04</span><span class="step-text">重新制定布局</span></div></div>
+          <div class="arrow">→</div>
+          <div class="step"><div class="step-card"><span class="step-no">05</span><span class="step-text">口头同步交互</span></div></div>
+          <div class="arrow">→</div>
+          <div class="step"><div class="step-card"><span class="step-no">06</span><span class="step-text">开发实现</span></div></div>
+          <div class="arrow">→</div>
+          <div class="step"><div class="step-card"><span class="step-no">07</span><span class="step-text">发现偏差，再次修改</span></div></div>
+        </div>
+        <div class="tags"><span class="tag">规则散落</span><span class="tag">重复决策</span><span class="tag">上下文丢失</span></div>
+      </article>
+
+      <div class="center"><div class="center-label">规则资产接入</div><div class="center-arrow">→</div></div>
+
+      <article class="panel after">
+        <div class="panel-head">
+          <div>
+            <div class="en">After</div>
+            <div class="panel-title">复用规则，快速生成</div>
+          </div>
+          <div class="panel-note">把判断沉淀为可复用资产</div>
+        </div>
+        <div class="flow">
+          <div class="step"><div class="step-card"><span class="step-no">01</span><span class="step-text">输入页面需求</span></div></div>
+          <div class="arrow">→</div>
+          <div class="step"><div class="step-card"><span class="step-no">02</span><span class="step-text">加载页面级规则</span></div></div>
+          <div class="arrow">→</div>
+          <div class="step"><div class="step-card"><span class="step-no">03</span><span class="step-text">读取 MD 交互说明</span></div></div>
+          <div class="arrow">→</div>
+          <div class="step"><div class="step-card"><span class="step-no">04</span><span class="step-text">调用代码组件库</span></div></div>
+          <div class="arrow">→</div>
+          <div class="step"><div class="step-card"><span class="step-no">05</span><span class="step-text">Agent 生成初稿</span></div></div>
+          <div class="arrow">→</div>
+          <div class="step"><div class="step-card"><span class="step-no">06</span><span class="step-text">设计师校准边界</span></div></div>
+          <div class="arrow">→</div>
+          <div class="step"><div class="step-card"><span class="step-no">07</span><span class="step-text">开发落地</span></div></div>
+        </div>
+        <div class="tags"><span class="tag">复用设计判断</span><span class="tag">完整传递上下文</span><span class="tag">聚焦场景差异</span></div>
+      </article>
+    </section>
+
+    <section class="result">
+      <div class="metric"><strong>20%</strong><span>重复沟通成本减少</span></div>
+      <div class="result-copy">
+        <strong>设计师的工作，从“重复画页面”转向“定义规则、校准结果”。</strong>
+        <p>规范不再只是交付物，而是连接设计判断、交互说明与开发实现的<strong><em>共同语言</em></strong>。</p>
+      </div>
+    </section>
+    <div class="footer"><span>页面级规范 × 交互文档 × 代码组件</span><span>DESIGN SYSTEM AS WORKFLOW</span></div>
+  </main>
+</body>
+</html>

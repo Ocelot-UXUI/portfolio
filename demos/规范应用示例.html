@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>规范应用示例｜作品集预览</title>
+  <style>
+    :root {
+      --ink: #1d2228;
+      --muted: #858b91;
+      --line: #d7dadd;
+      --paper: #f7f8f8;
+      --mint: #a9efd2;
+      --mint-strong: #67ddb2;
+      --blue: #4aa7db;
+      --dark-blue: #326b9d;
+      --screen: #f5f7fa;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #e9ebec;
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    .canvas {
+      width: 1920px;
+      height: 1080px;
+      margin: 0 auto;
+      padding: 78px 80px 60px;
+      background: white;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .eyebrow { color: #a0a5aa; font-size: 30px; letter-spacing: 2px; margin-bottom: 16px; }
+    h1 { margin: 0; font-size: 58px; line-height: 1.15; letter-spacing: -2px; }
+    .subtitle { margin: 42px 0 30px; font-size: 30px; font-weight: 600; }
+
+    .content { display: grid; grid-template-columns: 964px 1fr; gap: 54px; align-items: start; }
+    .left { min-width: 0; }
+
+    .flow { background: var(--paper); border-radius: 18px; padding: 22px 24px; margin-bottom: 8px; }
+    .flow-row { display: grid; grid-template-columns: 140px 1fr; align-items: center; min-height: 72px; }
+    .flow-label { font-size: 22px; font-weight: 700; }
+    .chips { display: flex; gap: 18px; align-items: center; }
+    .chip { min-width: 128px; padding: 19px 18px; background: var(--mint-strong); text-align: center; font-size: 18px; font-weight: 700; }
+    .chip.soft { background: var(--mint); min-width: 112px; padding: 12px 14px; }
+    .chip.small { min-width: 126px; padding: 12px 14px; }
+
+    .spec-flow { display: grid; grid-template-columns: 140px repeat(4, 1fr); gap: 28px; padding-top: 8px; }
+    .spec-column { position: relative; padding-top: 26px; }
+    .spec-column::before { content: ""; position: absolute; left: 0; top: 0; height: 20px; width: 1px; background: #555; }
+    .spec-column::after { content: ""; position: absolute; left: 0; top: 20px; right: 0; height: 1px; background: #555; }
+    .spec-column .chip { display: block; margin: 0 0 8px 10px; font-size: 16px; }
+    .spec-label { padding-top: 14px; font-size: 22px; font-weight: 700; }
+
+    .module-row { display: grid; grid-template-columns: 140px 1fr; align-items: center; background: var(--paper); padding: 18px 24px; margin-bottom: 8px; border-radius: 18px; }
+    .module-groups { display: flex; justify-content: space-around; gap: 32px; }
+    .module-group { display: flex; gap: 14px; position: relative; padding-bottom: 17px; }
+    .module-group::after { content: ""; position: absolute; left: 50%; right: 0; bottom: 0; height: 1px; background: #444; }
+    .module-group::before { content: ""; position: absolute; left: 50%; bottom: -8px; height: 9px; border-left: 1px solid #444; }
+
+    .page-row { display: grid; grid-template-columns: 140px 1fr; align-items: center; background: var(--paper); padding: 28px 24px; border-radius: 18px; }
+    .page-types { display: flex; justify-content: space-around; gap: 18px; }
+    .page-type { background: var(--mint-strong); padding: 18px 22px; min-width: 138px; text-align: center; font-size: 17px; font-weight: 700; }
+
+    .application-row { display: grid; grid-template-columns: 140px 1fr; gap: 0; margin-top: 8px; background: var(--paper); border-radius: 18px; padding: 24px; min-height: 184px; }
+    .application-label { font-size: 22px; font-weight: 700; padding-top: 12px; }
+    .app-columns { display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px; }
+    .app-column { border-left: 1px solid #555; padding-left: 14px; }
+    .app-column span { display: block; background: var(--mint); margin: 0 0 8px; padding: 10px 12px; text-align: center; font-size: 15px; font-weight: 700; }
+
+    .right { padding-top: 4px; }
+    .right-title { font-size: 33px; font-weight: 700; line-height: 1.3; margin-bottom: 18px; }
+    .right-intro { color: #687477; font-size: 20px; line-height: 1.75; max-width: 560px; margin-bottom: 30px; }
+    .principle { font-size: 23px; font-weight: 700; line-height: 1.55; padding: 22px 24px; margin-bottom: 26px; background: #eefaf5; border-left: 5px solid var(--mint-strong); }
+    .principles { display: grid; gap: 14px; }
+    .principle-item { display: grid; grid-template-columns: 58px 1fr; align-items: start; gap: 16px; padding: 20px 0 20px 2px; border-bottom: 1px solid #e2e6e6; }
+    .principle-num { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 50%; background: var(--mint-strong); color: #14533e; font-size: 17px; font-weight: 800; }
+    .principle-item strong { display: block; font-size: 22px; margin-bottom: 7px; }
+    .principle-item p { margin: 0; color: #7b8587; font-size: 17px; line-height: 1.6; }
+    .right-result { margin-top: 28px; font-size: 21px; font-weight: 700; line-height: 1.55; }
+    .right-result span { color: #27ad7c; }
+    .example { background: #f3f5f6; border-radius: 16px; padding: 18px; margin-bottom: 16px; }
+    .example-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
+    .example-title { font-size: 18px; font-weight: 700; }
+    .example-note { font-size: 14px; color: #7b858a; }
+    .mock { background: white; border: 1px solid #e0e5e7; border-radius: 8px; overflow: hidden; box-shadow: 0 7px 22px rgba(38, 58, 68, .06); }
+    .mock-nav { height: 24px; background: #1f2935; display: flex; align-items: center; gap: 7px; padding: 0 10px; }
+    .dot { width: 5px; height: 5px; border-radius: 50%; background: #72818d; }
+    .mock-body { display: grid; grid-template-columns: 42px 1fr; min-height: 172px; }
+    .rail { background: #26313d; padding-top: 12px; }
+    .rail i { display: block; width: 14px; height: 14px; border: 1px solid #8fa1ad; margin: 0 auto 16px; border-radius: 3px; }
+    .screen { background: var(--screen); padding: 15px 18px; }
+    .screen-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 13px; }
+    .screen-name { font-size: 15px; font-weight: 700; }
+    .screen-btn { font-size: 10px; color: white; background: #38b98d; padding: 6px 10px; border-radius: 3px; }
+    .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .mini-card { background: white; border: 1px solid #e1e7ea; border-radius: 4px; padding: 8px; }
+    .mini-card .line { height: 5px; background: #d8e3e6; border-radius: 3px; margin-bottom: 6px; width: 78%; }
+    .mini-card .line.short { width: 45%; }
+    .status { display: inline-block; color: #22a67e; background: #ddf7ec; font-size: 8px; padding: 3px 5px; border-radius: 2px; }
+    .table { background: white; border: 1px solid #e1e7ea; border-radius: 4px; overflow: hidden; }
+    .filter { display: flex; gap: 7px; padding: 8px; border-bottom: 1px solid #edf0f2; }
+    .filter b { height: 14px; width: 76px; background: #edf1f2; border-radius: 2px; }
+    .table-row { display: grid; grid-template-columns: 1.5fr 1fr 1fr .6fr; gap: 8px; padding: 7px 8px; border-bottom: 1px solid #f0f2f3; }
+    .table-row span { height: 6px; border-radius: 4px; background: #dce5e7; }
+    .table-row span:last-child { background: #9be2c3; }
+    .callouts { display: flex; gap: 9px; margin-top: 10px; flex-wrap: wrap; }
+    .callout { font-size: 12px; color: #4c646c; background: #e5f7f0; padding: 6px 9px; border-radius: 4px; }
+    .outcome { margin-top: 18px; padding: 18px 20px; background: #eefaf5; border-left: 4px solid var(--mint-strong); }
+    .outcome strong { display: block; font-size: 17px; margin-bottom: 6px; }
+    .outcome p { margin: 0; color: #687679; font-size: 15px; line-height: 1.6; }
+    .stats { display: flex; gap: 10px; margin-top: 12px; }
+    .stat { background: #f2f5f5; padding: 9px 13px; font-size: 13px; color: #657174; }
+    .stat b { color: #1f2d31; font-size: 17px; margin-right: 4px; }
+
+    @media (max-width: 1200px) {
+      .canvas { transform-origin: top left; transform: scale(.55); margin-bottom: -480px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="canvas">
+    <div class="eyebrow">设计点二</div>
+    <h1>制定规范，快速同步更多页面</h1>
+    <div class="subtitle">从复杂典型页面拆解并沉淀页面级交互规则</div>
+
+    <div class="content">
+      <section class="left" aria-label="规范提炼过程">
+        <div class="flow">
+          <div class="flow-row">
+            <div class="flow-label">典型页面</div>
+            <div class="chips">
+              <div class="chip">日志、监控</div><div class="chip">工作负载</div><div class="chip">流量接入</div><div class="chip">运行配置</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow">
+          <div class="spec-flow">
+            <div class="spec-label">沉淀界面规范</div>
+            <div class="spec-column"><div class="chip soft">代码显示</div><div class="chip soft">组件</div><div class="chip soft">卡片</div></div>
+            <div class="spec-column"><div class="chip soft">表格</div><div class="chip soft">筛选项</div><div class="chip soft">抽屉面板</div><div class="chip soft">组件</div></div>
+            <div class="spec-column"><div class="chip soft">抽屉面板</div><div class="chip soft">拓扑图</div><div class="chip soft">表单项</div><div class="chip soft">组件</div></div>
+            <div class="spec-column"><div class="chip soft">弹窗</div><div class="chip soft">导航</div><div class="chip soft">表单项</div><div class="chip soft">组件</div></div>
+          </div>
+        </div>
+
+        <div class="module-row">
+          <div class="flow-label">提炼通用模块</div>
+          <div class="module-groups">
+            <div class="module-group"><div class="chip small">列表</div><div class="chip small">筛选区</div></div>
+            <div class="module-group"><div class="chip small">抽屉面板</div><div class="chip small">表单项</div></div>
+            <div class="module-group"><div class="chip small">卡片</div><div class="chip small">表单项</div></div>
+          </div>
+        </div>
+
+        <div class="page-row">
+          <div class="flow-label">组合页面结构</div>
+          <div class="page-types"><div class="page-type">列表页</div><div class="page-type">列表＋详情页</div><div class="page-type">详情页</div><div class="page-type">概览页</div></div>
+        </div>
+
+        <div class="application-row">
+          <div class="application-label">落地业务页面</div>
+          <div class="app-columns">
+            <div class="app-column"><span>应用列表</span><span>环境列表</span></div>
+            <div class="app-column"><span>审批策略</span><span>变更管控</span><span>数据配送</span><span>扩缩容</span></div>
+            <div class="app-column"><span>景象仓库</span></div>
+            <div class="app-column"><span>账号列表</span><span>仪表盘</span><span>集群管理</span></div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="right" aria-label="页面级规范的方法总结">
+        <div class="right-title">复用，不等于套用同一套规范</div>
+        <div class="right-intro">面对不同页面与复杂业务场景，我先提炼共性，再根据使用场景与信息复杂度划定规则边界，最后将设计判断转为 Agent 可以执行的交互说明。</div>
+        <div class="principle">这套规范真正统一的，不是页面长相，而是同类问题的解决方式。</div>
+        <div class="principles">
+          <div class="principle-item"><div class="principle-num">01</div><div><strong>提炼共性</strong><p>从典型页面中识别高频模块与页面结构，找到可以复用的基础单元。</p></div></div>
+          <div class="principle-item"><div class="principle-num">02</div><div><strong>划定边界</strong><p>根据编辑与预览、信息量和影响范围，判断何时切换布局与信息承载方式。</p></div></div>
+          <div class="principle-item"><div class="principle-num">03</div><div><strong>转成规则</strong><p>将隐性的设计判断写成交互说明，并结合组件库支撑后续页面生成。</p></div></div>
+        </div>
+        <div class="right-result">从“每页重新设计”到<span>“按规则快速生成”</span></div>
+      </aside>
+    </div>
+  </main>
+</body>
+</html>
