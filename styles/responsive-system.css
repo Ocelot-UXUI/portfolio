@@ -434,6 +434,18 @@ body {
   }
 }
 
+/* Resume rows follow the reference rhythm: number, company, then role. */
+@media (min-width: 701px) {
+  .prototype-homepage .about-resume-entry-head {
+    justify-content: flex-start;
+    gap: clamp(16px, 1.8vw, 28px);
+  }
+
+  .prototype-homepage .about-resume-role {
+    margin-left: 0;
+  }
+}
+
 @media (max-width: 420px) {
   .prototype-homepage .nav-links {
     display: none;
