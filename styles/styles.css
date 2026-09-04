@@ -50,3 +50,6 @@ html:has(.cnap-research-page),.cnap-research-page,.cnap-research-page *{scrollba
 @font-face{font-family:"Space Grotesk";font-style:normal;font-weight:600;font-display:swap;src:url("../assets/fonts/space-grotesk-600.ttf") format("truetype")}
 @font-face{font-family:"Space Grotesk";font-style:normal;font-weight:700;font-display:swap;src:url("../assets/fonts/space-grotesk-700.ttf") format("truetype")}
 body,.homepage,.prototype-homepage{font-family:"Space Grotesk","Noto Sans SC","Source Han Sans SC","PingFang SC",Arial,sans-serif}
+
+/* Give each case-study slide a quiet frame so the deck does not run edge to edge. */
+.slides{padding-inline:clamp(16px,4vw,64px)}
