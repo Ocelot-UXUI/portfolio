@@ -1,0 +1,73 @@
+/* Shared responsive presentation shell for image-based case-study decks. */
+.case-deck-page {
+  --case-page-bg: #e8e8e5;
+  --case-deck-max-width: 1600px;
+  --case-page-gutter: clamp(28px, 5vw, 112px);
+  --case-slide-gap: clamp(24px, 3vw, 48px);
+  --case-slide-radius: clamp(10px, 1vw, 16px);
+  background: var(--case-page-bg);
+}
+
+.case-deck-page main {
+  width: 100%;
+  padding: clamp(76px, 6vw, 112px) var(--case-page-gutter) clamp(88px, 8vw, 144px);
+  background:
+    radial-gradient(circle at 50% 0, rgb(255 255 255 / .62), transparent 38%),
+    var(--case-page-bg);
+}
+
+.case-deck-page .slides {
+  display: grid;
+  width: min(100%, var(--case-deck-max-width));
+  max-width: var(--case-deck-max-width);
+  margin: 0 auto;
+  padding: 0;
+  gap: var(--case-slide-gap);
+  background: transparent;
+}
+
+.case-deck-page .slides > img,
+.case-deck-page .slides > .case-slide-frame {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgb(20 23 32 / .1);
+  border-radius: var(--case-slide-radius);
+  background: #fff;
+  box-shadow: 0 18px 50px rgb(20 23 32 / .11);
+}
+
+.case-deck-page .slides > img,
+.case-deck-page .case-slide-frame > img {
+  height: auto;
+}
+
+.case-deck-page .case-slide-frame > img {
+  display: block;
+  width: 100%;
+  margin: 0;
+}
+
+.case-deck-page footer {
+  background: #080910;
+}
+
+@media (max-width: 700px) {
+  .case-deck-page {
+    --case-page-gutter: 12px;
+    --case-slide-gap: 14px;
+    --case-slide-radius: 8px;
+  }
+
+  .case-deck-page main {
+    padding-top: 64px;
+    padding-bottom: 56px;
+  }
+
+  .case-deck-page .slides > img,
+  .case-deck-page .slides > .case-slide-frame {
+    box-shadow: 0 8px 24px rgb(20 23 32 / .1);
+  }
+}
