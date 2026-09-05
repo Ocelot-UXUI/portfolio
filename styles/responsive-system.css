@@ -254,6 +254,18 @@ body {
   line-height: 1.45;
 }
 
+.prototype-homepage .about-contact-group {
+  align-items: center;
+}
+
+.prototype-homepage .about-contact {
+  margin-bottom: 0;
+}
+
+.prototype-homepage .about-contact-popover {
+  margin-bottom: 0;
+}
+
 /* Desktop hero leaves a responsive preview of About instead of consuming the
    entire viewport. The inner stack compacts with short screens, so the reveal
    comes from layout reflow rather than clipping the project artwork. */
