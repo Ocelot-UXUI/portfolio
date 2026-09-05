@@ -18,6 +18,8 @@
   --fold-about-contact: clamp(13px, .9vw, 16px);
   --fold-about-top: clamp(38px, 4vh, 52px);
   --fold-project-inline: clamp(48px, 7vw, 132px);
+  --hero-card-frame-width: 3px;
+  --hero-card-frame-radius: 16px;
 }
 
 .prototype-homepage .hero.hero-stack-gallery {
@@ -63,54 +65,78 @@
 
 .prototype-homepage .hero-project-stack {
   width: var(--fold-card-stack);
-  transform: none;
+  transform: translateX(6.5%);
 }
 
-/* One ordered, proportional card fan: Remi → AI workflow → CNAP → XHS → Reading. */
+/* The year mark is navigational metadata, not a second headline. */
+.prototype-homepage .nav-logo {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: .04em;
+}
+
+/* Preserve the original fan geometry while using the new project order. */
 .prototype-homepage .hero-stack-remi {
-  --hero-card-rotate: -7deg;
-  --hero-card-y: clamp(62px, 7vh, 78px);
+  --hero-card-rotate: -8.5deg;
   z-index: 0;
-  left: -2%;
-  width: 36%;
+  left: -9%;
+  width: 42%;
+  transform: translateY(clamp(64px, 8vh, 92px)) rotate(var(--hero-card-rotate));
 }
 
 .prototype-homepage .hero-stack-dodo {
-  --hero-card-rotate: -3.5deg;
-  --hero-card-y: clamp(44px, 5vh, 58px);
+  --hero-card-rotate: -5.5deg;
   z-index: 1;
-  left: 19%;
-  width: 39%;
+  left: 6%;
+  width: 44%;
+  transform: translateY(clamp(42px, 5vh, 60px)) rotate(var(--hero-card-rotate));
 }
 
 .prototype-homepage .hero-stack-cnap {
-  --hero-card-rotate: -.6deg;
-  --hero-card-y: clamp(26px, 3vh, 38px);
+  --hero-card-rotate: -2.5deg;
   z-index: 2;
-  left: 41%;
-  width: 44%;
+  left: 30%;
+  width: 48%;
+  transform: translateY(clamp(42px, 5vh, 60px)) rotate(var(--hero-card-rotate));
 }
 
 .prototype-homepage .hero-stack-xhs {
-  --hero-card-rotate: 3deg;
-  --hero-card-y: clamp(42px, 5vh, 56px);
-  left: 71%;
-  width: 15%;
+  --hero-card-rotate: 2.5deg;
+  left: 70%;
+  width: 14%;
+  transform: translateY(clamp(42px, 5vh, 60px)) rotate(var(--hero-card-rotate));
 }
 
 .prototype-homepage .hero-stack-reading {
-  --hero-card-rotate: 6deg;
-  --hero-card-y: clamp(60px, 7vh, 76px);
-  left: 84%;
-  width: 15%;
+  --hero-card-rotate: 5.5deg;
+  left: 82%;
+  width: 14%;
+  transform: translateY(clamp(42px, 5vh, 60px)) rotate(var(--hero-card-rotate));
 }
 
-.prototype-homepage .hero-stack-remi,
-.prototype-homepage .hero-stack-dodo,
-.prototype-homepage .hero-stack-cnap,
+/* Use one CNAP-style outer frame for the panel cards in the hero stack. */
+.prototype-homepage .hero-project-stack-card {
+  border: var(--hero-card-frame-width) solid #090909;
+  border-radius: var(--hero-card-frame-radius);
+  background: #090909;
+}
+
+.prototype-homepage .hero-project-stack-card > img {
+  border-radius: calc(var(--hero-card-frame-radius) - var(--hero-card-frame-width));
+}
+
+/* The two phone projects are transparent device artwork, not framed panels.
+   Keep their original silhouette and remove only the shared outer frame. */
 .prototype-homepage .hero-stack-xhs,
 .prototype-homepage .hero-stack-reading {
-  transform: translateY(var(--hero-card-y)) rotate(var(--hero-card-rotate));
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.prototype-homepage .hero-stack-xhs > img,
+.prototype-homepage .hero-stack-reading > img {
+  border-radius: 0;
 }
 
 .prototype-homepage .about {
@@ -176,7 +202,19 @@
 
   .prototype-homepage .hero-project-stack-card:hover,
   .prototype-homepage .hero-project-stack-card:focus-visible {
-    transform: translate3d(0, calc(var(--hero-card-y) - 18px), 0) scale(1.06) rotate(var(--hero-card-rotate));
+    transform: translate3d(0, clamp(-28px, -3vh, -20px), 0) scale(1.06) rotate(var(--hero-card-rotate));
+  }
+
+  .prototype-homepage .hero-stack-cnap:hover,
+  .prototype-homepage .hero-stack-cnap:focus-visible {
+    transform: translate3d(-100px, clamp(-28px, -3vh, -20px), 84px) scale(1.035) rotate(var(--hero-card-rotate));
+  }
+
+  /* When the left Remi card opens, move it outward rather than over the
+     workflow card. This keeps AI 设计工作流的 hit area immediately reachable. */
+  .prototype-homepage .hero-stack-remi:hover,
+  .prototype-homepage .hero-stack-remi:focus-visible {
+    transform: translate3d(clamp(-128px, -8vw, -76px), clamp(-28px, -3vh, -20px), 84px) scale(1.035) rotate(var(--hero-card-rotate));
   }
 
   .prototype-homepage .showcase-heading,
@@ -204,11 +242,13 @@
     margin-bottom: clamp(32px, 5vh, 44px);
   }
 
-  .prototype-homepage .hero-stack-remi { --hero-card-y: 8px; }
-  .prototype-homepage .hero-stack-dodo { --hero-card-y: -6px; }
-  .prototype-homepage .hero-stack-cnap { --hero-card-y: -18px; }
-  .prototype-homepage .hero-stack-xhs { --hero-card-y: -6px; }
-  .prototype-homepage .hero-stack-reading { --hero-card-y: 8px; }
+  .prototype-homepage .hero-stack-remi,
+  .prototype-homepage .hero-stack-dodo,
+  .prototype-homepage .hero-stack-cnap,
+  .prototype-homepage .hero-stack-xhs,
+  .prototype-homepage .hero-stack-reading {
+    transform: translateY(-16px) rotate(var(--hero-card-rotate));
+  }
 }
 
 @media (min-width: 701px) and (max-height: 700px) {
@@ -232,11 +272,13 @@
     margin-bottom: 16px;
   }
 
-  .prototype-homepage .hero-stack-remi { --hero-card-y: 42px; }
-  .prototype-homepage .hero-stack-dodo { --hero-card-y: 28px; }
-  .prototype-homepage .hero-stack-cnap { --hero-card-y: 16px; }
-  .prototype-homepage .hero-stack-xhs { --hero-card-y: 28px; }
-  .prototype-homepage .hero-stack-reading { --hero-card-y: 42px; }
+  .prototype-homepage .hero-stack-remi,
+  .prototype-homepage .hero-stack-dodo,
+  .prototype-homepage .hero-stack-cnap,
+  .prototype-homepage .hero-stack-xhs,
+  .prototype-homepage .hero-stack-reading {
+    transform: translateY(32px) rotate(var(--hero-card-rotate));
+  }
 }
 
 @media (min-width: 701px) and (max-width: 1100px) {
@@ -272,6 +314,18 @@
 
   .prototype-homepage .hero-project-stack {
     transform: none;
+  }
+
+  .prototype-homepage .hero-stack-remi {
+    left: -9%;
+  }
+
+  .prototype-homepage .hero-stack-dodo {
+    left: 4%;
+  }
+
+  .prototype-homepage .hero-stack-cnap {
+    left: 26%;
   }
 
   .prototype-homepage .about-contact-group {
@@ -325,36 +379,32 @@
   .prototype-homepage .hero-project-stack {
     height: clamp(210px, 57vw, 255px);
     min-height: 210px;
+    transform: none;
   }
 
   .prototype-homepage .hero-stack-remi {
-    --hero-card-y: 44px;
-    left: -2%;
-    width: 38%;
-  }
-
-  .prototype-homepage .hero-stack-dodo {
-    --hero-card-y: 30px;
-    left: 20%;
+    left: -6%;
     width: 40%;
   }
 
+  .prototype-homepage .hero-stack-dodo {
+    left: 7%;
+    width: 42%;
+  }
+
   .prototype-homepage .hero-stack-cnap {
-    --hero-card-y: 18px;
-    left: 43%;
-    width: 43%;
+    left: 30%;
+    width: 46%;
   }
 
   .prototype-homepage .hero-stack-xhs {
-    --hero-card-y: 30px;
-    left: 70%;
-    width: 20%;
+    left: 72%;
+    width: 21%;
   }
 
   .prototype-homepage .hero-stack-reading {
-    --hero-card-y: 44px;
-    left: 84%;
-    width: 20%;
+    left: 86%;
+    width: 21%;
   }
 
   .prototype-homepage .about-heading {
