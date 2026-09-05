@@ -226,6 +226,14 @@ body {
   width: 100%;
 }
 
+/* The rotated cards extend beyond their nominal box. Limit the desktop stack
+   by viewport width so that extension stays below the headline safe area. */
+@media (min-width: 701px) {
+  .prototype-homepage .hero-project-stack {
+    width: min(100%, clamp(980px, 78vw, 1500px));
+  }
+}
+
 /* About identity follows a clear two-line lockup: name + signature, then the
    education and internship summary. */
 .prototype-homepage .about-identity {
@@ -281,7 +289,7 @@ body {
   .prototype-homepage .hero-stack-remi,
   .prototype-homepage .hero-stack-xhs,
   .prototype-homepage .hero-stack-reading {
-    transform: translateY(-24px) rotate(var(--hero-card-rotate));
+    transform: translateY(-12px) rotate(var(--hero-card-rotate));
   }
 
   .prototype-homepage .about {
@@ -351,6 +359,14 @@ body {
     min-height: 170px;
   }
 
+  .prototype-homepage .hero-stack-dodo,
+  .prototype-homepage .hero-stack-cnap,
+  .prototype-homepage .hero-stack-remi,
+  .prototype-homepage .hero-stack-xhs,
+  .prototype-homepage .hero-stack-reading {
+    transform: translateY(48px) rotate(var(--hero-card-rotate));
+  }
+
   .prototype-homepage .about {
     padding-top: 28px;
   }
@@ -388,6 +404,20 @@ body {
   .prototype-homepage .hero-project-stack {
     width: min(100%, 960px);
     transform: none;
+  }
+
+  .prototype-homepage .hero-stack-dodo,
+  .prototype-homepage .hero-stack-cnap,
+  .prototype-homepage .hero-stack-remi,
+  .prototype-homepage .hero-stack-xhs,
+  .prototype-homepage .hero-stack-reading {
+    transform: translateY(-12px) rotate(var(--hero-card-rotate));
+  }
+
+  @media (max-height: 700px) {
+    .prototype-homepage .hero-project-stack {
+      width: min(100%, 860px);
+    }
   }
 
   .prototype-homepage .about-heading {
@@ -474,6 +504,14 @@ body {
     width: min(100%, 430px);
     height: clamp(220px, 60vw, 270px);
     min-height: 220px;
+  }
+
+  .prototype-homepage .hero-stack-dodo,
+  .prototype-homepage .hero-stack-cnap,
+  .prototype-homepage .hero-stack-remi,
+  .prototype-homepage .hero-stack-xhs,
+  .prototype-homepage .hero-stack-reading {
+    transform: translateY(-24px) rotate(var(--hero-card-rotate));
   }
 
   .prototype-homepage .about,
