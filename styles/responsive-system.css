@@ -2,8 +2,9 @@
  * Portfolio-wide responsive system.
  *
  * This file is intentionally loaded after page-level styles. It provides one
- * predictable sizing and breakpoint layer for the homepage, project decks,
- * deliverables and embedded demos without changing their visual language.
+ * predictable sizing and breakpoint layer for long-form homepage content,
+ * project decks, deliverables and embedded demos. Hero/About fold composition
+ * lives in homepage-fold.css so it has one dedicated source of truth.
  */
 
 :root {
@@ -206,7 +207,7 @@ body {
   }
 }
 
-/* Homepage: fluid canvas, tablet layout and single-column mobile flow. */
+/* Homepage content below the fold: fluid canvas and responsive project flow. */
 .prototype-homepage .page,
 .prototype-homepage main,
 .prototype-homepage .hero,
@@ -226,214 +227,7 @@ body {
   width: 100%;
 }
 
-/* The rotated cards extend beyond their nominal box. Limit the desktop stack
-   by viewport width so that extension stays below the headline safe area. */
-@media (min-width: 701px) {
-  .prototype-homepage .hero-project-stack {
-    width: min(100%, clamp(980px, 78vw, 1500px));
-  }
-}
-
-/* About identity follows a clear two-line lockup: name + signature, then the
-   education and internship summary. */
-.prototype-homepage .about-identity {
-  min-width: 0;
-  flex: 1 1 auto;
-}
-
-.prototype-homepage .about-name-row {
-  align-items: center;
-  gap: clamp(20px, 2.4vw, 42px);
-}
-
-.prototype-homepage .about-heading h2 {
-  font-size: clamp(52px, 5.2vw, 82px);
-  line-height: 1;
-}
-
-.prototype-homepage .about-signature {
-  width: clamp(180px, 19vw, 300px);
-  transform: none;
-}
-
-.prototype-homepage .about-name-highlights {
-  margin: clamp(14px, 1.5vw, 22px) 0 0;
-  font-size: clamp(16px, 1.45vw, 23px);
-  line-height: 1.45;
-}
-
-.prototype-homepage .about-contact-group {
-  align-items: center;
-}
-
-.prototype-homepage .about-contact {
-  margin-bottom: 0;
-}
-
-.prototype-homepage .about-contact-popover {
-  margin-bottom: 0;
-}
-
-/* Desktop hero leaves a responsive preview of About instead of consuming the
-   entire viewport. The inner stack compacts with short screens, so the reveal
-   comes from layout reflow rather than clipping the project artwork. */
-@media (min-width: 701px) {
-  .prototype-homepage .hero.hero-stack-gallery {
-    min-height: clamp(560px, 70svh, 940px);
-  }
-}
-
-@media (min-width: 701px) and (max-height: 1200px) {
-  .prototype-homepage .hero-stack-dodo,
-  .prototype-homepage .hero-stack-cnap,
-  .prototype-homepage .hero-stack-remi,
-  .prototype-homepage .hero-stack-xhs,
-  .prototype-homepage .hero-stack-reading {
-    transform: translateY(-12px) rotate(var(--hero-card-rotate));
-  }
-
-  .prototype-homepage .about {
-    padding-top: clamp(44px, 5vh, 60px);
-  }
-
-  .prototype-homepage .about-resume {
-    margin-top: clamp(44px, 5vh, 60px);
-  }
-}
-
-@media (min-width: 701px) and (max-height: 900px) {
-  .prototype-homepage .hero.hero-stack-gallery {
-    padding-top: clamp(28px, 4vh, 40px);
-    padding-bottom: 16px;
-  }
-
-  .prototype-homepage .hero-stack-top {
-    min-height: 138px;
-    margin-top: clamp(20px, 4vh, 32px);
-    margin-bottom: clamp(16px, 3vh, 24px);
-  }
-
-  .prototype-homepage .hero-project-stack {
-    height: min(34svh, 280px);
-    min-height: 210px;
-    margin-bottom: 0;
-  }
-
-  .prototype-homepage .about {
-    padding-top: clamp(32px, 4.5vh, 40px);
-  }
-
-  .prototype-homepage .about-resume {
-    margin-top: clamp(32px, 5vh, 44px);
-  }
-
-  .prototype-homepage .about-heading h2 {
-    font-size: clamp(42px, 4vw, 58px);
-  }
-
-  .prototype-homepage .about-signature {
-    width: clamp(150px, 15vw, 220px);
-  }
-
-  .prototype-homepage .about-name-highlights {
-    margin-top: 10px;
-    font-size: clamp(15px, 1.25vw, 18px);
-  }
-}
-
-@media (min-width: 701px) and (max-height: 700px) {
-  .prototype-homepage .hero.hero-stack-gallery {
-    min-height: calc(100svh - 160px);
-    padding-top: 22px;
-    padding-bottom: 12px;
-  }
-
-  .prototype-homepage .hero-stack-top {
-    min-height: 116px;
-    margin-top: 14px;
-    margin-bottom: 12px;
-  }
-
-  .prototype-homepage .hero-project-stack {
-    height: min(32svh, 210px);
-    min-height: 170px;
-  }
-
-  .prototype-homepage .hero-stack-dodo,
-  .prototype-homepage .hero-stack-cnap,
-  .prototype-homepage .hero-stack-remi,
-  .prototype-homepage .hero-stack-xhs,
-  .prototype-homepage .hero-stack-reading {
-    transform: translateY(48px) rotate(var(--hero-card-rotate));
-  }
-
-  .prototype-homepage .about {
-    padding-top: 28px;
-  }
-
-  .prototype-homepage .about-resume {
-    margin-top: 28px;
-  }
-}
-
 @media (min-width: 701px) and (max-width: 1100px) {
-  .prototype-homepage .hero.hero-stack-gallery {
-    min-height: clamp(420px, calc(100svh - 210px), 640px);
-    padding-inline: var(--responsive-gutter);
-  }
-
-  .prototype-homepage .hero-stack-top {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(150px, 26vw);
-    align-items: start;
-    gap: clamp(24px, 5vw, 64px);
-  }
-
-  .prototype-homepage .hero-stack-copy {
-    text-align: left;
-  }
-
-  .prototype-homepage .hero-stack-meta {
-    position: static;
-    justify-self: end;
-    width: min(100%, 240px);
-    opacity: 1;
-    transform: none;
-  }
-
-  .prototype-homepage .hero-project-stack {
-    width: min(100%, 960px);
-    transform: none;
-  }
-
-  .prototype-homepage .hero-stack-dodo,
-  .prototype-homepage .hero-stack-cnap,
-  .prototype-homepage .hero-stack-remi,
-  .prototype-homepage .hero-stack-xhs,
-  .prototype-homepage .hero-stack-reading {
-    transform: translateY(-12px) rotate(var(--hero-card-rotate));
-  }
-
-  @media (max-height: 700px) {
-    .prototype-homepage .hero-project-stack {
-      width: min(100%, 860px);
-    }
-  }
-
-  .prototype-homepage .about-heading {
-    align-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  .prototype-homepage .about-contact-group {
-    width: 100%;
-    justify-content: flex-start;
-  }
-
-  .prototype-homepage .about-contact {
-    text-align: left;
-  }
-
   .prototype-homepage .about-strengths {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -482,66 +276,11 @@ body {
     clip-path: inset(50%);
   }
 
-  .prototype-homepage .hero.hero-stack-gallery {
-    min-height: auto;
-    padding: 64px 14px 24px;
-  }
-
-  .prototype-homepage .hero-stack-top {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: start;
-    gap: 16px;
-    margin-top: 28px;
-    margin-bottom: 22px;
-  }
-
-  .prototype-homepage .hero-stack-copy h1 {
-    font-size: clamp(25px, 7.6vw, 32px);
-  }
-
-  .prototype-homepage .hero-project-stack {
-    width: min(100%, 430px);
-    height: clamp(220px, 60vw, 270px);
-    min-height: 220px;
-  }
-
-  .prototype-homepage .hero-stack-dodo,
-  .prototype-homepage .hero-stack-cnap,
-  .prototype-homepage .hero-stack-remi,
-  .prototype-homepage .hero-stack-xhs,
-  .prototype-homepage .hero-stack-reading {
-    transform: translateY(-24px) rotate(var(--hero-card-rotate));
-  }
-
-  .prototype-homepage .about,
   .prototype-homepage .portfolio-index,
   .prototype-homepage .showcase-heading,
   .prototype-homepage .project-showcase,
   .prototype-homepage .project-showcase:nth-of-type(even) {
     padding-inline: var(--responsive-gutter);
-  }
-
-  .prototype-homepage .about {
-    padding-top: 52px;
-    padding-bottom: 80px;
-  }
-
-  .prototype-homepage .about-name-row {
-    gap: 14px;
-  }
-
-  .prototype-homepage .about-heading h2 {
-    font-size: clamp(38px, 12vw, 52px);
-  }
-
-  .prototype-homepage .about-signature {
-    width: clamp(112px, 31vw, 154px);
-  }
-
-  .prototype-homepage .about-name-highlights {
-    margin-top: 12px;
-    font-size: clamp(14px, 4.1vw, 16px);
   }
 
   .prototype-homepage .about-resume-projects {
@@ -630,22 +369,6 @@ body {
 @media (max-width: 420px) {
   .prototype-homepage .nav-links {
     display: none;
-  }
-
-  .prototype-homepage .hero-stack-top {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .prototype-homepage .hero-stack-meta {
-    justify-self: start;
-  }
-
-  .prototype-homepage .about-contact a {
-    font-size: 13px;
-  }
-
-  .prototype-homepage .about-name-highlights {
-    font-size: 13px;
   }
 }
 
