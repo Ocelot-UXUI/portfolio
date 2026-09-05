@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="郭昱成作品集首页排版方向稿" />
+    <title>首页排版方向稿｜郭昱成作品集</title>
+    <style>
+      :root {
+        --canvas: #050506;
+        --ink: #faf9f7;
+        --muted: #a9a5a0;
+        --quiet: #74706b;
+        --orange: #ef6e14;
+        --line: rgb(255 255 255 / 14%);
+        --gutter: clamp(28px, 5vw, 96px);
+      }
+
+      * { box-sizing: border-box; }
+      html { background: var(--canvas); }
+      body {
+        min-width: 320px;
+        margin: 0;
+        background: var(--canvas);
+        color: var(--ink);
+        font-family: "Space Grotesk", "Noto Sans SC", "PingFang SC", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      a { color: inherit; }
+
+      .proposal-nav {
+        position: relative;
+        z-index: 5;
+        display: grid;
+        grid-template-columns: minmax(170px, 1fr) auto minmax(170px, 1fr);
+        align-items: center;
+        min-height: 76px;
+        padding: 0 var(--gutter);
+        border-bottom: 1px solid var(--line);
+        background: rgb(5 5 6 / 56%);
+        backdrop-filter: blur(7px) saturate(110%);
+        -webkit-backdrop-filter: blur(7px) saturate(110%);
+      }
+
+      .proposal-index {
+        justify-self: start;
+        margin: 0;
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: .16em;
+      }
+
+      .proposal-nav-links {
+        display: flex;
+        gap: 32px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .proposal-nav-links a {
+        position: relative;
+        color: var(--ink);
+        font-size: 15px;
+        text-decoration: none;
+      }
+
+      .proposal-nav-links a.is-active::after {
+        position: absolute;
+        right: 0;
+        bottom: -27px;
+        left: 0;
+        height: 1px;
+        background: var(--ink);
+        content: "";
+      }
+
+      .proposal-contact {
+        justify-self: end;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 18px;
+        border: 1px solid rgb(255 255 255 / 72%);
+        border-radius: 999px;
+        color: var(--ink);
+        font-size: 14px;
+        font-weight: 500;
+        text-decoration: none;
+      }
+
+      .proposal-contact svg { width: 16px; height: 16px; }
+
+      .proposal-hero {
+        position: relative;
+        display: grid;
+        grid-template-rows: auto minmax(280px, 1fr) auto;
+        gap: clamp(10px, 1.35vw, 24px);
+        min-height: 760px;
+        height: calc(100svh - 76px);
+        overflow: hidden;
+        padding: clamp(30px, 4vw, 62px) var(--gutter) clamp(34px, 4vw, 68px);
+        background:
+          linear-gradient(180deg, rgb(5 5 6 / 10%) 0%, rgb(5 5 6 / 6%) 42%, var(--canvas) 94%),
+          linear-gradient(90deg, rgb(5 5 6 / 64%) 0%, transparent 28%, transparent 72%, rgb(5 5 6 / 64%) 100%),
+          url("../assets/hero-background-lines.webp") center 32% / cover no-repeat;
+      }
+
+      .proposal-kicker {
+        position: relative;
+        z-index: 2;
+        display: grid;
+        gap: 13px;
+        max-width: 1120px;
+      }
+
+      .proposal-kicker h1 {
+        margin: 0;
+        font-size: clamp(36px, 4.05vw, 74px);
+        font-weight: 600;
+        letter-spacing: -.05em;
+        line-height: 1.08;
+        white-space: nowrap;
+      }
+
+      .proposal-kicker img {
+        display: block;
+        width: clamp(172px, 16.5vw, 294px);
+        height: auto;
+        object-fit: contain;
+      }
+
+      .proposal-stage {
+        position: relative;
+        z-index: 1;
+        min-height: clamp(280px, 35vw, 610px);
+        margin: 0 calc(var(--gutter) * -1);
+        overflow: hidden;
+      }
+
+      .project-card {
+        position: absolute;
+        display: block;
+        overflow: hidden;
+        border: 3px solid #090909;
+        border-radius: 16px;
+        background: #090909;
+        box-shadow: 0 24px 54px rgb(0 0 0 / 30%);
+        transform-origin: center bottom;
+      }
+
+      .project-card img { display: block; width: 100%; height: auto; border-radius: 11px; }
+      .project-card.remi { z-index: 1; bottom: 6%; left: -4%; width: 31%; transform: rotate(-8deg); }
+      .project-card.workflow { z-index: 2; bottom: 7%; left: 19%; width: 34%; transform: rotate(-4.5deg); }
+      .project-card.cnap { z-index: 3; bottom: 8%; left: 43%; width: 39%; transform: rotate(-1.6deg); }
+      .project-card.xhs { z-index: 4; bottom: 10%; left: 74%; width: 12%; transform: rotate(2.6deg); }
+      .project-card.reading { z-index: 3; bottom: 9%; left: 84%; width: 12%; transform: rotate(5deg); }
+      .project-card.phone { border: 0; border-radius: 0; background: transparent; box-shadow: none; }
+      .project-card.phone img { border-radius: 0; }
+
+      .proposal-about {
+        position: relative;
+        z-index: 2;
+        display: grid;
+        grid-template-columns: minmax(0, 1.35fr) minmax(260px, .65fr);
+        gap: clamp(34px, 8vw, 150px);
+        align-items: end;
+        max-width: 1920px;
+        margin: 0 auto;
+        padding-top: clamp(16px, 1.5vw, 26px);
+        border-top: 1px solid rgb(255 255 255 / 12%);
+      }
+
+      .proposal-identity { display: grid; gap: 16px; }
+      .proposal-name-row { display: flex; align-items: baseline; gap: clamp(20px, 2vw, 38px); }
+
+      .proposal-name-row h2 {
+        margin: 0;
+        font-size: clamp(50px, 5.2vw, 94px);
+        font-weight: 600;
+        letter-spacing: -.06em;
+        line-height: .95;
+      }
+
+      .proposal-name-row img {
+        width: clamp(170px, 15vw, 292px);
+        height: auto;
+        object-fit: contain;
+      }
+
+      .proposal-role {
+        margin: 0;
+        color: var(--muted);
+        font-size: clamp(15px, 1.15vw, 20px);
+        letter-spacing: -.01em;
+      }
+
+      .proposal-role span { padding: 0 10px; color: var(--quiet); }
+
+      .proposal-details {
+        justify-self: end;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 18px;
+        align-items: center;
+        color: var(--muted);
+        font-size: clamp(14px, 1vw, 17px);
+        line-height: 1.7;
+        text-align: right;
+      }
+
+      .proposal-details a { color: inherit; text-decoration: none; }
+
+      .proposal-wechat {
+        display: grid;
+        width: 48px;
+        height: 48px;
+        place-items: center;
+        border: 1px solid rgb(255 255 255 / 70%);
+        border-radius: 50%;
+      }
+
+      .proposal-wechat svg { width: 19px; height: 19px; }
+
+      .proposal-note {
+        max-width: 1920px;
+        margin: 0 auto;
+        padding: 28px var(--gutter) 48px;
+        color: var(--quiet);
+        font-size: 12px;
+        letter-spacing: .04em;
+      }
+
+      .proposal-note b { color: var(--orange); font-weight: 600; }
+
+      @media (max-width: 900px) {
+        .proposal-nav { grid-template-columns: 1fr auto; min-height: 62px; }
+        .proposal-nav-links { display: none; }
+        .proposal-contact { padding: 8px 14px; font-size: 13px; }
+        .proposal-hero { min-height: 780px; height: calc(100svh - 62px); grid-template-rows: auto minmax(250px, 1fr) auto; }
+        .proposal-kicker h1 { white-space: normal; }
+        .proposal-stage { min-height: clamp(250px, 52vw, 420px); }
+        .project-card.remi { left: -14%; width: 41%; }
+        .project-card.workflow { left: 13%; width: 43%; }
+        .project-card.cnap { left: 43%; width: 46%; }
+        .project-card.xhs { left: 76%; width: 15%; }
+        .project-card.reading { left: 88%; width: 15%; }
+        .proposal-about { grid-template-columns: 1fr; gap: 28px; }
+        .proposal-details { justify-self: start; text-align: left; }
+      }
+
+      @media (max-width: 580px) {
+        :root { --gutter: 22px; }
+        .proposal-index { font-size: 10px; }
+        .proposal-contact span { display: none; }
+        .proposal-contact { padding: 10px; }
+        .proposal-kicker { gap: 10px; }
+        .proposal-kicker h1 { font-size: clamp(31px, 9vw, 44px); }
+        .proposal-kicker img { width: 160px; }
+        .proposal-hero { min-height: 690px; height: auto; padding-top: 28px; }
+        .proposal-stage { min-height: 250px; margin-top: 18px; }
+        .project-card.remi { bottom: 14%; left: -24%; width: 52%; }
+        .project-card.workflow { bottom: 10%; left: 9%; width: 50%; }
+        .project-card.cnap { bottom: 8%; left: 46%; width: 55%; }
+        .project-card.xhs { bottom: 9%; left: 80%; width: 19%; }
+        .project-card.reading { display: none; }
+        .proposal-name-row { gap: 16px; }
+        .proposal-name-row h2 { font-size: clamp(46px, 14vw, 68px); }
+        .proposal-name-row img { width: 150px; }
+        .proposal-role { font-size: 15px; line-height: 1.7; }
+        .proposal-role span { padding: 0 5px; }
+        .proposal-details { grid-template-columns: 1fr auto; gap: 12px; font-size: 13px; }
+        .proposal-wechat { width: 42px; height: 42px; }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="proposal-nav" aria-label="首页导航">
+      <p class="proposal-index">PORTFOLIO · 2026</p>
+      <ul class="proposal-nav-links">
+        <li><a class="is-active" href="#about">关于我</a></li>
+        <li><a href="#projects">项目</a></li>
+      </ul>
+      <a class="proposal-contact" href="mailto:1004080451@qq.com"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7.2A2.2 2.2 0 0 1 6.2 5h11.6A2.2 2.2 0 0 1 20 7.2v9.6a2.2 2.2 0 0 1-2.2 2.2H6.2A2.2 2.2 0 0 1 4 16.8V7.2Z" stroke="currentColor" stroke-width="1.6"/><path d="m5 7 7 5.1L19 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Let's talk</span></a>
+    </nav>
+
+    <main>
+      <section class="proposal-hero" id="home" aria-labelledby="proposal-title">
+        <div class="proposal-kicker">
+          <h1 id="proposal-title">有 AI 工作流，懂用户，能推动事情发生</h1>
+          <img src="../assets/hero-signature-ai-native-orange.png" alt="AI Native" />
+        </div>
+
+        <div class="proposal-stage" id="projects" aria-label="项目预览">
+          <a class="project-card remi" href="../pages/case.html"><img src="../assets/hero-devices/image_2.webp" alt="Remi 主动式 AI 记忆助手" /></a>
+          <a class="project-card workflow" href="../pages/dodo.html"><img src="../assets/dodo-product-assets-cropped.png" alt="AI 设计工作流实践与复盘" /></a>
+          <a class="project-card cnap" href="../pages/cnap-case.html"><img src="../assets/hero-projects/cnap-desktop.webp" alt="CNAP 云原生工作负载管理" /></a>
+          <a class="project-card phone xhs" href="../pages/xiaohongshu.html"><img src="../assets/hero-projects/image_1.webp" alt="小红书本地生活体验升级" /></a>
+          <a class="project-card phone reading" href="../pages/skip-read.html"><img src="../assets/hero-projects/image_3.webp" alt="职场人阅读学习 APP" /></a>
+        </div>
+
+        <section class="proposal-about" id="about" aria-labelledby="about-name">
+          <div class="proposal-identity">
+            <div class="proposal-name-row">
+              <h2 id="about-name">郭昱成</h2>
+              <img src="../assets/about-me-signature-clean.png" alt="About me" />
+            </div>
+            <p class="proposal-role">西南交通大学 <span>·</span> 百度 / 商汤科技 UX 实习</p>
+          </div>
+          <div class="proposal-details">
+            <div><a href="mailto:1004080451@qq.com">1004080451@qq.com</a><br /><a href="tel:13343215048">13343215048</a></div>
+            <span class="proposal-wechat" aria-label="微信联系"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8.4 5.7C4.8 5.7 2 8.1 2 11.1c0 1 .3 1.9.9 2.7l-.5 2.7 2.7-1.1c1 .5 2.1.8 3.3.8.2 0 .5 0 .7-.1.8 1.8 2.9 3.1 5.3 3.1.9 0 1.8-.2 2.6-.6l2.1 1 .2-2.1c.5-.6.7-1.4.7-2.1 0-2.2-2.2-4-4.9-4-.4 0-.8 0-1.1.1C12.8 7.9 10.9 5.7 8.4 5.7Zm-2 3.5c.5 0 .9.4.9.9s-.4.9-.9.9-.9-.4-.9-.9.4-.9.9-.9Zm4 0c.5 0 .9.4.9.9s-.4.9-.9.9-.9-.4-.9-.9.4-.9.9-.9Zm4.7 4.5c.4 0 .8.3.8.8s-.4.8-.8.8-.8-.3-.8-.8.4-.8.8-.8Zm3.2 0c.4 0 .8.3.8.8s-.4.8-.8.8-.8-.3-.8-.8.4-.8.8-.8Z" /></svg></span>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <p class="proposal-note"><b>方向稿 A</b>：保留项目卡片堆叠；「郭昱成」及学校／实习经历固定留在首页首屏底部，顶部只承担导航。</p>
+  </body>
+</html>
