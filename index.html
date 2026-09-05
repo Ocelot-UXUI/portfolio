@@ -633,18 +633,18 @@
         position: relative;
         z-index: 1;
         display: grid;
-        grid-template-columns: minmax(130px, .34fr) minmax(0, 1fr);
-        gap: clamp(36px, 7vw, 112px);
-        padding-top: 34px;
+        grid-template-columns: minmax(190px, .34fr) minmax(0, 1fr);
+        gap: clamp(44px, 6vw, 96px);
+        padding-top: 40px;
         border-top: 1px solid rgba(255, 255, 255, .16);
       }
 
       .prototype-homepage .portfolio-index-title {
         margin: 0;
-        color: var(--ink-subtle);
-        font-size: clamp(16px, 1.2vw, 19px);
-        font-weight: 400;
-        line-height: 1.55;
+        color: var(--ink-muted);
+        font-size: clamp(21px, 1.55vw, 28px);
+        font-weight: 500;
+        line-height: 1.4;
       }
 
       .prototype-homepage .portfolio-index-list {
@@ -688,11 +688,11 @@
 
       .prototype-homepage .portfolio-index-link {
         display: grid;
-        grid-template-columns: minmax(190px, .46fr) minmax(0, 1fr) 20px;
+        grid-template-columns: minmax(240px, .48fr) minmax(0, 1fr) 24px;
         align-items: baseline;
-        gap: 24px;
-        min-height: 52px;
-        padding: 14px 0;
+        gap: 28px;
+        min-height: 70px;
+        padding: 20px 0;
         color: inherit;
         text-decoration: none;
       }
@@ -724,23 +724,23 @@
 
       .prototype-homepage .portfolio-index-name {
         color: var(--ink);
-        font-size: clamp(17px, 1.3vw, 21px);
-        font-weight: 500;
-        line-height: 1.55;
+        font-size: clamp(20px, 1.55vw, 26px);
+        font-weight: 600;
+        line-height: 1.45;
         transition: color .22s ease;
       }
 
       .prototype-homepage .portfolio-index-description {
         min-width: 0;
         color: var(--ink-subtle);
-        font-size: clamp(15px, 1.08vw, 18px);
-        line-height: 1.55;
+        font-size: clamp(16px, 1.28vw, 21px);
+        line-height: 1.6;
         transition: color .22s ease;
       }
 
       .prototype-homepage .portfolio-index-arrow {
         color: var(--ink-muted);
-        font-size: 17px;
+        font-size: 22px;
         line-height: 1;
         text-align: right;
         transition: color .22s ease, transform .26s cubic-bezier(.22, 1, .36, 1);
@@ -2599,23 +2599,23 @@
       }
 
       .prototype-homepage .hero-stack-dodo {
-        --hero-card-rotate: -8.5deg;
-        z-index: 0;
+        --hero-card-rotate: -2.5deg;
+        z-index: 1;
         bottom: 0;
-        left: -9%;
-        width: 42%;
+        left: 18%;
+        width: 48%;
         aspect-ratio: 2360 / 1474;
-        transform: translateY(clamp(64px, 8vh, 92px)) rotate(var(--hero-card-rotate));
+        transform: translateY(clamp(42px, 5vh, 60px)) rotate(var(--hero-card-rotate));
       }
 
       .prototype-homepage .hero-stack-cnap {
-        --hero-card-rotate: -2.5deg;
+        --hero-card-rotate: -8.5deg;
         z-index: 2;
         bottom: 0;
-        left: 30%;
-        width: 48%;
+        left: 44%;
+        width: 42%;
         aspect-ratio: 1890 / 1194;
-        transform: translateY(clamp(42px, 5vh, 60px)) rotate(var(--hero-card-rotate));
+        transform: translateY(clamp(64px, 8vh, 92px)) rotate(var(--hero-card-rotate));
       }
 
       .prototype-homepage .hero-stack-cnap > img {
@@ -2856,17 +2856,17 @@
 
       /* Shift the desktop toward the larger left card when active, preserving
          its full canvas while keeping the two phone projects exposed. */
-      .prototype-homepage .hero-stack-cnap:hover,
-      .prototype-homepage .hero-stack-cnap:focus-visible {
+      .prototype-homepage .hero-stack-dodo:hover,
+      .prototype-homepage .hero-stack-dodo:focus-visible {
         z-index: 6;
         transform: translate3d(-100px, 24px, 84px) scale(1.035) rotate(var(--hero-card-rotate));
       }
 
       .prototype-homepage .hero-stack-remi {
         --hero-card-rotate: -5.5deg;
-        z-index: 1;
+        z-index: 0;
         bottom: 0;
-        left: 6%;
+        left: -9%;
         width: 44%;
         aspect-ratio: 1.575;
         transform: translateY(clamp(42px, 5vh, 60px)) rotate(var(--hero-card-rotate));
@@ -2945,9 +2945,9 @@
           transform: none;
         }
 
-        .prototype-homepage .hero-stack-dodo { bottom: 0; left: -6%; width: 40%; }
-        .prototype-homepage .hero-stack-cnap { bottom: 0; left: 30%; width: 46%; }
-        .prototype-homepage .hero-stack-remi { bottom: 0; left: 7%; width: 42%; }
+        .prototype-homepage .hero-stack-dodo { bottom: 0; left: 24%; width: 46%; }
+        .prototype-homepage .hero-stack-cnap { bottom: 0; left: 44%; width: 40%; }
+        .prototype-homepage .hero-stack-remi { bottom: 0; left: -6%; width: 42%; }
         .prototype-homepage .hero-stack-xhs { bottom: 0; left: 72%; width: 21%; }
         .prototype-homepage .hero-stack-reading { bottom: 0; left: 86%; width: 21%; }
         .prototype-homepage .hero-project-tooltip { display: none; }
@@ -2986,8 +2986,8 @@
           transform: translateY(-28px) rotate(var(--hero-card-rotate));
         }
 
-        .prototype-homepage .hero-stack-cnap:hover,
-        .prototype-homepage .hero-stack-cnap:focus-visible {
+        .prototype-homepage .hero-stack-dodo:hover,
+        .prototype-homepage .hero-stack-dodo:focus-visible {
           transform: translate3d(-100px, -28px, 84px) scale(1.035) rotate(var(--hero-card-rotate));
         }
 
@@ -3034,8 +3034,8 @@
           transform: translate3d(0, clamp(-28px, -3vh, -20px), 0) scale(1.06) rotate(var(--hero-card-rotate));
         }
 
-        .prototype-homepage .hero-stack-cnap:hover,
-        .prototype-homepage .hero-stack-cnap:focus-visible {
+        .prototype-homepage .hero-stack-dodo:hover,
+        .prototype-homepage .hero-stack-dodo:focus-visible {
           transform: translate3d(-100px, clamp(-28px, -3vh, -20px), 84px) scale(1.035) rotate(var(--hero-card-rotate));
         }
       }
@@ -3063,11 +3063,11 @@
         }
 
         .prototype-homepage .hero-stack-remi {
-          left: 4%;
+          left: -9%;
         }
 
-        .prototype-homepage .hero-stack-cnap {
-          left: 26%;
+        .prototype-homepage .hero-stack-dodo {
+          left: 18%;
         }
       }
 
@@ -3111,7 +3111,7 @@
 
     </style>
     <link rel="stylesheet" href="styles/responsive-system.css?v=20260905-7" />
-    <link rel="stylesheet" href="styles/homepage-fold.css?v=20260905-3" />
+    <link rel="stylesheet" href="styles/homepage-fold.css?v=20260905-7" />
   </head>
   <body class="prototype-homepage">
     <div class="page">
@@ -3150,16 +3150,16 @@
         <section class="hero hero-gallery hero-stack-gallery" id="home">
           <div class="hero-stack-top">
             <div class="hero-stack-copy">
-              <h1><span class="hero-stack-desktop-title">有 AI 工作流，懂用户，<br />能推动事情发生</span><span class="hero-stack-mobile-title">有 AI 工作流，<br />懂用户，<br />能推动事情发生</span></h1>
+              <h1><span class="hero-stack-desktop-title">有 AI 工作流，懂用户，能推动事情发生</span><span class="hero-stack-mobile-title">有 AI 工作流，<br />懂用户，<br />能推动事情发生</span></h1>
             </div>
             <div class="hero-stack-meta">
               <img class="hero-signature" src="assets/hero-signature-ai-native-orange.webp" alt="AI Native 手写字" width="2172" height="724" decoding="async" />
             </div>
           </div>
           <div class="hero-project-stack" aria-label="精选项目预览">
-            <a class="hero-project-stack-card hero-stack-cnap" href="pages/cnap-case.html" aria-label="查看 CNAP 云原生工作负载管理项目"><img src="assets/hero-projects/cnap-desktop.webp" alt="CNAP 云原生工作负载管理界面" width="1890" height="1194" decoding="async" /><span class="hero-project-tooltip"><b>CNAP 云原生工作负载管理</b><small>通过用户调研重构云原生部署与运维体验，降低平台使用门槛与排障成本</small></span></a>
-            <a class="hero-project-stack-card hero-stack-dodo" href="pages/dodo.html" aria-label="查看 AI 设计工作流实践与复盘项目"><img src="assets/dodo-product-assets.webp" alt="AI 设计工作流实践与复盘产物页面" width="2360" height="1474" decoding="async" /><span class="hero-project-tooltip"><b>AI 设计工作流实践与复盘</b><small>从用户反馈到需求上线，将设计判断沉淀为可复用的规范与 Skills</small></span></a>
             <a class="hero-project-stack-card hero-stack-remi" href="pages/case.html" aria-label="查看主动式 AI 记忆助手项目"><img src="assets/hero-devices/image_2.webp" alt="Remi 主动式 AI 记忆助手界面" width="4011" height="2518" decoding="async" /><span class="hero-project-tooltip"><b>商汤科技 主动 AI 记忆助手</b><small>解决 AI 交付物“理解门槛高，用不上”问题</small></span></a>
+            <a class="hero-project-stack-card hero-stack-dodo" href="pages/dodo.html" aria-label="查看 AI 设计工作流实践与复盘项目"><img src="assets/dodo-product-assets.webp" alt="AI 设计工作流实践与复盘产物页面" width="2360" height="1474" decoding="async" /><span class="hero-project-tooltip"><b>AI 设计工作流实践与复盘</b><small>从用户反馈到需求上线，将设计判断沉淀为可复用的规范与 Skills</small></span></a>
+            <a class="hero-project-stack-card hero-stack-cnap" href="pages/cnap-case.html" aria-label="查看 CNAP 云原生工作负载管理项目"><img src="assets/hero-projects/cnap-desktop.webp" alt="CNAP 云原生工作负载管理界面" width="1890" height="1194" decoding="async" /><span class="hero-project-tooltip"><b>CNAP 云原生工作负载管理</b><small>通过用户调研重构云原生部署与运维体验，降低平台使用门槛与排障成本</small></span></a>
             <a class="hero-project-stack-card hero-stack-xhs" href="pages/xiaohongshu.html" aria-label="查看小红书本地生活项目"><img src="assets/hero-projects/image_1.webp" alt="小红书本地生活项目界面" width="2648" height="5495" decoding="async" /><span class="hero-project-tooltip"><b>小红书 本地生活体验升级</b><small>提升用户从种草到下单核销的转化效率</small></span></a>
             <a class="hero-project-stack-card hero-stack-reading" href="pages/skip-read.html" aria-label="查看职场人阅读学习 APP 项目"><img class="hero-stack-reading-content" src="assets/hero-projects/image_3.webp" alt="职场人阅读学习 APP 界面" width="2456" height="5324" decoding="async" /><img class="hero-stack-reading-frame" src="assets/hero-projects/legacy-reading-frame.png" alt="" /><span class="hero-project-tooltip"><b>碎片时间下的快速阅读 APP</b><small>提升用户的平均阅读时间与留存</small></span></a>
           </div>
@@ -3170,7 +3170,7 @@
             <div class="about-identity">
               <div class="about-name-row">
                 <h2 class="about-name-static">郭昱成</h2>
-                <img class="about-signature" src="assets/about-me-signature.webp" alt="About me" width="1676" height="484" loading="lazy" decoding="async" />
+                <img class="about-signature" src="assets/about-me-signature-clean.png?v=20260905-2" alt="About me" width="2132" height="738" loading="lazy" decoding="async" />
               </div>
               <div class="about-name-highlights" aria-label="教育与实习经历">
                 <span>西南交通大学</span>
