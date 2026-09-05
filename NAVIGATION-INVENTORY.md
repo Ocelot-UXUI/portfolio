@@ -11,7 +11,7 @@
 
 ## 项目与交付物导航
 
-- `pages/case.html`：主动式 AI 记忆助手案例 Deck
+- `pages/case.html`：主动式 AI 记忆助手项目案例
 - `pages/remi.html`：主动式 AI 记忆助手交互 Demo
 - `pages/remi-materials.html`：主动式 AI 记忆助手交付物
 - `pages/remi-deliverables.html`：主动式 AI 记忆助手交付物兼容入口
@@ -19,7 +19,7 @@
 - `demos/workload-demo/index.html`：CNAP 交互 Demo
 - `pages/skip-read.html`：快速阅读 APP
 - `pages/xiaohongshu.html`：小红书本地生活
-- `pages/dodo.html`：AI 设计工作流实践案例 Deck
+- `pages/dodo.html`：AI 设计工作流实践项目案例
 - `pages/dodo-demo.html`：Dodo 正式版交互 Demo
 - `pages/dodo-materials.html`：AI 设计工作流项目交付物
 
