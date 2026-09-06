@@ -285,23 +285,53 @@
     transform: translate3d(clamp(-128px, -8vw, -76px), clamp(-28px, -3vh, -20px), 84px) scale(1.035) rotate(var(--hero-card-rotate));
   }
 
-  /* Teach the interaction from the whole preview area. When the pointer is
-     only over the stack's gaps, preview the same state as hovering CNAP;
-     actual card hover/focus always takes precedence. */
+  /* One guided pass mirrors the cursor tutorial in the AI workflow case:
+     a visual pointer travels to CNAP, then briefly previews its real hover. */
   @media (hover: hover) and (pointer: fine) {
-    .prototype-homepage .hero-project-stack:hover:not(:has(.hero-project-stack-card:hover)):not(:has(.hero-project-stack-card:focus-visible)) {
+    .prototype-homepage .hero-project-stack.is-demo-preview {
       z-index: 4;
     }
 
-    .prototype-homepage .hero-project-stack:hover:not(:has(.hero-project-stack-card:hover)):not(:has(.hero-project-stack-card:focus-visible)) .hero-stack-cnap {
+    .prototype-homepage .hero-stack-cnap.is-demo-hover {
       z-index: 6;
       transform: translate3d(-100px, clamp(-28px, -3vh, -20px), 84px) scale(1.035) rotate(var(--hero-card-rotate));
       box-shadow: 0 28px 48px rgba(0, 0, 0, .44);
     }
 
-    .prototype-homepage .hero-project-stack:hover:not(:has(.hero-project-stack-card:hover)):not(:has(.hero-project-stack-card:focus-visible)) .hero-stack-cnap .hero-project-tooltip {
+    .prototype-homepage .hero-stack-cnap.is-demo-hover .hero-project-tooltip {
       opacity: 1;
       transform: translate(-50%, 0) scale(1);
+    }
+
+    .prototype-homepage .hero-stack-demo-cursor {
+      position: absolute;
+      z-index: 12;
+      display: block;
+      width: 72px;
+      height: 74px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-22px, -24px);
+      transition:
+        left 720ms cubic-bezier(.2, .75, .2, 1),
+        top 720ms cubic-bezier(.2, .75, .2, 1),
+        opacity 360ms ease,
+        transform 160ms ease;
+    }
+
+    .prototype-homepage .hero-stack-demo-cursor svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 5px 12px rgb(238 111 45 / .72));
+    }
+
+    .prototype-homepage .hero-stack-demo-cursor.is-visible {
+      opacity: 1;
+    }
+
+    .prototype-homepage .hero-stack-demo-cursor.is-hovering {
+      transform: translate(-22px, -24px) scale(.88);
     }
   }
 

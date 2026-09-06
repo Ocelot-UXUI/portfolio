@@ -10,7 +10,7 @@
 
 .case-deck-page main {
   width: 100%;
-  padding: clamp(76px, 6vw, 112px) var(--case-page-gutter) clamp(88px, 8vw, 144px);
+  padding: clamp(76px, 6vw, 112px) var(--case-page-gutter) clamp(36px, 4vw, 64px);
   background:
     radial-gradient(circle at 50% 0, rgb(255 255 255 / .62), transparent 38%),
     var(--case-page-bg);
@@ -63,7 +63,7 @@
 
   .case-deck-page main {
     padding-top: 64px;
-    padding-bottom: 56px;
+    padding-bottom: 32px;
   }
 
   .case-deck-page .slides > img,
