@@ -50,6 +50,24 @@
   margin: 0;
 }
 
+.case-deck-page .cnap-interactive-slide .case-slide-hotspot {
+  cursor: none;
+}
+
+.case-deck-page .cnap-workload-hotspot {
+  top: 18%;
+  height: 82%;
+  left: 43%;
+  width: 57%;
+}
+
+.case-deck-page .cnap-detail-hotspot {
+  top: 16%;
+  height: 84%;
+  left: 0;
+  width: 55%;
+}
+
 .case-deck-page footer {
   background: #080910;
 }
