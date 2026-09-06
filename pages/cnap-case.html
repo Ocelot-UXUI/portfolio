@@ -6,8 +6,8 @@
     <meta name="description" content="郭昱成 UX/UI 作品集 - CNAP 云原生工作负载管理项目案例" />
     <title>CNAP 云原生工作负载管理 | 郭昱成作品集</title>
     <link rel="stylesheet" href="../styles/styles.css?v=20260728-4" />
-    <link rel="stylesheet" href="../styles/project-navigation.css?v=20260906-21" />
-    <link rel="stylesheet" href="../styles/case-deck.css?v=20260906-2" />
+    <link rel="stylesheet" href="../styles/project-navigation.css?v=20260906-27" />
+    <link rel="stylesheet" href="../styles/case-deck.css?v=20260906-3" />
     <script src="../scripts/project-navigation.js?v=20260906-6" defer></script>
     <link rel="stylesheet" href="../styles/responsive-system.css?v=20260905-1" />
   </head>
@@ -26,8 +26,14 @@
         <img src="../assets/cnap-case/page-05.png" alt="CNAP 页面改版前后对比" data-section-kicker="方案对比" data-section-title="让用户一眼找到要查的任务" loading="lazy" />
         <img src="../assets/cnap-case/page-06.png" alt="CNAP 核心流程与信息架构优化" data-section-kicker="信息架构" data-section-title="重组部署与排障路径" loading="lazy" />
         <img src="../assets/cnap-case/page-07.png" alt="CNAP 问题拆解与设计机会" data-section-kicker="问题拆解" data-section-title="两个成本最高的判断任务" loading="lazy" />
-        <img src="../assets/cnap-case/page-08.png" alt="CNAP 设计方案与页面结构" data-section-kicker="设计方案" data-section-title="让配置关系变得可理解" loading="lazy" />
-        <img src="../assets/cnap-case/page-09.png" alt="CNAP 任务状态与配置关系设计" data-section-kicker="方案细节" data-section-title="配置来源一眼可见" loading="lazy" />
+        <div class="case-slide-frame cnap-interactive-slide">
+          <img src="../assets/cnap-case/page-08.png" alt="CNAP 设计方案与页面结构" data-section-kicker="设计方案" data-section-title="让配置关系变得可理解" loading="lazy" />
+          <a class="case-slide-hotspot cnap-workload-hotspot" href="../demos/workload-demo/index.html" data-case-hotspot target="_blank" rel="noopener" aria-label="打开 CNAP 工作负载交互 Demo"></a>
+        </div>
+        <div class="case-slide-frame cnap-interactive-slide">
+          <img src="../assets/cnap-case/page-09.png" alt="CNAP 任务状态与配置关系设计" data-section-kicker="方案细节" data-section-title="配置来源一眼可见" loading="lazy" />
+          <a class="case-slide-hotspot cnap-detail-hotspot" href="../demos/workload-demo/index.html#pod=pod-1" data-case-hotspot target="_blank" rel="noopener" aria-label="打开 CNAP 工作负载详情交互 Demo"></a>
+        </div>
         <img src="../assets/cnap-case/page-10.png" alt="CNAP 页面布局方案对比" data-section-kicker="方案迭代" data-section-title="信息收束，扫读更快" loading="lazy" />
         <img src="../assets/cnap-case/page-11.png" alt="CNAP 配置编辑与恢复流程" data-section-kicker="交互设计" data-section-title="编辑、恢复与确认关系清晰" loading="lazy" />
         <img src="../assets/cnap-case/page-12.png" alt="CNAP 工作负载配置详情页" data-section-kicker="设计方案" data-section-title="复杂表单也能快速理解" loading="lazy" />
@@ -39,7 +45,7 @@
         <img src="../assets/cnap-case/page-18.png" alt="CNAP Agent 可执行页面规范" data-section-kicker="Agent 设计" data-section-title="让页面规则支撑快速生成" loading="lazy" />
         <img src="../assets/cnap-case/page-19.png" alt="CNAP 项目成果与体验改进" data-section-kicker="项目结果" data-section-title="减少 20% 重复沟通成本" loading="lazy" />
       </section>
-      <div class="case-project-hover-cursor" aria-hidden="true"><span class="case-project-hover-label"><span>查看</span><img src="../assets/figma-button/image_orange.png" alt="" /></span></div>
+      <div class="case-project-hover-cursor" aria-hidden="true"><span class="case-project-hover-label"><span>查看</span><img src="../assets/figma-button/image_white.svg" alt="" /></span></div>
     </main>
     <script>
       const stickyNav = document.querySelector("header.project-nav");
@@ -67,6 +73,79 @@
           window.location.href = option.value;
         });
       });
+
+      const caseCursor = document.querySelector(".case-project-hover-cursor");
+      const caseCursorLabel = caseCursor?.querySelector(".case-project-hover-label");
+      const caseHotspots = document.querySelectorAll("[data-case-hotspot]");
+      if (caseCursor && caseCursorLabel && caseHotspots.length && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+        const cursorMotion = {
+          targetX: 0,
+          targetY: 0,
+          labelX: 0,
+          labelY: 0,
+          labelRotation: 0,
+          initialized: false,
+          visible: false,
+          pressed: false,
+          frame: 0,
+        };
+
+        const renderCaseCursor = () => {
+          const labelOffsetX = 24;
+          const labelOffsetY = 15;
+          const nextLabelX = cursorMotion.targetX + labelOffsetX;
+          const nextLabelY = cursorMotion.targetY + labelOffsetY;
+          const horizontalLag = nextLabelX - cursorMotion.labelX;
+          cursorMotion.labelX += horizontalLag * .18;
+          cursorMotion.labelY += (nextLabelY - cursorMotion.labelY) * .18;
+          const rotationTarget = Math.max(-7, Math.min(7, horizontalLag * .18));
+          cursorMotion.labelRotation += (rotationTarget - cursorMotion.labelRotation) * .16;
+          const scale = cursorMotion.pressed ? .92 : 1;
+          caseCursorLabel.style.transform = `translate3d(${cursorMotion.labelX}px, ${cursorMotion.labelY}px, 0) rotate(${cursorMotion.labelRotation}deg) scale(${scale})`;
+          const unsettled = Math.abs(nextLabelX - cursorMotion.labelX) > .1
+            || Math.abs(nextLabelY - cursorMotion.labelY) > .1
+            || Math.abs(cursorMotion.labelRotation) > .1;
+          if (cursorMotion.visible || unsettled) cursorMotion.frame = requestAnimationFrame(renderCaseCursor);
+          else cursorMotion.frame = 0;
+        };
+
+        const startCaseCursorMotion = () => {
+          if (!cursorMotion.frame) cursorMotion.frame = requestAnimationFrame(renderCaseCursor);
+        };
+
+        const updateCaseCursor = (event) => {
+          cursorMotion.targetX = event.clientX;
+          cursorMotion.targetY = event.clientY;
+          if (!cursorMotion.initialized) {
+            cursorMotion.labelX = event.clientX + 24;
+            cursorMotion.labelY = event.clientY + 15;
+            cursorMotion.initialized = true;
+          }
+          startCaseCursorMotion();
+        };
+
+        caseHotspots.forEach((hotspot) => {
+          hotspot.addEventListener("pointerenter", (event) => {
+            updateCaseCursor(event);
+            cursorMotion.visible = true;
+            caseCursor.classList.add("visible");
+          });
+          hotspot.addEventListener("pointermove", updateCaseCursor);
+          hotspot.addEventListener("pointerleave", () => {
+            cursorMotion.visible = false;
+            cursorMotion.pressed = false;
+            caseCursor.classList.remove("visible");
+          });
+          hotspot.addEventListener("pointerdown", () => {
+            cursorMotion.pressed = true;
+            startCaseCursorMotion();
+          });
+          hotspot.addEventListener("pointerup", () => {
+            cursorMotion.pressed = false;
+            startCaseCursorMotion();
+          });
+        });
+      }
     </script>
   </body>
 </html>

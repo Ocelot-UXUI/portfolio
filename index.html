@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="preload" as="image" href="assets/hero-background.jpg" fetchpriority="high" />
     <link rel="stylesheet" href="styles/styles.css?v=20260729-12" />
-    <link rel="stylesheet" href="styles/project-navigation.css?v=20260809-14" />
+    <link rel="stylesheet" href="styles/project-navigation.css?v=20260906-27" />
     <script src="scripts/project-navigation.js?v=20260809-3" defer></script>
     <style>
       .prototype-homepage .nav {
@@ -3757,28 +3757,44 @@
           }
           startProjectCursorMotion();
         };
-        projectHotspots.forEach((hotspot) => {
-          hotspot.addEventListener("pointerenter", (event) => {
-            updateProjectPointer(event);
-            cursorMotion.visible = true;
-            projectArea.classList.add("project-glow-active");
-            projectCursor.classList.add("visible");
-          });
-          hotspot.addEventListener("pointermove", updateProjectPointer);
-          hotspot.addEventListener("pointerleave", () => {
-            cursorMotion.visible = false;
-            cursorMotion.pressed = false;
-            projectArea.classList.remove("project-glow-active");
-            projectCursor.classList.remove("visible");
-          });
-          hotspot.addEventListener("pointerdown", () => {
+        let activeProjectHotspot = null;
+        const getProjectHotspot = (target) => target instanceof Element
+          ? target.closest("[data-project-hotspot]")
+          : null;
+        const hideProjectCursor = () => {
+          activeProjectHotspot = null;
+          cursorMotion.visible = false;
+          cursorMotion.pressed = false;
+          projectArea.classList.remove("project-glow-active");
+          projectCursor.classList.remove("visible");
+        };
+        const showProjectCursor = (event, hotspot) => {
+          if (!hotspot) {
+            hideProjectCursor();
+            return;
+          }
+          activeProjectHotspot = hotspot;
+          updateProjectPointer(event);
+          cursorMotion.visible = true;
+          projectArea.classList.add("project-glow-active");
+          projectCursor.classList.add("visible");
+        };
+
+        /* Delegate from the whole showcase section so the custom pointer also
+           works over each project's copy column, not only its image. */
+        projectArea.addEventListener("pointermove", (event) => {
+          showProjectCursor(event, getProjectHotspot(event.target));
+        });
+        projectArea.addEventListener("pointerleave", hideProjectCursor);
+        projectArea.addEventListener("pointerdown", (event) => {
+          if (getProjectHotspot(event.target)) {
             cursorMotion.pressed = true;
             startProjectCursorMotion();
-          });
-          hotspot.addEventListener("pointerup", () => {
-            cursorMotion.pressed = false;
-            startProjectCursorMotion();
-          });
+          }
+        });
+        projectArea.addEventListener("pointerup", () => {
+          cursorMotion.pressed = false;
+          startProjectCursorMotion();
         });
       }
 

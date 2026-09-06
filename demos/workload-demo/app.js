@@ -2320,4 +2320,8 @@ serviceCreateModal?.addEventListener('click',event=>{
   }
 });
 renderClusterFilterOptions(); renderHistory(); render(); renderAppNavigation();
+const initialPodId = new URLSearchParams(window.location.hash.slice(1)).get('pod');
+if (initialPodId && pods.some(pod => pod[0] === initialPodId)) {
+  window.requestAnimationFrame(() => openInstanceDetail(initialPodId));
+}
 document.querySelectorAll('#runtimePage .runtime-row-hint use, #runtimePage .runtime-build-inline > span use').forEach(use=>use.setAttribute('href','#i-runtime-warning-hint'));

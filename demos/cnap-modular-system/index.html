@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CNAP 界面规范沉淀｜原结构优化版</title>
+    <style>
+      :root {
+        --paper: #f7f6f2;
+        --ink: #181b20;
+        --muted: #73797e;
+        --green: #78b99c;
+        --green-deep: #356a53;
+        --level-light: #edf4f0;
+        --level-mid: #cfe4da;
+        --level-strong: #6fba96;
+        --green-soft: #f3f7f4;
+        --green-pale: #f6f8f5;
+        --line: #dce4e0;
+        --surface: rgba(255, 255, 255, 0.72);
+      }
+
+      * { box-sizing: border-box; }
+      html, body { width: 100%; min-height: 100%; margin: 0; }
+
+      body {
+        display: grid;
+        place-items: center;
+        min-height: 100vh;
+        padding: 24px;
+        color: var(--ink);
+        font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+        background: #dedfdc;
+      }
+
+      .canvas {
+        position: relative;
+        width: min(96vw, 177.7778vh);
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+        padding: 4% 4.15% 3.6%;
+        background:
+          radial-gradient(circle at 14% 12%, rgba(255,255,255,.9), transparent 29%),
+          radial-gradient(circle at 83% 73%, rgba(111,186,150,.05), transparent 26%),
+          repeating-linear-gradient(103deg, rgba(35,45,40,.012) 0 1px, transparent 1px 8px),
+          var(--paper);
+        box-shadow: 0 24px 72px rgba(24,30,27,.18);
+      }
+
+      .page-head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        min-height: 10.5%;
+      }
+
+      .kicker {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: var(--green-deep);
+        font-size: clamp(9px, .69vw, 13px);
+        font-weight: 750;
+        letter-spacing: .12em;
+      }
+
+      .kicker::before {
+        width: 30px;
+        height: 3px;
+        content: "";
+        border-radius: 999px;
+        background: var(--green);
+      }
+
+      .page-head h1 {
+        margin: 9px 0 0;
+        font-size: clamp(23px, 2vw, 38px);
+        line-height: 1.12;
+        letter-spacing: -.035em;
+      }
+
+      .page-index {
+        color: rgba(24,27,32,.18);
+        font-family: Arial, sans-serif;
+        font-size: clamp(10px, .78vw, 15px);
+        font-weight: 700;
+        letter-spacing: .08em;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1.46fr) minmax(0, 1fr);
+        gap: 3.1%;
+        height: 82.5%;
+      }
+
+      .map {
+        display: grid;
+        grid-template-rows: .72fr 2.4fr .72fr .84fr 2.15fr;
+        gap: 1.25%;
+        min-width: 0;
+      }
+
+      .band {
+        position: relative;
+        display: grid;
+        grid-template-columns: 16% 1fr;
+        align-items: stretch;
+        min-height: 0;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: var(--surface);
+      }
+
+      .band--focus {
+        border-color: rgba(111,186,150,.26);
+        background: rgba(245,245,245,.9);
+      }
+
+      .band-label {
+        display: flex;
+        align-items: center;
+        padding: 0 13%;
+        border-right: 1px solid var(--line);
+        color: var(--ink);
+        font-size: clamp(9px, .68vw, 13px);
+        font-weight: 750;
+        line-height: 1.42;
+      }
+
+      .band--focus .band-label {
+        color: var(--ink);
+        background: rgba(245,245,245,.94);
+      }
+
+      .band-content {
+        position: relative;
+        min-width: 0;
+        padding: 2.2% 3.1%;
+      }
+
+      .band--slim .band-content { display: flex; align-items: center; }
+
+      .column-grid,
+      .branch-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 3.1%;
+        width: 100%;
+        height: 100%;
+      }
+
+      .source {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 0;
+        border: 1px solid rgba(53,106,83,.12);
+        border-radius: 9px;
+        color: #184a36;
+        font-size: clamp(8px, .61vw, 11.5px);
+        font-weight: 700;
+        background: var(--level-mid);
+        white-space: nowrap;
+      }
+
+      .source::before {
+        width: 6px;
+        height: 6px;
+        margin-right: 7px;
+        content: "";
+        border-radius: 2px;
+        background: rgba(53,106,83,.48);
+      }
+
+      .branch {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 5.5%;
+        min-width: 0;
+        padding: 6% 4% 3%;
+      }
+
+      .branch::before {
+        position: absolute;
+        left: 50%;
+        top: -12%;
+        bottom: 4%;
+        width: 1px;
+        content: "";
+        background: linear-gradient(to bottom, rgba(111,186,150,.45), rgba(220,228,224,.62));
+      }
+
+      .node {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        min-height: 0;
+        padding: 3px 7px;
+        border: 1px solid rgba(53,106,83,.09);
+        border-radius: 7px;
+        color: #24513e;
+        font-size: clamp(7px, .56vw, 10.5px);
+        font-weight: 650;
+        text-align: center;
+        background: var(--level-light);
+        white-space: nowrap;
+      }
+
+      .node--strong {
+        color: #123f2d;
+        border-color: rgba(53,106,83,.22);
+        background: var(--level-strong);
+      }
+
+      .module-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 4%;
+        width: 100%;
+      }
+
+      .module-group {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 7px;
+      }
+
+      .pill {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 0;
+        padding: 7px 8px;
+        border: 1px solid rgba(53,106,83,.09);
+        border-radius: 7px;
+        color: #24513e;
+        font-size: clamp(7px, .55vw, 10.5px);
+        font-weight: 700;
+        background: var(--level-light);
+        white-space: nowrap;
+      }
+
+      .structure-row {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 3%;
+        width: 100%;
+      }
+
+      .structure {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(53,106,83,.12);
+        border-radius: 9px;
+        color: #184a36;
+        font-size: clamp(8px, .6vw, 11.5px);
+        font-weight: 700;
+        background: var(--level-mid);
+      }
+
+      .delivery .branch { padding-top: 4%; }
+      .delivery .branch::before { top: -9%; }
+      .delivery .node {
+        color: #184a36;
+        border-color: rgba(53,106,83,.12);
+        background: var(--level-mid);
+      }
+      .delivery .node--strong { background: var(--level-strong); }
+
+      .map > .band:nth-child(3),
+      .map > .band:nth-child(4),
+      .map > .band:nth-child(5) {
+        background: rgba(255,255,255,.62);
+      }
+
+      .summary {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        padding: 1.2% 0 1.5% 1.5%;
+      }
+
+      .summary h2 {
+        margin: 0;
+        font-size: clamp(35px, 3.35vw, 64px);
+        font-weight: 760;
+        line-height: 1.42;
+        letter-spacing: -.06em;
+      }
+
+      .summary h2 span { display: block; color: var(--green-deep); }
+
+      .summary-lead {
+        margin: 4.3% 0 0;
+        padding-bottom: 3.7%;
+        border-bottom: 1px solid var(--line);
+        font-size: clamp(15px, 1.35vw, 26px);
+        font-weight: 720;
+      }
+
+      .summary-list {
+        display: grid;
+        grid-template-rows: repeat(3, 1fr);
+        flex: 1;
+        margin-top: 1%;
+      }
+
+      .summary-item {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        align-items: center;
+        gap: 6.4%;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .summary-item:last-child { border-bottom: 0; }
+
+      .summary-num {
+        display: grid;
+        place-items: center;
+        width: clamp(36px, 3.15vw, 60px);
+        aspect-ratio: 1;
+        border: 1px solid rgba(111,186,150,.34);
+        border-radius: 50%;
+        color: var(--green-deep);
+        font-family: Arial, sans-serif;
+        font-size: clamp(12px, 1.08vw, 21px);
+        font-weight: 650;
+        background: var(--green-soft);
+      }
+
+      .summary-copy strong {
+        display: block;
+        margin-bottom: 7px;
+        font-size: clamp(15px, 1.3vw, 25px);
+        letter-spacing: -.02em;
+      }
+
+      .summary-copy p {
+        max-width: 95%;
+        margin: 0;
+        color: var(--muted);
+        font-size: clamp(9px, .78vw, 15px);
+        line-height: 1.58;
+      }
+
+      @media (max-aspect-ratio: 4 / 3) {
+        body { padding: 0; }
+        .canvas { width: 100vw; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="canvas" aria-label="CNAP 界面规范沉淀作品集页面">
+      <header class="page-head">
+        <div>
+          <div class="kicker">DESIGN SYSTEM</div>
+          <h1>从页面实践中，沉淀可复用的设计规则</h1>
+        </div>
+        <div class="page-index">02 / 04</div>
+      </header>
+
+      <div class="layout">
+        <section class="map" aria-label="页面到规范再到业务落地的五层关系">
+          <article class="band band--slim">
+            <div class="band-label">典型页面</div>
+            <div class="band-content"><div class="column-grid">
+              <div class="source">日志、监控</div><div class="source">工作负载</div>
+              <div class="source">流量接入</div><div class="source">运行配置</div>
+            </div></div>
+          </article>
+
+          <article class="band band--focus">
+            <div class="band-label">沉淀界面规范</div>
+            <div class="band-content"><div class="branch-grid">
+              <div class="branch"><div class="node">代码显示</div><div class="node">组件</div><div class="node">卡片</div></div>
+              <div class="branch"><div class="node">表格</div><div class="node">筛选项</div><div class="node">抽屉面板</div><div class="node">组件</div></div>
+              <div class="branch"><div class="node">抽屉面板</div><div class="node">拓扑图</div><div class="node">表单项</div><div class="node">组件</div></div>
+              <div class="branch"><div class="node">弹窗</div><div class="node">导航</div><div class="node">表单项</div><div class="node">组件</div></div>
+            </div></div>
+          </article>
+
+          <article class="band band--slim">
+            <div class="band-label">提炼通用模块</div>
+            <div class="band-content"><div class="module-row">
+              <div class="module-group"><span class="pill">列表</span><span class="pill">筛选区</span></div>
+              <div class="module-group"><span class="pill">抽屉面板</span><span class="pill">表单项</span></div>
+              <div class="module-group"><span class="pill">卡片</span><span class="pill">表单项</span></div>
+            </div></div>
+          </article>
+
+          <article class="band band--slim">
+            <div class="band-label">组合页面结构</div>
+            <div class="band-content"><div class="structure-row">
+              <div class="structure">列表页</div><div class="structure">列表＋详情页</div>
+              <div class="structure">详情页</div><div class="structure">概览页</div>
+            </div></div>
+          </article>
+
+          <article class="band delivery">
+            <div class="band-label">落地业务页面</div>
+            <div class="band-content"><div class="branch-grid">
+              <div class="branch"><div class="node">应用列表</div><div class="node">环境列表</div></div>
+              <div class="branch"><div class="node node--strong">审批策略</div><div class="node node--strong">变更管控</div><div class="node">数据配送</div><div class="node">扩缩容</div></div>
+              <div class="branch"><div class="node">景象仓库</div></div>
+              <div class="branch"><div class="node">账号列表</div><div class="node">仪表盘</div><div class="node">集群管理</div><div class="node">组件</div></div>
+            </div></div>
+          </article>
+        </section>
+
+        <aside class="summary">
+          <h2>从“每页重新设计”<span>到“按规则快速生成”</span></h2>
+          <div class="summary-lead">总结同类问题的解决方式</div>
+          <div class="summary-list">
+            <article class="summary-item"><div class="summary-num">01</div><div class="summary-copy"><strong>提炼共性</strong><p>从典型页面中识别高频模块与页面结构，找到可以复用的基础单元。</p></div></article>
+            <article class="summary-item"><div class="summary-num">02</div><div class="summary-copy"><strong>划定边界</strong><p>根据编辑与预览、信息量和影响范围，判断何时切换布局与信息承载方式。</p></div></article>
+            <article class="summary-item"><div class="summary-num">03</div><div class="summary-copy"><strong>转成规则</strong><p>将隐性的设计判断写成交互说明，并结合组件库支撑后续页面生成。</p></div></article>
+          </div>
+        </aside>
+      </div>
+    </main>
+  </body>
+</html>
