@@ -455,13 +455,12 @@ body {
 
   .cnap-research-page .deliverables-tabs {
     display: flex;
-    border-inline: 0;
+    border-inline: 1px solid rgba(255, 255, 255, .13);
   }
 
   .cnap-research-page .deliverables-tabs button {
     flex: 1 0 auto;
     min-width: 104px;
-    border-right: 1px solid rgba(255, 255, 255, .12);
   }
 
   .research-document,
