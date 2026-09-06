@@ -1659,16 +1659,17 @@ body .project-nav .project-view-tab:focus-visible {
 
 /* Shared previous / next project navigation for the five primary case studies. */
 .project-sequence-nav {
+  --project-sequence-accent: #ee6a18;
+  --project-sequence-accent-rgb: 238 106 24;
   --project-sequence-line: rgba(255,255,255,.12);
   position: relative;
   z-index: 1;
   width: 100%;
-  padding: clamp(30px, 3.2vw, 48px) var(--case-page-gutter, clamp(28px, 5vw, 112px)) clamp(36px, 4vw, 56px);
-  border-top: 1px solid rgba(238,106,24,.22);
+  padding: clamp(22px, 2.4vw, 34px) var(--case-page-gutter, clamp(28px, 5vw, 112px)) clamp(24px, 2.8vw, 38px);
+  border-top: 1px solid rgb(var(--project-sequence-accent-rgb) / .28);
   background:
-    linear-gradient(90deg, rgba(8,9,10,.96), rgba(8,9,10,.7) 18%, rgba(8,9,10,.62) 50%, rgba(8,9,10,.9)),
-    linear-gradient(180deg, rgba(8,9,10,.72), rgba(8,9,10,.92)),
-    url("../assets/hero-background-lines.webp") center 54% / cover no-repeat,
+    radial-gradient(circle at 18% 0%, rgb(var(--project-sequence-accent-rgb) / .16), transparent 42%),
+    linear-gradient(180deg, rgba(8,9,10,.98), rgba(8,9,10,.96)),
     #08090a;
   color: #f7f7f5;
   font-family: "Space Grotesk", "PingFang SC", sans-serif;
@@ -1684,7 +1685,7 @@ body .project-nav .project-view-tab:focus-visible {
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 }
 
 .project-sequence-heading p,
@@ -1698,7 +1699,7 @@ body .project-nav .project-view-tab:focus-visible {
 
 .project-sequence-heading p {
   color: rgba(255,255,255,.74);
-  font-size: 13px;
+  font-size: 12px;
   letter-spacing: 0;
 }
 
@@ -1711,11 +1712,11 @@ body .project-nav .project-view-tab:focus-visible {
 .project-sequence-link {
   position: relative;
   min-width: 0;
-  min-height: clamp(104px, 9vw, 128px);
+  min-height: clamp(86px, 7.5vw, 108px);
   display: flex;
   align-items: center;
   gap: clamp(14px, 1.8vw, 24px);
-  padding: clamp(18px, 2vw, 28px);
+  padding: clamp(14px, 1.5vw, 20px);
   overflow: hidden;
   border: 1px solid var(--project-sequence-line);
   border-radius: 14px;
@@ -1737,7 +1738,7 @@ body .project-nav .project-view-tab:focus-visible {
   position: absolute;
   z-index: -1;
   inset: 0;
-  background: linear-gradient(120deg, rgba(238,106,24,.2), rgba(255,255,255,.035) 58%, transparent 78%);
+  background: linear-gradient(120deg, rgb(var(--project-sequence-accent-rgb) / .2), rgba(255,255,255,.035) 58%, transparent 78%);
   content: "";
   opacity: 0;
   transform: translateX(-12%);
@@ -1745,7 +1746,7 @@ body .project-nav .project-view-tab:focus-visible {
 }
 
 .project-sequence-link--next::before {
-  background: linear-gradient(240deg, rgba(238,106,24,.2), rgba(255,255,255,.035) 58%, transparent 78%);
+  background: linear-gradient(240deg, rgb(var(--project-sequence-accent-rgb) / .2), rgba(255,255,255,.035) 58%, transparent 78%);
   transform: translateX(12%);
 }
 
@@ -1757,13 +1758,13 @@ body .project-nav .project-view-tab:focus-visible {
 
 .project-sequence-link:hover,
 .project-sequence-link:focus-visible {
-  border-color: rgba(238,106,24,.52);
+  border-color: rgb(var(--project-sequence-accent-rgb) / .52);
   background: rgba(255,255,255,.075);
   box-shadow: inset 0 1px rgba(255,255,255,.1), 0 14px 34px rgba(0,0,0,.2);
 }
 
 .project-sequence-link:focus-visible {
-  outline: 2px solid #ee6a18;
+  outline: 2px solid var(--project-sequence-accent);
   outline-offset: -2px;
 }
 
@@ -1782,14 +1783,82 @@ body .project-nav .project-view-tab:focus-visible {
   border-radius: 50%;
   color: #fff;
   font-size: 15px;
+  line-height: 1;
+  padding-bottom: 2px;
   transition: border-color .22s ease, background-color .22s ease, color .22s ease, transform .32s cubic-bezier(.22,1,.36,1);
 }
 
 .project-sequence-link:hover .project-sequence-arrow,
 .project-sequence-link:focus-visible .project-sequence-arrow {
-  border-color: #ee6a18;
-  background: #ee6a18;
+  border-color: var(--project-sequence-accent);
+  background: var(--project-sequence-accent);
   color: #fff;
+}
+
+body[data-project-theme="cnap"] .project-sequence-nav {
+  --project-sequence-accent: #50d7a0;
+  --project-sequence-accent-rgb: 80 215 160;
+}
+
+body[data-project-theme="dodo"] .project-sequence-nav {
+  --project-sequence-accent: #5180f9;
+  --project-sequence-accent-rgb: 81 128 249;
+}
+
+body[data-project-theme="remi"] .project-sequence-nav {
+  --project-sequence-accent: #dc5619;
+  --project-sequence-accent-rgb: 220 86 25;
+}
+
+body[data-project-theme="reading"] .project-sequence-nav {
+  --project-sequence-accent: #b49aff;
+  --project-sequence-accent-rgb: 180 154 255;
+}
+
+body[data-project-theme="xhs"] .project-sequence-nav {
+  --project-sequence-accent: #ff5b72;
+  --project-sequence-accent-rgb: 255 91 114;
+}
+
+/* CNAP's case deck is a light canvas. Keep the continuation module in the
+   same visual field instead of dropping a dark block beneath it. */
+body[data-project-theme="cnap"] .project-sequence-nav {
+  --project-sequence-line: rgba(27,28,34,.16);
+  background:
+    radial-gradient(circle at 18% 0%, rgb(var(--project-sequence-accent-rgb) / .13), transparent 42%),
+    linear-gradient(180deg, rgba(255,255,255,.34), rgba(232,232,229,.72)),
+    #e8e8e5;
+  color: #1b1c22;
+}
+
+body[data-project-theme="cnap"] .project-sequence-heading p {
+  color: rgba(27,28,34,.76);
+}
+
+body[data-project-theme="cnap"] .project-sequence-heading span,
+body[data-project-theme="cnap"] .project-sequence-copy small,
+body[data-project-theme="cnap"] .project-sequence-copy em {
+  color: rgba(27,28,34,.56);
+}
+
+body[data-project-theme="cnap"] .project-sequence-copy strong {
+  color: #1b1c22;
+}
+
+body[data-project-theme="cnap"] .project-sequence-link {
+  background: rgba(255,255,255,.48);
+  box-shadow: inset 0 1px rgba(255,255,255,.64), 0 12px 30px rgba(27,28,34,.08);
+}
+
+body[data-project-theme="cnap"] .project-sequence-link:hover,
+body[data-project-theme="cnap"] .project-sequence-link:focus-visible {
+  background: rgba(255,255,255,.7);
+  box-shadow: inset 0 1px rgba(255,255,255,.78), 0 14px 34px rgba(27,28,34,.12);
+}
+
+body[data-project-theme="cnap"] .project-sequence-arrow {
+  border-color: rgba(27,28,34,.32);
+  color: #1b1c22;
 }
 
 .project-sequence-link--previous:hover .project-sequence-arrow,
@@ -1817,7 +1886,7 @@ body .project-nav .project-view-tab:focus-visible {
 
 .project-sequence-copy strong {
   color: #f7f7f5;
-  font-size: clamp(17px, 1.45vw, 22px);
+  font-size: clamp(15px, 1.25vw, 19px);
   font-weight: 500;
   letter-spacing: -.02em;
   line-height: 1.3;
@@ -1826,22 +1895,22 @@ body .project-nav .project-view-tab:focus-visible {
 .project-sequence-copy em {
   margin-top: 5px;
   color: rgba(255,255,255,.5);
-  font-size: clamp(11px, .85vw, 13px);
+  font-size: clamp(10px, .75vw, 12px);
   font-style: normal;
   line-height: 1.5;
 }
 
 @media (max-width: 700px) {
   .project-sequence-nav {
-    padding: 28px 18px 34px;
+    padding: 22px 18px 28px;
   }
 
   .project-sequence-heading {
-    margin-bottom: 12px;
+    margin-bottom: 9px;
   }
 
   .project-sequence-heading p {
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .project-sequence-links {
@@ -1849,8 +1918,8 @@ body .project-nav .project-view-tab:focus-visible {
   }
 
   .project-sequence-link {
-    min-height: 92px;
-    padding: 16px 4px;
+    min-height: 82px;
+    padding: 13px 4px;
   }
 
   .project-sequence-link + .project-sequence-link {
@@ -1870,7 +1939,7 @@ body .project-nav .project-view-tab:focus-visible {
   }
 
   .project-sequence-copy strong {
-    font-size: clamp(16px, 4.8vw, 20px);
+    font-size: clamp(15px, 4.2vw, 18px);
   }
 }
 

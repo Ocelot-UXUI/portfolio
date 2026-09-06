@@ -361,17 +361,18 @@
   }
 
   const projectSequence = [
-    { file: "dodo.html", title: "AI 设计工作流实践与复盘", meta: "AI 产品 · 设计工程化" },
-    { file: "cnap-case.html", title: "CNAP 云原生工作负载管理", meta: "百度智能云 · 复杂 B 端体验" },
-    { file: "case.html", title: "主动式 AI 记忆助手", meta: "商汤科技 · 0–1 项目" },
-    { file: "skip-read.html", title: "职场人的阅读学习 APP", meta: "AI 阅读 · 个人知识工作流" },
-    { file: "xiaohongshu.html", title: "小红书本地生活体验升级", meta: "C 端增长 · 转化链路" }
+    { file: "cnap-case.html", title: "复杂 B 端系统体验重构", meta: "百度智能云 · 复杂 B 端体验", theme: "cnap" },
+    { file: "dodo.html", title: "AI 设计工作流实践与复盘", meta: "AI 产品 · 设计工程化", theme: "dodo" },
+    { file: "case.html", title: "主动式 AI 记忆助手", meta: "商汤科技 · 0–1 项目", theme: "remi" },
+    { file: "skip-read.html", title: "职场人的阅读学习 APP", meta: "AI 阅读 · 个人知识工作流", theme: "reading" },
+    { file: "xiaohongshu.html", title: "小红书本地生活体验升级", meta: "C 端增长 · 转化链路", theme: "xhs" }
   ];
 
   const buildProjectSequenceNavigation = () => {
     const currentFile = window.location.pathname.split("/").pop();
     const currentIndex = projectSequence.findIndex((project) => project.file === currentFile);
     if (currentIndex < 0 || document.querySelector(".project-sequence-nav")) return;
+    document.body.dataset.projectTheme = projectSequence[currentIndex].theme;
 
     const previous = projectSequence[(currentIndex - 1 + projectSequence.length) % projectSequence.length];
     const next = projectSequence[(currentIndex + 1) % projectSequence.length];

@@ -3111,7 +3111,7 @@
 
     </style>
     <link rel="stylesheet" href="styles/responsive-system.css?v=20260905-7" />
-    <link rel="stylesheet" href="styles/homepage-fold.css?v=20260906-8" />
+    <link rel="stylesheet" href="styles/homepage-fold.css?v=20260906-10" />
   </head>
   <body class="prototype-homepage">
     <div class="page">
@@ -3158,8 +3158,8 @@
           </div>
           <div class="hero-project-stack" aria-label="精选项目预览">
             <a class="hero-project-stack-card hero-stack-remi" href="pages/case.html" aria-label="查看主动式 AI 记忆助手项目"><img src="assets/hero-devices/image_2.webp" alt="Remi 主动式 AI 记忆助手界面" width="4011" height="2518" decoding="async" /><span class="hero-project-tooltip"><b>商汤科技 主动 AI 记忆助手</b><small>解决 AI 交付物“理解门槛高，用不上”问题</small></span></a>
-            <a class="hero-project-stack-card hero-stack-dodo" href="pages/dodo.html" aria-label="查看 AI 设计工作流实践与复盘项目"><img src="assets/dodo-product-assets-cropped.png" alt="AI 设计工作流实践与复盘产物页面" width="2280" height="1394" decoding="async" /><span class="hero-project-tooltip"><b>AI 设计工作流实践与复盘</b><small>从用户反馈到需求上线，将设计判断沉淀为可复用的规范与 Skills</small></span></a>
-            <a class="hero-project-stack-card hero-stack-cnap" href="pages/cnap-case.html" aria-label="查看 CNAP 云原生工作负载管理项目"><img src="assets/hero-projects/cnap-desktop.webp" alt="CNAP 云原生工作负载管理界面" width="1890" height="1194" decoding="async" /><span class="hero-project-tooltip"><b>复杂B端系统体验重构</b><small>通过用户调研重构云原生部署与运维体验，降低平台使用门槛与排障成本</small></span></a>
+            <a class="hero-project-stack-card hero-stack-dodo" href="pages/dodo.html" aria-label="查看 AI 设计工作流实践与复盘项目"><img src="assets/dodo-product-assets-cropped.png" alt="AI 设计工作流实践与复盘产物页面" width="2280" height="1394" decoding="async" /><span class="hero-project-tooltip"><b>百度 AI 设计工作流实践与复盘</b><small>从用户反馈到需求上线，将设计判断沉淀为可复用的规范与 Skills</small></span></a>
+            <a class="hero-project-stack-card hero-stack-cnap" href="pages/cnap-case.html" aria-label="查看 CNAP 云原生工作负载管理项目"><img src="assets/hero-projects/cnap-desktop.webp" alt="CNAP 云原生工作负载管理界面" width="1890" height="1194" decoding="async" /><span class="hero-project-tooltip"><b>百度 复杂B端系统体验重构</b><small>通过用户调研重构云原生部署与运维体验，降低平台使用门槛与排障成本</small></span></a>
             <a class="hero-project-stack-card hero-stack-xhs" href="pages/xiaohongshu.html" aria-label="查看小红书本地生活项目"><img src="assets/hero-projects/image_1.webp" alt="小红书本地生活项目界面" width="2648" height="5495" decoding="async" /><span class="hero-project-tooltip"><b>小红书 本地生活体验升级</b><small>提升用户从种草到下单核销的转化效率</small></span></a>
             <a class="hero-project-stack-card hero-stack-reading" href="pages/skip-read.html" aria-label="查看职场人阅读学习 APP 项目"><img class="hero-stack-reading-content" src="assets/hero-projects/image_3.webp" alt="职场人阅读学习 APP 界面" width="2456" height="5324" decoding="async" /><img class="hero-stack-reading-frame" src="assets/hero-projects/legacy-reading-frame.png" alt="" /><span class="hero-project-tooltip"><b>碎片时间下的快速阅读 APP</b><small>提升用户的平均阅读时间与留存</small></span></a>
           </div>
@@ -3319,7 +3319,7 @@
           <div class="showcase-heading section-reveal"><h2 class="section-copy-step" id="projects-title">项目</h2></div>
           <a class="project-showcase project-showcase-cnap" id="project-cnap" href="pages/cnap-case.html" data-project-hotspot>
             <div class="showcase-copy">
-              <h3>复杂B端系统体验重构</h3>
+              <h3>百度 复杂B端系统体验重构</h3>
               <p>通过用户调研重构云原生部署与运维体验，降低平台使用门槛与排障成本</p>
               <ul><li>B端</li><li>云原生</li><li>用户调研</li><li>可交互Demo</li></ul>
               <img class="cnap-signature" src="assets/simplify-ops-signature.webp" alt="Simplify Ops" width="3012" height="800" loading="lazy" decoding="async" aria-hidden="true" />
@@ -3330,7 +3330,7 @@
           </a>
           <a class="project-showcase project-showcase-dodo" id="project-dodo" href="pages/dodo.html" data-project-hotspot>
             <div class="showcase-copy">
-              <h3>AI 设计工作流实践与复盘</h3>
+              <h3>百度 AI 设计工作流实践与复盘</h3>
               <p>从用户反馈到需求上线，将设计判断沉淀为可复用的规范与 Skills</p>
               <ul><li>AI 产品</li><li>端到端工作流</li><li>设计工程化</li><li>可交互 Demo</li></ul>
               <img class="dodo-signature" src="assets/ai-workflow-signature.webp" alt="AI Workflow" width="1200" height="402" loading="lazy" decoding="async" aria-hidden="true" />
@@ -3606,6 +3606,101 @@
           });
         }, { threshold: 0.35, rootMargin: "0px 0px -8% 0px" });
         aboutHeadingObserver.observe(aboutHeading);
+      }
+
+      const heroProjectStack = document.querySelector(".hero-project-stack");
+      const heroCnapCard = heroProjectStack?.querySelector(".hero-stack-cnap");
+      const canShowHeroCursorGuide = window.matchMedia("(hover: hover) and (pointer: fine)").matches
+        && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (heroProjectStack && heroCnapCard && canShowHeroCursorGuide) {
+        const guideCursor = document.createElement("span");
+        guideCursor.className = "hero-stack-demo-cursor";
+        guideCursor.setAttribute("aria-hidden", "true");
+        guideCursor.innerHTML = `
+          <svg viewBox="0 0 36 37" fill="none" role="presentation">
+            <path d="M11.5444 12.9152C11.191 11.226 12.9993 9.91228 14.4965 10.7704L22.769 15.5114C24.3173 16.3988 24.0164 18.7159 22.2927 19.1783L19.6402 19.89C19.1574 20.0195 18.7406 20.3251 18.4719 20.7466L17.1287 22.8537C16.1649 24.3659 13.8518 23.9433 13.4846 22.1882L11.5444 12.9152Z" fill="#EE6F2D" />
+            <path d="M12.1802 12.7822C11.9416 11.642 13.1629 10.7548 14.1735 11.334L22.4456 16.0755C23.4908 16.6745 23.2877 18.2385 22.1242 18.5506L19.4715 19.2624C18.832 19.4341 18.2802 19.839 17.9242 20.3974L16.581 22.5044C15.9304 23.525 14.3684 23.2399 14.1205 22.0553L12.1802 12.7822Z" stroke="#fff" stroke-width="1.3" />
+          </svg>`;
+        heroProjectStack.append(guideCursor);
+
+        let guideRunId = 0;
+        let guideRestartTimer = 0;
+        let userHoverTimer = 0;
+        let guideCompleted = false;
+        const waitForGuide = (duration, runId) => new Promise((resolve) => {
+          window.setTimeout(() => resolve(runId === guideRunId), duration);
+        });
+        const clearGuideVisuals = () => {
+          guideCursor.classList.remove("is-visible", "is-hovering");
+          heroCnapCard.classList.remove("is-demo-hover");
+          heroProjectStack.classList.remove("is-demo-preview");
+        };
+        const stopHeroCursorGuide = (completed = false) => {
+          guideRunId += 1;
+          clearGuideVisuals();
+          if (completed) guideCompleted = true;
+        };
+        const placeGuideCursor = (x, y) => {
+          guideCursor.style.left = `${x}px`;
+          guideCursor.style.top = `${y}px`;
+        };
+        const runHeroCursorGuide = async () => {
+          if (guideCompleted || heroProjectStack.matches(":hover")) return;
+          const runId = ++guideRunId;
+          if (!(await waitForGuide(420, runId))) return;
+
+          const stackRect = heroProjectStack.getBoundingClientRect();
+          const cardRect = heroCnapCard.getBoundingClientRect();
+          const targetX = cardRect.left - stackRect.left + cardRect.width * .55;
+          const targetY = cardRect.top - stackRect.top + cardRect.height * .55;
+          placeGuideCursor(Math.min(stackRect.width - 28, targetX + cardRect.width * .42), Math.min(stackRect.height - 24, targetY + 96));
+          guideCursor.classList.add("is-visible");
+
+          if (!(await waitForGuide(280, runId))) return;
+          placeGuideCursor(targetX, targetY);
+
+          if (!(await waitForGuide(740, runId))) return;
+          heroProjectStack.classList.add("is-demo-preview");
+          heroCnapCard.classList.add("is-demo-hover");
+          guideCursor.classList.add("is-hovering");
+
+          if (!(await waitForGuide(1350, runId))) return;
+          stopHeroCursorGuide(true);
+        };
+
+        heroProjectStack.querySelectorAll(".hero-project-stack-card").forEach((card) => {
+          card.addEventListener("pointerenter", () => {
+            if (guideCompleted) return;
+            stopHeroCursorGuide();
+            window.clearTimeout(userHoverTimer);
+            userHoverTimer = window.setTimeout(() => {
+              guideCompleted = true;
+            }, 650);
+          });
+          card.addEventListener("pointerleave", () => {
+            window.clearTimeout(userHoverTimer);
+            if (!guideCompleted && !heroProjectStack.matches(":hover")) {
+              window.clearTimeout(guideRestartTimer);
+              guideRestartTimer = window.setTimeout(runHeroCursorGuide, 520);
+            }
+          });
+        });
+        heroProjectStack.addEventListener("pointerleave", () => {
+          if (guideCompleted) return;
+          window.clearTimeout(guideRestartTimer);
+          guideRestartTimer = window.setTimeout(runHeroCursorGuide, 520);
+        });
+        ["pointerdown", "focusin"].forEach((eventName) => {
+          heroProjectStack.addEventListener(eventName, () => stopHeroCursorGuide(true), { once: true });
+        });
+        const heroGuideObserver = new IntersectionObserver((entries) => {
+          if (entries.some((entry) => entry.isIntersecting && entry.intersectionRatio >= .55)) {
+            heroGuideObserver.disconnect();
+            if (heroProjectStack.matches(":hover")) return;
+            runHeroCursorGuide();
+          }
+        }, { threshold: [.55] });
+        heroGuideObserver.observe(heroProjectStack);
       }
 
       const projectCursor = document.querySelector(".project-hover-cursor");
