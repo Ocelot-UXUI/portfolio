@@ -64,3 +64,13 @@ html:has(.cnap-research-page),.cnap-research-page,.cnap-research-page *{scrollba
 @font-face{font-family:"Space Grotesk";font-style:normal;font-weight:600;font-display:swap;src:url("../assets/fonts/space-grotesk-600.ttf") format("truetype")}
 @font-face{font-family:"Space Grotesk";font-style:normal;font-weight:700;font-display:swap;src:url("../assets/fonts/space-grotesk-700.ttf") format("truetype")}
 body,.homepage,.prototype-homepage{font-family:"Space Grotesk","Noto Sans SC","Source Han Sans SC","PingFang SC",Arial,sans-serif}
+
+/* Deliverable controls inherit the accent of the project they belong to. */
+.deliverables-page{--deliverable-accent:#ee6a18;--deliverable-accent-rgb:238 106 24}
+.deliverables-page[data-project-theme="cnap"]{--deliverable-accent:#50d7a0;--deliverable-accent-rgb:80 215 160}
+.deliverables-page[data-project-theme="dodo"]{--deliverable-accent:#5180f9;--deliverable-accent-rgb:81 128 249}
+.deliverables-page[data-project-theme="remi"]{--deliverable-accent:#a58fff;--deliverable-accent-rgb:165 143 255}
+.deliverables-page .deliverables-tabs button[aria-selected="true"]{border-color:rgb(var(--deliverable-accent-rgb) / .32);background:linear-gradient(135deg,rgb(var(--deliverable-accent-rgb) / .16),rgba(255,255,255,.055));box-shadow:inset 0 1px rgba(255,255,255,.08),0 10px 28px rgba(0,0,0,.2),0 0 24px rgb(var(--deliverable-accent-rgb) / .07)}
+.deliverables-page .deliverables-tabs button[data-tab-index][aria-selected="true"]:before{color:var(--deliverable-accent)}
+.deliverables-page .deliverables-tabs button:focus-visible,.deliverables-page .research-subtabs button:focus-visible{outline-color:var(--deliverable-accent)}
+.deliverables-page .research-subtabs button[aria-selected="true"]{border-color:rgb(var(--deliverable-accent-rgb) / .55);background:rgb(var(--deliverable-accent-rgb) / .16);color:#fff}

@@ -1646,17 +1646,19 @@ body .project-nav .project-view-tab:focus-visible {
 .project-sequence-nav {
   --project-sequence-accent: #ee6a18;
   --project-sequence-accent-rgb: 238 106 24;
-  --project-sequence-line: rgba(255,255,255,.12);
+  --project-sequence-line: rgba(27,28,34,.16);
+  --project-sequence-ink: #1b1c22;
+  --project-sequence-muted: rgba(27,28,34,.56);
   position: relative;
   z-index: 1;
   width: 100%;
   padding: clamp(22px, 2.4vw, 34px) var(--case-page-gutter, clamp(28px, 5vw, 112px)) clamp(24px, 2.8vw, 38px);
   border-top: 1px solid rgb(var(--project-sequence-accent-rgb) / .28);
   background:
-    radial-gradient(circle at 18% 0%, rgb(var(--project-sequence-accent-rgb) / .16), transparent 42%),
-    linear-gradient(180deg, rgba(8,9,10,.98), rgba(8,9,10,.96)),
-    #08090a;
-  color: #f7f7f5;
+    radial-gradient(circle at 18% 0%, rgb(var(--project-sequence-accent-rgb) / .14), transparent 42%),
+    linear-gradient(180deg, rgba(255,255,255,.4), rgba(232,232,229,.76)),
+    #e8e8e5;
+  color: var(--project-sequence-ink);
   font-family: "Space Grotesk", "PingFang SC", sans-serif;
 }
 
@@ -1676,14 +1678,14 @@ body .project-nav .project-view-tab:focus-visible {
 .project-sequence-heading p,
 .project-sequence-heading span {
   margin: 0;
-  color: rgba(255,255,255,.46);
+  color: var(--project-sequence-muted);
   font-size: 11px;
   font-weight: 500;
   letter-spacing: .08em;
 }
 
 .project-sequence-heading p {
-  color: rgba(255,255,255,.74);
+  color: rgba(27,28,34,.76);
   font-size: 12px;
   letter-spacing: 0;
 }
@@ -1705,10 +1707,10 @@ body .project-nav .project-view-tab:focus-visible {
   overflow: hidden;
   border: 1px solid var(--project-sequence-line);
   border-radius: 14px;
-  background: rgba(255,255,255,.055);
+  background: rgba(255,255,255,.48);
   -webkit-backdrop-filter: blur(18px) saturate(135%);
   backdrop-filter: blur(18px) saturate(135%);
-  box-shadow: inset 0 1px rgba(255,255,255,.08), 0 12px 30px rgba(0,0,0,.12);
+  box-shadow: inset 0 1px rgba(255,255,255,.64), 0 12px 30px rgba(27,28,34,.08);
   color: inherit;
   text-decoration: none;
   isolation: isolate;
@@ -1744,8 +1746,8 @@ body .project-nav .project-view-tab:focus-visible {
 .project-sequence-link:hover,
 .project-sequence-link:focus-visible {
   border-color: rgb(var(--project-sequence-accent-rgb) / .52);
-  background: rgba(255,255,255,.075);
-  box-shadow: inset 0 1px rgba(255,255,255,.1), 0 14px 34px rgba(0,0,0,.2);
+  background: rgba(255,255,255,.7);
+  box-shadow: inset 0 1px rgba(255,255,255,.78), 0 14px 34px rgba(27,28,34,.12);
 }
 
 .project-sequence-link:focus-visible {
@@ -1764,9 +1766,9 @@ body .project-nav .project-view-tab:focus-visible {
   height: 34px;
   flex: 0 0 34px;
   place-items: center;
-  border: 1px solid rgba(255,255,255,.28);
+  border: 1px solid rgba(27,28,34,.32);
   border-radius: 50%;
-  color: #fff;
+  color: var(--project-sequence-ink);
   font-size: 15px;
   line-height: 1;
   padding-bottom: 2px;
@@ -1791,13 +1793,13 @@ body[data-project-theme="dodo"] .project-sequence-nav {
 }
 
 body[data-project-theme="remi"] .project-sequence-nav {
-  --project-sequence-accent: #dc5619;
-  --project-sequence-accent-rgb: 220 86 25;
+  --project-sequence-accent: #a58fff;
+  --project-sequence-accent-rgb: 165 143 255;
 }
 
 body[data-project-theme="reading"] .project-sequence-nav {
-  --project-sequence-accent: #b49aff;
-  --project-sequence-accent-rgb: 180 154 255;
+  --project-sequence-accent: #35d98c;
+  --project-sequence-accent-rgb: 53 217 140;
 }
 
 body[data-project-theme="xhs"] .project-sequence-nav {
@@ -1864,13 +1866,13 @@ body[data-project-theme="cnap"] .project-sequence-arrow {
 
 .project-sequence-copy small {
   margin-bottom: 6px;
-  color: rgba(255,255,255,.46);
+  color: var(--project-sequence-muted);
   font-size: 11px;
   font-weight: 500;
 }
 
 .project-sequence-copy strong {
-  color: #f7f7f5;
+  color: var(--project-sequence-ink);
   font-size: clamp(15px, 1.25vw, 19px);
   font-weight: 500;
   letter-spacing: -.02em;
@@ -1879,7 +1881,7 @@ body[data-project-theme="cnap"] .project-sequence-arrow {
 
 .project-sequence-copy em {
   margin-top: 5px;
-  color: rgba(255,255,255,.5);
+  color: var(--project-sequence-muted);
   font-size: clamp(10px, .75vw, 12px);
   font-style: normal;
   line-height: 1.5;
