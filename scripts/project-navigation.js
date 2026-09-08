@@ -1,5 +1,5 @@
 (() => {
-  const homeScrollKey = "portfolio:home-scroll-y";
+const homeScrollKey = "portfolio:home-scroll-y";
   const restoreHomeScrollKey = "portfolio:restore-home-scroll";
   const returnScrollParam = "returnScroll";
   const restoreScrollParam = "restoreScroll";
@@ -87,8 +87,10 @@
       });
     });
   }
+})();
 
-  const shuffle = (items) => [...items].sort(() => Math.random() - 0.5);
+(() => {
+const shuffle = (items) => [...items].sort(() => Math.random() - 0.5);
 
   const createSwapLabel = (text, extraClass = "") => {
     const label = document.createElement("span");
@@ -334,8 +336,10 @@
 
   document.querySelectorAll(".project-nav .project-nav-index").forEach(enhanceElement);
   document.querySelectorAll(".prototype-homepage .nav-logo, .prototype-homepage .nav-label, .prototype-homepage .nav-contact-label").forEach(enhanceElement);
+})();
 
-  const collectSectionRailTargets = () => {
+(() => {
+const collectSectionRailTargets = () => {
     if (document.body.matches(".prototype-homepage, .demo-page, .dodo-demo-page") || document.querySelector(".portfolio-demo-app")) return [];
 
     const deck = document.querySelector("main .slides");
@@ -473,8 +477,10 @@
       railRebuildTimer = window.setTimeout(buildSectionRail, 80);
     }).observe(projectMain, { childList: true, subtree: true, attributes: true, attributeFilter: ["hidden"] });
   }
+})();
 
-  const projectSequence = [
+(() => {
+const projectSequence = [
     { file: "cnap-case.html", title: "复杂 B 端系统体验重构", meta: "百度智能云 · 复杂 B 端体验", theme: "cnap" },
     { file: "dodo.html", title: "AI 设计工作流实践与复盘", meta: "AI 产品 · 设计工程化", theme: "dodo" },
     { file: "case.html", title: "主动式 AI 记忆助手", meta: "商汤科技 · 0–1 项目", theme: "remi" },

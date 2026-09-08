@@ -1,84 +1,243 @@
-import assert from 'node:assert/strict';
+import assert from "node:assert/strict";
+import { spawn } from "node:child_process";
+import { createServer } from "node:http";
+import { existsSync } from "node:fs";
+import { mkdtemp, readFile, rm, stat } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-const targets = await fetch('http://127.0.0.1:9222/json').then(response => response.json());
-const target = targets.find(item => item.type === 'page' && item.url.includes('/demos/workload-demo/index.html'));
-assert.ok(target, 'workload demo page was not found in the running browser');
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
+const homepageInitialLoadBudget = 2 * 1024 * 1024;
+const missingRequests = new Set();
+const mimeTypes = {
+  ".css": "text/css; charset=utf-8",
+  ".gif": "image/gif",
+  ".html": "text/html; charset=utf-8",
+  ".ico": "image/x-icon",
+  ".jpg": "image/jpeg",
+  ".jpeg": "image/jpeg",
+  ".js": "text/javascript; charset=utf-8",
+  ".json": "application/json; charset=utf-8",
+  ".mp4": "video/mp4",
+  ".png": "image/png",
+  ".svg": "image/svg+xml",
+  ".webp": "image/webp",
+  ".woff2": "font/woff2",
+  ".zip": "application/zip",
+};
 
-const socket = new WebSocket(target.webSocketDebuggerUrl);
+const server = createServer(async (request, response) => {
+  try {
+    const requestUrl = new URL(request.url || "/", "http://127.0.0.1");
+    const relativePath = decodeURIComponent(requestUrl.pathname).replace(/^\/+/, "") || "index.html";
+    let filePath = path.resolve(root, relativePath);
+    if (!filePath.startsWith(root + path.sep)) throw new Error("path escapes portfolio root");
+    if ((await stat(filePath)).isDirectory()) filePath = path.join(filePath, "index.html");
+    const body = await readFile(filePath);
+    response.writeHead(200, { "content-type": mimeTypes[path.extname(filePath).toLowerCase()] || "application/octet-stream" });
+    response.end(body);
+  } catch {
+    if (request.url === "/favicon.ico") {
+      response.writeHead(204);
+      response.end();
+      return;
+    }
+    missingRequests.add(request.url || "/");
+    response.writeHead(404, { "content-type": "text/plain; charset=utf-8" });
+    response.end("Not found");
+  }
+});
+
+await new Promise((resolve, reject) => {
+  server.once("error", reject);
+  server.listen(0, "127.0.0.1", resolve);
+});
+
+const serverAddress = server.address();
+assert.ok(serverAddress && typeof serverAddress === "object");
+const siteOrigin = `http://127.0.0.1:${serverAddress.port}`;
+const chromeCandidates = [
+  process.env.CHROME_PATH,
+  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+  "/Applications/Chromium.app/Contents/MacOS/Chromium",
+  "/usr/bin/google-chrome",
+  "/usr/bin/google-chrome-stable",
+  "/usr/bin/chromium",
+  "/usr/bin/chromium-browser",
+].filter(Boolean);
+const chromePath = chromeCandidates.find(existsSync);
+assert.ok(chromePath, "Chrome/Chromium was not found; set CHROME_PATH to run browser tests");
+
+const profileDir = await mkdtemp(path.join(tmpdir(), "portfolio-browser-smoke-"));
+const chrome = spawn(chromePath, [
+  "--headless=new",
+  "--disable-background-networking",
+  "--disable-default-apps",
+  "--disable-extensions",
+  "--disable-gpu",
+  "--disable-sync",
+  "--metrics-recording-only",
+  "--no-default-browser-check",
+  "--no-first-run",
+  "--no-sandbox",
+  "--remote-debugging-address=127.0.0.1",
+  "--remote-debugging-port=0",
+  `--user-data-dir=${profileDir}`,
+  "about:blank",
+], { stdio: "ignore" });
+
+const delay = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
+async function waitFor(readValue, message, timeout = 15000) {
+  const deadline = Date.now() + timeout;
+  let lastError;
+  while (Date.now() < deadline) {
+    try {
+      const value = await readValue();
+      if (value) return value;
+    } catch (error) {
+      lastError = error;
+    }
+    await delay(50);
+  }
+  throw new Error(`${message}${lastError ? `: ${lastError.message}` : ""}`);
+}
+
+let socket;
 const pending = new Map();
 const errors = [];
 let sequence = 0;
 
-socket.addEventListener('message', event => {
-  const message = JSON.parse(event.data);
-  if(message.method === 'Runtime.exceptionThrown'){
-    const details = message.params.exceptionDetails;
-    errors.push(details.exception?.description || `${details.text} (${details.url}:${details.lineNumber})`);
-  }
-  if(message.method === 'Log.entryAdded' && message.params.entry.level === 'error'){
-    const entry = message.params.entry;
-    if(!entry.url?.endsWith('/favicon.ico'))errors.push(`${entry.text}${entry.url ? ` (${entry.url})` : ''}`);
-  }
-  if(!message.id)return;
-  const request = pending.get(message.id);
-  if(!request)return;
-  pending.delete(message.id);
-  if(message.error)request.reject(new Error(message.error.message));
-  else request.resolve(message.result);
-});
-
-await new Promise((resolve, reject) => {
-  socket.addEventListener('open', resolve, { once: true });
-  socket.addEventListener('error', reject, { once: true });
-});
-
-function send(method, params = {}){
+function send(method, params = {}) {
   const id = ++sequence;
   socket.send(JSON.stringify({ id, method, params }));
   return new Promise((resolve, reject) => pending.set(id, { resolve, reject }));
 }
 
-async function evaluate(expression){
-  const result = await send('Runtime.evaluate', { expression, returnByValue: true, awaitPromise: true });
-  if(result.exceptionDetails)throw new Error(result.exceptionDetails.text);
+async function evaluate(expression) {
+  const result = await send("Runtime.evaluate", { expression, returnByValue: true, awaitPromise: true });
+  if (result.exceptionDetails) throw new Error(result.exceptionDetails.exception?.description || result.exceptionDetails.text);
   return result.result.value;
 }
 
-await send('Runtime.enable');
-await send('Log.enable');
-await send('Page.enable');
-await send('Page.reload', { ignoreCache: true });
-await new Promise(resolve => setTimeout(resolve, 2500));
-errors.length = 0;
+async function openPage(pathname, selector) {
+  errors.length = 0;
+  missingRequests.clear();
+  await send("Page.navigate", { url: `${siteOrigin}${pathname}` });
+  await waitFor(
+    () => evaluate(`document.readyState === "complete" && Boolean(document.querySelector(${JSON.stringify(selector)}))`),
+    `${pathname} did not finish loading`,
+  );
+  await delay(250);
+  assert.deepEqual(errors, [], `${pathname} logged browser errors`);
+  assert.deepEqual([...missingRequests], [], `${pathname} requested missing local files`);
+}
 
-const initial = await evaluate(`({
-  groups: document.querySelectorAll('#clusterGroups .cluster-group').length,
-  exposureLabel: document.querySelector('[data-app-nav="exposure"] span')?.textContent,
-  dropdownReady: typeof window.mountCnapApplicationDropdown === 'function',
-  readinessPromise: typeof window.cnapApplicationDropdownReady,
-  deferredMarker: Boolean(document.querySelector('[data-deferred-src]')),
-  dropdownResources: performance.getEntriesByType('resource').filter(entry => entry.name.includes('cnap-application-dropdown')).map(entry => entry.name),
-  scriptSources: Array.from(document.scripts).map(script => script.src || script.dataset.deferredSrc || 'inline').filter(source => source.includes('cnap-application-dropdown'))
-})`);
-if(!initial.dropdownReady)console.log({ initial, errors });
-assert.equal(initial.groups, 7);
-assert.equal(initial.exposureLabel, '流量接入');
-assert.equal(initial.dropdownReady, true);
+try {
+  const devToolsPortFile = path.join(profileDir, "DevToolsActivePort");
+  const devToolsPort = await waitFor(async () => {
+    const contents = await readFile(devToolsPortFile, "utf8");
+    return Number.parseInt(contents.split(/\r?\n/)[0], 10) || 0;
+  }, "Chrome did not expose a DevTools port");
 
-await evaluate(`document.querySelector('[data-context="application"]').click()`);
-await new Promise(resolve => setTimeout(resolve, 100));
+  const target = await waitFor(async () => {
+    const response = await fetch(`http://127.0.0.1:${devToolsPort}/json/list`);
+    const list = await response.json();
+    return list.find((item) => item.type === "page");
+  }, "Chrome did not create a page target");
 
-const menu = await evaluate(`({
-  hidden: document.querySelector('#actionMenu').classList.contains('hidden'),
-  type: document.querySelector('#actionMenu').dataset.menuType,
-  reactRoot: Boolean(document.querySelector('#actionMenu [data-cnap-react-root="application-dropdown"]')),
-  legacyMenu: Boolean(document.querySelector('#actionMenu [data-application-search]'))
-})`);
-assert.equal(menu.hidden, false);
-assert.equal(menu.type, 'application');
-assert.equal(menu.reactRoot, true);
-assert.equal(menu.legacyMenu, false);
-assert.deepEqual(errors, []);
+  socket = new WebSocket(target.webSocketDebuggerUrl);
+  socket.addEventListener("message", (event) => {
+    const message = JSON.parse(event.data);
+    if (message.method === "Runtime.exceptionThrown") {
+      const details = message.params.exceptionDetails;
+      errors.push(details.exception?.description || `${details.text} (${details.url}:${details.lineNumber})`);
+    }
+    if (message.method === "Log.entryAdded" && message.params.entry.level === "error") {
+      const entry = message.params.entry;
+      if (!entry.url?.endsWith("/favicon.ico")) errors.push(`${entry.text}${entry.url ? ` (${entry.url})` : ""}`);
+    }
+    if (!message.id) return;
+    const request = pending.get(message.id);
+    if (!request) return;
+    pending.delete(message.id);
+    if (message.error) request.reject(new Error(message.error.message));
+    else request.resolve(message.result);
+  });
+  await new Promise((resolve, reject) => {
+    socket.addEventListener("open", resolve, { once: true });
+    socket.addEventListener("error", reject, { once: true });
+  });
+  await send("Runtime.enable");
+  await send("Log.enable");
+  await send("Page.enable");
 
-socket.close();
-console.log('workload demo browser smoke test passed');
+  const pages = [
+    ["/index.html", ".prototype-homepage"],
+    ["/pages/case.html", "main"],
+    ["/pages/cnap-case.html", "main"],
+    ["/pages/dodo.html", "main"],
+    ["/pages/skip-read.html", "main"],
+    ["/pages/xiaohongshu.html", "main"],
+    ["/pages/design-review-skill.html", "main"],
+    ["/pages/figma-asset-exporter.html", "main"],
+  ];
+  await openPage(...pages[0]);
+  const homepageLoad = await evaluate(`(() => {
+    const entries = [
+      ...performance.getEntriesByType('navigation'),
+      ...performance.getEntriesByType('resource')
+    ];
+    return {
+      bytes: entries.reduce((sum, entry) => sum + (entry.transferSize || entry.encodedBodySize || 0), 0),
+      resources: entries.length
+    };
+  })()`);
+  assert.ok(
+    homepageLoad.bytes <= homepageInitialLoadBudget,
+    `homepage initial load is ${(homepageLoad.bytes / 1048576).toFixed(2)} MiB; budget is 2.00 MiB`,
+  );
+  console.log(`homepage initial load: ${(homepageLoad.bytes / 1048576).toFixed(2)} MiB across ${homepageLoad.resources} requests`);
+
+  for (const [pathname, selector] of pages.slice(1)) await openPage(pathname, selector);
+
+  await openPage("/xiaohongshu.html?source=legacy#top", "main");
+  const redirect = await evaluate(`({ pathname: location.pathname, search: location.search, hash: location.hash })`);
+  assert.deepEqual(redirect, { pathname: "/pages/xiaohongshu.html", search: "?source=legacy", hash: "#top" });
+
+  await openPage("/demos/workload-demo/index.html", "#clusterGroups");
+  await waitFor(
+    () => evaluate(`typeof window.mountCnapApplicationDropdown === "function"`),
+    "the deferred application dropdown did not initialize",
+  );
+  const initial = await evaluate(`({
+    groups: document.querySelectorAll('#clusterGroups .cluster-group').length,
+    exposureLabel: document.querySelector('[data-app-nav="exposure"] span')?.textContent,
+    dropdownReady: typeof window.mountCnapApplicationDropdown === 'function'
+  })`);
+  assert.equal(initial.groups, 7);
+  assert.equal(initial.exposureLabel, "流量接入");
+  assert.equal(initial.dropdownReady, true);
+
+  await evaluate(`document.querySelector('[data-context="application"]').click()`);
+  await delay(100);
+  const menu = await evaluate(`({
+    hidden: document.querySelector('#actionMenu').classList.contains('hidden'),
+    type: document.querySelector('#actionMenu').dataset.menuType,
+    reactRoot: Boolean(document.querySelector('#actionMenu [data-cnap-react-root="application-dropdown"]')),
+    legacyMenu: Boolean(document.querySelector('#actionMenu [data-application-search]'))
+  })`);
+  assert.equal(menu.hidden, false);
+  assert.equal(menu.type, "application");
+  assert.equal(menu.reactRoot, true);
+  assert.equal(menu.legacyMenu, false);
+  assert.deepEqual(errors, []);
+  assert.deepEqual([...missingRequests], []);
+
+  console.log(`browser smoke test passed for ${pages.length + 2} routes`);
+} finally {
+  socket?.close();
+  chrome.kill("SIGTERM");
+  server.close();
+  await rm(profileDir, { recursive: true, force: true });
+}

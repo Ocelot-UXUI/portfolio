@@ -1,0 +1,1002 @@
+/* Demo pages use a dedicated in-flow top bar so portfolio controls never cover the product UI. */
+body.demo-page > .project-nav,
+body.dodo-demo-page > .project-nav,
+body > .portfolio-project-nav.project-nav {
+  position: sticky !important;
+  top: 0 !important;
+  width: 100% !important;
+  height: 56px !important;
+  margin: 0 !important;
+  padding: 0 20px !important;
+  background: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+/* Workload Demo uses the same light portfolio chrome as the other demo shells. */
+body > .portfolio-project-nav.project-nav,
+body > .portfolio-project-nav.project-nav.is-scrolled,
+body > .portfolio-project-nav.project-nav.project-nav--compact {
+  color: #1b1c22 !important;
+  background: rgba(255, 255, 255, .78) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(125%) !important;
+  backdrop-filter: blur(18px) saturate(125%) !important;
+  box-shadow: inset 0 1px rgba(255, 255, 255, .75) !important;
+}
+
+body.demo-page .demo-shell { height: calc(100vh - 100px) !important; }
+body.dodo-demo-page .dodo-demo-shell { height: calc(100vh - 56px) !important; }
+body > .portfolio-project-nav.project-nav + .portfolio-demo-app { height: calc(100vh - 56px) !important; }
+
+body.demo-page > .project-nav .project-back,
+body.demo-page > .project-nav .project-view-tabs,
+body.dodo-demo-page > .project-nav .project-back,
+body.dodo-demo-page > .project-nav .project-view-tabs,
+body > .portfolio-project-nav.project-nav .project-back,
+body > .portfolio-project-nav.project-nav .project-view-tabs {
+  box-shadow: 0 2px 8px rgba(15, 23, 42, .055), inset 0 1px rgba(255, 255, 255, .08) !important;
+}
+
+@media (max-width: 700px) {
+  body.demo-page > .project-nav,
+  body.dodo-demo-page > .project-nav,
+  body > .portfolio-project-nav.project-nav {
+    height: 52px !important;
+    padding: 0 10px !important;
+  }
+
+  body.demo-page .demo-shell { height: calc(100vh - 96px) !important; }
+  body.dodo-demo-page .dodo-demo-shell { height: calc(100vh - 52px) !important; }
+  body > .portfolio-project-nav.project-nav + .portfolio-demo-app { height: calc(100vh - 52px) !important; }
+}
+
+body .project-nav::before,
+body .project-nav::after {
+  content: none !important;
+  display: none !important;
+}
+
+body .project-nav,
+body .project-nav.is-scrolled,
+body .project-nav.project-nav--compact,
+body .project-nav.project-nav--hidden {
+  border-color: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  overflow: visible !important;
+}
+
+body .project-nav.project-nav--tabs {
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px;
+}
+
+body .project-nav .project-back,
+body .project-nav .project-view-tabs,
+body .project-nav .project-nav-index {
+  align-self: center !important;
+}
+
+body .project-nav.project-nav--tabs .project-nav-title,
+body .project-nav:not(.project-nav--tabs) .project-nav-title {
+  display: flex;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  justify-self: center;
+  justify-content: center;
+  width: auto;
+  max-width: min(42vw, 560px);
+  height: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent !important;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  box-shadow: none;
+  color: #fff !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  text-align: center;
+}
+
+body .project-nav.project-nav--tabs .project-view-tabs {
+  justify-self: end;
+  width: max-content;
+  max-width: none;
+  height: 52px;
+  gap: 6px;
+  padding: 3px;
+  overflow: visible;
+  border: 1px solid rgba(255, 255, 255, .16);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .08);
+  -webkit-backdrop-filter: blur(18px) saturate(135%);
+  backdrop-filter: blur(18px) saturate(135%);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .08), inset 0 1px rgba(255, 255, 255, .06);
+  opacity: 1;
+}
+
+body .project-nav .project-view-tab {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  min-width: 76px;
+  padding: 0 15px;
+  border-radius: 999px;
+  color: rgba(255, 255, 255, .68) !important;
+  font-size: 14px !important;
+  line-height: 1;
+  text-decoration: none;
+  transition: background-color .18s ease, color .18s ease;
+}
+
+body .project-nav .project-view-tab-text {
+  display: inline-block !important;
+  position: relative;
+  z-index: 1;
+  white-space: nowrap;
+}
+
+body .project-nav .project-view-tab-highlight {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--project-tab-active-bg, rgba(255, 255, 255, .14));
+  pointer-events: none;
+}
+
+body .project-nav .project-view-tab:hover,
+body .project-nav .project-view-tab:focus-visible {
+  background: rgba(255, 255, 255, .14);
+  color: #fff !important;
+}
+
+body .project-nav .project-view-tab.is-active {
+  background: transparent;
+  color: #fff !important;
+}
+
+body .project-nav .project-view-tab-indicator {
+  display: none !important;
+}
+
+body .project-nav.project-nav--title-in-tabs .project-nav-title {
+  position: static;
+  left: auto;
+  top: auto;
+  transform: none;
+  align-self: center;
+  flex: 0 0 auto;
+  width: 220px;
+  min-width: 220px;
+  max-width: 220px;
+  height: 32px;
+  margin-right: 8px;
+  padding: 0 16px 0 14px;
+  border-right: 1px solid rgba(255, 255, 255, .16);
+  color: #fff !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  line-height: 32px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+body .project-nav .project-back {
+  line-height: 1;
+  box-shadow: 0 0 18px rgba(0, 0, 0, .09), inset 0 1px rgba(255, 255, 255, .08);
+}
+
+body .project-nav .project-back > span:first-child {
+  flex: 0 0 24px;
+  padding: 0;
+  place-items: center;
+  line-height: 1;
+}
+
+body:not(.deliverables-page):not(.dodo-page):not(.dodo-demo-page):not(.demo-page) .project-nav.project-nav--tabs .project-view-tabs {
+  --project-tab-active-bg: rgba(16, 18, 24, .1);
+  border-color: rgba(16, 18, 24, .1);
+  background: rgba(255, 255, 255, .72);
+  box-shadow: 0 8px 24px rgba(20, 24, 32, .08), inset 0 1px rgba(255, 255, 255, .6);
+}
+
+body:not(.deliverables-page):not(.dodo-page):not(.dodo-demo-page):not(.demo-page) .project-nav.project-nav--title-in-tabs .project-nav-title {
+  border-right-color: rgba(16, 18, 24, .1);
+  color: #1b1c22 !important;
+}
+
+body:not(.deliverables-page):not(.dodo-page):not(.dodo-demo-page):not(.demo-page) .project-nav .project-view-tab {
+  color: rgba(27, 28, 34, .64) !important;
+}
+
+body:not(.deliverables-page):not(.dodo-page):not(.dodo-demo-page):not(.demo-page) .project-nav .project-view-tab:hover,
+body:not(.deliverables-page):not(.dodo-page):not(.dodo-demo-page):not(.demo-page) .project-nav .project-view-tab:focus-visible {
+  background: rgba(16, 18, 24, .08);
+  color: #1b1c22 !important;
+}
+
+body:not(.deliverables-page):not(.dodo-page):not(.dodo-demo-page):not(.demo-page) .project-nav .project-view-tab.is-active {
+  background: transparent;
+  color: #1b1c22 !important;
+}
+
+body.light-project-nav .project-nav.project-nav--tabs .project-view-tabs {
+  --project-tab-active-bg: rgba(16, 18, 24, .1);
+}
+
+@media (max-width: 700px) {
+  body .project-nav.project-nav--tabs {
+    grid-template-columns: 40px minmax(0, 1fr) minmax(0, 172px);
+    gap: 10px;
+  }
+
+  body .project-nav.project-nav--tabs .project-back {
+    width: 40px;
+    padding: 0 !important;
+    justify-content: center;
+    font-size: 0 !important;
+  }
+
+  body .project-nav.project-nav--tabs .project-back > span:first-child {
+    margin: 0;
+  }
+
+  body .project-nav.project-nav--tabs .project-nav-title {
+    position: static;
+    transform: none;
+    display: none;
+  }
+
+  body .project-nav.project-nav--tabs .project-view-tabs {
+    justify-self: stretch;
+    width: 100%;
+    max-width: none;
+    height: 40px;
+    margin: 0;
+    padding: 2px;
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  body .project-nav.project-nav--tabs .project-view-tabs::-webkit-scrollbar { display: none; }
+
+  body .project-nav .project-view-tab {
+    flex: 0 0 auto;
+    height: 34px;
+    padding: 0 9px;
+    font-size: 11px !important;
+  }
+}
+
+/* Center the arrow glyph optically inside its fixed circular control. */
+body .project-nav .project-back > span:first-child {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  background: #1c202b !important;
+  transform: none;
+  transition: background-color .2s ease, transform .2s ease;
+}
+
+body .project-nav .project-back > span:first-child::before {
+  content: "";
+  display: block;
+  width: 14px;
+  height: 14px;
+  background: #fff;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M19 12H5'/%3E%3Cpath d='m12 19-7-7 7-7'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M19 12H5'/%3E%3Cpath d='m12 19-7-7 7-7'/%3E%3C/svg%3E") center / contain no-repeat;
+  transition: background-color .2s ease;
+}
+
+body .project-nav .project-back:hover > span:first-child,
+body .project-nav .project-back:focus-visible > span:first-child {
+  background: #2a3040 !important;
+  transform: scale(1.04);
+}
+
+body .project-nav .project-back:hover > span:first-child::before,
+body .project-nav .project-back:focus-visible > span:first-child::before {
+  background: #a7f3cf;
+}
+
+body .project-nav .project-back > .project-back-label {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  line-height: 1;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 700px) {
+  body .project-nav .project-back > span:first-child {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* Keep floating project controls centered within the 52px top navigation band. */
+body:not(.demo-page):not(.dodo-demo-page) > .project-nav:not(.portfolio-project-nav) {
+  top: 0;
+  margin: 0 auto -52px;
+}
+
+/* Return control follows the same pill, glass and color system as the view rail. */
+body .project-nav {
+  --project-control-bg: rgba(255,255,255,.08);
+  --project-control-bg-hover: rgba(255,255,255,.14);
+  --project-control-border: rgba(255,255,255,.16);
+  --project-control-text: #fff;
+  --project-control-icon-bg: rgba(255,255,255,.14);
+  --project-control-shadow: 0 8px 24px rgba(0,0,0,.08), inset 0 1px rgba(255,255,255,.06);
+}
+
+body:not(.deliverables-page):not(.dodo-page):not(.dodo-demo-page):not(.demo-page) .project-nav {
+  --project-control-bg: rgba(255,255,255,.72);
+  --project-control-bg-hover: rgba(16,18,24,.08);
+  --project-control-border: rgba(16,18,24,.1);
+  --project-control-text: #42454d;
+  --project-control-icon-bg: rgba(16,18,24,.08);
+  --project-control-shadow: 0 8px 24px rgba(20,24,32,.08), inset 0 1px rgba(255,255,255,.6);
+}
+
+/* Light demo canvases need the same contrast as the case-deck navigation. */
+body.light-project-nav .project-nav {
+  --project-control-bg: rgba(255,255,255,.78);
+  --project-control-bg-hover: rgba(16,18,24,.08);
+  --project-control-border: rgba(16,18,24,.10);
+  --project-control-text: #42454d;
+  --project-control-icon-bg: rgba(16,18,24,.08);
+  --project-control-shadow: 0 2px 8px rgba(15,23,42,.055), inset 0 1px rgba(255,255,255,.72);
+}
+
+body.light-project-nav .project-nav .project-nav-title,
+body.light-project-nav .project-nav .project-view-tab,
+body.light-project-nav .project-nav .project-view-tab:hover,
+body.light-project-nav .project-nav .project-view-tab:focus-visible,
+body.light-project-nav .project-nav .project-view-tab.is-active {
+  color: #1b1c22 !important;
+}
+
+body.light-project-nav .project-nav .project-view-tab:not(.is-active) {
+  color: rgba(27,28,34,.64) !important;
+}
+
+body.demo-page > .project-nav,
+body.dodo-demo-page > .project-nav,
+body > .portfolio-project-nav.project-nav {
+  --project-control-shadow: 0 2px 8px rgba(15,23,42,.055), inset 0 1px rgba(255,255,255,.08);
+}
+
+body:not(.deliverables-page):not(.dodo-page):not(.dodo-demo-page):not(.demo-page) > .portfolio-project-nav.project-nav {
+  --project-control-shadow: 0 2px 8px rgba(15,23,42,.055), inset 0 1px rgba(255,255,255,.08);
+}
+
+body .project-nav .project-back,
+body .project-nav .project-back:hover,
+body .project-nav .project-back:focus-visible,
+body > .portfolio-project-nav.project-nav .project-back,
+body > .portfolio-project-nav.project-nav .project-back:hover,
+body > .portfolio-project-nav.project-nav .project-back:focus-visible {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  align-self: center;
+  justify-self: start;
+  flex: 0 0 auto;
+  width: fit-content;
+  min-width: 0;
+  max-width: min(260px, 100%);
+  height: 44px;
+  min-height: 44px;
+  gap: 10px;
+  margin: 0;
+  padding: 3px 16px 3px 3px !important;
+  border: 1px solid var(--project-control-border) !important;
+  border-radius: 999px;
+  background: var(--project-control-bg) !important;
+  color: var(--project-control-text) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(135%) !important;
+  backdrop-filter: blur(18px) saturate(135%) !important;
+  box-shadow: var(--project-control-shadow) !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  line-height: 1 !important;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  transform: none;
+  transition: background-color .3s ease, border-color .3s ease, color .3s ease;
+}
+
+body .project-nav .project-back:hover,
+body .project-nav .project-back:focus-visible,
+body > .portfolio-project-nav.project-nav .project-back:hover,
+body > .portfolio-project-nav.project-nav .project-back:focus-visible {
+  border-color: var(--project-control-border) !important;
+  background: var(--project-control-bg-hover) !important;
+  color: var(--project-control-text) !important;
+  box-shadow: var(--project-control-shadow) !important;
+  outline: none;
+}
+
+body .project-nav .project-back > span:first-child {
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  display: inline-grid;
+  place-items: center;
+  margin: 0;
+  border: 0;
+  border-radius: 999px;
+  background: var(--project-control-icon-bg) !important;
+  color: var(--project-control-text) !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+  transform: none !important;
+}
+
+body .project-nav .project-back > span:first-child::before {
+  content: "";
+  display: block;
+  width: 16px;
+  height: 16px;
+  background: var(--project-control-text) !important;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M19 12H5'/%3E%3Cpath d='m12 19-7-7 7-7'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M19 12H5'/%3E%3Cpath d='m12 19-7-7 7-7'/%3E%3C/svg%3E") center / contain no-repeat;
+  transform: translateY(4px);
+}
+
+body .project-nav .project-back:hover > span:first-child,
+body .project-nav .project-back:focus-visible > span:first-child {
+  background: var(--project-control-icon-bg) !important;
+  transform: none !important;
+}
+
+body .project-nav .project-back:hover > span:first-child::before,
+body .project-nav .project-back:focus-visible > span:first-child::before {
+  background: var(--project-control-text) !important;
+  transform: translateY(4px);
+}
+
+body .project-nav .project-back > .project-back-label {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  height: auto;
+  overflow: hidden;
+  color: inherit !important;
+  font-family: inherit;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 1 !important;
+  letter-spacing: 0 !important;
+  text-overflow: ellipsis;
+  transform: none !important;
+}
+
+/* Keep the return action available while reading long case decks. */
+body .project-nav.project-nav--hidden { transform: none !important; }
+
+@media (max-width: 700px) {
+  body .project-nav .project-back,
+  body > .portfolio-project-nav.project-nav .project-back {
+    height: 40px;
+    min-height: 40px;
+    padding: 3px 12px 3px 3px !important;
+    font-size: 12px !important;
+  }
+
+  body .project-nav .project-back > span:first-child {
+    flex-basis: 32px;
+    width: 32px;
+    height: 32px;
+  }
+
+}
+
+@media (max-width: 420px) {
+  body .project-nav .project-back,
+  body > .portfolio-project-nav.project-nav .project-back {
+    width: 40px;
+    padding: 0 !important;
+    justify-content: center;
+    border-radius: 999px;
+  }
+
+  body .project-nav .project-back-label { display: none; }
+}
+
+@media (max-width: 700px) {
+  /* The view switcher is moved into the tab rail, so there are only two grid columns. */
+  body .project-nav.project-nav--tabs {
+    grid-template-columns: 40px minmax(0, 1fr) !important;
+  }
+
+  body .project-nav.project-nav--tabs .project-back {
+    width: 40px;
+    min-width: 40px;
+    padding: 0 !important;
+    justify-content: center;
+    gap: 0;
+    font-size: 0 !important;
+  }
+
+  body .project-nav.project-nav--tabs .project-back-label { display: none; }
+}
+
+/* CNAP's research page uses the same top-band geometry as its Demo. */
+body.cnap-research-page > .project-nav {
+  position: sticky !important;
+  top: 0 !important;
+  width: 100% !important;
+  height: 56px !important;
+  margin: 0 !important;
+  padding: 0 20px !important;
+}
+
+/* Every project page with view tabs shares the Demo top-band geometry. */
+body > .project-nav.project-nav--tabs {
+  position: sticky !important;
+  top: 0 !important;
+  width: 100% !important;
+  height: 56px !important;
+  margin: 0 !important;
+  padding: 0 20px !important;
+}
+
+/* The project navigation is only the floating controls, never a full-width bar. */
+body > .project-nav,
+body > .project-nav.is-scrolled,
+body > .project-nav.project-nav--compact,
+body > .portfolio-project-nav.project-nav,
+body > .portfolio-project-nav.project-nav.is-scrolled,
+body > .portfolio-project-nav.project-nav.project-nav--compact {
+  background: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+body > .project-nav {
+  /* Overlay the first page section instead of reserving a black header band. */
+  margin: 0 auto -56px !important;
+}
+
+body > .project-nav.project-nav--tabs {
+  margin: 0 auto -56px !important;
+}
+
+/* Demo navigation owns a separate top band; keep it in flow above the app UI. */
+body.demo-page > .project-nav,
+body.dodo-demo-page > .project-nav,
+body > .portfolio-project-nav.project-nav {
+  position: sticky !important;
+  top: 0 !important;
+  margin: 0 !important;
+}
+
+body .project-nav .demo-nav-toggle { display: none; }
+
+/* Demo-only presentation mode: remove the portfolio bar from flow and reveal it at the top edge. */
+@media (hover: hover) and (pointer: fine) {
+  body.demo-nav-capable > .project-nav.project-nav--tabs {
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    column-gap: 10px;
+  }
+
+  body .project-nav .demo-nav-actions {
+    min-width: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-self: start;
+    gap: 8px;
+  }
+
+  body .project-nav .demo-nav-toggle {
+    align-self: center;
+    justify-self: end;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    gap: 8px;
+    padding: 0 15px;
+    border: 1px solid var(--project-control-border);
+    border-radius: 999px;
+    background: var(--project-control-bg);
+    color: var(--project-control-text);
+    -webkit-backdrop-filter: blur(18px) saturate(135%);
+    backdrop-filter: blur(18px) saturate(135%);
+    box-shadow: var(--project-control-shadow);
+    font: 500 12px/1 "Space Grotesk", "Noto Sans SC", "Source Han Sans SC", "PingFang SC", Arial, sans-serif;
+    letter-spacing: 0;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color .2s ease, border-color .2s ease;
+  }
+
+  body .project-nav .demo-nav-toggle:hover,
+  body .project-nav .demo-nav-toggle:focus-visible,
+  body .project-nav .demo-nav-toggle[aria-pressed="true"] {
+    border-color: var(--project-control-border);
+    background: color-mix(in srgb, var(--project-control-bg) 82%, var(--project-control-bg-hover));
+    outline: none;
+  }
+
+  body .project-nav .demo-nav-toggle svg {
+    width: 16px;
+    height: 16px;
+    flex: 0 0 16px;
+  }
+
+  body.demo-nav-hidden > .project-nav,
+  body.demo-nav-hidden > .portfolio-project-nav.project-nav {
+    position: fixed !important;
+    inset: 0 0 auto !important;
+    z-index: 1200;
+    transform: translateY(calc(-100% - 8px)) !important;
+    transition: transform .32s cubic-bezier(.22, 1, .36, 1) !important;
+  }
+
+  body.demo-nav-hidden.demo-nav-hovering > .project-nav,
+  body.demo-nav-hidden > .project-nav:focus-within,
+  body.demo-nav-hidden.demo-nav-hovering > .portfolio-project-nav.project-nav,
+  body.demo-nav-hidden > .portfolio-project-nav.project-nav:focus-within {
+    transform: translateY(0) !important;
+  }
+
+  body.demo-nav-hidden.demo-page .demo-shell { height: calc(100vh - 44px) !important; }
+  body.demo-nav-hidden.demo-page .skip-read-demo-shell { height: 100vh !important; }
+  body.demo-nav-hidden.dodo-demo-page .dodo-demo-shell { height: 100vh !important; }
+  body.demo-nav-hidden > .portfolio-project-nav.project-nav + .portfolio-demo-app { height: 100vh !important; }
+}
+
+@media (hover: none), (pointer: coarse) {
+  body .project-nav .demo-nav-toggle { display: none !important; }
+}
+
+@media (max-width: 700px) {
+  body .project-nav .demo-nav-toggle { display: none !important; }
+}
+
+body.deliverables-page > .project-nav,
+body.deliverables-page > .project-nav.is-scrolled,
+body.deliverables-page > .project-nav.project-nav--compact,
+body.cnap-research-page > .project-nav,
+body.cnap-research-page > .project-nav.is-scrolled,
+body.cnap-research-page > .project-nav.project-nav--compact {
+  background: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+/* Demo shells use CNAP's light top band, independent of each embedded product theme. */
+body.demo-page > .project-nav,
+body.dodo-demo-page > .project-nav,
+body > .portfolio-project-nav.project-nav {
+  --project-control-bg: rgba(255, 255, 255, .72);
+  --project-control-bg-hover: rgba(16, 18, 24, .08);
+  --project-control-border: rgba(16, 18, 24, .1);
+  --project-control-text: #42454d;
+  --project-control-icon-bg: rgba(16, 18, 24, .08);
+  --project-control-shadow: 0 2px 8px rgba(15, 23, 42, .055), inset 0 1px rgba(255, 255, 255, .08);
+  color: #1b1c22 !important;
+  background: #f8f9fb !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+body.demo-page > .project-nav.project-nav--tabs .project-view-tabs,
+body.dodo-demo-page > .project-nav.project-nav--tabs .project-view-tabs,
+body > .portfolio-project-nav.project-nav.project-nav--tabs .project-view-tabs {
+  --project-tab-active-bg: rgba(16, 18, 24, .1);
+  border-color: rgba(16, 18, 24, .1);
+  background: rgba(255, 255, 255, .72);
+  box-shadow: 0 8px 24px rgba(20, 24, 32, .08), inset 0 1px rgba(255, 255, 255, .6);
+}
+
+body.demo-page > .project-nav.project-nav--title-in-tabs .project-nav-title,
+body.dodo-demo-page > .project-nav.project-nav--title-in-tabs .project-nav-title,
+body > .portfolio-project-nav.project-nav.project-nav--title-in-tabs .project-nav-title {
+  border-right-color: rgba(16, 18, 24, .1);
+  color: #1b1c22 !important;
+}
+
+body.demo-page > .project-nav .project-view-tab,
+body.dodo-demo-page > .project-nav .project-view-tab,
+body > .portfolio-project-nav.project-nav .project-view-tab {
+  color: rgba(27, 28, 34, .64) !important;
+}
+
+body.demo-page > .project-nav .project-view-tab:hover,
+body.demo-page > .project-nav .project-view-tab:focus-visible,
+body.demo-page > .project-nav .project-view-tab.is-active,
+body.dodo-demo-page > .project-nav .project-view-tab:hover,
+body.dodo-demo-page > .project-nav .project-view-tab:focus-visible,
+body.dodo-demo-page > .project-nav .project-view-tab.is-active,
+body > .portfolio-project-nav.project-nav .project-view-tab:hover,
+body > .portfolio-project-nav.project-nav .project-view-tab:focus-visible,
+body > .portfolio-project-nav.project-nav .project-view-tab.is-active {
+  color: #1b1c22 !important;
+}
+
+body.demo-page > .project-nav .project-view-tab:hover,
+body.demo-page > .project-nav .project-view-tab:focus-visible,
+body.dodo-demo-page > .project-nav .project-view-tab:hover,
+body.dodo-demo-page > .project-nav .project-view-tab:focus-visible,
+body > .portfolio-project-nav.project-nav .project-view-tab:hover,
+body > .portfolio-project-nav.project-nav .project-view-tab:focus-visible {
+  background: rgba(16, 18, 24, .08);
+}
+
+body.demo-page > .project-nav .project-view-tab.is-active,
+body.dodo-demo-page > .project-nav .project-view-tab.is-active,
+body > .portfolio-project-nav.project-nav .project-view-tab.is-active {
+  background: transparent;
+}
+
+/* Keep navigation labels legible and interaction feedback consistent on every project page. */
+body .project-nav {
+  --project-tab-text: rgba(255, 255, 255, .84);
+  --project-tab-text-strong: #fff;
+  --project-tab-active-bg: rgba(255, 255, 255, .16);
+  --project-tab-hover-bg: rgba(255, 255, 255, .08);
+  --project-tab-hover-ring: rgba(255, 255, 255, .06);
+  --project-tab-disabled: rgba(255, 255, 255, .42);
+}
+
+body:not(.deliverables-page):not(.dodo-page):not(.dodo-demo-page):not(.demo-page) .project-nav,
+body.light-project-nav .project-nav,
+body.demo-page > .project-nav,
+body.dodo-demo-page > .project-nav,
+body > .portfolio-project-nav.project-nav {
+  --project-tab-text: rgba(27, 28, 34, .64);
+  --project-tab-text-strong: #1b1c22;
+  --project-tab-active-bg: rgba(16, 18, 24, .1);
+  --project-tab-hover-bg: rgba(16, 18, 24, .045);
+  --project-tab-hover-ring: rgba(16, 18, 24, .04);
+  --project-tab-disabled: rgba(27, 28, 34, .4);
+}
+
+body .project-nav .project-view-tab,
+body .project-nav .project-view-tab:not(.is-active) {
+  color: var(--project-tab-text) !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+}
+
+body .project-nav .project-view-tab-text {
+  display: inline-flex !important;
+  align-items: center;
+  height: 100%;
+  margin: 0 !important;
+  color: inherit !important;
+  font-family: inherit !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
+  letter-spacing: 0 !important;
+}
+
+body .project-nav .project-view-tab-highlight {
+  display: block !important;
+  margin: 0 !important;
+}
+
+body .project-nav .project-view-tab:hover,
+body .project-nav .project-view-tab:focus-visible {
+  background: var(--project-tab-hover-bg) !important;
+  color: var(--project-tab-text-strong) !important;
+  box-shadow: inset 0 0 0 1px var(--project-tab-hover-ring);
+  outline: none;
+}
+
+body .project-nav .project-view-tab.is-active {
+  color: var(--project-tab-text-strong) !important;
+  font-weight: 600 !important;
+}
+
+body .project-nav .project-view-tab.is-active:hover {
+  background: transparent !important;
+  box-shadow: none;
+}
+
+/* Revealed demo navigation remains a translucent glass layer over the app canvas. */
+body.demo-nav-hidden > .project-nav,
+body.demo-nav-hidden > .portfolio-project-nav.project-nav,
+body.demo-nav-hidden.demo-nav-hovering > .project-nav,
+body.demo-nav-hidden.demo-nav-hovering > .portfolio-project-nav.project-nav {
+  background: rgba(255, 255, 255, .72) !important;
+  border-bottom: 0 !important;
+  -webkit-backdrop-filter: blur(22px) saturate(145%) !important;
+  backdrop-filter: blur(22px) saturate(145%) !important;
+  box-shadow: none !important;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Demo pages do not use scroll-sticky navigation. The fixed layer is only
+   enabled while the user has chosen hidden navigation and is revealing it. */
+body.demo-page:not(.demo-nav-hidden) > .project-nav,
+body.dodo-demo-page:not(.demo-nav-hidden) > .project-nav,
+body:not(.demo-nav-hidden) > .portfolio-project-nav.project-nav {
+  position: relative !important;
+  top: auto !important;
+}
+
+/* Keep the companion action row aligned with the 64px navigation band. */
+body .demo-nav-companion {
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+  background: rgba(255, 255, 255, .72) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(145%) !important;
+  backdrop-filter: blur(22px) saturate(145%) !important;
+  transition: transform .22s cubic-bezier(.22, 1, .36, 1) !important;
+}
+
+/* The action row and project navigation share one glass surface. */
+body.demo-page > .project-nav,
+body.dodo-demo-page > .project-nav,
+body > .portfolio-project-nav.project-nav {
+  background: rgba(255, 255, 255, .72) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(145%) !important;
+  backdrop-filter: blur(22px) saturate(145%) !important;
+  box-shadow: none !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body.demo-nav-hidden > .demo-nav-companion {
+    inset: 64px 0 auto !important;
+  }
+
+  body.demo-nav-hidden.demo-page > .project-nav,
+  body.demo-nav-hidden.dodo-demo-page > .project-nav,
+  body.demo-nav-hidden > .portfolio-project-nav.project-nav {
+    transform: translateY(calc(-100% - 8px)) !important;
+  }
+
+  body.demo-nav-hidden > .project-nav,
+  body.demo-nav-hidden > .portfolio-project-nav.project-nav {
+    transition: transform .22s cubic-bezier(.22, 1, .36, 1) !important;
+  }
+
+  body.demo-nav-hidden.demo-nav-hovering > .project-nav,
+  body.demo-nav-hidden > .project-nav:focus-within,
+  body.demo-nav-hidden.demo-nav-hovering > .portfolio-project-nav.project-nav,
+  body.demo-nav-hidden > .portfolio-project-nav.project-nav:focus-within {
+    transform: translateY(0) !important;
+  }
+}
+
+/* Demo shells follow the shared 64px navigation height instead of the old 56px band. */
+body.demo-page:not(.demo-nav-hidden) .demo-shell {
+  height: calc(100vh - 108px) !important;
+}
+
+body.dodo-demo-page:not(.demo-nav-hidden) .dodo-demo-shell,
+body:not(.demo-nav-hidden) > .portfolio-project-nav.project-nav + .portfolio-demo-app {
+  height: calc(100vh - 64px) !important;
+}
+
+body:not(.demo-nav-hidden) > .portfolio-demo-app {
+  height: calc(100vh - 64px) !important;
+}
+
+body.demo-nav-hidden > .portfolio-demo-app {
+  height: 100vh !important;
+}
+
+@media (max-width: 700px) {
+  body.demo-page:not(.demo-nav-hidden) .demo-shell { height: calc(100vh - 96px) !important; }
+  body.dodo-demo-page:not(.demo-nav-hidden) .dodo-demo-shell,
+  body:not(.demo-nav-hidden) > .portfolio-project-nav.project-nav + .portfolio-demo-app {
+    height: calc(100vh - 52px) !important;
+  }
+}
+
+/* Remi's navigation and quick-action row use one shared glass surface. */
+body.demo-page:has(> .demo-nav-companion) {
+  background: #f8f9fb;
+}
+
+body.demo-page:has(> .demo-nav-companion)::before {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 108px;
+  background: rgba(255, 255, 255, .72);
+  -webkit-backdrop-filter: blur(22px) saturate(145%);
+  backdrop-filter: blur(22px) saturate(145%);
+  content: "";
+  pointer-events: none;
+}
+
+body.demo-page:has(> .demo-nav-companion) > .project-nav,
+body.demo-page:has(> .demo-nav-companion) > .demo-nav-companion,
+body.demo-nav-hidden.demo-page:has(> .demo-nav-companion) > .project-nav,
+body.demo-nav-hidden.demo-page:has(> .demo-nav-companion) > .demo-nav-companion {
+  background: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body.demo-nav-hidden.demo-page:has(> .demo-nav-companion)::before {
+    position: fixed;
+    z-index: 1198;
+    transform: translateY(calc(-100% - 8px));
+    transition: transform .22s cubic-bezier(.22, 1, .36, 1);
+  }
+
+  body.demo-nav-hidden.demo-page.demo-nav-hovering:has(> .demo-nav-companion)::before,
+  body.demo-nav-hidden.demo-page:has(> .demo-nav-companion:focus-within)::before {
+    transform: translateY(0);
+  }
+}
+
+body .project-nav .project-view-tab.is-active:focus-visible {
+  background: transparent !important;
+  box-shadow: none;
+  outline: 2px solid var(--project-tab-hover-ring);
+  outline-offset: 2px;
+}
+
+body .project-nav .project-view-tab[aria-disabled="true"] {
+  background: transparent !important;
+  color: var(--project-tab-disabled) !important;
+  box-shadow: none !important;
+  cursor: default;
+}
+
+body .project-nav .demo-nav-toggle {
+  color: var(--project-control-text) !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 1 !important;
+}
+
+body .project-nav .demo-nav-toggle > span {
+  margin: 0 !important;
+  color: inherit !important;
+  font: inherit !important;
+}
+
+body .project-nav .demo-nav-toggle:hover,
+body .project-nav .demo-nav-toggle:focus-visible,
+body .project-nav .demo-nav-toggle[aria-pressed="true"] {
+  border-color: color-mix(in srgb, var(--project-control-text) 18%, transparent) !important;
+  background: var(--project-control-bg-hover) !important;
+  color: var(--project-control-text) !important;
+  box-shadow: var(--project-control-shadow), inset 0 0 0 1px color-mix(in srgb, var(--project-control-text) 6%, transparent) !important;
+  outline: none;
+}
+
+@media (max-width: 700px) {
+  body .project-nav .project-view-tab {
+    font-size: 12px !important;
+  }
+}

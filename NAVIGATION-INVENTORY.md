@@ -30,8 +30,10 @@
 
 ## 共享实现
 
-- `styles/project-navigation.css`：项目导航布局、状态与 Random Letter Swap 样式。
-- `scripts/project-navigation.js`：项目展示标签、选中线与 Random Letter Swap 行为。
+- `styles/project-navigation/`：按基础导航、Demo、视觉规范和内容导航拆分的 CSS 源文件。
+- `scripts/project-navigation/`：按返回进度、Tab 与 Demo、章节轨道和项目续览拆分的 JS 源文件。
+- `styles/project-navigation.css` 与 `scripts/project-navigation.js`：网页实际加载的兼容产物，不直接修改。
+- 修改源文件后运行 `npm run build:navigation`，提交前运行 `npm test`。
 - 首页复用上述共享 CSS/JS，避免两套 Hover 动效分叉。
 
 ## 不在统一范围内

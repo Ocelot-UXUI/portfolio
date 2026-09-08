@@ -1,0 +1,11 @@
+{
+  "name": "guo-yucheng-portfolio",
+  "private": true,
+  "scripts": {
+    "build:navigation": "node scripts/build-project-navigation.mjs",
+    "check:navigation": "node scripts/build-project-navigation.mjs --check",
+    "test:unit": "node --test demos/workload-demo/tests/*.test.mjs",
+    "test:browser": "node demos/workload-demo/tests/browser-smoke.mjs",
+    "test": "npm run check:navigation && npm run test:unit && npm run test:browser"
+  }
+}

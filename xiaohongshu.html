@@ -4,64 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="小红书本地生活体验升级｜郭昱成作品集" />
-    <title>小红书本地生活体验升级 | 郭昱成作品集</title>
+    <title>正在前往小红书本地生活项目｜郭昱成作品集</title>
     <meta http-equiv="refresh" content="0; url=pages/xiaohongshu.html" />
     <link rel="canonical" href="pages/xiaohongshu.html" />
-    <link rel="stylesheet" href="styles/responsive-system.css?v=20260905-1" />
+    <script>
+      const destination = new URL("pages/xiaohongshu.html", window.location.href);
+      destination.search = window.location.search;
+      destination.hash = window.location.hash;
+      window.location.replace(destination.href);
+    </script>
   </head>
   <body>
-    <header class="project-nav"><a class="project-back" href="index.html"><span>←</span>返回首页</a><p class="project-nav-title">CASE STUDY / 02</p><p class="project-nav-index">XIAOHONGSHU</p></header>
-    <main id="top">
-      <section class="project-intro">
-        <p>PERSONAL PROJECT · 2025.09-11</p>
-        <h1>小红书本地生活<br /><em>体验升级</em></h1>
-        <span>向下阅读完整项目案例</span>
-      </section>
-      <section class="slides" aria-label="小红书本地生活体验升级项目案例">
-        <img src="assets/xiaohongshu-local/pages/page-01.webp" alt="小红书本地生活体验升级项目第 1 页" />
-        <img src="assets/xiaohongshu-local/pages/page-02.webp" alt="小红书本地生活体验升级项目第 2 页" loading="lazy" />
-        <img src="assets/xiaohongshu-local/pages/page-03.webp" alt="小红书本地生活体验升级项目第 3 页" loading="lazy" />
-        <img src="assets/xiaohongshu-local/pages/page-04.webp" alt="小红书本地生活体验升级项目第 4 页" loading="lazy" />
-        <img src="assets/xiaohongshu-local/pages/page-05.webp" alt="小红书本地生活体验升级项目第 5 页" loading="lazy" />
-        <img src="assets/xiaohongshu-local/pages/page-06.webp" alt="小红书本地生活体验升级项目第 6 页" loading="lazy" />
-        <img src="assets/xiaohongshu-local/pages/page-07.webp" alt="小红书本地生活体验升级项目第 7 页" loading="lazy" />
-        <img src="assets/xiaohongshu-local/pages/page-08.webp" alt="小红书本地生活体验升级项目第 8 页" loading="lazy" />
-        <img src="assets/xiaohongshu-local/pages/page-09.webp" alt="小红书本地生活体验升级项目第 9 页" loading="lazy" />
-        <img src="assets/xiaohongshu-local/pages/page-10.webp" alt="小红书本地生活体验升级项目第 10 页" loading="lazy" />
-        <img src="assets/xiaohongshu-local/pages/page-11.webp" alt="小红书本地生活体验升级项目第 11 页" loading="lazy" />
-        <img src="assets/xiaohongshu-local/pages/page-12.webp" alt="小红书本地生活体验升级项目第 12 页" loading="lazy" />
-        <img src="assets/xiaohongshu-local/pages/page-13.webp" alt="小红书本地生活体验升级项目第 13 页" loading="lazy" />
-        <img src="assets/xiaohongshu-local/pages/page-14.webp" alt="小红书本地生活体验升级项目第 14 页" loading="lazy" />
-        <img src="assets/xiaohongshu-local/pages/page-15.webp" alt="小红书本地生活体验升级项目第 15 页" loading="lazy" />
-        <img src="assets/xiaohongshu-local/pages/page-16.webp" alt="小红书本地生活体验升级项目第 16 页" loading="lazy" />
-        <img src="assets/xiaohongshu-local/pages/page-17.webp" alt="小红书本地生活体验升级项目第 17 页" loading="lazy" />
-        <img src="assets/xiaohongshu-local/pages/page-18.webp" alt="小红书本地生活体验升级项目第 18 页" loading="lazy" />
-        <img src="assets/xiaohongshu-local/pages/page-19.webp" alt="小红书本地生活体验升级项目第 19 页" loading="lazy" />
-        <img src="assets/xiaohongshu-local/pages/page-20.webp" alt="小红书本地生活体验升级项目第 20 页" loading="lazy" />
-        <img src="assets/xiaohongshu-local/pages/page-21.webp" alt="小红书本地生活体验升级项目第 21 页" loading="lazy" />
-        <img src="assets/xiaohongshu-local/pages/page-22.webp" alt="小红书本地生活体验升级项目第 22 页" loading="lazy" />
-      </section>
-    </main>
-    <footer>GUO YUCHENG · UX/UI DESIGN · 2026</footer>
-    <script>
-      const stickyNav = document.querySelector("header.project-nav");
-      let previousScrollY = window.scrollY;
-      let downwardScrollDistance = 0;
-      const NAV_HIDE_DISTANCE = 24;
-      const updateStickyNav = () => {
-        if (!stickyNav) return;
-        const currentScrollY = window.scrollY;
-        const pastHero = currentScrollY > 96;
-        const scrollDelta = currentScrollY - previousScrollY;
-        if (!pastHero || scrollDelta <= 0) downwardScrollDistance = 0;
-        else downwardScrollDistance += scrollDelta;
-        stickyNav.classList.toggle("is-scrolled", currentScrollY > 16);
-        stickyNav.classList.toggle("project-nav--compact", pastHero);
-        stickyNav.classList.toggle("project-nav--hidden", pastHero && downwardScrollDistance >= NAV_HIDE_DISTANCE);
-        previousScrollY = currentScrollY;
-      };
-      updateStickyNav();
-      window.addEventListener("scroll", updateStickyNav, { passive: true });
-    </script>
+    <p>正在前往<a href="pages/xiaohongshu.html">小红书本地生活项目</a>……</p>
   </body>
 </html>

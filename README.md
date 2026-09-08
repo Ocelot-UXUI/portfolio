@@ -48,8 +48,19 @@ python3 -m http.server 8000
 
 然后打开 <http://localhost:8000>。
 
+## 检查与维护
+
+```bash
+npm test
+```
+
+该命令会检查导航产物、运行工作负载 Demo 的 9 个单元/布局测试，并自动启动临时服务器与 Chrome 检查 10 条核心页面路由，不需要手动开放浏览器调试端口。同时会统计首页首次加载的网络资源；超过 2 MiB 时测试直接失败。
+
+导航源文件位于 `styles/project-navigation/` 和 `scripts/project-navigation/`。修改后运行 `npm run build:navigation`，生成网页继续使用的兼容单文件。
+
 ## 维护原则
 
 - 不移动或删除已公开的 `index.html`、`pages/` 和 `demos/` 入口。
 - Demo 内部资源只放在对应的 `demos/<name>/` 目录，公共作品集导航只复用 `styles/` 和 `scripts/`。
+- 作品集展示图片优先使用 WebP，并为首屏外图片保留懒加载，避免重新引入体积较大的 PNG/JPEG。
 - `agent/*` 等历史开发分支仅用于追溯，不作为线上页面的源码基准。
