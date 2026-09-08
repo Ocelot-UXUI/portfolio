@@ -6,8 +6,8 @@
     <meta name="description" content="设计评审前自检 Skill｜郭昱成作品集" />
     <title>设计评审前自检 Skill | 郭昱成作品集</title>
     <link rel="stylesheet" href="../styles/styles.css?v=20260727-1" />
-    <link rel="stylesheet" href="../styles/project-navigation.css?v=20260906-30" />
-    <script src="../scripts/project-navigation.js?v=20260809-3" defer></script>
+    <link rel="stylesheet" href="../styles/project-navigation.css?v=20260907-32" />
+    <script src="../scripts/project-navigation.js?v=20260907-1" defer></script>
     <style>
       :root{color-scheme:dark}
       body.skill-detail-page{margin:0;background:#08090d;color:#f5f6f8;font-family:"Space Grotesk","Noto Sans SC",sans-serif}
@@ -39,22 +39,19 @@
       .skill-map dd{color:#888e9a;font-size:14px;line-height:1.75}
       .skill-map dd code{color:#74d5ad;font-family:"Space Grotesk",monospace;font-size:12px}
       .skill-report-section{background:#0b0d12}
-      .skill-report-viewer{overflow:hidden;border:1px solid rgba(255,255,255,.15);background:#10131a}
-      .skill-report-toolbar{display:flex;align-items:center;justify-content:space-between;height:54px;padding:0 16px;border-bottom:1px solid rgba(255,255,255,.12)}
-      .skill-report-status{color:#9ba0ac;font-size:12px;font-variant-numeric:tabular-nums}
+      .skill-report-viewer{position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.11);border-radius:16px;background:radial-gradient(circle at 12% 0,rgba(116,213,173,.085),transparent 42%),rgba(255,255,255,.035);-webkit-backdrop-filter:blur(20px) saturate(135%);backdrop-filter:blur(20px) saturate(135%);box-shadow:0 18px 56px rgba(0,0,0,.16),inset 0 1px rgba(255,255,255,.065)}
+      .skill-report-toolbar{display:flex;align-items:center;justify-content:space-between;height:52px;padding:0 16px;border-bottom:1px solid rgba(255,255,255,.085);background:rgba(255,255,255,.018)}
+      .skill-report-status{color:#858b98;font-size:11px;font-weight:550;letter-spacing:.06em;font-variant-numeric:tabular-nums}
       .skill-report-actions{display:flex;gap:7px}
-      .skill-icon-button{display:grid;place-items:center;width:36px;height:36px;padding:0;border:1px solid rgba(255,255,255,.15);border-radius:4px;background:transparent;color:#e4e6eb;font-size:17px;cursor:pointer}
-      .skill-icon-button:hover,.skill-icon-button:focus-visible{border-color:rgba(255,255,255,.35);background:rgba(255,255,255,.07)}
+      .skill-icon-button{display:grid;place-items:center;width:34px;height:34px;padding:0;border:1px solid rgba(255,255,255,.13);border-radius:50%;background:rgba(255,255,255,.045);color:#e4e6eb;font-size:16px;cursor:pointer}
+      .skill-icon-button:hover,.skill-icon-button:focus-visible{border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.1);outline:none}
       .skill-icon-button:disabled{opacity:.28;cursor:default}
-      .skill-report-pages{display:flex;gap:18px;overflow-x:auto;padding:18px;scroll-behavior:smooth;scroll-snap-type:x mandatory;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.24) rgba(255,255,255,.05)}
-      .skill-report-page{position:relative;flex:0 0 min(72%,640px);margin:0;scroll-snap-align:start}
-      .skill-report-page img{display:block;width:100%;height:auto;background:#fff;box-shadow:0 10px 28px rgba(0,0,0,.35);cursor:zoom-in}
-      .skill-report-page figcaption{position:absolute;right:10px;bottom:10px;padding:5px 8px;border-radius:3px;background:rgba(8,9,13,.78);color:#fff;font-size:11px}
-      .skill-source{display:flex;justify-content:space-between;gap:24px;align-items:center}
-      .skill-source p{max-width:660px;margin:0;color:#858a96;font-size:13px;line-height:1.75}
-      .skill-source-links{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
-      .skill-text-link{display:inline-flex;align-items:center;min-height:42px;padding:0 16px;border:1px solid rgba(255,255,255,.16);border-radius:4px;color:#f1f2f5;font-size:13px;text-decoration:none}
-      .skill-text-link:hover,.skill-text-link:focus-visible{border-color:rgba(116,213,173,.55);background:rgba(116,213,173,.07)}
+      .skill-report-pages{display:flex;gap:14px;overflow-x:auto;padding:16px;scroll-behavior:smooth;scroll-snap-type:x mandatory;scrollbar-width:none}
+      .skill-report-pages::-webkit-scrollbar{display:none}
+      .skill-report-page{position:relative;flex:0 0 clamp(220px,31%,300px);margin:0;scroll-snap-align:start}
+      .skill-report-page img{display:block;width:100%;height:auto;background:#fff;box-shadow:0 10px 24px rgba(0,0,0,.28);cursor:zoom-in;transition:transform .22s ease,box-shadow .22s ease}
+      .skill-report-page img:hover{box-shadow:0 14px 32px rgba(0,0,0,.38);transform:translateY(-2px)}
+      .skill-report-page figcaption{position:absolute;right:8px;bottom:8px;min-width:26px;padding:4px 7px;border-radius:999px;background:rgba(8,9,13,.76);color:#fff;font-size:10px;text-align:center}
       .skill-lightbox{position:fixed;inset:0;z-index:1000;display:grid;grid-template-columns:52px minmax(0,1fr) 52px;grid-template-rows:50px minmax(0,1fr);gap:10px;padding:14px;background:rgba(4,5,8,.95);backdrop-filter:blur(12px)}
       .skill-lightbox[hidden]{display:none}
       .skill-lightbox-bar{grid-column:1 / -1;display:flex;align-items:center;justify-content:space-between;color:#c8cbd2;font-size:12px}
@@ -76,51 +73,79 @@
         .skill-map{grid-template-columns:1fr}
         .skill-map dt{padding-bottom:8px;border-bottom:0}
         .skill-map dd{padding-top:0}
-        .skill-report-page{flex-basis:100%}
+        .skill-report-page{flex-basis:76%}
         .skill-report-pages{gap:12px;padding:12px}
-        .skill-source{display:block}
-        .skill-source-links{justify-content:flex-start;margin-top:22px}
         .skill-lightbox{grid-template-columns:40px minmax(0,1fr) 40px;gap:5px;padding:8px}
       }
 
       /* Keep the Skill page editorial and quiet; project pages use a denser layout elsewhere. */
       body.skill-detail-page>.project-section-rail,body.skill-detail-page>.project-section-rail-tooltip{display:none!important}
-      body.skill-detail-page .project-nav:not(.project-nav--tabs){grid-template-columns:minmax(180px,1fr) minmax(0,1.4fr) minmax(140px,1fr)}
-      body.skill-detail-page .project-nav .project-back{grid-column:1;color:#fff!important}
+      body.skill-detail-page .project-nav .project-back{color:#fff!important}
       body.skill-detail-page .project-nav .project-back span{color:#fff!important}
-      body.skill-detail-page .project-nav .project-nav-title{grid-column:2;z-index:2;justify-self:center!important;width:max-content;max-width:100%;color:#fff!important}
-      body.skill-detail-page .project-nav .project-nav-index{grid-column:3;z-index:2;justify-self:end!important;width:max-content;color:#fff!important}
-      .skill-hero{position:relative;min-height:0;padding:150px 32px 78px;overflow:hidden}
-      .skill-hero-inner{position:relative;z-index:1;width:min(920px,100%)}
-      .skill-section-inner{width:min(920px,100%);margin:0 auto}
-      .skill-eyebrow,.skill-meta,.skill-section-index{display:none}
-      .skill-hero h1{max-width:820px;font-size:clamp(46px,6vw,68px);line-height:1.08}
-      .skill-lead{max-width:680px;margin-top:24px;font-size:15px;line-height:1.8}
+      .skill-hero{position:relative;min-height:700px;padding:160px 32px 84px;overflow:hidden;background:radial-gradient(circle at 82% 24%,rgba(69,196,145,.17),transparent 27%),#08090d}
+      .skill-hero::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(112deg,transparent 46%,rgba(255,255,255,.04) 46.1%,transparent 46.35%);opacity:.45}
+      .skill-hero-inner{position:relative;z-index:1;width:min(1180px,100%)}
+      .skill-hero-grid{display:grid;grid-template-columns:minmax(0,.78fr) minmax(400px,1fr);gap:clamp(54px,9vw,132px);align-items:center}
+      .skill-section-inner{width:min(1180px,100%);margin:0 auto}
+      .skill-eyebrow{display:none}
+      .skill-kicker{margin:0 0 18px;color:#74d5ad;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+      .skill-hero h1{max-width:580px;font-size:clamp(48px,6.4vw,84px);line-height:1.04;letter-spacing:-.04em}
+      .skill-lead{max-width:510px;margin-top:26px;font-size:16px;line-height:1.85}
+      .skill-meta{display:flex;margin-top:34px;border-top:0}
+      .skill-meta span{min-width:0;padding:0 26px 0 0;color:#858b96;font-size:11px}
+      .skill-meta strong{margin-bottom:5px;color:#f2f5f4;font-size:14px;font-weight:600}
       .skill-actions{display:flex;align-items:center;gap:14px;margin-top:30px}
-      .skill-download-link{display:inline-flex;align-items:center;min-height:44px;padding:0 17px;border:1px solid rgba(116,213,173,.48);border-radius:4px;background:rgba(116,213,173,.08);color:#d8f6e8;font-size:13px;font-weight:550;text-decoration:none}
-      .skill-download-link:hover,.skill-download-link:focus-visible{border-color:#74d5ad;background:rgba(116,213,173,.14);color:#fff}
+      .skill-download-link{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:4px 19px 4px 4px;border:1px solid rgba(255,255,255,.16);border-radius:999px;background:rgba(255,255,255,.08);box-shadow:0 8px 24px rgba(0,0,0,.08),inset 0 1px rgba(255,255,255,.06);color:#fff;font-size:14px;font-weight:500;text-decoration:none;transition:background-color .22s ease,border-color .22s ease}
+      .skill-download-icon{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.14)}
+      .skill-download-icon::before{content:"";width:18px;height:18px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3v12'/%3E%3Cpath d='m7 10 5 5 5-5'/%3E%3Cpath d='M5 21h14'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3v12'/%3E%3Cpath d='m7 10 5 5 5-5'/%3E%3Cpath d='M5 21h14'/%3E%3C/svg%3E") center/contain no-repeat}
+      .skill-download-link:hover,.skill-download-link:focus-visible{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.14);color:#fff;outline:none}
       .skill-download-meta{color:#686e7a;font-size:11px}
-      .skill-section{padding:72px 32px;background:#08090d}
-      .skill-section-head{display:block;margin-bottom:32px}
-      .skill-section h2{max-width:720px;font-size:clamp(28px,3vw,36px);line-height:1.25}
-      .skill-section-head p{max-width:680px;margin-top:14px}
-      .skill-flow-list{margin-left:0}
-      .skill-flow-row{grid-template-columns:190px minmax(0,1fr);gap:32px;padding:21px 0}
-      .skill-flow-row small{display:none}
+      .review-flow-card{position:relative;padding:22px;overflow:hidden;border:1px solid rgba(255,255,255,.16);border-radius:16px;background:linear-gradient(145deg,rgba(27,32,33,.9),rgba(10,14,15,.87));box-shadow:0 30px 70px rgba(0,0,0,.38),inset 0 1px rgba(255,255,255,.08)}
+      .review-flow-card::after{content:"";position:absolute;right:-78px;bottom:-108px;width:220px;height:220px;border-radius:50%;background:rgba(69,196,145,.17);filter:blur(38px);pointer-events:none}
+      .review-flow-head{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:20px;padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,.11)}
+      .review-flow-head small{display:block;margin-bottom:6px;color:#74d5ad;font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase}
+      .review-flow-head b{color:#f3f7f5;font-size:18px;letter-spacing:-.02em}
+      .review-flow-badge{flex:0 0 auto;padding:7px 11px;border:1px solid rgba(116,213,173,.34);border-radius:99px;color:#b9ecd6;background:rgba(116,213,173,.1);font-size:10px}
+      .review-flow-track{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:18px}
+      .review-flow-step{position:relative;min-height:196px;padding:15px 14px;border:1px solid rgba(255,255,255,.1);border-radius:10px;background:rgba(6,10,11,.5)}
+      .review-flow-step+.review-flow-step::before{content:"→";position:absolute;left:-14px;top:26px;width:18px;color:#74d5ad;background:#121718;font-size:13px;text-align:center}
+      .review-flow-index{display:grid;place-items:center;width:30px;height:30px;margin-bottom:26px;border:1px solid rgba(255,255,255,.15);border-radius:50%;color:#9de0c4;background:rgba(255,255,255,.05);font-size:10px;font-variant-numeric:tabular-nums}
+      .review-flow-step h3{margin:0;color:#f2f6f4;font-size:14px;font-weight:620}
+      .review-flow-step p{margin:9px 0 0;color:#8a9591;font-size:11px;line-height:1.65}
+      .review-flow-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:13px}
+      .review-flow-tags span{padding:4px 6px;border-radius:4px;color:#cad4d0;background:rgba(255,255,255,.07);font-size:9px;line-height:1.2}
+      .review-flow-result{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:18px;margin-top:10px;padding:12px 14px;border:1px solid rgba(116,213,173,.2);border-radius:9px;background:rgba(69,196,145,.07)}
+      .review-flow-result strong{color:#e0f4ec;font-size:11px;font-weight:600}
+      .review-flow-result span{color:#9aa6a1;font-size:10px;text-align:right}
+      .skill-section{padding:96px 32px;background:#08090d}
+      .skill-section-head{display:grid;grid-template-columns:210px minmax(0,1fr);gap:48px;margin-bottom:46px}
+      .skill-section-index{display:block;color:#767c7a;font-size:12px}
+      .skill-section h2{max-width:720px;font-size:clamp(30px,4vw,52px);line-height:1.15;letter-spacing:-.03em}
+      .skill-section-head p{max-width:680px;margin-top:16px}
+      .skill-flow-list{margin-left:258px}
+      .skill-flow-row{grid-template-columns:48px 190px minmax(0,1fr);gap:24px;padding:21px 0}
+      .skill-flow-row small{display:block}
       .skill-flow-row h3{font-size:16px}
       .skill-map{grid-template-columns:220px minmax(0,1fr)}
       .skill-map dt,.skill-map dd{padding:19px 0}
       .skill-report-section{background:#08090d}
-      .skill-source{display:block}
-      .skill-source-links{justify-content:flex-start;margin-top:22px}
       @media(max-width:760px){
-        body.skill-detail-page .project-nav .project-nav-title,body.skill-detail-page .project-nav .project-nav-index{display:none!important}
-        .skill-hero{padding:112px 24px 56px}
+        .skill-hero{min-height:0;padding:120px 24px 58px}
+        .skill-hero-grid{grid-template-columns:1fr;gap:40px}
         .skill-hero h1{font-size:42px}
-        .skill-section{padding:54px 24px}
+        .skill-meta{gap:18px}
+        .skill-meta span{padding:0}
+        .skill-section{padding:62px 24px}
+        .skill-section-head{grid-template-columns:1fr;gap:12px;margin-bottom:34px}
+        .skill-flow-list{margin-left:0}
         .skill-flow-row{grid-template-columns:1fr;gap:7px;padding:18px 0}
+        .skill-flow-row small{margin-bottom:2px}
         .skill-flow-row p{grid-column:auto}
         .skill-map{grid-template-columns:1fr}
+        .review-flow-track{grid-template-columns:1fr}
+        .review-flow-step{min-height:auto}
+        .review-flow-step+.review-flow-step::before{content:"↓";left:20px;top:-15px;background:#121718}
+        .review-flow-index{margin-bottom:16px}
       }
     </style>
     <link rel="stylesheet" href="../styles/responsive-system.css?v=20260905-1" />
@@ -128,16 +153,28 @@
   <body class="skill-detail-page dodo-page">
     <header class="project-nav">
       <a class="project-back" href="../index.html" aria-label="返回首页"><span aria-hidden="true">←</span><span class="project-back-label">返回首页</span></a>
-      <div class="project-nav-title">设计评审前自检 Skill</div>
-      <p class="project-nav-index">SKILL 01 / 01</p>
+      <p class="project-nav-title">设计工具</p>
+      <label class="project-view-switch"><span>当前工具</span><select aria-label="切换设计工具" data-view-switch data-current="design-review-skill.html"><option value="design-review-skill.html" selected>评审自检 Skill</option><option value="figma-asset-exporter.html">素材导出器</option></select></label>
     </header>
     <main>
       <section class="skill-hero">
-        <div class="skill-hero-inner">
-          <h1>设计评审前自检 Skill</h1>
-          <p class="skill-lead">把评审口径、输入识别、证据采集、问题分级和报告生成串成一条可复用工作流，让设计方案在正式评审前先完成一次系统检查。</p>
-          <div class="skill-actions"><a class="skill-download-link" href="../assets/skills/design-review-skills.zip" download="design-review-skills.zip">下载 Skills .zip ↓</a><span class="skill-download-meta">5 个 Skills · 55 KB</span></div>
-          <div class="skill-meta"><span>定位<strong>评审工作流总入口</strong></span><span>输入<strong>PDF / 截图 / PRD / Figma</strong></span><span>输出<strong>结构化结论与 PDF 报告</strong></span></div>
+        <div class="skill-hero-inner skill-hero-grid">
+          <div class="skill-hero-copy">
+            <p class="skill-kicker">AI Workflow · Design quality</p>
+            <h1>设计评审前<br />自检 Skill</h1>
+            <p class="skill-lead">把评审口径、输入识别、证据采集、问题分级和报告生成串成一条可复用工作流，让设计方案在正式评审前先完成一次系统检查。</p>
+            <div class="skill-meta"><span><strong>5 个 Skills</strong>协作完成评审</span><span><strong>4 类输入</strong>PDF / 截图 / PRD / Figma</span><span><strong>结构化报告</strong>结论与行动建议</span></div>
+            <div class="skill-actions"><a class="skill-download-link" href="../assets/skills/design-review-skills.zip" download="design-review-skills.zip"><span class="skill-download-icon" aria-hidden="true"></span><span>下载 Skills</span></a><span class="skill-download-meta">55 KB</span></div>
+          </div>
+          <div class="review-flow-card" aria-label="设计评审自检流程">
+            <div class="review-flow-head"><div><small>评审流程</small><b>一份方案，如何完成自检</b></div><span class="review-flow-badge">5 个 Skills 协作</span></div>
+            <div class="review-flow-track">
+              <article class="review-flow-step"><span class="review-flow-index">01</span><h3>提交评审材料</h3><p>提供方案与背景，让总控 Skill 先确认评审目标。</p><div class="review-flow-tags"><span>PRD</span><span>截图</span><span>PDF</span><span>Figma</span></div></article>
+              <article class="review-flow-step"><span class="review-flow-index">02</span><h3>分工完成检查</h3><p>总控 Skill 根据材料，把任务交给对应的验收模块。</p><div class="review-flow-tags"><span>视觉</span><span>交互</span><span>状态</span><span>代码</span></div></article>
+              <article class="review-flow-step"><span class="review-flow-index">03</span><h3>生成评审报告</h3><p>汇总证据与问题，给出优先级和可执行建议。</p><div class="review-flow-tags"><span>证据</span><span>分级</span><span>建议</span></div></article>
+            </div>
+            <div class="review-flow-result"><strong>最终得到：结构化评审报告</strong><span>可查看、分享与归档</span></div>
+          </div>
         </div>
       </section>
 
@@ -187,12 +224,6 @@
         </div>
       </section>
 
-      <section class="skill-section">
-        <div class="skill-section-inner skill-source">
-          <p>飞书文档保留原始建设材料和附件；站内页面用于向作品集访客直接呈现工作流与实际输出。</p>
-          <div class="skill-source-links"><a class="skill-text-link" href="../assets/skills/design-review-skills.zip" download="design-review-skills.zip">下载 Skills .zip ↓</a><a class="skill-text-link" href="https://my.feishu.cn/wiki/FCNRweqZjieqZ2kmdX9czgTrnNg" target="_blank" rel="noopener noreferrer">查看飞书原始材料 ↗</a><a class="skill-text-link" href="../index.html">返回首页</a></div>
-        </div>
-      </section>
     </main>
     <footer class="skill-footer">DESIGN REVIEW SKILL · GUO YUCHENG · 2026</footer>
 
@@ -212,11 +243,11 @@
       let currentPage = 0;
 
       const updateViewer = () => {
-        const center = strip.scrollLeft + strip.clientWidth / 2;
+        const leadingEdge = strip.scrollLeft;
         currentPage = pages.reduce((closest, page, index) => {
-          const pageCenter = page.offsetLeft - strip.offsetLeft + page.offsetWidth / 2;
-          const closestCenter = pages[closest].offsetLeft - strip.offsetLeft + pages[closest].offsetWidth / 2;
-          return Math.abs(pageCenter - center) < Math.abs(closestCenter - center) ? index : closest;
+          const pageEdge = page.offsetLeft - strip.offsetLeft;
+          const closestEdge = pages[closest].offsetLeft - strip.offsetLeft;
+          return Math.abs(pageEdge - leadingEdge) < Math.abs(closestEdge - leadingEdge) ? index : closest;
         }, 0);
         status.textContent = `${String(currentPage + 1).padStart(2,"0")} / ${String(pages.length).padStart(2,"0")}`;
         previous.disabled = currentPage === 0;
@@ -276,7 +307,29 @@
         if(event.key==="ArrowLeft"&&lightboxPage>0){lightboxPage-=1;renderLightbox()}
         if(event.key==="ArrowRight"&&lightboxPage<pages.length-1){lightboxPage+=1;renderLightbox()}
       });
+
+      const projectNav = document.querySelector(".project-nav");
+      const reportPages = document.querySelector(".skill-report-pages");
+      let navThemeFrame = 0;
+      const updateNavTheme = () => {
+        navThemeFrame = 0;
+        const navRect = projectNav.getBoundingClientRect();
+        const reportRect = reportPages.getBoundingClientRect();
+        const navProbe = navRect.top + navRect.height / 2;
+        projectNav.classList.toggle(
+          "project-nav--over-light",
+          navProbe >= reportRect.top && navProbe <= reportRect.bottom
+        );
+      };
+      const scheduleNavThemeUpdate = () => {
+        if (!navThemeFrame) navThemeFrame = requestAnimationFrame(updateNavTheme);
+      };
+      window.addEventListener("scroll",scheduleNavThemeUpdate,{passive:true});
+      window.addEventListener("resize",scheduleNavThemeUpdate);
+      reportPages.querySelectorAll("img").forEach(image=>image.addEventListener("load",scheduleNavThemeUpdate,{once:true}));
+
       updateViewer();
+      updateNavTheme();
     </script>
   </body>
 </html>

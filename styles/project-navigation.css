@@ -1306,6 +1306,7 @@ body .project-nav {
   --project-control-radius: 999px;
   --project-control-font-size: 14px;
   --project-control-font-weight: 500;
+  --project-tab-font-size: 13px;
   --project-control-icon-size: 18px;
   --project-back-icon-offset-y: 6px;
   --project-control-gap: 10px;
@@ -1398,9 +1399,27 @@ body .project-nav .project-view-tab {
   font-weight: var(--project-control-font-weight) !important;
 }
 
-body .project-nav.project-nav--title-in-tabs .project-nav-title,
-body .project-nav .project-view-tab.is-active {
+body .project-nav.project-nav--title-in-tabs .project-nav-title {
   font-weight: 600 !important;
+}
+
+body .project-nav .project-view-tab,
+body .project-nav .project-view-tab:not(.is-active),
+body .project-nav .project-view-tab:hover,
+body .project-nav .project-view-tab:focus-visible,
+body .project-nav .project-view-tab.is-active,
+body .project-nav .project-view-tab.is-active:hover,
+body .project-nav .project-view-tab.is-active:focus-visible {
+  font-size: var(--project-tab-font-size) !important;
+  font-weight: var(--project-control-font-weight) !important;
+  letter-spacing: 0 !important;
+  transform: none !important;
+}
+
+@media (max-width: 700px) {
+  body .project-nav {
+    --project-tab-font-size: 12px;
+  }
 }
 
 body .project-nav .project-back > span:first-child,
@@ -1454,6 +1473,80 @@ body .project-nav .project-view-tab:focus-visible {
   background: var(--project-tab-hover-bg) !important;
   color: var(--project-tab-text-strong) !important;
   transform: none !important;
+}
+
+/* The reading demo uses a light canvas; keep the outer navigation shell clear. */
+body.skip-read-demo-page > .project-nav {
+  background: transparent !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+
+/* Give the two design-tool tabs enough breathing room without widening the group. */
+body.skill-detail-page .project-nav.project-nav--title-in-tabs .project-nav-title,
+body.asset-exporter-page .project-nav.project-nav--title-in-tabs .project-nav-title {
+  width: 180px;
+  min-width: 180px;
+  max-width: 180px;
+}
+
+body.skill-detail-page .project-nav .project-view-tab,
+body.asset-exporter-page .project-nav .project-view-tab {
+  width: auto;
+  min-width: 120px;
+  padding-right: 18px;
+  padding-left: 18px;
+}
+
+/* Switch the floating tool navigation to dark type while it crosses white report pages. */
+body.skill-detail-page .project-nav.project-nav--over-light {
+  --project-control-bg: rgba(255, 255, 255, .86);
+  --project-control-bg-hover: rgba(255, 255, 255, .96);
+  --project-control-border: rgba(16, 18, 24, .13);
+  --project-control-border-hover: rgba(16, 18, 24, .2);
+  --project-control-text: #1b1c22;
+  --project-control-icon-bg: rgba(16, 18, 24, .09);
+  --project-control-icon-bg-hover: rgba(16, 18, 24, .14);
+  --project-control-shadow: 0 8px 26px rgba(20, 24, 32, .12), inset 0 1px rgba(255, 255, 255, .78);
+  --project-tab-text: rgba(27, 28, 34, .66);
+  --project-tab-text-strong: #1b1c22;
+  --project-tab-active-bg: rgba(16, 18, 24, .1);
+  --project-tab-hover-bg: rgba(16, 18, 24, .055);
+  --project-tab-hover-ring: rgba(16, 18, 24, .05);
+}
+
+body.skill-detail-page .project-nav.project-nav--over-light .project-nav-title,
+body.skill-detail-page .project-nav.project-nav--over-light .project-back,
+body.skill-detail-page .project-nav.project-nav--over-light .project-back span,
+body.skill-detail-page .project-nav.project-nav--over-light .project-view-tab,
+body.skill-detail-page .project-nav.project-nav--over-light .project-view-tab:hover,
+body.skill-detail-page .project-nav.project-nav--over-light .project-view-tab:focus-visible,
+body.skill-detail-page .project-nav.project-nav--over-light .project-view-tab.is-active {
+  color: var(--project-tab-text-strong) !important;
+}
+
+body.skill-detail-page .project-nav.project-nav--over-light .project-view-tab:not(.is-active) {
+  color: var(--project-tab-text) !important;
+}
+
+body.skill-detail-page .project-nav.project-nav--over-light .project-view-tabs {
+  border-color: rgba(16, 18, 24, .13) !important;
+  background: rgba(255, 255, 255, .82) !important;
+  box-shadow: 0 8px 26px rgba(20, 24, 32, .12), inset 0 1px rgba(255, 255, 255, .78) !important;
+}
+
+body.skill-detail-page .project-nav.project-nav--over-light .project-back > span:first-child::before {
+  background: #1b1c22 !important;
+}
+
+@media (max-width: 700px) {
+  body.skill-detail-page .project-nav .project-view-tab,
+  body.asset-exporter-page .project-nav .project-view-tab {
+    min-width: 96px;
+    padding-right: 12px;
+    padding-left: 12px;
+  }
 }
 
 /* Codex-inspired section rail for long project pages and case-study decks. */

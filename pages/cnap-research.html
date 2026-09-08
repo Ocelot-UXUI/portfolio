@@ -6,8 +6,8 @@
     <meta name="description" content="郭昱成 UX/UI 作品集 - CNAP 用户调研交付物" />
     <title>CNAP 用户调研 | 郭昱成作品集</title>
     <link rel="stylesheet" href="../styles/styles.css?v=20260907-1" />
-    <link rel="stylesheet" href="../styles/project-navigation.css?v=20260906-30" />
-    <script src="../scripts/project-navigation.js?v=20260809-3" defer></script>
+    <link rel="stylesheet" href="../styles/project-navigation.css?v=20260907-32" />
+    <script src="../scripts/project-navigation.js?v=20260907-1" defer></script>
     <style>
       .cnap-research-page .deliverables-shell{width:min(100% - 80px,1180px);padding-top:72px}
       .deliverables-intro{display:block}
@@ -38,20 +38,21 @@
       .artifact-heading{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:32px;align-items:start;margin-bottom:22px}
       .artifact-heading h3{margin:0 0 8px;color:#fff;font-size:23px;font-weight:600;line-height:1.4}
       .artifact-page-total{padding-top:5px;color:#737886;font-size:12px;white-space:nowrap}
-      .artifact-viewer{overflow:hidden;border:1px solid rgba(255,255,255,.14);background:#0c0e15}
-      .artifact-viewer-toolbar{display:flex;align-items:center;justify-content:space-between;min-height:52px;padding:0 16px;border-bottom:1px solid rgba(255,255,255,.11);background:#11131b}
-      .artifact-page-status{color:#9a9eaa;font-size:12px;font-variant-numeric:tabular-nums}
+      .artifact-viewer{overflow:hidden;border:1px solid rgba(255,255,255,.11);border-radius:16px;background:radial-gradient(circle at 12% 0,rgba(80,215,160,.085),transparent 42%),rgba(255,255,255,.035);-webkit-backdrop-filter:blur(20px) saturate(135%);backdrop-filter:blur(20px) saturate(135%);box-shadow:0 18px 56px rgba(0,0,0,.16),inset 0 1px rgba(255,255,255,.065)}
+      .artifact-viewer-toolbar{display:flex;align-items:center;justify-content:space-between;min-height:52px;padding:0 16px;border-bottom:1px solid rgba(255,255,255,.085);background:rgba(255,255,255,.018)}
+      .artifact-page-status{color:#858b98;font-size:11px;font-weight:550;letter-spacing:.06em;font-variant-numeric:tabular-nums}
       .artifact-viewer-actions{display:flex;gap:6px}
-      .artifact-viewer-actions button,.document-lightbox button{display:inline-grid;place-items:center;width:34px;height:34px;padding:0;border:1px solid rgba(255,255,255,.14);border-radius:4px;background:transparent;color:#d8dae1;font-size:17px;line-height:1;cursor:pointer;transition:background .16s ease,border-color .16s ease,color .16s ease}
-      .artifact-viewer-actions button:hover,.document-lightbox button:hover{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.07);color:#fff}
+      .artifact-viewer-actions button{display:inline-grid;place-items:center;width:34px;height:34px;padding:0;border:1px solid rgba(255,255,255,.13);border-radius:50%;background:rgba(255,255,255,.045);color:#d8dae1;font-size:16px;line-height:1;cursor:pointer;transition:background .16s ease,border-color .16s ease,color .16s ease}
+      .artifact-viewer-actions button:hover{border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.1);color:#fff}
       .artifact-viewer-actions button:disabled{opacity:.28;cursor:default}
-      .ai-workflow-scroll{display:flex;gap:18px;overflow-x:auto;padding:18px;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.24) rgba(255,255,255,.05)}
-      .ai-workflow-scroll::-webkit-scrollbar{height:7px}
-      .ai-workflow-scroll::-webkit-scrollbar-thumb{background:rgba(255,255,255,.24)}
-      .ai-workflow-scroll::-webkit-scrollbar-track{background:rgba(255,255,255,.05)}
-      .ai-workflow-scroll figure{position:relative;flex:0 0 min(72%,640px);margin:0;scroll-snap-align:start}
-      .ai-workflow-scroll img{display:block;width:100%;height:auto;border:0;background:#fff;cursor:zoom-in;box-shadow:0 10px 30px rgba(0,0,0,.32)}
-      .ai-workflow-scroll figcaption{position:absolute;right:10px;bottom:10px;min-width:30px;padding:5px 7px;border-radius:3px;background:rgba(10,11,16,.78);color:#d8dae2;font-size:11px;text-align:center;backdrop-filter:blur(8px)}
+      .document-lightbox button{display:inline-grid;place-items:center;width:34px;height:34px;padding:0;border:1px solid rgba(255,255,255,.14);border-radius:4px;background:transparent;color:#d8dae1;font-size:17px;line-height:1;cursor:pointer;transition:background .16s ease,border-color .16s ease,color .16s ease}
+      .document-lightbox button:hover{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.07);color:#fff}
+      .ai-workflow-scroll{display:flex;gap:14px;overflow-x:auto;padding:16px;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none}
+      .ai-workflow-scroll::-webkit-scrollbar{display:none}
+      .ai-workflow-scroll figure{position:relative;flex:0 0 clamp(220px,31%,300px);margin:0;scroll-snap-align:start}
+      .ai-workflow-scroll img{display:block;width:100%;height:auto;border:0;background:#fff;cursor:zoom-in;box-shadow:0 10px 24px rgba(0,0,0,.28);transition:transform .22s ease,box-shadow .22s ease}
+      .ai-workflow-scroll img:hover{box-shadow:0 14px 32px rgba(0,0,0,.38);transform:translateY(-2px)}
+      .ai-workflow-scroll figcaption{position:absolute;right:8px;bottom:8px;min-width:26px;padding:4px 7px;border-radius:999px;background:rgba(10,11,16,.76);color:#fff;font-size:10px;text-align:center;backdrop-filter:blur(8px)}
       .document-lightbox{position:fixed;inset:0;z-index:1000;display:grid;grid-template-columns:54px minmax(0,1fr) 54px;grid-template-rows:52px minmax(0,1fr);gap:12px;padding:14px;background:rgba(5,6,9,.94);backdrop-filter:blur(12px)}
       .document-lightbox[hidden]{display:none}
       .document-lightbox-bar{grid-column:1 / -1;display:flex;align-items:center;justify-content:space-between;color:#c6c9d1;font-size:12px;font-variant-numeric:tabular-nums}
@@ -79,7 +80,7 @@
         .artifact-heading h3{font-size:20px}
         .artifact-page-total{padding-top:0}
         .ai-workflow-scroll{gap:12px;padding:12px}
-        .ai-workflow-scroll figure{flex-basis:100%}
+        .ai-workflow-scroll figure{flex-basis:76%}
         .artifact-viewer-toolbar{min-height:48px;padding:0 12px}
         .document-lightbox{grid-template-columns:42px minmax(0,1fr) 42px;gap:6px;padding:10px}
       }
@@ -458,11 +459,11 @@
         let currentIndex = 0;
         const update = () => {
           if (!strip.clientWidth) return;
-          const center = strip.scrollLeft + strip.clientWidth / 2;
+          const leadingEdge = strip.scrollLeft;
           currentIndex = figures.reduce((closest, figure, index) => {
-            const figureCenter = figure.offsetLeft - strip.offsetLeft + figure.offsetWidth / 2;
-            const closestCenter = figures[closest].offsetLeft - strip.offsetLeft + figures[closest].offsetWidth / 2;
-            return Math.abs(figureCenter - center) < Math.abs(closestCenter - center) ? index : closest;
+            const figureEdge = figure.offsetLeft - strip.offsetLeft;
+            const closestEdge = figures[closest].offsetLeft - strip.offsetLeft;
+            return Math.abs(figureEdge - leadingEdge) < Math.abs(closestEdge - leadingEdge) ? index : closest;
           }, 0);
           status.textContent = `${String(currentIndex + 1).padStart(2, "0")} / ${String(figures.length).padStart(2, "0")}`;
           previous.disabled = currentIndex === 0;
