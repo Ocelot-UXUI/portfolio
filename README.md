@@ -2,6 +2,17 @@
 
 这是一个纯静态 HTML 作品集网站，首页统一承载多个项目入口；案例交付物和交互 Demo 分开维护，互不嵌套源码。
 
+**在线浏览：** [ocelot-uxui.github.io/portfolio](https://ocelot-uxui.github.io/portfolio/)
+
+## 项目入口
+
+- [作品集首页](https://ocelot-uxui.github.io/portfolio/)
+- [商汤｜主动 AI 记忆助手](https://ocelot-uxui.github.io/portfolio/pages/case.html)
+- [百度｜CNAP B 端系统体验重构](https://ocelot-uxui.github.io/portfolio/pages/cnap-case.html)
+- [跳读｜职场人阅读学习 APP](https://ocelot-uxui.github.io/portfolio/pages/skip-read.html)
+- [小红书｜本地生活项目](https://ocelot-uxui.github.io/portfolio/pages/xiaohongshu.html)
+- [设计工具｜评审自检 Skill 与素材导出器](https://ocelot-uxui.github.io/portfolio/pages/design-review-skill.html)
+
 ## 目录
 
 ```text
@@ -10,12 +21,12 @@
 ├── pages/                  # 项目交付物页面与 Demo 包装页
 ├── styles/                 # 全站公共样式与项目导航
 ├── scripts/                # 全站共享交互脚本
-├── assets/                 # 按项目和用途归档的图片、字体与 PDF 素材
+├── assets/                 # 按项目和用途归档的图片、字体与视频素材
 ├── demos/                  # 独立 Demo 源码，不改变首页入口结构
-└── docs/                   # 作品集 PDF 等文档
+└── docs/                   # 项目说明文档
 ```
 
-## 页面入口
+## 本地页面入口
 
 - `index.html`：项目目录
 - `pages/case.html`：Remi AI 案例讲述
