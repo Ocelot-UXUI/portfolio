@@ -30,6 +30,7 @@
 .case-deck-page .slides > .case-slide-frame {
   display: block;
   width: 100%;
+  aspect-ratio: 16 / 9;
   min-width: 0;
   margin: 0;
   overflow: hidden;

@@ -436,6 +436,31 @@
     updateSectionRail();
   };
 
+  const loadCaseDeckImage = (image) => {
+    const source = image?.dataset.src;
+    if (!source || image.dataset.loaded === "true") return;
+    image.dataset.loaded = "true";
+    image.removeAttribute("data-src");
+    image.loading = "eager";
+    image.src = source;
+  };
+
+  const lazyCaseDeckImages = [...document.querySelectorAll(".case-deck-page .slides img[data-src]")];
+  if (lazyCaseDeckImages.length) {
+    if ("IntersectionObserver" in window) {
+      const caseDeckImageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          loadCaseDeckImage(entry.target);
+          observer.unobserve(entry.target);
+        });
+      }, { rootMargin: "400px 0px" });
+      lazyCaseDeckImages.forEach((image) => caseDeckImageObserver.observe(image));
+    } else {
+      lazyCaseDeckImages.forEach(loadCaseDeckImage);
+    }
+  }
+
   buildSectionRail();
   window.addEventListener("scroll", requestSectionRailUpdate, { passive: true });
   window.addEventListener("resize", requestSectionRailUpdate, { passive: true });
