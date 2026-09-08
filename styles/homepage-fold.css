@@ -262,6 +262,100 @@
   height: 38px;
 }
 
+/* The cursor guide can still run in a narrow desktop window when a mouse or
+   trackpad is present. Give it a bounded base size so the SVG never falls back
+   to its oversized browser default outside the desktop media query. */
+.prototype-homepage .hero-stack-demo-cursor {
+  position: absolute;
+  z-index: 12;
+  display: block;
+  width: clamp(40px, 6vw, 52px);
+  aspect-ratio: 36 / 37;
+  height: auto;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-14px, -16px);
+  transition:
+    left 720ms cubic-bezier(.2, .75, .2, 1),
+    top 720ms cubic-bezier(.2, .75, .2, 1),
+    opacity 360ms ease,
+    transform 160ms ease;
+}
+
+.prototype-homepage .hero-stack-demo-cursor svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 4px 9px rgb(238 111 45 / .62));
+}
+
+.prototype-homepage .hero-stack-demo-cursor.is-visible {
+  opacity: 1;
+}
+
+.prototype-homepage .hero-stack-demo-cursor.is-hovering {
+  transform: translate(-14px, -16px) scale(.88);
+}
+
+/* Keep the guided hover meaningful in narrow desktop windows. The base
+   homepage stylesheet hides tooltips below 701px; here they return as a
+   compact, bounded variant. On touch-only devices they remain transparent
+   because neither hover nor the cursor-guide script activates them. */
+@media (max-width: 700px) {
+  .prototype-homepage .hero-project-tooltip {
+    bottom: calc(100% + 8px);
+    display: grid;
+    width: min(190px, 52vw);
+    gap: 3px;
+    padding: 9px 10px;
+    border-radius: 8px;
+  }
+
+  .prototype-homepage .hero-project-tooltip b {
+    font-size: 11px;
+    line-height: 1.35;
+  }
+
+  .prototype-homepage .hero-project-tooltip small {
+    font-size: 9px;
+    line-height: 1.45;
+  }
+
+  .prototype-homepage .hero-stack-remi .hero-project-tooltip {
+    left: 0;
+    transform: translate(0, 6px) scale(.98);
+  }
+
+  .prototype-homepage .hero-stack-xhs .hero-project-tooltip,
+  .prototype-homepage .hero-stack-reading .hero-project-tooltip {
+    right: 0;
+    left: auto;
+    transform: translate(0, 6px) scale(.98);
+  }
+
+  .prototype-homepage .hero-stack-remi:hover .hero-project-tooltip,
+  .prototype-homepage .hero-stack-remi:focus-visible .hero-project-tooltip,
+  .prototype-homepage .hero-stack-xhs:hover .hero-project-tooltip,
+  .prototype-homepage .hero-stack-xhs:focus-visible .hero-project-tooltip,
+  .prototype-homepage .hero-stack-reading:hover .hero-project-tooltip,
+  .prototype-homepage .hero-stack-reading:focus-visible .hero-project-tooltip {
+    transform: translate(0, 0) scale(1);
+  }
+
+  .prototype-homepage .hero-project-stack.is-demo-preview {
+    z-index: 4;
+  }
+
+  .prototype-homepage .hero-stack-cnap.is-demo-hover {
+    z-index: 6;
+  }
+
+  .prototype-homepage .hero-stack-cnap.is-demo-hover .hero-project-tooltip {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+}
+
 /* Keep the long-form project rows visually gathered on wide screens. */
 @media (min-width: 701px) {
   .prototype-homepage .about-signature {

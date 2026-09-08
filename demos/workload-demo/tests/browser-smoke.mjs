@@ -199,6 +199,48 @@ try {
   );
   console.log(`homepage initial load: ${(homepageLoad.bytes / 1048576).toFixed(2)} MiB across ${homepageLoad.resources} requests`);
 
+  await send("Emulation.setDeviceMetricsOverride", {
+    width: 640,
+    height: 900,
+    deviceScaleFactor: 1,
+    mobile: false,
+  });
+  await openPage(...pages[0]);
+  const narrowCursorGuide = await evaluate(`(() => {
+    const probe = document.createElement('span');
+    probe.className = 'hero-stack-demo-cursor';
+    probe.innerHTML = '<svg viewBox="0 0 36 37" aria-hidden="true"></svg>';
+    document.querySelector('.hero-project-stack').append(probe);
+    const styles = getComputedStyle(probe);
+    const cnapCard = document.querySelector('.hero-stack-cnap');
+    const tooltip = cnapCard.querySelector('.hero-project-tooltip');
+    tooltip.style.transition = 'none';
+    cnapCard.classList.add('is-demo-hover');
+    const tooltipStyles = getComputedStyle(tooltip);
+    const result = {
+      width: Number.parseFloat(styles.width),
+      height: Number.parseFloat(styles.height),
+      position: styles.position,
+      opacity: styles.opacity,
+      tooltip: {
+        display: tooltipStyles.display,
+        width: Number.parseFloat(tooltipStyles.width),
+        opacity: tooltipStyles.opacity,
+      },
+    };
+    cnapCard.classList.remove('is-demo-hover');
+    probe.remove();
+    return result;
+  })()`);
+  assert.ok(narrowCursorGuide.width >= 40 && narrowCursorGuide.width <= 52, `narrow cursor guide width is ${narrowCursorGuide.width}px`);
+  assert.ok(narrowCursorGuide.height >= 40 && narrowCursorGuide.height <= 54, `narrow cursor guide height is ${narrowCursorGuide.height}px`);
+  assert.equal(narrowCursorGuide.position, "absolute");
+  assert.equal(narrowCursorGuide.opacity, "0");
+  assert.equal(narrowCursorGuide.tooltip.display, "grid");
+  assert.ok(narrowCursorGuide.tooltip.width > 0 && narrowCursorGuide.tooltip.width <= 190, `narrow tooltip width is ${narrowCursorGuide.tooltip.width}px`);
+  assert.equal(narrowCursorGuide.tooltip.opacity, "1");
+  await send("Emulation.clearDeviceMetricsOverride");
+
   for (const [pathname, selector] of pages.slice(1)) await openPage(pathname, selector);
 
   await openPage("/xiaohongshu.html?source=legacy#top", "main");
