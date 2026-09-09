@@ -1,0 +1,365 @@
+/* Shared editorial grid for the two design-tool detail pages. */
+:where(.skill-detail-page, .asset-exporter-page) {
+  --tool-content-canvas: 920px;
+  --tool-hero-canvas: var(--tool-content-canvas);
+  --tool-page-gutter: clamp(28px, 6vw, 96px);
+  --tool-accent-rgb: 255 255 255;
+  --tool-glass: linear-gradient(145deg, rgba(255, 255, 255, .09), rgba(255, 255, 255, .025) 64%, rgb(var(--tool-accent-rgb) / .055));
+  --tool-glass-soft: linear-gradient(145deg, rgba(255, 255, 255, .055), rgba(255, 255, 255, .018) 68%, rgb(var(--tool-accent-rgb) / .035));
+  --tool-glass-shadow: 0 20px 52px rgba(0, 0, 0, .18), inset 0 1px rgba(255, 255, 255, .085);
+  --tool-glass-blur: blur(18px) saturate(.82);
+}
+
+.skill-detail-page { --tool-accent-rgb: 116 213 173; }
+.asset-exporter-page { --tool-accent-rgb: 239 132 80; }
+
+.skill-detail-page main,
+.asset-exporter-page main {
+  background:
+    radial-gradient(circle at 82% 13%, rgb(var(--tool-accent-rgb) / .09), transparent 24%),
+    radial-gradient(circle at 12% 58%, rgb(var(--tool-accent-rgb) / .045), transparent 22%),
+    #08090b;
+}
+
+/* Keep the opening split composition, but give it calmer proportions. */
+.skill-detail-page .skill-hero,
+.asset-exporter-page .asset-hero {
+  min-height: 640px;
+  padding: 148px var(--tool-page-gutter) 78px;
+  border-bottom: 0;
+}
+
+.skill-detail-page .skill-hero-inner,
+.asset-exporter-page .asset-hero .asset-wrap {
+  width: min(var(--tool-hero-canvas), 100%);
+}
+
+.skill-detail-page .skill-hero-grid,
+.asset-exporter-page .asset-hero-grid {
+  grid-template-columns: minmax(300px, .72fr) minmax(420px, 1fr);
+  gap: clamp(52px, 6vw, 88px);
+}
+
+.skill-detail-page .skill-hero h1,
+.asset-exporter-page .asset-hero h1 {
+  font-size: clamp(46px, 5vw, 68px);
+  line-height: 1.06;
+}
+
+.skill-detail-page .skill-lead,
+.asset-exporter-page .asset-lead {
+  max-width: 480px;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.asset-exporter-page .asset-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+
+.asset-exporter-page .asset-download-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 4px 19px 4px 4px;
+  border: 1px solid rgba(255, 255, 255, .16);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .08), inset 0 1px rgba(255, 255, 255, .06);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color .22s ease, border-color .22s ease;
+}
+
+.asset-exporter-page .asset-download-icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .14);
+}
+
+.asset-exporter-page .asset-download-icon::before {
+  content: "";
+  width: 18px;
+  height: 18px;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3v12'/%3E%3Cpath d='m7 10 5 5 5-5'/%3E%3Cpath d='M5 21h14'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3v12'/%3E%3Cpath d='m7 10 5 5 5-5'/%3E%3Cpath d='M5 21h14'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.asset-exporter-page .asset-download-link:hover,
+.asset-exporter-page .asset-download-link:focus-visible {
+  border-color: rgba(255, 255, 255, .3);
+  background: rgba(255, 255, 255, .14);
+  color: #fff;
+  outline: none;
+}
+
+.asset-exporter-page .asset-download-meta {
+  max-width: 170px;
+  color: #77757a;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+/* Every chapter uses one centered canvas and one shared reading axis. */
+.skill-detail-page .skill-section,
+.asset-exporter-page .asset-section {
+  padding: 92px var(--tool-page-gutter);
+  border-top: 0;
+  border-bottom: 0;
+  background: transparent;
+}
+
+.skill-detail-page .skill-section-inner,
+.asset-exporter-page .asset-section .asset-wrap {
+  width: min(var(--tool-content-canvas), 100%);
+  margin-inline: auto;
+}
+
+.skill-detail-page .skill-section-head,
+.asset-exporter-page .asset-section-head {
+  display: block;
+  margin-bottom: 40px;
+}
+
+.skill-detail-page .skill-section-index,
+.asset-exporter-page .asset-section-number {
+  display: block;
+  margin-bottom: 18px;
+}
+
+.skill-detail-page .skill-section h2,
+.asset-exporter-page .asset-section h2 {
+  max-width: 760px;
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1.18;
+}
+
+.skill-detail-page .skill-section-head p,
+.asset-exporter-page .asset-section-head p {
+  max-width: 680px;
+  margin-top: 16px;
+  line-height: 1.78;
+}
+
+/* Remove the old artificial left offset so chapter content follows its title. */
+.skill-detail-page .skill-flow-list {
+  margin-left: 0;
+}
+
+.skill-detail-page .skill-flow-row {
+  grid-template-columns: 48px 170px minmax(0, 1fr);
+  gap: 22px;
+}
+
+.skill-detail-page .skill-map {
+  grid-template-columns: 210px minmax(0, 1fr);
+}
+
+.asset-exporter-page .asset-problem article {
+  min-height: 170px;
+}
+
+.asset-exporter-page .asset-flow article {
+  min-height: 220px;
+}
+
+/* Replace the old outlined-tool UI with the portfolio's translucent material. */
+.skill-detail-page .review-flow-card,
+.asset-exporter-page .export-flow-card,
+.skill-detail-page .skill-report-viewer {
+  border: 0;
+  background: var(--tool-glass);
+  box-shadow: var(--tool-glass-shadow);
+  -webkit-backdrop-filter: var(--tool-glass-blur);
+  backdrop-filter: var(--tool-glass-blur);
+}
+
+.skill-detail-page .review-flow-head,
+.asset-exporter-page .export-flow-head {
+  border-bottom: 0;
+}
+
+.skill-detail-page .review-flow-track,
+.asset-exporter-page .export-flow-track {
+  gap: 12px;
+}
+
+.skill-detail-page .review-flow-step,
+.asset-exporter-page .export-flow-step {
+  border: 0;
+  border-radius: 12px;
+  background: rgba(5, 7, 9, .34);
+  box-shadow: inset 0 1px rgba(255, 255, 255, .05);
+}
+
+.skill-detail-page .review-flow-step + .review-flow-step::before,
+.asset-exporter-page .export-flow-step + .export-flow-step::before {
+  background: transparent;
+}
+
+.skill-detail-page .review-flow-result,
+.asset-exporter-page .export-flow-result {
+  border: 0;
+  background: rgb(var(--tool-accent-rgb) / .075);
+  box-shadow: inset 0 1px rgb(var(--tool-accent-rgb) / .11);
+}
+
+.asset-exporter-page .asset-section--muted {
+  background: transparent;
+}
+
+.asset-exporter-page .asset-problem,
+.asset-exporter-page .asset-flow {
+  display: grid;
+  gap: 16px;
+  border-top: 0;
+}
+
+.asset-exporter-page .asset-problem article,
+.asset-exporter-page .asset-problem article:nth-child(even),
+.asset-exporter-page .asset-flow article,
+.asset-exporter-page .asset-flow article + article {
+  padding: 26px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--tool-glass-soft);
+  box-shadow: var(--tool-glass-shadow);
+  -webkit-backdrop-filter: var(--tool-glass-blur);
+  backdrop-filter: var(--tool-glass-blur);
+}
+
+.skill-detail-page .skill-flow-list {
+  display: grid;
+  gap: 14px;
+  border-top: 0;
+}
+
+.skill-detail-page .skill-flow-row {
+  padding: 22px 24px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--tool-glass-soft);
+  box-shadow: var(--tool-glass-shadow);
+  -webkit-backdrop-filter: var(--tool-glass-blur);
+  backdrop-filter: var(--tool-glass-blur);
+}
+
+.skill-detail-page .skill-map {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  border-top: 0;
+}
+
+.skill-detail-page .skill-map-row {
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr);
+  gap: 24px;
+  align-items: baseline;
+  padding: 22px 24px;
+  border-radius: 14px;
+  background: var(--tool-glass-soft);
+  box-shadow: var(--tool-glass-shadow);
+  -webkit-backdrop-filter: var(--tool-glass-blur);
+  backdrop-filter: var(--tool-glass-blur);
+}
+
+.skill-detail-page .skill-map dt,
+.skill-detail-page .skill-map dd {
+  padding: 0;
+  border-bottom: 0;
+}
+
+.skill-detail-page .skill-report-toolbar {
+  border-bottom: 0;
+  background: rgba(255, 255, 255, .025);
+}
+
+.skill-detail-page .skill-report-pages {
+  padding: 18px;
+}
+
+.asset-exporter-page .asset-output-list {
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 16px;
+  background: var(--tool-glass);
+  box-shadow: var(--tool-glass-shadow);
+  -webkit-backdrop-filter: var(--tool-glass-blur);
+  backdrop-filter: var(--tool-glass-blur);
+}
+
+.asset-exporter-page .asset-output-row {
+  padding: 16px 18px;
+  border: 0;
+  border-radius: 10px;
+  background: rgba(5, 7, 9, .28);
+}
+
+.asset-exporter-page .asset-output-row + .asset-output-row {
+  border-top: 0;
+}
+
+.skill-detail-page .skill-footer,
+.asset-exporter-page .asset-footer {
+  border-top: 0;
+  background: transparent;
+}
+
+@media (max-width: 900px) {
+  :where(.skill-detail-page, .asset-exporter-page) {
+    --tool-page-gutter: 24px;
+  }
+
+  .skill-detail-page .skill-hero,
+  .asset-exporter-page .asset-hero {
+    min-height: 0;
+    padding: 118px var(--tool-page-gutter) 58px;
+  }
+
+  .skill-detail-page .skill-hero-grid,
+  .asset-exporter-page .asset-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 42px;
+  }
+
+  .skill-detail-page .skill-section,
+  .asset-exporter-page .asset-section {
+    padding: 64px var(--tool-page-gutter);
+  }
+}
+
+@media (max-width: 760px) {
+  .skill-detail-page .skill-hero h1,
+  .asset-exporter-page .asset-hero h1 {
+    font-size: clamp(40px, 12vw, 52px);
+  }
+
+  .skill-detail-page .skill-flow-row {
+    grid-template-columns: 1fr;
+    gap: 7px;
+  }
+
+  .skill-detail-page .skill-flow-row p {
+    grid-column: auto;
+  }
+
+  .skill-detail-page .skill-map-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
