@@ -41,12 +41,13 @@
 .prototype-homepage .hero-stack-copy {
   width: 100%;
   max-width: none;
-  text-align: left;
+  text-align: center;
 }
 
 .prototype-homepage .hero-stack-copy h1 {
   font-size: var(--fold-hero-title);
   line-height: 1.16;
+  text-shadow: none;
 }
 
 /* Desktop keeps the positioning statement as one continuous visual line. */
@@ -62,6 +63,22 @@
 .prototype-homepage .hero-signature {
   width: 100%;
   margin: clamp(9px, 1.2vh, 13px) 0 0;
+}
+
+/* With the optional AI Native mark removed, the positioning statement
+   becomes the single visual anchor of the hero. */
+@media (min-width: 1050px) {
+  .prototype-homepage .hero-stack-top {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+  }
+
+  .prototype-homepage .hero-stack-copy {
+    justify-self: stretch;
+    text-align: center;
+    transform: translateY(16px);
+  }
 }
 
 /* Reuse the long-form project reveal for the homepage's two primary
