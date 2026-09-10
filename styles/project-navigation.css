@@ -971,7 +971,9 @@ body .project-nav .demo-nav-toggle { display: none; }
   body .project-nav .demo-nav-toggle { display: none !important; }
 }
 
-@media (max-width: 700px) {
+/* At tablet widths the demo utility button no longer fits beside the tab rail.
+   Hide the optional utility before it can overflow into the project tabs. */
+@media (max-width: 900px) {
   body .project-nav .demo-nav-toggle { display: none !important; }
 }
 
