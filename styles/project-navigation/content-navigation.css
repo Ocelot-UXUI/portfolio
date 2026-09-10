@@ -148,21 +148,21 @@
   z-index: 2;
   top: 0;
   left: 0;
-  width: 140px;
-  height: 53px;
-  padding: 0 20px 0 30px;
+  width: 92px;
+  height: 36px;
+  padding: 0 11px 0 17px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  border-radius: 36px;
+  gap: 6px;
+  border-radius: 20px;
   background: #1c202b;
   box-shadow: 0 12px 28px rgba(0, 0, 0, .36), inset 0 1px rgba(255, 255, 255, .07);
   color: #7cfac9;
   font-family: "PingFang SC", sans-serif;
-  font-size: 21px;
+  font-size: 14px;
   font-weight: 500;
-  line-height: 33px;
+  line-height: 20px;
   white-space: nowrap;
   pointer-events: none;
   transform-origin: 0 50%;
@@ -170,9 +170,9 @@
 }
 
 .case-project-hover-label img {
-  width: 36px;
-  height: 36px;
-  flex: 0 0 36px;
+  width: 25px;
+  height: 25px;
+  flex: 0 0 25px;
   object-fit: contain;
 }
 

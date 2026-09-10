@@ -2306,7 +2306,8 @@
 }
 
 /* Figma 305:25329 workload detail drawer. */
-#detailBackdrop:not(.hidden){align-items:stretch;justify-content:flex-end}
+#detailBackdrop:not(.hidden){align-items:stretch;justify-content:flex-end;pointer-events:none;background:transparent!important}
+#detailBackdrop #instanceModal{pointer-events:auto}
 #instanceModal{
   box-sizing:border-box;
   width:980px!important;
