@@ -1988,6 +1988,7 @@ function syncRuntimeInheritedControls(){
       setRuntimeFieldEnabled(scope,false);
     }
   });
+  syncRuntimeSettingIcons();
 }
 function getRuntimeTooltipText(state){
   if(activeRuntimeContext==='application')return '';
@@ -2003,6 +2004,17 @@ function getRuntimeTooltipText(state){
   if(state==='restore')return `再次点击将放弃本地覆盖，恢复继承自 ${environment} 的环境级配置`;
   return `${current}的集群级配置，继承自 ${environment} 的环境级配置。点击可在当前层级覆盖为本地值`;
 }
+function syncRuntimeSettingIcons(){
+  document.querySelectorAll('#runtimePage .runtime-setting-icon use').forEach(use=>{
+    const toggle=use.closest('[data-runtime-field-toggle]');
+    const inheritsApplication=activeRuntimeContext==='environment'&&!toggle?.classList.contains('is-active');
+    const iconId=activeRuntimeContext==='application'||inheritsApplication
+      ? '#i-runtime-package'
+      : '#i-runtime-stack';
+    use.setAttribute('href',iconId);
+  });
+}
+syncRuntimeSettingIcons();
 function setupRuntimeFieldActivation(){
   const scopes=[...document.querySelectorAll('#runtimePage .runtime-setting-row, #runtimePage .runtime-rule-group, #runtime-container-image .runtime-image-source, #runtime-container-image .runtime-image-base-group')].filter(Boolean);
   scopes.forEach(scope=>{
@@ -2058,6 +2070,7 @@ function setupRuntimeFieldActivation(){
         toggle.setAttribute('aria-label','启用此配置项');
         ensureRuntimeFieldTooltip(scope,getRuntimeTooltipText('default'));
       }
+      syncRuntimeSettingIcons();
     });
     const cancelRestoreTimer=()=>{
       clearTimeout(scope._runtimeRestoreTimer);

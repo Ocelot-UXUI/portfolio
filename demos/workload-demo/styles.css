@@ -1438,10 +1438,8 @@
 #runtimePage button.runtime-setting-icon { padding: 0; cursor: pointer; }
 #runtimePage button.runtime-setting-icon:hover { border-color: #bfbfbf; background: #f7f7f7; }
 #runtimePage button.runtime-setting-icon.is-active { border-color: #9cf; background: #e5f2ff; color: #0080ff; }
-#runtimePage button.runtime-setting-icon.is-active svg { filter: brightness(0) saturate(100%) invert(41%) sepia(96%) saturate(2518%) hue-rotate(196deg) brightness(101%) contrast(105%); }
 #runtimePage .is-restore-pending .runtime-setting-icon { border-color: #f58300; background: #fff3e0; color: #f58300; }
 #runtimePage .is-restore-pending button.runtime-setting-icon.is-active { border-color: #f58300; background: #fff3e0; color: #f58300; }
-#runtimePage .is-restore-pending button.runtime-setting-icon.is-active svg { filter: none; stroke: #f58300; }
 #runtimePage .runtime-setting-row.is-field-disabled input,
 #runtimePage .runtime-setting-row.is-field-disabled select,
 #runtimePage .runtime-setting-row.is-field-disabled .runtime-select-value,
@@ -1502,7 +1500,7 @@
 #runtimePage .runtime-input-unit .cnap-input[type="number"] { width: 136px; min-width: 136px; }
 #runtimePage .runtime-setting-subrows .runtime-input-unit .cnap-input { width: 88px; min-width: 88px; }
 #runtimePage .runtime-inline-control > .cnap-input[type="number"] { width: 136px; min-width: 136px; }
-#runtimePage .runtime-setting-icon svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1; stroke-linecap: round; stroke-linejoin: round; }
+#runtimePage .runtime-setting-icon svg { width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
 #runtimePage .runtime-setting-row strong { display: block; font-size: 14px; line-height: 22px; font-weight: 500; }
 #runtimePage .runtime-field-title { display: inline-flex; align-items: center; gap: 4px; vertical-align: top; }
 #runtimePage .runtime-field-title strong { display: inline; }
