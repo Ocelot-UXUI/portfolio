@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1574" />
+  <title>配置覆盖与恢复演示</title>
+  <link rel="stylesheet" href="./override-preview.css?v=1" />
+</head>
+<body>
+  <div class="preview-card" data-state="inherited">
+    <button class="state-icon" type="button" tabindex="-1" aria-hidden="true">
+      <svg class="package-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M13.6673 4.66658L8.00065 1.33334L2.33398 4.66658V11.3333L8.00065 14.6667L13.6673 11.3333V4.66658Z" stroke="currentColor" stroke-width="1.33333" stroke-linejoin="round"/>
+        <path d="M5.33398 6.33252L7.99838 8.00005L10.6657 6.33252M8 8V11" stroke="currentColor" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <svg class="stack-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M7.187 2.114c.433-.163.91-.165 1.344-.004l4.912 1.82c1.086.402 1.12 1.926.053 2.376L8.859 8.262a1.91 1.91 0 0 1-1.441.02L2.448 6.276c-1.075-.434-1.062-1.957.014-2.376L7.187 2.114Zm.442 1.17L2.916 5.064l4.948 2.05c.163.067.346.065.509-.003l4.637-1.957-4.913-1.872a.68.68 0 0 0-.468.002Z" fill="currentColor"/>
+        <path d="M1.719 7.996a.625.625 0 0 1 .819-.333l4.977 2.096c.326.138.695.135 1.019-.006l4.775-2.087a.625.625 0 1 1 .5 1.145l-4.774 2.087a3.16 3.16 0 0 1-2.005.013L2.052 8.815a.625.625 0 0 1-.333-.819Zm0 2.956a.625.625 0 0 1 .819-.333l4.977 2.096c.326.138.695.135 1.019-.007l4.775-2.086a.625.625 0 1 1 .5 1.145l-4.774 2.087a3.16 3.16 0 0 1-2.005.013l-4.978-2.096a.625.625 0 0 1-.333-.819Z" fill="currentColor"/>
+      </svg>
+    </button>
+    <div class="copy">
+      <div class="title-row"><strong>实例数量</strong><span class="state-tag"></span></div>
+      <p>工作负载启动的 Pod 数量。系统将根据此数值创建并维护相应数量的 Pod 实例。</p>
+    </div>
+    <input type="number" value="3" min="1" disabled tabindex="-1" aria-label="实例数量" />
+    <span class="click-ripple" hidden></span>
+  </div>
+  <script src="./override-preview.js?v=1"></script>
+</body>
+</html>

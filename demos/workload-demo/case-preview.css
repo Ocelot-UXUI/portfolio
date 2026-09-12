@@ -1,0 +1,20 @@
+/* Coordinates measured on page-12.webp: 1920 x 1080; card 173,823,1574,152. */
+html:has(.case-component-preview), body.case-component-preview { margin: 0 !important; padding: 0 !important; width: 1574px !important; height: 152px !important; min-width: 0 !important; overflow: hidden !important; background: transparent !important; }
+body.case-component-preview > :not(#case-preview-shell):not(svg) { display: none !important; }
+#case-preview-shell { position: absolute; inset: 0; width: 1574px; height: 152px; box-sizing: border-box; border: 6px solid #171b18; border-radius: 28px; background: #fff; overflow: hidden; }
+body.case-component-preview #runtimePage { display: block !important; position: absolute; inset: 0; width: auto; height: auto; padding: 0; margin: 0; background: white; overflow: visible; }
+body.case-component-preview #runtimePage .runtime-setting-row { display: block; position: absolute; inset: 0; min-height: 0; padding: 0; border: 0; }
+body.case-component-preview #runtimePage .runtime-setting-icon { position: absolute; left: 40px; top: 27px; width: 44px; height: 44px; margin: 0; }
+body.case-component-preview #runtimePage .runtime-setting-icon svg { width: 24px; height: 24px; }
+body.case-component-preview #runtimePage .runtime-setting-row > div { position: absolute; left: 100px; top: 27px; width: 1160px; margin: 0; }
+body.case-component-preview #runtimePage .runtime-setting-row strong { font-size: 24px; line-height: 36px; font-weight: 500; }
+body.case-component-preview #runtimePage .runtime-setting-row p { display: block; margin: 20px 0 0; font-size: 20px; line-height: 30px; white-space: nowrap; color: #888; }
+body.case-component-preview #runtimePage .runtime-setting-row > input { position: absolute; left: 1298px; top: 27px; width: 224px; min-width: 0; height: 53px; padding: 6px 18px; font-size: 24px; line-height: 36px; border-radius: 14px; }
+body.case-component-preview #runtimePage .runtime-field-title { display: flex; align-items: center; gap: 8px; }
+body.case-component-preview #runtimePage .runtime-override-tag { height: 40px; padding: 0 16px; border-radius: 24px; font: 400 24px/40px "PingFang SC", sans-serif; }
+body.case-component-preview #runtimePage .runtime-setting-row > input { transition: border-color .2s ease, background-color .2s ease, color .2s ease, box-shadow .2s ease; }
+body.case-component-preview #runtimePage .runtime-setting-row.case-demo-input-active > input { border-color: #8f8f8f; background: #fff; color: #181818; cursor: text; opacity: 1; }
+body.case-component-preview #runtimePage .runtime-setting-row.case-demo-input-focused > input { border-color: #409eff; box-shadow: 0 0 0 3px rgba(64,158,255,.16); }
+body.case-component-preview #runtimePage .runtime-override-tooltip { display: none !important; }
+.case-demo-ripple { position: absolute; z-index: 5; width: 42px; height: 42px; box-sizing: border-box; border: 4px solid rgba(0, 128, 255, .78); border-radius: 50%; background: rgba(0, 128, 255, .1); box-shadow: 0 0 0 7px rgba(0, 128, 255, .08); pointer-events: none; transform-origin: center; }
+.case-demo-ripple::after { content: ''; position: absolute; inset: 12px; border-radius: 50%; background: #0080ff; }
