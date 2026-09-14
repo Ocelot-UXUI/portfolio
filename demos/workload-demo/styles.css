@@ -2631,6 +2631,14 @@
 /* Product drawers and dialogs must sit above the portfolio shell. */
 .portfolio-demo-app .modal-backdrop,
 .portfolio-demo-app .history-drawer{z-index:1000}
+
+/* The instance drawer belongs to the product demo, not the portfolio page.
+   Keep its fixed layer inside the demo's visible band below the page nav. */
+body:not(.demo-nav-hidden) > .portfolio-demo-app #detailBackdrop{
+  top:64px;
+  bottom:0;
+}
+body.demo-nav-hidden > .portfolio-demo-app #detailBackdrop{top:0}
 @media(max-width:1020px){
   #instanceModal{width:calc(100vw - 40px)!important}
   #instanceModal .instance-summary-shell,
@@ -2643,6 +2651,7 @@
 }
 @media(max-width:700px){
   body{min-width:0;overflow:hidden}
+  body:not(.demo-nav-hidden) > .portfolio-demo-app #detailBackdrop{top:52px}
   .portfolio-demo-app{display:none}
   .portfolio-mobile-fallback{height:calc(100vh - 56px);display:grid;place-items:center;padding:32px 24px;background:linear-gradient(145deg,#f7f8fa,#edf1f6);color:#181818;text-align:left}
   .portfolio-mobile-fallback>div{width:min(100%,420px)}
