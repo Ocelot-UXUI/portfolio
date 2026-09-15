@@ -3,6 +3,29 @@
   z-index: 2;
   cursor: default;
 }
+
+/* Pages 8–9 use the refreshed copy as the base artwork. Keep the original
+   device frames as clipped layers so their border, radius and video geometry
+   remain pixel-identical to the existing interactive slides. */
+.case-deck-page #workload-preview::before,
+.case-deck-page #detail-preview::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+.case-deck-page #workload-preview::before {
+  background-image: url('../assets/cnap-case/page-08-interactive-base.webp');
+  clip-path: inset(15.3% 0 7.8% 42.7%);
+}
+.case-deck-page #detail-preview::before {
+  background-image: url('../assets/cnap-case/page-09-figma.webp');
+  clip-path: inset(15.3% 47.5% 7.8% 0);
+}
 .case-deck-page .cnap-workload-hotspot {
   left: 44.3127%;
   top: 17.9448%;
