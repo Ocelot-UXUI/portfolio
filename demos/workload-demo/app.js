@@ -613,7 +613,8 @@ function syncWorkloadStickyStack(){
   }));
   let activeIndex=-1;
   metrics.forEach(({groupRect,headerRect},index)=>{
-    if(headerRect.top<=stickyTop&&groupRect.bottom>stickyTop) activeIndex=index;
+    const boundary=metrics[index+1]?.headerRect.top??groupRect.bottom;
+    if(headerRect.top<=stickyTop&&boundary>stickyTop) activeIndex=index;
   });
 
   if(activeIndex<0){
@@ -630,16 +631,12 @@ function syncWorkloadStickyStack(){
   const tableFrameRect=metrics[activeIndex].tableFrameRect??groupRect;
   const titleRect=document.querySelector('.title-row').getBoundingClientRect();
   const boundary=metrics[activeIndex+1]?.headerRect.top??groupRect.bottom;
-  const contentHeight=collapsed?52:100;
-  const stackHeight=collapsed?118:166;
-  const innerOffset=Math.min(0,boundary-stickyTop-contentHeight);
   const sourceScroll=group.querySelector('.table-scroll');
   const stickyScroll=workloadStickyStack.querySelector('.sticky-table-scroll');
 
   setPixelStyle(workloadStickyStack,'top',workspaceRect.top);
   setPixelStyle(workloadStickyStack,'left',workspaceRect.left);
   setPixelStyle(workloadStickyStack,'width',workspaceRect.width);
-  setPixelStyle(workloadStickyStack,'height',stackHeight);
   setPixelVariable(workloadStickyStack,'--sticky-title-left',titleRect.left-workspaceRect.left);
   setPixelVariable(workloadStickyStack,'--sticky-title-right',workspaceRect.right-titleRect.right);
   setPixelVariable(workloadStickyStack,'--sticky-header-left',groupRect.left-workspaceRect.left);
@@ -649,6 +646,12 @@ function syncWorkloadStickyStack(){
   setPixelVariable(workloadStickyStack,'--sticky-table-inset-left',tableFrameRect.left-panelRect.left);
   setPixelVariable(workloadStickyStack,'--sticky-table-inset-right',panelRect.right-tableFrameRect.right);
   const stickyContent=workloadStickyStack.querySelector('.sticky-workload-content');
+  // Keep the app header readable until its successor reaches the same anchor.
+  // Only slide away at the end of the entire list, not between applications.
+  workloadStickyStack.classList.remove('hidden');
+  const contentHeight=stickyContent.offsetHeight;
+  setPixelStyle(workloadStickyStack,'height',66+contentHeight);
+  const innerOffset=activeIndex===groups.length-1?Math.min(0,boundary-stickyTop-contentHeight):0;
   const nextTransform=`translateY(${innerOffset}px)`;
   if(stickyContent.style.transform!==nextTransform) stickyContent.style.transform=nextTransform;
   if(sourceScroll&&stickyScroll&&stickyScroll.scrollLeft!==sourceScroll.scrollLeft) stickyScroll.scrollLeft=sourceScroll.scrollLeft;

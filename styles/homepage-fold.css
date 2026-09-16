@@ -540,7 +540,9 @@
   .prototype-homepage {
     --fold-inline: var(--responsive-gutter);
     --fold-hero-height: clamp(420px, calc(100svh - 190px), 600px);
-    --fold-hero-title: var(--fold-about-name);
+    /* Keep the longer positioning statement readable on tablet-width
+       desktop layouts without changing the About section's name scale. */
+    --fold-hero-title: 32px;
     --fold-hero-mark: clamp(140px, 20vw, 190px);
     --fold-card-stack: min(84vw, 860px);
     --fold-about-name: clamp(36px, 4.6vw, 46px);
