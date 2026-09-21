@@ -389,6 +389,10 @@ body {
 }
 
 /* Deliverables and research pages */
+.deliverables-page {
+  --deliverable-reading-gutter: clamp(28px, 6vw, 76px);
+}
+
 .deliverables-main {
   width: 100%;
   max-width: 100%;
@@ -404,6 +408,73 @@ body {
   max-width: 100%;
   overscroll-behavior-inline: contain;
   -webkit-overflow-scrolling: touch;
+}
+
+/* Keep the hierarchy clean: the secondary tabs provide the only divider. */
+.deliverables-page .deliverables-content {
+  border-top: 0;
+}
+
+.deliverables-page .research-subtabs {
+  display: flex;
+  gap: 0;
+  margin: 0 0 36px;
+  padding: 0;
+  overflow-x: auto;
+  border-bottom: 1px solid rgba(255, 255, 255, .13);
+  scrollbar-width: none;
+}
+
+.deliverables-page .research-subtabs::-webkit-scrollbar {
+  display: none;
+}
+
+.deliverables-page .research-subtabs button {
+  position: relative;
+  flex: 0 0 auto;
+  height: auto;
+  padding: 0 24px 16px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #747987;
+  font-size: 14px;
+  font-weight: 550;
+  white-space: nowrap;
+}
+
+.deliverables-page .research-subtabs button:first-child {
+  padding-left: 0;
+}
+
+.deliverables-page .research-subtabs button:hover,
+.deliverables-page .research-subtabs button[aria-selected="true"] {
+  border: 0;
+  background: transparent;
+  color: #fff;
+}
+
+.deliverables-page .research-subtabs button[aria-selected="true"]::after {
+  content: "";
+  position: absolute;
+  right: 24px;
+  bottom: -1px;
+  left: 24px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--deliverable-accent);
+  box-shadow: 0 0 14px rgb(var(--deliverable-accent-rgb) / .34);
+}
+
+.deliverables-page .research-subtabs button:first-child[aria-selected="true"]::after {
+  left: 0;
+}
+
+/* Long-form deliverables share one reading width and one responsive gutter. */
+.deliverables-page .research-document {
+  width: min(100%, 980px);
+  margin-inline: auto;
+  padding-inline: var(--deliverable-reading-gutter);
 }
 
 .deliverables-content,
@@ -467,6 +538,29 @@ body {
   .dodo-document {
     width: 100%;
     font-size: 14px;
+  }
+
+  .deliverables-page .research-subtabs {
+    margin-bottom: 28px;
+  }
+
+  .deliverables-page .research-subtabs button {
+    padding-right: 18px;
+    padding-left: 18px;
+    font-size: 13px;
+  }
+
+  .deliverables-page .research-subtabs button:first-child {
+    padding-left: 0;
+  }
+
+  .deliverables-page .research-subtabs button[aria-selected="true"]::after {
+    right: 18px;
+    left: 18px;
+  }
+
+  .deliverables-page .research-subtabs button:first-child[aria-selected="true"]::after {
+    left: 0;
   }
 
   .research-table-scroll,

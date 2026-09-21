@@ -35,6 +35,25 @@
       .artifact-subtabs button>small{margin-left:7px;color:#5f6472;font-size:11px;font-weight:500}
       .artifact-subtabs button[aria-selected="true"]>small{color:#9ca0ab}
       .artifact-subpanel[hidden]{display:none}
+      .cnap-research-page .cnap-satisfaction-chart{margin:30px 0 48px;padding:0;overflow:visible;border:1px solid rgba(255,255,255,.11);border-radius:20px;background:linear-gradient(145deg,rgba(80,215,160,.045),rgba(255,255,255,.018) 42%),#0d1119;box-shadow:0 24px 70px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.045)}
+      .cnap-research-page .cnap-chart-head{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin:0;padding:24px 26px 20px;border-bottom:1px solid rgba(255,255,255,.085)}
+      .cnap-research-page .cnap-chart-title{display:grid;gap:6px}
+      .cnap-research-page .cnap-chart-title small{color:#6fcda8;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+      .cnap-research-page .cnap-chart-title strong{color:#f5f7f6;font-size:20px;font-weight:650;line-height:1.4}
+      .cnap-chart-privacy{display:inline-flex;align-items:center;min-height:30px;padding:0 11px;border:1px solid rgba(255,255,255,.1);border-radius:999px;background:rgba(255,255,255,.035);color:#8f96a3;font-size:11px;white-space:nowrap}
+      .cnap-chart-toolbar{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 26px 10px}
+      .cnap-chart-toolbar>span{color:#697180;font-size:11px;font-weight:600;letter-spacing:.06em}
+      .cnap-research-page .cnap-chart-legend{display:flex;gap:8px}
+      .cnap-research-page .cnap-chart-legend button{display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 12px;border:1px solid rgba(255,255,255,.09);border-radius:999px;background:rgba(255,255,255,.025);color:#8d95a4;font:12px inherit;cursor:pointer;transition:color .18s ease,border-color .18s ease,background .18s ease,transform .18s ease}
+      .cnap-research-page .cnap-chart-legend button:hover{border-color:rgba(255,255,255,.18);background:rgba(255,255,255,.055);color:#d9dde4;transform:translateY(-1px)}
+      .cnap-research-page .cnap-chart-legend button.is-selected{border-color:color-mix(in srgb,var(--series-color) 52%,transparent);background:color-mix(in srgb,var(--series-color) 13%,transparent);color:#fff;box-shadow:0 0 20px color-mix(in srgb,var(--series-color) 10%,transparent)}
+      .cnap-research-page .cnap-chart-legend i{width:7px;height:7px;margin:0;background:var(--series-color)}
+      .cnap-research-page .cnap-chart-legend button:nth-child(1){--series-color:#9cbf8c}.cnap-research-page .cnap-chart-legend button:nth-child(2){--series-color:#7594f2}.cnap-research-page .cnap-chart-legend button:nth-child(3){--series-color:#cc91f0}
+      .cnap-chart-viewport{margin:0 14px;overflow-x:auto;overscroll-behavior-inline:contain;scrollbar-width:thin;scrollbar-color:#394252 transparent}
+      .cnap-research-page .cnap-satisfaction-chart canvas{display:block;width:100%;min-width:980px;height:auto;border:0;cursor:crosshair}
+      .cnap-chart-foot{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:0;padding:14px 26px 20px;border-top:1px solid rgba(255,255,255,.07);color:#697180;font-size:11px;line-height:1.6}
+      .cnap-chart-foot span{display:inline-flex;align-items:center;gap:7px}
+      .cnap-chart-foot i{display:inline-block;width:8px;height:8px;border-radius:2px;background:rgba(242,168,91,.7)}
       .artifact-heading{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:32px;align-items:start;margin-bottom:22px}
       .artifact-heading h3{margin:0 0 8px;color:#fff;font-size:23px;font-weight:600;line-height:1.4}
       .artifact-page-total{padding-top:5px;color:#737886;font-size:12px;white-space:nowrap}
@@ -83,9 +102,10 @@
         .ai-workflow-scroll figure{flex-basis:76%}
         .artifact-viewer-toolbar{min-height:48px;padding:0 12px}
         .document-lightbox{grid-template-columns:42px minmax(0,1fr) 42px;gap:6px;padding:10px}
+        .cnap-research-page .cnap-chart-head{padding:20px;display:block}.cnap-chart-privacy{margin-top:12px}.cnap-chart-toolbar{align-items:flex-start;flex-direction:column;padding:14px 20px 8px}.cnap-research-page .cnap-chart-legend{flex-wrap:wrap}.cnap-chart-viewport{margin:0 8px}.cnap-research-page .cnap-satisfaction-chart canvas{min-width:900px}.cnap-chart-foot{align-items:flex-start;flex-direction:column;padding:12px 20px 18px}
       }
     </style>
-    <link rel="stylesheet" href="../styles/responsive-system.css?v=20260906-2" />
+    <link rel="stylesheet" href="../styles/responsive-system.css?v=20260921-1" />
   </head>
   <body class="deliverables-page cnap-research-page" data-project-theme="cnap">
     <header class="project-nav">
@@ -174,10 +194,12 @@
             <section class="research-subpanel" data-research-panel="satisfaction" role="tabpanel" hidden>
               <article class="research-document">
                 <h2>CNAP 二级指标满意度</h2>
-                <p>问卷持续追踪应用管理、部署、流水线、运维、环境管理和端侧等二级指标。为保护内部数据，图表不展示具体满意度数值；曲线按跨季度调研趋势相对绘制，突出不同模块的持续低位与阶段性波动。</p>
+                <p>持续追踪应用管理、部署、流水线、运维、环境管理和端侧体验。图表仅呈现跨季度相对变化，不展示具体分值，用于识别持续低位和波动项。</p>
                 <div class="cnap-satisfaction-chart" aria-label="CNAP 二级指标相对趋势图">
-                  <div class="cnap-chart-head"><div><small>季度追踪 · 相对趋势</small><strong>二级指标满意度变化</strong></div><div class="cnap-chart-controls"><span>不展示具体数值</span><div class="cnap-chart-legend" aria-label="季度图例"><button type="button" data-chart-series="0"><i></i>绿色 · 2025Q2</button><button type="button" data-chart-series="1"><i></i>蓝色 · 2025Q3</button><button type="button" data-chart-series="2" class="is-selected"><i></i>紫色 · 2025Q4</button></div></div></div>
-                  <canvas data-cnap-satisfaction-chart width="1360" height="620">CNAP 二级指标相对趋势图</canvas>
+                  <div class="cnap-chart-head"><div class="cnap-chart-title"><small>Quarterly Tracking</small><strong>二级指标满意度趋势</strong></div><span class="cnap-chart-privacy">仅展示相对高低</span></div>
+                  <div class="cnap-chart-toolbar"><span>选择季度，高亮查看趋势</span><div class="cnap-chart-legend" aria-label="季度图例"><button type="button" data-chart-series="0"><i></i>2025 Q2</button><button type="button" data-chart-series="1"><i></i>2025 Q3</button><button type="button" data-chart-series="2" class="is-selected"><i></i>2025 Q4</button></div></div>
+                  <div class="cnap-chart-viewport"><canvas data-cnap-satisfaction-chart width="1360" height="570">CNAP 二级指标相对趋势图</canvas></div>
+                  <p class="cnap-chart-foot"><span><i></i>橙色区间为 CNAP 2.0 重点改版项</span><span>悬停节点查看季度变化方向</span></p>
                   <div class="cnap-chart-tooltip" data-chart-tooltip role="status" aria-live="polite"></div>
                 </div>
                 <h3>问卷口径</h3>
@@ -497,7 +519,7 @@
         ];
         const width = satisfactionCanvas.width;
         const height = satisfactionCanvas.height;
-        const padding = { top: 86, right: 40, bottom: 128, left: 68 };
+        const padding = { top: 58, right: 30, bottom: 126, left: 30 };
         const minValue = 0;
         const maxValue = 100;
         const chartWidth = width - padding.left - padding.right;
@@ -508,22 +530,44 @@
         const chartTooltip = chartContainer.querySelector("[data-chart-tooltip]");
         const legendButtons = [...chartContainer.querySelectorAll("[data-chart-series]")];
         const cnap2Focus = new Map([[5, "部署管理"], [14, "设计布局"]]);
+        const metricGroups = [
+          { label: "应用管理", start: 0, end: 4 },
+          { label: "部署", start: 5, end: 7 },
+          { label: "流水线", start: 8, end: 8 },
+          { label: "运维", start: 9, end: 10 },
+          { label: "环境管理", start: 11, end: 13 },
+          { label: "端侧", start: 14, end: 16 }
+        ];
         let selectedDataset = 2;
         let hoveredIndex = null;
         let hoveredDataset = null;
         const drawChart = () => {
-        context.fillStyle = "#10131c";
+        context.fillStyle = "#0d1119";
         context.fillRect(0, 0, width, height);
+        metricGroups.forEach((group, groupIndex) => {
+          const step = chartWidth / (labels.length - 1);
+          const startX = group.start === 0 ? padding.left : x(group.start) - step / 2;
+          const endX = group.end === labels.length - 1 ? width - padding.right : x(group.end) + step / 2;
+          if (groupIndex % 2 === 0) {
+            context.fillStyle = "rgba(255,255,255,.012)";
+            context.fillRect(startX, padding.top, endX - startX, chartHeight);
+          }
+          if (group.start > 0) {
+            context.strokeStyle = "rgba(255,255,255,.065)";
+            context.lineWidth = 1;
+            context.beginPath(); context.moveTo(startX, padding.top); context.lineTo(startX, height - padding.bottom); context.stroke();
+          }
+        });
         cnap2Focus.forEach((label, index) => {
-          const focusWidth = (chartWidth / (labels.length - 1)) * .78;
-          context.fillStyle = "rgba(242, 168, 91, .09)";
+          const focusWidth = (chartWidth / (labels.length - 1)) * .72;
+          context.fillStyle = "rgba(242,168,91,.075)";
           context.fillRect(x(index) - focusWidth / 2, padding.top, focusWidth, chartHeight);
           context.fillStyle = "#f2a85b";
-          context.font = "600 12px PingFang SC, sans-serif";
+          context.font = "600 11px PingFang SC, sans-serif";
           context.textAlign = "center";
-          context.fillText("CNAP 2.0 重点", x(index), padding.top + 18);
+          context.fillText("2.0 重点", x(index), padding.top + 18);
         });
-        [20,40,60,80].forEach((value) => {
+        [25,50,75].forEach((value) => {
           const lineY = y(value);
           context.strokeStyle = "rgba(255,255,255,.12)";
           context.lineWidth = 1;
@@ -542,21 +586,28 @@
           const isSelected = datasetIndex === selectedDataset;
           const isHovered = datasetIndex === hoveredDataset;
           context.strokeStyle = dataset.color;
-          context.globalAlpha = isSelected ? 1 : isHovered ? .72 : .28;
-          context.lineWidth = isSelected ? 4 : isHovered ? 3 : 2;
+          context.globalAlpha = isSelected ? 1 : isHovered ? .68 : .18;
+          context.lineWidth = isSelected ? 3.5 : isHovered ? 2.5 : 1.5;
           context.beginPath();
           dataset.values.forEach((value, index) => { index ? context.lineTo(x(index), y(value)) : context.moveTo(x(index), y(value)); });
           context.stroke();
           dataset.values.forEach((value, index) => {
             const isHoverPoint = index === hoveredIndex && isHovered;
-            context.fillStyle = "#10131c"; context.strokeStyle = dataset.color; context.lineWidth = isSelected || isHoverPoint ? 3 : 2;
-            context.beginPath(); context.arc(x(index), y(value), isHoverPoint ? 7 : isSelected ? 5.5 : 4, 0, Math.PI * 2); context.fill(); context.stroke();
+            context.fillStyle = "#0d1119"; context.strokeStyle = dataset.color; context.lineWidth = isSelected || isHoverPoint ? 2.5 : 1.5;
+            context.beginPath(); context.arc(x(index), y(value), isHoverPoint ? 6.5 : isSelected ? 4.5 : 3.2, 0, Math.PI * 2); context.fill(); context.stroke();
           });
         });
         context.globalAlpha = 1;
-        context.save(); context.translate(25, height / 2); context.rotate(-Math.PI / 2); context.fillStyle = "#8e97a8"; context.font = "15px PingFang SC, sans-serif"; context.textAlign = "center"; context.fillText("相对趋势（不含具体分值）", 0, 0); context.restore();
-        context.fillStyle = "#aeb5c2"; context.font = "15px PingFang SC, sans-serif"; context.textAlign = "right";
-        labels.forEach((label, index) => { context.save(); context.translate(x(index) + 6, height - padding.bottom + 30); context.rotate(-Math.PI / 4); context.fillText(label, 0, 0); context.restore(); });
+        context.fillStyle = "#aeb5c2"; context.font = "13px PingFang SC, sans-serif"; context.textAlign = "center";
+        labels.forEach((label, index) => context.fillText(label, x(index), height - padding.bottom + 30));
+        metricGroups.forEach((group) => {
+          const centerX = (x(group.start) + x(group.end)) / 2;
+          context.fillStyle = "#626b79";
+          context.font = "600 11px PingFang SC, sans-serif";
+          context.fillText(group.label, centerX, height - padding.bottom + 78);
+          context.strokeStyle = "rgba(255,255,255,.08)";
+          context.beginPath(); context.moveTo(x(group.start), height - padding.bottom + 55); context.lineTo(x(group.end), height - padding.bottom + 55); context.stroke();
+        });
         };
         const selectDataset = (index) => {
           selectedDataset = index;
@@ -574,7 +625,8 @@
           if (pointerX < padding.left || pointerX > width - padding.right || pointerY < padding.top || pointerY > height - padding.bottom) return null;
           const index = Math.max(0, Math.min(labels.length - 1, Math.round(((pointerX - padding.left) / chartWidth) * (labels.length - 1))));
           const dataset = datasets.reduce((closest, item, itemIndex) => Math.abs(pointerY - y(item.values[index])) < Math.abs(pointerY - y(datasets[closest].values[index])) ? itemIndex : closest, 0);
-          return { index, dataset, offsetX: event.clientX - rect.left, offsetY: event.clientY - rect.top };
+          const containerRect = chartContainer.getBoundingClientRect();
+          return { index, dataset, offsetX: event.clientX - containerRect.left, offsetY: event.clientY - containerRect.top };
         };
         const showTooltip = (target) => {
           const selectedRows = datasets.map((dataset, index) => {
@@ -582,8 +634,8 @@
             return `<span class="${index === selectedDataset ? "is-selected" : ""}" style="color:${dataset.color}"><i></i><em>${dataset.label}</em>${direction}</span>`;
           }).join("");
           chartTooltip.innerHTML = `<strong>${labels[target.index]}</strong>${selectedRows}`;
-          chartTooltip.style.left = `${satisfactionCanvas.offsetLeft + target.offsetX}px`;
-          chartTooltip.style.top = `${satisfactionCanvas.offsetTop + target.offsetY}px`;
+          chartTooltip.style.left = `${Math.min(target.offsetX, chartContainer.clientWidth - 205)}px`;
+          chartTooltip.style.top = `${target.offsetY}px`;
           chartTooltip.classList.add("is-visible");
         };
         satisfactionCanvas.addEventListener("pointermove", (event) => {
