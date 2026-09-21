@@ -54,6 +54,8 @@
       .cnap-chart-foot{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:0;padding:14px 26px 20px;border-top:1px solid rgba(255,255,255,.07);color:#697180;font-size:11px;line-height:1.6}
       .cnap-chart-foot span{display:inline-flex;align-items:center;gap:7px}
       .cnap-chart-foot i{display:inline-block;width:8px;height:8px;border-radius:2px;background:rgba(242,168,91,.7)}
+      .research-priority-badge{display:inline-flex;align-items:center;justify-content:center;min-width:38px;height:25px;padding:0 9px;border:1px solid rgba(255,126,105,.28);border-radius:999px;background:rgba(255,126,105,.1);color:#ff9a87;font-size:11px;font-weight:750;letter-spacing:.04em}
+      .cnap-evidence-table td:last-child{color:#7de0b4;font-weight:650;white-space:nowrap}
       .artifact-heading{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:32px;align-items:start;margin-bottom:22px}
       .artifact-heading h3{margin:0 0 8px;color:#fff;font-size:23px;font-weight:600;line-height:1.4}
       .artifact-page-total{padding-top:5px;color:#737886;font-size:12px;white-space:nowrap}
@@ -105,7 +107,7 @@
         .cnap-research-page .cnap-chart-head{padding:20px;display:block}.cnap-chart-privacy{margin-top:12px}.cnap-chart-toolbar{align-items:flex-start;flex-direction:column;padding:14px 20px 8px}.cnap-research-page .cnap-chart-legend{flex-wrap:wrap}.cnap-chart-viewport{margin:0 8px}.cnap-research-page .cnap-satisfaction-chart canvas{min-width:900px}.cnap-chart-foot{align-items:flex-start;flex-direction:column;padding:12px 20px 18px}
       }
     </style>
-    <link rel="stylesheet" href="../styles/responsive-system.css?v=20260921-2" />
+    <link rel="stylesheet" href="../styles/responsive-system.css?v=20260921-3" />
   </head>
   <body class="deliverables-page cnap-research-page" data-project-theme="cnap">
     <header class="project-nav">
@@ -159,14 +161,14 @@
                 <p>本次访谈材料共覆盖 6 名用户，角色包括平台管理者、大模型基建开发者、商业 OP、一线研发和健康策略研发；其中包含新用户与高频用户。</p>
                 <p>痛点表格中的“依据 2”将多位受访者的相似反馈合并展示，统一采用“反馈原话 + 命中人数”的口径。以下内容保留代表性原话，帮助区分高频问题与高影响问题。</p>
                 <div class="research-table-scroll">
-                  <table class="research-table" aria-label="CNAP 用户调研证据">
+                  <table class="research-table cnap-evidence-table" aria-label="CNAP 用户调研证据">
                     <tbody>
                       <tr><th class="research-table-first-column">优先级</th><th>问题</th><th>代表性反馈原话</th><th>反馈人数</th></tr>
-                      <tr><td class="research-table-first-column">P0</td><td>用户找不到目标应用</td><td><span class="research-cell-text">“信息量太大了，进来之后不知道该点哪里。”<br>“导航结构和我的操作习惯不一样，我每次都要找半天。”</span></td><td>4/5 用户</td></tr>
-                      <tr><td class="research-table-first-column">P0</td><td>部署失败无法自助排查</td><td><span class="research-cell-text">“出错了也不知道是哪里的问题，只能去找研发。”<br>“失败的时候提示不够清楚，不知道下一步该怎么办。”</span></td><td>4/5 用户</td></tr>
-                      <tr><td class="research-table-first-column">P0</td><td>配置变更缺少 Diff</td><td><span class="research-cell-text">“我希望能看到这次上线改了什么，和上次有什么不一样。”</span></td><td>3/5 用户</td></tr>
-                      <tr><td class="research-table-first-column">P0</td><td>日志能力无法支撑排查</td><td><span class="research-cell-text">“日志这块太弱了，我都用 BLS，CNAP 的日志基本不用。”<br>“连关键词搜索都没有，怎么排查问题？”</span></td><td>3/5 用户</td></tr>
-                      <tr><td class="research-table-first-column">P0</td><td>AI 能力不可见</td><td><span class="research-cell-text">“有这个工具？我完全不知道。”<br>“AI 能力在哪里用？没见过。”</span></td><td>4/5 用户</td></tr>
+                      <tr><td class="research-table-first-column"><span class="research-priority-badge">P0</span></td><td>用户找不到目标应用</td><td><span class="research-cell-text">“信息量太大了，进来之后不知道该点哪里。”<br>“导航结构和我的操作习惯不一样，我每次都要找半天。”</span></td><td>4/5 用户</td></tr>
+                      <tr><td class="research-table-first-column"><span class="research-priority-badge">P0</span></td><td>部署失败无法自助排查</td><td><span class="research-cell-text">“出错了也不知道是哪里的问题，只能去找研发。”<br>“失败的时候提示不够清楚，不知道下一步该怎么办。”</span></td><td>4/5 用户</td></tr>
+                      <tr><td class="research-table-first-column"><span class="research-priority-badge">P0</span></td><td>配置变更缺少 Diff</td><td><span class="research-cell-text">“我希望能看到这次上线改了什么，和上次有什么不一样。”</span></td><td>3/5 用户</td></tr>
+                      <tr><td class="research-table-first-column"><span class="research-priority-badge">P0</span></td><td>日志能力无法支撑排查</td><td><span class="research-cell-text">“日志这块太弱了，我都用 BLS，CNAP 的日志基本不用。”<br>“连关键词搜索都没有，怎么排查问题？”</span></td><td>3/5 用户</td></tr>
+                      <tr><td class="research-table-first-column"><span class="research-priority-badge">P0</span></td><td>AI 能力不可见</td><td><span class="research-cell-text">“有这个工具？我完全不知道。”<br>“AI 能力在哪里用？没见过。”</span></td><td>4/5 用户</td></tr>
                     </tbody>
                   </table>
                 </div>
@@ -187,8 +189,6 @@
                 <ul><li>构建阶段耗时长且无进度反馈。</li><li>GPU 等复杂应用接入文档不完整。</li><li>平台无上线流程强制卡点。</li><li>扩缩容等关键运维入口不易发现。</li><li>不同模块的权限入口逻辑不一致。</li><li>用户期待部署完成或失败后的主动通知。</li></ul>
                 <h4>P2 · 版本与连续性问题</h4>
                 <ul><li>镜像 Tag 与代码版本无清晰映射，线上排查困难。</li><li>运行时配置保存偶发丢失，属于直接阻断的功能性问题。</li></ul>
-                <h3>设计 Todo</h3>
-                <ol><li><strong>P0</strong> 信息架构重构：以“应用”为核心对象重组导航。</li><li><strong>P0</strong> 部署 Diff 展示：明确展示本次配置变更。</li><li><strong>P0</strong> 错误信息优化：提供具体原因和修复建议。</li><li><strong>P0</strong> 日志能力增强：支持搜索、全屏、暂停滚动和日志定格。</li><li><strong>P0</strong> 集群标签：支持按标签批量筛选和操作。</li><li><strong>P1</strong> 部署配置模板化：保存和复用策略模板，支持批量导入变量。</li><li><strong>P1</strong> 部署状态主动通知：完成或失败后自动推送如流消息。</li><li><strong>P1</strong> AI 能力可见性提升：在日志和状态查询节点嵌入 AI 入口。</li><li><strong>P1</strong> 上线流程卡点：校验关联卡片和评审状态。</li><li><strong>P1</strong> 文档补全：重点补充 GPU 和复杂配置场景示例。</li><li><strong>P2</strong> 镜像 Tag 与代码版本映射。</li><li><strong>P2</strong> 自定义导航，满足不同角色的使用习惯。</li></ol>
               </article>
             </section>
             <section class="research-subpanel" data-research-panel="satisfaction" role="tabpanel" hidden>
