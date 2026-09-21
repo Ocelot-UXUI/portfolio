@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../styles/styles.css?v=20260907-1" />
     <link rel="stylesheet" href="../styles/project-navigation.css?v=20260910-2" />
     <script src="../scripts/project-navigation.js?v=20260908-2" defer></script>
-    <link rel="stylesheet" href="../styles/responsive-system.css?v=20260921-1" />
+    <link rel="stylesheet" href="../styles/responsive-system.css?v=20260921-2" />
   </head>
   <body class="deliverables-page" data-project-theme="remi">
     <header class="project-nav">
@@ -135,6 +135,8 @@
           const paragraph = document.createElement("p");
           if (className) paragraph.className = className;
           appendInlineMarkdown(paragraph, content);
+          if (!article.querySelector("p") && content.trim().length <= 24) paragraph.classList.add("document-kicker");
+          if (paragraph.childNodes.length === 1 && paragraph.firstElementChild?.tagName === "STRONG") paragraph.classList.add("document-emphasis");
           article.append(paragraph);
         };
         lines.forEach((line) => {
