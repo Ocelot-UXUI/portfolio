@@ -163,10 +163,10 @@
       userPaused = !userPaused;
       update();
     });
-    hotspot.addEventListener('pointerenter', event => {
+    frame.addEventListener('pointerenter', event => {
       if (event.pointerType === 'mouse') { hovering = true; update(); }
     });
-    hotspot.addEventListener('pointerleave', () => { hovering = false; update(); });
+    frame.addEventListener('pointerleave', () => { hovering = false; update(); });
     hotspot.addEventListener('focus', () => { keyboardPaused = true; update(); });
     hotspot.addEventListener('blur', () => { keyboardPaused = false; update(); });
     if (reduced.matches) { toggle.hidden = false; label(); }
