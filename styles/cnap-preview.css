@@ -25,13 +25,13 @@
 .case-deck-page #detail-preview::before {
   background-image: url('../assets/cnap-case/page-09-figma.webp');
   clip-path: inset(15.3% 47.5% 7.8% 0);
-  transform: translateY(6%);
+  transform: translateY(4%);
 }
 .case-deck-page .cnap-workload-hotspot {
-  left: 44.3127%;
-  top: 17.9448%;
-  width: 75.3324%;
-  height: 71.6838%;
+  left: 43.54%;
+  top: 16.67%;
+  width: 76.1%;
+  height: 74.26%;
   box-sizing: border-box;
   border: 0;
   background: #f4f6f8;
@@ -41,7 +41,7 @@
 }
 .case-deck-page .cnap-detail-preview-slide .cnap-detail-hotspot {
   left: 0;
-  top: 22.67%;
+  top: 20.67%;
   width: 51.67%;
   height: 74.07%;
   border: 0;
