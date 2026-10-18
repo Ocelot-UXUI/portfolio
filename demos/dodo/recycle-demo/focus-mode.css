@@ -166,9 +166,11 @@ body {
 
 .recycle-entry--floating {
   position: fixed !important;
-  right: 24px !important;
-  bottom: 24px !important;
+  right: var(--recycle-right, 24px) !important;
+  bottom: 8px !important;
   z-index: 150 !important;
+  transform: scale(var(--demo-scale, 1));
+  transform-origin: right bottom;
 }
 
 .demo-guide-target {

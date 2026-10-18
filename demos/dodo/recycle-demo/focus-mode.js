@@ -37,6 +37,7 @@
   const artifactGrid = document.querySelector("[data-artifact-grid]");
   const recycleEntry = document.querySelector("[data-open-recycle]");
   const recycleModal = document.querySelector("[data-recycle-modal]");
+  const timeFilter = document.querySelector(".artifact-filter-actions button:last-child");
   const DESIGN_WIDTH = 1160;
   const MIN_DESIGN_HEIGHT = 900;
 
@@ -228,6 +229,10 @@
       appShell.style.left = `${left}px`;
       appShell.style.top = `${top}px`;
       appShell.style.transform = `scale(${scale})`;
+      if (timeFilter) {
+        const rightGap = viewportWidth - timeFilter.getBoundingClientRect().right;
+        document.documentElement.style.setProperty("--recycle-right", `${Math.max(8, rightGap)}px`);
+      }
     });
   };
 
