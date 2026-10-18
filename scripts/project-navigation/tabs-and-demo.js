@@ -1,6 +1,63 @@
 (() => {
 const shuffle = (items) => [...items].sort(() => Math.random() - 0.5);
 
+  const viewProgressParam = "viewProgress";
+  const pageUrl = new URL(window.location.href);
+  const readViewProgress = () => {
+    try {
+      const value = JSON.parse(pageUrl.searchParams.get(viewProgressParam) || "{}");
+      return value && typeof value === "object" && !Array.isArray(value) ? value : {};
+    } catch {
+      return {};
+    }
+  };
+  const viewProgress = readViewProgress();
+  const captureViewProgress = () => {
+    const progress = { scrollY: Math.max(0, Math.round(window.scrollY)) };
+    const slides = [...document.querySelectorAll("main .slides > img, main .slides > .case-slide-frame")];
+    if (slides.length) {
+      const readingLine = window.scrollY + 64;
+      const currentIndex = slides.reduce((current, slide, index) => {
+        const top = slide.getBoundingClientRect().top + window.scrollY;
+        return top <= readingLine ? index : current;
+      }, 0);
+      const currentSlide = slides[currentIndex];
+      progress.slideIndex = currentIndex;
+      progress.offset = Math.round(-currentSlide.getBoundingClientRect().top);
+      if (currentSlide.id) progress.slide = currentSlide.id;
+    }
+    progress.tabs = [...document.querySelectorAll("main [role='tablist']")].map((list, index) => {
+      const tabs = [...list.querySelectorAll("[role='tab']")];
+      return [index, tabs.findIndex((tab) => tab.getAttribute("aria-selected") === "true")];
+    }).filter(([, index]) => index >= 0);
+    return progress;
+  };
+  const restoreViewProgress = () => {
+    const progress = viewProgress[pageUrl.pathname];
+    if (!progress || !Number.isFinite(progress.scrollY)) return;
+    if (Array.isArray(progress.tabs)) {
+      const lists = [...document.querySelectorAll("main [role='tablist']")];
+      progress.tabs.forEach(([listIndex, tabIndex]) => {
+        lists[listIndex]?.querySelectorAll("[role='tab']")[tabIndex]?.click();
+      });
+    }
+    const slides = [...document.querySelectorAll("main .slides > img, main .slides > .case-slide-frame")];
+    const slide = (typeof progress.slide === "string" && document.getElementById(progress.slide))
+      || slides[progress.slideIndex];
+    const targetY = slide && Number.isFinite(progress.offset)
+      ? slide.getBoundingClientRect().top + window.scrollY + progress.offset
+      : progress.scrollY;
+    const root = document.documentElement;
+    const previousBehavior = root.style.scrollBehavior;
+    root.style.scrollBehavior = "auto";
+    window.scrollTo(0, Math.max(0, targetY));
+    window.requestAnimationFrame(() => { root.style.scrollBehavior = previousBehavior; });
+  };
+  if (viewProgress[pageUrl.pathname]) {
+    if (document.readyState === "complete") window.requestAnimationFrame(restoreViewProgress);
+    else window.addEventListener("load", () => window.requestAnimationFrame(restoreViewProgress), { once: true });
+  }
+
   const createSwapLabel = (text, extraClass = "") => {
     const label = document.createElement("span");
     label.className = `nav-random-swap ${extraClass}`.trim();
@@ -225,6 +282,12 @@ const shuffle = (items) => [...items].sort(() => Math.random() - 0.5);
       } else {
         tab.href = option.value;
         tab.setAttribute("aria-label", option.text);
+        tab.addEventListener("click", () => {
+          viewProgress[pageUrl.pathname] = captureViewProgress();
+          const destination = new URL(tab.href, window.location.href);
+          destination.searchParams.set(viewProgressParam, JSON.stringify(viewProgress));
+          tab.href = destination.href;
+        });
       }
       if (option.selected) {
         tab.classList.add("is-active");
