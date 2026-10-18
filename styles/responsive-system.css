@@ -701,9 +701,12 @@ body {
     padding-bottom: 64px;
   }
 
-  .deliverables-shell h1,
-  .cnap-research-page .deliverables-shell h1 {
+  .deliverables-shell h1 {
     font-size: clamp(34px, 10vw, 48px);
+  }
+
+  .cnap-research-page .deliverables-shell h1 {
+    font-size: clamp(30px, 7.5vw, 40px);
   }
 
   .deliverables-tabs {
@@ -714,12 +717,15 @@ body {
 
   .cnap-research-page .deliverables-tabs {
     display: flex;
+    width: min(100%, 480px);
     border-inline: 1px solid rgba(255, 255, 255, .13);
   }
 
   .cnap-research-page .deliverables-tabs button {
-    flex: 1 0 auto;
-    min-width: 104px;
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 48px;
+    padding: 10px 6px;
   }
 
   .research-document,
