@@ -3,16 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="郭昱成 UX/UI 作品集 - CNAP 用户调研交付物" />
-    <title>CNAP 用户调研 | 郭昱成作品集</title>
+    <meta name="description" content="郭昱成 UX/UI 作品集 - CNAP 用户调研、交互规范与设计走查交付物" />
+    <title>CNAP 项目交付物 | 郭昱成作品集</title>
     <link rel="stylesheet" href="../styles/styles.css?v=20260907-1" />
     <link rel="stylesheet" href="../styles/project-navigation.css?v=20260910-2" />
-    <script src="../scripts/project-navigation.js?v=20260907-1" defer></script>
+    <script src="../scripts/project-navigation.js?v=20261018-view-progress-1" defer></script>
     <style>
       .cnap-research-page .deliverables-shell{width:min(100% - 80px,1180px);padding-top:72px}
       .deliverables-intro{display:block}
       .cnap-research-page .deliverables-shell h1{font-size:clamp(34px,3.6vw,46px);letter-spacing:0}
-      .cnap-research-page .deliverables-tabs{display:grid;grid-template-columns:repeat(3,1fr);width:min(100%,780px);gap:5px;margin-top:30px;padding:5px;border:1px solid rgba(255,255,255,.13);border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.025));box-shadow:0 18px 50px rgba(0,0,0,.2),inset 0 1px rgba(255,255,255,.055);overflow:visible;-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
+      .cnap-research-page .deliverables-tabs{display:grid;grid-template-columns:repeat(4,1fr);width:min(100%,900px);gap:5px;margin-top:30px;padding:5px;border:1px solid rgba(255,255,255,.13);border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.025));box-shadow:0 18px 50px rgba(0,0,0,.2),inset 0 1px rgba(255,255,255,.055);overflow:visible;-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
       .cnap-research-page .deliverables-tabs button{position:relative;display:flex;align-items:center;justify-content:center;gap:8px;min-width:0;min-height:52px;padding:10px 14px;border:1px solid transparent;border-radius:11px;background:transparent;color:#858a96;text-align:center;transition:color .2s ease,background .24s ease,border-color .24s ease,box-shadow .24s ease,transform .24s ease}
       .cnap-research-page .deliverables-tabs button:hover{border-color:rgba(255,255,255,.11);background:rgba(255,255,255,.045);color:#e7e8ec;transform:translateY(-1px)}
       .cnap-research-page .deliverables-tabs button:before{content:attr(data-tab-index);grid-row:1 / span 2;color:#606571;font-size:11px;font-weight:600;line-height:24px;letter-spacing:.06em;transition:color .2s ease}
@@ -35,6 +35,14 @@
       .artifact-subtabs button>small{margin-left:7px;color:#5f6472;font-size:11px;font-weight:500}
       .artifact-subtabs button[aria-selected="true"]>small{color:#9ca0ab}
       .artifact-subpanel[hidden]{display:none}
+      .spec-subpanel[hidden]{display:none}
+      .cnap-research-page.deliverables-page .research-document{font-size:14px;line-height:1.8}
+      .spec-document{padding:28px 32px;border:1px solid rgba(255,255,255,.11);border-radius:16px;background:linear-gradient(145deg,rgba(80,215,160,.045),transparent 38%),rgba(255,255,255,.025)}
+      .spec-document .spec-kicker{margin-bottom:8px;color:#70d6ad;font-size:12px;font-weight:650;letter-spacing:.08em}
+      .spec-document h2{font-size:28px}
+      .spec-document h3{margin-top:36px}
+      .spec-document .spec-note{margin:24px 0;padding:14px 18px;border-left:2px solid #50d7a0;background:rgba(80,215,160,.075);color:#cbd4d1}
+      .spec-document .spec-rule-label{color:#70d6ad}
       .cnap-research-page .cnap-satisfaction-chart{margin:30px 0 48px;padding:0;overflow:visible;border:1px solid rgba(255,255,255,.11);border-radius:20px;background:linear-gradient(145deg,rgba(80,215,160,.045),rgba(255,255,255,.018) 42%),#0d1119;box-shadow:0 24px 70px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.045)}
       .cnap-research-page .cnap-chart-head{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin:0;padding:24px 26px 20px;border-bottom:1px solid rgba(255,255,255,.085)}
       .cnap-research-page .cnap-chart-title{display:grid;gap:6px}
@@ -86,7 +94,7 @@
       @media(max-width:700px){
         .cnap-research-page .deliverables-shell{width:calc(100% - 32px);padding-top:42px}
         .cnap-research-page .deliverables-tabs{margin-top:26px}
-        .cnap-research-page .deliverables-tabs{gap:4px;padding:4px;border-radius:14px}
+        .cnap-research-page .deliverables-tabs{grid-template-columns:repeat(2,1fr);gap:4px;padding:4px;border-radius:14px}
         .cnap-research-page .deliverables-tabs button{display:block;min-height:52px;padding:14px 10px;border-radius:10px;text-align:center}
         .cnap-research-page .deliverables-tabs button:before,.cnap-research-page .deliverables-tabs button>small{display:none}
         .cnap-research-page .deliverables-tabs button>span{font-size:14px}
@@ -97,6 +105,9 @@
         .cnap-research-page .research-subtabs button:first-child,.artifact-subtabs button:first-child{padding-left:0}
         .cnap-research-page .research-subtabs button[aria-selected="true"]:after,.artifact-subtabs button[aria-selected="true"]:after{right:16px;left:16px}
         .cnap-research-page .research-subtabs button:first-child[aria-selected="true"]:after,.artifact-subtabs button:first-child[aria-selected="true"]:after{left:0}
+        .cnap-research-page.deliverables-page .research-document{font-size:13.5px}
+        .spec-document{padding:22px 18px}
+        .spec-document h2{font-size:24px}
         .artifact-heading{grid-template-columns:1fr;gap:4px}
         .artifact-heading h3{font-size:20px}
         .artifact-page-total{padding-top:0}
@@ -124,8 +135,9 @@
         </div>
         <div class="deliverables-tabs" role="tablist" aria-label="交付物分类">
           <button type="button" role="tab" aria-controls="research-panel" aria-selected="true" tabindex="0" data-deliverable-tab="research" data-tab-index="01"><span>用户调研</span></button>
-          <button type="button" role="tab" aria-controls="ai-workflow-panel" aria-selected="false" tabindex="-1" data-deliverable-tab="ai-workflow" data-tab-index="02"><span>AI 工作流</span></button>
-          <button type="button" role="tab" aria-controls="walkthrough-panel" aria-selected="false" tabindex="-1" data-deliverable-tab="walkthrough" data-tab-index="03"><span>设计走查</span></button>
+          <button type="button" role="tab" aria-controls="spec-panel" aria-selected="false" tabindex="-1" data-deliverable-tab="spec" data-tab-index="02"><span>交互规范</span></button>
+          <button type="button" role="tab" aria-controls="ai-workflow-panel" aria-selected="false" tabindex="-1" data-deliverable-tab="ai-workflow" data-tab-index="03"><span>AI 工作流</span></button>
+          <button type="button" role="tab" aria-controls="walkthrough-panel" aria-selected="false" tabindex="-1" data-deliverable-tab="walkthrough" data-tab-index="04"><span>设计走查</span></button>
         </div>
         <div class="deliverables-content" aria-live="polite">
           <section class="deliverable-panel" id="research-panel" data-deliverable-panel="research" role="tabpanel">
@@ -232,6 +244,78 @@
                   <tr><td class="research-table-first-column">P2</td><td>环境费用</td><td>85+</td><td>小幅下降</td><td><span class="research-cell-text">满意度仍处于较高区间，但下滑需要关注费用信息的实时性、口径解释和异常成本提示。</span></td></tr>
                   <tr><td class="research-table-first-column">P2</td><td>性能</td><td>75+</td><td>小幅下降</td><td><span class="research-cell-text">分数偏低，但本轮下降不如前述模块显著。需确认性能指标是否难理解、诊断建议是否不足，或用户缺少可执行的优化路径。</span></td></tr>
                 </tbody></table></div>
+              </article>
+            </section>
+          </section>
+          <section class="deliverable-panel" id="spec-panel" data-deliverable-panel="spec" role="tabpanel" hidden>
+            <div class="research-subtabs spec-subtabs" role="tablist" aria-label="CNAP 交互规范">
+              <button type="button" role="tab" aria-controls="spec-title-filter-panel" aria-selected="true" tabindex="0" data-spec-tab="title-filter">页面标题与筛选区</button>
+              <button type="button" role="tab" aria-controls="spec-form-panel" aria-selected="false" tabindex="-1" data-spec-tab="form">表单项交互与布局</button>
+            </div>
+            <section class="spec-subpanel" id="spec-title-filter-panel" data-spec-panel="title-filter" role="tabpanel">
+              <article class="research-document spec-document">
+                <p class="spec-kicker">交互规范 01</p>
+                <h2>页面标题与筛选区</h2>
+                <p>统一页面标题、操作入口和筛选行为，让用户先看清当前范围，再找到关键操作。本文只定义交互与信息优先级，不包含精确视觉参数。</p>
+                <p class="spec-note"><strong>规则口径：</strong>“必须”是明确约束；“建议”用于没有特殊业务要求的场景；“待确认”保留为开放问题，不当作已定规则。</p>
+                <h3>标题区：区分范围切换与内容切换</h3>
+                <ul>
+                  <li><strong class="spec-rule-label">必须</strong> 标题区由页面标题、可选的标题扩展区和操作按钮区组成。扩展区的下拉选择用于切换数据范围、对象或环境；Tab 用于切换同一页面内的内容模块。</li>
+                  <li><strong class="spec-rule-label">必须</strong> 标题行右侧最多外露 3 个操作；其余操作收入“更多”菜单。操作按重要程度排列，最重要的位于最右侧。</li>
+                  <li><strong>说明</strong> 按操作优先级选用主要、次要、图标或文字按钮；具体颜色、尺寸和禁用态由视觉规范定义。</li>
+                </ul>
+                <h3>筛选区：一行呈现，溢出可找</h3>
+                <ul>
+                  <li><strong class="spec-rule-label">必须</strong> 筛选区默认只展示一行；空间不足时，将溢出项收入“更多筛选”，已选条件不能丢失。</li>
+                  <li><strong>建议</strong> 没有业务特殊顺序时，按“搜索框 → 下拉筛选 → 日期 → 查询或其他操作”排列；业务优先级明确时，以业务优先级为准。</li>
+                  <li><strong class="spec-rule-label">必须</strong> 单选和多选的默认值、以及没有“全部”选项的特殊筛选项，需分别定义；首行控件与“更多筛选”浮层中的默认状态保持一致。</li>
+                  <li><strong>建议</strong> 筛选项支持多选；若只能单选，应说明业务原因。</li>
+                </ul>
+                <h3>更多筛选：修改、联动、重置一致</h3>
+                <ul>
+                  <li><strong class="spec-rule-label">必须</strong> 打开浮层不清除现有条件；浮层失焦时应用已修改条件，并在入口同步显示更改数量。</li>
+                  <li><strong class="spec-rule-label">必须</strong> 点击“重置”后，首行、浮层与数量提示一同恢复默认状态。</li>
+                  <li><strong class="spec-rule-label">必须</strong> 前置条件改变并带出新筛选项时，重新计算展示顺序。新项优先展示，被挤入浮层的旧项保留已选状态。</li>
+                </ul>
+                <h3>待确认</h3>
+                <ul>
+                  <li>各业务页面哪些筛选项必须留在首行；部分页面是否需要“应用”按钮，而不是失焦即生效。</li>
+                  <li>“更多筛选”数量按已修改的筛选项计，还是按已选值计；动态移入浮层时是否需要提示。</li>
+                  <li>不同风险等级操作应使用哪类按钮，以及菜单操作后的关闭与后续流程。</li>
+                </ul>
+              </article>
+            </section>
+            <section class="spec-subpanel" id="spec-form-panel" data-spec-panel="form" role="tabpanel" hidden>
+              <article class="research-document spec-document">
+                <p class="spec-kicker">交互规范 02</p>
+                <h2>表单项交互与布局</h2>
+                <p>根据预览、弹窗编辑和复杂配置三类场景选择布局，并统一空值、禁用、说明和报错的反馈方式。精确视觉参数不在本文范围内。</p>
+                <p class="spec-note"><strong>规则口径：</strong>“必须”是明确约束；“建议”用于没有特殊业务要求的场景；“待确认”保留为开放问题，不自行补齐。</p>
+                <h3>先判断场景，再决定布局</h3>
+                <ul>
+                  <li><strong>纯预览</strong> 用于详情页、抽屉或弹窗的信息展示，内容应清楚可读，不误导为可编辑控件。</li>
+                  <li><strong class="spec-rule-label">必须</strong> 编辑弹窗中的普通表单项采用“上标题、下控件”；开关是例外，采用“左标题、右开关”。</li>
+                  <li><strong>建议</strong> 复杂配置页中，单选下拉、数值输入和开关等窄控件采用左右布局；多选、文本输入、表单组和表格等宽内容采用上下布局。</li>
+                  <li><strong class="spec-rule-label">必须</strong> 混合多列布局按每行列数聚合排列，不让相同列数的行被其他结构打断。</li>
+                </ul>
+                <h3>状态与文案：让字段含义可见</h3>
+                <ul>
+                  <li><strong class="spec-rule-label">必须</strong> 新建时已配置且不支持二次编辑的字段，在编辑页置灰禁用，同时保留当前值。</li>
+                  <li><strong class="spec-rule-label">必须</strong> 空字段给出具体提示，例如“请选择生效环境”，不只写“请选择”或“请输入”。非必填字段在输入区域提示“可选”。</li>
+                  <li><strong class="spec-rule-label">必须</strong> 标题说明放在标题下方单独一行；长说明自动换行，不用省略号截断，也不能与控件重叠。</li>
+                  <li><strong class="spec-rule-label">必须</strong> 报错时控件呈现错误态；悬停错误态展示提示气泡，并与控件右侧对齐。文案说明问题或修正方向。</li>
+                </ul>
+                <h3>层级与动态配置：结构不能因增项失序</h3>
+                <ul>
+                  <li><strong class="spec-rule-label">必须</strong> 多层级表单保持父子关系可辨；子级说明仍放在标题下方并允许换行。</li>
+                  <li><strong class="spec-rule-label">必须</strong> 动态新增项延续当前页面的布局规则，不破坏按列数聚合的排列。</li>
+                </ul>
+                <h3>待确认</h3>
+                <ul>
+                  <li>三级、四级字段如何展开与收起；父级报错是否汇总或定位子级错误。</li>
+                  <li>动态项的删除、排序、空状态和保存时机；预览场景是否允许复制、跳转或局部展开。</li>
+                  <li>不可编辑字段的具体禁用态视觉参数。</li>
+                </ul>
               </article>
             </section>
           </section>
@@ -355,7 +439,7 @@
         deliverablePanels.forEach((panel) => { panel.hidden = panel.dataset.deliverablePanel !== target; });
         requestAnimationFrame(() => document.querySelectorAll(".ai-workflow-scroll").forEach((strip) => strip._updateViewer?.()));
       }));
-      const researchTabs = [...document.querySelectorAll(".research-subtabs:not(.ai-workflow-subtabs) [role=tab]")];
+      const researchTabs = [...document.querySelectorAll(".research-subtabs:not(.spec-subtabs) [data-research-tab]")];
       const researchPanels = [...document.querySelectorAll("[data-research-panel]")];
       researchTabs.forEach((tab) => tab.addEventListener("click", () => {
         const target = tab.dataset.researchTab;
@@ -365,6 +449,17 @@
           item.tabIndex = selected ? 0 : -1;
         });
         researchPanels.forEach((panel) => { panel.hidden = panel.dataset.researchPanel !== target; });
+      }));
+      const specTabs = [...document.querySelectorAll("[data-spec-tab]")];
+      const specPanels = [...document.querySelectorAll("[data-spec-panel]")];
+      specTabs.forEach((tab) => tab.addEventListener("click", () => {
+        const target = tab.dataset.specTab;
+        specTabs.forEach((item) => {
+          const selected = item === tab;
+          item.setAttribute("aria-selected", String(selected));
+          item.tabIndex = selected ? 0 : -1;
+        });
+        specPanels.forEach((panel) => { panel.hidden = panel.dataset.specPanel !== target; });
       }));
       document.querySelectorAll(".artifact-switcher").forEach((switcher) => {
         const tabs = [...switcher.querySelectorAll("[data-artifact-tab]")];

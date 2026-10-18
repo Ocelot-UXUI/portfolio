@@ -476,8 +476,13 @@ body {
   margin-inline: auto;
   padding-inline: var(--deliverable-reading-gutter);
   color: #b8bec9;
-  font-size: 15px;
-  line-height: 1.9;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.deliverables-page[data-project-theme="dodo"] .workflow-summary,
+.deliverables-page[data-project-theme="dodo"] .workflow-skill-description {
+  font-size: 14px;
 }
 
 .deliverables-page .research-document > h2 {
@@ -693,6 +698,9 @@ body {
 }
 
 @media (max-width: 700px) {
+  .deliverables-page .research-document {
+    font-size: 13.5px;
+  }
   .deliverables-shell,
   .cnap-research-page .deliverables-shell {
     width: auto;
