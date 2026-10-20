@@ -36,6 +36,7 @@
       .artifact-subtabs button[aria-selected="true"]>small{color:#9ca0ab}
       .artifact-subpanel[hidden]{display:none}
       .spec-subpanel[hidden]{display:none}
+      .spec-subpanel{scroll-margin-top:100px}
       .cnap-research-page.deliverables-page .research-document{font-size:14px;line-height:1.8}
       .spec-document{padding:28px 32px;border:1px solid rgba(255,255,255,.11);border-radius:16px;background:linear-gradient(145deg,rgba(80,215,160,.045),transparent 38%),rgba(255,255,255,.025)}
       .spec-document .spec-kicker{margin-bottom:8px;color:#70d6ad;font-size:12px;font-weight:650;letter-spacing:.08em}
@@ -43,6 +44,30 @@
       .spec-document h3{margin-top:36px}
       .spec-document .spec-note{margin:24px 0;padding:14px 18px;border-left:2px solid #50d7a0;background:rgba(80,215,160,.075);color:#cbd4d1}
       .spec-document .spec-rule-label{color:#70d6ad}
+      .spec-document--visual{width:min(100%,1120px)}
+      .spec-document--visual>p{max-width:760px}
+      .spec-scene{margin-top:36px;padding-top:30px;border-top:1px solid rgba(255,255,255,.12)}
+      .spec-scene h3{margin:0 0 8px}
+      .spec-scene>p{max-width:760px;color:#aeb5b7}
+      .spec-figure{display:block;margin:20px 0 18px;overflow:hidden;border:1px solid rgba(255,255,255,.14);border-radius:12px;background:#fff;color:#29302e;text-decoration:none}
+      .spec-figure img{display:block;width:100%;height:clamp(240px,38vw,520px);object-fit:cover;object-position:top;transition:transform .25s ease}
+      .spec-figure:hover img,.spec-figure:focus-visible img{transform:scale(1.015)}
+      .spec-figure span{display:block;padding:11px 16px;background:#171d1b;color:#aeeacb;font-size:12px;font-weight:600}
+      .spec-figure:focus-visible{outline:2px solid #70d6ad;outline-offset:4px}
+      .spec-scene ul{max-width:780px}
+      .ai-translation{width:min(100%,1120px);margin-bottom:38px;padding:28px 32px;border:1px solid rgba(80,215,160,.2);border-radius:16px;background:linear-gradient(145deg,rgba(80,215,160,.07),rgba(255,255,255,.02) 50%)}
+      .ai-translation h2{margin:0 0 10px;font-size:27px;line-height:1.35}
+      .ai-translation>p{max-width:790px;margin:0 0 20px;color:#b8c1bf;font-size:14px;line-height:1.8}
+      .ai-rule-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0;padding:0;list-style:none}
+      .ai-rule-steps li{padding:18px;border:1px solid rgba(255,255,255,.1);border-radius:11px;background:rgba(255,255,255,.035)}
+      .ai-rule-steps strong{display:block;margin-bottom:8px;color:#f3f6f4;font-size:15px}
+      .ai-rule-steps span{display:block;color:#aeb8b4;font-size:13px;line-height:1.7}
+      .ai-translation-stage{scroll-margin-top:100px}
+      .ai-translation-stage+.ai-translation-stage{margin-top:28px;padding-top:24px;border-top:1px solid rgba(255,255,255,.11)}
+      .ai-translation-stage h3{margin:0 0 12px;color:#eaf6f0;font-size:20px}
+      .ai-harness-link{display:inline-flex;align-items:center;min-height:38px;margin-top:18px;padding:0 15px;border:1px solid rgba(80,215,160,.42);border-radius:999px;color:#aeeacb;font-size:13px;font-weight:600;text-decoration:none}
+      .ai-harness-link:hover,.ai-harness-link:focus-visible{background:rgba(80,215,160,.12);color:#fff}
+      .ai-validation-image{display:block;max-width:100%;margin-top:18px;border:1px solid rgba(255,255,255,.12);border-radius:10px}
       .cnap-research-page .cnap-satisfaction-chart{margin:30px 0 48px;padding:0;overflow:visible;border:1px solid rgba(255,255,255,.11);border-radius:20px;background:linear-gradient(145deg,rgba(80,215,160,.045),rgba(255,255,255,.018) 42%),#0d1119;box-shadow:0 24px 70px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.045)}
       .cnap-research-page .cnap-chart-head{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin:0;padding:24px 26px 20px;border-bottom:1px solid rgba(255,255,255,.085)}
       .cnap-research-page .cnap-chart-title{display:grid;gap:6px}
@@ -87,6 +112,9 @@
       .document-lightbox-bar{grid-column:1 / -1;display:flex;align-items:center;justify-content:space-between;color:#c6c9d1;font-size:12px;font-variant-numeric:tabular-nums}
       .document-lightbox-stage{grid-column:2;grid-row:2;display:grid;place-items:center;min-width:0;min-height:0;overflow:auto}
       .document-lightbox-stage img{display:block;max-width:100%;max-height:100%;width:auto;height:auto;background:#fff;box-shadow:0 18px 64px rgba(0,0,0,.5)}
+      .document-lightbox.is-spec-image .document-lightbox-stage{grid-column:1 / -1;display:block;text-align:center}
+      .document-lightbox.is-spec-image .document-lightbox-stage img{width:min(100%,1100px);max-height:none;height:auto;margin:0 auto}
+      .document-lightbox.is-spec-image .document-lightbox-prev,.document-lightbox.is-spec-image .document-lightbox-next{display:none}
       .document-lightbox-prev{grid-column:1;grid-row:2;align-self:center}
       .document-lightbox-next{grid-column:3;grid-row:2;align-self:center}
       .document-lightbox-close{width:38px!important;height:38px!important}
@@ -108,6 +136,10 @@
         .cnap-research-page.deliverables-page .research-document{font-size:13.5px}
         .spec-document{padding:22px 18px}
         .spec-document h2{font-size:24px}
+        .spec-figure img{height:300px}
+        .ai-translation{padding:22px 18px}
+        .ai-translation h2{font-size:23px}
+        .ai-rule-steps{grid-template-columns:1fr}
         .artifact-heading{grid-template-columns:1fr;gap:4px}
         .artifact-heading h3{font-size:20px}
         .artifact-page-total{padding-top:0}
@@ -286,40 +318,50 @@
               </article>
             </section>
             <section class="spec-subpanel" id="spec-form-panel" data-spec-panel="form" role="tabpanel" hidden>
-              <article class="research-document spec-document">
+              <article class="research-document spec-document spec-document--visual">
                 <p class="spec-kicker">交互规范 02</p>
                 <h2>表单项交互与布局</h2>
-                <p>根据预览、弹窗编辑和复杂配置三类场景选择布局，并统一空值、禁用、说明和报错的反馈方式。精确视觉参数不在本文范围内。</p>
-                <p class="spec-note"><strong>规则口径：</strong>“必须”是明确约束；“建议”用于没有特殊业务要求的场景；“待确认”保留为开放问题，不自行补齐。</p>
-                <h3>先判断场景，再决定布局</h3>
-                <ul>
-                  <li><strong>纯预览</strong> 用于详情页、抽屉或弹窗的信息展示，内容应清楚可读，不误导为可编辑控件。</li>
-                  <li><strong class="spec-rule-label">必须</strong> 编辑弹窗中的普通表单项采用“上标题、下控件”；开关是例外，采用“左标题、右开关”。</li>
-                  <li><strong>建议</strong> 复杂配置页中，单选下拉、数值输入和开关等窄控件采用左右布局；多选、文本输入、表单组和表格等宽内容采用上下布局。</li>
-                  <li><strong class="spec-rule-label">必须</strong> 混合多列布局按每行列数聚合排列，不让相同列数的行被其他结构打断。</li>
-                </ul>
-                <h3>状态与文案：让字段含义可见</h3>
-                <ul>
-                  <li><strong class="spec-rule-label">必须</strong> 新建时已配置且不支持二次编辑的字段，在编辑页置灰禁用，同时保留当前值。</li>
-                  <li><strong class="spec-rule-label">必须</strong> 空字段给出具体提示，例如“请选择生效环境”，不只写“请选择”或“请输入”。非必填字段在输入区域提示“可选”。</li>
-                  <li><strong class="spec-rule-label">必须</strong> 标题说明放在标题下方单独一行；长说明自动换行，不用省略号截断，也不能与控件重叠。</li>
-                  <li><strong class="spec-rule-label">必须</strong> 报错时控件呈现错误态；悬停错误态展示提示气泡，并与控件右侧对齐。文案说明问题或修正方向。</li>
-                </ul>
-                <h3>层级与动态配置：结构不能因增项失序</h3>
-                <ul>
-                  <li><strong class="spec-rule-label">必须</strong> 多层级表单保持父子关系可辨；子级说明仍放在标题下方并允许换行。</li>
-                  <li><strong class="spec-rule-label">必须</strong> 动态新增项延续当前页面的布局规则，不破坏按列数聚合的排列。</li>
-                </ul>
-                <h3>待确认</h3>
-                <ul>
-                  <li>三级、四级字段如何展开与收起；父级报错是否汇总或定位子级错误。</li>
-                  <li>动态项的删除、排序、空状态和保存时机；预览场景是否允许复制、跳转或局部展开。</li>
-                  <li>不可编辑字段的具体禁用态视觉参数。</li>
-                </ul>
+                <p>按使用场景定义表单的呈现方式：只读预览先保证信息清楚，编辑弹窗处理输入与反馈，复杂配置页再安排层级和列布局。点击图片可查看完整原稿。</p>
+                <section class="spec-scene" id="spec-form-preview">
+                  <h3>只读预览</h3>
+                  <p>用于详情页、抽屉和弹窗。以标签和内容呈现信息，让用户一眼分清当前值和可编辑控件。</p>
+                  <a class="spec-figure" href="../assets/cnap-spec/form-preview.png" aria-label="打开只读预览表单完整规范图"><img src="../assets/cnap-spec/form-preview.png" alt="只读预览表单规范：详情抽屉示例与单列、双列、三列及混合布局" loading="lazy" decoding="async" /><span>放大查看完整规范图</span></a>
+                  <ul><li>详情内容与表单组按阅读顺序排列；同一行保持一致的列数。</li><li>混合布局中，相同列数的行连续排列，避免来回跳变。</li></ul>
+                </section>
+                <section class="spec-scene" id="spec-form-modal">
+                  <h3>弹窗编辑</h3>
+                  <p>编辑任务在有限空间里完成，标题、控件和反馈需要形成稳定的上下关系。</p>
+                  <a class="spec-figure" href="../assets/cnap-spec/form-modal.png" aria-label="打开弹窗编辑表单完整规范图"><img src="../assets/cnap-spec/form-modal.png" alt="弹窗编辑表单规范：字段布局、禁用状态、说明文字与错误反馈" loading="lazy" decoding="async" /><span>放大查看完整规范图</span></a>
+                  <ul><li>普通字段采用上标题、下控件；开关采用左标题、右开关。</li><li>不可修改的字段保留当前值并置灰；空值提示写清需要输入什么。</li><li>说明文字可换行，错误信息贴近对应控件。</li></ul>
+                </section>
+                <section class="spec-scene" id="spec-form-config">
+                  <h3>复杂配置</h3>
+                  <p>字段多、关系深时，依据控件宽度选择布局，并让父子层级和动态新增项始终可辨。</p>
+                  <a class="spec-figure" href="../assets/cnap-spec/form-config.png" aria-label="打开复杂配置表单完整规范图"><img src="../assets/cnap-spec/form-config.png" alt="复杂配置表单规范：运行配置页面与字段布局、说明及多层级表单示例" loading="lazy" decoding="async" /><span>放大查看完整规范图</span></a>
+                  <ul><li>数值、单选和开关等窄控件可采用左右布局；文本、多选、表单组和表格采用上下布局。</li><li>说明紧随字段标题，子级字段保持清晰缩进；新增项沿用所在区域的布局。</li></ul>
+                </section>
               </article>
             </section>
           </section>
           <section class="deliverable-panel" id="ai-workflow-panel" data-deliverable-panel="ai-workflow" role="tabpanel" hidden>
+            <div class="ai-translation">
+              <h2>从设计规则到页面验证</h2>
+              <p>把 Figma 里的布局与状态约定整理成可执行规则，再对照生成页面检查一致性。设计原稿保留在「交互规范」，这里呈现规则如何进入 AI 工作流。</p>
+              <section class="ai-translation-stage" id="agent-harness">
+                <h3>规则转译 · Agent Harness</h3>
+                <ol class="ai-rule-steps">
+                  <li><strong>识别场景</strong><span>先判断是只读预览、弹窗编辑，还是复杂配置；不同场景调用不同布局规则。</span></li>
+                  <li><strong>写清约束</strong><span>明确标题与控件的位置、空值提示、禁用条件、错误反馈及多列排列。</span></li>
+                  <li><strong>保留判断</strong><span>把未定的业务例外标为待确认，避免 Agent 自行补齐规则。</span></li>
+                </ol>
+                <a class="ai-harness-link" href="../assets/cnap-spec/form-agent-harness.md" target="_blank" rel="noopener">查看公开版 MD 规则 ↗</a>
+              </section>
+              <section class="ai-translation-stage" id="page-validation">
+                <h3>页面生成 · 一致性验证</h3>
+                <p>结合代码组件库生成业务页面后，对照原稿检查字段结构、层级关系和状态反馈；发现偏差，再回到规则或组件修正。</p>
+                <img class="ai-validation-image" src="../assets/cnap-case/page-14-agent-rules.webp" alt="设计规范、Agent 规则和生成页面的验证过程" loading="lazy" decoding="async" width="1920" height="1080" />
+              </section>
+            </div>
             <div class="artifact-switcher">
               <div class="artifact-subtabs" role="tablist" aria-label="AI 工作流评审类型">
                 <button type="button" role="tab" aria-controls="ai-interaction-panel" aria-selected="true" tabindex="0" data-artifact-tab="ai-interaction">交互方案评审 <small>10 页</small></button>
@@ -476,6 +518,18 @@
         }));
       });
 
+      const openDeliverableAnchor = () => {
+        const target = document.getElementById(decodeURIComponent(window.location.hash.slice(1)));
+        if (!target) return;
+        const deliverablePanel = target.closest("[data-deliverable-panel]");
+        if (deliverablePanel) document.querySelector(`[data-deliverable-tab="${deliverablePanel.dataset.deliverablePanel}"]`)?.click();
+        const specPanel = target.closest("[data-spec-panel]");
+        if (specPanel) document.querySelector(`[data-spec-tab="${specPanel.dataset.specPanel}"]`)?.click();
+        window.requestAnimationFrame(() => target.scrollIntoView({ block: "start", behavior: "instant" }));
+      };
+      window.addEventListener("load", () => window.setTimeout(openDeliverableAnchor, 60));
+      window.addEventListener("hashchange", openDeliverableAnchor);
+
       const lightbox = document.createElement("div");
       lightbox.className = "document-lightbox";
       lightbox.hidden = true;
@@ -527,8 +581,10 @@
         lightboxImages = images;
         lightboxIndex = index;
         lightboxReturnTarget = target;
+        lightbox.classList.toggle("is-spec-image", target?.matches(".spec-figure"));
         renderLightbox();
         lightbox.hidden = false;
+        lightboxStage.scrollTop = 0;
         document.body.classList.add("is-lightbox-open");
         lightboxClose.focus();
       };
@@ -546,6 +602,15 @@
         if (event.key === "Escape") closeLightbox();
         if (event.key === "ArrowLeft" && lightboxIndex > 0) { lightboxIndex -= 1; renderLightbox(); }
         if (event.key === "ArrowRight" && lightboxIndex < lightboxImages.length - 1) { lightboxIndex += 1; renderLightbox(); }
+      });
+
+      document.querySelectorAll(".spec-figure").forEach((figure) => {
+        figure.addEventListener("click", (event) => {
+          const image = figure.querySelector("img");
+          if (!image) return;
+          event.preventDefault();
+          openLightbox([image], 0, figure);
+        });
       });
 
       document.querySelectorAll(".ai-workflow-scroll").forEach((strip) => {

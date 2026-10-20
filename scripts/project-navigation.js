@@ -351,6 +351,15 @@ const shuffle = (items) => [...items].sort(() => Math.random() - 0.5);
     });
   };
 
+  document.querySelectorAll("a[data-preserve-view-progress]").forEach((link) => {
+    link.addEventListener("click", () => {
+      viewProgress[pageUrl.pathname] = captureViewProgress();
+      const destination = new URL(link.href, window.location.href);
+      destination.searchParams.set(viewProgressParam, JSON.stringify(viewProgress));
+      link.href = destination.href;
+    });
+  });
+
   document.querySelectorAll(".project-nav").forEach((header) => {
     const switcher = header.querySelector(".project-view-switch, .portfolio-view-switch");
     const select = switcher?.querySelector("select");
