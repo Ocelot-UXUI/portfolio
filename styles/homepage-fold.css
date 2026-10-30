@@ -819,3 +819,34 @@
     min-width: 36px;
   }
 }
+/* Remi's updated homepage visual already includes its MacBook frame. */
+.prototype-homepage .project-showcase-remi .remi-laptop-media {
+  width: min(58vw, 870px);
+  max-width: none;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 2274 / 1641;
+  margin-right: -9vw;
+  overflow: visible;
+  display: block;
+  justify-self: end;
+}
+
+.prototype-homepage .project-showcase-remi .remi-laptop-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@media (max-width: 700px) {
+  .prototype-homepage .project-showcase-remi .remi-laptop-media {
+    width: min(120vw, 720px);
+    max-width: none;
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 2274 / 1641;
+    margin: 0 -12vw 0 auto;
+    justify-self: end;
+  }
+}
