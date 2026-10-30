@@ -248,3 +248,18 @@ body.skill-detail-page .project-nav.project-nav--over-light .project-back > span
     padding-left: 12px;
   }
 }
+
+/* Compact controls with consistent breathing room on all project pages. */
+@media (min-width: 701px) {
+  body .project-nav {
+    --project-control-height: 40px;
+    --project-control-inner-size: 32px;
+    --project-control-font-size: 13px;
+    --project-control-icon-size: 16px;
+    --project-control-gap: 8px;
+  }
+  body > .project-nav.project-nav--tabs,
+  body > .portfolio-project-nav.project-nav { padding-inline: clamp(24px, 2.5vw, 40px) !important; }
+  body .project-nav .project-back { padding: 3px 14px 3px 3px !important; }
+  body .project-nav .demo-nav-toggle { padding-inline: 12px !important; gap: 6px !important; }
+}
