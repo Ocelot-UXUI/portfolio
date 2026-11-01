@@ -79,34 +79,6 @@
     requestAnimationFrame(tick);
   });
 
-  document.querySelectorAll('[data-live-override]').forEach(iframe => {
-    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-    const slide = iframe.closest('.case-slide-frame');
-    const stateRows = ['inherited', 'overridden', 'restore'].map(step => {
-      const row = document.createElement('span');
-      row.className = 'cnap-scheme1-row-fade cnap-scheme2-state-fade';
-      row.dataset.step = step;
-      row.setAttribute('aria-hidden', 'true');
-      row.classList.toggle('is-active', step === 'inherited');
-      slide.append(row);
-      return row;
-    });
-    let visible = false;
-    const update = () => {
-      const playing = visible && !document.hidden && !reduced.matches;
-      iframe.contentWindow?.postMessage({ type: 'case-preview-play', playing }, '*');
-    };
-    new ResizeObserver(() => { iframe.style.transform = `scale(${iframe.parentElement.getBoundingClientRect().width / 1574})`; }).observe(iframe.parentElement);
-    new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; update(); }).observe(iframe.parentElement);
-    addEventListener('message', event => {
-      if (event.source !== iframe.contentWindow) return;
-      if (event.data?.type === 'case-preview-ready') update();
-      if (event.data?.type === 'case-preview-state') {
-        stateRows.forEach(row => row.classList.toggle('is-active', row.dataset.step === event.data.step));
-      }
-    });
-    document.addEventListener('visibilitychange', update);
-  });
   const videos = document.querySelectorAll('[data-preview-src]');
   const fallbackPoster = '../assets/cnap-case/workload-preview-poster.jpg';
 

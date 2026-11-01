@@ -103,12 +103,6 @@
 .cnap-scheme1-row-fade.is-active { opacity: 0; }
 @media (prefers-reduced-motion: reduce) { .cnap-scheme1-row-fade { display: none; } }
 
-/* Page 12: the live Demo row is rendered at the exact 1574 × 152 artwork size. */
-.cnap-scheme2-state-fade { left: 28.8%; top: 20.4%; width: 18.5%; height: 18%; }
-.cnap-scheme2-state-fade[data-step="overridden"] { left: 51.5%; top: 20.4%; }
-.cnap-scheme2-state-fade[data-step="restore"] { left: 75.5%; top: 20.4%; }
-.cnap-live-override { position: absolute; left: 9.0104167%; top: 76.2037037%; width: 81.9791667%; height: 14.0740741%; z-index: 2; }
-.cnap-live-override iframe { position: absolute; top: 0; left: 0; width: 1574px; max-width: none; height: 152px; border: 0; transform-origin: top left; }
 @media (prefers-reduced-motion: reduce) {
   .cnap-preview-video { transition: none; }
 }
