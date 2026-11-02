@@ -6,7 +6,7 @@
   z-index: 10000;
   display: flex;
   align-items: center;
-  padding: 5px;
+  padding: 3px;
   border: 1px solid rgb(20 23 32 / 12%);
   border-radius: 999px;
   background: rgb(255 255 255 / 94%);
@@ -17,17 +17,17 @@
 .project-zoom button {
   display: grid;
   place-items: center;
-  min-width: 44px;
-  height: 44px;
-  padding: 0 10px;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 5px;
   border: 0;
   border-radius: 999px;
   background: transparent;
   color: inherit;
-  font: 500 22px/1 system-ui, sans-serif;
+  font: 500 18px/1 system-ui, sans-serif;
   cursor: pointer;
 }
-.project-zoom button[data-zoom="reset"] { min-width: 60px; font-size: 13px; font-variant-numeric: tabular-nums; }
+.project-zoom button[data-zoom="reset"] { min-width: 44px; font-size: 11px; font-variant-numeric: tabular-nums; }
 .project-zoom button:hover { background: #eceef2; }
 .project-zoom button:focus-visible { outline: 2px solid #3478f6; outline-offset: 1px; }
 .project-zoom button:disabled { opacity: .3; cursor: default; background: transparent; }

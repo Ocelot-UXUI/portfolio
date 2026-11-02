@@ -12,6 +12,7 @@
   const decrease = toolbar.querySelector('[data-zoom="out"]');
   const reset = toolbar.querySelector('[data-zoom="reset"]');
   const increase = toolbar.querySelector('[data-zoom="in"]');
+  decrease.disabled = true;
   let scale = 1;
   let baseWidth = document.documentElement.clientWidth;
 
@@ -22,7 +23,7 @@
     const fractionY = (readingY - before.top) / before.height;
     const fractionX = (window.innerWidth / 2 - before.left) / before.width;
     if (scale === 1) baseWidth = document.documentElement.clientWidth;
-    scale = Math.max(0.5, Math.min(2, next));
+    scale = Math.max(1, Math.min(3, next));
     if (originalStyle === null) main.removeAttribute('style');
     else main.setAttribute('style', originalStyle);
     document.documentElement.classList.toggle('project-is-zoomed', scale !== 1);
@@ -39,8 +40,8 @@
     });
     reset.textContent = `${Math.round(scale * 100)}%`;
     reset.setAttribute('aria-label', `恢复原样，当前缩放 ${Math.round(scale * 100)}%`);
-    decrease.disabled = scale <= 0.5;
-    increase.disabled = scale >= 2;
+    decrease.disabled = scale <= 1;
+    increase.disabled = scale >= 3;
   };
   decrease.addEventListener('click', () => apply(scale - 0.25));
   increase.addEventListener('click', () => apply(scale + 0.25));
