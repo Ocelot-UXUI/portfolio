@@ -2129,4 +2129,9 @@ body[data-project-theme="cnap"] .project-sequence-arrow {
 html.project-is-zoomed { overflow-x: auto; scroll-behavior: auto !important; }
 html.project-is-zoomed body { overflow-x: visible; }
 html.project-is-zoomed main { margin-inline: auto; }
+html.project-is-zoomed main,
+html.project-is-zoomed main img { cursor: grab !important; user-select: none; -webkit-user-drag: none; }
+html.project-is-zoomed main { touch-action: pan-x pan-y pinch-zoom; }
+html.project-is-zoomed main.project-is-panning,
+html.project-is-zoomed main.project-is-panning * { cursor: grabbing !important; }
 @media print { .project-zoom { display: none; } }
