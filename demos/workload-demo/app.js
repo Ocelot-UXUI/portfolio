@@ -1199,7 +1199,6 @@ function setRuntimeHelpMode(enabled){
 setRuntimeHelpMode(Boolean(runtimeHelpModeToggle?.checked));
 runtimeHelpModeToggle?.addEventListener('change',()=>setRuntimeHelpMode(runtimeHelpModeToggle.checked));
 let activeRuntimeContext='cluster';
-let runtimeContextRefreshTimer=0;
 function applyRuntimeContext(context,value=runtimeContextSelection[context],{announce=true}={}){
   const profile=runtimeContextProfiles[context];
   const page=document.querySelector('#runtimePage');
@@ -1207,9 +1206,6 @@ function applyRuntimeContext(context,value=runtimeContextSelection[context],{ann
   if(!profile||!page||!editor)return;
   activeRuntimeContext=context;
   runtimeContextSelection[context]=value;
-  refreshRuntimeFieldTooltips();
-  syncRuntimeInheritedControls();
-  window.clearTimeout(runtimeContextRefreshTimer);
   document.querySelectorAll('.runtime-context-chip[data-runtime-context]').forEach(chip=>{
     const selected=chip.dataset.runtimeContext===context;
     chip.classList.toggle('is-current',selected);
@@ -1222,11 +1218,9 @@ function applyRuntimeContext(context,value=runtimeContextSelection[context],{ann
     row.classList.toggle('is-selected',selected);
   });
   page.dataset.currentContext=context;
-  page.classList.add('is-context-refreshing');
   const help=document.querySelector('.runtime-context-help');
   if(help)help.lastChild.textContent=`正在修改${profile.label}配置`;
   updateRuntimeEditorHeader(activeRuntimeTarget);
-  runtimeContextRefreshTimer=window.setTimeout(()=>{
     document.querySelectorAll('#runtimePage input[type="number"]').forEach((input,index)=>{
       if(index<profile.values.length)input.value=profile.values[index];
     });
@@ -1237,9 +1231,7 @@ function applyRuntimeContext(context,value=runtimeContextSelection[context],{ann
     });
     editor.scrollTo({top:0,behavior:'auto'});
     syncRuntimeInheritedControls();
-    page.classList.remove('is-context-refreshing');
     if(announce)toast(`已切换到${profile.label}：${runtimeContextValueLabels[value]} 配置`);
-  },180);
 }
 let runtimeDeleteTarget=null;
 function updateRuntimeDeleteVisibility(){
@@ -1968,29 +1960,42 @@ function setRuntimeFieldEnabled(scope,enabled){
   toggle?.classList.toggle('is-active',enabled);
   toggle?.setAttribute('aria-pressed',String(enabled));
   scope.querySelectorAll('input,select,textarea,button').forEach(control=>{
-    if(control===toggle)return;
+    if(control===toggle||control.matches('[data-runtime-field-action]'))return;
     control.disabled=!enabled;
+    control.setAttribute('aria-disabled',String(!enabled));
+  });
+  scope.querySelectorAll('[role="button"], [role="combobox"], [contenteditable], a[href]').forEach(control=>{
+    control.inert=!enabled;
+    control.setAttribute('aria-disabled',String(!enabled));
   });
 }
 function syncRuntimeInheritedControls(){
   const page=document.querySelector('#runtimePage');
   if(!page)return;
-  const scopes=[...page.querySelectorAll('.runtime-setting-row, .runtime-rule-group, .runtime-image-list, .runtime-image-source, .runtime-image-base-group')];
+  const scopes=[...page.querySelectorAll('.runtime-inheritance-field')];
   const isApplication=activeRuntimeContext==='application';
   page.classList.toggle('is-application-context',isApplication);
   scopes.forEach(scope=>{
     const toggle=scope.querySelector('[data-runtime-field-toggle]');
+    const contextKey=activeRuntimeContext+':'+runtimeContextSelection[activeRuntimeContext];
+    if(scope.dataset.runtimeFieldContext!==contextKey){
+      toggle.dataset.runtimeFieldState='default';
+      clearRuntimeFieldOverride(scope);
+      scope.dataset.runtimeFieldContext=contextKey;
+    }
     if(isApplication){
       setRuntimeFieldEnabled(scope,true);
       scope.querySelector('.runtime-override-tooltip')?.remove();
       scope.querySelectorAll('.runtime-override-tag').forEach(tag=>tag.remove());
       toggle?.removeAttribute('aria-describedby');
+      scope.querySelector('[data-runtime-field-action]')?.setAttribute('hidden','');
     } else if(toggle?.dataset.runtimeFieldState==='active'){
       setRuntimeFieldEnabled(scope,true);
     } else {
       setRuntimeFieldEnabled(scope,false);
     }
   });
+  refreshRuntimeFieldTooltips();
   syncRuntimeSettingIcons();
 }
 function getRuntimeTooltipText(state){
@@ -2007,14 +2012,14 @@ function getRuntimeTooltipText(state){
   if(state==='restore')return `再次点击将放弃本地覆盖，恢复继承自 ${environment} 的环境级配置`;
   return `${current}的集群级配置，继承自 ${environment} 的环境级配置。点击可在当前层级覆盖为本地值`;
 }
-function syncRuntimeSettingIcons(){
-  document.querySelectorAll('#runtimePage .runtime-setting-icon use').forEach(use=>{
+function syncRuntimeSettingIcons(root=document.querySelector('#runtimePage')){
+  root?.querySelectorAll('.runtime-setting-icon use').forEach(use=>{
     const toggle=use.closest('[data-runtime-field-toggle]');
     const inheritsApplication=activeRuntimeContext==='environment'&&!toggle?.classList.contains('is-active');
     const iconId=activeRuntimeContext==='application'||inheritsApplication
       ? '#i-runtime-package'
       : '#i-runtime-stack';
-    use.setAttribute('href',iconId);
+    if(use.getAttribute('href')!==iconId)use.setAttribute('href',iconId);
   });
 }
 syncRuntimeSettingIcons();
@@ -2029,67 +2034,45 @@ function setupRuntimeFieldActivation(){
         ? scope.querySelector(':scope > .runtime-subsection-title > .runtime-setting-icon')
         : scope.querySelector(':scope > .runtime-setting-icon');
     if(!icon||!icon.querySelector('svg'))return;
-    let toggle=icon;
-    if(icon.tagName!=='BUTTON'){
-      toggle=document.createElement('button');
-      toggle.type='button';
-      toggle.className=icon.className;
-      toggle.innerHTML=icon.innerHTML;
-      icon.replaceWith(toggle);
-    }
+    scope.classList.add('runtime-inheritance-field');
+    scope.addEventListener('pointerleave',()=>scope.classList.remove('is-action-complete'));
+    const toggle=document.createElement('span');
+    toggle.className=icon.className;
+    toggle.innerHTML=icon.innerHTML;
+    icon.replaceWith(toggle);
     toggle.dataset.runtimeFieldToggle='';
     toggle.dataset.runtimeFieldState='default';
-    toggle.setAttribute('aria-label','启用此配置项');
-    scope._runtimeInitialValues=[...scope.querySelectorAll('input,select,textarea')].map(control=>({
-      control,
-      value:control.value,
-      checked:control.checked
-    }));
-    toggle.addEventListener('click',event=>{
+    scope._runtimeInitialValues=[...scope.querySelectorAll('input,select,textarea')].map(control=>({control,value:control.value,checked:control.checked}));
+    scope._runtimeInitialSwitches=[...scope.querySelectorAll('.runtime-switch')].map(control=>({control,active:control.classList.contains('is-on'),pressed:control.getAttribute('aria-pressed')}));
+    ensureRuntimeFieldTooltip(scope,'');
+    scope.querySelector('[data-runtime-field-action]')?.addEventListener('click',event=>{
       event.preventDefault();
       event.stopPropagation();
-      scope._runtimeRestoreHotZone?.cancel();
-      const state=toggle.dataset.runtimeFieldState;
-      if(state==='default'){
-        setRuntimeFieldEnabled(scope,true);
-        scope.classList.remove('is-restore-pending');
-        toggle.dataset.runtimeFieldState='active';
-        toggle.setAttribute('aria-label','取消覆盖');
-        ensureRuntimeFieldTooltip(scope,getRuntimeTooltipText('active'));
-      } else if(state==='active'){
-        scope.classList.add('is-restore-pending');
-        toggle.dataset.runtimeFieldState='restore';
-        toggle.setAttribute('aria-label','确认恢复继承配置');
-        markRuntimeFieldRestorePending(scope);
-      } else {
-        scope._runtimeInitialValues?.forEach(({control,value,checked})=>{
+      scope.classList.add('is-action-complete');
+      const enabled=toggle.dataset.runtimeFieldState!=='active';
+      if(enabled){
+        scope._runtimeInitialValues=[...scope.querySelectorAll('input,select,textarea')].map(control=>({control,value:control.value,checked:control.checked}));
+        scope._runtimeInitialSwitches=[...scope.querySelectorAll('.runtime-switch')].map(control=>({control,active:control.classList.contains('is-on'),pressed:control.getAttribute('aria-pressed')}));
+      }
+      if(!enabled){
+        scope._runtimeInitialValues.forEach(({control,value,checked})=>{
           control.value=value;
           if('checked' in control)control.checked=checked;
         });
-        setRuntimeFieldEnabled(scope,false);
-        clearRuntimeFieldOverride(scope);
-        scope.classList.remove('is-restore-pending');
-        toggle.dataset.runtimeFieldState='default';
-        toggle.setAttribute('aria-label','启用此配置项');
-        ensureRuntimeFieldTooltip(scope,getRuntimeTooltipText('default'));
+        scope._runtimeInitialSwitches.forEach(({control,active,pressed})=>{
+          control.classList.toggle('is-on',active);
+          if(pressed===null)control.removeAttribute('aria-pressed');
+          else control.setAttribute('aria-pressed',pressed);
+        });
       }
-      syncRuntimeSettingIcons();
+      toggle.dataset.runtimeFieldState=enabled?'active':'default';
+      setRuntimeFieldEnabled(scope,enabled);
+      if(enabled)markRuntimeFieldCovered(scope);
+      else clearRuntimeFieldOverride(scope);
+      ensureRuntimeFieldTooltip(scope,'');
+      syncRuntimeSettingIcons(scope);
     });
-    const cancelRestoreTimer=()=>{
-      clearTimeout(scope._runtimeRestoreTimer);
-      scope._runtimeRestoreTimer=null;
-    };
-    const scheduleRestoreTimer=()=>{
-      cancelRestoreTimer();
-      scope._runtimeRestoreTimer=setTimeout(()=>{
-        if(toggle.dataset.runtimeFieldState==='restore')restoreRuntimeFieldToBlue(scope);
-      },300);
-    };
-    scope._runtimeRestoreHotZone={cancel:cancelRestoreTimer,schedule:scheduleRestoreTimer};
-    toggle.addEventListener('pointerenter',cancelRestoreTimer);
-    toggle.addEventListener('pointerleave',scheduleRestoreTimer);
     setRuntimeFieldEnabled(scope,false);
-    ensureRuntimeFieldTooltip(scope,getRuntimeTooltipText('default'));
   });
 }
 function clearRuntimeFieldOverride(scope){
@@ -2097,99 +2080,69 @@ function clearRuntimeFieldOverride(scope){
   scope.querySelector('.runtime-override-tag')?.remove();
   scope.querySelector('.runtime-override-tooltip')?.remove();
   scope.querySelector('[data-runtime-field-toggle]')?.removeAttribute('aria-describedby');
-  const title=scope.querySelector('.runtime-field-title');
-  const label=title?.querySelector('strong, h4');
-  if(title&&label)title.replaceWith(label);
 }
-function restoreRuntimeFieldToBlue(scope){
-  if(!scope||!scope.classList.contains('is-restore-pending'))return;
-  scope._runtimeRestoreHotZone?.cancel();
-  scope.classList.remove('is-restore-pending');
-  const toggle=scope.querySelector('[data-runtime-field-toggle]');
-  if(toggle)toggle.dataset.runtimeFieldState='active';
-  toggle?.setAttribute('aria-label','取消覆盖');
-  const tag=scope.querySelector('.runtime-override-tag');
-  if(tag){
-    tag.className='runtime-override-tag';
-    tag.textContent='已覆盖';
-  }
-  ensureRuntimeFieldTooltip(scope,getRuntimeTooltipText('active'));
-}
-let runtimeOverrideTooltipId=0;
 function ensureRuntimeFieldTooltip(scope,text){
   const toggle=scope?.querySelector('[data-runtime-field-toggle]');
-  if(!scope||!toggle)return;
-  if(!text){
-    scope.querySelector('.runtime-override-tooltip')?.remove();
-    toggle.removeAttribute('aria-describedby');
-    return;
+  if(!toggle)return;
+  scope.querySelector('.runtime-override-tooltip')?.remove();
+  let action=scope.querySelector('[data-runtime-field-action]');
+  if(!action){
+    const label=scope.querySelector('strong, h4');
+    if(!label)return;
+    let title=label.closest('.runtime-field-title');
+    if(!title){
+      title=document.createElement('span');
+      title.className='runtime-field-title';
+      label.replaceWith(title);
+      title.append(label);
+    }
+    action=document.createElement('button');
+    action.type='button';
+    action.className='runtime-field-action';
+    action.dataset.runtimeFieldAction='';
+    action.innerHTML='<img src="./assets/runtime-icons/field-unlock.svg" alt=""><img src="./assets/runtime-icons/field-restore.svg" alt="" hidden><span>解锁</span>';
+    title.append(action);
   }
-  let tooltip=scope.querySelector('.runtime-override-tooltip');
-  if(!tooltip){
-    tooltip=document.createElement('span');
-    tooltip.className='runtime-override-tooltip';
-    tooltip.setAttribute('role','tooltip');
-    toggle.after(tooltip);
+  const active=toggle.dataset.runtimeFieldState==='active';
+  const actionState=active?'active':'default';
+  if(action.dataset.state!==actionState){
+    action.dataset.state=actionState;
+    const icons=action.querySelectorAll('img');
+    icons[0].hidden=active;
+    icons[1].hidden=!active;
+    action.querySelector('span').textContent=active?'还原':'解锁';
   }
-  tooltip.textContent=text;
-  if(!tooltip.id)tooltip.id=`runtime-override-tooltip-${++runtimeOverrideTooltipId}`;
-  toggle.setAttribute('aria-describedby',tooltip.id);
-}
-function markRuntimeFieldRestorePending(scope){
-  if(!scope)return;
-  if(scope.matches('.runtime-rule-group'))return;
-  const label=scope.matches('.runtime-image-list')
-    ? scope.querySelector('.runtime-image-heading strong')
-    : scope.querySelector(':scope > div:not(.runtime-setting-icon) strong');
-  if(!label)return;
-  let title=label.parentElement;
-  if(!title?.classList.contains('runtime-field-title')){
-    title=document.createElement('span');
-    title.className='runtime-field-title';
-    label.replaceWith(title);
-    title.append(label);
-  }
-  let tag=title.querySelector('.runtime-override-tag');
-  if(!tag){
-    tag=document.createElement('span');
-    title.append(tag);
-  }
-  tag.className='runtime-override-tag runtime-override-tag-pending';
-  tag.textContent='再次点击 取消覆盖';
-
-  const toggle=scope.querySelector('[data-runtime-field-toggle]');
-  ensureRuntimeFieldTooltip(scope,getRuntimeTooltipText('restore'));
-  const tooltip=scope.querySelector('.runtime-override-tooltip');
-  const hotZone=scope._runtimeRestoreHotZone;
-  if(hotZone&&!tooltip.dataset.hotZoneBound){
-    tooltip.addEventListener('pointerenter',hotZone.cancel);
-    tooltip.addEventListener('pointerleave',hotZone.schedule);
-    tooltip.dataset.hotZoneBound='true';
-  }
+  action.setAttribute('aria-label',active?'还原继承配置':'解锁此配置项');
+  action.disabled=false;
+  action.hidden=activeRuntimeContext==='application';
+  toggle.setAttribute('aria-label',active?'已覆盖':'继承配置');
 }
 function refreshRuntimeFieldTooltips(){
   document.querySelectorAll('#runtimePage [data-runtime-field-toggle]').forEach(toggle=>{
-    const scope=toggle.closest('.runtime-setting-row, .runtime-rule-group, .runtime-image-list');
-    if(!scope)return;
-    ensureRuntimeFieldTooltip(scope,getRuntimeTooltipText(toggle.dataset.runtimeFieldState||'default'));
+    const scope=toggle.closest('.runtime-setting-row, .runtime-rule-group, .runtime-image-list, .runtime-image-source, .runtime-image-base-group');
+    if(scope)ensureRuntimeFieldTooltip(scope,'');
   });
 }
 function markRuntimeFieldCovered(scope){
   if(activeRuntimeContext==='application')return;
   if(!scope||!scope.classList.contains('is-field-enabled'))return;
-  if(scope.matches('.runtime-rule-group'))return;
   const label=scope.matches('.runtime-image-list')
     ? scope.querySelector('.runtime-image-heading strong')
-    : scope.querySelector(':scope > div:not(.runtime-setting-icon) strong');
+    : scope.querySelector('strong, h4');
   if(!label||label.parentElement.querySelector('.runtime-override-tag'))return;
-  const title=document.createElement('span');
-  title.className='runtime-field-title';
-  label.replaceWith(title);
-  title.append(label);
+  let title=label.closest('.runtime-field-title');
+  if(!title){
+    title=document.createElement('span');
+    title.className='runtime-field-title';
+    label.replaceWith(title);
+    title.append(label);
+  }
   const tag=document.createElement('span');
   tag.className='runtime-override-tag';
   tag.textContent='已覆盖';
-  title.append(tag);
+  const action=title.querySelector('[data-runtime-field-action]');
+  if(action)title.insertBefore(tag,action);
+  else title.append(tag);
 }
 document.addEventListener('input',event=>{
   const scope=event.target.closest('#runtimePage .runtime-setting-row, #runtimePage .runtime-image-list');
@@ -2205,6 +2158,13 @@ document.addEventListener('click',event=>{
   const scope=control?.closest('.runtime-setting-row, .runtime-image-list');
   if(scope)markRuntimeFieldCovered(scope);
 });
+document.querySelector('#runtimePage')?.addEventListener('click',event=>{
+  const scope=event.target.closest('.runtime-inheritance-field');
+  if(scope?.classList.contains('is-field-disabled')&&!event.target.closest('[data-runtime-field-action]')){
+    event.preventDefault();
+    event.stopImmediatePropagation();
+  }
+},true);
 setupRuntimeFieldActivation();
 syncRuntimeInheritedControls();
 document.querySelector('#closeHistoryBtn').addEventListener('click',()=>historyDrawer.classList.add('hidden'));

@@ -1156,8 +1156,8 @@
 #runtimePage .runtime-context-arrow { width: 16px; height: 16px; fill: none; stroke: #545454; stroke-width: 1.2; }
 #runtimePage .runtime-context-help { display: inline-flex; align-items: center; gap: 8px; margin-left: 16px; color: #8f8f8f; white-space: nowrap; }
 #runtimePage .runtime-context-help svg { width: 16px; height: 16px; fill: none; stroke: #f5a623; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
-#runtimePage .runtime-editor { transition: opacity .14s ease, transform .14s ease; }
-#runtimePage.is-context-refreshing .runtime-editor { opacity: .35; transform: translateY(2px); pointer-events: none; }
+#runtimePage .runtime-editor { transition: none; }
+
 #runtimePage .runtime-layout {
   grid-template-columns: 240px minmax(0, 815px) 87px;
   justify-content: space-between;
@@ -1401,7 +1401,7 @@
 #runtimePage .runtime-tree-leaf,
 #runtimePage .runtime-tree-resource-item { position: relative; justify-content: flex-start; gap: 4px; cursor: default; }
 #runtimePage .runtime-tree-delete { display: inline-flex; width: 24px; height: 24px; align-items: center; justify-content: center; margin-left: auto; padding: 5px; border: 0; border-radius: 6px; background: transparent; color: #181818; opacity: 0; pointer-events: none; cursor: pointer; }
-#runtimePage .runtime-tree-delete.is-hidden { visibility: hidden; pointer-events: none; }
+#runtimePage .runtime-tree-delete.is-hidden { opacity: 0; pointer-events: none; }
 #runtimePage .runtime-tree-leaf:hover .runtime-tree-delete:not(.is-hidden),
 #runtimePage .runtime-tree-resource-item:hover .runtime-tree-delete:not(.is-hidden) { opacity: 1; pointer-events: auto; }
 #runtimePage .runtime-tree-delete svg { width: 16px; height: 16px; fill: #181818; stroke: none; }
@@ -1461,7 +1461,7 @@
 #runtimePage .runtime-setting-icon { display: grid; width: 22px; height: 22px; place-items: center; border: 1px solid #ccc; border-radius: 50%; background: #fff; color: #8f8f8f; }
 #runtimePage button.runtime-setting-icon { padding: 0; cursor: pointer; }
 #runtimePage button.runtime-setting-icon:hover { border-color: #bfbfbf; background: #f7f7f7; }
-#runtimePage button.runtime-setting-icon.is-active { border-color: #9cf; background: #e5f2ff; color: #0080ff; }
+#runtimePage .runtime-setting-icon.is-active { border-color: #9cf; background: #e5f2ff; color: #0080ff; }
 #runtimePage .is-restore-pending .runtime-setting-icon { border-color: #f58300; background: #fff3e0; color: #f58300; }
 #runtimePage .is-restore-pending button.runtime-setting-icon.is-active { border-color: #f58300; background: #fff3e0; color: #f58300; }
 #runtimePage .runtime-setting-row.is-field-disabled input,
@@ -4041,3 +4041,54 @@ html:has(body.demo-nav-capable > .portfolio-project-nav.project-nav) {
     overflow-y: auto;
   }
 }
+
+/* Inheritance status is passive; the whole field reveals its explicit action. */
+#runtimePage [data-runtime-field-toggle] { cursor: default; }
+#runtimePage .runtime-field-title { flex-wrap: wrap; gap: 8px; }
+#runtimePage .runtime-field-action {
+  display: inline-flex; align-items: center; gap: 6px; height: 24px;
+  padding: 0 4px; border: 0; border-radius: 4px; background: transparent;
+  color: #595959; font: inherit; white-space: nowrap; cursor: pointer;
+  opacity: 0; pointer-events: none;
+}
+#runtimePage .runtime-field-action svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.5; }
+#runtimePage :is(.runtime-setting-row,.runtime-rule-group,.runtime-image-source,.runtime-image-base-group):is(:hover,:focus-within) > :is(div,span,h4) .runtime-field-action {
+  opacity: 1; pointer-events: auto;
+}
+#runtimePage :is(.runtime-setting-row,.runtime-rule-group,.runtime-image-source,.runtime-image-base-group):has([data-runtime-field-toggle]):is(:hover,:focus-within) {
+  background-color: transparent; border-radius: 8px;
+}
+#runtimePage .runtime-field-action:hover { color: #181818; background: #e5e5e5; }
+#runtimePage .runtime-field-action:focus-visible { opacity: 1; pointer-events: auto; outline: 2px solid #0080ff; outline-offset: 2px; }
+#runtimePage .runtime-field-action[hidden],
+#runtimePage.is-application-context .runtime-field-action { display: none; }
+@media (hover: none) { #runtimePage .runtime-field-action { opacity: 1; pointer-events: auto; } }
+
+#runtimePage .runtime-field-action img { width: 16px; height: 16px; object-fit: contain; }
+
+/* The highlight wraps the complete field, with equal space beyond icon and control. */
+#runtimePage .runtime-inheritance-field { position: relative; isolation: isolate; }
+#runtimePage .runtime-inheritance-field::before {
+  content: ""; position: absolute; inset: 4px -8px; z-index: -1;
+  border-radius: 8px; background: transparent; pointer-events: none;
+}
+#runtimePage .runtime-inheritance-field:hover:not(.is-action-complete)::before { background: #fafafa; }
+#runtimePage .runtime-inheritance-field.is-field-disabled :is(input,select,textarea,button:not(.runtime-field-action),[role="combobox"],[role="button"]) {
+  color: #bfbfbf; border-color: #d9d9d9; background-color: #f7f7f7;
+  cursor: not-allowed; box-shadow: none;
+}
+#runtimePage .runtime-inheritance-field.is-field-disabled .runtime-switch { background: #e8e8e8; opacity: .6; }
+#runtimePage .runtime-inheritance-field.is-field-disabled .runtime-switch i { background: #fff; }
+#runtimePage .runtime-inheritance-field.is-field-disabled :is(.runtime-choice-list,.runtime-image-card,.runtime-version-pills) { opacity: .45; }
+#runtimePage .runtime-inheritance-field.is-field-disabled button:not(.runtime-field-action) :is(img,svg) { opacity: .45; }
+#runtimePage .runtime-inheritance-field.is-field-disabled :is(input,textarea)::placeholder { color: #bfbfbf; }
+
+#runtimePage .runtime-field-action img[hidden] { display: none; }
+
+/* Keep field actions at the same visual scale as the 22px status indicator. */
+#runtimePage .runtime-field-action {
+  height: 22px; padding: 0 3px; gap: 4px;
+  font: 400 12px/20px "PingFang SC",sans-serif;
+}
+#runtimePage .runtime-field-action img,
+#runtimePage .runtime-field-action svg { width: 12px; height: 12px; }
