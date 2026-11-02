@@ -266,7 +266,7 @@ body .project-nav,
 body .project-nav.is-scrolled,
 body .project-nav.project-nav--compact {
   position: sticky;
-  height: 64px;
+  height: 56px;
   background: transparent !important;
   box-shadow: none !important;
   font-family:"Space Grotesk","Noto Sans SC","Source Han Sans SC","PingFang SC",Arial,sans-serif;

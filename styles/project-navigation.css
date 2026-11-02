@@ -2092,3 +2092,41 @@ body[data-project-theme="cnap"] .project-sequence-arrow {
   body .project-nav .project-back { padding: 3px 14px 3px 3px !important; }
   body .project-nav .demo-nav-toggle { padding-inline: 12px !important; gap: 6px !important; }
 }
+
+/* Remains attached to the viewport while project content is magnified. */
+.project-zoom {
+  position: fixed;
+  right: max(18px, env(safe-area-inset-right));
+  bottom: max(20px, env(safe-area-inset-bottom));
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  border: 1px solid rgb(20 23 32 / 12%);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 94%);
+  box-shadow: 0 4px 20px rgb(20 23 32 / 14%);
+  color: #24262c;
+  backdrop-filter: blur(16px);
+}
+.project-zoom button {
+  display: grid;
+  place-items: center;
+  min-width: 44px;
+  height: 44px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font: 500 22px/1 system-ui, sans-serif;
+  cursor: pointer;
+}
+.project-zoom button[data-zoom="reset"] { min-width: 60px; font-size: 13px; font-variant-numeric: tabular-nums; }
+.project-zoom button:hover { background: #eceef2; }
+.project-zoom button:focus-visible { outline: 2px solid #3478f6; outline-offset: 1px; }
+.project-zoom button:disabled { opacity: .3; cursor: default; background: transparent; }
+html.project-is-zoomed { overflow-x: auto; scroll-behavior: auto !important; }
+html.project-is-zoomed body { overflow-x: visible; }
+html.project-is-zoomed main { margin-inline: auto; }
+@media print { .project-zoom { display: none; } }

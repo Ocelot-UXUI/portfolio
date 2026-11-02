@@ -159,8 +159,8 @@ const shuffle = (items) => [...items].sort(() => Math.random() - 0.5);
     actions.append(button);
     document.body.classList.add("demo-nav-capable");
 
-    // Iframe demos swallow pointer events, so keep a thin parent-page hit area
-    // above them to reveal the hidden portfolio navigation.
+    // Keep only a narrow edge for revealing the hidden portfolio navigation.
+    // A tall overlay blocks the embedded demo's own toolbar and controls.
     const revealZone = document.createElement("div");
     revealZone.className = "demo-nav-reveal-zone";
     revealZone.hidden = true;
@@ -170,7 +170,7 @@ const shuffle = (items) => [...items].sort(() => Math.random() - 0.5);
       inset: "0 0 auto",
       zIndex: "1197",
       width: "100%",
-      height: "64px",
+      height: "4px",
       background: "transparent"
     });
     document.body.append(revealZone);
@@ -240,12 +240,12 @@ const shuffle = (items) => [...items].sort(() => Math.random() - 0.5);
 
     document.addEventListener("pointermove", (event) => {
       if (!document.body.classList.contains("demo-nav-hidden")) return;
-      const revealHeight = compactViewport.matches ? 52 : 64;
+      const revealHeight = 4;
       if (event.clientY <= revealHeight) cancelRevealHide();
       const companion = document.body.querySelector(":scope > .demo-nav-companion");
       const isInsideNavigation = header.contains(event.target) || companion?.contains(event.target);
       const isHovering = document.body.classList.contains("demo-nav-hovering");
-      const leaveBuffer = 16;
+      const leaveBuffer = 4;
       const shouldReveal = isInsideNavigation
         || event.clientY <= revealHeight
         || (isHovering && event.clientY <= revealHeight + leaveBuffer);
@@ -259,6 +259,15 @@ const shuffle = (items) => [...items].sort(() => Math.random() - 0.5);
       }
     });
   };
+
+  document.querySelectorAll("a[data-preserve-view-progress]").forEach((link) => {
+    link.addEventListener("click", () => {
+      viewProgress[pageUrl.pathname] = captureViewProgress();
+      const destination = new URL(link.href, window.location.href);
+      destination.searchParams.set(viewProgressParam, JSON.stringify(viewProgress));
+      link.href = destination.href;
+    });
+  });
 
   document.querySelectorAll(".project-nav").forEach((header) => {
     const switcher = header.querySelector(".project-view-switch, .portfolio-view-switch");
@@ -308,4 +317,7 @@ const shuffle = (items) => [...items].sort(() => Math.random() - 0.5);
 
   document.querySelectorAll(".project-nav .project-nav-index").forEach(enhanceElement);
   document.querySelectorAll(".prototype-homepage .nav-logo, .prototype-homepage .nav-label, .prototype-homepage .nav-contact-label").forEach(enhanceElement);
+})();
+
+(() => {
 })();

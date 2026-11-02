@@ -16,6 +16,7 @@ const cssSources = [
   "demo.css",
   "system.css",
   "content-navigation.css",
+  "zoom.css",
 ];
 
 const jsSources = [
@@ -23,6 +24,7 @@ const jsSources = [
   "tabs-and-demo.js",
   "section-rail.js",
   "project-sequence.js",
+  "zoom.js",
 ];
 
 function splitAt(source, marker) {

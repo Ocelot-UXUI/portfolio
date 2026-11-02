@@ -138,3 +138,6 @@ const collectSectionRailTargets = () => {
     }).observe(projectMain, { childList: true, subtree: true, attributes: true, attributeFilter: ["hidden"] });
   }
 })();
+
+(() => {
+})();
