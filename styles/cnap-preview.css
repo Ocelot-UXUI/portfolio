@@ -106,3 +106,41 @@
 @media (prefers-reduced-motion: reduce) {
   .cnap-preview-video { transition: none; }
 }
+
+/* Scheme 2: Figma 2324:1153, canvas 1560.714 × 138. */
+.cnap-live-scheme2 { position: absolute; left: 9.3229167%; top: 76.7592593%; width: 81.3541667%; height: 12.9629630%; z-index: 2; overflow: hidden; background: #fff; border-radius: 1.4% / 14%; }
+.cnap-scheme2-card { position: absolute; inset: 0 auto auto 0; width: 1560.714px; height: 138px; box-sizing: border-box; padding: 26.286px 39.429px; border: 0; border-radius: 0; background: #fff; box-shadow: none; transform-origin: top left; color: #181818; font-family: "PingFang SC", sans-serif; transition: background-color .18s ease; }
+.cnap-scheme2-icon { position: absolute; left: 39.429px; top: 26.286px; width: 40px; height: 40px; box-sizing: border-box; border: 1.232px solid #ccc; border-radius: 29.571px; background: #fff; display: grid; place-items: center; }
+.cnap-scheme2-icon img { position: absolute; }
+.cnap-scheme2-icon .scheme2-overridden { display: none; }
+.cnap-scheme2-copy { position: absolute; left: 99.143px; top: 26.286px; }
+.cnap-scheme2-title { display: flex; align-items: center; gap: 20px; height: 36.143px; }
+.cnap-scheme2-title strong { font-size: 23px; line-height: 36.143px; font-weight: 500; white-space: nowrap; }
+.cnap-scheme2-copy p { margin: 16.429px 0 0; color: #545454; font-size: 19.714px; line-height: 32.857px; font-weight: 400; white-space: nowrap; }
+.cnap-scheme2-tag { display: none; padding: 0 13.436px; height: 33.59px; border-radius: 6.718px; background: #e5f2ff; color: #0080ff; font-size: 20.15px; line-height: 33.59px; }
+.cnap-scheme2-action { display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-width: 84px; height: 44px; padding: 4px; border: 0; border-radius: 6px; color: #595959; background: transparent; font: 400 20px/36px "PingFang SC", sans-serif; opacity: 0; visibility: hidden; cursor: pointer; transition: background-color .15s, box-shadow .15s, opacity .15s; }
+.cnap-scheme2-action .scheme2-restore { display: none; }
+.cnap-scheme2-card input { position: absolute; top: 26.286px; right: 39.429px; box-sizing: border-box; width: 223.429px; height: 52.571px; padding: 9.857px 19.714px; border: 1.643px solid #d9d9d9; border-radius: 13.143px; background: #fff; color: #181818; font: 400 23px/36.143px "PingFang SC",sans-serif; outline: none; appearance: textfield; }
+.cnap-scheme2-card input::-webkit-inner-spin-button { display: none; }
+.cnap-scheme2-card input:disabled { background: #f7f7f7; color: #bfbfbf; opacity: 1; -webkit-text-fill-color: #bfbfbf; }
+.cnap-scheme2-card:is(.is-hovered,:hover) { background: #ededed; }
+.cnap-scheme2-card:is(.is-hovered,:hover,:focus-within) .cnap-scheme2-action { opacity: 1; visibility: visible; }
+.cnap-scheme2-card.is-button-hovered .cnap-scheme2-action, .cnap-scheme2-action:hover { background: #d9d9d9; box-shadow: none; }
+.cnap-scheme2-action:focus-visible, .cnap-scheme2-card input:focus-visible { outline: 2px solid #0080ff; outline-offset: 3px; }
+.cnap-scheme2-card.is-typing input { border-color: #0080ff; box-shadow: 0 0 0 3px #0080ff20; }
+.cnap-scheme2-card.is-covered .cnap-scheme2-icon { border: 1.843px solid #9cf; background: #e5f2ff; }
+.cnap-scheme2-card.is-covered .scheme2-inherited, .cnap-scheme2-card.is-covered .scheme2-unlock { display: none; }
+.cnap-scheme2-card.is-covered .scheme2-overridden, .cnap-scheme2-card.is-covered .scheme2-restore { display: block; }
+.cnap-scheme2-card.is-covered .cnap-scheme2-tag { display: block; }
+@media (prefers-reduced-motion: reduce) { .cnap-scheme2-card, .cnap-scheme2-action { transition: none; } }
+/* Deck artwork rules must not stretch the Figma SVG assets inside the live card. */
+.cnap-scheme2-card img { width: auto; height: auto; max-width: none; margin: 0; padding: 0; background: transparent; }
+
+
+/* Keep the artwork outer frame; animate only within its exact inner bounds. */
+.cnap-scheme2-card.is-selecting input { background: linear-gradient(#b8daff,#b8daff) 19.714px 8px / 16px 36px no-repeat, #fff; }
+.cnap-scheme2-caret { display: none; position: absolute; top: 38px; right: calc(39.429px + 223.429px - 19.714px - var(--typed-width, 15px)); height: 29px; border-left: 2px solid #181818; pointer-events: none; }
+.cnap-scheme2-card.is-typing .cnap-scheme2-caret { display: block; }
+.cnap-scheme2-ripple { position: absolute; z-index: 4; width: 42px; height: 42px; box-sizing: border-box; border: 4px solid #0080ffc7; border-radius: 50%; background: #0080ff1a; box-shadow: 0 0 0 7px #0080ff14; pointer-events: none; }
+.cnap-scheme2-ripple::after { content: ''; position: absolute; inset: 12px; border-radius: 50%; background: #0080ff; }
+@media (prefers-reduced-motion: reduce) { .cnap-scheme2-ripple { display: none; } }

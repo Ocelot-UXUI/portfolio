@@ -10,8 +10,9 @@
     <link rel="stylesheet" href="../styles/case-deck.css?v=20260910-1" />
     <script src="../scripts/project-navigation.js?v=20261102-zoom-3" defer></script>
     <link rel="stylesheet" href="../styles/responsive-system.css?v=20260905-1" />
-    <link rel="stylesheet" href="../styles/cnap-preview.css?v=23" />
-    <script src="../scripts/cnap-preview.js?v=23" defer></script>
+    <link rel="stylesheet" href="../styles/cnap-preview.css?v=27" />
+    <script src="../scripts/cnap-preview.js?v=24" defer></script>
+    <script src="../scripts/cnap-scheme2.js?v=2" defer></script>
   </head>
   <body class="cnap-case-page case-deck-page">
     <header class="project-nav">
@@ -57,9 +58,30 @@
           </div>
         </div>
         <div class="case-slide-frame cnap-interactive-slide cnap-override-preview-slide" id="override-preview">
-          <img data-src="../assets/cnap-case/page-12-update-20261101.webp?v=20261101-1" alt="CNAP 方案二：通过入口收敛、覆盖状态和恢复反馈，让配置变更更容易发现与理解" data-section-kicker="方案二" data-section-title="入口收敛，多点补偿" width="1920" height="1080" loading="lazy" decoding="async" />
+          <img data-src="../assets/cnap-case/page-12-update-20261101.webp?v=20261102-1" alt="CNAP 方案二：通过入口收敛、覆盖状态和恢复反馈，让配置变更更容易发现与理解" data-section-kicker="方案二" data-section-title="入口收敛，多点补偿" width="1920" height="1080" loading="lazy" decoding="async" />
+          <div class="cnap-live-scheme2" data-scheme2-demo role="group" aria-label="方案二配置覆盖与还原演示">
+            <div class="cnap-scheme2-card">
+              <span class="cnap-scheme2-icon" aria-hidden="true">
+                <img class="scheme2-inherited" src="../assets/cnap-case/scheme2/inherited.svg" alt="" />
+                <img class="scheme2-overridden" src="../assets/cnap-case/scheme2/overridden.svg" alt="" />
+              </span>
+              <div class="cnap-scheme2-copy">
+                <div class="cnap-scheme2-title">
+                  <strong>实例数量</strong><span class="cnap-scheme2-tag">已覆盖</span>
+                  <button class="cnap-scheme2-action" type="button" aria-label="解锁此配置项">
+                    <img class="scheme2-unlock" src="../assets/cnap-case/scheme2/unlock.svg" alt="" />
+                    <img class="scheme2-restore" src="../assets/cnap-case/scheme2/restore.svg" alt="" /><span>解锁</span>
+                  </button>
+                </div>
+                <p>工作负载启动的 Pod 数量。系统将根据此数值创建并维护相应数量的 Pod 实例。</p>
+              </div>
+              <input type="number" min="1" value="3" aria-label="实例数量" disabled />
+              <i class="cnap-scheme2-caret" aria-hidden="true"></i>
+              <span class="cnap-scheme2-ripple" aria-hidden="true" hidden></span>
+            </div>
+          </div>
         </div>
-        <img data-src="../assets/cnap-case/page-13-update-20261101.webp?v=20261101-1" alt="CNAP 交互设计：组件之外，继续打磨页面与流程" data-section-kicker="交互设计" data-section-title="组件之外，继续打磨页面与流程" width="1920" height="1080" loading="lazy" decoding="async" />
+        <img data-src="../assets/cnap-case/page-13-update-20261101.webp?v=20261102-1" alt="CNAP 交互设计：组件之外，继续打磨页面与流程" data-section-kicker="交互设计" data-section-title="组件之外，继续打磨页面与流程" width="1920" height="1080" loading="lazy" decoding="async" />
         <img data-src="../assets/cnap-case/page-14-agent-rules-refresh-20261101.webp?v=20261101-1" alt="CNAP 设计点二：制定规范，快速同步更多页面" data-section-kicker="设计点二" data-section-title="制定规范，快速同步更多页面" width="1920" height="1080" loading="lazy" decoding="async" />
         <img data-src="../assets/cnap-case/page-14-agent-popup-spec.webp?v=20261101-1" alt="弹窗规范成果：沉淀设计规则、补充 Agent 执行约束，并验证生成结果" data-section-kicker="设计成果二｜弹窗规范" data-section-title="更新设计规范，并翻译成 Agent 语言" width="1920" height="1080" loading="lazy" decoding="async" />
         <img data-src="../assets/cnap-case/page-15-agent-popup-layout.webp?v=20261101-1" alt="弹窗布局规范：按场景和复杂度组织弹窗表单布局规则" data-section-kicker="以弹窗规范为例" data-section-title="与 Agent 协作完善布局规范" width="1920" height="1080" loading="lazy" decoding="async" />
