@@ -518,13 +518,51 @@ const collectSectionRailTargets = () => {
     updateSectionRail();
   };
 
-  const loadCaseDeckImage = (image) => {
-    const source = image?.dataset.src;
-    if (!source || image.dataset.loaded === "true") return;
-    image.dataset.loaded = "true";
-    image.removeAttribute("data-src");
+  const loadCaseDeckImage = (image, retry = false) => {
+    const source = image?.dataset.caseImageSource || image?.dataset.src;
+    if (!source || image.dataset.loading === "true" || image.dataset.loaded === "true") return;
+    image.dataset.caseImageSource = source;
+    image.dataset.loading = "true";
     image.loading = "eager";
-    image.src = source;
+
+    image.onload = () => {
+      image.dataset.loaded = "true";
+      image.dataset.loading = "false";
+      image.dataset.retryCount = "0";
+      image.removeAttribute("data-image-error");
+      image.removeAttribute("role");
+      image.removeAttribute("tabindex");
+      image.removeAttribute("aria-label");
+      image.alt = image.dataset.originalAlt || image.alt;
+    };
+    image.onerror = () => {
+      image.dataset.loading = "false";
+      const retries = Number(image.dataset.retryCount || 0);
+      if (retries < 2 && navigator.onLine) {
+        const nextRetry = retries + 1;
+        image.dataset.retryCount = String(nextRetry);
+        window.setTimeout(() => {
+          if (image.dataset.loaded === "true") return;
+          loadCaseDeckImage(image, true);
+        }, nextRetry * 900);
+        return;
+      }
+
+      image.dataset.imageError = "true";
+      image.dataset.originalAlt ||= image.alt;
+      image.alt = `${image.dataset.originalAlt}（图片暂时未加载，点按重试）`;
+      image.setAttribute("role", "button");
+      image.setAttribute("tabindex", "0");
+      image.setAttribute("aria-label", `${image.dataset.originalAlt}，图片加载失败，点按重试`);
+    };
+
+    if (retry) {
+      const retryUrl = new URL(source, document.baseURI);
+      retryUrl.searchParams.set("image-retry", String(Number(image.dataset.retryCount || 0) + 1));
+      image.src = retryUrl.href;
+    } else {
+      image.src = source;
+    }
   };
 
   const lazyCaseDeckImages = [...document.querySelectorAll(".case-deck-page .slides img[data-src]")];
@@ -536,12 +574,36 @@ const collectSectionRailTargets = () => {
           loadCaseDeckImage(entry.target);
           observer.unobserve(entry.target);
         });
-      }, { rootMargin: "400px 0px" });
+      }, { rootMargin: "1200px 0px" });
       lazyCaseDeckImages.forEach((image) => caseDeckImageObserver.observe(image));
     } else {
       lazyCaseDeckImages.forEach(loadCaseDeckImage);
     }
   }
+
+  document.addEventListener("click", (event) => {
+    const image = event.target instanceof Element ? event.target.closest(".case-deck-page .slides img[data-image-error='true']") : null;
+    if (!image) return;
+    image.dataset.retryCount = "0";
+    image.dataset.imageError = "false";
+    loadCaseDeckImage(image, true);
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    const image = event.target instanceof Element ? event.target.closest(".case-deck-page .slides img[data-image-error='true']") : null;
+    if (!image) return;
+    event.preventDefault();
+    image.dataset.retryCount = "0";
+    image.dataset.imageError = "false";
+    loadCaseDeckImage(image, true);
+  });
+  window.addEventListener("online", () => {
+    document.querySelectorAll(".case-deck-page .slides img[data-image-error='true']").forEach((image) => {
+      image.dataset.retryCount = "0";
+      image.dataset.imageError = "false";
+      loadCaseDeckImage(image, true);
+    });
+  });
 
   buildSectionRail();
   window.addEventListener("scroll", requestSectionRailUpdate, { passive: true });
