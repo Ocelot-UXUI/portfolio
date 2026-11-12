@@ -50,9 +50,9 @@
   text-shadow: none;
 }
 
-/* Desktop keeps the positioning statement as one continuous visual line. */
+/* Keep the positioning statement on two intentional lines across breakpoints. */
 .prototype-homepage .hero-stack-desktop-title {
-  white-space: nowrap;
+  white-space: normal;
 }
 
 .prototype-homepage .hero-stack-meta {
