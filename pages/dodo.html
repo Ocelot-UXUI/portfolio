@@ -19,6 +19,11 @@
       .dodo-download-link{position:absolute;z-index:2;display:block;border-radius:999px;background:transparent;cursor:pointer}
       #dodo-slide-12 .dodo-download-link{left:86.04%;top:7.4%;width:10.52%;height:5.19%}
       .dodo-download-link:focus-visible{outline:3px solid #fff;outline-offset:4px}
+      .dodo-process-slide{position:relative;aspect-ratio:16/9;overflow:hidden;background:#f7f8fc}
+      .case-deck-page .dodo-process-slide>img{display:block;width:100%;height:100%;object-fit:cover}
+      .dodo-process-panel{position:absolute;left:4.22%;top:30.28%;width:53.91%;height:69.72%;z-index:1;display:grid;place-items:center;overflow:hidden;background:#f7f8fc}
+      .dodo-process-media{display:block;width:100%;height:100%;object-fit:contain}
+      .dodo-process-media:focus-visible{outline:3px solid #1769ff;outline-offset:-3px}
       .dodo-process-label{position:absolute;left:14px;top:12px;z-index:2;padding:5px 8px;border-radius:5px;background:rgba(10,13,21,.72);color:#fff;font-size:11px;letter-spacing:.04em;pointer-events:none}
       @media(max-width:700px){.dodo-cover-demo{left:4%;top:24.7%;width:59.4%;height:calc(64.6% + 1px);border-radius:1.4% / 2.3%}.dodo-cover-demo iframe{border-radius:0}.dodo-process-label{left:7px;top:7px;padding:4px 6px;font-size:9px}}
     </style>
@@ -52,7 +57,15 @@
           <img data-src="../assets/dodo/pages/page-09.webp?v=20261020-01" alt="根据评估结果，明确各环节的 Skill 沉淀内容" width="1920" height="1080" loading="lazy" decoding="async" />
           <a class="dodo-download-link" href="../assets/skills/design-review-skills.zip" download="design-review-skills.zip" aria-label="下载Skill" title="下载Skill"></a>
         </div>
-        <img id="dodo-slide-13" data-src="../assets/dodo/pages/page-10.webp?v=20260914-01" alt="以设计走查为例，按设计师走查的思路编排 Skill" width="1920" height="1080" loading="lazy" decoding="async" />
+        <div id="dodo-slide-13" class="case-slide-frame dodo-process-slide" aria-label="设计走查 Skill 实际运行录屏">
+          <img data-src="../assets/dodo/pages/page-10.webp?v=20260914-01" alt="以设计走查为例，按设计师走查的思路编排 Skill" width="1920" height="1080" loading="lazy" decoding="async" />
+          <div class="dodo-process-panel">
+            <video class="dodo-process-media" controls muted playsinline preload="none" poster="../assets/dodo/dodo-review-process-poster.webp" aria-label="设计走查 Skill 实际运行录屏">
+              <source src="../assets/dodo/dodo-review-process-high-quality.mp4" type="video/mp4" />
+              当前浏览器不支持播放视频。
+            </video>
+          </div>
+        </div>
         <img id="dodo-slide-14" data-src="../assets/dodo/pages/page-11.webp?v=20261102-results-1" alt="设计走查 Skill 成果验证：评审前自查、上线前走查与实际使用反馈" width="1920" height="1080" loading="lazy" decoding="async" />
       </section>
     </main>
