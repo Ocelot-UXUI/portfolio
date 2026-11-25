@@ -17,9 +17,11 @@
       .dodo-cover-demo iframe{display:block;width:100%;height:100%;border:0;border-radius:0;background:#fff;pointer-events:auto}
       .dodo-process-slide{position:relative;aspect-ratio:16/9;overflow:hidden;background:#f7f8fc}
       .case-deck-page .dodo-process-slide>img{display:block;width:100%;height:100%;object-fit:cover}
-      .dodo-process-panel{position:absolute;left:4.22%;top:30.28%;width:53.91%;height:69.72%;z-index:1;display:grid;place-items:center;overflow:hidden;background:#f7f8fc}
+      .dodo-process-panel{position:absolute;left:4.04%;top:19.26%;width:24.32%;height:40.05%;z-index:1;display:grid;place-items:center;overflow:hidden;background:#f7f8fc}
       .dodo-process-media{display:block;width:100%;height:100%;object-fit:contain}
       .dodo-process-media:focus-visible{outline:3px solid #1769ff;outline-offset:-3px}
+      .dodo-process-download{position:absolute;z-index:2;left:23.15%;top:10.5%;width:7%;height:2.8%;border-radius:999px}
+      .dodo-process-download:focus-visible{outline:3px solid #1769ff;outline-offset:3px}
       .dodo-process-label{position:absolute;left:14px;top:12px;z-index:2;padding:5px 8px;border-radius:5px;background:rgba(10,13,21,.72);color:#fff;font-size:11px;letter-spacing:.04em;pointer-events:none}
       @media(max-width:700px){.dodo-cover-demo{left:4%;top:24.7%;width:59.4%;height:calc(64.6% + 1px);border-radius:1.4% / 2.3%}.dodo-cover-demo iframe{border-radius:0}.dodo-process-label{left:7px;top:7px;padding:4px 6px;font-size:9px}}
     </style>
@@ -50,8 +52,9 @@
         <img id="dodo-slide-10" data-src="../assets/dodo/pages/page-07.webp" alt="Agent 体验原则与产品规范应用结果" width="1920" height="1080" loading="lazy" decoding="async" />
         <img id="dodo-slide-11" data-src="../assets/dodo/pages/page-08-skills-evaluation-20261124.webp" alt="评估工作流各环节的使用频率与标准化程度，判断 Skills 的沉淀方式" width="1920" height="1080" loading="lazy" decoding="async" />
         <img id="dodo-slide-12" data-src="../assets/dodo/pages/page-09-skills-breakdown-20261125.webp" alt="以设计走查 Skill Pack 为例，拆分四个可独立调用的 Skill，并说明拆分原因、拆分方式和四个执行步骤" width="3840" height="2160" loading="lazy" decoding="async" />
-        <div id="dodo-slide-13" class="case-slide-frame dodo-process-slide" aria-label="设计走查 Skill 实际运行录屏">
-          <img data-src="../assets/dodo/pages/page-10.webp?v=20260914-01" alt="以设计走查为例，按设计师走查的思路编排 Skill" width="1920" height="1080" loading="lazy" decoding="async" />
+        <div id="dodo-slide-13" class="case-slide-frame dodo-process-slide" aria-label="以设计走查 Skill Pack 为例，一次真实走查">
+          <img data-src="../assets/dodo/pages/page-10-walkthrough-20261125.webp" alt="一次真实走查：左侧展示走查流程，右侧呈现走查结果，并提供 Skill 下载" width="3840" height="2160" loading="lazy" decoding="async" />
+          <a class="dodo-process-download" href="../assets/skills/design-review-skills.zip" download="design-review-skills.zip" aria-label="点击下载 Skill" title="点击下载 Skill"></a>
           <div class="dodo-process-panel">
             <video class="dodo-process-media" controls muted playsinline preload="none" poster="../assets/dodo/dodo-review-process-poster.webp" aria-label="设计走查 Skill 实际运行录屏">
               <source src="../assets/dodo/dodo-review-process-high-quality.mp4" type="video/mp4" />
